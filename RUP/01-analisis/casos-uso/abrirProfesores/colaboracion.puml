@@ -20,7 +20,7 @@ OpenTeachersView -d-> TeachersController: listTeachers() : List<Teacher>
 
 TeachersController --> TeacherRepository: getAll() : List<Teacher>
 
-TeacherRepository -- Profesor
+TeacherRepository -- Teacher
 
 OpenTeachersView --> TeachersController: filterTeachers(criteria) : List<Teacher>
 

@@ -1,28 +1,28 @@
 @startuml createCourse-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Cursos Abierto" as CursosAbierto
+rectangle #CDEBA5 ":Courses Open" as CoursesOpen
 rectangle #CDEBA5 ":Collaboration EditCourse" as EditCourse
 
 package createCourse as "createCourse()" {
     rectangle #629EF9 CreateCourseView
-    rectangle #b5bd68 CursoController
+    rectangle #b5bd68 CoursesController
     rectangle #F2AC4E CourseRepository
     rectangle #F2AC4E Course
 }
 
-CursosAbierto --> CreateCourseView: createCourse()
+CoursesOpen --> CreateCourseView: createCourse()
 
-CreateCourseView -d-> CursoController: validateMinimalData(nombre) : boolean
+CreateCourseView -d-> CoursesController: validateMinimalData(name) : boolean
 
-CursoController --> CourseRepository: checkUniqueness(nombre) : boolean
+CoursesController --> CourseRepository: checkUniqueness(name) : boolean
 
-CreateCourseView --> CursoController: crearCurso(nombre) : Curso
+CreateCourseView --> CoursesController: createCourse(name) : Course
 
-CursoController --> CourseRepository: create(nombre) : Curso
+CoursesController --> CourseRepository: create(name) : Course
 
-CourseRepository -- Curso
+CourseRepository -- Course
 
-CreateCourseView ..> EditCourse: <<include>> editarCurso(cursoNuevo)
+CreateCourseView ..> EditCourse: <<include>> editCourse(newCourse)
 
 @enduml

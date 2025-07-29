@@ -1,36 +1,36 @@
 @startuml assignTeacherToCourse-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbierto
+rectangle #CDEBA5 ":Teacher Open" as TeacherOpen
 rectangle #CDEBA5 ":Collaboration EditTeacher" as EditTeacher
 
 package assignTeacherToCourse as "assignTeacherToCourse()" {
-    rectangle #629EF9 AssignTeacherACursoView
-    rectangle #b5bd68 AsignacionProfesorCursoController
+    rectangle #629EF9 AssignTeacherToCourseView
+    rectangle #b5bd68 TeacherCourseAssignmentController
     rectangle #F2AC4E TeacherRepository
     rectangle #F2AC4E CourseRepository
     rectangle #F2AC4E Teacher
-    rectangle #F2AC4E AsignacionProfesorCurso
+    rectangle #F2AC4E TeacherCourseAssignment
     rectangle #F2AC4E Course
 }
 
-ProfesorAbierto -r-> AssignTeacherACursoView: asignarProfesorACurso(profesorId)
+TeacherOpen -r-> AssignTeacherToCourseView: assignTeacherToCourse(teacherId)
 
-AssignTeacherACursoView -d-> AsignacionProfesorCursoController: cargarAsignacionesProfesor(profesorId)
+AssignTeacherToCourseView -d-> TeacherCourseAssignmentController: loadTeacherAssignments(teacherId)
 
-AsignacionProfesorCursoController --> TeacherRepository: obtenerConAsignaciones(profesorId) : Teacher
-AsignacionProfesorCursoController --> CourseRepository: obtenerCursosDisponibles() : List<Course>
-AsignacionProfesorCursoController --> CourseRepository: obtenerCursosAsignados(profesorId) : List<Course>
+TeacherCourseAssignmentController --> TeacherRepository: getWithAssignments(teacherId) : Teacher
+TeacherCourseAssignmentController --> CourseRepository: getAvailableCourses() : List<Course>
+TeacherCourseAssignmentController --> CourseRepository: getAssignedCourses(teacherId) : List<Course>
 
-AssignTeacherACursoView --> AsignacionProfesorCursoController: asignarCurso(profesorId, cursoId) : boolean
-AssignTeacherACursoView --> AsignacionProfesorCursoController: desasignarCurso(profesorId, cursoId) : boolean
+AssignTeacherToCourseView --> TeacherCourseAssignmentController: assignCourse(teacherId, courseId) : boolean
+AssignTeacherToCourseView --> TeacherCourseAssignmentController: unassignCourse(teacherId, courseId) : boolean
 
-AsignacionProfesorCursoController --> TeacherRepository: actualizarAsignaciones(profesorId, asignaciones) : boolean
+TeacherCourseAssignmentController --> TeacherRepository: updateAssignments(teacherId, assignments) : boolean
 
-TeacherRepository -- Profesor
-TeacherRepository -- AsignacionProfesorCurso
-CourseRepository -- Curso
+TeacherRepository -- Teacher
+TeacherRepository -- TeacherCourseAssignment
+CourseRepository -- Course
 
-AssignTeacherACursoView ..> EditTeacher: <<include>> editarProfesor(profesorId)
+AssignTeacherToCourseView ..> EditTeacher: <<include>> editTeacher(teacherId)
 
 @enduml
