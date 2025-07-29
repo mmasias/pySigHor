@@ -1,81 +1,81 @@
-@startuml crearCurso-analisis-secuencia
+@startuml createCourse-analysis-sequence
 
 skinparam linetype polyline
 
-' Actores externos
-actor ":Cursos Abierto" as CursosAbierto
-participant ":Collaboration EditarCurso" as EditarCurso
+' External actors
+actor ":Courses Open" as CoursesOpen
+participant ":Collaboration EditCourse" as EditCourse
 
-' Clases de análisis - Vista (Boundary)
-boundary "CrearCursoView" as Vista <<boundary>>
+' Analysis classes - View (Boundary)
+boundary "CreateCourseView" as Vista <<boundary>>
 
-' Clases de análisis - Control  
-control "CursoController" as Controlador <<control>>
+' Analysis classes - Control  
+control "CourseController" as Controller <<control>>
 
-' Clases de análisis - Entidad (Entity)
-entity "CursoRepository" as Repositorio <<entity>>
-entity "Curso" as CursoEntity <<entity>>
+' Analysis classes - Entity (Entity)
+entity "CourseRepository" as Repository <<entity>>
+entity "Course" as CourseEntity <<entity>>
 
-title Análisis de Colaboración: crearCurso()
+title Collaboration Analysis: createCourse()
 
-== Flujo Principal: Crear Curso Académico ==
+== Main Flow: Create Academic Course ==
 
-CursosAbierto -> Vista : 1: crearCurso()
+CoursesOpen -> Vista : 1: createCourse()
 activate Vista
 
-Vista -> Vista : 2: presenta solicitud de\ndatos mínimos del curso
+Vista -> Vista : 2: presents request for\nminimal course data
 note right
-**Sistema presenta solicitud de datos mínimos del curso**
-• Nombre del curso (obligatorio)
+**System presents request for minimal course data**
+• Course name (required)
 
-**Sistema permite solicitar:**
-• crear curso
-• cancelar creación
+**System allows requesting:**
+• create course
+• cancel creation
 end note
 
-Vista -> Controlador : 3: validarDatosMínimos(nombre)
-activate Controlador
+Vista -> Controller : 3: validateMinimalData(name)
+activate Controller
 
-Controlador -> Repositorio : 4: verificarUnicidad(nombre)
-activate Repositorio
-Repositorio --> Controlador : 5: esÚnico : boolean
-deactivate Repositorio
+Controller -> Repository : 4: checkUniqueness(name)
+activate Repository
+Repository --> Controller : 5: isUnique : boolean
+deactivate Repository
 
-Controlador --> Vista : 6: validaciónCorrecta : boolean
-deactivate Controlador
+Controller --> Vista : 6: validationCorrect : boolean
+deactivate Controller
 
-Vista -> Controlador : 7: crearCurso(nombre)
-activate Controlador
+Vista -> Controller : 7: createCourse(name)
+activate Controller
 
-Controlador -> Repositorio : 8: crear(nombre) : Curso
-activate Repositorio
+Controller -> Repository : 8: create(name) : Course
+activate Repository
 
-Repositorio -> CursoEntity : 9: new Curso(nombre)
-activate CursoEntity
+Repository -> CourseEntity : 9: new Course(name)
+activate CourseEntity
 note right
-**Curso creado con datos mínimos:**
-• Nombre: [proporcionado]
-• Otros campos: valores por defecto
-• Estado: activo
-• ID: generado automáticamente
+**Course created with minimal data:**
+• Name: [provided]
+• Other fields: default values
+• Status: active
+• ID: automatically generated
 end note
 
-CursoEntity --> Repositorio : 10: cursoNuevo : Curso
-deactivate CursoEntity
+CourseEntity --> Repository : 10: newCourse : Course
+deactivate CourseEntity
 
-Repositorio -> Repositorio : 11: persistir(cursoNuevo)
-Repositorio --> Controlador : 12: cursoCreado : Curso
-deactivate Repositorio
+Repository -> Repository : 11: persist(newCourse)
+Repository --> Controller : 12: createdCourse : Course
+deactivate Repository
 
-Controlador --> Vista : 13: cursoCreado : Curso
-deactivate Controlador
+Controller --> Vista : 13: createdCourse : Course
+deactivate Controller
 
-Vista -> EditarCurso : 14: <<include>> editarCurso(cursoNuevo)
+Vista -> EditCourse : 14: <<include>> editCourse(newCourse)
 note right
-**Transferencia automática C→U**
-• Curso básico creado
-• Edición completa automática
-• "El delgado" → "El gordo"
+**Automatic C→U transfer**
+• Basic course created
+• Automatic complete editing
+• "The thin" → "The thick"
 end note
 
 deactivate Vista

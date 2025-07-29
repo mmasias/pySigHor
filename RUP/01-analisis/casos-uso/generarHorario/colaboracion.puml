@@ -1,37 +1,37 @@
-@startuml generarHorario-analisis
+@startuml generateSchedule-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
-rectangle #CDEBA5 ":Collaboration ConsultarHorario" as ConsultarHorario
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+rectangle #CDEBA5 ":Collaboration ViewSchedule" as ViewSchedule
 rectangle #CDEBA5 ":Collaboration CompletarGestion" as CompletarGestion
 
-package generarHorario as "generarHorario()" {
-    rectangle #629EF9 GenerarHorarioView
-    rectangle #b5bd68 HorarioController
-    rectangle #F2AC4E HorarioRepository
-    rectangle #F2AC4E HorarioGenerator
+package generateSchedule as "generateSchedule()" {
+    rectangle #629EF9 GenerateScheduleView
+    rectangle #b5bd68 ScheduleController
+    rectangle #F2AC4E ScheduleRepository
+    rectangle #F2AC4E ScheduleGenerator
     rectangle #F2AC4E Validador
-    rectangle #F2AC4E Horario
+    rectangle #F2AC4E Schedule
 }
 
-SistemaDisponible --> GenerarHorarioView: generarHorario()
+SystemAvailable --> GenerateScheduleView: generateSchedule()
 
-GenerarHorarioView -d-> HorarioController: procesarGeneracion() : ResultadoGeneracion
+GenerateScheduleView -d-> ScheduleController: procesarGeneracion() : ResultadoGeneracion
 
-HorarioController --> Validador: verificarDatosMinimos() : boolean
+ScheduleController --> Validador: verificarDatosMinimos() : boolean
 
-HorarioController --> HorarioRepository: existeHorario() : boolean
-HorarioController --> HorarioRepository: verificarDatosDisponibles() : DatosDisponibles
+ScheduleController --> ScheduleRepository: existeHorario() : boolean
+ScheduleController --> ScheduleRepository: verificarDatosDisponibles() : DatosDisponibles
 
-HorarioController --> HorarioGenerator: ejecutarGeneracion() : Horario
+ScheduleController --> HorarioGenerator: ejecutarGeneracion() : Horario
 
-HorarioGenerator --> HorarioRepository: cargarDatosMaestros() : DatosMaestros
-HorarioGenerator --> HorarioRepository: guardarHorario(horario) : boolean
+HorarioGenerator --> ScheduleRepository: cargarDatosMaestros() : DatosMaestros
+HorarioGenerator --> ScheduleRepository: guardarHorario(horario) : boolean
 
-HorarioRepository -- Horario
-HorarioRepository -- Validador
+ScheduleRepository -- Horario
+ScheduleRepository -- Validador
 
-GenerarHorarioView ..> ConsultarHorario: <<include>> consultarHorario() [generación exitosa]
-GenerarHorarioView ..> CompletarGestion: <<include>> completarGestion() [cancelación/error]
+GenerateScheduleView ..> ViewSchedule: <<include>> viewSchedule() [generación exitosa]
+GenerateScheduleView ..> CompletarGestion: <<include>> completeManagement() [cancelación/error]
 
 @enduml

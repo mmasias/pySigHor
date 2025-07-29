@@ -1,53 +1,53 @@
-@startuml editarEdificio
+@startuml editBuilding
 
 skinparam linetype polyline
 
-state editarEdificio as "editarEdificio()" {
+state editBuilding as "editBuilding()" {
 
     state " " as EditandoDatos
-    state " " as GuardandoDatos 
+    state " " as SavingData 
 
     [*] -[#green]-> EditandoDatos 
     note on link
-    <b>Administrador</b> solicita editar edificio
+    <b>Administrator</b> requests edit
     end note    
     
-    EditandoDatos -[#green]-> GuardandoDatos
+    EditandoDatos -[#green]-> SavingData
     note on link
-    <b>Sistema</b> presenta datos de edición
+    <b>System</b> presents datos de edición
     • Código, nombre del edificio
     • Ubicación, descripción
     • Observaciones del edificio
     
-    <b>Sistema</b> permite solicitar:
+    <b>System</b> permite requestsr:
     • modificar campos
     • guardar edificio
     • cancelar edición
     end note
     
-    GuardandoDatos -[#green]-> EditandoDatos
+    SavingData -[#green]-> EditandoDatos
     note on link
-    <b>Administrador</b> solicita modificar campos
+    <b>Administrator</b> requests modificar campos
     end note
     
-    GuardandoDatos -[#green]-> [*]
+    SavingData -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita guardar y salir
+    <b>Administrator</b> requests guardar y salir
     end note
 
-    GuardandoDatos -[#red]-> [*]
+    SavingData -[#red]-> [*]
     note on link
-    <b>Administrador</b> solicita cancelar edición
+    <b>Administrator</b> requests cancelar edición
     end note
 
 }
 
-editarEdificio -[#green]-> EDIFICIOS_ABIERTO
+editarEdificio -[#green]-> BUILDINGS_OPEN
 note on link
-abrirEdificios()
+openBuildings()
 end note
 
-editarEdificio -[#red]-> EDIFICIOS_ABIERTO
+editarEdificio -[#red]-> BUILDINGS_OPEN
 note on link
 cancelar edición
 end note

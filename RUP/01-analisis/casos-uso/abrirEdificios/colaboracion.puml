@@ -1,34 +1,34 @@
-@startuml abrirEdificios-analisis
+@startuml openBuildings-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
-package abrirEdificios as "abrirEdificios()" {
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openBuildings as "openBuildings()" {
     rectangle #629EF9 ListarEdificiosView
-    rectangle #b5bd68 EdificiosController
-    rectangle #F2AC4E EdificioRepository
-    rectangle #F2AC4E Edificio
+    rectangle #b5bd68 BuildingsController
+    rectangle #F2AC4E BuildingRepository
+    rectangle #F2AC4E Building
 }
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
-rectangle #CDEBA5 ":Collaboration CrearEdificio" as CrearEdificio
-rectangle #CDEBA5 ":Collaboration EditarEdificio" as EditarEdificio
-rectangle #CDEBA5 ":Collaboration EliminarEdificio" as EliminarEdificio
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateBuilding" as CreateBuilding
+rectangle #CDEBA5 ":Collaboration EditBuilding" as EditBuilding
+rectangle #CDEBA5 ":Collaboration DeleteBuilding" as DeleteBuilding
 
-SistemaDisponible -r-> ListarEdificiosView: abrirEdificios()
+SystemAvailable -r-> ListarEdificiosView: openBuildings()
 
-ListarEdificiosView -d-> EdificiosController: listarEdificios() : List<Edificio>
+ListarEdificiosView -d-> BuildingsController: listBuildings() : List<Building>
 
-EdificiosController --> EdificioRepository: obtenerTodos() : List<Edificio>
+BuildingsController --> BuildingRepository: getAll() : List<Building>
 
-EdificioRepository -- Edificio
+BuildingRepository -- Edificio
 
-ListarEdificiosView --> EdificiosController: filtrarEdificios(criterio) : List<Edificio>
+ListarEdificiosView --> BuildingsController: filterBuildings(criteria) : List<Building>
 
-EdificiosController --> EdificioRepository: buscarPorCriterio(criterio) : List<Edificio>
+BuildingsController --> BuildingRepository: findByCriteria(criteria) : List<Building>
 
-ListarEdificiosView ..> SistemaDisponibleSalida: completarGestion()
-ListarEdificiosView ..> CrearEdificio: crearEdificio()
-ListarEdificiosView ..> EditarEdificio: editarEdificio()
-ListarEdificiosView ..> EliminarEdificio: eliminarEdificio()
+ListarEdificiosView ..> SystemAvailableSalida: completeManagement()
+ListarEdificiosView ..> CreateBuilding: createBuilding()
+ListarEdificiosView ..> EditBuilding: editBuilding()
+ListarEdificiosView ..> DeleteBuilding: deleteBuilding()
 
 @enduml

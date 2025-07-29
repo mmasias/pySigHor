@@ -1,53 +1,53 @@
-@startuml editarProfesor
+@startuml editTeacher
 
 skinparam linetype polyline
 
-state editarProfesor as "editarProfesor()" {
+state editTeacher as "editTeacher()" {
 
     state " " as EditandoDatos
-    state " " as GuardandoDatos 
+    state " " as SavingData 
 
     [*] -[#green]-> EditandoDatos 
     note on link
-    <b>Administrador</b> solicita editar profesor
+    <b>Administrator</b> requests edit
     end note    
     
-    EditandoDatos -[#green]-> GuardandoDatos
+    EditandoDatos -[#green]-> SavingData
     note on link
-    <b>Sistema</b> presenta datos de edición
+    <b>System</b> presents datos de edición
     • Código, nombres, apellidos del profesor
     • Correo electrónico, teléfono
     • Observaciones del profesor
     
-    <b>Sistema</b> permite solicitar:
+    <b>System</b> permite requestsr:
     • modificar campos
     • guardar profesor
     • cancelar edición
     end note
     
-    GuardandoDatos -[#green]-> EditandoDatos
+    SavingData -[#green]-> EditandoDatos
     note on link
-    <b>Administrador</b> solicita modificar campos
+    <b>Administrator</b> requests modificar campos
     end note
     
-    GuardandoDatos -[#green]-> [*]
+    SavingData -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita guardar y salir
+    <b>Administrator</b> requests guardar y salir
     end note
 
-    GuardandoDatos -[#red]-> [*]
+    SavingData -[#red]-> [*]
     note on link
-    <b>Administrador</b> solicita cancelar edición
+    <b>Administrator</b> requests cancelar edición
     end note
 
 }
 
-editarProfesor -[#green]-> PROFESORES_ABIERTO
+editarProfesor -[#green]-> TEACHERS_OPEN
 note on link
-abrirProfesores()
+openTeachers()
 end note
 
-editarProfesor -[#red]-> PROFESORES_ABIERTO
+editarProfesor -[#red]-> TEACHERS_OPEN
 note on link
 cancelar edición
 end note

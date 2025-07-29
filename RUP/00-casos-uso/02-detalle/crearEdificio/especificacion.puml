@@ -1,39 +1,39 @@
-@startuml crearEdificio
+@startuml createBuilding
 
 skinparam linetype polyline
 
-state crearEdificio as "crearEdificio()" {
+state createBuilding as "createBuilding()" {
 
-    state " " as SolicitandoDatos
+    state " " as RequestingData
     state " " as CreandoEdificio
 
-    [*] -[#green]-> SolicitandoDatos 
+    [*] -[#green]-> RequestingData 
     note on link
-    <b>Administrador</b> solicita crear edificio nuevo
+    <b>Administrator</b> requests create new
     end note    
     
-    SolicitandoDatos -[#green]-> CreandoEdificio
+    RequestingData -[#green]-> CreandoEdificio
     note on link
-    <b>Sistema</b> presenta solicitud de datos mínimos del edificio
+    <b>System</b> presents solicitud de datos mínimos del edificio
     • Código del edificio (obligatorio)
     • Nombre del edificio (obligatorio)
-    • Permite solicitar crear edificio
-    • Permite solicitar cancelar creación
+    • Permite requestsr crear edificio
+    • Permite requestsr cancelar creación
     end note
     
     CreandoEdificio -[#green]-> [*]
     note on link
-    <b>Administrador</b> proporciona datos mínimos
-    <b>Sistema</b> crea edificio y transfiere a edición
+    <b>Administrator</b> proporciona datos mínimos
+    <b>System</b> crea edificio y transfiere a edición
     end note
 }
 
-crearEdificio -[#green]-> EDIFICIO_ABIERTO
+crearEdificio -[#green]-> BUILDING_OPEN
 note on link
 editarEdificio(edificioNuevo)
 end note
 
-crearEdificio -[#blue]-> EDIFICIOS_ABIERTO
+crearEdificio -[#blue]-> BUILDINGS_OPEN
 note on link
 cancelar creación
 end note

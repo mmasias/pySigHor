@@ -1,44 +1,44 @@
-@startuml eliminarEdificio
+@startuml deleteBuilding
 
 skinparam linetype polyline
 
-state eliminarEdificio as "eliminarEdificio()" {
+state deleteBuilding as "deleteBuilding()" {
 
     state " " as ConfirmandoEliminacion
     state " " as EliminandoEdificio
 
     [*] -[#green]-> ConfirmandoEliminacion 
     note on link
-    <b>Administrador</b> solicita eliminar edificio
+    <b>Administrator</b> requests delete
     end note    
     
     ConfirmandoEliminacion -[#green]-> EliminandoEdificio
     note on link
-    <b>Sistema</b> presenta información del edificio a eliminar
+    <b>System</b> presents información del edificio a eliminar
     • Código, nombre del edificio
     • Ubicación, descripción
     • Observaciones, aulas asociadas
     • Presenta advertencia de eliminación
-    • Permite solicitar confirmar eliminación
-    • Permite solicitar cancelar eliminación
+    • Permite requestsr confirmar eliminación
+    • Permite requestsr cancelar eliminación
     end note
     
     EliminandoEdificio -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita confirmación de eliminación
-    <b>Sistema</b> permite solicitar confirmar eliminación
-    <b>Administrador</b> solicita confirmar eliminación
+    <b>Administrator</b> requests confirmación de eliminación
+    <b>System</b> permite requestsr confirmar eliminación
+    <b>Administrator</b> requests confirmar eliminación
     end note
 }
 
-eliminarEdificio -[#green]-> EDIFICIOS_ABIERTO
+eliminarEdificio -[#green]-> BUILDINGS_OPEN
 note on link
-<<include>> abrirEdificios() - lista actualizada
+<<include>> openBuildings() - lista actualizada
 end note
 
-eliminarEdificio -[#blue]-> EDIFICIOS_ABIERTO
+eliminarEdificio -[#blue]-> BUILDINGS_OPEN
 note on link
-<<include>> abrirEdificios() - cancelar eliminación
+<<include>> openBuildings() - cancelar eliminación
 end note
 
 @enduml

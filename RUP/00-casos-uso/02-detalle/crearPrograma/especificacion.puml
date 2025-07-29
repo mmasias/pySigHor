@@ -1,38 +1,38 @@
-@startuml crearPrograma
+@startuml createProgram
 
 skinparam linetype polyline
 
-state crearPrograma as "crearPrograma()" {
+state createProgram as "createProgram()" {
 
-    state " " as SolicitandoDatos
+    state " " as RequestingData
     state " " as CreandoPrograma
 
-    [*] -[#green]-> SolicitandoDatos 
+    [*] -[#green]-> RequestingData 
     note on link
-    <b>Administrador</b> solicita crear programa nuevo
+    <b>Administrator</b> requests create new
     end note    
     
-    SolicitandoDatos -[#green]-> CreandoPrograma
+    RequestingData -[#green]-> CreandoPrograma
     note on link
-    <b>Sistema</b> solicita datos mínimos del programa
+    <b>System</b> requests datos mínimos del programa
     • Nombre del programa (obligatorio)
-    • Permite solicitar crear programa
-    • Permite solicitar cancelar creación
+    • Permite requestsr crear programa
+    • Permite requestsr cancelar creación
     end note
     
     CreandoPrograma -[#green]-> [*]
     note on link
-    <b>Administrador</b> proporciona datos mínimos
-    <b>Sistema</b> crea programa y transfiere a edición
+    <b>Administrator</b> proporciona datos mínimos
+    <b>System</b> crea programa y transfiere a edición
     end note
 }
 
-crearPrograma -[#green]-> PROGRAMA_ABIERTO
+crearPrograma -[#green]-> PROGRAM_OPEN
 note on link
 editarPrograma(programaNuevo)
 end note
 
-crearPrograma -[#blue]-> PROGRAMAS_ABIERTO
+crearPrograma -[#blue]-> PROGRAMS_OPEN
 note on link
 cancelar creación
 end note

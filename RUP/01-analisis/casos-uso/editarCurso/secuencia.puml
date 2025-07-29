@@ -1,54 +1,54 @@
-@startuml editarCurso-analisis-secuencia
+@startuml editCourse-analysis-sequence
 
 skinparam linetype polyline
 
 ' Actores externos
-actor ":Cursos Abierto" as CursosAbierto
-actor ":Curso Abierto" as CursoAbierto
-participant ":Collaboration CrearCurso" as CrearCurso
-participant ":Collaboration AbrirCursos" as AbrirCursos
+actor ":Courses Open" as CoursesOpen
+actor ":Course Open" as CourseOpen
+participant ":Collaboration CreateCourse" as CreateCourse
+participant ":Collaboration OpenCourses" as OpenCourses
 
 ' Clases de análisis - Vista (Boundary)
-boundary "EditarCursoView" as Vista <<boundary>>
+boundary "EditCourseView" as Vista <<boundary>>
 
 ' Clases de análisis - Control  
-control "CursoController" as Controlador <<control>>
+control "CourseController" as Controller <<control>>
 
 ' Clases de análisis - Entidad (Entity)
-entity "CursoRepository" as Repositorio <<entity>>
-entity "Curso" as CursoEntity <<entity>>
+entity "CourseRepository" as Repository <<entity>>
+entity "Course" as CourseEntity <<entity>>
 
-title Análisis de Colaboración: editarCurso()
+title Collaboration Analysis: editCourse()
 
-== Flujo Principal: Editar Curso Académico ==
+== Main Flow: Edit Academic Course ==
 
-note over CursosAbierto, CrearCurso
-**Múltiples puntos de entrada:**
-• Desde lista de cursos (edición directa)
-• Desde creación de curso (C→U automático)
-• Desde detalle de curso (continuar edición)
+note over CoursesOpen, CreateCourse
+**Multiple entry points:**
+• From course list (direct editing)
+• From course creation (automatic C→U)
+• From course detail (continue editing)
 end note
 
 alt Entrada desde lista
-    CursosAbierto -> Vista : 1a: editarCurso(cursoId)
+    CoursesOpen -> Vista : 1a: editCourse(cursoId)
 else Entrada desde creación (C→U)
-    CrearCurso -> Vista : 1b: editarCurso(cursoNuevo)
+    CreateCourse -> Vista : 1b: editCourse(cursoNuevo)
 else Entrada desde detalle
-    CursoAbierto -> Vista : 1c: editarCurso(cursoId)
+    CourseOpen -> Vista : 1c: editCourse(cursoId)
 end
 
 activate Vista
 
-Vista -> Controlador : 2: cargarCursoParaEdición(cursoId)
-activate Controlador
+Vista -> Controller : 2: cargarCursoParaEdición(cursoId)
+activate Controller
 
-Controlador -> Repositorio : 3: obtenerPorId(cursoId)
-activate Repositorio
-Repositorio --> Controlador : 4: curso : Curso
-deactivate Repositorio
+Controller -> Repository : 3: getById(cursoId)
+activate Repository
+Repository --> Controller : 4: curso : Course
+deactivate Repository
 
-Controlador --> Vista : 5: datosCurso : Curso
-deactivate Controlador
+Controller --> Vista : 5: datosCurso : Course
+deactivate Controller
 
 Vista -> Vista : 6: presenta datos de edición
 note right
@@ -57,20 +57,20 @@ note right
 • Créditos, horas teóricas, horas prácticas
 • Programa académico asociado
 
-**Sistema permite solicitar:**
+**Sistema allows requesting:**
 • modificar campos
 • guardar curso
-• cancelar edición
+• cancel editing
 end note
 
 == Ciclo de Edición Continua ==
 
 loop Edición continua
-    Vista -> Controlador : 7: modificarCampos(cursoId, cambios)
-    activate Controlador
+    Vista -> Controller : 7: modificarCampos(cursoId, cambios)
+    activate Controller
     
-    Controlador -> CursoEntity : 8: aplicarCambios(cambios)
-    activate CursoEntity
+    Controller -> CourseEntity : 8: aplicarCambios(cambios)
+    activate CourseEntity
     note right
     **Modificaciones académicas:**
     • Validar coherencia de créditos/horas
@@ -78,16 +78,16 @@ loop Edición continua
     • Mantener integridad de datos
     end note
     
-    CursoEntity --> Controlador : 9: cursoModificado : Curso
-    deactivate CursoEntity
+    CourseEntity --> Controller : 9: cursoModificado : Course
+    deactivate CourseEntity
     
-    Controlador -> Repositorio : 10: actualizar(cursoModificado)
-    activate Repositorio
-    Repositorio --> Controlador : 11: éxito : boolean
-    deactivate Repositorio
+    Controller -> Repository : 10: update(cursoModificado)
+    activate Repository
+    Repository --> Controller : 11: éxito : boolean
+    deactivate Repository
     
-    Controlador --> Vista : 12: cambiosAplicados : boolean
-    deactivate Controlador
+    Controller --> Vista : 12: cambiosAplicados : boolean
+    deactivate Controller
     
     alt Continuar editando
         Vista -> Vista : 13: mantiene edición activa
@@ -103,16 +103,16 @@ end
 == Finalización de Edición ==
 
 alt Guardar y salir
-    Vista -> AbrirCursos : 14a: <<include>> abrirCursos()
+    Vista -> OpenCourses : 14a: <<include>> openCourses()
     note right
     **Administrador solicita guardar y salir**
     • Cambios persistidos
     • Regresa a lista actualizada
     end note
 else Cancelar edición
-    Vista -> AbrirCursos : 14b: <<include>> abrirCursos()
+    Vista -> OpenCourses : 14b: <<include>> openCourses()
     note right
-    **Administrador solicita cancelar edición**
+    **Administrador solicita cancel editing**
     • Cambios pueden perderse
     • Regresa a lista sin modificaciones
     end note

@@ -1,32 +1,32 @@
-@startuml editarRecurso-analisis
+@startuml editResource-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Recursos Abierto" as RecursosAbierto
 rectangle #CDEBA5 ":Recurso Abierto" as RecursoAbierto
-rectangle #CDEBA5 ":Collaboration CrearRecurso" as CrearRecurso
+rectangle #CDEBA5 ":Collaboration CreateResource" as CreateResource
 rectangle #CDEBA5 ":Collaboration AbrirRecursos" as AbrirRecursos
 
-package editarRecurso as "editarRecurso()" {
-    rectangle #629EF9 EditarRecursoView
+package editResource as "editResource()" {
+    rectangle #629EF9 EditResourceView
     rectangle #b5bd68 RecursoController
-    rectangle #F2AC4E RecursoRepository
-    rectangle #F2AC4E Recurso
+    rectangle #F2AC4E ResourceRepository
+    rectangle #F2AC4E Resource
 }
 
-RecursosAbierto --> EditarRecursoView: editarRecurso(recursoId)
-RecursoAbierto --> EditarRecursoView: editarRecurso(recursoId)
-CrearRecurso --> EditarRecursoView: editarRecurso(recursoNuevo)
+RecursosAbierto --> EditResourceView: editarRecurso(recursoId)
+RecursoAbierto --> EditResourceView: editarRecurso(recursoId)
+CreateResource --> EditResourceView: editarRecurso(recursoNuevo)
 
-EditarRecursoView -d-> RecursoController: cargarRecursoParaEdición(recursoId) : Recurso
+EditResourceView -d-> RecursoController: cargarRecursoParaEdición(recursoId) : Recurso
 
-RecursoController --> RecursoRepository: obtenerPorId(recursoId) : Recurso
+RecursoController --> ResourceRepository: getById(recursoId) : Recurso
 
-EditarRecursoView --> RecursoController: modificarCampos(recursoId, cambios) : boolean
+EditResourceView --> RecursoController: modificarCampos(recursoId, cambios) : boolean
 
-RecursoController --> RecursoRepository: actualizar(recurso) : boolean
+RecursoController --> ResourceRepository: update(recurso) : boolean
 
-RecursoRepository -- Recurso
+ResourceRepository -- Recurso
 
-EditarRecursoView ..> AbrirRecursos: <<include>> abrirRecursos()
+EditResourceView ..> AbrirRecursos: <<include>> openResources()
 
 @enduml

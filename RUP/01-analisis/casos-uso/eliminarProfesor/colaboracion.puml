@@ -1,30 +1,30 @@
-@startuml eliminarProfesor-analisis
+@startuml deleteTeacher-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbierto
 rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbierto
 rectangle #CDEBA5 ":Collaboration AbrirProfesores" as AbrirProfesores
 
-package eliminarProfesor as "eliminarProfesor()" {
-    rectangle #629EF9 EliminarProfesorView
+package deleteTeacher as "deleteTeacher()" {
+    rectangle #629EF9 DeleteTeacherView
     rectangle #b5bd68 ProfesorController
-    rectangle #F2AC4E ProfesorRepository
-    rectangle #F2AC4E Profesor
+    rectangle #F2AC4E TeacherRepository
+    rectangle #F2AC4E Teacher
 }
 
-ProfesoresAbierto --> EliminarProfesorView: eliminarProfesor(profesorId)
-ProfesorAbierto --> EliminarProfesorView: eliminarProfesor(profesorId)
+ProfesoresAbierto --> DeleteTeacherView: eliminarProfesor(profesorId)
+ProfesorAbierto --> DeleteTeacherView: eliminarProfesor(profesorId)
 
-EliminarProfesorView -d-> ProfesorController: cargarProfesorParaEliminacion(profesorId) : Profesor
+DeleteTeacherView -d-> ProfesorController: cargarProfesorParaEliminacion(profesorId) : Profesor
 
-ProfesorController --> ProfesorRepository: obtenerPorId(profesorId) : Profesor
+ProfesorController --> TeacherRepository: getById(profesorId) : Profesor
 
-ProfesorRepository -- Profesor
+TeacherRepository -- Profesor
 
-EliminarProfesorView --> ProfesorController: eliminarProfesor(profesorId) : void
+DeleteTeacherView --> ProfesorController: eliminarProfesor(profesorId) : void
 
-ProfesorController --> ProfesorRepository: eliminar(profesorId) : void
+ProfesorController --> TeacherRepository: delete(profesorId) : void
 
-EliminarProfesorView ..> AbrirProfesores: <<include>> abrirProfesores()
+DeleteTeacherView ..> AbrirProfesores: <<include>> openTeachers()
 
 @enduml

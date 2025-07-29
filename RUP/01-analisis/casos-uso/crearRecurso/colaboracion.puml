@@ -1,28 +1,28 @@
-@startuml crearRecurso-analisis
+@startuml createResource-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Recursos Abierto" as RecursosAbierto
-rectangle #CDEBA5 ":Collaboration EditarRecurso" as EditarRecurso
+rectangle #CDEBA5 ":Collaboration EditResource" as EditResource
 
-package crearRecurso as "crearRecurso()" {
-    rectangle #629EF9 CrearRecursoView
+package createResource as "createResource()" {
+    rectangle #629EF9 CreateResourceView
     rectangle #b5bd68 RecursoController
-    rectangle #F2AC4E RecursoRepository
-    rectangle #F2AC4E Recurso
+    rectangle #F2AC4E ResourceRepository
+    rectangle #F2AC4E Resource
 }
 
-RecursosAbierto -r-> CrearRecursoView: crearRecurso()
+RecursosAbierto -r-> CreateResourceView: createResource()
 
-CrearRecursoView -d-> RecursoController: validarDatosMínimos(codigo, nombre) : boolean
+CreateResourceView -d-> RecursoController: validarDatosMínimos(codigo, nombre) : boolean
 
-RecursoController --> RecursoRepository: verificarUnicidad(codigo) : boolean
+RecursoController --> ResourceRepository: verificarUnicidad(codigo) : boolean
 
-CrearRecursoView --> RecursoController: crearRecurso(codigo, nombre) : Recurso
+CreateResourceView --> RecursoController: crearRecurso(codigo, nombre) : Recurso
 
-RecursoController --> RecursoRepository: crear(codigo, nombre) : Recurso
+RecursoController --> ResourceRepository: crear(codigo, nombre) : Recurso
 
-RecursoRepository -- Recurso
+ResourceRepository -- Recurso
 
-CrearRecursoView ..> EditarRecurso: <<include>> editarRecurso(recursoNuevo)
+CreateResourceView ..> EditResource: <<include>> editarRecurso(recursoNuevo)
 
 @enduml

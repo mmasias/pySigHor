@@ -1,32 +1,32 @@
-@startuml editarAula-analisis
+@startuml editClassroom-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Aulas Abierto" as AulasAbierto
 rectangle #CDEBA5 ":Aula Abierta" as AulaAbierta
-rectangle #CDEBA5 ":Collaboration CrearAula" as CrearAula
+rectangle #CDEBA5 ":Collaboration CreateClassroom" as CreateClassroom
 rectangle #CDEBA5 ":Collaboration AbrirAulas" as AbrirAulas
 
-package editarAula as "editarAula()" {
-    rectangle #629EF9 EditarAulaView
+package editClassroom as "editClassroom()" {
+    rectangle #629EF9 EditClassroomView
     rectangle #b5bd68 AulaController
-    rectangle #F2AC4E AulaRepository
-    rectangle #F2AC4E Aula
+    rectangle #F2AC4E ClassroomRepository
+    rectangle #F2AC4E Classroom
 }
 
-AulasAbierto --> EditarAulaView: editarAula(aulaId)
-AulaAbierta --> EditarAulaView: editarAula(aulaId)
-CrearAula --> EditarAulaView: editarAula(aulaNueva)
+AulasAbierto --> EditClassroomView: editarAula(aulaId)
+AulaAbierta --> EditClassroomView: editarAula(aulaId)
+CreateClassroom --> EditClassroomView: editarAula(aulaNueva)
 
-EditarAulaView -d-> AulaController: cargarAulaParaEdición(aulaId) : Aula
+EditClassroomView -d-> AulaController: cargarAulaParaEdición(aulaId) : Aula
 
-AulaController --> AulaRepository: obtenerPorId(aulaId) : Aula
+AulaController --> ClassroomRepository: getById(aulaId) : Aula
 
-EditarAulaView --> AulaController: modificarCampos(aulaId, cambios) : boolean
+EditClassroomView --> AulaController: modificarCampos(aulaId, cambios) : boolean
 
-AulaController --> AulaRepository: actualizar(aula) : boolean
+AulaController --> ClassroomRepository: update(aula) : boolean
 
-AulaRepository -- Aula
+ClassroomRepository -- Aula
 
-EditarAulaView ..> AbrirAulas: <<include>> abrirAulas()
+EditClassroomView ..> AbrirAulas: <<include>> openClassrooms()
 
 @enduml

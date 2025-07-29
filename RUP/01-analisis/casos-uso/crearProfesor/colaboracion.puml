@@ -1,28 +1,28 @@
-@startuml crearProfesor-analisis
+@startuml createTeacher-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbierto
-rectangle #CDEBA5 ":Collaboration EditarProfesor" as EditarProfesor
+rectangle #CDEBA5 ":Collaboration EditTeacher" as EditTeacher
 
-package crearProfesor as "crearProfesor()" {
-    rectangle #629EF9 CrearProfesorView
+package createTeacher as "createTeacher()" {
+    rectangle #629EF9 CreateTeacherView
     rectangle #b5bd68 ProfesorController
-    rectangle #F2AC4E ProfesorRepository
-    rectangle #F2AC4E Profesor
+    rectangle #F2AC4E TeacherRepository
+    rectangle #F2AC4E Teacher
 }
 
-ProfesoresAbierto -r-> CrearProfesorView: crearProfesor()
+ProfesoresAbierto -r-> CreateTeacherView: createTeacher()
 
-CrearProfesorView -d-> ProfesorController: validarDatosMínimos(codigo, nombres, apellidos) : boolean
+CreateTeacherView -d-> ProfesorController: validarDatosMínimos(codigo, nombres, apellidos) : boolean
 
-ProfesorController --> ProfesorRepository: verificarUnicidad(codigo) : boolean
+ProfesorController --> TeacherRepository: verificarUnicidad(codigo) : boolean
 
-CrearProfesorView --> ProfesorController: crearProfesor(codigo, nombres, apellidos) : Profesor
+CreateTeacherView --> ProfesorController: crearProfesor(codigo, nombres, apellidos) : Profesor
 
-ProfesorController --> ProfesorRepository: crear(codigo, nombres, apellidos) : Profesor
+ProfesorController --> TeacherRepository: crear(codigo, nombres, apellidos) : Profesor
 
-ProfesorRepository -- Profesor
+TeacherRepository -- Profesor
 
-CrearProfesorView ..> EditarProfesor: <<include>> editarProfesor(profesorNuevo)
+CreateTeacherView ..> EditTeacher: <<include>> editarProfesor(profesorNuevo)
 
 @enduml

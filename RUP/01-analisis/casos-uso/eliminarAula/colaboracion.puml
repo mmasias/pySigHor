@@ -1,30 +1,30 @@
-@startuml eliminarAula-analisis
+@startuml deleteClassroom-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Aulas Abierto" as AulasAbierto
 rectangle #CDEBA5 ":Aula Abierta" as AulaAbierta
 rectangle #CDEBA5 ":Collaboration AbrirAulas" as AbrirAulas
 
-package eliminarAula as "eliminarAula()" {
-    rectangle #629EF9 EliminarAulaView
+package deleteClassroom as "deleteClassroom()" {
+    rectangle #629EF9 DeleteClassroomView
     rectangle #b5bd68 AulaController
-    rectangle #F2AC4E AulaRepository
-    rectangle #F2AC4E Aula
+    rectangle #F2AC4E ClassroomRepository
+    rectangle #F2AC4E Classroom
 }
 
-AulasAbierto --> EliminarAulaView: eliminarAula(aulaId)
-AulaAbierta --> EliminarAulaView: eliminarAula(aulaId)
+AulasAbierto --> DeleteClassroomView: eliminarAula(aulaId)
+AulaAbierta --> DeleteClassroomView: eliminarAula(aulaId)
 
-EliminarAulaView -d-> AulaController: cargarAulaParaEliminacion(aulaId) : Aula
+DeleteClassroomView -d-> AulaController: cargarAulaParaEliminacion(aulaId) : Aula
 
-AulaController --> AulaRepository: obtenerPorId(aulaId) : Aula
+AulaController --> ClassroomRepository: getById(aulaId) : Aula
 
-AulaRepository -- Aula
+ClassroomRepository -- Aula
 
-EliminarAulaView --> AulaController: eliminarAula(aulaId) : void
+DeleteClassroomView --> AulaController: eliminarAula(aulaId) : void
 
-AulaController --> AulaRepository: eliminar(aulaId) : void
+AulaController --> ClassroomRepository: delete(aulaId) : void
 
-EliminarAulaView ..> AbrirAulas: <<include>> abrirAulas()
+DeleteClassroomView ..> AbrirAulas: <<include>> openClassrooms()
 
 @enduml

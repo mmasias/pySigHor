@@ -1,57 +1,57 @@
-@startuml abrirProfesores
+@startuml openTeachers
 
 skinparam linetype polyline
 
-state abrirProfesores as "abrirProfesores()" {
+state openTeachers as "openTeachers()" {
 
-    state " " as MostrandoLista
-    state " " as FiltrandoLista
+    state " " as ShowingList
+    state " " as FilteringList
 
-    [*] -[#green]-> MostrandoLista 
+    [*] -[#green]-> ShowingList 
     note on link
-    <b>Administrador</b> solicita abrir profesores
+    <b>Administrator</b> requests abrir profesores
     end note    
     
-    MostrandoLista -[#green]-> FiltrandoLista
+    ShowingList -[#green]-> FilteringList
     note on link
-    <b>Sistema</b> presenta lista de profesores
+    <b>System</b> presents teacher list
     • Código, nombre, apellidos de cada profesor
-    • Permite solicitar filtrar lista
-    • Permite solicitar crear profesor nuevo
-    • Permite solicitar eliminar profesor
-    • Permite solicitar editar profesor
+    • Permite requestsr filter list
+    • Permite requestsr create new
+    • Permite requestsr delete
+    • Permite requestsr edit
     end note
     
-    FiltrandoLista -[#green]-> FiltrandoLista
+    FilteringList -[#green]-> FilteringList
     note on link
-    <b>Administrador</b> solicita filtrar lista
-    <b>Sistema</b> presenta lista filtrada
+    <b>Administrator</b> requests filter list
+    <b>System</b> presents filtered list
     end note
     
-    FiltrandoLista -[#green]-> [*]
+    FilteringList -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita una de las opciones
+    <b>Administrator</b> requests one of the options
     end note
 }
 
-abrirProfesores -[#green]-> PROFESOR_ABIERTO
+abrirProfesores -[#green]-> TEACHER_OPEN
 note on link
-editarProfesor()
+editTeacher()
 end note
 
-abrirProfesores -[#green]-> PROFESOR_ABIERTO
+abrirProfesores -[#green]-> TEACHER_OPEN
 note on link
-crearProfesor()
+createTeacher()
 end note
 
-abrirProfesores -[#green]-> PROFESORES_ABIERTO
+abrirProfesores -[#green]-> TEACHERS_OPEN
 note on link
-eliminarProfesor()
+deleteTeacher()
 end note
 
-abrirProfesores -[#green]-> SISTEMA_DISPONIBLE
+abrirProfesores -[#green]-> SYSTEM_AVAILABLE
 note on link
-completarGestion()
+completeManagement()
 end note
 
 @enduml

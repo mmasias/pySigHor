@@ -1,32 +1,32 @@
-@startuml editarEdificio-analisis
+@startuml editBuilding-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Edificios Abierto" as EdificiosAbierto
 rectangle #CDEBA5 ":Edificio Abierto" as EdificioAbierto
-rectangle #CDEBA5 ":Collaboration CrearEdificio" as CrearEdificio
+rectangle #CDEBA5 ":Collaboration CreateBuilding" as CreateBuilding
 rectangle #CDEBA5 ":Collaboration AbrirEdificios" as AbrirEdificios
 
-package editarEdificio as "editarEdificio()" {
-    rectangle #629EF9 EditarEdificioView
+package editBuilding as "editBuilding()" {
+    rectangle #629EF9 EditBuildingView
     rectangle #b5bd68 EdificioController
-    rectangle #F2AC4E EdificioRepository
-    rectangle #F2AC4E Edificio
+    rectangle #F2AC4E BuildingRepository
+    rectangle #F2AC4E Building
 }
 
-EdificiosAbierto --> EditarEdificioView: editarEdificio(edificioId)
-EdificioAbierto --> EditarEdificioView: editarEdificio(edificioId)
-CrearEdificio --> EditarEdificioView: editarEdificio(edificioNuevo)
+EdificiosAbierto --> EditBuildingView: editarEdificio(edificioId)
+EdificioAbierto --> EditBuildingView: editarEdificio(edificioId)
+CreateBuilding --> EditBuildingView: editarEdificio(edificioNuevo)
 
-EditarEdificioView -d-> EdificioController: cargarEdificioParaEdición(edificioId) : Edificio
+EditBuildingView -d-> EdificioController: cargarEdificioParaEdición(edificioId) : Edificio
 
-EdificioController --> EdificioRepository: obtenerPorId(edificioId) : Edificio
+EdificioController --> BuildingRepository: getById(edificioId) : Edificio
 
-EditarEdificioView --> EdificioController: modificarCampos(edificioId, cambios) : boolean
+EditBuildingView --> EdificioController: modificarCampos(edificioId, cambios) : boolean
 
-EdificioController --> EdificioRepository: actualizar(edificio) : boolean
+EdificioController --> BuildingRepository: update(edificio) : boolean
 
-EdificioRepository -- Edificio
+BuildingRepository -- Edificio
 
-EditarEdificioView ..> AbrirEdificios: <<include>> abrirEdificios()
+EditBuildingView ..> AbrirEdificios: <<include>> openBuildings()
 
 @enduml

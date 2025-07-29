@@ -1,32 +1,32 @@
-@startuml editarProfesor-analisis
+@startuml editTeacher-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbierto
 rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbierto
-rectangle #CDEBA5 ":Collaboration CrearProfesor" as CrearProfesor
+rectangle #CDEBA5 ":Collaboration CreateTeacher" as CreateTeacher
 rectangle #CDEBA5 ":Collaboration AbrirProfesores" as AbrirProfesores
 
-package editarProfesor as "editarProfesor()" {
-    rectangle #629EF9 EditarProfesorView
+package editTeacher as "editTeacher()" {
+    rectangle #629EF9 EditTeacherView
     rectangle #b5bd68 ProfesorController
-    rectangle #F2AC4E ProfesorRepository
-    rectangle #F2AC4E Profesor
+    rectangle #F2AC4E TeacherRepository
+    rectangle #F2AC4E Teacher
 }
 
-ProfesoresAbierto --> EditarProfesorView: editarProfesor(profesorId)
-ProfesorAbierto --> EditarProfesorView: editarProfesor(profesorId)
-CrearProfesor --> EditarProfesorView: editarProfesor(profesorNuevo)
+ProfesoresAbierto --> EditTeacherView: editarProfesor(profesorId)
+ProfesorAbierto --> EditTeacherView: editarProfesor(profesorId)
+CreateTeacher --> EditTeacherView: editarProfesor(profesorNuevo)
 
-EditarProfesorView -d-> ProfesorController: cargarProfesorParaEdición(profesorId) : Profesor
+EditTeacherView -d-> ProfesorController: cargarProfesorParaEdición(profesorId) : Profesor
 
-ProfesorController --> ProfesorRepository: obtenerPorId(profesorId) : Profesor
+ProfesorController --> TeacherRepository: getById(profesorId) : Profesor
 
-EditarProfesorView --> ProfesorController: modificarCampos(profesorId, cambios) : boolean
+EditTeacherView --> ProfesorController: modificarCampos(profesorId, cambios) : boolean
 
-ProfesorController --> ProfesorRepository: actualizar(profesor) : boolean
+ProfesorController --> TeacherRepository: update(profesor) : boolean
 
-ProfesorRepository -- Profesor
+TeacherRepository -- Profesor
 
-EditarProfesorView ..> AbrirProfesores: <<include>> abrirProfesores()
+EditTeacherView ..> AbrirProfesores: <<include>> openTeachers()
 
 @enduml

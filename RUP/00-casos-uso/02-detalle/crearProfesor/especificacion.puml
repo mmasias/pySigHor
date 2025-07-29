@@ -1,40 +1,40 @@
-@startuml crearProfesor
+@startuml createTeacher
 
 skinparam linetype polyline
 
-state crearProfesor as "crearProfesor()" {
+state createTeacher as "createTeacher()" {
 
-    state " " as SolicitandoDatos
+    state " " as RequestingData
     state " " as CreandoProfesor
 
-    [*] -[#green]-> SolicitandoDatos 
+    [*] -[#green]-> RequestingData 
     note on link
-    <b>Administrador</b> solicita crear profesor nuevo
+    <b>Administrator</b> requests create new
     end note    
     
-    SolicitandoDatos -[#green]-> CreandoProfesor
+    RequestingData -[#green]-> CreandoProfesor
     note on link
-    <b>Sistema</b> presenta solicitud de datos mínimos del profesor
+    <b>System</b> presents solicitud de datos mínimos del profesor
     • Código del profesor (obligatorio)
     • Nombres del profesor (obligatorio)
     • Apellidos del profesor (obligatorio)
-    • Permite solicitar crear profesor
-    • Permite solicitar cancelar creación
+    • Permite requestsr crear profesor
+    • Permite requestsr cancelar creación
     end note
     
     CreandoProfesor -[#green]-> [*]
     note on link
-    <b>Administrador</b> proporciona datos mínimos
-    <b>Sistema</b> crea profesor y transfiere a edición
+    <b>Administrator</b> proporciona datos mínimos
+    <b>System</b> crea profesor y transfiere a edición
     end note
 }
 
-crearProfesor -[#green]-> PROFESOR_ABIERTO
+crearProfesor -[#green]-> TEACHER_OPEN
 note on link
 editarProfesor(profesorNuevo)
 end note
 
-crearProfesor -[#blue]-> PROFESORES_ABIERTO
+crearProfesor -[#blue]-> TEACHERS_OPEN
 note on link
 cancelar creación
 end note

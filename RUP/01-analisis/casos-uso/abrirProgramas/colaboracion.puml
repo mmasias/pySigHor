@@ -1,34 +1,34 @@
-@startuml abrirProgramas-analisis
+@startuml openPrograms-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
-package abrirProgramas as "abrirProgramas()" {
-    rectangle #629EF9 AbrirProgramasView
-    rectangle #b5bd68 ProgramasController
-    rectangle #F2AC4E ProgramaRepository
-    rectangle #F2AC4E Programa
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openPrograms as "openPrograms()" {
+    rectangle #629EF9 OpenProgramsView
+    rectangle #b5bd68 ProgramsController
+    rectangle #F2AC4E ProgramRepository
+    rectangle #F2AC4E Program
 }
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
-rectangle #CDEBA5 ":Collaboration CrearPrograma" as CrearPrograma
-rectangle #CDEBA5 ":Collaboration EditarPrograma" as EditarPrograma
-rectangle #CDEBA5 ":Collaboration EliminarPrograma" as EliminarPrograma
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateProgram" as CreateProgram
+rectangle #CDEBA5 ":Collaboration EditProgram" as EditProgram
+rectangle #CDEBA5 ":Collaboration DeleteProgram" as DeleteProgram
 
-SistemaDisponible -r-> AbrirProgramasView: abrirProgramas()
+SystemAvailable -r-> OpenProgramsView: openPrograms()
 
-AbrirProgramasView -d-> ProgramasController: listarProgramas() : List<Programa>
+OpenProgramsView -d-> ProgramsController: listPrograms() : List<Program>
 
-ProgramasController --> ProgramaRepository: obtenerTodos() : List<Programa>
+ProgramsController --> ProgramRepository: getAll() : List<Program>
 
-ProgramaRepository -- Programa
+ProgramRepository -- Programa
 
-AbrirProgramasView --> ProgramasController: filtrarProgramas(criterio) : List<Programa>
+OpenProgramsView --> ProgramsController: filterPrograms(criteria) : List<Program>
 
-ProgramasController --> ProgramaRepository: buscarPorCriterio(criterio) : List<Programa>
+ProgramsController --> ProgramRepository: findByCriteria(criteria) : List<Program>
 
-AbrirProgramasView ..> SistemaDisponibleSalida: completarGestion()
-AbrirProgramasView ..> CrearPrograma: crearPrograma()
-AbrirProgramasView ..> EditarPrograma: editarPrograma()
-AbrirProgramasView ..> EliminarPrograma: eliminarPrograma()
+OpenProgramsView ..> SystemAvailableSalida: completeManagement()
+OpenProgramsView ..> CreateProgram: createProgram()
+OpenProgramsView ..> EditProgram: editProgram()
+OpenProgramsView ..> DeleteProgram: deleteProgram()
 
 @enduml

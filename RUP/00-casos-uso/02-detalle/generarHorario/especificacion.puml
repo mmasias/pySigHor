@@ -1,8 +1,8 @@
-@startuml generarHorario
+@startuml generateSchedule
 
 skinparam linetype polyline
 
-state generarHorario as "generarHorario()" {
+state generateSchedule as "generateSchedule()" {
 
     state " " as RequiringGeneration
     state " " as ProvidingConfirmation
@@ -10,19 +10,19 @@ state generarHorario as "generarHorario()" {
 
     [*] -[#green]-> RequiringGeneration 
     note on link
-    <b>Administrador</b> solicita generar horario
+    <b>Administrator</b> requests generar horario
     end note    
     
     RequiringGeneration -[#green]-> ProvidingConfirmation
     note on link
-    <b>Sistema</b> presenta
+    <b>System</b> presents
     • datos disponibles para generación
     • advertencia si horario existe
     end note
     
     ProvidingConfirmation -[#green]-> c
     note on link
-    <b>Administrador</b> solicita
+    <b>Administrator</b> requests
     • confirmar generación
     • cancelar generación
     end note
@@ -43,9 +43,9 @@ state generarHorario as "generarHorario()" {
     end note
 }
 
-generarHorario -[#green]-> HORARIO_ABIERTO
+generarHorario -[#green]-> SCHEDULE_OPEN
 note on link
-consultarHorario()
+viewSchedule()
 end note
 
 @enduml

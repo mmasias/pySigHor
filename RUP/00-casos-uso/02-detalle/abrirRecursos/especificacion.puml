@@ -1,57 +1,57 @@
-@startuml abrirRecursos
+@startuml openResources
 
 skinparam linetype polyline
 
-state abrirRecursos as "abrirRecursos()" {
+state openResources as "openResources()" {
 
-    state " " as MostrandoLista
-    state " " as FiltrandoLista
+    state " " as ShowingList
+    state " " as FilteringList
 
-    [*] -[#green]-> MostrandoLista 
+    [*] -[#green]-> ShowingList 
     note on link
-    <b>Administrador</b> solicita abrir recursos
+    <b>Administrator</b> requests abrir recursos
     end note    
     
-    MostrandoLista -[#green]-> FiltrandoLista
+    ShowingList -[#green]-> FilteringList
     note on link
-    <b>Sistema</b> presenta lista de recursos
+    <b>System</b> presents resource list
     • ID, nombre, descripción de cada recurso
-    • Permite solicitar filtrar lista
-    • Permite solicitar crear recurso nuevo
-    • Permite solicitar eliminar recurso
-    • Permite solicitar editar recurso
+    • Permite requestsr filter list
+    • Permite requestsr create new
+    • Permite requestsr delete
+    • Permite requestsr edit
     end note
     
-    FiltrandoLista -[#green]-> FiltrandoLista
+    FilteringList -[#green]-> FilteringList
     note on link
-    <b>Administrador</b> solicita filtrar lista
-    <b>Sistema</b> presenta lista filtrada
+    <b>Administrator</b> requests filter list
+    <b>System</b> presents filtered list
     end note
     
-    FiltrandoLista -[#green]-> [*]
+    FilteringList -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita una de las opciones
+    <b>Administrator</b> requests one of the options
     end note
 }
 
-abrirRecursos -[#green]-> RECURSO_ABIERTO
+abrirRecursos -[#green]-> RECOURSE_OPEN
 note on link
-editarRecurso()
+editResource()
 end note
 
-abrirRecursos -[#green]-> RECURSO_ABIERTO
+abrirRecursos -[#green]-> RECOURSE_OPEN
 note on link
-crearRecurso()
+createResource()
 end note
 
-abrirRecursos -[#green]-> RECURSOS_ABIERTO
+abrirRecursos -[#green]-> RECOURSES_OPEN
 note on link
-eliminarRecurso()
+deleteResource()
 end note
 
-abrirRecursos -[#green]-> SISTEMA_DISPONIBLE
+abrirRecursos -[#green]-> SYSTEM_AVAILABLE
 note on link
-completarGestion()
+completeManagement()
 end note
 
 @enduml

@@ -1,54 +1,54 @@
-@startuml editarAula
+@startuml editClassroom
 
 skinparam linetype polyline
 
-state editarAula as "editarAula()" {
+state editClassroom as "editClassroom()" {
 
     state " " as EditandoDatos
-    state " " as GuardandoDatos 
+    state " " as SavingData 
 
     [*] -[#green]-> EditandoDatos 
     note on link
-    <b>Administrador</b> solicita editar aula
+    <b>Administrator</b> requests edit
     end note    
     
-    EditandoDatos -[#green]-> GuardandoDatos
+    EditandoDatos -[#green]-> SavingData
     note on link
-    <b>Sistema</b> presenta datos de edición
+    <b>System</b> presents datos de edición
     • Código, nombre del aula
     • Edificio asociado, capacidad
     • Tipo de aula, recursos
     • Observaciones del aula
     
-    <b>Sistema</b> permite solicitar:
+    <b>System</b> permite requestsr:
     • modificar campos
     • guardar aula
     • cancelar edición
     end note
     
-    GuardandoDatos -[#green]-> EditandoDatos
+    SavingData -[#green]-> EditandoDatos
     note on link
-    <b>Administrador</b> solicita modificar campos
+    <b>Administrator</b> requests modificar campos
     end note
     
-    GuardandoDatos -[#green]-> [*]
+    SavingData -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita guardar y salir
+    <b>Administrator</b> requests guardar y salir
     end note
 
-    GuardandoDatos -[#red]-> [*]
+    SavingData -[#red]-> [*]
     note on link
-    <b>Administrador</b> solicita cancelar edición
+    <b>Administrator</b> requests cancelar edición
     end note
 
 }
 
-editarAula -[#green]-> AULAS_ABIERTO
+editarAula -[#green]-> CLASSROOMS_OPEN
 note on link
-abrirAulas()
+openClassrooms()
 end note
 
-editarAula -[#red]-> AULAS_ABIERTO
+editarAula -[#red]-> CLASSROOMS_OPEN
 note on link
 cancelar edición
 end note

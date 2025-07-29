@@ -1,30 +1,30 @@
-@startuml eliminarCurso-analisis
+@startuml deleteCourse-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Cursos Abierto" as CursosAbierto
 rectangle #CDEBA5 ":Curso Abierto" as CursoAbierto
 rectangle #CDEBA5 ":Collaboration AbrirCursos" as AbrirCursos
 
-package eliminarCurso as "eliminarCurso()" {
-    rectangle #629EF9 EliminarCursoView
+package deleteCourse as "deleteCourse()" {
+    rectangle #629EF9 DeleteCourseView
     rectangle #b5bd68 CursoController
-    rectangle #F2AC4E CursoRepository
-    rectangle #F2AC4E Curso
+    rectangle #F2AC4E CourseRepository
+    rectangle #F2AC4E Course
 }
 
-CursosAbierto --> EliminarCursoView: eliminarCurso(cursoId)
-CursoAbierto --> EliminarCursoView: eliminarCurso(cursoId)
+CursosAbierto --> DeleteCourseView: eliminarCurso(cursoId)
+CursoAbierto --> DeleteCourseView: eliminarCurso(cursoId)
 
-EliminarCursoView -d-> CursoController: cargarCursoParaEliminacion(cursoId) : Curso
+DeleteCourseView -d-> CursoController: cargarCursoParaEliminacion(cursoId) : Curso
 
-CursoController --> CursoRepository: obtenerPorId(cursoId) : Curso
+CursoController --> CourseRepository: getById(cursoId) : Curso
 
-CursoRepository -- Curso
+CourseRepository -- Curso
 
-EliminarCursoView --> CursoController: eliminarCurso(cursoId) : void
+DeleteCourseView --> CursoController: eliminarCurso(cursoId) : void
 
-CursoController --> CursoRepository: eliminar(cursoId) : void
+CursoController --> CourseRepository: delete(cursoId) : void
 
-EliminarCursoView ..> AbrirCursos: <<include>> abrirCursos()
+DeleteCourseView ..> AbrirCursos: <<include>> openCourses()
 
 @enduml

@@ -1,57 +1,57 @@
-@startuml abrirProgramas
+@startuml openPrograms
 
 skinparam linetype polyline
 
-state abrirProgramas as "abrirProgramas()" {
+state openPrograms as "openPrograms()" {
 
-    state " " as MostrandoLista
-    state " " as FiltrandoLista
+    state " " as ShowingList
+    state " " as FilteringList
 
-    [*] -[#green]-> MostrandoLista 
+    [*] -[#green]-> ShowingList 
     note on link
-    <b>Administrador</b> solicita abrir programas
+    <b>Administrator</b> requests abrir programas
     end note    
     
-    MostrandoLista -[#green]-> FiltrandoLista
+    ShowingList -[#green]-> FilteringList
     note on link
-    <b>Sistema</b> presenta lista de programas
+    <b>System</b> presents program list
     • Código, nombre, descripción de cada programa
-    • Permite solicitar filtrar lista
-    • Permite solicitar crear programa nuevo
-    • Permite solicitar eliminar programa
-    • Permite solicitar editar programa
+    • Permite requestsr filter list
+    • Permite requestsr create new
+    • Permite requestsr delete
+    • Permite requestsr edit
     end note
     
-    FiltrandoLista -[#green]-> FiltrandoLista
+    FilteringList -[#green]-> FilteringList
     note on link
-    <b>Administrador</b> solicita filtrar lista
-    <b>Sistema</b> presenta lista filtrada
+    <b>Administrator</b> requests filter list
+    <b>System</b> presents filtered list
     end note
     
-    FiltrandoLista -[#green]-> [*]
+    FilteringList -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita una de las opciones
+    <b>Administrator</b> requests one of the options
     end note
 }
 
-abrirProgramas -[#green]-> PROGRAMA_ABIERTO
+abrirProgramas -[#green]-> PROGRAM_OPEN
 note on link
-editarPrograma()
+editProgram()
 end note
 
-abrirProgramas -[#green]-> PROGRAMA_ABIERTO
+abrirProgramas -[#green]-> PROGRAM_OPEN
 note on link
-crearPrograma()
+createProgram()
 end note
 
-abrirProgramas -[#green]-> PROGRAMAS_ABIERTO
+abrirProgramas -[#green]-> PROGRAMS_OPEN
 note on link
-eliminarPrograma()
+deleteProgram()
 end note
 
-abrirProgramas -[#green]-> SISTEMA_DISPONIBLE
+abrirProgramas -[#green]-> SYSTEM_AVAILABLE
 note on link
-completarGestion()
+completeManagement()
 end note
 
 @enduml

@@ -1,7 +1,7 @@
-@startuml editarRecurso
+@startuml editResource
 skinparam linetype polyline
 
-state editarRecurso as "editarRecurso()" {
+state editResource as "editResource()" {
     state " " as PresentingData
     state " " as ModifyingData
     state c1 <<choice>>
@@ -9,12 +9,12 @@ state editarRecurso as "editarRecurso()" {
     
     [*] -[#green]-> PresentingData
     note on link
-    <b>Administrador</b> solicita editar recurso
+    <b>Administrator</b> requests edit
     end note
     
     PresentingData -[#green]-> ModifyingData
     note on link
-    <b>Sistema</b> presenta
+    <b>System</b> presents
     • código del recurso
     • nombre del recurso
     • descripción del recurso
@@ -22,13 +22,13 @@ state editarRecurso as "editarRecurso()" {
     
     ModifyingData -[#green]-> c1
     note on link
-    <b>Administrador</b> introduce
+    <b>Administrator</b> introduce
     modificaciones (opcional)
     end note
     
     c1 -[#green]-> c2
     note on link
-    <b>Administrador</b> solicita guardar
+    <b>Administrator</b> requests guardar
     end note
     
     c2 -[#red]-> PresentingData
@@ -45,14 +45,14 @@ state editarRecurso as "editarRecurso()" {
     
     c1 -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita finalizar
-    transferir a abrirRecursos()
+    <b>Administrator</b> requests finalizar
+    transferir a openResources()
     end note
 }
 
-editarRecurso -[#green]-> RECURSOS_ABIERTO
+editarRecurso -[#green]-> RECOURSES_OPEN
 note on link
-abrirRecursos()
+openResources()
 end note
 
 @enduml

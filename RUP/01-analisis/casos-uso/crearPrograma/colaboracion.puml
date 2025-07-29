@@ -1,24 +1,24 @@
-@startuml crearPrograma-analisis
+@startuml createProgram-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Programas Abierto" as ProgramasAbierto
-rectangle #CDEBA5 ":Collaboration EditarPrograma" as EditarPrograma
+rectangle #CDEBA5 ":Collaboration EditProgram" as EditProgram
 
-package crearPrograma as "crearPrograma()" {
-    rectangle #629EF9 CrearProgramaView
+package createProgram as "createProgram()" {
+    rectangle #629EF9 CreateProgramView
     rectangle #b5bd68 ProgramaController
-    rectangle #F2AC4E ProgramaRepository
-    rectangle #F2AC4E Programa
+    rectangle #F2AC4E ProgramRepository
+    rectangle #F2AC4E Program
 }
 
-ProgramasAbierto --> CrearProgramaView: crearPrograma()
+ProgramasAbierto --> CreateProgramView: createProgram()
 
-CrearProgramaView -d-> ProgramaController: crearProgramaMinimo(nombre) : Programa
+CreateProgramView -d-> ProgramaController: crearProgramaMinimo(nombre) : Programa
 
-ProgramaController --> ProgramaRepository: crear(nombre) : Programa
+ProgramaController --> ProgramRepository: crear(nombre) : Programa
 
-ProgramaRepository -- Programa
+ProgramRepository -- Programa
 
-CrearProgramaView ..> EditarPrograma: editarPrograma(programaNuevo)
+CreateProgramView ..> EditProgram: editarPrograma(programaNuevo)
 
 @enduml

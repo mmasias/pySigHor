@@ -1,57 +1,57 @@
-@startuml abrirEdificios
+@startuml openBuildings
 
 skinparam linetype polyline
 
-state abrirEdificios as "abrirEdificios()" {
+state openBuildings as "openBuildings()" {
 
-    state " " as MostrandoLista
-    state " " as FiltrandoLista
+    state " " as ShowingList
+    state " " as FilteringList
 
-    [*] -[#green]-> MostrandoLista 
+    [*] -[#green]-> ShowingList 
     note on link
-    <b>Administrador</b> solicita abrir edificios
+    <b>Administrator</b> requests abrir edificios
     end note    
     
-    MostrandoLista -[#green]-> FiltrandoLista
+    ShowingList -[#green]-> FilteringList
     note on link
-    <b>Sistema</b> presenta lista de edificios
+    <b>System</b> presents building list
     • ID, nombre de cada edificio
-    • Permite solicitar filtrar lista
-    • Permite solicitar crear edificio nuevo
-    • Permite solicitar eliminar edificio
-    • Permite solicitar editar edificio
+    • Permite requestsr filter list
+    • Permite requestsr create new
+    • Permite requestsr delete
+    • Permite requestsr edit
     end note
     
-    FiltrandoLista -[#green]-> FiltrandoLista
+    FilteringList -[#green]-> FilteringList
     note on link
-    <b>Administrador</b> solicita filtrar lista
-    <b>Sistema</b> presenta lista filtrada
+    <b>Administrator</b> requests filter list
+    <b>System</b> presents filtered list
     end note
     
-    FiltrandoLista -[#green]-> [*]
+    FilteringList -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita una de las opciones
+    <b>Administrator</b> requests one of the options
     end note
 }
 
-abrirEdificios -[#green]-> EDIFICIO_ABIERTO
+abrirEdificios -[#green]-> BUILDING_OPEN
 note on link
-editarEdificio()
+editBuilding()
 end note
 
-abrirEdificios -[#green]-> EDIFICIO_ABIERTO
+abrirEdificios -[#green]-> BUILDING_OPEN
 note on link
-crearEdificio()
+createBuilding()
 end note
 
-abrirEdificios -[#green]-> EDIFICIOS_ABIERTO
+abrirEdificios -[#green]-> BUILDINGS_OPEN
 note on link
-eliminarEdificio()
+deleteBuilding()
 end note
 
-abrirEdificios -[#green]-> SISTEMA_DISPONIBLE
+abrirEdificios -[#green]-> SYSTEM_AVAILABLE
 note on link
-completarGestion()
+completeManagement()
 end note
 
 @enduml

@@ -1,44 +1,44 @@
-@startuml eliminarAula
+@startuml deleteClassroom
 
 skinparam linetype polyline
 
-state eliminarAula as "eliminarAula()" {
+state deleteClassroom as "deleteClassroom()" {
 
     state " " as ConfirmandoEliminacion
     state " " as EliminandoAula
 
     [*] -[#green]-> ConfirmandoEliminacion 
     note on link
-    <b>Administrador</b> solicita eliminar aula
+    <b>Administrator</b> requests delete
     end note    
     
     ConfirmandoEliminacion -[#green]-> EliminandoAula
     note on link
-    <b>Sistema</b> presenta información del aula a eliminar
+    <b>System</b> presents información del aula a eliminar
     • Código, nombre del aula
     • Edificio asociado, capacidad
     • Tipo, recursos, observaciones
     • Presenta advertencia de eliminación
-    • Permite solicitar confirmar eliminación
-    • Permite solicitar cancelar eliminación
+    • Permite requestsr confirmar eliminación
+    • Permite requestsr cancelar eliminación
     end note
     
     EliminandoAula -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita confirmación de eliminación
-    <b>Sistema</b> permite solicitar confirmar eliminación
-    <b>Administrador</b> solicita confirmar eliminación
+    <b>Administrator</b> requests confirmación de eliminación
+    <b>System</b> permite requestsr confirmar eliminación
+    <b>Administrator</b> requests confirmar eliminación
     end note
 }
 
-eliminarAula -[#green]-> AULAS_ABIERTO
+eliminarAula -[#green]-> CLASSROOMS_OPEN
 note on link
-<<include>> abrirAulas() - lista actualizada
+<<include>> openClassrooms() - lista actualizada
 end note
 
-eliminarAula -[#blue]-> AULAS_ABIERTO
+eliminarAula -[#blue]-> CLASSROOMS_OPEN
 note on link
-<<include>> abrirAulas() - cancelar eliminación
+<<include>> openClassrooms() - cancelar eliminación
 end note
 
 @enduml

@@ -1,33 +1,33 @@
-@startuml editarPrograma-analisis
+@startuml editProgram-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Programas Abierto" as ProgramasAbierto
-rectangle #CDEBA5 ":Collaboration CrearPrograma" as CrearPrograma
+rectangle #CDEBA5 ":Collaboration CreateProgram" as CreateProgram
 rectangle #CDEBA5 ":Programas Abierto" as ProgramasAbiertoSalida
 
-package editarPrograma as "editarPrograma()" {
-    rectangle #629EF9 EditarProgramaView
+package editProgram as "editProgram()" {
+    rectangle #629EF9 EditProgramView
     rectangle #b5bd68 ProgramaController
-    rectangle #F2AC4E ProgramaRepository
-    rectangle #F2AC4E Programa
+    rectangle #F2AC4E ProgramRepository
+    rectangle #F2AC4E Program
 }
 
 
-ProgramasAbierto --> EditarProgramaView: editarPrograma(programaId)
-CrearPrograma --> EditarProgramaView: editarPrograma(programaNuevo)
+ProgramasAbierto --> EditProgramView: editarPrograma(programaId)
+CreateProgram --> EditProgramView: editarPrograma(programaNuevo)
 
-EditarProgramaView -d-> ProgramaController: cargarPrograma(programaId) : Programa
+EditProgramView -d-> ProgramaController: cargarPrograma(programaId) : Programa
 
-ProgramaController --> ProgramaRepository: obtenerPorId(programaId) : Programa
+ProgramaController --> ProgramRepository: getById(programaId) : Programa
 
-ProgramaRepository -- Programa
+ProgramRepository -- Programa
 
-EditarProgramaView --> ProgramaController: modificarCampos(programa) : void
+EditProgramView --> ProgramaController: modificarCampos(programa) : void
 
-EditarProgramaView --> ProgramaController: guardarPrograma(programa) : void
+EditProgramView --> ProgramaController: guardarPrograma(programa) : void
 
-ProgramaController --> ProgramaRepository: actualizar(programa) : void
+ProgramaController --> ProgramRepository: update(programa) : void
 
-EditarProgramaView ..> ProgramasAbiertoSalida: abrirProgramas()
+EditProgramView ..> ProgramasAbiertoSalida: openPrograms()
 
 @enduml

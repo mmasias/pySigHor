@@ -1,50 +1,50 @@
-@startuml editarPrograma
+@startuml editProgram
 
 skinparam linetype polyline
 
-state editarPrograma as "editarPrograma()" {
+state editProgram as "editProgram()" {
 
     state " " as EditandoDatos
-    state " " as GuardandoDatos
+    state " " as SavingData
 
     [*] -[#green]-> EditandoDatos 
     note on link
-    <b>Administrador</b> solicita editar programa
+    <b>Administrator</b> requests edit
     end note    
     
-    EditandoDatos -[#green]-> GuardandoDatos
+    EditandoDatos -[#green]-> SavingData
     note on link
-    <b>Sistema</b> presenta formulario de edición
+    <b>System</b> presents formulario de edición
     • Código, nombre, descripción del programa
-    • Permite solicitar modificar campos
-    • Permite solicitar guardar programa
-    • Permite solicitar cancelar edición
+    • Permite requestsr modificar campos
+    • Permite requestsr guardar programa
+    • Permite requestsr cancelar edición
     end note
     
-    GuardandoDatos -[#green]-> EditandoDatos
+    SavingData -[#green]-> EditandoDatos
     note on link
-    <b>Administrador</b> solicita modificar campos (opcional)
-    <b>Sistema</b> permite modificar información
+    <b>Administrator</b> requests modificar campos (opcional)
+    <b>System</b> permite modificar información
     end note
     
-    GuardandoDatos -[#green]-> [*]
+    SavingData -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita guardar y salir
+    <b>Administrator</b> requests guardar y salir
     end note
 }
 
 editarPrograma -[#green]-> EditandoDatos
 note on link
-<b>Administrador</b> solicita continuar editando
-<b>Sistema</b> mantiene formulario activo
+<b>Administrator</b> requests continuar editando
+<b>System</b> mantiene formulario activo
 end note
 
-editarPrograma -[#green]-> PROGRAMAS_ABIERTO
+editarPrograma -[#green]-> PROGRAMS_OPEN
 note on link
-abrirProgramas()
+openPrograms()
 end note
 
-editarPrograma -[#blue]-> PROGRAMAS_ABIERTO
+editarPrograma -[#blue]-> PROGRAMS_OPEN
 note on link
 cancelar edición
 end note

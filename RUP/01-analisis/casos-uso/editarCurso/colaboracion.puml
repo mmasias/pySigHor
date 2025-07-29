@@ -1,32 +1,32 @@
-@startuml editarCurso-analisis
+@startuml editCourse-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Cursos Abierto" as CursosAbierto
 rectangle #CDEBA5 ":Curso Abierto" as CursoAbierto
-rectangle #CDEBA5 ":Collaboration CrearCurso" as CrearCurso
+rectangle #CDEBA5 ":Collaboration CreateCourse" as CreateCourse
 rectangle #CDEBA5 ":Collaboration AbrirCursos" as AbrirCursos
 
-package editarCurso as "editarCurso()" {
-    rectangle #629EF9 EditarCursoView
+package editCourse as "editCourse()" {
+    rectangle #629EF9 EditCourseView
     rectangle #b5bd68 CursoController
-    rectangle #F2AC4E CursoRepository
-    rectangle #F2AC4E Curso
+    rectangle #F2AC4E CourseRepository
+    rectangle #F2AC4E Course
 }
 
-CursosAbierto --> EditarCursoView: editarCurso(cursoId)
-CursoAbierto --> EditarCursoView: editarCurso(cursoId)
-CrearCurso --> EditarCursoView: editarCurso(cursoNuevo)
+CursosAbierto --> EditCourseView: editarCurso(cursoId)
+CursoAbierto --> EditCourseView: editarCurso(cursoId)
+CreateCourse --> EditCourseView: editarCurso(cursoNuevo)
 
-EditarCursoView -d-> CursoController: cargarCursoParaEdición(cursoId) : Curso
+EditCourseView -d-> CursoController: cargarCursoParaEdición(cursoId) : Curso
 
-CursoController --> CursoRepository: obtenerPorId(cursoId) : Curso
+CursoController --> CourseRepository: getById(cursoId) : Curso
 
-EditarCursoView --> CursoController: modificarCampos(cursoId, cambios) : boolean
+EditCourseView --> CursoController: modificarCampos(cursoId, cambios) : boolean
 
-CursoController --> CursoRepository: actualizar(curso) : boolean
+CursoController --> CourseRepository: update(curso) : boolean
 
-CursoRepository -- Curso
+CourseRepository -- Curso
 
-EditarCursoView ..> AbrirCursos: <<include>> abrirCursos()
+EditCourseView ..> AbrirCursos: <<include>> openCourses()
 
 @enduml

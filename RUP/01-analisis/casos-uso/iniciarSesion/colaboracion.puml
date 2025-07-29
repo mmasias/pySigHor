@@ -1,27 +1,27 @@
-@startuml iniciarSesion-analisis
+@startuml login-analysis
 skinparam linetype polyline
 
 actor UsuarioNoRegistrado
-package iniciarSesion as "iniciarSesion()" {
+package login as "login()" {
     rectangle #629EF9 LoginView
-    rectangle #b5bd68 IniciarSesionController
+    rectangle #b5bd68 IniciarSessionController
     rectangle #F2AC4E UsuarioRepository
     rectangle #F2AC4E Usuario
     rectangle #F2AC4E Sesion
 }
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+rectangle #CDEBA5 ":System Available" as SystemAvailable
 
 UsuarioNoRegistrado -r-> LoginView: iniciarSesion(usuario, contraseña)
 
-LoginView -d-> IniciarSesionController: autenticar(usuario, contraseña) : Sesion
+LoginView -d-> IniciarSessionController: autenticar(usuario, contraseña) : Sesion
 
-IniciarSesionController --> UsuarioRepository: validarCredenciales(usuario, contraseña) : Usuario
+IniciarSessionController --> UsuarioRepository: validarCredenciales(usuario, contraseña) : Usuario
 
 UsuarioRepository -- Usuario
 
-IniciarSesionController --> Sesion: crearSesion(usuario) : Sesion
+IniciarSessionController --> Sesion: crearSesion(usuario) : Sesion
 
-LoginView -r-> SistemaDisponible: sistemaDisponible(administrador)
+LoginView -r-> SystemAvailable: sistemaDisponible(administrador)
 
 
 

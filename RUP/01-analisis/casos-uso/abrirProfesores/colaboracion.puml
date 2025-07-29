@@ -1,34 +1,34 @@
-@startuml abrirProfesores-analisis
+@startuml openTeachers-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
-package abrirProfesores as "abrirProfesores()" {
-    rectangle #629EF9 AbrirProfesoresView
-    rectangle #b5bd68 ProfesoresController
-    rectangle #F2AC4E ProfesorRepository
-    rectangle #F2AC4E Profesor
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openTeachers as "openTeachers()" {
+    rectangle #629EF9 OpenTeachersView
+    rectangle #b5bd68 TeachersController
+    rectangle #F2AC4E TeacherRepository
+    rectangle #F2AC4E Teacher
 }
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
-rectangle #CDEBA5 ":Collaboration CrearProfesor" as CrearProfesor
-rectangle #CDEBA5 ":Collaboration EditarProfesor" as EditarProfesor
-rectangle #CDEBA5 ":Collaboration EliminarProfesor" as EliminarProfesor
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateTeacher" as CreateTeacher
+rectangle #CDEBA5 ":Collaboration EditTeacher" as EditTeacher
+rectangle #CDEBA5 ":Collaboration DeleteTeacher" as DeleteTeacher
 
-SistemaDisponible -r-> AbrirProfesoresView: abrirProfesores()
+SystemAvailable -r-> OpenTeachersView: openTeachers()
 
-AbrirProfesoresView -d-> ProfesoresController: listarProfesores() : List<Profesor>
+OpenTeachersView -d-> TeachersController: listTeachers() : List<Teacher>
 
-ProfesoresController --> ProfesorRepository: obtenerTodos() : List<Profesor>
+TeachersController --> TeacherRepository: getAll() : List<Teacher>
 
-ProfesorRepository -- Profesor
+TeacherRepository -- Profesor
 
-AbrirProfesoresView --> ProfesoresController: filtrarProfesores(criterio) : List<Profesor>
+OpenTeachersView --> TeachersController: filterTeachers(criteria) : List<Teacher>
 
-ProfesoresController --> ProfesorRepository: buscarPorCriterio(criterio) : List<Profesor>
+TeachersController --> TeacherRepository: findByCriteria(criteria) : List<Teacher>
 
-AbrirProfesoresView ..> SistemaDisponibleSalida: completarGestion()
-AbrirProfesoresView ..> CrearProfesor: crearProfesor()
-AbrirProfesoresView ..> EditarProfesor: editarProfesor()
-AbrirProfesoresView ..> EliminarProfesor: eliminarProfesor()
+OpenTeachersView ..> SystemAvailableSalida: completeManagement()
+OpenTeachersView ..> CreateTeacher: createTeacher()
+OpenTeachersView ..> EditTeacher: editTeacher()
+OpenTeachersView ..> DeleteTeacher: deleteTeacher()
 
 @enduml

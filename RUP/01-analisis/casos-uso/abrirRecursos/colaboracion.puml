@@ -1,34 +1,34 @@
-@startuml abrirRecursos-analisis
+@startuml openResources-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
-package abrirRecursos as "abrirRecursos()" {
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openResources as "openResources()" {
     rectangle #629EF9 ListarRecursosView
-    rectangle #b5bd68 RecursosController
-    rectangle #F2AC4E RecursoRepository
-    rectangle #F2AC4E Recurso
+    rectangle #b5bd68 ResourcesController
+    rectangle #F2AC4E ResourceRepository
+    rectangle #F2AC4E Resource
 }
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
-rectangle #CDEBA5 ":Collaboration CrearRecurso" as CrearRecurso
-rectangle #CDEBA5 ":Collaboration EditarRecurso" as EditarRecurso
-rectangle #CDEBA5 ":Collaboration EliminarRecurso" as EliminarRecurso
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateResource" as CreateResource
+rectangle #CDEBA5 ":Collaboration EditResource" as EditResource
+rectangle #CDEBA5 ":Collaboration DeleteResource" as DeleteResource
 
-SistemaDisponible -r-> ListarRecursosView: abrirRecursos()
+SystemAvailable -r-> ListarRecursosView: openResources()
 
-ListarRecursosView -d-> RecursosController: listarRecursos() : List<Recurso>
+ListarRecursosView -d-> ResourcesController: listResources() : List<Resource>
 
-RecursosController --> RecursoRepository: obtenerTodos() : List<Recurso>
+ResourcesController --> ResourceRepository: getAll() : List<Resource>
 
-RecursoRepository -- Recurso
+ResourceRepository -- Recurso
 
-ListarRecursosView --> RecursosController: filtrarRecursos(criterio) : List<Recurso>
+ListarRecursosView --> ResourcesController: filterResources(criteria) : List<Resource>
 
-RecursosController --> RecursoRepository: buscarPorCriterio(criterio) : List<Recurso>
+ResourcesController --> ResourceRepository: findByCriteria(criteria) : List<Resource>
 
-ListarRecursosView ..> SistemaDisponibleSalida: completarGestion()
-ListarRecursosView ..> CrearRecurso: crearRecurso()
-ListarRecursosView ..> EditarRecurso: editarRecurso()
-ListarRecursosView ..> EliminarRecurso: eliminarRecurso()
+ListarRecursosView ..> SystemAvailableSalida: completeManagement()
+ListarRecursosView ..> CreateResource: createResource()
+ListarRecursosView ..> EditResource: editResource()
+ListarRecursosView ..> DeleteResource: deleteResource()
 
 @enduml

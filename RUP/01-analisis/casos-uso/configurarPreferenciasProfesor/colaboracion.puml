@@ -1,34 +1,34 @@
-@startuml configurarPreferenciasProfesor-analisis
+@startuml configureTeacherPreferences-analysis
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbierto
-rectangle #CDEBA5 ":Collaboration EditarProfesor" as EditarProfesor
+rectangle #CDEBA5 ":Collaboration EditTeacher" as EditTeacher
 
-package configurarPreferenciasProfesor as "configurarPreferenciasProfesor()" {
-    rectangle #629EF9 ConfigurarPreferenciasProfesorView
+package configureTeacherPreferences as "configureTeacherPreferences()" {
+    rectangle #629EF9 ConfigurePreferencesProfesorView
     rectangle #b5bd68 PreferenciasProfesorController
-    rectangle #F2AC4E ProfesorRepository
-    rectangle #F2AC4E RecursoRepository
-    rectangle #F2AC4E Profesor
+    rectangle #F2AC4E TeacherRepository
+    rectangle #F2AC4E ResourceRepository
+    rectangle #F2AC4E Teacher
     rectangle #F2AC4E PreferenciasRecurso
-    rectangle #F2AC4E Recurso
+    rectangle #F2AC4E Resource
 }
 
-ProfesorAbierto -r-> ConfigurarPreferenciasProfesorView: configurarPreferenciasProfesor(profesorId)
+ProfesorAbierto -r-> ConfigurePreferencesProfesorView: configurarPreferenciasProfesor(profesorId)
 
-ConfigurarPreferenciasProfesorView -d-> PreferenciasProfesorController: cargarPreferenciasProfesor(profesorId)
+ConfigurePreferencesProfesorView -d-> PreferenciasProfesorController: cargarPreferenciasProfesor(profesorId)
 
-PreferenciasProfesorController --> ProfesorRepository: obtenerConPreferencias(profesorId) : Profesor
-PreferenciasProfesorController --> RecursoRepository: obtenerRecursosDisponibles() : List<Recurso>
+PreferenciasProfesorController --> TeacherRepository: obtenerConPreferencias(profesorId) : Profesor
+PreferenciasProfesorController --> ResourceRepository: obtenerRecursosDisponibles() : List<Resource>
 
-ConfigurarPreferenciasProfesorView --> PreferenciasProfesorController: modificarOrdenPrioridad(nuevoOrden) : boolean
+ConfigurePreferencesProfesorView --> PreferenciasProfesorController: modificarOrdenPrioridad(nuevoOrden) : boolean
 
-PreferenciasProfesorController --> ProfesorRepository: actualizarPreferencias(profesorId, preferencias) : boolean
+PreferenciasProfesorController --> TeacherRepository: actualizarPreferencias(profesorId, preferencias) : boolean
 
-ProfesorRepository -- Profesor
-ProfesorRepository -- PreferenciasRecurso
-RecursoRepository -- Recurso
+TeacherRepository -- Profesor
+TeacherRepository -- PreferenciasRecurso
+ResourceRepository -- Recurso
 
-ConfigurarPreferenciasProfesorView ..> EditarProfesor: <<include>> editarProfesor(profesorId)
+ConfigurePreferencesProfesorView ..> EditTeacher: <<include>> editarProfesor(profesorId)
 
 @enduml

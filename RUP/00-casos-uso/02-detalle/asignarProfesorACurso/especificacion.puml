@@ -1,24 +1,24 @@
-@startuml asignarProfesorACurso
+@startuml assignTeacherToCourse
 
 skinparam linetype polyline
 
-state asignarProfesorACurso as "asignarProfesorACurso()" {
+state assignTeacherToCourse as "assignTeacherToCourse()" {
 
     state " " as GestionandoAsignaciones
     state " " as GuardandoAsignaciones 
 
     [*] -[#green]-> GestionandoAsignaciones 
     note on link
-    <b>Administrador</b> solicita asignar cursos al profesor
+    <b>Administrator</b> requests asignar cursos al profesor
     end note    
     
     GestionandoAsignaciones -[#green]-> GuardandoAsignaciones
     note on link
-    <b>Sistema</b> presenta gestión de asignaciones
+    <b>System</b> presents gestión de asignaciones
     • Lista de cursos disponibles
     • Lista de cursos ya asignados al profesor
     
-    <b>Sistema</b> permite solicitar:
+    <b>System</b> permite requestsr:
     • asignar curso disponible
     • desasignar curso asignado
     • guardar asignaciones
@@ -27,27 +27,27 @@ state asignarProfesorACurso as "asignarProfesorACurso()" {
     
     GuardandoAsignaciones -[#green]-> GestionandoAsignaciones
     note on link
-    <b>Administrador</b> solicita asignar curso disponible
+    <b>Administrator</b> requests asignar curso disponible
     end note
     
     GuardandoAsignaciones -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita guardar y salir
+    <b>Administrator</b> requests guardar y salir
     end note
 
     GuardandoAsignaciones -[#red]-> [*]
     note on link
-    <b>Administrador</b> solicita cancelar gestión
+    <b>Administrator</b> requests cancelar gestión
     end note
 
 }
 
-asignarProfesorACurso -[#green]-> PROFESOR_ABIERTO
+asignarProfesorACurso -[#green]-> TEACHER_OPEN
 note on link
-editarProfesor()
+editTeacher()
 end note
 
-asignarProfesorACurso -[#red]-> PROFESOR_ABIERTO
+asignarProfesorACurso -[#red]-> TEACHER_OPEN
 note on link
 cancelar gestión
 end note

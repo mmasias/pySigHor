@@ -1,34 +1,34 @@
-@startuml abrirAulas-analisis
+@startuml openClassrooms-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
-package abrirAulas as "abrirAulas()" {
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openClassrooms as "openClassrooms()" {
     rectangle #629EF9 ListarAulasView
-    rectangle #b5bd68 AulasController
-    rectangle #F2AC4E AulaRepository
-    rectangle #F2AC4E Aula
+    rectangle #b5bd68 ClassroomsController
+    rectangle #F2AC4E ClassroomRepository
+    rectangle #F2AC4E Classroom
 }
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
-rectangle #CDEBA5 ":Collaboration CrearAula" as CrearAula
-rectangle #CDEBA5 ":Collaboration EditarAula" as EditarAula
-rectangle #CDEBA5 ":Collaboration EliminarAula" as EliminarAula
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateClassroom" as CreateClassroom
+rectangle #CDEBA5 ":Collaboration EditClassroom" as EditClassroom
+rectangle #CDEBA5 ":Collaboration DeleteClassroom" as DeleteClassroom
 
-SistemaDisponible -r-> ListarAulasView: abrirAulas()
+SystemAvailable -r-> ListarAulasView: openClassrooms()
 
-ListarAulasView -d-> AulasController: listarAulas() : List<Aula>
+ListarAulasView -d-> ClassroomsController: listClassrooms() : List<Classroom>
 
-AulasController --> AulaRepository: obtenerTodos() : List<Aula>
+ClassroomsController --> ClassroomRepository: getAll() : List<Classroom>
 
-AulaRepository -- Aula
+ClassroomRepository -- Aula
 
-ListarAulasView --> AulasController: filtrarAulas(criterio) : List<Aula>
+ListarAulasView --> ClassroomsController: filterClassrooms(criteria) : List<Classroom>
 
-AulasController --> AulaRepository: buscarPorCriterio(criterio) : List<Aula>
+ClassroomsController --> ClassroomRepository: findByCriteria(criteria) : List<Classroom>
 
-ListarAulasView ..> SistemaDisponibleSalida: completarGestion()
-ListarAulasView ..> CrearAula: crearAula()
-ListarAulasView ..> EditarAula: editarAula()
-ListarAulasView ..> EliminarAula: eliminarAula()
+ListarAulasView ..> SystemAvailableSalida: completeManagement()
+ListarAulasView ..> CreateClassroom: createClassroom()
+ListarAulasView ..> EditClassroom: editClassroom()
+ListarAulasView ..> DeleteClassroom: deleteClassroom()
 
 @enduml

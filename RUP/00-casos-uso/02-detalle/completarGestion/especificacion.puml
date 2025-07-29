@@ -1,86 +1,86 @@
-@startuml completarGestion
+@startuml completeManagement
 
 skinparam linetype polyline
 
-state completarGestion as "completarGestion()" {
+state completeManagement as "completeManagement()" {
 
     state " " as PresentandoMenu
     state " " as EsperandoSeleccion
 
     [*] -[#green]-> PresentandoMenu 
     note on link
-    <b>Administrador</b> solicita disponibilizar sistema
+    <b>Administrator</b> requests disponibilizar sistema
     end note    
     
     PresentandoMenu -[#green]-> EsperandoSeleccion
     note on link
-    <b>Sistema</b> permite solicitar:
-    • abrirProgramas()
-    • abrirCursos()
-    • abrirProfesores()
-    • abrirEdificios()
-    • abrirAulas()
-    • abrirRecursos()
-    • asignarProfesorACurso()
-    • generarHorario()
-    • consultarHorario()
-    • cerrarSesion()
+    <b>System</b> permite requestsr:
+    • openPrograms()
+    • openCourses()
+    • openTeachers()
+    • openBuildings()
+    • openClassrooms()
+    • openResources()
+    • assignTeacherToCourse()
+    • generateSchedule()
+    • viewSchedule()
+    • logout()
     end note
     
     EsperandoSeleccion -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita una de las opciones
+    <b>Administrator</b> requests one of the options
     end note
 }
 
-completarGestion -[#green]-> PROGRAMAS_ABIERTO
+completarGestion -[#green]-> PROGRAMS_OPEN
 note on link
-abrirProgramas()
+openPrograms()
 end note
 
-completarGestion -[#green]-> CURSOS_ABIERTO
+completarGestion -[#green]-> COURSES_OPEN
 note on link
-abrirCursos()
+openCourses()
 end note
 
-completarGestion -[#green]-> PROFESORES_ABIERTO
+completarGestion -[#green]-> TEACHERS_OPEN
 note on link
-abrirProfesores()
+openTeachers()
 end note
 
-completarGestion -[#green]-> EDIFICIOS_ABIERTO
+completarGestion -[#green]-> BUILDINGS_OPEN
 note on link
-abrirEdificios()
+openBuildings()
 end note
 
-completarGestion -[#green]-> AULAS_ABIERTO
+completarGestion -[#green]-> CLASSROOMS_OPEN
 note on link
-abrirAulas()
+openClassrooms()
 end note
 
-completarGestion -[#green]-> RECURSOS_ABIERTO
+completarGestion -[#green]-> RECOURSES_OPEN
 note on link
-abrirRecursos()
+openResources()
 end note
 
-completarGestion -[#green]-> PROFESOR_ASIGNATURAS_ABIERTO
+completarGestion -[#green]-> TEACHER_ASSIGNMENTS_OPEN
 note on link
-asignarProfesorACurso()
+assignTeacherToCourse()
 end note
 
-completarGestion -[#green]-> HORARIO_GENERADO
+completarGestion -[#green]-> SCHEDULE_GENERATED
 note on link
-generarHorario()
+generateSchedule()
 end note
 
-completarGestion -[#green]-> HORARIO_ABIERTO
+completarGestion -[#green]-> SCHEDULE_OPEN
 note on link
-consultarHorario()
+viewSchedule()
 end note
 
-completarGestion -[#green]-> SESION_CERRADA
+completarGestion -[#green]-> SESSION_CLOSED
 note on link
-cerrarSesion()
+logout()
 end note
 
 @enduml
