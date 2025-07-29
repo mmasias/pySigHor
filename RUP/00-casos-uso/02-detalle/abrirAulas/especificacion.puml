@@ -9,7 +9,7 @@ state openClassrooms as "openClassrooms()" {
 
     [*] -[#green]-> ShowingList 
     note on link
-    <b>Administrator</b> requests abrir aulas
+    <b>Administrator</b> requests open classrooms
     end note    
     
     ShowingList -[#green]-> FilteringList
@@ -34,22 +34,22 @@ state openClassrooms as "openClassrooms()" {
     end note
 }
 
-abrirAulas -[#green]-> AULA_ABIERTO
+openClassrooms -[#green]-> CLASSROOM_OPEN
 note on link
 editClassroom()
 end note
 
-abrirAulas -[#green]-> AULA_ABIERTO
+openClassrooms -[#green]-> CLASSROOM_OPEN
 note on link
 createClassroom()
 end note
 
-abrirAulas -[#green]-> CLASSROOMS_OPEN
+openClassrooms -[#green]-> CLASSROOMS_OPEN
 note on link
 deleteClassroom()
 end note
 
-abrirAulas -[#green]-> SYSTEM_AVAILABLE
+openClassrooms -[#green]-> SYSTEM_AVAILABLE
 note on link
 completeManagement()
 end note

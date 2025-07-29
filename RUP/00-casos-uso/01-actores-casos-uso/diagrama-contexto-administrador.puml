@@ -3,99 +3,99 @@
 left to right direction
 skinparam linetype polyline
 
-state "SESION_CERRADA" as NoAuth
-state "SISTEMA_DISPONIBLE" as Menu
+state "SESSION_CLOSED" as NoAuth
+state "SYSTEM_AVAILABLE" as Menu
 
-state "PROGRAMAS_ABIERTO" as ListProgramas
-state "PROGRAMA_ABIERTO" as EditPrograma
-state "CURSOS_ABIERTO" as ListCursos
-state "CURSO_ABIERTO" as EditCurso
-state "PROFESORES_ABIERTO" as ListProfesores
-state "PROFESOR_ABIERTO" as EditProfesor
-state "PROFESOR_PREFERENCIAS_ABIERTO" as EditProfesorPreferencias
-state "EDIFICIOS_ABIERTO" as ListEdificios
-state "EDIFICIO_ABIERTO" as EditEdificio
-state "AULAS_ABIERTO" as ListAulas
-state "AULA_ABIERTA" as EditAula
-state "RECURSOS_ABIERTO" as ListRecursos
-state "RECURSO_ABIERTO" as EditRecurso
+state "PROGRAMS_OPEN" as ListPrograms
+state "PROGRAM_OPEN" as EditProgram
+state "COURSES_OPEN" as ListCourses
+state "COURSE_OPEN" as EditCourse
+state "TEACHERS_OPEN" as ListTeachers
+state "TEACHER_OPEN" as EditTeacher
+state "TEACHER_PREFERENCES_OPEN" as EditTeacherPreferences
+state "BUILDINGS_OPEN" as ListBuildings
+state "BUILDING_OPEN" as EditBuilding
+state "CLASSROOMS_OPEN" as ListClassrooms
+state "CLASSROOM_OPEN" as EditClassroom
+state "RESOURCES_OPEN" as ListResources
+state "RESOURCE_OPEN" as EditResource
 
-state "PROFESOR_ASIGNATURAS_ABIERTO" as Asignaciones
-state "HORARIO_GENERADO" as Generacion
-state "HORARIO_ABIERTO" as Consulta
+state "TEACHER_ASSIGNMENTS_OPEN" as Assignments
+state "SCHEDULE_GENERATED" as Generation
+state "SCHEDULE_OPEN" as Consultation
 
 [*] --> NoAuth
 
-NoAuth --> Menu : iniciarSesion()
+NoAuth --> Menu : startSession()
 
-Menu --> NoAuth : cerrarSesion()
-Menu --> ListProgramas: abrirProgramas()
-Menu --> ListCursos: abrirCursos()
-Menu --> ListProfesores: abrirProfesores()
-Menu --> ListEdificios: abrirEdificios()
-Menu --> ListAulas: abrirAulas()
-Menu --> ListRecursos: abrirRecursos()
-Menu --> Generacion: generarHorario()
-Menu --> Consulta: consultarHorario()
+Menu --> NoAuth : closeSession()
+Menu --> ListPrograms: openPrograms()
+Menu --> ListCourses: openCourses()
+Menu --> ListTeachers: openTeachers()
+Menu --> ListBuildings: openBuildings()
+Menu --> ListClassrooms: openClassrooms()
+Menu --> ListResources: openResources()
+Menu --> Generation: generateSchedule()
+Menu --> Consultation: viewSchedule()
 
-EditProfesor --> Asignaciones: asignarProfesorACurso()
+EditTeacher --> Assignments: assignTeacherToCourse()
 
-Asignaciones --> EditProfesor: editarProfesor()
-
-
-ListProgramas --> EditPrograma: crearPrograma()
-ListProgramas --> EditPrograma: editarPrograma()
-ListProgramas --> ListProgramas: eliminarPrograma()
-
-EditPrograma --> EditPrograma: editarPrograma()
-EditPrograma --> ListProgramas: abrirProgramas()
-
-ListCursos --> EditCurso: crearCurso()
-ListCursos --> EditCurso: editarCurso()
-ListCursos --> ListCursos: eliminarCurso()
-
-EditCurso --> EditCurso: editarCurso()
-EditCurso --> ListCursos: abrirCursos()
-
-ListProfesores --> EditProfesor: createTeacher()
-ListProfesores --> EditProfesor: editarProfesor()
-ListProfesores --> ListProfesores: eliminarProfesor()
-
-EditProfesor --> EditProfesor: editarProfesor()
-EditProfesor --> EditProfesorPreferencias: configurarPreferenciasProfesor()
-EditProfesor --> ListProfesores: abrirProfesores()
-
-EditProfesorPreferencias --> EditProfesor: abrirEdicionProfesor()
+Assignments --> EditTeacher: editTeacher()
 
 
-ListEdificios --> EditEdificio: crearEdificio()
-ListEdificios --> EditEdificio: editarEdificio()
-ListEdificios --> ListEdificios: eliminarEdificio()
-EditEdificio --> EditEdificio: editarEdificio()
+ListPrograms --> EditProgram: createProgram()
+ListPrograms --> EditProgram: editProgram()
+ListPrograms --> ListPrograms: deleteProgram()
 
-EditEdificio --> ListEdificios: abrirEdificios()
+EditProgram --> EditProgram: editProgram()
+EditProgram --> ListPrograms: openPrograms()
 
-ListAulas --> EditAula: crearAula()
-ListAulas --> EditAula: editarAula()
-ListAulas --> ListAulas: eliminarAula()
+ListCourses --> EditCourse: createCourse()
+ListCourses --> EditCourse: editCourse()
+ListCourses --> ListCourses: deleteCourse()
 
-EditAula --> EditAula: editarAula()
-EditAula --> ListAulas: abrirAulas()
+EditCourse --> EditCourse: editCourse()
+EditCourse --> ListCourses: openCourses()
 
-ListRecursos --> EditRecurso: crearRecurso()
-ListRecursos --> EditRecurso: editarRecurso()
-ListRecursos --> ListRecursos: eliminarRecurso()
+ListTeachers --> EditTeacher: createTeacher()
+ListTeachers --> EditTeacher: editTeacher()
+ListTeachers --> ListTeachers: deleteTeacher()
 
-EditRecurso --> EditRecurso: editarRecurso()
-EditRecurso --> ListRecursos: abrirRecursos()
+EditTeacher --> EditTeacher: editTeacher()
+EditTeacher --> EditTeacherPreferences: configureTeacherPreferences()
+EditTeacher --> ListTeachers: openTeachers()
 
-ListProgramas --> Menu: completarGestion()
-ListCursos --> Menu: completarGestion()
-ListProfesores --> Menu: completarGestion()
-ListEdificios --> Menu: completarGestion()
-ListAulas --> Menu: completarGestion()
-ListRecursos --> Menu: completarGestion()
-Generacion --> Menu: completarProceso()
-Consulta --> Menu: completarConsulta()
+EditTeacherPreferences --> EditTeacher: openTeacherEdition()
+
+
+ListBuildings --> EditBuilding: createBuilding()
+ListBuildings --> EditBuilding: editBuilding()
+ListBuildings --> ListBuildings: deleteBuilding()
+EditBuilding --> EditBuilding: editBuilding()
+
+EditBuilding --> ListBuildings: openBuildings()
+
+ListClassrooms --> EditClassroom: createClassroom()
+ListClassrooms --> EditClassroom: editClassroom()
+ListClassrooms --> ListClassrooms: deleteClassroom()
+
+EditClassroom --> EditClassroom: editClassroom()
+EditClassroom --> ListClassrooms: openClassrooms()
+
+ListResources --> EditResource: createResource()
+ListResources --> EditResource: editResource()
+ListResources --> ListResources: deleteResource()
+
+EditResource --> EditResource: editResource()
+EditResource --> ListResources: openResources()
+
+ListPrograms --> Menu: completeManagement()
+ListCourses --> Menu: completeManagement()
+ListTeachers --> Menu: completeManagement()
+ListBuildings --> Menu: completeManagement()
+ListClassrooms --> Menu: completeManagement()
+ListResources --> Menu: completeManagement()
+Generation --> Menu: completeProcess()
+Consultation --> Menu: completeConsultation()
 
 @enduml
