@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editResource()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: editarRecurso()](/images/RUP/00-casos-uso/02-detalle/editResource/editarRecurso.svg)|
+|![Caso de uso: editarRecurso()](/images/RUP/00-casos-uso/02-detalle/editResource/editResource.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editResource()` mediante diagrama de 
 
 <div align=center>
 
-|![Wireframe: Edición de recurso](/images/RUP/00-casos-uso/02-detalle/editResource/editarRecurso-wireframe.svg)|
+|![Wireframe: Edición de recurso](/images/RUP/00-casos-uso/02-detalle/editResource/editResource-wireframe.svg)|
 |-|
 |**Estado**: PresentingData / ModifyingData|
 

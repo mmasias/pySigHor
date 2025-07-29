@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openPrograms()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: abrirProgramas()](/images/RUP/00-casos-uso/02-detalle/openPrograms/abrirProgramas.svg)|
+|![Caso de uso: abrirProgramas()](/images/RUP/00-casos-uso/02-detalle/openPrograms/openPrograms.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `openPrograms()` mediante diagrama de 
 #### pantalla 1: gestión de programas académicos
 <div align=center>
 
-|![Wireframe: Gestión de programas](/images/RUP/00-casos-uso/02-detalle/openPrograms/abrirProgramas-wireframe.svg)|
+|![Wireframe: Gestión de programas](/images/RUP/00-casos-uso/02-detalle/openPrograms/openPrograms-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 

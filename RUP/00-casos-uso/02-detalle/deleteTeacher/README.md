@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `deleteTeacher()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: eliminarProfesor()](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/eliminarProfesor.svg)|
+|![Caso de uso: eliminarProfesor()](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/deleteTeacher.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `deleteTeacher()` mediante diagrama de
 
 <div align=center>
 
-|![Wireframe: Eliminación de profesor](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/eliminarProfesor-wireframe.svg)|
+|![Wireframe: Eliminación de profesor](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/deleteTeacher-wireframe.svg)|
 |-|
 |**Estado**: ConfirmandoEliminacion / EliminandoProfesor|
 

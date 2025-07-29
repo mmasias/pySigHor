@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openBuildings()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: abrirEdificios()](/images/RUP/00-casos-uso/02-detalle/openBuildings/abrirEdificios.svg)|
+|![Caso de uso: abrirEdificios()](/images/RUP/00-casos-uso/02-detalle/openBuildings/openBuildings.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `openBuildings()` mediante diagrama de
 #### pantalla 1: gestión de edificios
 <div align=center>
 
-|![Wireframe: Gestión de edificios](/images/RUP/00-casos-uso/02-detalle/openBuildings/abrirEdificios-wireframe.svg)|
+|![Wireframe: Gestión de edificios](/images/RUP/00-casos-uso/02-detalle/openBuildings/openBuildings-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 

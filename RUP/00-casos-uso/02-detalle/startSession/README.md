@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `startSession()` mediante diagrama de 
 #### pantalla 1: diálogo de inicio de sesión
 <div align=center>
 
-|![Wireframe: Inicio de sesión](/images/RUP/00-casos-uso/02-detalle/iniciarSesion/iniciarSesion-wireframe.svg)|
+|![Wireframe: Inicio de sesión](/images/RUP/00-casos-uso/02-detalle/startSession/startSession-wireframe.svg)|
 |-|
 |**Estado**: SolicitandoAcceso → ProporcionandoCredenciales|
 
@@ -62,7 +62,7 @@ Especificación detallada del caso de uso `startSession()` mediante diagrama de 
 #### pantalla 2: credenciales inválidas
 <div align=center>
 
-|![Wireframe: Error de credenciales](/images/RUP/00-casos-uso/02-detalle/iniciarSesion/iniciarSesion-credenciales-invalidas-wireframe.svg)|
+|![Wireframe: Error de credenciales](/images/RUP/00-casos-uso/02-detalle/startSession/startSession-invalid-credentials-wireframe.svg)|
 |-|
 |**Estado**: Choice point → regreso a SolicitandoAcceso|
 

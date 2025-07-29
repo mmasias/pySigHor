@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openTeachers()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: abrirProfesores()](/images/RUP/00-casos-uso/02-detalle/openTeachers/abrirProfesores.svg)|
+|![Caso de uso: abrirProfesores()](/images/RUP/00-casos-uso/02-detalle/openTeachers/openTeachers.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `openTeachers()` mediante diagrama de 
 #### pantalla 1: gestión de profesores
 <div align=center>
 
-|![Wireframe: Gestión de profesores](/images/RUP/00-casos-uso/02-detalle/openTeachers/abrirProfesores-wireframe.svg)|
+|![Wireframe: Gestión de profesores](/images/RUP/00-casos-uso/02-detalle/openTeachers/openTeachers-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 

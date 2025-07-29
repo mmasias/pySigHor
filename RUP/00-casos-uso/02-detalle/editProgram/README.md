@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `editProgram()` mediante diagrama de e
 
 <div align=center>
 
-|![Caso de uso: editarPrograma()](/images/RUP/00-casos-uso/02-detalle/editProgram/editarPrograma.svg)|
+|![Caso de uso: editarPrograma()](/images/RUP/00-casos-uso/02-detalle/editProgram/editProgram.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `editProgram()` mediante diagrama de e
 
 <div align=center>
 
-|![Wireframe: Edición de programa](/images/RUP/00-casos-uso/02-detalle/editProgram/editarPrograma-wireframe.svg)|
+|![Wireframe: Edición de programa](/images/RUP/00-casos-uso/02-detalle/editProgram/editProgram-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 

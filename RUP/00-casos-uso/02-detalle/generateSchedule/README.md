@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `generateSchedule()` mediante diagrama
 
 <div align=center>
 
-|![Wireframe: Confirmación de reemplazo de horario](/images/RUP/00-casos-uso/02-detalle/generarHorario/generarHorario-wireframe-confirmation.svg)|
+|![Wireframe: Confirmación de reemplazo de horario](/images/RUP/00-casos-uso/02-detalle/generateSchedule/generateSchedule-wireframe-confirmation.svg)|
 |-|
 |**Estado**: ProvidingConfirmation|
 
@@ -69,7 +69,7 @@ Especificación detallada del caso de uso `generateSchedule()` mediante diagrama
 
 <div align=center>
 
-|![Wireframe: Datos insuficientes](/images/RUP/00-casos-uso/02-detalle/generarHorario/generarHorario-wireframe-insufficient.svg)|
+|![Wireframe: Datos insuficientes](/images/RUP/00-casos-uso/02-detalle/generateSchedule/generateSchedule-wireframe-insufficient.svg)|
 |-|
 |**Estado**: Choice point - datos insuficientes|
 
@@ -79,7 +79,7 @@ Especificación detallada del caso de uso `generateSchedule()` mediante diagrama
 
 <div align=center>
 
-|![Wireframe: Generación en progreso](/images/RUP/00-casos-uso/02-detalle/generarHorario/generarHorario-wireframe-generating.svg)|
+|![Wireframe: Generación en progreso](/images/RUP/00-casos-uso/02-detalle/generateSchedule/generateSchedule-wireframe-generating.svg)|
 |-|
 |**Estado**: Choice point - generación exitosa|
 

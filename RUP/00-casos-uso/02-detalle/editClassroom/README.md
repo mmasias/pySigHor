@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editClassroom()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: editarAula()](/images/RUP/00-casos-uso/02-detalle/editClassroom/editarAula.svg)|
+|![Caso de uso: editarAula()](/images/RUP/00-casos-uso/02-detalle/editClassroom/editClassroom.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editClassroom()` mediante diagrama de
 
 <div align=center>
 
-|![Wireframe: Edición de aula](/images/RUP/00-casos-uso/02-detalle/editClassroom/editarAula-wireframe.svg)|
+|![Wireframe: Edición de aula](/images/RUP/00-casos-uso/02-detalle/editClassroom/editClassroom-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 

@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `deleteResource()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: eliminarRecurso()](/images/RUP/00-casos-uso/02-detalle/deleteResource/eliminarRecurso.svg)|
+|![Caso de uso: eliminarRecurso()](/images/RUP/00-casos-uso/02-detalle/deleteResource/deleteResource.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `deleteResource()` mediante diagrama d
 
 <div align=center>
 
-|![Wireframe: Eliminación de recurso](/images/RUP/00-casos-uso/02-detalle/deleteResource/eliminarRecurso-wireframe.svg)|
+|![Wireframe: Eliminación de recurso](/images/RUP/00-casos-uso/02-detalle/deleteResource/deleteResource-wireframe.svg)|
 |-|
 |**Estado**: PresentingConfirmation / AwaitingDecision|
 

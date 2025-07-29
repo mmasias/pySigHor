@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `editCourse()` mediante diagrama de es
 
 <div align=center>
 
-|![Caso de uso: editarCurso()](/images/RUP/00-casos-uso/02-detalle/editCourse/editarCurso.svg)|
+|![Caso de uso: editarCurso()](/images/RUP/00-casos-uso/02-detalle/editCourse/editCourse.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `editCourse()` mediante diagrama de es
 
 <div align=center>
 
-|![Wireframe: Edición de curso](/images/RUP/00-casos-uso/02-detalle/editCourse/editarCurso-wireframe.svg)|
+|![Wireframe: Edición de curso](/images/RUP/00-casos-uso/02-detalle/editCourse/editCourse-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 

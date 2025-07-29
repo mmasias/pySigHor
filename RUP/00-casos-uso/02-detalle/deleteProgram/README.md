@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `deleteProgram()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: eliminarPrograma()](/images/RUP/00-casos-uso/02-detalle/deleteProgram/eliminarPrograma.svg)|
+|![Caso de uso: eliminarPrograma()](/images/RUP/00-casos-uso/02-detalle/deleteProgram/deleteProgram.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `deleteProgram()` mediante diagrama de
 
 <div align=center>
 
-|![Wireframe: Eliminación de programa](/images/RUP/00-casos-uso/02-detalle/deleteProgram/eliminarPrograma-wireframe.svg)|
+|![Wireframe: Eliminación de programa](/images/RUP/00-casos-uso/02-detalle/deleteProgram/deleteProgram-wireframe.svg)|
 |-|
 |**Estado**: ConfirmandoEliminacion / EliminandoPrograma|
 

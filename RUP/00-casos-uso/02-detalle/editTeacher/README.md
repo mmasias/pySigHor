@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editTeacher()` mediante diagrama de e
 
 <div align=center>
 
-|![Caso de uso: editarProfesor()](/images/RUP/00-casos-uso/02-detalle/editTeacher/editarProfesor.svg)|
+|![Caso de uso: editarProfesor()](/images/RUP/00-casos-uso/02-detalle/editTeacher/editTeacher.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editTeacher()` mediante diagrama de e
 
 <div align=center>
 
-|![Wireframe: Edición de profesor](/images/RUP/00-casos-uso/02-detalle/editTeacher/editarProfesor-wireframe.svg)|
+|![Wireframe: Edición de profesor](/images/RUP/00-casos-uso/02-detalle/editTeacher/editTeacher-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 

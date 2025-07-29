@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openResources()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: abrirRecursos()](/images/RUP/00-casos-uso/02-detalle/openResources/abrirRecursos.svg)|
+|![Caso de uso: abrirRecursos()](/images/RUP/00-casos-uso/02-detalle/openResources/openResources.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `openResources()` mediante diagrama de
 #### pantalla 1: gestión de recursos
 <div align=center>
 
-|![Wireframe: Gestión de recursos](/images/RUP/00-casos-uso/02-detalle/openResources/abrirRecursos-wireframe.svg)|
+|![Wireframe: Gestión de recursos](/images/RUP/00-casos-uso/02-detalle/openResources/openResources-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 

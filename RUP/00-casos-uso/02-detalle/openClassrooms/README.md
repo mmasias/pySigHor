@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openClassrooms()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: abrirAulas()](/images/RUP/00-casos-uso/02-detalle/openClassrooms/abrirAulas.svg)|
+|![Caso de uso: abrirAulas()](/images/RUP/00-casos-uso/02-detalle/openClassrooms/openClassrooms.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `openClassrooms()` mediante diagrama d
 #### pantalla 1: gestión de aulas
 <div align=center>
 
-|![Wireframe: Gestión de aulas](/images/RUP/00-casos-uso/02-detalle/openClassrooms/abrirAulas-wireframe.svg)|
+|![Wireframe: Gestión de aulas](/images/RUP/00-casos-uso/02-detalle/openClassrooms/openClassrooms-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 
