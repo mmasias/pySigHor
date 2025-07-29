@@ -1,0 +1,86 @@
+@startuml completeManagement
+
+skinparam linetype polyline
+
+state completeManagement as "completeManagement()" {
+
+    state " " as PresentingMenu
+    state " " as WaitingForSelection
+
+    [*] -[#green]-> PresentingMenu 
+    note on link
+    <b>Administrator</b> requests make system available
+    end note    
+    
+    PresentingMenu -[#green]-> WaitingForSelection
+    note on link
+    <b>System</b> allows request:
+    • openPrograms()
+    • openCourses()
+    • openTeachers()
+    • openBuildings()
+    • openClassrooms()
+    • openResources()
+    • assignTeacherToCourse()
+    • generateSchedule()
+    • viewSchedule()
+    • closeSession()
+    end note
+    
+    WaitingForSelection -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests one of the options
+    end note
+}
+
+completeManagement -[#green]-> PROGRAMS_OPEN
+note on link
+openPrograms()
+end note
+
+completeManagement -[#green]-> COURSES_OPEN
+note on link
+openCourses()
+end note
+
+completeManagement -[#green]-> TEACHERS_OPEN
+note on link
+openTeachers()
+end note
+
+completeManagement -[#green]-> BUILDINGS_OPEN
+note on link
+openBuildings()
+end note
+
+completeManagement -[#green]-> CLASSROOMS_OPEN
+note on link
+openClassrooms()
+end note
+
+completeManagement -[#green]-> RESOURCES_OPEN
+note on link
+openResources()
+end note
+
+completeManagement -[#green]-> TEACHER_ASSIGNMENTS_OPEN
+note on link
+assignTeacherToCourse()
+end note
+
+completeManagement -[#green]-> SCHEDULE_GENERATED
+note on link
+generateSchedule()
+end note
+
+completeManagement -[#green]-> SCHEDULE_OPEN
+note on link
+viewSchedule()
+end note
+
+completeManagement -[#green]-> SESSION_CLOSED
+note on link
+closeSession()
+end note
+
+@enduml

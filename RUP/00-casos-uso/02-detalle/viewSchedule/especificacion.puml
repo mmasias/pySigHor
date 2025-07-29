@@ -1,0 +1,46 @@
+@startuml viewSchedule
+
+skinparam linetype polyline
+
+state viewSchedule as "viewSchedule()" {
+
+    state " " as RequiringConsultation
+    state " " as ProvidingSchedule
+    state c <<choice>>
+
+    [*] -[#green]-> RequiringConsultation 
+    note on link
+    <b>Administrator</b> requests view schedule
+    end note    
+    
+    RequiringConsultation -[#green]-> ProvidingSchedule
+    note on link
+    <b>System</b> presents
+    • generated schedule
+    • message if no schedule exists
+    end note
+    
+    ProvidingSchedule -[#green]-> c
+    note on link
+    <b>Administrator</b> requests
+    • continue viewing
+    • exit consultation
+    end note
+    
+    c -[#green]-> ProvidingSchedule
+    note on link
+    continue browsing
+    end note
+
+    c -[#green]-> [*]
+    note on link
+    exit consultation
+    end note
+}
+
+viewSchedule -[#green]-> SYSTEM_AVAILABLE
+note on link
+completeManagement()
+end note
+
+@enduml

@@ -1,0 +1,58 @@
+@startuml openResources
+
+skinparam linetype polyline
+
+state openResources as "openResources()" {
+
+    state " " as ShowingList
+    state " " as FilteringList
+
+    [*] -[#green]-> ShowingList 
+    note on link
+    <b>Administrator</b> requests open resources
+    end note    
+    
+    ShowingList -[#green]-> FilteringList
+    note on link
+    <b>System</b> presents resource list
+    • ID, name, description of each resource
+    <b>System</b> allows
+    • request filter list
+    • request create new
+    • request delete
+    • request edit
+    end note
+    
+    FilteringList -[#green]-> FilteringList
+    note on link
+    <b>Administrator</b> requests filter list
+    <b>System</b> presents filtered list
+    end note
+    
+    FilteringList -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests one of the options
+    end note
+}
+
+openResources -[#green]-> RESOURCE_OPEN
+note on link
+editResource()
+end note
+
+openResources -[#green]-> RESOURCE_OPEN
+note on link
+createResource()
+end note
+
+openResources -[#green]-> RESOURCES_OPEN
+note on link
+deleteResource()
+end note
+
+openResources -[#green]-> SYSTEM_AVAILABLE
+note on link
+completeManagement()
+end note
+
+@enduml

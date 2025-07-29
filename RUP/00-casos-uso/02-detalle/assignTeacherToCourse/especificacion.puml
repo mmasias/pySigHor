@@ -1,0 +1,55 @@
+@startuml assignTeacherToCourse
+
+skinparam linetype polyline
+
+state assignTeacherToCourse as "assignTeacherToCourse()" {
+
+    state " " as ManagingAssignments
+    state " " as SavingAssignments 
+
+    [*] -[#green]-> ManagingAssignments 
+    note on link
+    <b>Administrator</b> requests assign courses to teacher
+    end note    
+    
+    ManagingAssignments -[#green]-> SavingAssignments
+    note on link
+    <b>System</b> presents assignment management
+    • List of available courses
+    • List of courses already assigned to teacher
+    
+    <b>System</b> allows
+    • assign available course
+    • unassign assigned course
+    • save assignments
+    • cancel management
+    end note
+    
+    SavingAssignments -[#green]-> ManagingAssignments
+    note on link
+    <b>Administrator</b> requests assign available course
+    end note
+    
+    SavingAssignments -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests save and exit
+    end note
+
+    SavingAssignments -[#red]-> [*]
+    note on link
+    <b>Administrator</b> requests cancel
+    end note
+
+}
+
+assignTeacherToCourse -[#green]-> TEACHER_OPEN
+note on link
+editTeacher()
+end note
+
+assignTeacherToCourse -[#red]-> TEACHER_OPEN
+note on link
+cancel
+end note
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml deleteProgram
+
+skinparam linetype polyline
+
+state deleteProgram as "deleteProgram()" {
+
+    state " " as ConfirmingDeletion
+    state " " as DeletingProgram
+
+    [*] -[#green]-> ConfirmingDeletion 
+    note on link
+    <b>Administrator</b> requests delete
+    end note    
+    
+    ConfirmingDeletion -[#green]-> DeletingProgram
+    note on link
+    <b>System</b> presents program information to delete
+    • Code, name, program description
+    • Presents deletion warning
+    • Allows request confirm deletion
+    • Allows request cancel deletion
+    end note
+    
+    DeletingProgram -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests deletion confirmation
+    <b>System</b> allows request confirm deletion
+    <b>Administrator</b> requests confirm deletion
+    end note
+}
+
+deleteProgram -[#green]-> PROGRAMS_OPEN
+note on link
+<<include>> openPrograms() - updated list
+end note
+
+deleteProgram -[#blue]-> PROGRAMS_OPEN
+note on link
+<<include>> openPrograms() - cancel deletion
+end note
+
+@enduml

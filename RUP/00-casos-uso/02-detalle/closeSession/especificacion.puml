@@ -1,0 +1,49 @@
+@startuml closeSession
+
+skinparam linetype polyline
+
+state closeSession as "closeSession()" {
+
+    state " " as RequestingClose
+    state " " as ConfirmingClose  
+    state c <<choice>>
+
+    [*] -[#green]-> RequestingClose 
+    note on link
+    <b>Administrator</b> requests close session
+    end note    
+    
+    RequestingClose -[#green]-> ConfirmingClose
+    note on link
+    <b>System</b> presents confirmation
+    Do you want to close the active session?
+    end note
+    
+    ConfirmingClose -[#green]-> c
+    note on link
+    <b>System</b> allows confirm and cancel
+    end note
+    
+    c -[#blue]-> [*]
+    note on link
+    <b>Administrator</b> requests cancel close
+    end note
+    
+    c -[#green]-> [*]
+    note on link
+    <b>Administrator</b> confirms close session
+    end note
+}
+
+closeSession -[#blue]-> SYSTEM_AVAILABLE
+note on link
+cancel close
+end note
+
+closeSession -[#green]-> SESSION_CLOSED
+note on link
+Administrator → UnregisteredUser
+login()
+end note
+
+@enduml

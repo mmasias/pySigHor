@@ -1,0 +1,42 @@
+@startuml createTeacher
+
+skinparam linetype polyline
+
+state createTeacher as "createTeacher()" {
+
+    state " " as RequestingData
+    state " " as CreatingTeacher
+
+    [*] -[#green]-> RequestingData 
+    note on link
+    <b>Administrator</b> requests create new
+    end note    
+    
+    RequestingData -[#green]-> CreatingTeacher
+    note on link
+    <b>System</b> presents request for minimal teacher data
+    • Teacher code (required)
+    • Teacher names (required)
+    • Teacher surnames (required)
+    • Allows request create teacher
+    • Allows request cancel creation
+    end note
+    
+    CreatingTeacher -[#green]-> [*]
+    note on link
+    <b>Administrator</b> provides minimal data
+    <b>System</b> creates teacher and transfers to editing
+    end note
+}
+
+createTeacher -[#green]-> TEACHER_OPEN
+note on link
+editTeacher(newTeacher)
+end note
+
+createTeacher -[#blue]-> TEACHERS_OPEN
+note on link
+cancel creation
+end note
+
+@enduml

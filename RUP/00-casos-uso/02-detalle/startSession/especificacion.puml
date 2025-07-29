@@ -1,0 +1,47 @@
+@startuml startSession
+
+skinparam linetype polyline
+
+state startSession as "startSession()" {
+
+    state " " as RequestingAccess
+    state " " as ProvidingCredentials  
+    state c <<choice>>
+
+    [*] -[#green]-> RequestingAccess 
+    note on link
+    <b>UnregisteredUser</b> requests access system
+    end note    
+    
+    RequestingAccess -[#green]-> ProvidingCredentials
+    note on link
+    <b>System</b> allows input
+    • username
+    • password
+    end note
+    
+    ProvidingCredentials -[#green]-> c
+    note on link
+    <b>UnregisteredUser</b> provides
+    • username
+    • password
+    end note
+    
+    c -[#red]-> RequestingAccess
+    note on link
+    username:password invalid
+    end note
+
+    c -[#green]-> [*]
+    note on link
+    username:password valid
+    end note
+}
+
+startSession -[#green]-> SYSTEM_AVAILABLE
+note on link
+UnregisteredUser → Administrator
+completeManagement()
+end note
+
+@enduml

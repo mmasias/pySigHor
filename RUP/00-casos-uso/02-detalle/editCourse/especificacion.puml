@@ -1,0 +1,55 @@
+@startuml editCourse
+
+skinparam linetype polyline
+
+state editCourse as "editCourse()" {
+
+    state " " as EditingData
+    state " " as SavingData 
+
+    [*] -[#green]-> EditingData 
+    note on link
+    <b>Administrator</b> requests edit
+    end note    
+    
+    EditingData -[#green]-> SavingData
+    note on link
+    <b>System</b> presents editing data
+    • Code, name, description of course
+    • Credits, theoretical hours, practical hours
+    • Associated academic program
+    
+    <b>System</b> allows request:
+    • modify fields
+    • save course
+    • cancel editing
+    end note
+    
+    SavingData -[#green]-> EditingData
+    note on link
+    <b>Administrator</b> requests modify fields
+    end note
+    
+    SavingData -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests save and exit
+    end note
+
+    SavingData -[#red]-> [*]
+    note on link
+    <b>Administrator</b> requests cancel editing
+    end note
+
+}
+
+editCourse -[#green]-> COURSES_OPEN
+note on link
+openCourses()
+end note
+
+editCourse -[#red]-> COURSES_OPEN
+note on link
+cancel editing
+end note
+
+@enduml

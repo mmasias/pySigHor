@@ -1,0 +1,55 @@
+@startuml deleteResource
+skinparam linetype polyline
+
+state deleteResource as "deleteResource()" {
+    state " " as PresentingConfirmation
+    state " " as AwaitingDecision
+    state c <<choice>>
+    
+    [*] -[#green]-> PresentingConfirmation
+    note on link
+    <b>Administrator</b> requests delete
+    end note
+    
+    PresentingConfirmation -[#green]-> AwaitingDecision
+    note on link
+    <b>System</b> presents
+    • resource code
+    • resource name
+    • resource description
+    • teachers who prefer it
+    • classrooms that offer it
+    • deletion warning
+    end note
+    
+    AwaitingDecision -[#green]-> c
+    note on link
+    <b>Administrator</b> requests confirm deletion
+    end note
+    
+    AwaitingDecision -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests cancel
+    transfer to openResources()
+    end note
+    
+    c -[#red]-> [*]
+    note on link
+    resource has critical dependencies
+    cannot be deleted
+    transfer to openResources()
+    end note
+    
+    c -[#green]-> [*]
+    note on link
+    resource deleted successfully
+    transfer to openResources()
+    end note
+}
+
+deleteResource -[#green]-> RESOURCES_OPEN
+note on link
+openResources()
+end note
+
+@enduml

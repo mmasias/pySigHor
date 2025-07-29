@@ -1,0 +1,44 @@
+@startuml deleteCourse
+
+skinparam linetype polyline
+
+state deleteCourse as "deleteCourse()" {
+
+    state " " as ConfirmingDeletion
+    state " " as DeletingCourse
+
+    [*] -[#green]-> ConfirmingDeletion 
+    note on link
+    <b>Administrator</b> requests delete
+    end note    
+    
+    ConfirmingDeletion -[#green]-> DeletingCourse
+    note on link
+    <b>System</b> presents information of course to delete
+    • Code, name, description of course
+    • Credits, theoretical hours, practical hours
+    • Associated academic program
+    • Presents deletion warning
+    • Allows request confirm deletion
+    • Allows request cancel deletion
+    end note
+    
+    DeletingCourse -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests deletion confirmation
+    <b>System</b> allows request confirm deletion
+    <b>Administrator</b> requests confirm deletion
+    end note
+}
+
+deleteCourse -[#green]-> COURSES_OPEN
+note on link
+<<include>> openCourses() - updated list
+end note
+
+deleteCourse -[#blue]-> COURSES_OPEN
+note on link
+<<include>> openCourses() - cancel deletion
+end note
+
+@enduml

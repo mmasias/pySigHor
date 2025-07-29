@@ -1,0 +1,51 @@
+@startuml generateSchedule
+
+skinparam linetype polyline
+
+state generateSchedule as "generateSchedule()" {
+
+    state " " as RequiringGeneration
+    state " " as ProvidingConfirmation
+    state c <<choice>>
+
+    [*] -[#green]-> RequiringGeneration 
+    note on link
+    <b>Administrator</b> requests generate schedule
+    end note    
+    
+    RequiringGeneration -[#green]-> ProvidingConfirmation
+    note on link
+    <b>System</b> presents
+    • available data for generation
+    • warning if schedule exists
+    end note
+    
+    ProvidingConfirmation -[#green]-> c
+    note on link
+    <b>Administrator</b> requests
+    • confirm generation
+    • cancel generation
+    end note
+    
+    c -[#red]-> [*]
+    note on link
+    Administrator cancels
+    end note
+
+    c -[#green]-> [*]
+    note on link
+    insufficient data
+    end note
+
+    c -[#green]-> [*]
+    note on link
+    successful generation
+    end note
+}
+
+generateSchedule -[#green]-> SCHEDULE_OPEN
+note on link
+viewSchedule()
+end note
+
+@enduml

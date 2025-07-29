@@ -1,0 +1,40 @@
+@startuml createProgram
+
+skinparam linetype polyline
+
+state createProgram as "createProgram()" {
+
+    state " " as RequestingData
+    state " " as CreatingProgram
+
+    [*] -[#green]-> RequestingData 
+    note on link
+    <b>Administrator</b> requests create new
+    end note    
+    
+    RequestingData -[#green]-> CreatingProgram
+    note on link
+    <b>System</b> requests minimal program data
+    • Program name (required)
+    • Allows request create program
+    • Allows request cancel creation
+    end note
+    
+    CreatingProgram -[#green]-> [*]
+    note on link
+    <b>Administrator</b> provides minimal data
+    <b>System</b> creates program and transfers to editing
+    end note
+}
+
+createProgram -[#green]-> PROGRAM_OPEN
+note on link
+editProgram(newProgram)
+end note
+
+createProgram -[#blue]-> PROGRAMS_OPEN
+note on link
+cancel creation
+end note
+
+@enduml

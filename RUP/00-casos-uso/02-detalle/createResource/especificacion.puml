@@ -1,0 +1,46 @@
+@startuml createResource
+skinparam linetype polyline
+
+state createResource as "createResource()" {
+    state " " as RequiringData
+    state " " as ProvidingData
+    state c <<choice>>
+    
+    [*] -[#green]-> RequiringData
+    note on link
+    <b>Administrator</b> requests create resource
+    end note
+    
+    RequiringData -[#green]-> ProvidingData
+    note on link
+    <b>System</b> allows input
+    • resource code
+    • resource name
+    end note
+    
+    ProvidingData -[#green]-> c
+    note on link
+    <b>Administrator</b> provides
+    • resource code
+    • resource name
+    end note
+    
+    c -[#red]-> RequiringData
+    note on link
+    resource code
+    already exists
+    end note
+    
+    c -[#green]-> [*]
+    note on link
+    resource created with minimal data
+    transfer to editResource()
+    end note
+}
+
+createResource -[#green]-> RESOURCE_OPEN
+note on link
+editResource()
+end note
+
+@enduml

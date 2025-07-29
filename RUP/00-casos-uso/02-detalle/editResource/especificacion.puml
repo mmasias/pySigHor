@@ -1,0 +1,58 @@
+@startuml editResource
+skinparam linetype polyline
+
+state editResource as "editResource()" {
+    state " " as PresentingData
+    state " " as ModifyingData
+    state c1 <<choice>>
+    state c2 <<choice>>
+    
+    [*] -[#green]-> PresentingData
+    note on link
+    <b>Administrator</b> requests edit
+    end note
+    
+    PresentingData -[#green]-> ModifyingData
+    note on link
+    <b>System</b> presents
+    • resource code
+    • resource name
+    • resource description
+    end note
+    
+    ModifyingData -[#green]-> c1
+    note on link
+    <b>Administrator</b> provides
+    modifications (optional)
+    end note
+    
+    c1 -[#green]-> c2
+    note on link
+    <b>Administrator</b> requests save
+    end note
+    
+    c2 -[#red]-> PresentingData
+    note on link
+    resource code
+    already exists
+    end note
+    
+    c2 -[#green]-> PresentingData
+    note on link
+    resource updated
+    continue editing
+    end note
+    
+    c1 -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests finish
+    transfer to openResources()
+    end note
+}
+
+editResource -[#green]-> RESOURCES_OPEN
+note on link
+openResources()
+end note
+
+@enduml

@@ -65,7 +65,7 @@ EditTeacher --> EditTeacher: editTeacher()
 EditTeacher --> EditTeacherPreferences: configureTeacherPreferences()
 EditTeacher --> ListTeachers: openTeachers()
 
-EditTeacherPreferences --> EditTeacher: openTeacherEdition()
+EditTeacherPreferences --> EditTeacher: editTeacher()
 
 
 ListBuildings --> EditBuilding: createBuilding()
@@ -95,7 +95,7 @@ ListTeachers --> Menu: completeManagement()
 ListBuildings --> Menu: completeManagement()
 ListClassrooms --> Menu: completeManagement()
 ListResources --> Menu: completeManagement()
-Generation --> Menu: completeProcess()
-Consultation --> Menu: completeConsultation()
+Generation --> Menu: completeManagement()
+Consultation --> Menu: completeManagement()
 
 @enduml

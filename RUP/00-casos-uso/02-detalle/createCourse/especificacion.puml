@@ -1,0 +1,40 @@
+@startuml createCourse
+
+skinparam linetype polyline
+
+state createCourse as "createCourse()" {
+
+    state " " as RequestingData
+    state " " as CreatingCourse
+
+    [*] -[#green]-> RequestingData 
+    note on link
+    <b>Administrator</b> requests create new
+    end note    
+    
+    RequestingData -[#green]-> CreatingCourse
+    note on link
+    <b>System</b> presents request for minimal course data
+    • Course name (required)
+    • Allows request create course
+    • Allows request cancel creation
+    end note
+    
+    CreatingCourse -[#green]-> [*]
+    note on link
+    <b>Administrator</b> provides minimal data
+    <b>System</b> creates course and transfers to editing
+    end note
+}
+
+createCourse -[#green]-> COURSE_OPEN
+note on link
+editCourse(newCourse)
+end note
+
+createCourse -[#blue]-> COURSES_OPEN
+note on link
+cancel creation
+end note
+
+@enduml

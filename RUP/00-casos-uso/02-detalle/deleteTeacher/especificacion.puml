@@ -1,0 +1,44 @@
+@startuml deleteTeacher
+
+skinparam linetype polyline
+
+state deleteTeacher as "deleteTeacher()" {
+
+    state " " as ConfirmingDeletion
+    state " " as DeletingTeacher
+
+    [*] -[#green]-> ConfirmingDeletion 
+    note on link
+    <b>Administrator</b> requests delete
+    end note    
+    
+    ConfirmingDeletion -[#green]-> DeletingTeacher
+    note on link
+    <b>System</b> presents information of teacher to delete
+    • Code, names, surnames of teacher
+    • Email, phone
+    • Observations, assigned courses
+    • Presents deletion warning
+    • Allows request confirm deletion
+    • Allows request cancel deletion
+    end note
+    
+    DeletingTeacher -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests deletion confirmation
+    <b>System</b> allows request confirm deletion
+    <b>Administrator</b> requests confirm deletion
+    end note
+}
+
+deleteTeacher -[#green]-> TEACHERS_OPEN
+note on link
+<<include>> openTeachers() - updated list
+end note
+
+deleteTeacher -[#blue]-> TEACHERS_OPEN
+note on link
+<<include>> openTeachers() - cancel deletion
+end note
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml createClassroom
+
+skinparam linetype polyline
+
+state createClassroom as "createClassroom()" {
+
+    state " " as RequestingData
+    state " " as CreatingClassroom
+
+    [*] -[#green]-> RequestingData 
+    note on link
+    <b>Administrator</b> requests create new classroom
+    end note    
+    
+    RequestingData -[#green]-> CreatingClassroom
+    note on link
+    <b>System</b> presents request for minimal classroom data
+    • Classroom code (required)
+    • Classroom name (required)
+    • Associated building (required)
+    • Allows request create classroom
+    • Allows request cancel creation
+    end note
+    
+    CreatingClassroom -[#green]-> [*]
+    note on link
+    <b>Administrator</b> provides minimal data
+    <b>System</b> creates classroom and transfers to editing
+    end note
+}
+
+createClassroom -[#green]-> CLASSROOM_OPEN
+note on link
+editClassroom(newClassroom)
+end note
+
+createClassroom -[#blue]-> CLASSROOMS_OPEN
+note on link
+cancel creation
+end note
+
+@enduml

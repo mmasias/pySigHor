@@ -163,3 +163,98 @@ Te lo he contestado arriba.
 **Respuesta**:
 
 A priori, si se cumple la condición mínima (1 aula, 1 curso, 1 profesor), el algoritmo siempre concluye proponiendo un horario. Y lo muestra.
+
+---
+
+## 🚨 CONSULTA CRÍTICA - Estandarización de Nomenclatura (Traducción Especificaciones)
+
+### Fecha: 2025-07-29
+### Contexto: Durante la verificación de coherencia entre diagrama de contexto y especificaciones
+
+---
+
+## INCONSISTENCIAS IDENTIFICADAS
+
+### 1. CASOS FALTANTES (sin carpeta de especificación):
+- `completeProcess()` 
+- `completeConsultation()`
+- `openTeacherEdition()`
+
+RESPUESTA 
+
+- completeProcess y completeConsultation son traducciones "libres" del mismo caso de uso: completeManagement(). Se deberia usar este último.
+- openTeacherEdition es otra traducción libre. Deberia ser editTeacher()
+
+### 2. INCONSISTENCIA DE IDIOMA MASIVA:
+- **Diagrama de contexto**: En INGLÉS (startSession, openPrograms, etc.)
+- **Carpetas de especificación**: En ESPAÑOL (iniciarSesion, abrirProgramas, etc.)
+
+### 3. NOMENCLATURA MIXTA INTERNA:
+- Archivos `.puml` internos tienen nombres inconsistentes
+- Algunos coinciden con el diagrama (inglés), otros con las carpetas (español)
+
+## PREGUNTAS CRÍTICAS
+
+### PREGUNTA 1: Dirección de estandarización de idioma
+**¿Cuál es la dirección preferida para la estandarización completa?**
+
+**OPCIÓN A - TODO AL INGLÉS:**
+- Renombrar carpetas: `iniciarSesion` → `startSession`, `abrirProgramas` → `openPrograms`, etc.
+- Mantener diagrama de contexto en inglés (ya está)
+- Traducir contenido interno de archivos .puml al inglés
+- Resultado: Sistema completamente en inglés
+
+**OPCIÓN B - TODO AL ESPAÑOL:**
+- Mantener carpetas en español (ya están)
+- Cambiar diagrama de contexto al español: `startSession()` → `iniciarSesion()`, etc.
+- Traducir contenido interno de archivos .puml al español
+- Resultado: Sistema completamente en español
+
+**OPCIÓN C - STATUS QUO MIXTO (no recomendado):**
+- Solo traducir contenido interno, mantener nombres de carpetas y diagrama como están
+- Resultado: Inconsistencia permanente
+
+### PREGUNTA 2: Casos faltantes
+**¿Qué hacer con los casos de uso que están en el diagrama pero no tienen carpeta de especificación?**
+
+**OPCIÓN A:** Crear las carpetas faltantes con especificaciones completas
+**OPCIÓN B:** Eliminar esos casos del diagrama de contexto
+**OPCIÓN C:** Dejarlos como están (inconsistencia permanente)
+
+### PREGUNTA 3: Nomenclatura específica
+**¿Cuál es la nomenclatura preferida para conceptos específicos?**
+
+- `classroom` vs `aula` 
+- `building` vs `edificio`
+- `teacher` vs `profesor`
+- `course` vs `curso`
+- `resource` vs `recurso`
+
+### PREGUNTA 4: Alcance de la traducción
+**¿Debo traducir también los estados internos de los diagramas o solo el contenido textual?**
+
+Por ejemplo:
+- Nombres de estados: `EditingData` vs `EditandoDatos`
+- Referencias de transición: `PROGRAMS_OPEN` vs `PROGRAMAS_ABIERTOS`
+
+## RESPUESTAS
+[Manuel: Por favor responde aquí las preguntas numerándolas]
+
+**PREGUNTA 1:** 
+
+Opcion A: todo al inglés, de modo coherente, incluyendo renombrado de carpetas y archivos. Con especial atención además al ajuste de rutas en los README.md
+
+**PREGUNTA 2:** 
+
+Te he contestado arriba, pero repito aquí la respuesta:
+
+- completeProcess y completeConsultation son traducciones "libres" del mismo caso de uso: completeManagement(). Se deberia usar este último.
+- openTeacherEdition es otra traducción libre. Deberia ser editTeacher()
+
+**PREGUNTA 3:** 
+
+La nomenclatura correcta preferida es el término en inglés.
+
+**PREGUNTA 4:**
+
+Todo al inglés, incluyendo estados internos.

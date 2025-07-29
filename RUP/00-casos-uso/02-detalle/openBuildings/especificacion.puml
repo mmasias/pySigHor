@@ -1,0 +1,58 @@
+@startuml openBuildings
+
+skinparam linetype polyline
+
+state openBuildings as "openBuildings()" {
+
+    state " " as ShowingList
+    state " " as FilteringList
+
+    [*] -[#green]-> ShowingList 
+    note on link
+    <b>Administrator</b> requests open buildings
+    end note    
+    
+    ShowingList -[#green]-> FilteringList
+    note on link
+    <b>System</b> presents building list
+    • ID, name of each building
+    <b>System</b> allows
+    • request filter list
+    • request create new
+    • request delete
+    • request edit
+    end note
+    
+    FilteringList -[#green]-> FilteringList
+    note on link
+    <b>Administrator</b> requests filter list
+    <b>System</b> presents filtered list
+    end note
+    
+    FilteringList -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests one of the options
+    end note
+}
+
+openBuildings -[#green]-> BUILDING_OPEN
+note on link
+editBuilding()
+end note
+
+openBuildings -[#green]-> BUILDING_OPEN
+note on link
+createBuilding()
+end note
+
+openBuildings -[#green]-> BUILDINGS_OPEN
+note on link
+deleteBuilding()
+end note
+
+openBuildings -[#green]-> SYSTEM_AVAILABLE
+note on link
+completeManagement()
+end note
+
+@enduml

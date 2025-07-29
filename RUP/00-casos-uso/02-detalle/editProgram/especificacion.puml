@@ -1,0 +1,52 @@
+@startuml editProgram
+
+skinparam linetype polyline
+
+state editProgram as "editProgram()" {
+
+    state " " as EditingData
+    state " " as SavingData
+
+    [*] -[#green]-> EditingData 
+    note on link
+    <b>Administrator</b> requests edit
+    end note    
+    
+    EditingData -[#green]-> SavingData
+    note on link
+    <b>System</b> presents editing form
+    • Code, name, program description
+    • Allows request modify fields
+    • Allows request save program
+    • Allows request cancel editing
+    end note
+    
+    SavingData -[#green]-> EditingData
+    note on link
+    <b>Administrator</b> requests modify fields (optional)
+    <b>System</b> allows modify information
+    end note
+    
+    SavingData -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests save and exit
+    end note
+}
+
+editProgram -[#green]-> EditingData
+note on link
+<b>Administrator</b> requests continue editing
+<b>System</b> keeps form active
+end note
+
+editProgram -[#green]-> PROGRAMS_OPEN
+note on link
+openPrograms()
+end note
+
+editProgram -[#blue]-> PROGRAMS_OPEN
+note on link
+cancel editing
+end note
+
+@enduml

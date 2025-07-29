@@ -1,0 +1,41 @@
+@startuml createBuilding
+
+skinparam linetype polyline
+
+state createBuilding as "createBuilding()" {
+
+    state " " as RequestingData
+    state " " as CreatingBuilding
+
+    [*] -[#green]-> RequestingData 
+    note on link
+    <b>Administrator</b> requests create new
+    end note    
+    
+    RequestingData -[#green]-> CreatingBuilding
+    note on link
+    <b>System</b> presents request for minimal building data
+    • Building code (required)
+    • Building name (required)
+    • Allows request create building
+    • Allows request cancel creation
+    end note
+    
+    CreatingBuilding -[#green]-> [*]
+    note on link
+    <b>Administrator</b> provides minimal data
+    <b>System</b> creates building and transfers to editing
+    end note
+}
+
+createBuilding -[#green]-> BUILDING_OPEN
+note on link
+editBuilding(newBuilding)
+end note
+
+createBuilding -[#blue]-> BUILDINGS_OPEN
+note on link
+cancel creation
+end note
+
+@enduml

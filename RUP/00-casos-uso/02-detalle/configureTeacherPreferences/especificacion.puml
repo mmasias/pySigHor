@@ -1,0 +1,54 @@
+@startuml configureTeacherPreferences
+
+skinparam linetype polyline
+
+state configureTeacherPreferences as "configureTeacherPreferences()" {
+
+    state " " as ConfiguringPreferences
+    state " " as SavingConfiguration 
+
+    [*] -[#green]-> ConfiguringPreferences 
+    note on link
+    <b>Administrator</b> requests configure teacher preferences
+    end note    
+    
+    ConfiguringPreferences -[#green]-> SavingConfiguration
+    note on link
+    <b>System</b> presents configuration data
+    • List of available resources
+    • Teacher's current priority order
+    
+    <b>System</b> allows request:
+    • modify order
+    • save configuration
+    • cancel configuration
+    end note
+    
+    SavingConfiguration -[#green]-> ConfiguringPreferences
+    note on link
+    <b>Administrator</b> requests modify order
+    end note
+    
+    SavingConfiguration -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests save and exit
+    end note
+
+    SavingConfiguration -[#red]-> [*]
+    note on link
+    <b>Administrator</b> requests cancel configuration
+    end note
+
+}
+
+configureTeacherPreferences -[#green]-> TEACHER_OPEN
+note on link
+editTeacher()
+end note
+
+configureTeacherPreferences -[#red]-> TEACHER_OPEN
+note on link
+cancel configuration
+end note
+
+@enduml

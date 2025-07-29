@@ -1,0 +1,44 @@
+@startuml deleteClassroom
+
+skinparam linetype polyline
+
+state deleteClassroom as "deleteClassroom()" {
+
+    state " " as ConfirmingDeletion
+    state " " as DeletingClassroom
+
+    [*] -[#green]-> ConfirmingDeletion 
+    note on link
+    <b>Administrator</b> requests delete
+    end note    
+    
+    ConfirmingDeletion -[#green]-> DeletingClassroom
+    note on link
+    <b>System</b> presents information of classroom to delete
+    • Code, name of classroom
+    • Associated building, capacity
+    • Type, resources, observations
+    • Presents deletion warning
+    • Allows request confirm deletion
+    • Allows request cancel deletion
+    end note
+    
+    DeletingClassroom -[#green]-> [*]
+    note on link
+    <b>Administrator</b> requests deletion confirmation
+    <b>System</b> allows request confirm deletion
+    <b>Administrator</b> requests confirm deletion
+    end note
+}
+
+deleteClassroom -[#green]-> CLASSROOMS_OPEN
+note on link
+<<include>> openClassrooms() - updated list
+end note
+
+deleteClassroom -[#blue]-> CLASSROOMS_OPEN
+note on link
+<<include>> openClassrooms() - cancel deletion
+end note
+
+@enduml
