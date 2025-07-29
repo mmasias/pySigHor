@@ -19,14 +19,14 @@ state deleteTeacher as "deleteTeacher()" {
     • Correo electrónico, teléfono
     • Observaciones, cursos asignados
     • Presenta advertencia de eliminación
-    • Permite requestsr confirmar eliminación
-    • Permite requestsr cancelar eliminación
+    • Permite request confirmar eliminación
+    • Permite request cancelar eliminación
     end note
     
     EliminandoProfesor -[#green]-> [*]
     note on link
     <b>Administrator</b> requests confirmación de eliminación
-    <b>System</b> permite requestsr confirmar eliminación
+    <b>System</b> permite request confirmar eliminación
     <b>Administrator</b> requests confirmar eliminación
     end note
 }

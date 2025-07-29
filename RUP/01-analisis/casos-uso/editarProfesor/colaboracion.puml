@@ -1,29 +1,29 @@
 @startuml editTeacher-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbierto
+rectangle #CDEBA5 ":Teachers Open" as TeachersOpen
 rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbierto
 rectangle #CDEBA5 ":Collaboration CreateTeacher" as CreateTeacher
 rectangle #CDEBA5 ":Collaboration AbrirProfesores" as AbrirProfesores
 
 package editTeacher as "editTeacher()" {
     rectangle #629EF9 EditTeacherView
-    rectangle #b5bd68 ProfesorController
+    rectangle #b5bd68 TeacherController
     rectangle #F2AC4E TeacherRepository
     rectangle #F2AC4E Teacher
 }
 
-ProfesoresAbierto --> EditTeacherView: editarProfesor(profesorId)
+TeachersOpen --> EditTeacherView: editarProfesor(profesorId)
 ProfesorAbierto --> EditTeacherView: editarProfesor(profesorId)
 CreateTeacher --> EditTeacherView: editarProfesor(profesorNuevo)
 
-EditTeacherView -d-> ProfesorController: cargarProfesorParaEdición(profesorId) : Profesor
+EditTeacherView -d-> TeacherController: cargarProfesorParaEdición(profesorId) : Teacher
 
-ProfesorController --> TeacherRepository: getById(profesorId) : Profesor
+TeacherController --> TeacherRepository: getById(profesorId) : Teacher
 
-EditTeacherView --> ProfesorController: modificarCampos(profesorId, cambios) : boolean
+EditTeacherView --> TeacherController: modificarCampos(profesorId, cambios) : boolean
 
-ProfesorController --> TeacherRepository: update(profesor) : boolean
+TeacherController --> TeacherRepository: update(profesor) : boolean
 
 TeacherRepository -- Profesor
 

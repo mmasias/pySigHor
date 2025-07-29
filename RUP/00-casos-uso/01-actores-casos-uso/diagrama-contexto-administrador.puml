@@ -57,7 +57,7 @@ ListCursos --> ListCursos: eliminarCurso()
 EditCurso --> EditCurso: editarCurso()
 EditCurso --> ListCursos: abrirCursos()
 
-ListProfesores --> EditProfesor: crearProfesor()
+ListProfesores --> EditProfesor: createTeacher()
 ListProfesores --> EditProfesor: editarProfesor()
 ListProfesores --> ListProfesores: eliminarProfesor()
 

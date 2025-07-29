@@ -6,7 +6,7 @@ rectangle #CDEBA5 ":Collaboration EditTeacher" as EditTeacher
 
 package configureTeacherPreferences as "configureTeacherPreferences()" {
     rectangle #629EF9 ConfigurePreferencesProfesorView
-    rectangle #b5bd68 PreferenciasProfesorController
+    rectangle #b5bd68 PreferenciasTeacherController
     rectangle #F2AC4E TeacherRepository
     rectangle #F2AC4E ResourceRepository
     rectangle #F2AC4E Teacher
@@ -16,14 +16,14 @@ package configureTeacherPreferences as "configureTeacherPreferences()" {
 
 ProfesorAbierto -r-> ConfigurePreferencesProfesorView: configurarPreferenciasProfesor(profesorId)
 
-ConfigurePreferencesProfesorView -d-> PreferenciasProfesorController: cargarPreferenciasProfesor(profesorId)
+ConfigurePreferencesProfesorView -d-> PreferenciasTeacherController: cargarPreferenciasProfesor(profesorId)
 
-PreferenciasProfesorController --> TeacherRepository: obtenerConPreferencias(profesorId) : Profesor
-PreferenciasProfesorController --> ResourceRepository: obtenerRecursosDisponibles() : List<Resource>
+PreferenciasTeacherController --> TeacherRepository: obtenerConPreferencias(profesorId) : Teacher
+PreferenciasTeacherController --> ResourceRepository: obtenerRecursosDisponibles() : List<Resource>
 
-ConfigurePreferencesProfesorView --> PreferenciasProfesorController: modificarOrdenPrioridad(nuevoOrden) : boolean
+ConfigurePreferencesProfesorView --> PreferenciasTeacherController: modificarOrdenPrioridad(nuevoOrden) : boolean
 
-PreferenciasProfesorController --> TeacherRepository: actualizarPreferencias(profesorId, preferencias) : boolean
+PreferenciasTeacherController --> TeacherRepository: actualizarPreferencias(profesorId, preferencias) : boolean
 
 TeacherRepository -- Profesor
 TeacherRepository -- PreferenciasRecurso

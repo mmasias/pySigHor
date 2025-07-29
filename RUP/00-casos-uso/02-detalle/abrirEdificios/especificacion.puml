@@ -16,10 +16,10 @@ state openBuildings as "openBuildings()" {
     note on link
     <b>System</b> presents building list
     • ID, nombre de cada edificio
-    • Permite requestsr filter list
-    • Permite requestsr create new
-    • Permite requestsr delete
-    • Permite requestsr edit
+    • Permite request filter list
+    • Permite request create new
+    • Permite request delete
+    • Permite request edit
     end note
     
     FilteringList -[#green]-> FilteringList

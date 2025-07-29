@@ -16,10 +16,10 @@ state openTeachers as "openTeachers()" {
     note on link
     <b>System</b> presents teacher list
     • Código, nombre, apellidos de cada profesor
-    • Permite requestsr filter list
-    • Permite requestsr create new
-    • Permite requestsr delete
-    • Permite requestsr edit
+    • Permite request filter list
+    • Permite request create new
+    • Permite request delete
+    • Permite request edit
     end note
     
     FilteringList -[#green]-> FilteringList

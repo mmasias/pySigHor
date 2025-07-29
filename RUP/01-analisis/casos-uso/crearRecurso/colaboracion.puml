@@ -13,13 +13,13 @@ package createResource as "createResource()" {
 
 RecursosAbierto -r-> CreateResourceView: createResource()
 
-CreateResourceView -d-> RecursoController: validarDatosMínimos(codigo, nombre) : boolean
+CreateResourceView -d-> RecursoController: validateMinimalData(codigo, nombre) : boolean
 
-RecursoController --> ResourceRepository: verificarUnicidad(codigo) : boolean
+RecursoController --> ResourceRepository: checkUniqueness(codigo) : boolean
 
 CreateResourceView --> RecursoController: crearRecurso(codigo, nombre) : Recurso
 
-RecursoController --> ResourceRepository: crear(codigo, nombre) : Recurso
+RecursoController --> ResourceRepository: create(codigo, nombre) : Recurso
 
 ResourceRepository -- Recurso
 

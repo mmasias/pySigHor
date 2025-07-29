@@ -18,7 +18,7 @@ state assignTeacherToCourse as "assignTeacherToCourse()" {
     • Lista de cursos disponibles
     • Lista de cursos ya asignados al profesor
     
-    <b>System</b> permite requestsr:
+    <b>System</b> permite request:
     • asignar curso disponible
     • desasignar curso asignado
     • guardar asignaciones

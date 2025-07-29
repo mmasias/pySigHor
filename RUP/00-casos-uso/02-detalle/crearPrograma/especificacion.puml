@@ -5,24 +5,24 @@ skinparam linetype polyline
 state createProgram as "createProgram()" {
 
     state " " as RequestingData
-    state " " as CreandoPrograma
+    state " " as CreatingProgram
 
     [*] -[#green]-> RequestingData 
     note on link
     <b>Administrator</b> requests create new
     end note    
     
-    RequestingData -[#green]-> CreandoPrograma
+    RequestingData -[#green]-> CreatingProgram
     note on link
     <b>System</b> requests datos mínimos del programa
     • Nombre del programa (obligatorio)
-    • Permite requestsr crear programa
-    • Permite requestsr cancelar creación
+    • Permite request crear programa
+    • Permite request cancel creation
     end note
     
-    CreandoPrograma -[#green]-> [*]
+    CreatingProgram -[#green]-> [*]
     note on link
-    <b>Administrator</b> proporciona datos mínimos
+    <b>Administrator</b> provides minimal data
     <b>System</b> crea programa y transfiere a edición
     end note
 }
@@ -34,7 +34,7 @@ end note
 
 crearPrograma -[#blue]-> PROGRAMS_OPEN
 note on link
-cancelar creación
+cancel creation
 end note
 
 @enduml

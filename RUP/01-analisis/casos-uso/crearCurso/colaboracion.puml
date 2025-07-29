@@ -13,13 +13,13 @@ package createCourse as "createCourse()" {
 
 CursosAbierto --> CreateCourseView: createCourse()
 
-CreateCourseView -d-> CursoController: validarDatosMínimos(nombre) : boolean
+CreateCourseView -d-> CursoController: validateMinimalData(nombre) : boolean
 
-CursoController --> CourseRepository: verificarUnicidad(nombre) : boolean
+CursoController --> CourseRepository: checkUniqueness(nombre) : boolean
 
 CreateCourseView --> CursoController: crearCurso(nombre) : Curso
 
-CursoController --> CourseRepository: crear(nombre) : Curso
+CursoController --> CourseRepository: create(nombre) : Curso
 
 CourseRepository -- Curso
 

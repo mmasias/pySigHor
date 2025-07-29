@@ -18,7 +18,7 @@ ProfesorAbierto -r-> AssignTeacherACursoView: asignarProfesorACurso(profesorId)
 
 AssignTeacherACursoView -d-> AsignacionProfesorCursoController: cargarAsignacionesProfesor(profesorId)
 
-AsignacionProfesorCursoController --> TeacherRepository: obtenerConAsignaciones(profesorId) : Profesor
+AsignacionProfesorCursoController --> TeacherRepository: obtenerConAsignaciones(profesorId) : Teacher
 AsignacionProfesorCursoController --> CourseRepository: obtenerCursosDisponibles() : List<Course>
 AsignacionProfesorCursoController --> CourseRepository: obtenerCursosAsignados(profesorId) : List<Course>
 

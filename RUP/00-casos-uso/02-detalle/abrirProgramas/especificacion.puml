@@ -16,10 +16,10 @@ state openPrograms as "openPrograms()" {
     note on link
     <b>System</b> presents program list
     • Código, nombre, descripción de cada programa
-    • Permite requestsr filter list
-    • Permite requestsr create new
-    • Permite requestsr delete
-    • Permite requestsr edit
+    • Permite request filter list
+    • Permite request create new
+    • Permite request delete
+    • Permite request edit
     end note
     
     FilteringList -[#green]-> FilteringList

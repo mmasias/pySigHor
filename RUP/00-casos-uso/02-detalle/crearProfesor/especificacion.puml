@@ -5,26 +5,26 @@ skinparam linetype polyline
 state createTeacher as "createTeacher()" {
 
     state " " as RequestingData
-    state " " as CreandoProfesor
+    state " " as CreatingTeacher
 
     [*] -[#green]-> RequestingData 
     note on link
     <b>Administrator</b> requests create new
     end note    
     
-    RequestingData -[#green]-> CreandoProfesor
+    RequestingData -[#green]-> CreatingTeacher
     note on link
     <b>System</b> presents solicitud de datos mínimos del profesor
     • Código del profesor (obligatorio)
     • Nombres del profesor (obligatorio)
     • Apellidos del profesor (obligatorio)
-    • Permite requestsr crear profesor
-    • Permite requestsr cancelar creación
+    • Permite request crear profesor
+    • Permite request cancel creation
     end note
     
-    CreandoProfesor -[#green]-> [*]
+    CreatingTeacher -[#green]-> [*]
     note on link
-    <b>Administrator</b> proporciona datos mínimos
+    <b>Administrator</b> provides minimal data
     <b>System</b> crea profesor y transfiere a edición
     end note
 }
@@ -36,7 +36,7 @@ end note
 
 crearProfesor -[#blue]-> TEACHERS_OPEN
 note on link
-cancelar creación
+cancel creation
 end note
 
 @enduml

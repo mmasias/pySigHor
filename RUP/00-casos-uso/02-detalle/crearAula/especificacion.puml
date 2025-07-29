@@ -5,26 +5,26 @@ skinparam linetype polyline
 state createClassroom as "createClassroom()" {
 
     state " " as RequestingData
-    state " " as CreandoAula
+    state " " as CreatingClassroom
 
     [*] -[#green]-> RequestingData 
     note on link
     <b>Administrator</b> requests crear aula nueva
     end note    
     
-    RequestingData -[#green]-> CreandoAula
+    RequestingData -[#green]-> CreatingClassroom
     note on link
     <b>System</b> presents solicitud de datos mínimos del aula
     • Código del aula (obligatorio)
     • Nombre del aula (obligatorio)
     • Edificio asociado (obligatorio)
-    • Permite requestsr crear aula
-    • Permite requestsr cancelar creación
+    • Permite request crear aula
+    • Permite request cancel creation
     end note
     
-    CreandoAula -[#green]-> [*]
+    CreatingClassroom -[#green]-> [*]
     note on link
-    <b>Administrator</b> proporciona datos mínimos
+    <b>Administrator</b> provides minimal data
     <b>System</b> crea aula y transfiere a edición
     end note
 }
@@ -36,7 +36,7 @@ end note
 
 crearAula -[#blue]-> CLASSROOMS_OPEN
 note on link
-cancelar creación
+cancel creation
 end note
 
 @enduml

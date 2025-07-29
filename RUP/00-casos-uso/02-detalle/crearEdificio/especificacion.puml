@@ -5,25 +5,25 @@ skinparam linetype polyline
 state createBuilding as "createBuilding()" {
 
     state " " as RequestingData
-    state " " as CreandoEdificio
+    state " " as CreatingBuilding
 
     [*] -[#green]-> RequestingData 
     note on link
     <b>Administrator</b> requests create new
     end note    
     
-    RequestingData -[#green]-> CreandoEdificio
+    RequestingData -[#green]-> CreatingBuilding
     note on link
     <b>System</b> presents solicitud de datos mínimos del edificio
     • Código del edificio (obligatorio)
     • Nombre del edificio (obligatorio)
-    • Permite requestsr crear edificio
-    • Permite requestsr cancelar creación
+    • Permite request crear edificio
+    • Permite request cancel creation
     end note
     
-    CreandoEdificio -[#green]-> [*]
+    CreatingBuilding -[#green]-> [*]
     note on link
-    <b>Administrator</b> proporciona datos mínimos
+    <b>Administrator</b> provides minimal data
     <b>System</b> crea edificio y transfiere a edición
     end note
 }
@@ -35,7 +35,7 @@ end note
 
 crearEdificio -[#blue]-> BUILDINGS_OPEN
 note on link
-cancelar creación
+cancel creation
 end note
 
 @enduml

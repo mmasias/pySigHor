@@ -15,7 +15,7 @@ ProgramasAbierto --> CreateProgramView: createProgram()
 
 CreateProgramView -d-> ProgramaController: crearProgramaMinimo(nombre) : Programa
 
-ProgramaController --> ProgramRepository: crear(nombre) : Programa
+ProgramaController --> ProgramRepository: create(nombre) : Programa
 
 ProgramRepository -- Programa
 

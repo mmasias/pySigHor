@@ -14,7 +14,7 @@ state completeManagement as "completeManagement()" {
     
     PresentandoMenu -[#green]-> EsperandoSeleccion
     note on link
-    <b>System</b> permite requestsr:
+    <b>System</b> permite request:
     • openPrograms()
     • openCourses()
     • openTeachers()

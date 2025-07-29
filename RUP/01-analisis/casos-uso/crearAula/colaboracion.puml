@@ -13,13 +13,13 @@ package createClassroom as "createClassroom()" {
 
 AulasAbierto -r-> CreateClassroomView: createClassroom()
 
-CreateClassroomView -d-> AulaController: validarDatosMínimos(codigo, nombre, edificio) : boolean
+CreateClassroomView -d-> AulaController: validateMinimalData(codigo, nombre, edificio) : boolean
 
-AulaController --> ClassroomRepository: verificarUnicidad(codigo) : boolean
+AulaController --> ClassroomRepository: checkUniqueness(codigo) : boolean
 
 CreateClassroomView --> AulaController: crearAula(codigo, nombre, edificio) : Aula
 
-AulaController --> ClassroomRepository: crear(codigo, nombre, edificio) : Aula
+AulaController --> ClassroomRepository: create(codigo, nombre, edificio) : Aula
 
 ClassroomRepository -- Aula
 

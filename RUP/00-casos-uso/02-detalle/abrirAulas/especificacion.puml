@@ -16,10 +16,10 @@ state openClassrooms as "openClassrooms()" {
     note on link
     <b>System</b> presents classroom list
     • ID, nombre, capacidad, edificio de cada aula
-    • Permite requestsr filter list
-    • Permite requestsr crear aula nueva
-    • Permite requestsr delete
-    • Permite requestsr edit
+    • Permite request filter list
+    • Permite request crear aula nueva
+    • Permite request delete
+    • Permite request edit
     end note
     
     FilteringList -[#green]-> FilteringList

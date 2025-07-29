@@ -16,10 +16,10 @@ state openResources as "openResources()" {
     note on link
     <b>System</b> presents resource list
     • ID, nombre, descripción de cada recurso
-    • Permite requestsr filter list
-    • Permite requestsr create new
-    • Permite requestsr delete
-    • Permite requestsr edit
+    • Permite request filter list
+    • Permite request create new
+    • Permite request delete
+    • Permite request edit
     end note
     
     FilteringList -[#green]-> FilteringList

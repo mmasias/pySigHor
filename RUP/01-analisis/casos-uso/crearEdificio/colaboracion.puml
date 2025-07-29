@@ -13,13 +13,13 @@ package createBuilding as "createBuilding()" {
 
 EdificiosAbierto -r-> CreateBuildingView: createBuilding()
 
-CreateBuildingView -d-> EdificioController: validarDatosMínimos(codigo, nombre) : boolean
+CreateBuildingView -d-> EdificioController: validateMinimalData(codigo, nombre) : boolean
 
-EdificioController --> BuildingRepository: verificarUnicidad(codigo) : boolean
+EdificioController --> BuildingRepository: checkUniqueness(codigo) : boolean
 
 CreateBuildingView --> EdificioController: crearEdificio(codigo, nombre) : Edificio
 
-EdificioController --> BuildingRepository: crear(codigo, nombre) : Edificio
+EdificioController --> BuildingRepository: create(codigo, nombre) : Edificio
 
 BuildingRepository -- Edificio
 

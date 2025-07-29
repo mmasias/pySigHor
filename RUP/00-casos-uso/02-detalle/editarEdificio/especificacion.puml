@@ -19,7 +19,7 @@ state editBuilding as "editBuilding()" {
     • Ubicación, descripción
     • Observaciones del edificio
     
-    <b>System</b> permite requestsr:
+    <b>System</b> permite request:
     • modificar campos
     • guardar edificio
     • cancelar edición

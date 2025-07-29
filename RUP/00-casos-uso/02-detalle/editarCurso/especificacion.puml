@@ -19,7 +19,7 @@ state editCourse as "editCourse()" {
     • Créditos, horas teóricas, horas prácticas
     • Programa académico asociado
     
-    <b>System</b> permite requestsr:
+    <b>System</b> permite request:
     • modificar campos
     • guardar curso
     • cancelar edición

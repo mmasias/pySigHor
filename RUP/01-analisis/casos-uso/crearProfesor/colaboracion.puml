@@ -1,25 +1,25 @@
 @startuml createTeacher-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbierto
+rectangle #CDEBA5 ":Teachers Open" as TeachersOpen
 rectangle #CDEBA5 ":Collaboration EditTeacher" as EditTeacher
 
 package createTeacher as "createTeacher()" {
     rectangle #629EF9 CreateTeacherView
-    rectangle #b5bd68 ProfesorController
+    rectangle #b5bd68 TeacherController
     rectangle #F2AC4E TeacherRepository
     rectangle #F2AC4E Teacher
 }
 
-ProfesoresAbierto -r-> CreateTeacherView: createTeacher()
+TeachersOpen -r-> CreateTeacherView: createTeacher()
 
-CreateTeacherView -d-> ProfesorController: validarDatosMínimos(codigo, nombres, apellidos) : boolean
+CreateTeacherView -d-> TeacherController: validateMinimalData(codigo, nombres, apellidos) : boolean
 
-ProfesorController --> TeacherRepository: verificarUnicidad(codigo) : boolean
+TeacherController --> TeacherRepository: checkUniqueness(codigo) : boolean
 
-CreateTeacherView --> ProfesorController: crearProfesor(codigo, nombres, apellidos) : Profesor
+CreateTeacherView --> TeacherController: createTeacher(codigo, nombres, apellidos) : Teacher
 
-ProfesorController --> TeacherRepository: crear(codigo, nombres, apellidos) : Profesor
+TeacherController --> TeacherRepository: create(codigo, nombres, apellidos) : Teacher
 
 TeacherRepository -- Profesor
 

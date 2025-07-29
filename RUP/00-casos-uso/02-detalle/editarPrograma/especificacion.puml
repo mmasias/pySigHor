@@ -16,9 +16,9 @@ state editProgram as "editProgram()" {
     note on link
     <b>System</b> presents formulario de edición
     • Código, nombre, descripción del programa
-    • Permite requestsr modificar campos
-    • Permite requestsr guardar programa
-    • Permite requestsr cancelar edición
+    • Permite request modificar campos
+    • Permite request guardar programa
+    • Permite request cancelar edición
     end note
     
     SavingData -[#green]-> EditandoDatos

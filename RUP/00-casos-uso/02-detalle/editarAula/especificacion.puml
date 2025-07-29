@@ -20,7 +20,7 @@ state editClassroom as "editClassroom()" {
     • Tipo de aula, recursos
     • Observaciones del aula
     
-    <b>System</b> permite requestsr:
+    <b>System</b> permite request:
     • modificar campos
     • guardar aula
     • cancelar edición
