@@ -1,11 +1,11 @@
-@startsalt editarPrograma-wireframe
+@startsalt editProgram-wireframe
 {
-    <b>EDICIÓN DE PROGRAMA ACADÉMICO</b>
+    <b>ACADEMIC PROGRAM EDITING</b>
     ===
     {
-        <b>Código del programa:</b> | [      PRG-001      ]
-        <b>Nombre del programa:</b> | [                                              ]
-        <b>Descripción:</b> | 
+        <b>Program code:</b> | [      PRG-001      ]
+        <b>Program name:</b> | [                                              ]
+        <b>Description:</b> | 
         {
             [                                                                    ]
             [                                                                    ]
@@ -15,7 +15,7 @@
     
     ~~
     
-    {[Guardar] | [Guardar y salir] | [Cancelar edición]}
+    {[Save] | [Save and exit] | [Cancel editing]}
 }
 
 @endsalt

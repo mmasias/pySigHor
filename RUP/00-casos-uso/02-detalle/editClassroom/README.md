@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > editarAula > Detalle y prototipado
+# pySigHor > editClassroom > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../editClassroom/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/editClassroom/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `editarAula()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de aulas.
+Especificación detallada del caso de uso `editClassroom()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de aulas.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|editarAula()|
+|**Nombre**|editClassroom()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar datos de edición de aula con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Aula seleccionada desde abrirAulas() o aula recién creada desde crearAula()|
+|**Precondición**|Aula seleccionada desde openClassrooms() o aula recién creada desde crearAula()|
 |**Postcondición exitosa**|Aula modificada guardada, usuario puede continuar editando en AULA_ABIERTA o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editarAula()` mediante diagrama de es
 
 <div align=center>
 
-|![Caso de uso: editarAula()](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula.svg)|
+|![Caso de uso: editarAula()](/images/RUP/00-casos-uso/02-detalle/editClassroom/editarAula.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editarAula()` mediante diagrama de es
 
 <div align=center>
 
-|![Wireframe: Edición de aula](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula-wireframe.svg)|
+|![Wireframe: Edición de aula](/images/RUP/00-casos-uso/02-detalle/editClassroom/editarAula-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 
@@ -127,23 +127,23 @@ Especificación detallada del caso de uso `editarAula()` mediante diagrama de es
 ### operaciones de edición
 
 - **Continuar editando** → Mantiene `AULA_ABIERTA` en modo edición
-- **Guardar y salir** → `abrirAulas()` con lista actualizada
-- **Cancelar edición** → `abrirAulas()` sin cambios
+- **Guardar y salir** → `openClassrooms()` con lista actualizada
+- **Cancelar edición** → `openClassrooms()` sin cambios
 
 ### navegación del sistema
 
 - **Continuar editando** → Permanece en `AULA_ABIERTA`
-- **Guardar y salir** → `AULAS_ABIERTO` via `abrirAulas()`
+- **Guardar y salir** → `AULAS_ABIERTO` via `openClassrooms()`
 - **Cancelación** → `AULAS_ABIERTO` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **AULAS_ABIERTO** → `editarAula()` → **AULA_ABIERTA**
-- **AULA_ABIERTA** → `editarAula()` → **AULA_ABIERTA** (continuar editando)
+- **AULAS_ABIERTO** → `editClassroom()` → **AULA_ABIERTA**
+- **AULA_ABIERTA** → `editClassroom()` → **AULA_ABIERTA** (continuar editando)
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirAulas()` → **AULAS_ABIERTO** (al guardar y salir)
+- **&lt;&lt;include&gt;&gt;** `openClassrooms()` → **AULAS_ABIERTO** (al guardar y salir)
 
 ## vocabulario utilizado
 
@@ -189,13 +189,13 @@ Ambas transiciones incluyen:
 - **Edición completa**: Permite modificar todos los campos del aula
 - **Sesión continua**: Mantiene estado de edición activa
 - **Flexibilidad**: Puede continuar editando o guardar y salir
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirAulas()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openClassrooms()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirAulas()](../openClassrooms/README.md) - Caso de uso de navegación
+- [openClassrooms()](../openClassrooms/README.md) - Caso de uso de navegación
 - [crearAula()](../createClassroom/README.md) - Caso complementario del CRUD
 - [eliminarAula()](../deleteClassroom/README.md) - Caso complementario del CRUD
 - [editarEdificio()](../editBuilding/README.md) - Patrón de referencia para "el gordo"

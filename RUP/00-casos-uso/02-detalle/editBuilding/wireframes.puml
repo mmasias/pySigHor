@@ -1,26 +1,26 @@
-@startsalt editarEdificio-wireframe
+@startsalt editBuilding-wireframe
 {
-    <b>EDITAR EDIFICIO</b>
+    <b>EDIT BUILDING</b>
     ===
     {
-        <b>Datos del edificio:</b>
+        <b>Building data:</b>
         --
         {
             {
-            {<b>Código:</b> | "EDIF-001                    "
-            <b>Nombre:</b> | "Edificio Central             "}
-            {<b>Ubicación:</b> | "Campus Universitario         "
-            <b>Descripción:</b> | "Edificio principal de aulas  "}
-            {<b>Observaciones:</b> |
-                {"Edificio con aulas de gran capacidad
-                para cursos magistrales. Cuenta con
-                equipamiento audiovisual moderno     "}}
+            {<b>Code:</b> | "EDIF-001                    "
+            <b>Name:</b> | "Central Building             "}
+            {<b>Location:</b> | "University Campus            "
+            <b>Description:</b> | "Main classroom building      "}
+            {<b>Observations:</b> |
+                {"Large capacity classroom building
+                for lecture courses. Features modern
+                audiovisual equipment                "}}
             }
         }
 
         ~~
 
-        {[Guardar cambios] | [Continuar editando] | [Cancelar]}
+        {[Save changes] | [Continue editing] | [Cancel]}
     }
 }
 @endsalt

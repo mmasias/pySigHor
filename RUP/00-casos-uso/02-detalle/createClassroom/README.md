@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > crearAula > Detalle y prototipado
+# pySigHor > createClassroom > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../createClassroom/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/createClassroom/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +22,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `crearAula()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de aulas aplicando la filosofía C→U como "el delgado".
+Especificación detallada del caso de uso `createClassroom()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de aulas aplicando la filosofía C→U como "el delgado".
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|crearAula()|
+|**Nombre**|createClassroom()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Crear aula con datos mínimos y transferir inmediatamente a edición completa|
 |**Tipo**|Primario, esencial|
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `crearAula()` mediante diagrama de est
 
 <div align=center>
 
-|![Caso de uso: crearAula()](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula.svg)|
+|![Caso de uso: createClassroom()](/images/RUP/00-casos-uso/02-detalle/createClassroom/createClassroom.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

@@ -1,25 +1,25 @@
-@startsalt crearProfesor-wireframe
+@startsalt createTeacher-wireframe
 {
-    <b>CREAR PROFESOR</b>
+    <b>CREATE TEACHER</b>
     ===
     {
-        <b>Datos mínimos del profesor:</b>
+        <b>Teacher minimum data:</b>
         --
         {
-            <b>Código del profesor (*):</b>
+            <b>Teacher code (*):</b>
             "                                        "
-            <b>Nombres (*):</b>
+            <b>First names (*):</b>
             "                                        "
-            <b>Apellidos (*):</b>
+            <b>Last names (*):</b>
             "                                        "
             --
-            <i>(*) Campos obligatorios</i>
-            <i>Otros datos se completarán en la edición</i>
+            <i>(*) Required fields</i>
+            <i>Other data will be completed during editing</i>
         }
 
         ~~
 
-        {[Crear profesor] | [Cancelar]}
+        {[Create teacher] | [Cancel]}
     }
 }
 @endsalt

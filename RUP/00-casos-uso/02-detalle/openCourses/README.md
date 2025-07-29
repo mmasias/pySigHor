@@ -1,6 +1,6 @@
-# pySigHor > abrirCursos > Detalle y prototipado
+# pySigHor > openCourses > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../openCourses/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/openCourses/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 
@@ -15,13 +15,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `abrirCursos()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de cursos académicos.
+Especificación detallada del caso de uso `openCourses()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de cursos académicos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|abrirCursos()|
+|**Nombre**|openCourses()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar lista de cursos académicos con capacidad de filtrado y navegación a operaciones CRUD|
 |**Tipo**|Primario, esencial|
@@ -34,7 +34,7 @@ Especificación detallada del caso de uso `abrirCursos()` mediante diagrama de e
 
 <div align=center>
 
-|![Caso de uso: abrirCursos()](/images/RUP/00-casos-uso/02-detalle/abrirCursos/abrirCursos.svg)|
+|![Caso de uso: abrirCursos()](/images/RUP/00-casos-uso/02-detalle/openCourses/abrirCursos.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -50,7 +50,7 @@ Especificación detallada del caso de uso `abrirCursos()` mediante diagrama de e
 #### pantalla 1: gestión de cursos académicos
 <div align=center>
 
-|![Wireframe: Gestión de cursos](/images/RUP/00-casos-uso/02-detalle/abrirCursos/abrirCursos-wireframe.svg)|
+|![Wireframe: Gestión de cursos](/images/RUP/00-casos-uso/02-detalle/openCourses/abrirCursos-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 
@@ -115,7 +115,7 @@ Especificación detallada del caso de uso `abrirCursos()` mediante diagrama de e
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `abrirCursos()` → **CURSOS_ABIERTO**
+- **SISTEMA_DISPONIBLE** → `openCourses()` → **CURSOS_ABIERTO**
 
 Y las transiciones de salida:
 - **CURSOS_ABIERTO** → `crearCurso()` → **CURSO_ABIERTO**

@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > editarRecurso > Detalle y prototipado
+# pySigHor > editResource > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../editResource/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/editResource/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `editarRecurso()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de recursos.
+Especificación detallada del caso de uso `editResource()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de recursos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|editarRecurso()|
+|**Nombre**|editResource()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar datos de edición de recurso con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Recurso seleccionado desde abrirRecursos() o recurso recién creado desde crearRecurso()|
+|**Precondición**|Recurso seleccionado desde openResources() o recurso recién creado desde crearRecurso()|
 |**Postcondición exitosa**|Recurso modificado guardado, usuario puede continuar editando en RECURSO_ABIERTO o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editarRecurso()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: editarRecurso()](/images/RUP/00-casos-uso/02-detalle/editarRecurso/editarRecurso.svg)|
+|![Caso de uso: editarRecurso()](/images/RUP/00-casos-uso/02-detalle/editResource/editarRecurso.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editarRecurso()` mediante diagrama de
 
 <div align=center>
 
-|![Wireframe: Edición de recurso](/images/RUP/00-casos-uso/02-detalle/editarRecurso/editarRecurso-wireframe.svg)|
+|![Wireframe: Edición de recurso](/images/RUP/00-casos-uso/02-detalle/editResource/editarRecurso-wireframe.svg)|
 |-|
 |**Estado**: PresentingData / ModifyingData|
 
@@ -92,7 +92,7 @@ Especificación detallada del caso de uso `editarRecurso()` mediante diagrama de
 |**Administrador**|solicita guardar||
 ||**Sistema**|presenta resultado|• recurso actualizado<br>• continuar editando|
 |**Administrador**|solicita finalizar||
-||**Sistema**|presenta resultado|• transferir a abrirRecursos()|
+||**Sistema**|presenta resultado|• transferir a openResources()|
 
 ## estados internos del caso de uso
 
@@ -129,23 +129,23 @@ Especificación detallada del caso de uso `editarRecurso()` mediante diagrama de
 ### operaciones de edición
 
 - **Guardar y continuar** → Cambios guardados + mantiene `RECURSO_ABIERTO`
-- **Guardar y salir** → Cambios guardados + **&lt;&lt;include&gt;&gt;** `abrirRecursos()`
-- **Cancelar edición** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` sin cambios
+- **Guardar y salir** → Cambios guardados + **&lt;&lt;include&gt;&gt;** `openResources()`
+- **Cancelar edición** → **&lt;&lt;include&gt;&gt;** `openResources()` sin cambios
 
 ### navegación del sistema
 
 - **Guardado exitoso (continuar)** → Permanece en `RECURSO_ABIERTO`
-- **Guardado exitoso (salir)** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` en `RECURSOS_ABIERTO`
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` en `RECURSOS_ABIERTO`
+- **Guardado exitoso (salir)** → **&lt;&lt;include&gt;&gt;** `openResources()` en `RECURSOS_ABIERTO`
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openResources()` en `RECURSOS_ABIERTO`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **RECURSOS_ABIERTO** → `editarRecurso()` → **RECURSO_ABIERTO**
-- **RECURSO_ABIERTO** → `editarRecurso()` → **RECURSO_ABIERTO** (edición continua)
+- **RECURSOS_ABIERTO** → `editResource()` → **RECURSO_ABIERTO**
+- **RECURSO_ABIERTO** → `editResource()` → **RECURSO_ABIERTO** (edición continua)
 
 Las transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirRecursos()` → **RECURSOS_ABIERTO** (al guardar y salir)
+- **&lt;&lt;include&gt;&gt;** `openResources()` → **RECURSOS_ABIERTO** (al guardar y salir)
 
 ## vocabulario utilizado
 
@@ -191,13 +191,13 @@ Las transiciones incluyen:
 - **Presentación completa**: Muestra todos los campos editables
 - **Edición continua**: Permite sesión de trabajo extendida
 - **Guardado flexible**: Opciones de continuar o salir tras guardar
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirRecursos()` para salir
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openResources()` para salir
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirRecursos()](../openResources/README.md) - Caso de uso de navegación
+- [openResources()](../openResources/README.md) - Caso de uso de navegación
 - [crearRecurso()](../createResource/README.md) - Caso de transferencia desde creación
 - [eliminarRecurso()](../deleteResource/README.md) - Caso complementario del CRUD
 - [editarEdificio()](../editBuilding/README.md) - Patrón de referencia para "el gordo"

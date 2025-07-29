@@ -1,21 +1,21 @@
-@startsalt crearCurso-wireframe
+@startsalt createCourse-wireframe
 {
-    <b>CREAR CURSO ACADÉMICO</b>
+    <b>CREATE ACADEMIC COURSE</b>
     ===
     {
-        <b>Datos mínimos del curso:</b>
+        <b>Course minimum data:</b>
         --
         {
-            <b>Nombre del curso (*):</b>
+            <b>Course name (*):</b>
             "                                        "
             --
-            <i>(*) Campo obligatorio</i>
-            <i>Otros datos se completarán en la edición</i>
+            <i>(*) Required field</i>
+            <i>Other data will be completed during editing</i>
         }
 
         ~~
 
-        {[Crear curso] | [Cancelar]}
+        {[Create course] | [Cancel]}
     }
 }
 @endsalt

@@ -1,6 +1,6 @@
-# pySigHor > eliminarPrograma > Detalle y prototipado
+# pySigHor > deleteProgram > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../deleteProgram/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/deleteProgram/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,18 +14,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `eliminarPrograma()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de programas académicos.
+Especificación detallada del caso de uso `deleteProgram()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de programas académicos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|eliminarPrograma()|
+|**Nombre**|deleteProgram()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Eliminar programa académico de forma segura con confirmación previa|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Programa seleccionado desde abrirProgramas(), usuario autenticado como Administrador|
+|**Precondición**|Programa seleccionado desde openPrograms(), usuario autenticado como Administrador|
 |**Postcondición exitosa**|Programa eliminado del sistema, usuario regresa a lista de programas actualizada|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `eliminarPrograma()` mediante diagrama
 
 <div align=center>
 
-|![Caso de uso: eliminarPrograma()](/images/RUP/00-casos-uso/02-detalle/eliminarPrograma/eliminarPrograma.svg)|
+|![Caso de uso: eliminarPrograma()](/images/RUP/00-casos-uso/02-detalle/deleteProgram/eliminarPrograma.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `eliminarPrograma()` mediante diagrama
 
 <div align=center>
 
-|![Wireframe: Eliminación de programa](/images/RUP/00-casos-uso/02-detalle/eliminarPrograma/eliminarPrograma-wireframe.svg)|
+|![Wireframe: Eliminación de programa](/images/RUP/00-casos-uso/02-detalle/deleteProgram/eliminarPrograma-wireframe.svg)|
 |-|
 |**Estado**: ConfirmandoEliminacion / EliminandoPrograma|
 
@@ -112,22 +112,22 @@ Especificación detallada del caso de uso `eliminarPrograma()` mediante diagrama
 
 ### operaciones de eliminación
 
-- **Confirmar eliminación** → Programa eliminado, **&lt;&lt;include&gt;&gt;** `abrirProgramas()` 
-- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `abrirProgramas()` sin cambios
+- **Confirmar eliminación** → Programa eliminado, **&lt;&lt;include&gt;&gt;** `openPrograms()` 
+- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `openPrograms()` sin cambios
 
 ### navegación del sistema
 
-- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `abrirProgramas()` con lista actualizada
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirProgramas()` sin modificaciones
+- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `openPrograms()` con lista actualizada
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openPrograms()` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **PROGRAMAS_ABIERTO** → `eliminarPrograma()` → **PROGRAMAS_ABIERTO**
-- **PROGRAMA_ABIERTO** → `eliminarPrograma()` → **PROGRAMAS_ABIERTO**
+- **PROGRAMAS_ABIERTO** → `deleteProgram()` → **PROGRAMAS_ABIERTO**
+- **PROGRAMA_ABIERTO** → `deleteProgram()` → **PROGRAMAS_ABIERTO**
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirProgramas()` → **PROGRAMAS_ABIERTO** (lista actualizada)
+- **&lt;&lt;include&gt;&gt;** `openPrograms()` → **PROGRAMAS_ABIERTO** (lista actualizada)
 
 ## vocabulario utilizado
 
@@ -172,13 +172,13 @@ Ambas transiciones incluyen:
 - **Confirmación requerida**: Evita eliminaciones accidentales
 - **Información completa**: Muestra qué se va a eliminar
 - **Operación irreversible**: Claridad sobre las consecuencias
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirProgramas()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openPrograms()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirProgramas()](../openPrograms/README.md) - Caso de uso de navegación
+- [openPrograms()](../openPrograms/README.md) - Caso de uso de navegación
 - [editarPrograma()](../editProgram/README.md) - Caso complementario del CRUD
 - [crearPrograma()](../createProgram/README.md) - Caso complementario del CRUD
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

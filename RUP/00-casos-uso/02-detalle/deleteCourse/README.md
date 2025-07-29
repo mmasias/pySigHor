@@ -1,6 +1,6 @@
-# pySigHor > eliminarCurso > Detalle y prototipado
+# pySigHor > deleteCourse > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../deleteCourse/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/deleteCourse/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,18 +14,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `eliminarCurso()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de cursos académicos.
+Especificación detallada del caso de uso `deleteCourse()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de cursos académicos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|eliminarCurso()|
+|**Nombre**|deleteCourse()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Eliminar curso académico de forma segura con confirmación previa|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Curso seleccionado desde abrirCursos(), usuario autenticado como Administrador|
+|**Precondición**|Curso seleccionado desde openCourses(), usuario autenticado como Administrador|
 |**Postcondición exitosa**|Curso eliminado del sistema, usuario regresa a lista de cursos actualizada|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `eliminarCurso()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: eliminarCurso()](/images/RUP/00-casos-uso/02-detalle/eliminarCurso/eliminarCurso.svg)|
+|![Caso de uso: deleteCourse()](/images/RUP/00-casos-uso/02-detalle/deleteCourse/deleteCourse.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `eliminarCurso()` mediante diagrama de
 
 <div align=center>
 
-|![Wireframe: Eliminación de curso](/images/RUP/00-casos-uso/02-detalle/eliminarCurso/eliminarCurso-wireframe.svg)|
+|![Wireframe: Eliminación de curso](/images/RUP/00-casos-uso/02-detalle/deleteCourse/deleteCourse-wireframe.svg)|
 |-|
 |**Estado**: ConfirmandoEliminacion / EliminandoCurso|
 
@@ -95,7 +95,7 @@ Especificación detallada del caso de uso `eliminarCurso()` mediante diagrama de
 
 ### concepto clave
 
-- **eliminarCurso()** es un caso de uso que abarca:
+- **deleteCourse()** es un caso de uso que abarca:
   - **Presentar** información completa del curso a eliminar
   - **Permitir solicitar** confirmación del administrador
   - **Procesar** eliminación del curso del sistema
@@ -115,22 +115,22 @@ Especificación detallada del caso de uso `eliminarCurso()` mediante diagrama de
 
 ### operaciones de eliminación
 
-- **Confirmar eliminación** → Curso eliminado, **&lt;&lt;include&gt;&gt;** `abrirCursos()` 
-- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `abrirCursos()` sin cambios
+- **Confirmar eliminación** → Curso eliminado, **&lt;&lt;include&gt;&gt;** `openCourses()` 
+- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `openCourses()` sin cambios
 
 ### navegación del sistema
 
-- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `abrirCursos()` con lista actualizada
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirCursos()` sin modificaciones
+- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `openCourses()` con lista actualizada
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openCourses()` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **CURSOS_ABIERTO** → `eliminarCurso()` → **CURSOS_ABIERTO**
-- **CURSO_ABIERTO** → `eliminarCurso()` → **CURSOS_ABIERTO**
+- **CURSOS_ABIERTO** → `deleteCourse()` → **CURSOS_ABIERTO**
+- **CURSO_ABIERTO** → `deleteCourse()` → **CURSOS_ABIERTO**
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirCursos()` → **CURSOS_ABIERTO** (lista actualizada)
+- **&lt;&lt;include&gt;&gt;** `openCourses()` → **CURSOS_ABIERTO** (lista actualizada)
 
 ## vocabulario utilizado
 
@@ -175,13 +175,13 @@ Ambas transiciones incluyen:
 - **Confirmación requerida**: Evita eliminaciones accidentales
 - **Información completa**: Muestra qué se va a eliminar
 - **Operación irreversible**: Claridad sobre las consecuencias
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirCursos()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openCourses()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirCursos()](../openCourses/README.md) - Caso de uso de navegación
+- [openCourses()](../openCourses/README.md) - Caso de uso de navegación
 - [editarCurso()](../editCourse/README.md) - Caso complementario del CRUD
 - [crearCurso()](../createCourse/README.md) - Caso complementario del CRUD
 - [eliminarPrograma()](../deleteProgram/README.md) - Patrón de referencia para eliminación

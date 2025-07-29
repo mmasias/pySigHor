@@ -1,6 +1,6 @@
-# pySigHor > abrirAulas > Detalle y prototipado
+# pySigHor > openClassrooms > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../openClassrooms/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/openClassrooms/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `abrirAulas()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de aulas.
+Especificación detallada del caso de uso `openClassrooms()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de aulas.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|abrirAulas()|
+|**Nombre**|openClassrooms()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar lista de aulas con capacidad de filtrado y navegación a operaciones CRUD|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `abrirAulas()` mediante diagrama de es
 
 <div align=center>
 
-|![Caso de uso: abrirAulas()](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas.svg)|
+|![Caso de uso: abrirAulas()](/images/RUP/00-casos-uso/02-detalle/openClassrooms/abrirAulas.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `abrirAulas()` mediante diagrama de es
 #### pantalla 1: gestión de aulas
 <div align=center>
 
-|![Wireframe: Gestión de aulas](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)|
+|![Wireframe: Gestión de aulas](/images/RUP/00-casos-uso/02-detalle/openClassrooms/abrirAulas-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 
@@ -114,7 +114,7 @@ Especificación detallada del caso de uso `abrirAulas()` mediante diagrama de es
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `abrirAulas()` → **AULAS_ABIERTO**
+- **SISTEMA_DISPONIBLE** → `openClassrooms()` → **AULAS_ABIERTO**
 
 Y las transiciones de salida:
 - **AULAS_ABIERTO** → `crearAula()` → **AULA_ABIERTO**

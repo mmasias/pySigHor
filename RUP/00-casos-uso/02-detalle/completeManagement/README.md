@@ -1,6 +1,6 @@
-# pySigHor > completarGestion > Detalle y prototipado
+# pySigHor > completeManagement > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../completeManagement/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/completeManagement/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `completarGestion()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la presentación del sistema principal.
+Especificación detallada del caso de uso `completeManagement()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la presentación del sistema principal.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|completarGestion()|
+|**Nombre**|completeManagement()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Disponibilizar sistema con capacidad de solicitar todas las funcionalidades|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `completarGestion()` mediante diagrama
 
 <div align=center>
 
-|![Caso de uso: completarGestion()](/images/RUP/00-casos-uso/02-detalle/completarGestion/completarGestion.svg)|
+|![Caso de uso: completeManagement()](/images/RUP/00-casos-uso/02-detalle/completeManagement/completeManagement.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

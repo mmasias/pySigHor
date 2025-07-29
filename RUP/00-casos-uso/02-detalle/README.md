@@ -13,53 +13,53 @@ Esta carpeta contiene la especificación detallada y prototipado de cada caso de
 ## Casos de uso especificados
 
 ### Gestión del sistema
-- [iniciarSesion](startSession/) - Autenticación de usuarios
-- [cerrarSesion](closeSession/) - Cierre de sesión
-- [completarGestion](completeManagement/) - Hub de convergencia del sistema
+- [startSession](startSession/) - Autenticación de usuarios
+- [closeSession](closeSession/) - Cierre de sesión
+- [completeManagement](completeManagement/) - Hub de convergencia del sistema
 
 ### Apertura de entidades
-- [abrirProgramas](openPrograms/) - Gestión de programas académicos
-- [abrirCursos](openCourses/) - Gestión de cursos
-- [abrirProfesores](openTeachers/) - Gestión de profesores
-- [abrirEdificios](openBuildings/) - Gestión de edificios
-- [abrirAulas](openClassrooms/) - Gestión de aulas
-- [abrirRecursos](openResources/) - Gestión de recursos
+- [openPrograms](openPrograms/) - Gestión de programas académicos
+- [openCourses](openCourses/) - Gestión de cursos
+- [openTeachers](openTeachers/) - Gestión de profesores
+- [openBuildings](openBuildings/) - Gestión de edificios
+- [openClassrooms](openClassrooms/) - Gestión de aulas
+- [openResources](openResources/) - Gestión de recursos
 
 ### CRUD de Programas
-- [crearPrograma](createProgram/) - Creación de programas académicos
-- [editarPrograma](editProgram/) - Edición de programas académicos
-- [eliminarPrograma](deleteProgram/) - Eliminación de programas académicos
+- [createProgram](createProgram/) - Creación de programas académicos
+- [editProgram](editProgram/) - Edición de programas académicos
+- [deleteProgram](deleteProgram/) - Eliminación de programas académicos
 
 ### CRUD de Cursos
-- [crearCurso](createCourse/) - Creación de cursos académicos
-- [editarCurso](editCourse/) - Edición de cursos académicos
-- [eliminarCurso](deleteCourse/) - Eliminación de cursos académicos
+- [createCourse](createCourse/) - Creación de cursos académicos
+- [editCourse](editCourse/) - Edición de cursos académicos
+- [deleteCourse](deleteCourse/) - Eliminación de cursos académicos
 
 ### CRUD de Profesores
-- [crearProfesor](createTeacher/) - Creación de profesores
-- [editarProfesor](editTeacher/) - Edición de profesores
-- [eliminarProfesor](deleteTeacher/) - Eliminación de profesores
-- [configurarPreferenciasProfesor](configureTeacherPreferences/) - Configuración de preferencias de recursos
-- [asignarProfesorACurso](assignTeacherToCourse/) - Gestión de asignaciones profesor-curso
+- [createTeacher](createTeacher/) - Creación de profesores
+- [editTeacher](editTeacher/) - Edición de profesores
+- [deleteTeacher](deleteTeacher/) - Eliminación de profesores
+- [configureTeacherPreferences](configureTeacherPreferences/) - Configuración de preferencias de recursos
+- [assignTeacherToCourse](assignTeacherToCourse/) - Gestión de asignaciones profesor-curso
 
 ### CRUD de Edificios
-- [crearEdificio](createBuilding/) - Creación de edificios
-- [editarEdificio](editBuilding/) - Edición de edificios
-- [eliminarEdificio](deleteBuilding/) - Eliminación de edificios
+- [createBuilding](createBuilding/) - Creación de edificios
+- [editBuilding](editBuilding/) - Edición de edificios
+- [deleteBuilding](deleteBuilding/) - Eliminación de edificios
 
 ### CRUD de Aulas
-- [crearAula](createClassroom/) - Creación de aulas
-- [editarAula](editClassroom/) - Edición de aulas
-- [eliminarAula](deleteClassroom/) - Eliminación de aulas
+- [createClassroom](createClassroom/) - Creación de aulas
+- [editClassroom](editClassroom/) - Edición de aulas
+- [deleteClassroom](deleteClassroom/) - Eliminación de aulas
 
 ### CRUD de Recursos
-- [crearRecurso](createResource/) - Creación de recursos
-- [editarRecurso](editResource/) - Edición de recursos
-- [eliminarRecurso](deleteResource/) - Eliminación de recursos
+- [createResource](createResource/) - Creación de recursos
+- [editResource](editResource/) - Edición de recursos
+- [deleteResource](deleteResource/) - Eliminación de recursos
 
 ### Gestión de Horarios
-- [generarHorario](generateSchedule/) - Generación automática de horarios
-- [consultarHorario](viewSchedule/) - Consulta de horarios generados
+- [generateSchedule](generateSchedule/) - Generación automática de horarios
+- [viewSchedule](viewSchedule/) - Consulta de horarios generados
 
 ## Estructura de cada caso de uso
 

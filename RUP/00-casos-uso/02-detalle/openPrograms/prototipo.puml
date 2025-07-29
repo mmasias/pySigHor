@@ -1,17 +1,17 @@
-@startsalt abrirProgramas-wireframe
+@startsalt openPrograms-wireframe
 { 
-<b>GESTIÓN DE PROGRAMAS ACADÉMICOS</b>  
+<b>ACADEMIC PROGRAMS MANAGEMENT</b>  
 ===
-{+  CODIGO | NOMBRE | DESCRIPCION | ACCIÓN
+{+  CODE | NAME | DESCRIPTION | ACTION
   --|--|--|--
-  GII | Ingeniería Informática | Grado en Ingeniería Informática | [Editar]
-  GIOI | Ingeniería en Organización Industrial | Grado en Ingeniería en Organización Industrial | [Editar]
-  GXYZ | Nombre del programa | Descripción del programa | [Editar]
+  GII | Computer Engineering | Bachelor in Computer Engineering | [Edit]
+  GIOI | Industrial Organization Engineering | Bachelor in Industrial Organization Engineering | [Edit]
+  GXYZ | Program name | Program description | [Edit]
   }
   ~~
-  {<b>BUSCAR:</b> [                                       ] | [Filtrar]}
+  {<b>SEARCH:</b> [                                       ] | [Filter]}
   ~~
-  {[Crear nuevo] | [Borrar seleccionado] | [Salir]}
+  {[Create new] | [Delete selected] | [Exit]}
 }
 
 @endsalt

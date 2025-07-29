@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > editarProfesor > Detalle y prototipado
+# pySigHor > editTeacher > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../editTeacher/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/editTeacher/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `editarProfesor()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de profesores.
+Especificación detallada del caso de uso `editTeacher()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de profesores.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|editarProfesor()|
+|**Nombre**|editTeacher()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar datos de edición de profesor con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Profesor seleccionado desde abrirProfesores() o profesor recién creado desde crearProfesor()|
+|**Precondición**|Profesor seleccionado desde openTeachers() o profesor recién creado desde crearProfesor()|
 |**Postcondición exitosa**|Profesor modificado guardado, usuario puede continuar editando en PROFESOR_ABIERTO o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editarProfesor()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: editarProfesor()](/images/RUP/00-casos-uso/02-detalle/editarProfesor/editarProfesor.svg)|
+|![Caso de uso: editarProfesor()](/images/RUP/00-casos-uso/02-detalle/editTeacher/editarProfesor.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editarProfesor()` mediante diagrama d
 
 <div align=center>
 
-|![Wireframe: Edición de profesor](/images/RUP/00-casos-uso/02-detalle/editarProfesor/editarProfesor-wireframe.svg)|
+|![Wireframe: Edición de profesor](/images/RUP/00-casos-uso/02-detalle/editTeacher/editarProfesor-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 
@@ -126,23 +126,23 @@ Especificación detallada del caso de uso `editarProfesor()` mediante diagrama d
 ### operaciones de edición
 
 - **Continuar editando** → Mantiene `PROFESOR_ABIERTO` en modo edición
-- **Guardar y salir** → `abrirProfesores()` con lista actualizada
-- **Cancelar edición** → `abrirProfesores()` sin cambios
+- **Guardar y salir** → `openTeachers()` con lista actualizada
+- **Cancelar edición** → `openTeachers()` sin cambios
 
 ### navegación del sistema
 
 - **Continuar editando** → Permanece en `PROFESOR_ABIERTO`
-- **Guardar y salir** → `PROFESORES_ABIERTO` via `abrirProfesores()`
+- **Guardar y salir** → `PROFESORES_ABIERTO` via `openTeachers()`
 - **Cancelación** → `PROFESORES_ABIERTO` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **PROFESORES_ABIERTO** → `editarProfesor()` → **PROFESOR_ABIERTO**
-- **PROFESOR_ABIERTO** → `editarProfesor()` → **PROFESOR_ABIERTO** (continuar editando)
+- **PROFESORES_ABIERTO** → `editTeacher()` → **PROFESOR_ABIERTO**
+- **PROFESOR_ABIERTO** → `editTeacher()` → **PROFESOR_ABIERTO** (continuar editando)
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirProfesores()` → **PROFESORES_ABIERTO** (al guardar y salir)
+- **&lt;&lt;include&gt;&gt;** `openTeachers()` → **PROFESORES_ABIERTO** (al guardar y salir)
 
 ## vocabulario utilizado
 
@@ -188,13 +188,13 @@ Ambas transiciones incluyen:
 - **Edición completa**: Permite modificar todos los campos del profesor
 - **Sesión continua**: Mantiene estado de edición activa
 - **Flexibilidad**: Puede continuar editando o guardar y salir
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirProfesores()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openTeachers()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirProfesores()](../openTeachers/README.md) - Caso de uso de navegación
+- [openTeachers()](../openTeachers/README.md) - Caso de uso de navegación
 - [crearProfesor()](../createTeacher/README.md) - Caso complementario del CRUD
 - [eliminarProfesor()](../deleteTeacher/README.md) - Caso complementario del CRUD
 - [editarCurso()](../editCourse/README.md) - Patrón de referencia para "el gordo"

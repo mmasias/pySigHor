@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > editarEdificio > Detalle y prototipado
+# pySigHor > editBuilding > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../editBuilding/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/editBuilding/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `editarEdificio()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de edificios.
+Especificación detallada del caso de uso `editBuilding()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de edificios.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|editarEdificio()|
+|**Nombre**|editBuilding()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar datos de edición de edificio con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Edificio seleccionado desde abrirEdificios() o edificio recién creado desde crearEdificio()|
+|**Precondición**|Edificio seleccionado desde openBuildings() o edificio recién creado desde crearEdificio()|
 |**Postcondición exitosa**|Edificio modificado guardado, usuario puede continuar editando en EDIFICIO_ABIERTO o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editarEdificio()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: editarEdificio()](/images/RUP/00-casos-uso/02-detalle/editarEdificio/editarEdificio.svg)|
+|![Caso de uso: editarEdificio()](/images/RUP/00-casos-uso/02-detalle/editBuilding/editarEdificio.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editarEdificio()` mediante diagrama d
 
 <div align=center>
 
-|![Wireframe: Edición de edificio](/images/RUP/00-casos-uso/02-detalle/editarEdificio/editarEdificio-wireframe.svg)|
+|![Wireframe: Edición de edificio](/images/RUP/00-casos-uso/02-detalle/editBuilding/editarEdificio-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 
@@ -125,23 +125,23 @@ Especificación detallada del caso de uso `editarEdificio()` mediante diagrama d
 ### operaciones de edición
 
 - **Continuar editando** → Mantiene `EDIFICIO_ABIERTO` en modo edición
-- **Guardar y salir** → `abrirEdificios()` con lista actualizada
-- **Cancelar edición** → `abrirEdificios()` sin cambios
+- **Guardar y salir** → `openBuildings()` con lista actualizada
+- **Cancelar edición** → `openBuildings()` sin cambios
 
 ### navegación del sistema
 
 - **Continuar editando** → Permanece en `EDIFICIO_ABIERTO`
-- **Guardar y salir** → `EDIFICIOS_ABIERTO` via `abrirEdificios()`
+- **Guardar y salir** → `EDIFICIOS_ABIERTO` via `openBuildings()`
 - **Cancelación** → `EDIFICIOS_ABIERTO` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **EDIFICIOS_ABIERTO** → `editarEdificio()` → **EDIFICIO_ABIERTO**
-- **EDIFICIO_ABIERTO** → `editarEdificio()` → **EDIFICIO_ABIERTO** (continuar editando)
+- **EDIFICIOS_ABIERTO** → `editBuilding()` → **EDIFICIO_ABIERTO**
+- **EDIFICIO_ABIERTO** → `editBuilding()` → **EDIFICIO_ABIERTO** (continuar editando)
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirEdificios()` → **EDIFICIOS_ABIERTO** (al guardar y salir)
+- **&lt;&lt;include&gt;&gt;** `openBuildings()` → **EDIFICIOS_ABIERTO** (al guardar y salir)
 
 ## vocabulario utilizado
 
@@ -187,13 +187,13 @@ Ambas transiciones incluyen:
 - **Edición completa**: Permite modificar todos los campos del edificio
 - **Sesión continua**: Mantiene estado de edición activa
 - **Flexibilidad**: Puede continuar editando o guardar y salir
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirEdificios()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openBuildings()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirEdificios()](../openBuildings/README.md) - Caso de uso de navegación
+- [openBuildings()](../openBuildings/README.md) - Caso de uso de navegación
 - [crearEdificio()](../createBuilding/README.md) - Caso complementario del CRUD
 - [eliminarEdificio()](../deleteBuilding/README.md) - Caso complementario del CRUD
 - [editarCurso()](../editCourse/README.md) - Patrón de referencia para "el gordo"

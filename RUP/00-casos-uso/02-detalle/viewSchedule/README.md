@@ -6,7 +6,7 @@
 
 </div>
 
-# pySigHor > consultarHorario > Detalle y prototipado
+# pySigHor > viewSchedule > Detalle y prototipado
 
 > |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/viewSchedule/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
@@ -22,13 +22,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `consultarHorario()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la visualización del horario académico generado.
+Especificación detallada del caso de uso `viewSchedule()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la visualización del horario académico generado.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|consultarHorario()|
+|**Nombre**|viewSchedule()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Visualizar horario académico generado con manejo de ausencia|
 |**Tipo**|Primario, esencial, consulta|
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `consultarHorario()` mediante diagrama
 
 <div align=center>
 
-|![Caso de uso: consultarHorario()](/images/RUP/00-casos-uso/02-detalle/consultarHorario/consultarHorario.svg)|
+|![Caso de uso: viewSchedule()](/images/RUP/00-casos-uso/02-detalle/viewSchedule/viewSchedule.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

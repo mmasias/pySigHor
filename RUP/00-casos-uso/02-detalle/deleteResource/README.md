@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > eliminarRecurso > Detalle y prototipado
+# pySigHor > deleteResource > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../deleteResource/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/deleteResource/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `eliminarRecurso()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de recursos.
+Especificación detallada del caso de uso `deleteResource()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de recursos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|eliminarRecurso()|
+|**Nombre**|deleteResource()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Eliminar recurso de forma segura con confirmación previa|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Recurso seleccionado desde abrirRecursos(), usuario autenticado como Administrador|
+|**Precondición**|Recurso seleccionado desde openResources(), usuario autenticado como Administrador|
 |**Postcondición exitosa**|Recurso eliminado del sistema, usuario regresa a lista de recursos actualizada|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `eliminarRecurso()` mediante diagrama 
 
 <div align=center>
 
-|![Caso de uso: eliminarRecurso()](/images/RUP/00-casos-uso/02-detalle/eliminarRecurso/eliminarRecurso.svg)|
+|![Caso de uso: eliminarRecurso()](/images/RUP/00-casos-uso/02-detalle/deleteResource/eliminarRecurso.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `eliminarRecurso()` mediante diagrama 
 
 <div align=center>
 
-|![Wireframe: Eliminación de recurso](/images/RUP/00-casos-uso/02-detalle/eliminarRecurso/eliminarRecurso-wireframe.svg)|
+|![Wireframe: Eliminación de recurso](/images/RUP/00-casos-uso/02-detalle/deleteResource/eliminarRecurso-wireframe.svg)|
 |-|
 |**Estado**: PresentingConfirmation / AwaitingDecision|
 
@@ -89,9 +89,9 @@ Especificación detallada del caso de uso `eliminarRecurso()` mediante diagrama 
 |**Administrador**|solicita eliminar recurso||
 ||**Sistema**|presenta|• código del recurso<br>• nombre del recurso<br>• descripción del recurso<br>• profesores que lo prefieren<br>• aulas que lo ofrecen<br>• advertencia de eliminación|
 |**Administrador**|solicita confirmar eliminación||
-||**Sistema**|presenta resultado|• recurso eliminado exitosamente<br>• transferir a abrirRecursos()|
+||**Sistema**|presenta resultado|• recurso eliminado exitosamente<br>• transferir a openResources()|
 |**Administrador**|solicita cancelar||
-||**Sistema**|presenta resultado|• transferir a abrirRecursos()|
+||**Sistema**|presenta resultado|• transferir a openResources()|
 
 ## estados internos del caso de uso
 
@@ -127,22 +127,22 @@ Especificación detallada del caso de uso `eliminarRecurso()` mediante diagrama 
 
 ### operaciones de eliminación
 
-- **Confirmar y eliminar** → Recurso eliminado + **&lt;&lt;include&gt;&gt;** `abrirRecursos()`
-- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` sin cambios
+- **Confirmar y eliminar** → Recurso eliminado + **&lt;&lt;include&gt;&gt;** `openResources()`
+- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `openResources()` sin cambios
 
 ### navegación del sistema
 
-- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` en `RECURSOS_ABIERTO`
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` en `RECURSOS_ABIERTO`
+- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `openResources()` en `RECURSOS_ABIERTO`
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openResources()` en `RECURSOS_ABIERTO`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **RECURSOS_ABIERTO** → `eliminarRecurso()` → **RECURSOS_ABIERTO**
-- **RECURSO_ABIERTO** → `eliminarRecurso()` → **RECURSOS_ABIERTO**
+- **RECURSOS_ABIERTO** → `deleteResource()` → **RECURSOS_ABIERTO**
+- **RECURSO_ABIERTO** → `deleteResource()` → **RECURSOS_ABIERTO**
 
 Las transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirRecursos()` → **RECURSOS_ABIERTO** (tras eliminación o cancelación)
+- **&lt;&lt;include&gt;&gt;** `openResources()` → **RECURSOS_ABIERTO** (tras eliminación o cancelación)
 
 ## vocabulario utilizado
 
@@ -188,13 +188,13 @@ Las transiciones incluyen:
 - **Información completa**: Muestra todos los datos relevantes del recurso
 - **Dependencias visibles**: Presenta impacto de la eliminación
 - **Confirmación requerida**: Paso obligatorio de confirmación
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirRecursos()` para regresar
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openResources()` para regresar
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirRecursos()](../openResources/README.md) - Caso de uso de navegación
+- [openResources()](../openResources/README.md) - Caso de uso de navegación
 - [crearRecurso()](../createResource/README.md) - Caso complementario del CRUD
 - [editarRecurso()](../editResource/README.md) - Caso complementario del CRUD
 - [eliminarEdificio()](../deleteBuilding/README.md) - Patrón de referencia para eliminación segura

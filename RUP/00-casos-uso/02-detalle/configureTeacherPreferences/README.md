@@ -6,15 +6,15 @@
 
 </div>
 
-# pySigHor > configurarPreferenciasProfesor > Detalle y prototipado
+# pySigHor > configureTeacherPreferences > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../configureTeacherPreferences/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/configureTeacherPreferences/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## Información del artefacto
 
 - **Proyecto**: pySigHor - Modernización del Sistema Generador de Horarios
-- **Caso de uso**: configurarPreferenciasProfesor()
+- **Caso de uso**: configureTeacherPreferences()
 - **Actor**: Administrador de Horarios
 - **Tipo**: CRUD "El gordo" - Configuración específica
 - **Hilo funcional**: Profesores
@@ -25,15 +25,15 @@ Permitir que el administrador configure el orden de prioridad de recursos para u
 
 ## Casos de uso relacionados
 
-- **Origen**: Se accede desde editarProfesor() cuando el sistema está en estado PROFESOR_ABIERTO
-- **Algoritmo dependiente**: generarHorario() utiliza estas preferencias
-- **Navegación**: Retorna a editarProfesor() mediante abrirEdicionProfesor()
+- **Origen**: Se accede desde editTeacher() cuando el sistema está en estado TEACHER_OPEN
+- **Algoritmo dependiente**: generateSchedule() utiliza estas preferencias
+- **Navegación**: Retorna a editTeacher() mediante openTeacherEdition()
 
 ## Diagrama de especificación
 
 <div align=center>
 
-![configurarPreferenciasProfesor](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor.svg)
+![configureTeacherPreferences](/images/RUP/00-casos-uso/02-detalle/configureTeacherPreferences/configureTeacherPreferences.svg)
 
 </div>
 
@@ -43,7 +43,7 @@ Permitir que el administrador configure el orden de prioridad de recursos para u
 
 <div align=center>
 
-![configurarPreferenciasProfesor-wireframe](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor-wireframe.svg)
+![configureTeacherPreferences-wireframe](/images/RUP/00-casos-uso/02-detalle/configureTeacherPreferences/configureTeacherPreferences-wireframe.svg)
 
 </div>
 

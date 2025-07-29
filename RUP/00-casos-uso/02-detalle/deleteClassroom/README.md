@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > eliminarAula > Detalle y prototipado
+# pySigHor > deleteClassroom > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../deleteClassroom/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/deleteClassroom/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `eliminarAula()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de aulas con confirmación previa.
+Especificación detallada del caso de uso `deleteClassroom()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de aulas con confirmación previa.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|eliminarAula()|
+|**Nombre**|deleteClassroom()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Eliminar aula de forma segura con confirmación previa|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Aula seleccionada desde abrirAulas(), usuario autenticado como Administrador|
+|**Precondición**|Aula seleccionada desde openClassrooms(), usuario autenticado como Administrador|
 |**Postcondición exitosa**|Aula eliminada del sistema, usuario regresa a lista de aulas actualizada|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `eliminarAula()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: eliminarAula()](/images/RUP/00-casos-uso/02-detalle/eliminarAula/eliminarAula.svg)|
+|![Caso de uso: deleteClassroom()](/images/RUP/00-casos-uso/02-detalle/deleteClassroom/deleteClassroom.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `eliminarAula()` mediante diagrama de 
 
 <div align=center>
 
-|![Wireframe: Eliminación de aula](/images/RUP/00-casos-uso/02-detalle/eliminarAula/eliminarAula-wireframe.svg)|
+|![Wireframe: Eliminación de aula](/images/RUP/00-casos-uso/02-detalle/deleteClassroom/deleteClassroom-wireframe.svg)|
 |-|
 |**Estado**: ConfirmandoEliminacion / EliminandoAula|
 
@@ -103,7 +103,7 @@ Especificación detallada del caso de uso `eliminarAula()` mediante diagrama de 
 
 ### concepto clave
 
-- **eliminarAula()** es un caso de uso que abarca:
+- **deleteClassroom()** es un caso de uso que abarca:
   - **Presentar** información completa del aula a eliminar
   - **Permitir solicitar** confirmación del administrador
   - **Procesar** eliminación del aula del sistema
@@ -124,22 +124,22 @@ Especificación detallada del caso de uso `eliminarAula()` mediante diagrama de 
 
 ### operaciones de eliminación
 
-- **Confirmar eliminación** → Aula eliminada, **&lt;&lt;include&gt;&gt;** `abrirAulas()` 
-- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `abrirAulas()` sin cambios
+- **Confirmar eliminación** → Aula eliminada, **&lt;&lt;include&gt;&gt;** `openClassrooms()` 
+- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `openClassrooms()` sin cambios
 
 ### navegación del sistema
 
-- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `abrirAulas()` con lista actualizada
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirAulas()` sin modificaciones
+- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `openClassrooms()` con lista actualizada
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openClassrooms()` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **AULAS_ABIERTO** → `eliminarAula()` → **AULAS_ABIERTO**
-- **AULA_ABIERTA** → `eliminarAula()` → **AULAS_ABIERTO**
+- **AULAS_ABIERTO** → `deleteClassroom()` → **AULAS_ABIERTO**
+- **AULA_ABIERTA** → `deleteClassroom()` → **AULAS_ABIERTO**
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirAulas()` → **AULAS_ABIERTO** (lista actualizada)
+- **&lt;&lt;include&gt;&gt;** `openClassrooms()` → **AULAS_ABIERTO** (lista actualizada)
 
 ## vocabulario utilizado
 
@@ -184,14 +184,14 @@ Ambas transiciones incluyen:
 - **Confirmación requerida**: Evita eliminaciones accidentales
 - **Información completa**: Muestra qué se va a eliminar
 - **Operación irreversible**: Claridad sobre las consecuencias
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirAulas()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openClassrooms()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirAulas()](../openClassrooms/README.md) - Caso de uso de navegación
-- [editarAula()](../editClassroom/README.md) - Caso complementario del CRUD
-- [crearAula()](../createClassroom/README.md) - Caso complementario del CRUD
-- [eliminarEdificio()](../deleteBuilding/README.md) - Patrón de referencia para eliminación
+- [openClassrooms()](../openClassrooms/README.md) - Caso de uso de navegación
+- [editClassroom()](../editClassroom/README.md) - Caso complementario del CRUD
+- [createClassroom()](../createClassroom/README.md) - Caso complementario del CRUD
+- [deleteBuilding()](../deleteBuilding/README.md) - Patrón de referencia para eliminación
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

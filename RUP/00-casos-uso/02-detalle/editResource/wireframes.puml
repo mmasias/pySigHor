@@ -1,25 +1,25 @@
-@startsalt editarRecurso-wireframe
+@startsalt editResource-wireframe
 {
-    <b>EDITAR RECURSO</b>
+    <b>EDIT RESOURCE</b>
     ====
-    <b>Código del recurso (*):</b>
+    <b>Resource code (*):</b>
     "PROY-001                            "
     ====
-    <b>Nombre del recurso (*):</b>
-    "Proyector Multimedia                "
+    <b>Resource name (*):</b>
+    "Multimedia Projector                "
     ====
-    <b>Descripción del recurso:</b>
+    <b>Resource description:</b>
     {
-        "Proyector HD 1080p con conexiones"
-        "HDMI, VGA y USB. Incluye control  "
-        "remoto y cables de conexión.      "
-        "Ideal para presentaciones y clases"
+        "HD 1080p projector with connections"
+        "HDMI, VGA and USB. Includes remote"
+        "control and connection cables.    "
+        "Ideal for presentations and classes"
     }
     ====
-    [ <b>Guardar y Continuar</b> ] | [ <b>Guardar y Finalizar</b> ] | [ Cancelar ]
+    [ <b>Save and Continue</b> ] | [ <b>Save and Finish</b> ] | [ Cancel ]
     ====
-    <size:9><i>(*) Campos obligatorios</i></size>
-    <size:9><i>Los cambios se guardan automáticamente</i></size>
-    <size:9><i>al presionar "Guardar y Continuar".</i></size>
+    <size:9><i>(*) Required fields</i></size>
+    <size:9><i>Changes are saved automatically</i></size>
+    <size:9><i>when pressing "Save and Continue".</i></size>
 }
 @endsalt

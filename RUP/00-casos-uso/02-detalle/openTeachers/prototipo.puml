@@ -1,17 +1,17 @@
-@startsalt abrirProfesores-wireframe
+@startsalt openTeachers-wireframe
 { 
-<b>GESTIÓN DE PROFESORES</b>  
+<b>TEACHERS MANAGEMENT</b>  
 ===
-{+  CODIGO | NOMBRE | APELLIDOS | ACCIÓN
+{+  CODE | FIRST NAME | LAST NAME | ACTION
   --|--|--|--
   RC001 | Roberto | Castro Chirinos | [Editar]
   JM002 | José María | González López | [Editar]  
-  PXYZ | Nombre del profesor | Apellidos del profesor | [Editar]
+  PXYZ | Teacher first name | Teacher last name | [Edit]
   }
   ~~
-  {<b>BUSCAR:</b> [                                       ] | [Filtrar]}
+  {<b>SEARCH:</b> [                                       ] | [Filter]}
   ~~
-  {[Crear nuevo] | [Borrar seleccionado] | [Salir]}
+  {[Create new] | [Delete selected] | [Exit]}
 }
 
 @endsalt

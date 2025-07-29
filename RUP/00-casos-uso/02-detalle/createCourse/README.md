@@ -1,6 +1,6 @@
-# pySigHor > crearCurso > Detalle y prototipado
+# pySigHor > createCourse > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../createCourse/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/createCourse/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `crearCurso()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de cursos aplicando la filosofía C→U como "el delgado".
+Especificación detallada del caso de uso `createCourse()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de cursos aplicando la filosofía C→U como "el delgado".
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|crearCurso()|
+|**Nombre**|createCourse()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Crear curso con datos mínimos y transferir inmediatamente a edición completa|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `crearCurso()` mediante diagrama de es
 
 <div align=center>
 
-|![Caso de uso: crearCurso()](/images/RUP/00-casos-uso/02-detalle/crearCurso/crearCurso.svg)|
+|![Caso de uso: crearCurso()](/images/RUP/00-casos-uso/02-detalle/createCourse/createCourse.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > crearRecurso > Detalle y prototipado
+# pySigHor > createResource > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../createResource/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/createResource/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +22,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `crearRecurso()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de recursos aplicando la filosofía C→U como "el delgado".
+Especificación detallada del caso de uso `createResource()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de recursos aplicando la filosofía C→U como "el delgado".
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|crearRecurso()|
+|**Nombre**|createResource()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Crear recurso con datos mínimos y transferir inmediatamente a edición completa|
 |**Tipo**|Primario, esencial|
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `crearRecurso()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: crearRecurso()](/images/RUP/00-casos-uso/02-detalle/crearRecurso/crearRecurso.svg)|
+|![Caso de uso: crearRecurso()](/images/RUP/00-casos-uso/02-detalle/createResource/createResource.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

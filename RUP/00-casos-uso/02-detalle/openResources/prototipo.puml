@@ -1,18 +1,18 @@
-@startsalt abrirRecursos-wireframe
+@startsalt openResources-wireframe
 { 
-<b>GESTIÓN DE RECURSOS</b>  
+<b>RESOURCES MANAGEMENT</b>  
 ===
-{+  ID | NOMBRE | DESCRIPCIÓN | ACCIÓN
+{+  ID | NAME | DESCRIPTION | ACTION
   --|--|--|--
-  001 | Proyector | Proyector multimedia estándar | [Editar]
-  002 | Computadora | PC de escritorio para aulas | [Editar]
-  003 | Pizarra Digital | Pizarra interactiva | [Editar]
-  004 | Laboratorio | Equipamiento especializado | [Editar]
+  001 | Projector | Standard multimedia projector | [Edit]
+  002 | Computer | Desktop PC for classrooms | [Edit]
+  003 | Digital Board | Interactive board | [Edit]
+  004 | Laboratory | Specialized equipment | [Edit]
   }
   ~~
-  {<b>BUSCAR:</b> [                                       ] | [Filtrar]}
+  {<b>SEARCH:</b> [                                       ] | [Filter]}
   ~~
-  {[Crear nuevo] | [Borrar seleccionado] | [Salir]}
+  {[Create new] | [Delete selected] | [Exit]}
 }
 
 @endsalt

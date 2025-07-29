@@ -1,27 +1,27 @@
-@startsalt eliminarPrograma-wireframe
+@startsalt deleteProgram-wireframe
 {
-    <b>ELIMINAR PROGRAMA ACADÉMICO</b>
+    <b>DELETE ACADEMIC PROGRAM</b>
     ===
     {
-        <b>¿Está seguro de eliminar este programa?</b>
+        <b>Are you sure you want to delete this program?</b>
         --
         {
-            <b>Código:</b> | PRG-001
-            <b>Nombre:</b> | Ingeniería Industrial y de Sistemas
-            <b>Descripción:</b> |
+            <b>Code:</b> | PRG-001
+            <b>Name:</b> | Industrial and Systems Engineering
+            <b>Description:</b> |
             {
-                Programa académico de pregrado orientado
-                a la formación integral de profesionales
-                en ingeniería industrial y de sistemas
+                Undergraduate academic program oriented
+                to comprehensive training of professionals
+                in industrial and systems engineering
             }}
             --
-            <b>⚠️ ADVERTENCIA: Esta acción es irreversible</b>
-            <i>El programa y toda su información asociada serán eliminados permanentemente</i>
+            <b>⚠️ WARNING: This action is irreversible</b>
+            <i>The program and all associated information will be permanently deleted</i>
         }
 
         ~~
 
-        {[Confirmar eliminación] | [Cancelar]}
+        {[Confirm deletion] | [Cancel]}
     }
 
     @endsalt

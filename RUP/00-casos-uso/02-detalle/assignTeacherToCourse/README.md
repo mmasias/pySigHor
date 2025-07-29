@@ -6,15 +6,15 @@
 
 </div>
 
-# pySigHor > asignarProfesorACurso > Detalle y prototipado
+# pySigHor > assignTeacherToCourse > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../assignTeacherToCourse/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/assignTeacherToCourse/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## Información del artefacto
 
 - **Proyecto**: pySigHor - Modernización del Sistema Generador de Horarios
-- **Caso de uso**: asignarProfesorACurso()
+- **Caso de uso**: assignTeacherToCourse()
 - **Actor**: Administrador de Horarios
 - **Tipo**: Gestión de asignaciones específicas
 - **Hilo funcional**: Asignaciones Profesor-Curso
@@ -25,15 +25,15 @@ Permitir que el administrador gestione las asignaciones de cursos específicos a
 
 ## Casos de uso relacionados
 
-- **Origen**: Se accede desde editarProfesor() cuando el sistema está en estado PROFESOR_ABIERTO
-- **Algoritmo dependiente**: generarHorario() utiliza estas asignaciones
-- **Navegación**: Retorna a editarProfesor() mediante editarProfesor()
+- **Origen**: Se accede desde editTeacher() cuando el sistema está en estado TEACHER_OPEN
+- **Algoritmo dependiente**: generateSchedule() utiliza estas asignaciones
+- **Navegación**: Retorna a editTeacher() mediante editTeacher()
 
 ## Diagrama de especificación
 
 <div align=center>
 
-![asignarProfesorACurso](/images/RUP/00-casos-uso/02-detalle/asignarProfesorACurso/asignarProfesorACurso.svg)
+![assignTeacherToCourse](/images/RUP/00-casos-uso/02-detalle/assignTeacherToCourse/assignTeacherToCourse.svg)
 
 </div>
 
@@ -43,7 +43,7 @@ Permitir que el administrador gestione las asignaciones de cursos específicos a
 
 <div align=center>
 
-![asignarProfesorACurso-wireframe](/images/RUP/00-casos-uso/02-detalle/asignarProfesorACurso/asignarProfesorACurso-wireframe.svg)
+![assignTeacherToCourse-wireframe](/images/RUP/00-casos-uso/02-detalle/assignTeacherToCourse/assignTeacherToCourse-wireframe.svg)
 
 </div>
 
@@ -72,7 +72,7 @@ Permitir que el administrador gestione las asignaciones de cursos específicos a
 
 ### concepto clave - "gestión de relaciones"
 
-- **asignarProfesorACurso()** es gestión de relaciones que:
+- **assignTeacherToCourse()** es gestión de relaciones que:
   - **Presenta** lista de cursos disponibles y ya asignados
   - **Permite** asignar y desasignar cursos específicos
   - **Mantiene** sesión de gestión activa (puede continuar)

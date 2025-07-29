@@ -1,68 +1,68 @@
-@startsalt generarHorario-wireframe-confirmation
+@startsalt generateSchedule-wireframe-confirmation
 {
-    <b>GENERAR HORARIO</b>
+    <b>GENERATE SCHEDULE</b>
     ====
-    <color:orange><b>⚠ ATENCIÓN: Horario existente será reemplazado</b></color>
+    <color:orange><b>⚠ WARNING: Existing schedule will be replaced</b></color>
     ====
-    <b>Horario actual:</b>
-    • Generado: 15/07/2025 14:30
-    • Cursos programados: 12
-    • Profesores asignados: 8
-    • Aulas utilizadas: 6
+    <b>Current schedule:</b>
+    • Generated: 15/07/2025 14:30
+    • Scheduled courses: 12
+    • Assigned teachers: 8
+    • Classrooms used: 6
     ====
-    <b>Datos disponibles para nueva generación:</b>
-    • Cursos configurados: 15 cursos
-    • Profesores disponibles: 10 profesores  
-    • Aulas disponibles: 8 aulas
-    • Recursos definidos: 12 recursos
+    <b>Available data for new generation:</b>
+    • Configured courses: 15 courses
+    • Available teachers: 10 teachers  
+    • Available classrooms: 8 classrooms
+    • Defined resources: 12 resources
     ====
-    <color:red><b>¿Confirma generar nuevo horario?</b></color>
-    <color:gray><i>Esta acción reemplazará completamente el horario actual</i></color>
+    <color:red><b>Confirm generating new schedule?</b></color>
+    <color:gray><i>This action will completely replace the current schedule</i></color>
     ====
-    [ <color:red><b>Generar Nuevo Horario</b></color> ] | [ Cancelar ]
+    [ <color:red><b>Generate New Schedule</b></color> ] | [ Cancel ]
 }
 @endsalt
 
-@startsalt generarHorario-wireframe-insufficient
+@startsalt generateSchedule-wireframe-insufficient
 {
-    <b>GENERAR HORARIO</b>
+    <b>GENERATE SCHEDULE</b>
     ====
-    <color:red><b>❌ DATOS INSUFICIENTES</b></color>
+    <color:red><b>❌ INSUFFICIENT DATA</b></color>
     ====
-    <b>El sistema requiere datos mínimos para generar horario:</b>
+    <b>The system requires minimum data to generate schedule:</b>
     --
-    <color:red>✗ Cursos: 0 configurados (mínimo: 1)</color>
-    <color:green>✓ Profesores: 3 disponibles (mínimo: 1)</color>
-    <color:green>✓ Aulas: 2 disponibles (mínimo: 1)</color>
+    <color:red>✗ Courses: 0 configured (minimum: 1)</color>
+    <color:green>✓ Teachers: 3 available (minimum: 1)</color>
+    <color:green>✓ Classrooms: 2 available (minimum: 1)</color>
     --
-    <b>Acciones recomendadas:</b>
-    • Configure al menos 1 curso en el sistema
-    • Verifique que el curso tenga profesor asignado
-    • Asegúrese de que hay aulas disponibles
+    <b>Recommended actions:</b>
+    • Configure at least 1 course in the system
+    • Verify that the course has an assigned teacher
+    • Ensure there are available classrooms
     ====
-    [ <b>Entendido</b> ]
+    [ <b>Understood</b> ]
     ====
-    <size:9><i>Una vez configurados los datos mínimos,</i></size>
-    <size:9><i>podrá generar el horario desde el menú principal.</i></size>
+    <size:9><i>Once minimum data is configured,</i></size>
+    <size:9><i>you can generate the schedule from the main menu.</i></size>
 }
 @endsalt
 
-@startsalt generarHorario-wireframe-generating
+@startsalt generateSchedule-wireframe-generating
 {
-    <b>GENERANDO HORARIO</b>
+    <b>GENERATING SCHEDULE</b>
     ====
-    <b>🔄 Generación en progreso...</b>
+    <b>🔄 Generation in progress...</b>
     ====
-    <b>Datos procesados:</b>
-    • Cursos: 15
-    • Profesores: 10
-    • Aulas: 8
-    • Recursos: 12
+    <b>Processed data:</b>
+    • Courses: 15
+    • Teachers: 10
+    • Classrooms: 8
+    • Resources: 12
     ====
-    <b>Algoritmo de optimización ejecutándose</b>
-    <i>Por favor espere...</i>
+    <b>Optimization algorithm running</b>
+    <i>Please wait...</i>
     ====
-    <size:9><i>El proceso puede tardar unos momentos</i></size>
-    <size:9><i>dependiendo de la cantidad de datos.</i></size>
+    <size:9><i>The process may take a few moments</i></size>
+    <size:9><i>depending on the amount of data.</i></size>
 }
 @endsalt

@@ -1,38 +1,38 @@
-@startsalt asignarProfesorACurso-wireframe
+@startsalt assignTeacherToCourse-wireframe
 {
-    <b>ASIGNAR CURSOS AL PROFESOR</b>
+    <b>ASSIGN COURSES TO TEACHER</b>
     ===
     {
         {
         {
             {
-            <b>Cursos disponibles:</b>|<b>Cursos asignados:</b>
-            "Matemática I              "|"Matemática II             " 
-            "Física I                  "|"Física II                 "
-            "Química General           "|"Algoritmos y Estructuras  "
-            "Cálculo Diferencial       "|"Base de Datos I           "
-            "Estadística Básica        "|"                          "
-            "Historia Universal        "|"                          "
+            <b>Available courses:</b>|<b>Assigned courses:</b>
+            "Mathematics I             "|"Mathematics II            " 
+            "Physics I                 "|"Physics II                "
+            "General Chemistry         "|"Algorithms and Structures "
+            "Differential Calculus     "|"Database I                "
+            "Basic Statistics          "|"                          "
+            "World History             "|"                          "
         }
         
         ~~
         
-        {[Asignar >>] | [<< Desasignar]}
+        {[Assign >>] | [<< Unassign]}
         
         ~~
         
-        <b>Resumen de asignaciones:</b>
+        <b>Assignment summary:</b>
         {
-            "Total cursos disponibles: 10 "
-            "Total cursos asignados: 4    "
-            "Profesor: Dr. Manuel Masías  "
+            "Total available courses: 10   "
+            "Total assigned courses: 4    "
+            "Teacher: Dr. Manuel Masías   "
         }
         }
         }
 
         ~~
 
-        {[Guardar asignaciones] | [Continuar gestionando] | [Cancelar]}
+        {[Save assignments] | [Continue managing] | [Cancel]}
     }
 }
 @endsalt

@@ -1,11 +1,11 @@
-@startsalt iniciarSesion-wireframe
+@startsalt startSession-wireframe
 {
     ====
     SigHor - Sistema Generador de Horarios
     ====
-    {^" Iniciar sesión "
-        Usuario    | "Administrador   "
-        Contraseña | "********        "
+    {^" Start session "
+        User       | "Administrator   "
+        Password   | "********        "
         {
             [Cancel] | [  OK   ]
         }
@@ -14,19 +14,19 @@
 @endsalt
 
 
-@startsalt iniciarSesion-credenciales-invalidas-wireframe
+@startsalt startSession-invalid-credentials-wireframe
 {
     ====
     SigHor - Sistema Generador de Horarios
     ====
-    {^" Iniciar sesión "
-        Usuario    | "Administrador   "
-        Contraseña | "********        "
+    {^" Start session "
+        User       | "Administrator   "
+        Password   | "********        "
         {
             [Cancel] | [  OK   ]
         }
     }
-    **usuario:contraseña no válida!**
+    **invalid user:password!**
     ====    
 }
 @endsalt

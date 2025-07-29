@@ -1,31 +1,31 @@
-@startsalt eliminarCurso-wireframe
+@startsalt deleteCourse-wireframe
 {
-    <b>ELIMINAR CURSO ACADÉMICO</b>
+    <b>DELETE ACADEMIC COURSE</b>
     ===
     {
-        <b>¿Está seguro de eliminar este curso?</b>
+        <b>Are you sure you want to delete this course?</b>
         --
         {
-            {<b>Código:</b> | CUR-001
-            <b>Nombre:</b> | Cálculo Diferencial}
-            {<b>Descripción:</b> |
+            {<b>Code:</b> | CUR-001
+            <b>Name:</b> | Differential Calculus}
+            {<b>Description:</b> |
             {
-                Curso de matemática fundamental que introduce
-                conceptos de límites, derivadas y aplicaciones
-                del cálculo diferencial
+                Fundamental mathematics course that introduces
+                concepts of limits, derivatives and applications
+                of differential calculus
             }}
-            {<b>Créditos:</b> | 4
-            <b>Horas teóricas/semana:</b> | 3
-            <b>Horas prácticas/semana:</b> | 2
-            <b>Programa académico:</b> | Ingeniería Industrial y de Sistemas}
+            {<b>Credits:</b> | 4
+            <b>Theoretical hours/week:</b> | 3
+            <b>Practical hours/week:</b> | 2
+            <b>Academic program:</b> | Industrial and Systems Engineering}
             --
-            <b>⚠️ ADVERTENCIA: Esta acción es irreversible</b>
-            <i>El curso y toda su información asociada serán eliminados permanentemente</i>
+            <b>⚠️ WARNING: This action is irreversible</b>
+            <i>The course and all associated information will be permanently deleted</i>
         }
 
         ~~
 
-        {[Confirmar eliminación] | [Cancelar]}
+        {[Confirm deletion] | [Cancel]}
     }
 }
 @endsalt

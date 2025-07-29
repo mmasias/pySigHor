@@ -1,17 +1,17 @@
-@startsalt crearRecurso-wireframe
+@startsalt createResource-wireframe
 {
-    <b>CREAR RECURSO</b>
+    <b>CREATE RESOURCE</b>
     ====
-    <b>Código del recurso (*):</b>
+    <b>Resource code (*):</b>
     "                                    "
     ====
-    <b>Nombre del recurso (*):</b>
+    <b>Resource name (*):</b>
     "                                    "
     ====
-    [ <b>Crear Recurso</b> ] | [ Cancelar ]
+    [ <b>Create Resource</b> ] | [ Cancel ]
     ====
-    <size:9><i>(*) Campos obligatorios</i></size>
-    <size:9><i>Después de crear, se abrirá automáticamente</i></size>
-    <size:9><i>la edición completa del recurso.</i></size>
+    <size:9><i>(*) Required fields</i></size>
+    <size:9><i>After creation, the complete resource</i></size>
+    <size:9><i>editing will open automatically.</i></size>
 }
 @endsalt

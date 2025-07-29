@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > eliminarEdificio > Detalle y prototipado
+# pySigHor > deleteBuilding > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../deleteBuilding/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/deleteBuilding/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `eliminarEdificio()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de edificios.
+Especificación detallada del caso de uso `deleteBuilding()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de edificios.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|eliminarEdificio()|
+|**Nombre**|deleteBuilding()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Eliminar edificio de forma segura con confirmación previa|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Edificio seleccionado desde abrirEdificios(), usuario autenticado como Administrador|
+|**Precondición**|Edificio seleccionado desde openBuildings(), usuario autenticado como Administrador|
 |**Postcondición exitosa**|Edificio eliminado del sistema, usuario regresa a lista de edificios actualizada|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `eliminarEdificio()` mediante diagrama
 
 <div align=center>
 
-|![Caso de uso: eliminarEdificio()](/images/RUP/00-casos-uso/02-detalle/eliminarEdificio/eliminarEdificio.svg)|
+|![Caso de uso: deleteBuilding()](/images/RUP/00-casos-uso/02-detalle/deleteBuilding/deleteBuilding.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `eliminarEdificio()` mediante diagrama
 
 <div align=center>
 
-|![Wireframe: Eliminación de edificio](/images/RUP/00-casos-uso/02-detalle/eliminarEdificio/eliminarEdificio-wireframe.svg)|
+|![Wireframe: Eliminación de edificio](/images/RUP/00-casos-uso/02-detalle/deleteBuilding/deleteBuilding-wireframe.svg)|
 |-|
 |**Estado**: ConfirmandoEliminacion / EliminandoEdificio|
 
@@ -103,7 +103,7 @@ Especificación detallada del caso de uso `eliminarEdificio()` mediante diagrama
 
 ### concepto clave
 
-- **eliminarEdificio()** es un caso de uso que abarca:
+- **deleteBuilding()** es un caso de uso que abarca:
   - **Presentar** información completa del edificio a eliminar
   - **Permitir solicitar** confirmación del administrador
   - **Procesar** eliminación del edificio del sistema
@@ -123,22 +123,22 @@ Especificación detallada del caso de uso `eliminarEdificio()` mediante diagrama
 
 ### operaciones de eliminación
 
-- **Confirmar eliminación** → Edificio eliminado, **&lt;&lt;include&gt;&gt;** `abrirEdificios()` 
-- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `abrirEdificios()` sin cambios
+- **Confirmar eliminación** → Edificio eliminado, **&lt;&lt;include&gt;&gt;** `openBuildings()` 
+- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `openBuildings()` sin cambios
 
 ### navegación del sistema
 
-- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `abrirEdificios()` con lista actualizada
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirEdificios()` sin modificaciones
+- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `openBuildings()` con lista actualizada
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openBuildings()` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **EDIFICIOS_ABIERTO** → `eliminarEdificio()` → **EDIFICIOS_ABIERTO**
-- **EDIFICIO_ABIERTO** → `eliminarEdificio()` → **EDIFICIOS_ABIERTO**
+- **EDIFICIOS_ABIERTO** → `deleteBuilding()` → **EDIFICIOS_ABIERTO**
+- **EDIFICIO_ABIERTO** → `deleteBuilding()` → **EDIFICIOS_ABIERTO**
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirEdificios()` → **EDIFICIOS_ABIERTO** (lista actualizada)
+- **&lt;&lt;include&gt;&gt;** `openBuildings()` → **EDIFICIOS_ABIERTO** (lista actualizada)
 
 ## vocabulario utilizado
 
@@ -183,14 +183,14 @@ Ambas transiciones incluyen:
 - **Confirmación requerida**: Evita eliminaciones accidentales
 - **Información completa**: Muestra qué se va a eliminar
 - **Operación irreversible**: Claridad sobre las consecuencias
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirEdificios()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openBuildings()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirEdificios()](../openBuildings/README.md) - Caso de uso de navegación
-- [editarEdificio()](../editBuilding/README.md) - Caso complementario del CRUD
-- [crearEdificio()](../createBuilding/README.md) - Caso complementario del CRUD
-- [eliminarCurso()](../deleteCourse/README.md) - Patrón de referencia para eliminación
+- [openBuildings()](../openBuildings/README.md) - Caso de uso de navegación
+- [editBuilding()](../editBuilding/README.md) - Caso complementario del CRUD
+- [createBuilding()](../createBuilding/README.md) - Caso complementario del CRUD
+- [deleteCourse()](../deleteCourse/README.md) - Patrón de referencia para eliminación
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

@@ -1,4 +1,4 @@
-# pySigHor > abrirProgramas > Detalle y prototipado
+# pySigHor > openPrograms > Detalle y prototipado
 
 > |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/openPrograms/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `abrirProgramas()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de programas académicos.
+Especificación detallada del caso de uso `openPrograms()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de programas académicos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|abrirProgramas()|
+|**Nombre**|openPrograms()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar lista de programas académicos con capacidad de filtrado y navegación a operaciones CRUD|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `abrirProgramas()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: abrirProgramas()](/images/RUP/00-casos-uso/02-detalle/abrirProgramas/abrirProgramas.svg)|
+|![Caso de uso: abrirProgramas()](/images/RUP/00-casos-uso/02-detalle/openPrograms/abrirProgramas.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `abrirProgramas()` mediante diagrama d
 #### pantalla 1: gestión de programas académicos
 <div align=center>
 
-|![Wireframe: Gestión de programas](/images/RUP/00-casos-uso/02-detalle/abrirProgramas/abrirProgramas-wireframe.svg)|
+|![Wireframe: Gestión de programas](/images/RUP/00-casos-uso/02-detalle/openPrograms/abrirProgramas-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 
@@ -114,7 +114,7 @@ Especificación detallada del caso de uso `abrirProgramas()` mediante diagrama d
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `abrirProgramas()` → **PROGRAMAS_ABIERTO**
+- **SISTEMA_DISPONIBLE** → `openPrograms()` → **PROGRAMAS_ABIERTO**
 
 Y las transiciones de salida:
 - **LISTANDO_PROGRAMAS** → `crearPrograma()` → **EDITANDO_PROGRAMA**

@@ -1,6 +1,6 @@
-# pySigHor > abrirEdificios > Detalle y prototipado
+# pySigHor > openBuildings > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../openBuildings/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/openBuildings/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `abrirEdificios()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de edificios.
+Especificación detallada del caso de uso `openBuildings()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de edificios.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|abrirEdificios()|
+|**Nombre**|openBuildings()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar lista de edificios con capacidad de filtrado y navegación a operaciones CRUD|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `abrirEdificios()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: abrirEdificios()](/images/RUP/00-casos-uso/02-detalle/abrirEdificios/abrirEdificios.svg)|
+|![Caso de uso: abrirEdificios()](/images/RUP/00-casos-uso/02-detalle/openBuildings/abrirEdificios.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `abrirEdificios()` mediante diagrama d
 #### pantalla 1: gestión de edificios
 <div align=center>
 
-|![Wireframe: Gestión de edificios](/images/RUP/00-casos-uso/02-detalle/abrirEdificios/abrirEdificios-wireframe.svg)|
+|![Wireframe: Gestión de edificios](/images/RUP/00-casos-uso/02-detalle/openBuildings/abrirEdificios-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 
@@ -115,7 +115,7 @@ Especificación detallada del caso de uso `abrirEdificios()` mediante diagrama d
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `abrirEdificios()` → **EDIFICIOS_ABIERTO**
+- **SISTEMA_DISPONIBLE** → `openBuildings()` → **EDIFICIOS_ABIERTO**
 
 Y las transiciones de salida:
 - **EDIFICIOS_ABIERTO** → `crearEdificio()` → **EDIFICIO_ABIERTO**

@@ -1,6 +1,6 @@
-# pySigHor > editarCurso > Detalle y prototipado
+# pySigHor > editCourse > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../editCourse/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/editCourse/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,18 +14,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `editarCurso()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de cursos académicos.
+Especificación detallada del caso de uso `editCourse()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de cursos académicos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|editarCurso()|
+|**Nombre**|editCourse()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar datos de edición de curso académico con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Curso seleccionado desde abrirCursos() o curso recién creado desde crearCurso()|
+|**Precondición**|Curso seleccionado desde openCourses() o curso recién creado desde crearCurso()|
 |**Postcondición exitosa**|Curso modificado guardado, usuario puede continuar editando en CURSO_ABIERTO o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `editarCurso()` mediante diagrama de e
 
 <div align=center>
 
-|![Caso de uso: editarCurso()](/images/RUP/00-casos-uso/02-detalle/editarCurso/editarCurso.svg)|
+|![Caso de uso: editarCurso()](/images/RUP/00-casos-uso/02-detalle/editCourse/editarCurso.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `editarCurso()` mediante diagrama de e
 
 <div align=center>
 
-|![Wireframe: Edición de curso](/images/RUP/00-casos-uso/02-detalle/editarCurso/editarCurso-wireframe.svg)|
+|![Wireframe: Edición de curso](/images/RUP/00-casos-uso/02-detalle/editCourse/editarCurso-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 
@@ -119,21 +119,21 @@ Especificación detallada del caso de uso `editarCurso()` mediante diagrama de e
 ### operaciones de edición
 
 - **Continuar editando** → Mantiene `CURSO_ABIERTO` en modo edición
-- **Guardar y salir** → `abrirCursos()` con lista actualizada
-- **Cancelar edición** → `abrirCursos()` sin cambios
+- **Guardar y salir** → `openCourses()` con lista actualizada
+- **Cancelar edición** → `openCourses()` sin cambios
 
 ### navegación del sistema
 
 - **Continuar editando** → Permanece en `CURSO_ABIERTO`
-- **Guardar y salir** → `CURSOS_ABIERTO` via `abrirCursos()`
+- **Guardar y salir** → `CURSOS_ABIERTO` via `openCourses()`
 - **Cancelación** → `CURSOS_ABIERTO` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **CURSOS_ABIERTO** → `editarCurso()` → **CURSO_ABIERTO**
-- **CURSO_ABIERTO** → `editarCurso()` → **CURSO_ABIERTO** (continuar editando)
-- **CURSO_ABIERTO** → `editarCurso()` → **CURSOS_ABIERTO** (guardar y salir)
+- **CURSOS_ABIERTO** → `editCourse()` → **CURSO_ABIERTO**
+- **CURSO_ABIERTO** → `editCourse()` → **CURSO_ABIERTO** (continuar editando)
+- **CURSO_ABIERTO** → `editCourse()` → **CURSOS_ABIERTO** (guardar y salir)
 
 ## vocabulario utilizado
 
@@ -185,7 +185,7 @@ Este caso de uso corresponde a las transiciones:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirCursos()](../openCourses/README.md) - Caso de uso de navegación
+- [openCourses()](../openCourses/README.md) - Caso de uso de navegación
 - [crearCurso()](../createCourse/README.md) - Caso complementario del CRUD (el delgado)
 - [eliminarCurso()](../deleteCourse/README.md) - Caso complementario del CRUD
 - [editarPrograma()](../editProgram/README.md) - Patrón de referencia para edición

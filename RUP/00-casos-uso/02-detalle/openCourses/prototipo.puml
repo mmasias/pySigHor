@@ -1,17 +1,17 @@
-@startsalt abrirCursos-wireframe
+@startsalt openCourses-wireframe
 { 
-<b>GESTIÓN DE CURSOS ACADÉMICOS</b>  
+<b>ACADEMIC COURSES MANAGEMENT</b>  
 ===
-{+  CODIGO | NOMBRE | DESCRIPCION | ACCIÓN
+{+  CODE | NAME | DESCRIPTION | ACTION
   --|--|--|--
-  MAT101 | Matemática I | Cálculo diferencial e integral | [Editar]
-  FIS201 | Física General | Mecánica y termodinámica | [Editar]
-  CXYZ | Nombre del curso | Descripción del curso | [Editar]
+  MAT101 | Mathematics I | Differential and integral calculus | [Edit]
+  FIS201 | General Physics | Mechanics and thermodynamics | [Edit]
+  CXYZ | Course name | Course description | [Edit]
   }
   ~~
-  {<b>BUSCAR:</b> [                                       ] | [Filtrar]}
+  {<b>SEARCH:</b> [                                       ] | [Filter]}
   ~~
-  {[Crear nuevo] | [Borrar seleccionado] | [Salir]}
+  {[Create new] | [Delete selected] | [Exit]}
 }
 
 @endsalt

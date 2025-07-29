@@ -1,6 +1,6 @@
-# pySigHor > cerrarSesion > Detalle y prototipado
+# pySigHor > closeSession > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../closeSession/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/closeSession/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `cerrarSesion()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para el proceso de cierre de sesión.
+Especificación detallada del caso de uso `closeSession()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para el proceso de cierre de sesión.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|cerrarSesion()|
+|**Nombre**|closeSession()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Terminar sesión activa y regresar al estado no autenticado del sistema|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `cerrarSesion()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: cerrarSesion()](/images/RUP/00-casos-uso/02-detalle/cerrarSesion/cerrarSesion.svg)|
+|![Caso de uso: closeSession()](/images/RUP/00-casos-uso/02-detalle/closeSession/closeSession.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `cerrarSesion()` mediante diagrama de 
 #### pantalla 1: confirmación de cierre
 <div align=center>
 
-|![Wireframe: Cerrar sesión](/images/RUP/00-casos-uso/02-detalle/cerrarSesion/cerrarSesion-wireframe.svg)|
+|![Wireframe: Cerrar sesión](/images/RUP/00-casos-uso/02-detalle/closeSession/closeSession-wireframe.svg)|
 |-|
 |**Estado**: SolicitandoCierre → ConfirmandoCierre|
 
@@ -105,7 +105,7 @@ Especificación detallada del caso de uso `cerrarSesion()` mediante diagrama de 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `cerrarSesion()` → **SESION_CERRADA**
+- **SISTEMA_DISPONIBLE** → `closeSession()` → **SESION_CERRADA**
 
 La especificación detalla la transición desde **SISTEMA_DISPONIBLE** hacia **SESION_CERRADA** del diagrama de contexto del Administrador de Horarios.
 

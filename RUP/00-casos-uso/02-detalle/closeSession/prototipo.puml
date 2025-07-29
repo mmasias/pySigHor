@@ -1,20 +1,20 @@
-@startsalt cerrarSesion-wireframe
+@startsalt closeSession-wireframe
 {
     ====
     SigHor - Sistema Generador de Horarios
     ====
-    {^" Cerrar sesión "
-        ¿Desea cerrar la sesión activa?
+    {^" Close session "
+        Do you want to close the active session?
         
-        Usuario actual: **Administrador**
+        Current user: **Administrator**
         
         .
         {
-            [Cancelar] | [Cerrar sesión]
+            [Cancel] | [Close session]
         }
     }
     ====
-    Sistema: Activo
+    System: Active
     ====
 }
 @endsalt

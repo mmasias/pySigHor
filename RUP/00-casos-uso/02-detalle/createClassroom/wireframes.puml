@@ -1,25 +1,25 @@
-@startsalt crearAula-wireframe
+@startsalt createClassroom-wireframe
 {
-    <b>CREAR AULA</b>
+    <b>CREATE CLASSROOM</b>
     ===
     {
-        <b>Datos mínimos del aula:</b>
+        <b>Classroom minimum data:</b>
         --
         {
-            <b>Código del aula (*):</b>
+            <b>Classroom code (*):</b>
             "                                        "
-            <b>Nombre del aula (*):</b>
+            <b>Classroom name (*):</b>
             "                                        "
-            <b>Edificio asociado (*):</b>
-            ^"Seleccionar edificio..."^
+            <b>Associated building (*):</b>
+            ^"Select building..."^
             --
-            <i>(*) Campos obligatorios</i>
-            <i>Otros datos se completarán en la edición</i>
+            <i>(*) Required fields</i>
+            <i>Other data will be completed during editing</i>
         }
 
         ~~
 
-        {[Crear aula] | [Cancelar]}
+        {[Create classroom] | [Cancel]}
     }
 }
 @endsalt

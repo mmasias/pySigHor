@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > eliminarProfesor > Detalle y prototipado
+# pySigHor > deleteTeacher > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../deleteTeacher/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/deleteTeacher/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,18 +22,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `eliminarProfesor()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de profesores.
+Especificación detallada del caso de uso `deleteTeacher()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la eliminación segura de profesores.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|eliminarProfesor()|
+|**Nombre**|deleteTeacher()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Eliminar profesor de forma segura con confirmación previa|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Profesor seleccionado desde abrirProfesores(), usuario autenticado como Administrador|
+|**Precondición**|Profesor seleccionado desde openTeachers(), usuario autenticado como Administrador|
 |**Postcondición exitosa**|Profesor eliminado del sistema, usuario regresa a lista de profesores actualizada|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `eliminarProfesor()` mediante diagrama
 
 <div align=center>
 
-|![Caso de uso: eliminarProfesor()](/images/RUP/00-casos-uso/02-detalle/eliminarProfesor/eliminarProfesor.svg)|
+|![Caso de uso: eliminarProfesor()](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/eliminarProfesor.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `eliminarProfesor()` mediante diagrama
 
 <div align=center>
 
-|![Wireframe: Eliminación de profesor](/images/RUP/00-casos-uso/02-detalle/eliminarProfesor/eliminarProfesor-wireframe.svg)|
+|![Wireframe: Eliminación de profesor](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/eliminarProfesor-wireframe.svg)|
 |-|
 |**Estado**: ConfirmandoEliminacion / EliminandoProfesor|
 
@@ -124,22 +124,22 @@ Especificación detallada del caso de uso `eliminarProfesor()` mediante diagrama
 
 ### operaciones de eliminación
 
-- **Confirmar eliminación** → Profesor eliminado, **&lt;&lt;include&gt;&gt;** `abrirProfesores()` 
-- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `abrirProfesores()` sin cambios
+- **Confirmar eliminación** → Profesor eliminado, **&lt;&lt;include&gt;&gt;** `openTeachers()` 
+- **Cancelar eliminación** → **&lt;&lt;include&gt;&gt;** `openTeachers()` sin cambios
 
 ### navegación del sistema
 
-- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `abrirProfesores()` con lista actualizada
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirProfesores()` sin modificaciones
+- **Eliminación exitosa** → **&lt;&lt;include&gt;&gt;** `openTeachers()` con lista actualizada
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openTeachers()` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **PROFESORES_ABIERTO** → `eliminarProfesor()` → **PROFESORES_ABIERTO**
-- **PROFESOR_ABIERTO** → `eliminarProfesor()` → **PROFESORES_ABIERTO**
+- **PROFESORES_ABIERTO** → `deleteTeacher()` → **PROFESORES_ABIERTO**
+- **PROFESOR_ABIERTO** → `deleteTeacher()` → **PROFESORES_ABIERTO**
 
 Ambas transiciones incluyen:
-- **&lt;&lt;include&gt;&gt;** `abrirProfesores()` → **PROFESORES_ABIERTO** (lista actualizada)
+- **&lt;&lt;include&gt;&gt;** `openTeachers()` → **PROFESORES_ABIERTO** (lista actualizada)
 
 ## vocabulario utilizado
 
@@ -184,13 +184,13 @@ Ambas transiciones incluyen:
 - **Confirmación requerida**: Evita eliminaciones accidentales
 - **Información completa**: Muestra qué se va a eliminar
 - **Operación irreversible**: Claridad sobre las consecuencias
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `abrirProfesores()` para mostrar lista actualizada
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `openTeachers()` para mostrar lista actualizada
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirProfesores()](../openTeachers/README.md) - Caso de uso de navegación
+- [openTeachers()](../openTeachers/README.md) - Caso de uso de navegación
 - [editarProfesor()](../editTeacher/README.md) - Caso complementario del CRUD
 - [crearProfesor()](../createTeacher/README.md) - Caso complementario del CRUD
 - [eliminarCurso()](../deleteCourse/README.md) - Patrón de referencia para eliminación

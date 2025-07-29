@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > crearProfesor > Detalle y prototipado
+# pySigHor > createTeacher > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../createTeacher/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/createTeacher/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +22,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `crearProfesor()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de profesores aplicando la filosofía C→U como "el delgado".
+Especificación detallada del caso de uso `createTeacher()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de profesores aplicando la filosofía C→U como "el delgado".
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|crearProfesor()|
+|**Nombre**|createTeacher()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Crear profesor con datos mínimos y transferir inmediatamente a edición completa|
 |**Tipo**|Primario, esencial|
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `crearProfesor()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: crearProfesor()](/images/RUP/00-casos-uso/02-detalle/crearProfesor/crearProfesor.svg)|
+|![Caso de uso: crearProfesor()](/images/RUP/00-casos-uso/02-detalle/createTeacher/createTeacher.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

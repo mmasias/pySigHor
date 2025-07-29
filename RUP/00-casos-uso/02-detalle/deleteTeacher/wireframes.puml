@@ -1,31 +1,31 @@
-@startsalt eliminarProfesor-wireframe
+@startsalt deleteTeacher-wireframe
 {
-    <b>ELIMINAR PROFESOR</b>
+    <b>DELETE TEACHER</b>
     ===
     {
-        <b>¿Está seguro de eliminar este profesor?</b>
+        <b>Are you sure you want to delete this teacher?</b>
         --
         {
-            {<b>Código:</b> | PROF-001
-            <b>Nombre:</b> | Juan Carlos García López}
-            {<b>Correo:</b> | jgarcia@universidad.edu
-            <b>Teléfono:</b> | +51 999 123 456}
-            {<b>Observaciones:</b> |
+            {<b>Code:</b> | PROF-001
+            <b>Name:</b> | Juan Carlos García López}
+            {<b>Email:</b> | jgarcia@universidad.edu
+            <b>Phone:</b> | +51 999 123 456}
+            {<b>Observations:</b> |
             {
-                Profesor especializado en algoritmos
-                y estructuras de datos. Experiencia
-                en desarrollo de software educativo.
+                Specialized teacher in algorithms
+                and data structures. Experience
+                in educational software development.
             }}
-            {<b>Cursos asignados:</b> | 3 cursos activos
-            <b>Preferencias:</b> | Configuradas (aulas con proyector)}
+            {<b>Assigned courses:</b> | 3 active courses
+            <b>Preferences:</b> | Configured (classrooms with projector)}
             --
-            <b>⚠️ ADVERTENCIA: Esta acción es irreversible</b>
-            <i>El profesor y toda su información asociada serán eliminados permanentemente</i>
+            <b>⚠️ WARNING: This action is irreversible</b>
+            <i>The teacher and all associated information will be permanently deleted</i>
         }
 
         ~~
 
-        {[Confirmar eliminación] | [Cancelar]}
+        {[Confirm deletion] | [Cancel]}
     }
 }
 @endsalt

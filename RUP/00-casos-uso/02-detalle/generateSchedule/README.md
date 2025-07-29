@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > generarHorario > Detalle y prototipado
+# pySigHor > generateSchedule > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../generateSchedule/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/generateSchedule/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +22,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `generarHorario()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la generación algorítmica de horarios académicos.
+Especificación detallada del caso de uso `generateSchedule()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la generación algorítmica de horarios académicos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|generarHorario()|
+|**Nombre**|generateSchedule()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Ejecutar algoritmo de generación de horarios con validaciones previas y manejo de reemplazo|
 |**Tipo**|Primario, esencial, proceso algorítmico|
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `generarHorario()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: generarHorario()](/images/RUP/00-casos-uso/02-detalle/generarHorario/generarHorario.svg)|
+|![Caso de uso: generateSchedule()](/images/RUP/00-casos-uso/02-detalle/generateSchedule/generateSchedule.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

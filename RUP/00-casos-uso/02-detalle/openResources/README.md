@@ -1,6 +1,6 @@
-# pySigHor > abrirRecursos > Detalle y prototipado
+# pySigHor > openResources > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../openResources/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/openResources/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `abrirRecursos()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de recursos.
+Especificación detallada del caso de uso `openResources()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de recursos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|abrirRecursos()|
+|**Nombre**|openResources()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar lista de recursos con capacidad de filtrado y navegación a operaciones CRUD|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `abrirRecursos()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: abrirRecursos()](/images/RUP/00-casos-uso/02-detalle/abrirRecursos/abrirRecursos.svg)|
+|![Caso de uso: abrirRecursos()](/images/RUP/00-casos-uso/02-detalle/openResources/abrirRecursos.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `abrirRecursos()` mediante diagrama de
 #### pantalla 1: gestión de recursos
 <div align=center>
 
-|![Wireframe: Gestión de recursos](/images/RUP/00-casos-uso/02-detalle/abrirRecursos/abrirRecursos-wireframe.svg)|
+|![Wireframe: Gestión de recursos](/images/RUP/00-casos-uso/02-detalle/openResources/abrirRecursos-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 
@@ -114,7 +114,7 @@ Especificación detallada del caso de uso `abrirRecursos()` mediante diagrama de
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `abrirRecursos()` → **RECURSOS_ABIERTO**
+- **SISTEMA_DISPONIBLE** → `openResources()` → **RECURSOS_ABIERTO**
 
 Y las transiciones de salida:
 - **RECURSOS_ABIERTO** → `crearRecurso()` → **RECURSO_ABIERTO**

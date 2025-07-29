@@ -1,27 +1,27 @@
-@startsalt editarProfesor-wireframe
+@startsalt editTeacher-wireframe
 {
-    <b>EDITAR PROFESOR</b>
+    <b>EDIT TEACHER</b>
     ===
     {
-        <b>Datos del profesor:</b>
+        <b>Teacher data:</b>
         --
         {
             {
-            {<b>Código:</b> | "PROF-001                    "
-            <b>Nombres:</b> | "Juan Carlos                  "}
-            {<b>Apellidos:</b> | "García López                 "
-            <b>Correo:</b> | "jgarcia@universidad.edu      "}
-            {<b>Teléfono:</b> | "+51 999 123 456              "
-            <b>Observaciones:</b> |
-                {"Profesor especializado en algoritmos
-                y estructuras de datos. Experiencia
-                en desarrollo de software educativo  "}}
+            {<b>Code:</b> | "PROF-001                    "
+            <b>First names:</b> | "Juan Carlos                  "}
+            {<b>Last names:</b> | "García López                 "
+            <b>Email:</b> | "jgarcia@universidad.edu      "}
+            {<b>Phone:</b> | "+51 999 123 456              "
+            <b>Observations:</b> |
+                {"Specialized teacher in algorithms
+                and data structures. Experience
+                in educational software development  "}}
             }
         }
 
         ~~
 
-        {[Guardar cambios] | [Continuar editando] | [Cancelar]}
+        {[Save changes] | [Continue editing] | [Cancel]}
     }
 }
 @endsalt

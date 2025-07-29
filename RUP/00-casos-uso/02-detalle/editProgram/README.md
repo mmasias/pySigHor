@@ -1,6 +1,6 @@
-# pySigHor > editarPrograma > Detalle y prototipado
+# pySigHor > editProgram > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../editProgram/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/editProgram/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,18 +14,18 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `editarPrograma()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de programas académicos.
+Especificación detallada del caso de uso `editProgram()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la edición de programas académicos.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|editarPrograma()|
+|**Nombre**|editProgram()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar formulario de edición de programa académico con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Programa seleccionado desde abrirProgramas() o programa recién creado desde crearPrograma()|
+|**Precondición**|Programa seleccionado desde openPrograms() o programa recién creado desde crearPrograma()|
 |**Postcondición exitosa**|Programa modificado guardado, usuario puede continuar editando en PROGRAMA_ABIERTO o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `editarPrograma()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: editarPrograma()](/images/RUP/00-casos-uso/02-detalle/editarPrograma/editarPrograma.svg)|
+|![Caso de uso: editarPrograma()](/images/RUP/00-casos-uso/02-detalle/editProgram/editarPrograma.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `editarPrograma()` mediante diagrama d
 
 <div align=center>
 
-|![Wireframe: Edición de programa](/images/RUP/00-casos-uso/02-detalle/editarPrograma/editarPrograma-wireframe.svg)|
+|![Wireframe: Edición de programa](/images/RUP/00-casos-uso/02-detalle/editProgram/editarPrograma-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 
@@ -111,23 +111,23 @@ Especificación detallada del caso de uso `editarPrograma()` mediante diagrama d
 
 ### operaciones de programa
 
-- **Solicitar guardar programa** → Permanecer en `editarPrograma()` (continuar editando)
-- **Solicitar guardar y salir** → Navegar a `abrirProgramas()`
-- **Solicitar cancelar edición** → Navegar a `abrirProgramas()`
+- **Solicitar guardar programa** → Permanecer en `editProgram()` (continuar editando)
+- **Solicitar guardar y salir** → Navegar a `openPrograms()`
+- **Solicitar cancelar edición** → Navegar a `openPrograms()`
 
 ### navegación del sistema
 
 - **Continuar editando** → Permanecer en estado `PROGRAMA_ABIERTO`
-- **Finalizar edición** → Navegar a `abrirProgramas()`
+- **Finalizar edición** → Navegar a `openPrograms()`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **PROGRAMAS_ABIERTO** → `editarPrograma()` → **PROGRAMA_ABIERTO**
+- **PROGRAMAS_ABIERTO** → `editProgram()` → **PROGRAMA_ABIERTO**
 - **PROGRAMAS_ABIERTO** → `crearPrograma()` → **PROGRAMA_ABIERTO**
 
 Y las transiciones de salida:
-- **PROGRAMA_ABIERTO** → `abrirProgramas()` → **PROGRAMAS_ABIERTO**
+- **PROGRAMA_ABIERTO** → `openPrograms()` → **PROGRAMAS_ABIERTO**
 
 ## vocabulario utilizado
 
@@ -177,6 +177,6 @@ Y las transiciones de salida:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirProgramas()](../openPrograms/README.md) - Caso de uso de navegación
+- [openPrograms()](../openPrograms/README.md) - Caso de uso de navegación
 - [Filosofía C→U](../../../../extraDocs/008-filosofia-crud-creacion-edicion/README.md) - Metodología aplicada
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

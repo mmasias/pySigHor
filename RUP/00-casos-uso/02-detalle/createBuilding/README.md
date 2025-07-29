@@ -6,9 +6,9 @@
 
 </div>
 
-# pySigHor > crearEdificio > Detalle y prototipado
+# pySigHor > createBuilding > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../createBuilding/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/createBuilding/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +22,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `crearEdificio()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de edificios aplicando la filosofía C→U como "el delgado".
+Especificación detallada del caso de uso `createBuilding()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de edificios aplicando la filosofía C→U como "el delgado".
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|crearEdificio()|
+|**Nombre**|createBuilding()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Crear edificio con datos mínimos y transferir inmediatamente a edición completa|
 |**Tipo**|Primario, esencial|
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `crearEdificio()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: crearEdificio()](/images/RUP/00-casos-uso/02-detalle/crearEdificio/crearEdificio.svg)|
+|![Caso de uso: createBuilding()](/images/RUP/00-casos-uso/02-detalle/createBuilding/createBuilding.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

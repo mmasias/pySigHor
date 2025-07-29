@@ -1,18 +1,18 @@
-@startsalt abrirAulas-wireframe
+@startsalt openClassrooms-wireframe
 { 
-<b>GESTIÓN DE AULAS</b>  
+<b>CLASSROOMS MANAGEMENT</b>  
 ===
-{+  ID | NOMBRE | CAPACIDAD | EDIFICIO | ACCIÓN
+{+  ID | NAME | CAPACITY | BUILDING | ACTION
   --|--|--|--|--
-  001 | Aula 101 | 30 | Edificio Principal | [Editar]
-  002 | Aula 102 | 25 | Edificio Principal | [Editar]
-  003 | Lab 201 | 20 | Edificio de Laboratorios | [Editar]
-  004 | Aula Magna | 100 | Edificio Principal | [Editar]
+  001 | Room 101 | 30 | Main Building | [Edit]
+  002 | Room 102 | 25 | Main Building | [Edit]
+  003 | Lab 201 | 20 | Laboratories Building | [Edit]
+  004 | Main Auditorium | 100 | Main Building | [Edit]
   }
   ~~
-  {<b>BUSCAR:</b> [                                       ] | [Filtrar]}
+  {<b>SEARCH:</b> [                                       ] | [Filter]}
   ~~
-  {[Crear nuevo] | [Borrar seleccionado] | [Salir]}
+  {[Create new] | [Delete selected] | [Exit]}
 }
 
 @endsalt

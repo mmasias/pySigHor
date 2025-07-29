@@ -1,31 +1,31 @@
-@startsalt eliminarEdificio-wireframe
+@startsalt deleteBuilding-wireframe
 {
-    <b>ELIMINAR EDIFICIO</b>
+    <b>DELETE BUILDING</b>
     ===
     {
-        <b>¿Está seguro de eliminar este edificio?</b>
+        <b>Are you sure you want to delete this building?</b>
         --
         {
-            {<b>Código:</b> | EDIF-001
-            <b>Nombre:</b> | Edificio Central}
-            {<b>Ubicación:</b> | Campus Universitario
-            <b>Descripción:</b> | Edificio principal de aulas}
-            {<b>Observaciones:</b> |
+            {<b>Code:</b> | EDIF-001
+            <b>Name:</b> | Central Building}
+            {<b>Location:</b> | University Campus
+            <b>Description:</b> | Main classroom building}
+            {<b>Observations:</b> |
             {
-                Edificio con aulas de gran capacidad
-                para cursos magistrales. Cuenta con
-                equipamiento audiovisual moderno.
+                Building with large capacity classrooms
+                for lecture courses. Features modern
+                audiovisual equipment.
             }}
-            {<b>Aulas asociadas:</b> | 15 aulas registradas
-            <b>Capacidad total:</b> | 850 estudiantes}
+            {<b>Associated classrooms:</b> | 15 registered classrooms
+            <b>Total capacity:</b> | 850 students}
             --
-            <b>⚠️ ADVERTENCIA: Esta acción es irreversible</b>
-            <i>El edificio y toda su información asociada serán eliminados permanentemente</i>
+            <b>⚠️ WARNING: This action is irreversible</b>
+            <i>The building and all associated information will be permanently deleted</i>
         }
 
         ~~
 
-        {[Confirmar eliminación] | [Cancelar]}
+        {[Confirm deletion] | [Cancel]}
     }
 }
 @endsalt

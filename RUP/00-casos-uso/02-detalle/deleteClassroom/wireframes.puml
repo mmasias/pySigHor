@@ -1,31 +1,31 @@
-@startsalt eliminarAula-wireframe
+@startsalt deleteClassroom-wireframe
 {
-    <b>ELIMINAR AULA</b>
+    <b>DELETE CLASSROOM</b>
     ===
     {
-        <b>¿Está seguro de eliminar esta aula?</b>
+        <b>Are you sure you want to delete this classroom?</b>
         --
         {
-            {<b>Código:</b> | AULA-001
-            <b>Nombre:</b> | Aula Magna}
-            {<b>Edificio:</b> | Edificio Central
-            <b>Capacidad:</b> | 120 estudiantes}
-            {<b>Tipo:</b> | Aula magistral
-            <b>Recursos:</b> | Proyector, Audio, AC}
-            {<b>Observaciones:</b> |
+            {<b>Code:</b> | AULA-001
+            <b>Name:</b> | Main Auditorium}
+            {<b>Building:</b> | Central Building
+            <b>Capacity:</b> | 120 students}
+            {<b>Type:</b> | Lecture hall
+            <b>Resources:</b> | Projector, Audio, AC}
+            {<b>Observations:</b> |
             {
-                Aula de gran capacidad para eventos
-                especiales y conferencias magistrales.
-                Equipamiento audiovisual completo.
+                Large capacity classroom for special
+                events and lectures. Complete
+                audiovisual equipment available.
             }}
             --
-            <b>⚠️ ADVERTENCIA: Esta acción es irreversible</b>
-            <i>El aula y toda su información asociada serán eliminados permanentemente</i>
+            <b>⚠️ WARNING: This action is irreversible</b>
+            <i>The classroom and all associated information will be permanently deleted</i>
         }
 
         ~~
 
-        {[Confirmar eliminación] | [Cancelar]}
+        {[Confirm deletion] | [Cancel]}
     }
 }
 @endsalt

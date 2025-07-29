@@ -1,6 +1,6 @@
-# pySigHor > iniciarSesion > Detalle y prototipado
+# pySigHor > startSession > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../startSession/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/startSession/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `iniciarSesion()` mediante diagrama de estado, mostrando la conversación completa entre el UsuarioNoRegistrado y el Sistema para el proceso de autenticación.
+Especificación detallada del caso de uso `startSession()` mediante diagrama de estado, mostrando la conversación completa entre el UsuarioNoRegistrado y el Sistema para el proceso de autenticación.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|iniciarSesion()|
+|**Nombre**|startSession()|
 |**Actor primario**|UsuarioNoRegistrado|
 |**Objetivo**|Autenticar credenciales del usuario para permitir acceso al sistema|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `iniciarSesion()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: iniciarSesion()](/images/RUP/00-casos-uso/02-detalle/iniciarSesion/iniciarSesion.svg)|
+|![Caso de uso: iniciarSesion()](/images/RUP/00-casos-uso/02-detalle/startSession/startSession.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 

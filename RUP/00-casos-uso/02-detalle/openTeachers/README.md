@@ -1,6 +1,6 @@
-# pySigHor > abrirProfesores > Detalle y prototipado
+# pySigHor > openTeachers > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../openTeachers/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/openTeachers/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `abrirProfesores()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de profesores.
+Especificación detallada del caso de uso `openTeachers()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la gestión de profesores.
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|abrirProfesores()|
+|**Nombre**|openTeachers()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Presentar lista de profesores con capacidad de filtrado y navegación a operaciones CRUD|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `abrirProfesores()` mediante diagrama 
 
 <div align=center>
 
-|![Caso de uso: abrirProfesores()](/images/RUP/00-casos-uso/02-detalle/abrirProfesores/abrirProfesores.svg)|
+|![Caso de uso: abrirProfesores()](/images/RUP/00-casos-uso/02-detalle/openTeachers/abrirProfesores.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `abrirProfesores()` mediante diagrama 
 #### pantalla 1: gestión de profesores
 <div align=center>
 
-|![Wireframe: Gestión de profesores](/images/RUP/00-casos-uso/02-detalle/abrirProfesores/abrirProfesores-wireframe.svg)|
+|![Wireframe: Gestión de profesores](/images/RUP/00-casos-uso/02-detalle/openTeachers/abrirProfesores-wireframe.svg)|
 |-|
 |**Estado**: MostrandoLista / FiltrandoLista|
 
@@ -114,7 +114,7 @@ Especificación detallada del caso de uso `abrirProfesores()` mediante diagrama 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `abrirProfesores()` → **PROFESORES_ABIERTO**
+- **SISTEMA_DISPONIBLE** → `openTeachers()` → **PROFESORES_ABIERTO**
 
 Y las transiciones de salida:
 - **PROFESORES_ABIERTO** → `crearProfesor()` → **PROFESOR_ABIERTO**
