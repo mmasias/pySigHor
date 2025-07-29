@@ -4,25 +4,15 @@
     ===
     {
         {
-        <b>Cursos disponibles:</b> | <b>Cursos asignados:</b>
-        --
         {
             {
-            "Matemática I              " 
-            "Física I                  "
-            "Química General           "
-            "Programación I            "
-            "Cálculo Diferencial       "
-            "Estadística Básica        "
-            "Historia Universal        "
-            }
-            |
-            {
-            "Matemática II             "
-            "Física II                 "
-            "Algoritmos y Estructuras  "
-            "Base de Datos I           "
-            }
+            <b>Cursos disponibles:</b>|<b>Cursos asignados:</b>
+            "Matemática I              "|"Matemática II             " 
+            "Física I                  "|"Física II                 "
+            "Química General           "|"Algoritmos y Estructuras  "
+            "Cálculo Diferencial       "|"Base de Datos I           "
+            "Estadística Básica        "|"                          "
+            "Historia Universal        "|"                          "
         }
         
         ~~
@@ -33,9 +23,9 @@
         
         <b>Resumen de asignaciones:</b>
         {
-            "Total cursos disponibles: 7"
-            "Total cursos asignados: 4"
-            "Profesor: Dr. Manuel Masías"
+            "Total cursos disponibles: 10 "
+            "Total cursos asignados: 4    "
+            "Profesor: Dr. Manuel Masías  "
         }
         }
         }

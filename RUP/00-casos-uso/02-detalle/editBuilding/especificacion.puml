@@ -19,10 +19,10 @@ state editBuilding as "editBuilding()" {
     • Location, description
     • Building observations
     
-    <b>System</b> allows request:
-    • modify fields
-    • save building
-    • cancel editing
+    <b>System</b> allows
+    • request modify fields
+    • request save building
+    • request cancel editing
     end note
     
     SavingData -[#green]-> EditingData

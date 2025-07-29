@@ -17,8 +17,9 @@ state deleteProgram as "deleteProgram()" {
     <b>System</b> presents program information to delete
     • Code, name, program description
     • Presents deletion warning
-    • Allows request confirm deletion
-    • Allows request cancel deletion
+    <b>System</b> allows
+    • request confirm deletion
+    • request cancel deletion
     end note
     
     DeletingProgram -[#green]-> [*]

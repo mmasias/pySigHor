@@ -19,8 +19,9 @@ state deleteBuilding as "deleteBuilding()" {
     • Location, description
     • Observations, associated classrooms
     • Presents deletion warning
-    • Allows request confirm deletion
-    • Allows request cancel deletion
+    <b>System</b> allows
+    • request confirm deletion
+    • request cancel deletion
     end note
     
     DeletingBuilding -[#green]-> [*]

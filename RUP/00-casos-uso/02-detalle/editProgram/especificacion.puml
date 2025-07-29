@@ -16,9 +16,10 @@ state editProgram as "editProgram()" {
     note on link
     <b>System</b> presents editing form
     • Code, name, program description
-    • Allows request modify fields
-    • Allows request save program
-    • Allows request cancel editing
+    <b>System</b> allows
+    • request modify fields
+    • request save program
+    • request cancel editing
     end note
     
     SavingData -[#green]-> EditingData

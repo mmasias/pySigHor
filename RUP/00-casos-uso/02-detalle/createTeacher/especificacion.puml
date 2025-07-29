@@ -18,8 +18,9 @@ state createTeacher as "createTeacher()" {
     • Teacher code (required)
     • Teacher names (required)
     • Teacher surnames (required)
-    • Allows request create teacher
-    • Allows request cancel creation
+    <b>System</b> allows
+    • request create teacher
+    • request cancel creation
     end note
     
     CreatingTeacher -[#green]-> [*]

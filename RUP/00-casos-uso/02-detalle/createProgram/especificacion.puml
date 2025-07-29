@@ -16,8 +16,9 @@ state createProgram as "createProgram()" {
     note on link
     <b>System</b> requests minimal program data
     • Program name (required)
-    • Allows request create program
-    • Allows request cancel creation
+    <b>System</b> allows
+    • request create program
+    • request cancel creation
     end note
     
     CreatingProgram -[#green]-> [*]

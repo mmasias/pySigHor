@@ -16,8 +16,9 @@ state createCourse as "createCourse()" {
     note on link
     <b>System</b> presents request for minimal course data
     • Course name (required)
-    • Allows request create course
-    • Allows request cancel creation
+    <b>System</b> allows
+    • request create course
+    • request cancel creation
     end note
     
     CreatingCourse -[#green]-> [*]
