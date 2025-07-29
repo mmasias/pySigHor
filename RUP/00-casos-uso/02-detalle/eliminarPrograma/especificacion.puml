@@ -29,12 +29,12 @@ state deleteProgram as "deleteProgram()" {
     end note
 }
 
-eliminarPrograma -[#green]-> PROGRAMS_OPEN
+deleteProgram -[#green]-> PROGRAMS_OPEN
 note on link
 <<include>> openPrograms() - lista actualizada
 end note
 
-eliminarPrograma -[#blue]-> PROGRAMS_OPEN
+deleteProgram -[#blue]-> PROGRAMS_OPEN
 note on link
 <<include>> openPrograms() - cancelar eliminación
 end note

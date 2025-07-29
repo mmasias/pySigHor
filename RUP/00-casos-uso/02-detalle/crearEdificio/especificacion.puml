@@ -28,12 +28,12 @@ state createBuilding as "createBuilding()" {
     end note
 }
 
-crearEdificio -[#green]-> BUILDING_OPEN
+createBuilding -[#green]-> BUILDING_OPEN
 note on link
-editarEdificio(edificioNuevo)
+editBuilding(newBuilding)
 end note
 
-crearEdificio -[#blue]-> BUILDINGS_OPEN
+createBuilding -[#blue]-> BUILDINGS_OPEN
 note on link
 cancel creation
 end note

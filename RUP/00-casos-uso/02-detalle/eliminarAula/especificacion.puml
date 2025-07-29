@@ -31,12 +31,12 @@ state deleteClassroom as "deleteClassroom()" {
     end note
 }
 
-eliminarAula -[#green]-> CLASSROOMS_OPEN
+deleteClassroom -[#green]-> CLASSROOMS_OPEN
 note on link
 <<include>> openClassrooms() - lista actualizada
 end note
 
-eliminarAula -[#blue]-> CLASSROOMS_OPEN
+deleteClassroom -[#blue]-> CLASSROOMS_OPEN
 note on link
 <<include>> openClassrooms() - cancelar eliminación
 end note

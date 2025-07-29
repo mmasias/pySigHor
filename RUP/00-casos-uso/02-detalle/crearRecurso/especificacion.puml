@@ -38,7 +38,7 @@ state createResource as "createResource()" {
     end note
 }
 
-crearRecurso -[#green]-> RECOURSE_OPEN
+createResource -[#green]-> RECOURSE_OPEN
 note on link
 editResource()
 end note

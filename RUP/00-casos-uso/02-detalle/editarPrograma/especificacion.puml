@@ -33,18 +33,18 @@ state editProgram as "editProgram()" {
     end note
 }
 
-editarPrograma -[#green]-> EditandoDatos
+editProgram -[#green]-> EditandoDatos
 note on link
 <b>Administrator</b> requests continuar editando
 <b>System</b> mantiene formulario activo
 end note
 
-editarPrograma -[#green]-> PROGRAMS_OPEN
+editProgram -[#green]-> PROGRAMS_OPEN
 note on link
 openPrograms()
 end note
 
-editarPrograma -[#blue]-> PROGRAMS_OPEN
+editProgram -[#blue]-> PROGRAMS_OPEN
 note on link
 cancelar edición
 end note

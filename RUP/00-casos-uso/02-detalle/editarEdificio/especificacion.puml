@@ -42,12 +42,12 @@ state editBuilding as "editBuilding()" {
 
 }
 
-editarEdificio -[#green]-> BUILDINGS_OPEN
+editBuilding -[#green]-> BUILDINGS_OPEN
 note on link
 openBuildings()
 end note
 
-editarEdificio -[#red]-> BUILDINGS_OPEN
+editBuilding -[#red]-> BUILDINGS_OPEN
 note on link
 cancelar edición
 end note

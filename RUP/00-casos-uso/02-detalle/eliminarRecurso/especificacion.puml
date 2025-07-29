@@ -47,7 +47,7 @@ state deleteResource as "deleteResource()" {
     end note
 }
 
-eliminarRecurso -[#green]-> RECOURSES_OPEN
+deleteResource -[#green]-> RECOURSES_OPEN
 note on link
 openResources()
 end note

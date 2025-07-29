@@ -27,12 +27,12 @@ state createCourse as "createCourse()" {
     end note
 }
 
-crearCurso -[#green]-> COURSE_OPEN
+createCourse -[#green]-> COURSE_OPEN
 note on link
-editarCurso(cursoNuevo)
+editCourse(newCourse)
 end note
 
-crearCurso -[#blue]-> COURSES_OPEN
+createCourse -[#blue]-> COURSES_OPEN
 note on link
 cancel creation
 end note

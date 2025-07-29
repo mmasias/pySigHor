@@ -31,12 +31,12 @@ state deleteCourse as "deleteCourse()" {
     end note
 }
 
-eliminarCurso -[#green]-> COURSES_OPEN
+deleteCourse -[#green]-> COURSES_OPEN
 note on link
 <<include>> openCourses() - lista actualizada
 end note
 
-eliminarCurso -[#blue]-> COURSES_OPEN
+deleteCourse -[#blue]-> COURSES_OPEN
 note on link
 <<include>> openCourses() - cancelar eliminación
 end note

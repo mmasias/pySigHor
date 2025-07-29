@@ -42,12 +42,12 @@ state editCourse as "editCourse()" {
 
 }
 
-editarCurso -[#green]-> COURSES_OPEN
+editCourse -[#green]-> COURSES_OPEN
 note on link
 openCourses()
 end note
 
-editarCurso -[#red]-> COURSES_OPEN
+editCourse -[#red]-> COURSES_OPEN
 note on link
 cancelar edición
 end note

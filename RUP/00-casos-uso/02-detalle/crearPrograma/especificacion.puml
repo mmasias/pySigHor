@@ -27,12 +27,12 @@ state createProgram as "createProgram()" {
     end note
 }
 
-crearPrograma -[#green]-> PROGRAM_OPEN
+createProgram -[#green]-> PROGRAM_OPEN
 note on link
-editarPrograma(programaNuevo)
+editProgram(newProgram)
 end note
 
-crearPrograma -[#blue]-> PROGRAMS_OPEN
+createProgram -[#blue]-> PROGRAMS_OPEN
 note on link
 cancel creation
 end note

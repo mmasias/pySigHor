@@ -34,22 +34,22 @@ state openTeachers as "openTeachers()" {
     end note
 }
 
-abrirProfesores -[#green]-> TEACHER_OPEN
+openTeachers -[#green]-> TEACHER_OPEN
 note on link
 editTeacher()
 end note
 
-abrirProfesores -[#green]-> TEACHER_OPEN
+openTeachers -[#green]-> TEACHER_OPEN
 note on link
 createTeacher()
 end note
 
-abrirProfesores -[#green]-> TEACHERS_OPEN
+openTeachers -[#green]-> TEACHERS_OPEN
 note on link
 deleteTeacher()
 end note
 
-abrirProfesores -[#green]-> SYSTEM_AVAILABLE
+openTeachers -[#green]-> SYSTEM_AVAILABLE
 note on link
 completeManagement()
 end note

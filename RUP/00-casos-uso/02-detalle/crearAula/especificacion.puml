@@ -29,12 +29,12 @@ state createClassroom as "createClassroom()" {
     end note
 }
 
-crearAula -[#green]-> CLASSROOM_OPEN
+createClassroom -[#green]-> CLASSROOM_OPEN
 note on link
-editarAula(aulaNueva)
+editClassroom(newClassroom)
 end note
 
-crearAula -[#blue]-> CLASSROOMS_OPEN
+createClassroom -[#blue]-> CLASSROOMS_OPEN
 note on link
 cancel creation
 end note

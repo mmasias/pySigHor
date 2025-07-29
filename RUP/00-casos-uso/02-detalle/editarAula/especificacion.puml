@@ -43,12 +43,12 @@ state editClassroom as "editClassroom()" {
 
 }
 
-editarAula -[#green]-> CLASSROOMS_OPEN
+editClassroom -[#green]-> CLASSROOMS_OPEN
 note on link
 openClassrooms()
 end note
 
-editarAula -[#red]-> CLASSROOMS_OPEN
+editClassroom -[#red]-> CLASSROOMS_OPEN
 note on link
 cancelar edición
 end note

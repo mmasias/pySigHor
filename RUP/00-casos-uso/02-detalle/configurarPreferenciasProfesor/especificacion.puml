@@ -43,7 +43,7 @@ state configureTeacherPreferences as "configureTeacherPreferences()" {
 
 configurarPreferenciasProfesor -[#green]-> TEACHER_OPEN
 note on link
-abrirEdicionProfesor()
+editTeacher()
 end note
 
 configurarPreferenciasProfesor -[#red]-> TEACHER_OPEN

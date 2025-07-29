@@ -42,12 +42,12 @@ state editTeacher as "editTeacher()" {
 
 }
 
-editarProfesor -[#green]-> TEACHERS_OPEN
+editTeacher -[#green]-> TEACHERS_OPEN
 note on link
 openTeachers()
 end note
 
-editarProfesor -[#red]-> TEACHERS_OPEN
+editTeacher -[#red]-> TEACHERS_OPEN
 note on link
 cancelar edición
 end note

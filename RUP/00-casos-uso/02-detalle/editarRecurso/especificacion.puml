@@ -50,7 +50,7 @@ state editResource as "editResource()" {
     end note
 }
 
-editarRecurso -[#green]-> RECOURSES_OPEN
+editResource -[#green]-> RECOURSES_OPEN
 note on link
 openResources()
 end note

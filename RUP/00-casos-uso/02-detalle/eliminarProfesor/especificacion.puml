@@ -31,12 +31,12 @@ state deleteTeacher as "deleteTeacher()" {
     end note
 }
 
-eliminarProfesor -[#green]-> TEACHERS_OPEN
+deleteTeacher -[#green]-> TEACHERS_OPEN
 note on link
 <<include>> openTeachers() - lista actualizada
 end note
 
-eliminarProfesor -[#blue]-> TEACHERS_OPEN
+deleteTeacher -[#blue]-> TEACHERS_OPEN
 note on link
 <<include>> openTeachers() - cancelar eliminación
 end note

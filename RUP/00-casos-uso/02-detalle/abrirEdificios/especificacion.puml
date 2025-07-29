@@ -34,22 +34,22 @@ state openBuildings as "openBuildings()" {
     end note
 }
 
-abrirEdificios -[#green]-> BUILDING_OPEN
+openBuildings -[#green]-> BUILDING_OPEN
 note on link
 editBuilding()
 end note
 
-abrirEdificios -[#green]-> BUILDING_OPEN
+openBuildings -[#green]-> BUILDING_OPEN
 note on link
 createBuilding()
 end note
 
-abrirEdificios -[#green]-> BUILDINGS_OPEN
+openBuildings -[#green]-> BUILDINGS_OPEN
 note on link
 deleteBuilding()
 end note
 
-abrirEdificios -[#green]-> SYSTEM_AVAILABLE
+openBuildings -[#green]-> SYSTEM_AVAILABLE
 note on link
 completeManagement()
 end note

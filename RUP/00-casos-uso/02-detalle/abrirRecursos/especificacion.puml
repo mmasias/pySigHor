@@ -34,22 +34,22 @@ state openResources as "openResources()" {
     end note
 }
 
-abrirRecursos -[#green]-> RECOURSE_OPEN
+openResources -[#green]-> RECOURSE_OPEN
 note on link
 editResource()
 end note
 
-abrirRecursos -[#green]-> RECOURSE_OPEN
+openResources -[#green]-> RECOURSE_OPEN
 note on link
 createResource()
 end note
 
-abrirRecursos -[#green]-> RECOURSES_OPEN
+openResources -[#green]-> RECOURSES_OPEN
 note on link
 deleteResource()
 end note
 
-abrirRecursos -[#green]-> SYSTEM_AVAILABLE
+openResources -[#green]-> SYSTEM_AVAILABLE
 note on link
 completeManagement()
 end note

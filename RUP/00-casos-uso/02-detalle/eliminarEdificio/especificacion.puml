@@ -31,12 +31,12 @@ state deleteBuilding as "deleteBuilding()" {
     end note
 }
 
-eliminarEdificio -[#green]-> BUILDINGS_OPEN
+deleteBuilding -[#green]-> BUILDINGS_OPEN
 note on link
 <<include>> openBuildings() - lista actualizada
 end note
 
-eliminarEdificio -[#blue]-> BUILDINGS_OPEN
+deleteBuilding -[#blue]-> BUILDINGS_OPEN
 note on link
 <<include>> openBuildings() - cancelar eliminación
 end note

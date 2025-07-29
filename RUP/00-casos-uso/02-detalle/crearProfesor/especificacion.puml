@@ -29,12 +29,12 @@ state createTeacher as "createTeacher()" {
     end note
 }
 
-crearProfesor -[#green]-> TEACHER_OPEN
+createTeacher -[#green]-> TEACHER_OPEN
 note on link
-editarProfesor(profesorNuevo)
+editTeacher(newTeacher)
 end note
 
-crearProfesor -[#blue]-> TEACHERS_OPEN
+createTeacher -[#blue]-> TEACHERS_OPEN
 note on link
 cancel creation
 end note

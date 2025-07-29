@@ -34,22 +34,22 @@ state openPrograms as "openPrograms()" {
     end note
 }
 
-abrirProgramas -[#green]-> PROGRAM_OPEN
+openPrograms -[#green]-> PROGRAM_OPEN
 note on link
 editProgram()
 end note
 
-abrirProgramas -[#green]-> PROGRAM_OPEN
+openPrograms -[#green]-> PROGRAM_OPEN
 note on link
 createProgram()
 end note
 
-abrirProgramas -[#green]-> PROGRAMS_OPEN
+openPrograms -[#green]-> PROGRAMS_OPEN
 note on link
 deleteProgram()
 end note
 
-abrirProgramas -[#green]-> SYSTEM_AVAILABLE
+openPrograms -[#green]-> SYSTEM_AVAILABLE
 note on link
 completeManagement()
 end note
