@@ -1,6 +1,6 @@
-# pySigHor > crearPrograma > Detalle y prototipado
+# pySigHor > createProgram > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-u../createProgram/README.md)|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/createProgram/README.md)|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Especificación detallada del caso de uso `crearPrograma()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de programas académicos aplicando la filosofía C→U como "el delgado".
+Especificación detallada del caso de uso `createProgram()` mediante diagrama de estado, mostrando la conversación completa entre el Administrador y el Sistema para la creación de programas académicos aplicando la filosofía C→U como "el delgado".
 
 ## información del caso de uso
 
 |Atributo|Valor|
 |-|-|
-|**Nombre**|crearPrograma()|
+|**Nombre**|createProgram()|
 |**Actor primario**|Administrador|
 |**Objetivo**|Crear programa académico con datos mínimos y transferir inmediatamente a edición completa|
 |**Tipo**|Primario, esencial|
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `crearPrograma()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: crearPrograma()](/images/RUP/00-casos-uso/02-detalle/crearPrograma/crearPrograma.svg)|
+|![Caso de uso: createProgram()](/images/RUP/00-casos-uso/02-detalle/createProgram/createProgram.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `crearPrograma()` mediante diagrama de
 
 <div align=center>
 
-|![Wireframe: Creación de programa](/images/RUP/00-casos-uso/02-detalle/crearPrograma/crearPrograma-wireframe.svg)|
+|![Wireframe: Creación de programa](/images/RUP/00-casos-uso/02-detalle/createProgram/createProgram-wireframe.svg)|
 |-|
 |**Estado**: SolicitandoDatos / CreandoPrograma|
 
@@ -61,7 +61,7 @@ Especificación detallada del caso de uso `crearPrograma()` mediante diagrama de
 - Sistema "solicita datos mínimos del programa"
 - Actor "proporciona nombre del programa"
 - Sistema "crea programa y transfiere a edición"
-- Actor "llega automáticamente a editarPrograma()"
+- Actor "llega automáticamente a editProgram()"
 
 ### validaciones del wireframe
 
@@ -88,16 +88,16 @@ Especificación detallada del caso de uso `crearPrograma()` mediante diagrama de
 |Estado|Descripción|Responsabilidad|
 |-|-|-|
 |**SolicitandoDatos**|Estado donde se solicitan los datos mínimos para crear el programa|Sistema debe presentar formulario simple con campos obligatorios|
-|**CreandoPrograma**|Estado donde se crea el programa y se transfiere control|Sistema debe crear entidad y navegar a editarPrograma()|
+|**CreandoPrograma**|Estado donde se crea el programa y se transfiere control|Sistema debe crear entidad y navegar a editProgram()|
 
 ## funcionalidad delgada: crear = transferir
 
 ### concepto clave
 
-- **crearPrograma()** es "el delgado" de la filosofía C→U que:
+- **createProgram()** es "el delgado" de la filosofía C→U que:
   - **Solicita** únicamente datos mínimos necesarios
   - **Crea** programa con información básica
-  - **Transfiere** inmediatamente a editarPrograma() para completar
+  - **Transfiere** inmediatamente a editProgram() para completar
 
 ### datos mínimos requeridos
 
@@ -109,18 +109,18 @@ Especificación detallada del caso de uso `crearPrograma()` mediante diagrama de
 
 ### transición principal
 
-- **Crear programa exitoso** → Navegar a `editarPrograma(programaNuevo)`
+- **Crear programa exitoso** → Navegar a `editProgram(programaNuevo)`
 
 ### navegación alternativa
 
-- **Cancelar creación** → Navegar a `abrirProgramas()`
+- **Cancelar creación** → Navegar a `openPrograms()`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **PROGRAMAS_ABIERTO** → `crearPrograma()` → **PROGRAMA_ABIERTO**
+- **PROGRAMAS_ABIERTO** → `createProgram()` → **PROGRAMA_ABIERTO**
 
-Donde el programa llega a editarPrograma() con:
+Donde el programa llega a editProgram() con:
 - **Datos mínimos**: Nombre proporcionado por el administrador
 - **Datos automáticos**: Código generado, estado activo
 - **Modo edición**: Formulario completo disponible para completar información
@@ -166,7 +166,7 @@ Donde el programa llega a editarPrograma() con:
 ### patrón "el delgado" (filosofía C→U)
 
 - **Funcionalidad mínima**: Solo crea con datos esenciales
-- **Transferencia inmediata**: Pasa control a editarPrograma() automáticamente
+- **Transferencia inmediata**: Pasa control a editProgram() automáticamente
 - **Experiencia fluida**: Usuario no regresa a lista, continúa editando
 - **Reutilización**: Aprovecha toda la funcionalidad de "el gordo"
 
@@ -174,7 +174,7 @@ Donde el programa llega a editarPrograma() con:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [editarPrograma()](../editProgram/README.md) - "El gordo" que recibe el control
-- [abrirProgramas()](../openPrograms/README.md) - Caso de uso de origen
+- [editProgram()](../editProgram/README.md) - "El gordo" que recibe el control
+- [openPrograms()](../openPrograms/README.md) - Caso de uso de origen
 - [Filosofía C→U](../../../../extraDocs/008-filosofia-crud-creacion-edicion/README.md) - Metodología aplicada
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

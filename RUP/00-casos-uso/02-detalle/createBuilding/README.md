@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `createBuilding()` mediante diagrama d
 
 <div align=center>
 
-|![Wireframe: Creación de edificio](/images/RUP/00-casos-uso/02-detalle/crearEdificio/crearEdificio-wireframe.svg)|
+|![Wireframe: Creación de edificio](/images/RUP/00-casos-uso/02-detalle/createBuilding/createBuilding-wireframe.svg)|
 |-|
 |**Estado**: CreandoEdificio|
 
@@ -102,7 +102,7 @@ Especificación detallada del caso de uso `createBuilding()` mediante diagrama d
 
 ### concepto clave - "el delgado"
 
-- **crearEdificio()** es "el delgado" que:
+- **createBuilding()** es "el delgado" que:
   - **Solicita** solo datos mínimos indispensables
   - **Crea** edificio con información básica
   - **Transfiere** inmediatamente a edición completa
@@ -123,21 +123,21 @@ Especificación detallada del caso de uso `createBuilding()` mediante diagrama d
 
 ### operaciones de creación
 
-- **Crear y editar** → Edificio creado + **&lt;&lt;include&gt;&gt;** `editarEdificio()` para completar datos
-- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `abrirEdificios()` sin cambios
+- **Crear y editar** → Edificio creado + **&lt;&lt;include&gt;&gt;** `editBuilding()` para completar datos
+- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `openBuildings()` sin cambios
 
 ### navegación del sistema
 
-- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editarEdificio()` en `EDIFICIO_ABIERTO`
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirEdificios()` en `EDIFICIOS_ABIERTO`
+- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editBuilding()` en `EDIFICIO_ABIERTO`
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openBuildings()` en `EDIFICIOS_ABIERTO`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **EDIFICIOS_ABIERTO** → `crearEdificio()` → **EDIFICIO_ABIERTO**
+- **EDIFICIOS_ABIERTO** → `createBuilding()` → **EDIFICIO_ABIERTO**
 
 La transición incluye:
-- **&lt;&lt;include&gt;&gt;** `editarEdificio()` → **EDIFICIO_ABIERTO** (para completar datos)
+- **&lt;&lt;include&gt;&gt;** `editBuilding()` → **EDIFICIO_ABIERTO** (para completar datos)
 
 ## vocabulario utilizado
 
@@ -183,14 +183,14 @@ La transición incluye:
 - **Creación mínima**: Solo solicita datos indispensables para crear
 - **Transferencia inmediata**: Pasa directamente a edición completa
 - **Eficiencia**: Minimiza fricción en el proceso de creación
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editarEdificio()` para completar información
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editBuilding()` para completar información
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirEdificios()](../openBuildings/README.md) - Caso de uso de navegación
-- [editarEdificio()](../editBuilding/README.md) - Caso de transferencia inmediata
-- [eliminarEdificio()](../deleteBuilding/README.md) - Caso complementario del CRUD
-- [crearCurso()](../createCourse/README.md) - Patrón de referencia para "el delgado"
+- [openBuildings()](../openBuildings/README.md) - Caso de uso de navegación
+- [editBuilding()](../editBuilding/README.md) - Caso de transferencia inmediata
+- [deleteBuilding()](../deleteBuilding/README.md) - Caso complementario del CRUD
+- [createCourse()](../createCourse/README.md) - Patrón de referencia para "el delgado"
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

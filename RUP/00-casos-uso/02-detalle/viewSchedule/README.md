@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `viewSchedule()` mediante diagrama de 
 |**Objetivo**|Visualizar horario académico generado con manejo de ausencia|
 |**Tipo**|Primario, esencial, consulta|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Usuario autenticado como Administrador, acceso desde menú principal o transferencia desde generarHorario()|
+|**Precondición**|Usuario autenticado como Administrador, acceso desde menú principal o transferencia desde generateSchedule()|
 |**Postcondición exitosa**|Horario visualizado, usuario mantiene estado HORARIO_ABIERTO|
 |**Postcondición de fallo**|N/A - caso sin condiciones de fallo (maneja ausencia informativamente)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `viewSchedule()` mediante diagrama de 
 
 <div align=center>
 
-|![Wireframe: Horario académico](/images/RUP/00-casos-uso/02-detalle/consultarHorario/consultarHorario-wireframe-schedule.svg)|
+|![Wireframe: Horario académico](/images/RUP/00-casos-uso/02-detalle/viewSchedule/viewSchedule-wireframe-schedule.svg)|
 |-|
 |**Estado**: ProvidingSchedule|
 
@@ -69,7 +69,7 @@ Especificación detallada del caso de uso `viewSchedule()` mediante diagrama de 
 
 <div align=center>
 
-|![Wireframe: Sin horario disponible](/images/RUP/00-casos-uso/02-detalle/consultarHorario/consultarHorario-wireframe-noSchedule.svg)|
+|![Wireframe: Sin horario disponible](/images/RUP/00-casos-uso/02-detalle/viewSchedule/viewSchedule-wireframe-noSchedule.svg)|
 |-|
 |**Estado**: ProvidingSchedule - sin horario|
 
@@ -158,7 +158,7 @@ Este caso de uso corresponde a las transiciones:
 
 Las transiciones incluyen:
 - **<<include>>** `completarGestion()` → **SISTEMA_DISPONIBLE** (al salir)
-- Transferencia automática desde `generarHorario()` → **HORARIO_ABIERTO**
+- Transferencia automática desde `generateSchedule()` → **HORARIO_ABIERTO**
 
 ## vocabulario utilizado
 
@@ -214,7 +214,7 @@ Las transiciones incluyen:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [generarHorario()](../generateSchedule/README.md) - Caso que genera el horario consultado
+- [generateSchedule()](../generateSchedule/README.md) - Caso que genera el horario consultado
 - [completarGestion()](../completeManagement/README.md) - Caso de navegación de salida
 - [Análisis algorítmico original](../../../../reverseEngineering.md) - Formato del horario legacy
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

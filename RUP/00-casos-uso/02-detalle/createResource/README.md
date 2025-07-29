@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `createResource()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: crearRecurso()](/images/RUP/00-casos-uso/02-detalle/createResource/createResource.svg)|
+|![Caso de uso: createResource()](/images/RUP/00-casos-uso/02-detalle/createResource/createResource.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `createResource()` mediante diagrama d
 
 <div align=center>
 
-|![Wireframe: Creación de recurso](/images/RUP/00-casos-uso/02-detalle/crearRecurso/crearRecurso-wireframe.svg)|
+|![Wireframe: Creación de recurso](/images/RUP/00-casos-uso/02-detalle/createResource/createResource-wireframe.svg)|
 |-|
 |**Estado**: RequiringData / ProvidingData|
 
@@ -89,7 +89,7 @@ Especificación detallada del caso de uso `createResource()` mediante diagrama d
 |**Administrador**|solicita crear recurso||
 ||**Sistema**|permite introducir|• código del recurso<br>• nombre del recurso|
 |**Administrador**|introduce||• código del recurso<br>• nombre del recurso|
-||**Sistema**|presenta resultado|• recurso creado con datos mínimos<br>• transferir a editarRecurso()|
+||**Sistema**|presenta resultado|• recurso creado con datos mínimos<br>• transferir a editResource()|
 
 ## estados internos del caso de uso
 
@@ -102,7 +102,7 @@ Especificación detallada del caso de uso `createResource()` mediante diagrama d
 
 ### concepto clave - "el delgado"
 
-- **crearRecurso()** es "el delgado" que:
+- **createResource()** es "el delgado" que:
   - **Solicita** solo datos mínimos indispensables
   - **Crea** recurso con información básica
   - **Transfiere** inmediatamente a edición completa
@@ -123,21 +123,21 @@ Especificación detallada del caso de uso `createResource()` mediante diagrama d
 
 ### operaciones de creación
 
-- **Crear y editar** → Recurso creado + **&lt;&lt;include&gt;&gt;** `editarRecurso()` para completar datos
-- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` sin cambios
+- **Crear y editar** → Recurso creado + **&lt;&lt;include&gt;&gt;** `editResource()` para completar datos
+- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `openResources()` sin cambios
 
 ### navegación del sistema
 
-- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editarRecurso()` en `RECURSO_ABIERTO`
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirRecursos()` en `RECURSOS_ABIERTO`
+- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editResource()` en `RECURSO_ABIERTO`
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openResources()` en `RECURSOS_ABIERTO`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **RECURSOS_ABIERTO** → `crearRecurso()` → **RECURSO_ABIERTO**
+- **RECURSOS_ABIERTO** → `createResource()` → **RECURSO_ABIERTO**
 
 La transición incluye:
-- **&lt;&lt;include&gt;&gt;** `editarRecurso()` → **RECURSO_ABIERTO** (para completar datos)
+- **&lt;&lt;include&gt;&gt;** `editResource()` → **RECURSO_ABIERTO** (para completar datos)
 
 ## vocabulario utilizado
 
@@ -183,15 +183,15 @@ La transición incluye:
 - **Creación mínima**: Solo solicita datos indispensables para crear
 - **Transferencia inmediata**: Pasa directamente a edición completa
 - **Eficiencia**: Minimiza fricción en el proceso de creación
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editarRecurso()` para completar información
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editResource()` para completar información
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirRecursos()](../openResources/README.md) - Caso de uso de navegación
-- [editarRecurso()](../editResource/README.md) - Caso de transferencia inmediata
-- [eliminarRecurso()](../deleteResource/README.md) - Caso complementario del CRUD
+- [openResources()](../openResources/README.md) - Caso de uso de navegación
+- [editResource()](../editResource/README.md) - Caso de transferencia inmediata
+- [deleteResource()](../deleteResource/README.md) - Caso complementario del CRUD
 - [crearEdificio()](../createBuilding/README.md) - Patrón de referencia para "el delgado"
 - [crearAula()](../createClassroom/README.md) - Patrón de referencia para "el delgado"
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `createCourse()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: crearCurso()](/images/RUP/00-casos-uso/02-detalle/createCourse/createCourse.svg)|
+|![Caso de uso: createCourse()](/images/RUP/00-casos-uso/02-detalle/createCourse/createCourse.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -51,7 +51,7 @@ Especificación detallada del caso de uso `createCourse()` mediante diagrama de 
 
 <div align=center>
 
-|![Wireframe: Creación de curso](/images/RUP/00-casos-uso/02-detalle/crearCurso/crearCurso-wireframe.svg)|
+|![Wireframe: Creación de curso](/images/RUP/00-casos-uso/02-detalle/createCourse/createCourse-wireframe.svg)|
 |-|
 |**Estado**: SolicitandoDatos / CreandoCurso|
 
@@ -81,7 +81,7 @@ Especificación detallada del caso de uso `createCourse()` mediante diagrama de 
 |**Administrador**|solicita crear curso nuevo||
 ||**Sistema**|presenta solicitud de datos mínimos del curso|• Nombre del curso (obligatorio)<br>• Permite solicitar crear curso<br>• Permite solicitar cancelar creación|
 |**Administrador**|proporciona datos mínimos||
-||**Sistema**|crea curso y transfiere a edición|• Crea curso con datos proporcionados<br>• Transfiere inmediatamente a editarCurso()|
+||**Sistema**|crea curso y transfiere a edición|• Crea curso con datos proporcionados<br>• Transfiere inmediatamente a editCourse()|
 
 ## estados internos del caso de uso
 
@@ -94,35 +94,35 @@ Especificación detallada del caso de uso `createCourse()` mediante diagrama de 
 
 ### concepto clave - filosofía C→U
 
-- **crearCurso()** es "el delgado" que:
+- **createCourse()** es "el delgado" que:
   - **Presenta** solicitud de datos mínimos obligatorios
   - **Crea** curso básico en el sistema
-  - **Transfiere** inmediatamente a editarCurso() para completar
+  - **Transfiere** inmediatamente a editCourse() para completar
 
 ### datos mínimos requeridos
 
 - **Nombre del curso** (obligatorio)
-- Otros campos se completan en editarCurso()
+- Otros campos se completan en editCourse()
 
 ## opciones de navegación
 
 ### operaciones de creación
 
-- **Crear curso** → Curso creado básico, transfiere a `editarCurso(cursoNuevo)`
+- **Crear curso** → Curso creado básico, transfiere a `editCourse(cursoNuevo)`
 - **Cancelar creación** → Regresa a `CURSOS_ABIERTO` sin cambios
 
 ### navegación del sistema
 
-- **Creación exitosa** → `CURSO_ABIERTO` via `editarCurso(cursoNuevo)`
+- **Creación exitosa** → `CURSO_ABIERTO` via `editCourse(cursoNuevo)`
 - **Cancelación** → `CURSOS_ABIERTO` sin modificaciones
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **CURSOS_ABIERTO** → `crearCurso()` → **CURSO_ABIERTO**
+- **CURSOS_ABIERTO** → `createCourse()` → **CURSO_ABIERTO**
 
 La creación exitosa incluye:
-- Transferencia automática a `editarCurso(cursoNuevo)` → **CURSO_ABIERTO**
+- Transferencia automática a `editCourse(cursoNuevo)` → **CURSO_ABIERTO**
 
 ## vocabulario utilizado
 
@@ -173,7 +173,7 @@ La creación exitosa incluye:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirCursos()](../openCourses/README.md) - Caso de uso de navegación
-- [editarCurso()](../editCourse/README.md) - Caso complementario del CRUD (el gordo)
+- [openCourses()](../openCourses/README.md) - Caso de uso de navegación
+- [editCourse()](../editCourse/README.md) - Caso complementario del CRUD (el gordo)
 - [crearPrograma()](../createProgram/README.md) - Patrón de referencia C→U
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

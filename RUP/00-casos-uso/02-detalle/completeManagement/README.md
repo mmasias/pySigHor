@@ -49,7 +49,7 @@ Especificación detallada del caso de uso `completeManagement()` mediante diagra
 #### pantalla 1: sistema principal
 <div align=center>
 
-|![Wireframe: Panel principal](/images/RUP/00-casos-uso/02-detalle/completarGestion/completarGestion-wireframe.svg)|
+|![Wireframe: Panel principal](/images/RUP/00-casos-uso/02-detalle/completeManagement/completeManagement-wireframe.svg)|
 |-|
 |**Estado**: PresentandoMenu|
 
@@ -74,7 +74,7 @@ Especificación detallada del caso de uso `completeManagement()` mediante diagra
 |Actor|Acción|Sistema|Respuesta|
 |-|-|-|-|
 |**Administrador**|solicita disponibilizar sistema||
-||**Sistema**|permite solicitar|• abrirProgramas()<br>• abrirCursos()<br>• abrirProfesores()<br>• abrirEdificios()<br>• abrirAulas()<br>• abrirRecursos()<br>• asignarProfesorACurso()<br>• generarHorario()<br>• consultarHorario()<br>• cerrarSesion()|
+||**Sistema**|permite solicitar|• openPrograms()<br>• openCourses()<br>• openTeachers()<br>• openBuildings()<br>• openClassrooms()<br>• openResources()<br>• assignTeacherToCourse()<br>• generateSchedule()<br>• viewSchedule()<br>• closeSession()|
 |**Administrador**|solicita una de las opciones||
 
 ## estados internos del caso de uso
@@ -89,34 +89,34 @@ Especificación detallada del caso de uso `completeManagement()` mediante diagra
 ### gestión de datos maestros
 - **Gestionar Programas**: Navegar a `abrirProgramas()`
 - **Gestionar Cursos**: Navegar a `abrirCursos()`
-- **Gestionar Profesores**: Navegar a `abrirProfesores()`
-- **Gestionar Edificios**: Navegar a `abrirEdificios()`
-- **Gestionar Aulas**: Navegar a `abrirAulas()`
-- **Gestionar Recursos**: Navegar a `abrirRecursos()`
+- **Gestionar Profesores**: Navegar a `openTeachers()`
+- **Gestionar Edificios**: Navegar a `openBuildings()`
+- **Gestionar Aulas**: Navegar a `openClassrooms()`
+- **Gestionar Recursos**: Navegar a `openResources()`
 
 ### funcionalidades especiales
-- **Asignar Profesores**: Navegar a `asignarProfesorACurso()`
-- **Generar Horario**: Navegar a `generarHorario()`
-- **Consultar Horario**: Navegar a `consultarHorario()`
+- **Asignar Profesores**: Navegar a `assignTeacherToCourse()`
+- **Generar Horario**: Navegar a `generateSchedule()`
+- **Consultar Horario**: Navegar a `viewSchedule()`
 
 ### funcionalidades del sistema
-- **Cerrar Sesión**: Navegar a `cerrarSesion()`
+- **Cerrar Sesión**: Navegar a `closeSession()`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SISTEMA_DISPONIBLE** → `completarGestion()` → **SISTEMA_DISPONIBLE** (autorreflexivo)
+- **SISTEMA_DISPONIBLE** → `completeManagement()` → **SISTEMA_DISPONIBLE** (autorreflexivo)
 
 Y también a todas las transiciones de retorno desde estados específicos:
-- **PROGRAMAS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **CURSOS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **PROFESORES_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **EDIFICIOS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **AULAS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **RECURSOS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **PROFESOR_ASIGNATURAS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **HORARIO_GENERADO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
-- **HORARIO_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
+- **PROGRAMAS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **CURSOS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **PROFESORES_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **EDIFICIOS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **AULAS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **RECURSOS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **PROFESOR_ASIGNATURAS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **HORARIO_GENERADO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
+- **HORARIO_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
 
 La especificación detalla el interior del estado **SISTEMA_DISPONIBLE** del diagrama de contexto del Administrador de Horarios.
 

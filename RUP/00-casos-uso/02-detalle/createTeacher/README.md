@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `createTeacher()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: crearProfesor()](/images/RUP/00-casos-uso/02-detalle/createTeacher/createTeacher.svg)|
+|![Caso de uso: createTeacher()](/images/RUP/00-casos-uso/02-detalle/createTeacher/createTeacher.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `createTeacher()` mediante diagrama de
 
 <div align=center>
 
-|![Wireframe: Creación de profesor](/images/RUP/00-casos-uso/02-detalle/crearProfesor/crearProfesor-wireframe.svg)|
+|![Wireframe: Creación de profesor](/images/RUP/00-casos-uso/02-detalle/createTeacher/createTeacher-wireframe.svg)|
 |-|
 |**Estado**: CreandoProfesor|
 
@@ -102,7 +102,7 @@ Especificación detallada del caso de uso `createTeacher()` mediante diagrama de
 
 ### concepto clave - "el delgado"
 
-- **crearProfesor()** es "el delgado" que:
+- **createTeacher()** es "el delgado" que:
   - **Solicita** solo datos mínimos indispensables
   - **Crea** profesor con información básica
   - **Transfiere** inmediatamente a edición completa
@@ -124,21 +124,21 @@ Especificación detallada del caso de uso `createTeacher()` mediante diagrama de
 
 ### operaciones de creación
 
-- **Crear y editar** → Profesor creado + **&lt;&lt;include&gt;&gt;** `editarProfesor()` para completar datos
-- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `abrirProfesores()` sin cambios
+- **Crear y editar** → Profesor creado + **&lt;&lt;include&gt;&gt;** `editTeacher()` para completar datos
+- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `openTeachers()` sin cambios
 
 ### navegación del sistema
 
-- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editarProfesor()` en `PROFESOR_ABIERTO`
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirProfesores()` en `PROFESORES_ABIERTO`
+- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editTeacher()` en `PROFESOR_ABIERTO`
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openTeachers()` en `PROFESORES_ABIERTO`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **PROFESORES_ABIERTO** → `crearProfesor()` → **PROFESOR_ABIERTO**
+- **PROFESORES_ABIERTO** → `createTeacher()` → **PROFESOR_ABIERTO**
 
 La transición incluye:
-- **&lt;&lt;include&gt;&gt;** `editarProfesor()` → **PROFESOR_ABIERTO** (para completar datos)
+- **&lt;&lt;include&gt;&gt;** `editTeacher()` → **PROFESOR_ABIERTO** (para completar datos)
 
 ## vocabulario utilizado
 
@@ -184,14 +184,14 @@ La transición incluye:
 - **Creación mínima**: Solo solicita datos indispensables para crear
 - **Transferencia inmediata**: Pasa directamente a edición completa
 - **Eficiencia**: Minimiza fricción en el proceso de creación
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editarProfesor()` para completar información
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editTeacher()` para completar información
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirProfesores()](../openTeachers/README.md) - Caso de uso de navegación
-- [editarProfesor()](../editTeacher/README.md) - Caso de transferencia inmediata
-- [eliminarProfesor()](../deleteTeacher/README.md) - Caso complementario del CRUD
+- [openTeachers()](../openTeachers/README.md) - Caso de uso de navegación
+- [editTeacher()](../editTeacher/README.md) - Caso de transferencia inmediata
+- [deleteTeacher()](../deleteTeacher/README.md) - Caso complementario del CRUD
 - [crearCurso()](../createCourse/README.md) - Patrón de referencia para "el delgado"
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

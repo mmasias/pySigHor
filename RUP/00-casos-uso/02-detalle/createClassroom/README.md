@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `createClassroom()` mediante diagrama 
 
 <div align=center>
 
-|![Wireframe: Creación de aula](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula-wireframe.svg)|
+|![Wireframe: Creación de aula](/images/RUP/00-casos-uso/02-detalle/createClassroom/createClassroom-wireframe.svg)|
 |-|
 |**Estado**: CreandoAula|
 
@@ -102,7 +102,7 @@ Especificación detallada del caso de uso `createClassroom()` mediante diagrama 
 
 ### concepto clave - "el delgado"
 
-- **crearAula()** es "el delgado" que:
+- **createClassroom()** es "el delgado" que:
   - **Solicita** solo datos mínimos indispensables
   - **Crea** aula con información básica
   - **Transfiere** inmediatamente a edición completa
@@ -124,21 +124,21 @@ Especificación detallada del caso de uso `createClassroom()` mediante diagrama 
 
 ### operaciones de creación
 
-- **Crear y editar** → Aula creada + **&lt;&lt;include&gt;&gt;** `editarAula()` para completar datos
-- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `abrirAulas()` sin cambios
+- **Crear y editar** → Aula creada + **&lt;&lt;include&gt;&gt;** `editClassroom()` para completar datos
+- **Cancelar creación** → **&lt;&lt;include&gt;&gt;** `openClassrooms()` sin cambios
 
 ### navegación del sistema
 
-- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editarAula()` en `AULA_ABIERTA`
-- **Cancelación** → **&lt;&lt;include&gt;&gt;** `abrirAulas()` en `AULAS_ABIERTO`
+- **Creación exitosa** → **&lt;&lt;include&gt;&gt;** `editClassroom()` en `AULA_ABIERTA`
+- **Cancelación** → **&lt;&lt;include&gt;&gt;** `openClassrooms()` en `AULAS_ABIERTO`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **AULAS_ABIERTO** → `crearAula()` → **AULA_ABIERTA**
+- **AULAS_ABIERTO** → `createClassroom()` → **AULA_ABIERTA**
 
 La transición incluye:
-- **&lt;&lt;include&gt;&gt;** `editarAula()` → **AULA_ABIERTA** (para completar datos)
+- **&lt;&lt;include&gt;&gt;** `editClassroom()` → **AULA_ABIERTA** (para completar datos)
 
 ## vocabulario utilizado
 
@@ -184,14 +184,14 @@ La transición incluye:
 - **Creación mínima**: Solo solicita datos indispensables para crear
 - **Transferencia inmediata**: Pasa directamente a edición completa
 - **Eficiencia**: Minimiza fricción en el proceso de creación
-- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editarAula()` para completar información
+- **Navegación incluida**: **&lt;&lt;include&gt;&gt;** `editClassroom()` para completar información
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [abrirAulas()](../openClassrooms/README.md) - Caso de uso de navegación
-- [editarAula()](../editClassroom/README.md) - Caso de transferencia inmediata
-- [eliminarAula()](../deleteClassroom/README.md) - Caso complementario del CRUD
+- [openClassrooms()](../openClassrooms/README.md) - Caso de uso de navegación
+- [editClassroom()](../editClassroom/README.md) - Caso de transferencia inmediata
+- [deleteClassroom()](../deleteClassroom/README.md) - Caso complementario del CRUD
 - [crearEdificio()](../createBuilding/README.md) - Patrón de referencia para "el delgado"
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

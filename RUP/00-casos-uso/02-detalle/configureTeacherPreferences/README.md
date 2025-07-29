@@ -72,7 +72,7 @@ Permitir que el administrador configure el orden de prioridad de recursos para u
 
 ### concepto clave - "el gordo"
 
-- **configurarPreferenciasProfesor()** es "el gordo" que:
+- **configureTeacherPreferences()** es "el gordo" que:
   - **Presenta** lista completa de recursos con orden actual
   - **Permite** modificación del orden de prioridad
   - **Mantiene** sesión de configuración activa (puede continuar)
