@@ -2,44 +2,44 @@
 
 left to right direction
 
-actor "Administrador de Horarios" as admin
-actor "Consultor de Horarios" as consultor
+actor "Schedule Administrator" as admin
+actor "Schedule Consultant" as consultant
 
-consultor <|-up- admin 
+consultant <|-up- admin 
 
 
-package "Gestión de Profesores" {
-    usecase crearProfesor as "crearProfesor()"
-    usecase abrirProfesores as "abrirProfesores()"
-    usecase editarProfesor as "editarProfesor()"
-    usecase eliminarProfesor as "eliminarProfesor()"
-    usecase configurarPreferenciasProfesor as "configurarPreferenciasProfesor()"
+package "Teacher Management" {
+    usecase createTeacher as "createTeacher()"
+    usecase openTeachers as "openTeachers()"
+    usecase editTeacher as "editTeacher()"
+    usecase deleteTeacher as "deleteTeacher()"
+    usecase configureTeacherPreferences as "configureTeacherPreferences()"
 }
 
-package "Consulta de Horarios" {
-    usecase consultarHorario as "consultarHorario()"
+package "Schedule Consultation" {
+    usecase viewSchedule as "viewSchedule()"
 }
 
-package "Generación de Horarios" {
-    usecase generarHorario as "generarHorario()"
+package "Schedule Generation" {
+    usecase generateSchedule as "generateSchedule()"
 }
 
-package "Asignaciones" {
-    usecase asignarProfesorACurso as "asignarProfesorACurso()"
+package "Assignments" {
+    usecase assignTeacherToCourse as "assignTeacherToCourse()"
 }
 
 
-(crearProfesor) <-- admin
-(abrirProfesores) <-- admin
-(editarProfesor) <-- admin
-(eliminarProfesor) <-- admin
-(configurarPreferenciasProfesor) <-- admin
+(createTeacher) <-- admin
+(openTeachers) <-- admin
+(editTeacher) <-- admin
+(deleteTeacher) <-- admin
+(configureTeacherPreferences) <-- admin
 
-consultor --> (consultarHorario)
+consultant --> (viewSchedule)
 
-admin --> (asignarProfesorACurso)
-admin --> (generarHorario)
+admin --> (assignTeacherToCourse)
+admin --> (generateSchedule)
 
-eliminarProfesor .> abrirProfesores : <<include>>
+deleteTeacher .> openTeachers : <<include>>
 
 @enduml

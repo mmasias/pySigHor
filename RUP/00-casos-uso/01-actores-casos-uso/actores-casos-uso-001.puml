@@ -2,33 +2,33 @@
 
 left to right direction
 
-actor "Administrador de Horarios" as admin
+actor "Schedule Administrator" as admin
 
-package "Gestión de Programas" {
-    usecase crearPrograma as "crearPrograma()"
-    usecase abrirProgramas as "abrirProgramas()"
-    usecase editarPrograma as "editarPrograma()"
-    usecase eliminarPrograma as "eliminarPrograma()"
+package "Program Management" {
+    usecase createProgram as "createProgram()"
+    usecase openPrograms as "openPrograms()"
+    usecase editProgram as "editProgram()"
+    usecase deleteProgram as "deleteProgram()"
 }
 
-package "Gestión de Cursos" {
-    usecase crearCurso as "crearCurso()"
-    usecase abrirCursos as "abrirCursos()"
-    usecase editarCurso as "editarCurso()"
-    usecase eliminarCurso as "eliminarCurso()"
+package "Course Management" {
+    usecase createCourse as "createCourse()"
+    usecase openCourses as "openCourses()"
+    usecase editCourse as "editCourse()"
+    usecase deleteCourse as "deleteCourse()"
 }
 
-admin --> (crearPrograma)
-admin --> (abrirProgramas)
-admin --> (editarPrograma)
-admin --> (eliminarPrograma)
+admin --> (createProgram)
+admin --> (openPrograms)
+admin --> (editProgram)
+admin --> (deleteProgram)
 
-(crearCurso) <-- admin
-(abrirCursos) <-- admin
-(editarCurso) <-- admin
-(eliminarCurso) <-- admin
+(createCourse) <-- admin
+(openCourses) <-- admin
+(editCourse) <-- admin
+(deleteCourse) <-- admin
 
-eliminarCurso .> abrirCursos : <<include>>
-eliminarPrograma .> abrirProgramas : <<include>>
+deleteCourse .> openCourses : <<include>>
+deleteProgram .> openPrograms : <<include>>
 
 @enduml

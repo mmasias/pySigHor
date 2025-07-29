@@ -3,37 +3,37 @@
 left to right direction
 
 
-package "Gestión de Campus" {
-actor "Administrador de Horarios" as admin
-    usecase crearEdificio as "crearEdificio()"
-    usecase abrirEdificios as "abrirEdificios()"
-    usecase editarEdificio as "editarEdificio()"
-    usecase eliminarEdificio as "eliminarEdificio()"
-    usecase crearAula as "crearAula()"
-    usecase abrirAulas as "abrirAulas()"
-    usecase editarAula as "editarAula()"
-    usecase eliminarAula as "eliminarAula()"
-    usecase crearRecurso as "crearRecurso()"
-    usecase abrirRecursos as "abrirRecursos()"
-    usecase editarRecurso as "editarRecurso()"
-    usecase eliminarRecurso as "eliminarRecurso()"
+package "Campus Management" {
+actor "Schedule Administrator" as admin
+    usecase createBuilding as "createBuilding()"
+    usecase openBuildings as "openBuildings()"
+    usecase editBuilding as "editBuilding()"
+    usecase deleteBuilding as "deleteBuilding()"
+    usecase createClassroom as "createClassroom()"
+    usecase openClassrooms as "openClassrooms()"
+    usecase editClassroom as "editClassroom()"
+    usecase deleteClassroom as "deleteClassroom()"
+    usecase createResource as "createResource()"
+    usecase openResources as "openResources()"
+    usecase editResource as "editResource()"
+    usecase deleteResource as "deleteResource()"
 }
 
-admin --> (crearEdificio)
-admin --> (abrirEdificios)
-admin --> (editarEdificio)
-admin --> (eliminarEdificio)
-admin --> (crearAula)
-admin --> (abrirAulas)
-(editarAula) <-- admin
-(eliminarAula) <-- admin
-(crearRecurso) <-- admin
-(abrirRecursos) <-- admin
-(editarRecurso) <-- admin
-(eliminarRecurso) <-- admin
+admin --> (createBuilding)
+admin --> (openBuildings)
+admin --> (editBuilding)
+admin --> (deleteBuilding)
+admin --> (createClassroom)
+admin --> (openClassrooms)
+(editClassroom) <-- admin
+(deleteClassroom) <-- admin
+(createResource) <-- admin
+(openResources) <-- admin
+(editResource) <-- admin
+(deleteResource) <-- admin
 
-eliminarEdificio .> abrirEdificios : <<include>>
-eliminarAula .> abrirAulas : <<include>>
-eliminarRecurso .> abrirRecursos : <<include>>
+deleteBuilding .> openBuildings : <<include>>
+deleteClassroom .> openClassrooms : <<include>>
+deleteResource .> openResources : <<include>>
 
 @enduml

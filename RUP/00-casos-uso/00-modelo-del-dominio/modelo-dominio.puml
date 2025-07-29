@@ -1,21 +1,21 @@
 @startuml
 
-Profesor -d- Curso : imparte
+Teacher -d- Course : teaches
 
-Curso -r-* Programa
+Course -r-* Program
 
-package CampusUniversitario {
-    Edificio *-u- Aula
+package UniversityCampus {
+    Building *-u- Classroom
 }
 
-Horario o-- Aula
-Horario o-d- Curso
-Horario o-- Profesor
+Schedule o-- Classroom
+Schedule o-d- Course
+Schedule o-- Teacher
 
-Profesor ..> Recurso : prefiere
-Aula ..> Recurso : ofrece
+Teacher ..> Resource : prefers
+Classroom ..> Resource : offers
 
-Curso .. BloqueHorario
+Course .. TimeBlock
 
 
 @enduml

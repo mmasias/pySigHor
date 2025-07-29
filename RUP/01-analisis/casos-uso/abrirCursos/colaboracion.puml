@@ -1,34 +1,34 @@
-@startuml abrirCursos-analisis
+@startuml openCourses-analysis
 skinparam linetype polyline
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
-package abrirCursos as "abrirCursos()" {
-    rectangle #629EF9 AbrirCursosView
-    rectangle #b5bd68 CursosController
-    rectangle #F2AC4E CursoRepository
-    rectangle #F2AC4E Curso
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openCourses as "openCourses()" {
+    rectangle #629EF9 OpenCoursesView
+    rectangle #b5bd68 CoursesController
+    rectangle #F2AC4E CourseRepository
+    rectangle #F2AC4E Course
 }
 
-rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
-rectangle #CDEBA5 ":Collaboration CrearCurso" as CrearCurso
-rectangle #CDEBA5 ":Collaboration EditarCurso" as EditarCurso
-rectangle #CDEBA5 ":Collaboration EliminarCurso" as EliminarCurso
+rectangle #CDEBA5 ":System Available" as SystemAvailableOutput
+rectangle #CDEBA5 ":Collaboration CreateCourse" as CreateCourse
+rectangle #CDEBA5 ":Collaboration EditCourse" as EditCourse
+rectangle #CDEBA5 ":Collaboration DeleteCourse" as DeleteCourse
 
-SistemaDisponible -r-> AbrirCursosView: abrirCursos()
+SystemAvailable -r-> OpenCoursesView: openCourses()
 
-AbrirCursosView -d-> CursosController: listarCursos() : List<Curso>
+OpenCoursesView -d-> CoursesController: listCourses() : List<Course>
 
-CursosController --> CursoRepository: obtenerTodos() : List<Curso>
+CoursesController --> CourseRepository: getAll() : List<Course>
 
-CursoRepository -- Curso
+CourseRepository -- Course
 
-AbrirCursosView --> CursosController: filtrarCursos(criterio) : List<Curso>
+OpenCoursesView --> CoursesController: filterCourses(criteria) : List<Course>
 
-CursosController --> CursoRepository: buscarPorCriterio(criterio) : List<Curso>
+CoursesController --> CourseRepository: findByCriteria(criteria) : List<Course>
 
-AbrirCursosView ..> SistemaDisponibleSalida: completarGestion()
-AbrirCursosView ..> CrearCurso: crearCurso()
-AbrirCursosView ..> EditarCurso: editarCurso()
-AbrirCursosView ..> EliminarCurso: eliminarCurso()
+OpenCoursesView ..> SystemAvailableOutput: completeManagement()
+OpenCoursesView ..> CreateCourse: createCourse()
+OpenCoursesView ..> EditCourse: editCourse()
+OpenCoursesView ..> DeleteCourse: deleteCourse()
 
 @enduml

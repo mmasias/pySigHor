@@ -1,57 +1,57 @@
-@startuml abrirCursos
+@startuml openCourses
 
 skinparam linetype polyline
 
-state abrirCursos as "abrirCursos()" {
+state openCourses as "openCourses()" {
 
-    state " " as MostrandoLista
-    state " " as FiltrandoLista
+    state " " as ShowingList
+    state " " as FilteringList
 
-    [*] -[#green]-> MostrandoLista 
+    [*] -[#green]-> ShowingList 
     note on link
-    <b>Administrador</b> solicita abrir cursos
+    <b>Administrator</b> requests to open courses
     end note    
     
-    MostrandoLista -[#green]-> FiltrandoLista
+    ShowingList -[#green]-> FilteringList
     note on link
-    <b>Sistema</b> presenta lista de cursos
-    • Código, nombre, descripción de cada curso
-    • Permite solicitar filtrar lista
-    • Permite solicitar crear curso nuevo
-    • Permite solicitar eliminar curso
-    • Permite solicitar editar curso
+    <b>System</b> presents course list
+    • Code, name, description of each course
+    • Allows requesting to filter list
+    • Allows requesting to create new course
+    • Allows requesting to delete course
+    • Allows requesting to edit course
     end note
     
-    FiltrandoLista -[#green]-> FiltrandoLista
+    FilteringList -[#green]-> FilteringList
     note on link
-    <b>Administrador</b> solicita filtrar lista
-    <b>Sistema</b> presenta lista filtrada
+    <b>Administrator</b> requests to filter list
+    <b>System</b> presents filtered list
     end note
     
-    FiltrandoLista -[#green]-> [*]
+    FilteringList -[#green]-> [*]
     note on link
-    <b>Administrador</b> solicita una de las opciones
+    <b>Administrator</b> requests one of the options
     end note
 }
 
-abrirCursos -[#green]-> CURSO_ABIERTO
+openCourses -[#green]-> COURSE_OPEN
 note on link
-editarCurso()
+editCourse()
 end note
 
-abrirCursos -[#green]-> CURSO_ABIERTO
+openCourses -[#green]-> COURSE_OPEN
 note on link
-crearCurso()
+createCourse()
 end note
 
-abrirCursos -[#green]-> CURSOS_ABIERTO
+openCourses -[#green]-> COURSES_OPEN
 note on link
-eliminarCurso()
+deleteCourse()
 end note
 
-abrirCursos -[#green]-> SISTEMA_DISPONIBLE
+openCourses -[#green]-> SYSTEM_AVAILABLE
 note on link
-completarGestion()
+completeManagement()
 end note
 
 @enduml
