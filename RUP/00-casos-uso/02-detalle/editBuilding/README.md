@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editBuilding()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: editarEdificio()](/images/RUP/00-casos-uso/02-detalle/editBuilding/editarEdificio.svg)|
+|![Caso de uso: editarEdificio()](/images/RUP/00-casos-uso/02-detalle/editBuilding/editBuilding.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -59,7 +59,7 @@ Especificación detallada del caso de uso `editBuilding()` mediante diagrama de 
 
 <div align=center>
 
-|![Wireframe: Edición de edificio](/images/RUP/00-casos-uso/02-detalle/editBuilding/editarEdificio-wireframe.svg)|
+|![Wireframe: Edición de edificio](/images/RUP/00-casos-uso/02-detalle/editBuilding/editBuilding-wireframe.svg)|
 |-|
 |**Estado**: EditandoDatos / GuardandoDatos|
 
