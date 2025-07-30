@@ -101,7 +101,7 @@ Especificación detallada del caso de uso `viewSchedule()` mediante diagrama de 
 |**Administrador**|solicita continuar consultando||
 ||**Sistema**|presenta|• mantener vista horario|
 |**Administrador**|solicita salir de consulta||
-||**Sistema**|presenta resultado|• transferir a completarGestion()|
+||**Sistema**|presenta resultado|• transferir a completeManagement()|
 
 ## estados internos del caso de uso
 
@@ -115,7 +115,7 @@ Especificación detallada del caso de uso `viewSchedule()` mediante diagrama de 
 
 ### concepto clave - visualización simple
 
-- **consultarHorario()** implementa consulta simple que:
+- **viewSchedule()** implementa consulta simple que:
   - **Verifica** existencia de horario generado previamente
   - **Presenta** horario completo en formato académico estándar
   - **Informa** claramente cuando no hay horario disponible
@@ -141,23 +141,23 @@ Especificación detallada del caso de uso `viewSchedule()` mediante diagrama de 
 
 - **Visualizar horario** → Permanece en `HORARIO_ABIERTO`
 - **Navegar dentro del horario** → Futuras extensiones (filtros, vistas)
-- **Salir de consulta** → **<<include>>** `completarGestion()`
+- **Salir de consulta** → **\<\<include>>** `completeManagement()`
 
 ### navegación del sistema
 
 - **Con horario disponible** → Permanece en `HORARIO_ABIERTO`
-- **Sin horario disponible** → **<<include>>** `completarGestion()` tras información
-- **Salida del usuario** → **<<include>>** `completarGestion()` en `SISTEMA_DISPONIBLE`
+- **Sin horario disponible** → **\<\<include>>** `completeManagement()` tras información
+- **Salida del usuario** → **\<\<include>>** `completeManagement()` en `SISTEMA_DISPONIBLE`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **SISTEMA_DISPONIBLE** → `consultarHorario()` → **HORARIO_ABIERTO** (con horario)
-- **SISTEMA_DISPONIBLE** → `consultarHorario()` → **SISTEMA_DISPONIBLE** (sin horario)
-- **HORARIO_ABIERTO** → `consultarHorario()` → **HORARIO_ABIERTO** (navegación interna)
+- **SISTEMA_DISPONIBLE** → `viewSchedule()` → **HORARIO_ABIERTO** (con horario)
+- **SISTEMA_DISPONIBLE** → `viewSchedule()` → **SISTEMA_DISPONIBLE** (sin horario)
+- **HORARIO_ABIERTO** → `viewSchedule()` → **HORARIO_ABIERTO** (navegación interna)
 
 Las transiciones incluyen:
-- **<<include>>** `completarGestion()` → **SISTEMA_DISPONIBLE** (al salir)
+- **\<\<include>>** `completeManagement()` → **SISTEMA_DISPONIBLE** (al salir)
 - Transferencia automática desde `generateSchedule()` → **HORARIO_ABIERTO**
 
 ## vocabulario utilizado
@@ -208,14 +208,14 @@ Las transiciones incluyen:
 - **Verificación directa**: Chequeo inmediato de existencia de datos
 - **Presentación completa**: Información completa cuando está disponible
 - **Manejo informativo**: Ausencia tratada como información, no error
-- **Navegación flexible**: **<<include>>** `completarGestion()` para salir
+- **Navegación flexible**: **\<\<include>>** `completeManagement()` para salir
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
 - [generateSchedule()](../generateSchedule/README.md) - Caso que genera el horario consultado
-- [completarGestion()](../completeManagement/README.md) - Caso de navegación de salida
+- [completeManagement()](../completeManagement/README.md) - Caso de navegación de salida
 - [Análisis algorítmico original](../../../../reverseEngineering.md) - Formato del horario legacy
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada
 - [QyA.log](../../../../QyA.log) - Decisiones de diseño para caso de consulta

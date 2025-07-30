@@ -182,7 +182,7 @@ Ambas transiciones incluyen:
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
 - [openCourses()](../openCourses/README.md) - Caso de uso de navegación
-- [editarCurso()](../editCourse/README.md) - Caso complementario del CRUD
-- [crearCurso()](../createCourse/README.md) - Caso complementario del CRUD
-- [eliminarPrograma()](../deleteProgram/README.md) - Patrón de referencia para eliminación
+- [editCourse()](../editCourse/README.md) - Caso complementario del CRUD
+- [createCourse()](../createCourse/README.md) - Caso complementario del CRUD
+- [deleteProgram()](../deleteProgram/README.md) - Patrón de referencia para eliminación
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

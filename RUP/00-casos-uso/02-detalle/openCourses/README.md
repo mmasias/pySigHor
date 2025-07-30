@@ -34,7 +34,7 @@ Especificación detallada del caso de uso `openCourses()` mediante diagrama de e
 
 <div align=center>
 
-|![Caso de uso: abrirCursos()](/images/RUP/00-casos-uso/02-detalle/openCourses/openCourses.svg)|
+|![Caso de uso: openCourses()](/images/RUP/00-casos-uso/02-detalle/openCourses/openCourses.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -92,7 +92,7 @@ Especificación detallada del caso de uso `openCourses()` mediante diagrama de e
 ## funcionalidad unificada: listar = filtrar = buscar
 
 ### concepto clave
-- **abrirCursos()** es un caso de uso que abarca:
+- **openCourses()** es un caso de uso que abarca:
   - **Listar** (sin criterio) → muestra todos los cursos
   - **Filtrar/Buscar** (con criterio) → muestra cursos que coinciden
 
@@ -105,12 +105,12 @@ Especificación detallada del caso de uso `openCourses()` mediante diagrama de e
 ## opciones de navegación
 
 ### operaciones CRUD
-- **Solicitar crear curso** → Navegar a `crearCurso()`
-- **Solicitar editar curso** → Navegar a `editarCurso()`
-- **Solicitar eliminar curso** → Navegar a `eliminarCurso()`
+- **Solicitar crear curso** → Navegar a `createCourse()`
+- **Solicitar editar curso** → Navegar a `editCourse()`
+- **Solicitar eliminar curso** → Navegar a `deleteCourse()`
 
 ### navegación del sistema
-- **Solicitar mostrar menú** → Navegar a `completarGestion()`
+- **Solicitar mostrar menú** → Navegar a `completeManagement()`
 
 ## conexión con diagrama de contexto
 
@@ -118,10 +118,10 @@ Este caso de uso corresponde a la transición:
 - **SISTEMA_DISPONIBLE** → `openCourses()` → **CURSOS_ABIERTO**
 
 Y las transiciones de salida:
-- **CURSOS_ABIERTO** → `crearCurso()` → **CURSO_ABIERTO**
-- **CURSOS_ABIERTO** → `editarCurso()` → **CURSO_ABIERTO**
-- **CURSOS_ABIERTO** → `eliminarCurso()` → **CURSOS_ABIERTO**
-- **CURSOS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
+- **CURSOS_ABIERTO** → `createCourse()` → **CURSO_ABIERTO**
+- **CURSOS_ABIERTO** → `editCourse()` → **CURSO_ABIERTO**
+- **CURSOS_ABIERTO** → `deleteCourse()` → **CURSOS_ABIERTO**
+- **CURSOS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
 
 ## vocabulario utilizado
 
@@ -164,6 +164,6 @@ Y las transiciones de salida:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [completarGestion()](../completeManagement/README.md) - Caso de uso previo
-- [abrirProgramas()](../openPrograms/README.md) - Caso de uso similar
+- [completeManagement()](../completeManagement/README.md) - Caso de uso previo
+- [openPrograms()](../openPrograms/README.md) - Caso de uso similar
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

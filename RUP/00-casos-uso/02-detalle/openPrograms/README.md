@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openPrograms()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: abrirProgramas()](/images/RUP/00-casos-uso/02-detalle/openPrograms/openPrograms.svg)|
+|![Caso de uso: openPrograms()](/images/RUP/00-casos-uso/02-detalle/openPrograms/openPrograms.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -91,7 +91,7 @@ Especificación detallada del caso de uso `openPrograms()` mediante diagrama de 
 ## funcionalidad unificada: listar = filtrar = buscar
 
 ### concepto clave
-- **abrirProgramas()** es un caso de uso que abarca:
+- **openPrograms()** es un caso de uso que abarca:
   - **Listar** (sin criterio) → muestra todos los programas
   - **Filtrar/Buscar** (con criterio) → muestra programas que coinciden
 
@@ -106,10 +106,10 @@ Especificación detallada del caso de uso `openPrograms()` mediante diagrama de 
 ### operaciones CRUD
 - **Solicitar crear programa** → Navegar a `crearPrograma()`
 - **Solicitar editar programa** → Navegar a `editarPrograma()`
-- **Solicitar eliminar programa** → Navegar a `eliminarPrograma()`
+- **Solicitar eliminar programa** → Navegar a `deleteProgram()`
 
 ### navegación del sistema
-- **Solicitar salir** → Navegar a `completarGestion()`
+- **Solicitar salir** → Navegar a `completeManagement()`
 
 ## conexión con diagrama de contexto
 
@@ -119,8 +119,8 @@ Este caso de uso corresponde a la transición:
 Y las transiciones de salida:
 - **LISTANDO_PROGRAMAS** → `crearPrograma()` → **EDITANDO_PROGRAMA**
 - **LISTANDO_PROGRAMAS** → `editarPrograma()` → **EDITANDO_PROGRAMA**
-- **LISTANDO_PROGRAMAS** → `eliminarPrograma()` → **LISTANDO_PROGRAMAS**
-- **LISTANDO_PROGRAMAS** → `completarGestion()` → **MENU_PRINCIPAL**
+- **LISTANDO_PROGRAMAS** → `deleteProgram()` → **LISTANDO_PROGRAMAS**
+- **LISTANDO_PROGRAMAS** → `completeManagement()` → **MENU_PRINCIPAL**
 
 ## vocabulario utilizado
 
@@ -163,5 +163,5 @@ Y las transiciones de salida:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [completarGestion()](../completeManagement/README.md) - Caso de uso previo
+- [completeManagement()](../completeManagement/README.md) - Caso de uso previo
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

@@ -43,8 +43,8 @@ Análisis de colaboración del caso de uso `generarHorario()` mediante el patró
 **Colaboraciones**:
 - **Entrada**: Recibe `generarHorario()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `HorarioController`
-- **Salida**: **<<include>>** `:Collaboration ConsultarHorario` tras generación exitosa
-- **Salida**: **<<include>>** `:Collaboration CompletarGestion` tras cancelación/error
+- **Salida**: **\<\<include>>** `:Collaboration ConsultarHorario` tras generación exitosa
+- **Salida**: **\<\<include>>** `:Collaboration CompletarGestion` tras cancelación/error
 
 ### clases de control
 

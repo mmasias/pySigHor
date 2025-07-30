@@ -196,5 +196,5 @@ Ambas transiciones incluyen:
 - [openBuildings()](../openBuildings/README.md) - Caso de uso de navegación
 - [crearEdificio()](../createBuilding/README.md) - Caso complementario del CRUD
 - [eliminarEdificio()](../deleteBuilding/README.md) - Caso complementario del CRUD
-- [editarCurso()](../editCourse/README.md) - Patrón de referencia para "el gordo"
+- [editCourse()](../editCourse/README.md) - Patrón de referencia para "el gordo"
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

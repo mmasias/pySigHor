@@ -42,7 +42,7 @@ Análisis de colaboración del caso de uso `eliminarRecurso()` mediante el patr�
 **Colaboraciones**:
 - **Entrada**: Recibe `eliminarRecurso()` desde `:Recursos Abierto`
 - **Control**: Se comunica con `RecursoController`
-- **Salida**: **<<include>>** `:Collaboration AbrirRecursos` tras eliminación o cancelación
+- **Salida**: **\<\<include>>** `:Collaboration AbrirRecursos` tras eliminación o cancelación
 
 ### clases de control
 

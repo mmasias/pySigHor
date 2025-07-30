@@ -193,5 +193,5 @@ La transición incluye:
 - [openTeachers()](../openTeachers/README.md) - Caso de uso de navegación
 - [editTeacher()](../editTeacher/README.md) - Caso de transferencia inmediata
 - [deleteTeacher()](../deleteTeacher/README.md) - Caso complementario del CRUD
-- [crearCurso()](../createCourse/README.md) - Patrón de referencia para "el delgado"
+- [createCourse()](../createCourse/README.md) - Patrón de referencia para "el delgado"
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

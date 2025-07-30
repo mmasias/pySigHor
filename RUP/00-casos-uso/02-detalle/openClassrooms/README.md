@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openClassrooms()` mediante diagrama d
 
 <div align=center>
 
-|![Caso de uso: abrirAulas()](/images/RUP/00-casos-uso/02-detalle/openClassrooms/openClassrooms.svg)|
+|![Caso de uso: openClassrooms()](/images/RUP/00-casos-uso/02-detalle/openClassrooms/openClassrooms.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -91,7 +91,7 @@ Especificación detallada del caso de uso `openClassrooms()` mediante diagrama d
 ## funcionalidad unificada: listar = filtrar = buscar
 
 ### concepto clave
-- **abrirAulas()** es un caso de uso que abarca:
+- **openClassrooms()** es un caso de uso que abarca:
   - **Listar** (sin criterio) → muestra todas las aulas
   - **Filtrar/Buscar** (con criterio) → muestra aulas que coinciden
 
@@ -109,7 +109,7 @@ Especificación detallada del caso de uso `openClassrooms()` mediante diagrama d
 - **Solicitar eliminar aula** → Navegar a `eliminarAula()`
 
 ### navegación del sistema
-- **Solicitar salir** → Navegar a `completarGestion()`
+- **Solicitar salir** → Navegar a `completeManagement()`
 
 ## conexión con diagrama de contexto
 
@@ -120,7 +120,7 @@ Y las transiciones de salida:
 - **AULAS_ABIERTO** → `crearAula()` → **AULA_ABIERTO**
 - **AULAS_ABIERTO** → `editarAula()` → **AULA_ABIERTO**
 - **AULAS_ABIERTO** → `eliminarAula()` → **AULAS_ABIERTO**
-- **AULAS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
+- **AULAS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
 
 ## vocabulario utilizado
 
@@ -163,5 +163,5 @@ Y las transiciones de salida:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [completarGestion()](../completeManagement/README.md) - Caso de uso previo
+- [completeManagement()](../completeManagement/README.md) - Caso de uso previo
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

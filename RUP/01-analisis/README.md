@@ -35,7 +35,7 @@ Análisis completo de cada caso de uso especificado mediante:
 ### Diagramas de colaboración
 - **Estructura de package**: Cada caso de uso como paquete independiente
 - **Entradas desde estados**: Conexiones desde estados del diagrama de contexto
-- **Salidas con include**: Navegación mediante `<<include>>` a otras colaboraciones
+- **Salidas con include**: Navegación mediante `\<\<include>>` a otras colaboraciones
 - **Relaciones MVC**: Controlador intermedia entre Vista y Entidades
 
 ## Cobertura de análisis
@@ -61,7 +61,7 @@ Análisis completo de cada caso de uso especificado mediante:
 #### Patrón "el delgado" (crear)
 - **Vista mínima**: Captura datos básicos únicamente
 - **Controlador**: Validación y creación inmediata
-- **Redirección automática**: `<<include>>` a edición del objeto creado
+- **Redirección automática**: `\<\<include>>` a edición del objeto creado
 
 #### Patrón "el gordo" (editar)
 - **Vista completa**: Todos los campos editables con sesión continua

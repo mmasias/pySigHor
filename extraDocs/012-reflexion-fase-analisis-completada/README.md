@@ -115,7 +115,7 @@ Cada uno de los 32 casos contiene:
 - **Filosofía C→U**: "El delgado" (crear) + "El gordo" (editar) en todos los CRUDs
 - **Estados simples**: Nombres vacíos `" "` en todos los diagramas de estado
 - **Patrón MVC**: 6 clases promedio de análisis por caso de uso
-- **Include navigation**: `<<include>>` para navegación entre casos
+- **Include navigation**: `\<\<include>>` para navegación entre casos
 
 #### Arquitectura emergente identificada
 - **Boundary classes**: 32 clases de vista especializadas

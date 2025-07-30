@@ -25,7 +25,7 @@ Especificación detallada del caso de uso `editCourse()` mediante diagrama de es
 |**Objetivo**|Presentar datos de edición de curso académico con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Curso seleccionado desde openCourses() o curso recién creado desde crearCurso()|
+|**Precondición**|Curso seleccionado desde openCourses() o curso recién creado desde createCourse()|
 |**Postcondición exitosa**|Curso modificado guardado, usuario puede continuar editando en CURSO_ABIERTO o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `editCourse()` mediante diagrama de es
 
 <div align=center>
 
-|![Caso de uso: editarCurso()](/images/RUP/00-casos-uso/02-detalle/editCourse/editCourse.svg)|
+|![Caso de uso: editCourse()](/images/RUP/00-casos-uso/02-detalle/editCourse/editCourse.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -95,7 +95,7 @@ Especificación detallada del caso de uso `editCourse()` mediante diagrama de es
 
 ### concepto clave - "el gordo"
 
-- **editarCurso()** es "el gordo" que:
+- **editCourse()** es "el gordo" que:
   - **Presenta** datos completos con todos los campos
   - **Permite** modificación de cualquier campo del curso
   - **Mantiene** sesión de edición activa (puede continuar)
@@ -186,7 +186,7 @@ Este caso de uso corresponde a las transiciones:
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
 - [openCourses()](../openCourses/README.md) - Caso de uso de navegación
-- [crearCurso()](../createCourse/README.md) - Caso complementario del CRUD (el delgado)
-- [eliminarCurso()](../deleteCourse/README.md) - Caso complementario del CRUD
+- [createCourse()](../createCourse/README.md) - Caso complementario del CRUD (el delgado)
+- [deleteCourse()](../deleteCourse/README.md) - Caso complementario del CRUD
 - [editarPrograma()](../editProgram/README.md) - Patrón de referencia para edición
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

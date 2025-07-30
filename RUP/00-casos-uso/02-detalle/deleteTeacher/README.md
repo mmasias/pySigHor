@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `deleteTeacher()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: eliminarProfesor()](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/deleteTeacher.svg)|
+|![Caso de uso: deleteTeacher()](/images/RUP/00-casos-uso/02-detalle/deleteTeacher/deleteTeacher.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -103,7 +103,7 @@ Especificación detallada del caso de uso `deleteTeacher()` mediante diagrama de
 
 ### concepto clave
 
-- **eliminarProfesor()** es un caso de uso que abarca:
+- **deleteTeacher()** es un caso de uso que abarca:
   - **Presentar** información completa del profesor a eliminar
   - **Permitir solicitar** confirmación del administrador
   - **Procesar** eliminación del profesor del sistema
@@ -191,7 +191,7 @@ Ambas transiciones incluyen:
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
 - [openTeachers()](../openTeachers/README.md) - Caso de uso de navegación
-- [editarProfesor()](../editTeacher/README.md) - Caso complementario del CRUD
-- [crearProfesor()](../createTeacher/README.md) - Caso complementario del CRUD
-- [eliminarCurso()](../deleteCourse/README.md) - Patrón de referencia para eliminación
+- [editTeacher()](../editTeacher/README.md) - Caso complementario del CRUD
+- [createTeacher()](../createTeacher/README.md) - Caso complementario del CRUD
+- [deleteCourse()](../deleteCourse/README.md) - Patrón de referencia para eliminación
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

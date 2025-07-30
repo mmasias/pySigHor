@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `deleteProgram()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: eliminarPrograma()](/images/RUP/00-casos-uso/02-detalle/deleteProgram/deleteProgram.svg)|
+|![Caso de uso: deleteProgram()](/images/RUP/00-casos-uso/02-detalle/deleteProgram/deleteProgram.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -95,7 +95,7 @@ Especificación detallada del caso de uso `deleteProgram()` mediante diagrama de
 
 ### concepto clave
 
-- **eliminarPrograma()** es un caso de uso que abarca:
+- **deleteProgram()** es un caso de uso que abarca:
   - **Presentar** información completa del programa a eliminar
   - **Permitir solicitar** confirmación del administrador
   - **Procesar** eliminación del programa del sistema

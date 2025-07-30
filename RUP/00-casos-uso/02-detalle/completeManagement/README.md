@@ -87,8 +87,8 @@ Especificación detallada del caso de uso `completeManagement()` mediante diagra
 ## opciones del sistema
 
 ### gestión de datos maestros
-- **Gestionar Programas**: Navegar a `abrirProgramas()`
-- **Gestionar Cursos**: Navegar a `abrirCursos()`
+- **Gestionar Programas**: Navegar a `openPrograms()`
+- **Gestionar Cursos**: Navegar a `openCourses()`
 - **Gestionar Profesores**: Navegar a `openTeachers()`
 - **Gestionar Edificios**: Navegar a `openBuildings()`
 - **Gestionar Aulas**: Navegar a `openClassrooms()`

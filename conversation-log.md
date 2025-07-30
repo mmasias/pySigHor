@@ -3472,7 +3472,7 @@ Manuel identificó que eliminarPrograma() **ya debería incluir** abrirProgramas
 eliminarPrograma() {
   - confirma eliminación
   - procesa eliminación  
-  - <<include>> abrirProgramas() → PROGRAMAS_ABIERTO
+  - \<\<include>> abrirProgramas() → PROGRAMAS_ABIERTO
 }
 ```
 
@@ -3496,8 +3496,8 @@ Manuel inicialmente sugirió "listarX()" pero corrigió inmediatamente:
 #### 2. Actualización de Diagramas de Casos de Uso
 Manuel ajustó actores-casos-uso-001.puml agregando:
 ```plantuml
-eliminarPrograma .> abrirProgramas : <<include>>
-eliminarCurso .> abrirCursos : <<include>>
+eliminarPrograma .> abrirProgramas : \<\<include>>
+eliminarCurso .> abrirCursos : \<\<include>>
 ```
 
 Claude completó 002 y 003 con el patrón completo.
@@ -3505,13 +3505,13 @@ Claude completó 002 y 003 con el patrón completo.
 #### 3. Corrección de eliminarPrograma()
 
 **Especificación corregida**:
-- Transiciones: `<<include>> abrirProgramas() - lista actualizada`
+- Transiciones: `\<\<include>> abrirProgramas() - lista actualizada`
 - Doble entrada: PROGRAMAS_ABIERTO y PROGRAMA_ABIERTO
 - Navegación unificada hacia PROGRAMAS_ABIERTO
 
 **Análisis MVC actualizado**:
 - EliminarProgramaView recibe desde ambos contextos
-- Salida: `<<include>> :Collaboration AbrirProgramas`
+- Salida: `\<\<include>> :Collaboration AbrirProgramas`
 - Patrón de reutilización sin duplicación
 
 **Dashboard actualizado**:

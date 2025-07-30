@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `editTeacher()` mediante diagrama de e
 |**Objetivo**|Presentar datos de edición de profesor con capacidad de modificación y guardado|
 |**Tipo**|Primario, esencial|
 |**Nivel**|Objetivo de usuario|
-|**Precondición**|Profesor seleccionado desde openTeachers() o profesor recién creado desde crearProfesor()|
+|**Precondición**|Profesor seleccionado desde openTeachers() o profesor recién creado desde createTeacher()|
 |**Postcondición exitosa**|Profesor modificado guardado, usuario puede continuar editando en PROFESOR_ABIERTO o volver al sistema|
 |**Postcondición de fallo**|N/A - caso de uso sin condiciones de fallo|
 
@@ -41,7 +41,7 @@ Especificación detallada del caso de uso `editTeacher()` mediante diagrama de e
 
 <div align=center>
 
-|![Caso de uso: editarProfesor()](/images/RUP/00-casos-uso/02-detalle/editTeacher/editTeacher.svg)|
+|![Caso de uso: editTeacher()](/images/RUP/00-casos-uso/02-detalle/editTeacher/editTeacher.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -103,7 +103,7 @@ Especificación detallada del caso de uso `editTeacher()` mediante diagrama de e
 
 ### concepto clave - "el gordo"
 
-- **editarProfesor()** es "el gordo" que:
+- **editTeacher()** es "el gordo" que:
   - **Presenta** datos completos con todos los campos
   - **Permite** modificación de cualquier campo del profesor
   - **Mantiene** sesión de edición activa (puede continuar)
@@ -195,7 +195,7 @@ Ambas transiciones incluyen:
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
 - [openTeachers()](../openTeachers/README.md) - Caso de uso de navegación
-- [crearProfesor()](../createTeacher/README.md) - Caso complementario del CRUD
-- [eliminarProfesor()](../deleteTeacher/README.md) - Caso complementario del CRUD
-- [editarCurso()](../editCourse/README.md) - Patrón de referencia para "el gordo"
+- [createTeacher()](../createTeacher/README.md) - Caso complementario del CRUD
+- [deleteTeacher()](../deleteTeacher/README.md) - Caso complementario del CRUD
+- [editCourse()](../editCourse/README.md) - Patrón de referencia para "el gordo"
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

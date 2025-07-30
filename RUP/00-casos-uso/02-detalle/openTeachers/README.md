@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openTeachers()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: abrirProfesores()](/images/RUP/00-casos-uso/02-detalle/openTeachers/openTeachers.svg)|
+|![Caso de uso: openTeachers()](/images/RUP/00-casos-uso/02-detalle/openTeachers/openTeachers.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -91,7 +91,7 @@ Especificación detallada del caso de uso `openTeachers()` mediante diagrama de 
 ## funcionalidad unificada: listar = filtrar = buscar
 
 ### concepto clave
-- **abrirProfesores()** es un caso de uso que abarca:
+- **openTeachers()** es un caso de uso que abarca:
   - **Listar** (sin criterio) → muestra todos los profesores
   - **Filtrar/Buscar** (con criterio) → muestra profesores que coinciden
 
@@ -104,12 +104,12 @@ Especificación detallada del caso de uso `openTeachers()` mediante diagrama de 
 ## opciones de navegación
 
 ### operaciones CRUD
-- **Solicitar crear profesor** → Navegar a `crearProfesor()`
-- **Solicitar editar profesor** → Navegar a `editarProfesor()`
-- **Solicitar eliminar profesor** → Navegar a `eliminarProfesor()`
+- **Solicitar crear profesor** → Navegar a `createTeacher()`
+- **Solicitar editar profesor** → Navegar a `editTeacher()`
+- **Solicitar eliminar profesor** → Navegar a `deleteTeacher()`
 
 ### navegación del sistema
-- **Solicitar salir** → Navegar a `completarGestion()`
+- **Solicitar salir** → Navegar a `completeManagement()`
 
 ## conexión con diagrama de contexto
 
@@ -117,10 +117,10 @@ Este caso de uso corresponde a la transición:
 - **SISTEMA_DISPONIBLE** → `openTeachers()` → **PROFESORES_ABIERTO**
 
 Y las transiciones de salida:
-- **PROFESORES_ABIERTO** → `crearProfesor()` → **PROFESOR_ABIERTO**
-- **PROFESORES_ABIERTO** → `editarProfesor()` → **PROFESOR_ABIERTO**
-- **PROFESORES_ABIERTO** → `eliminarProfesor()` → **PROFESORES_ABIERTO**
-- **PROFESORES_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
+- **PROFESORES_ABIERTO** → `createTeacher()` → **PROFESOR_ABIERTO**
+- **PROFESORES_ABIERTO** → `editTeacher()` → **PROFESOR_ABIERTO**
+- **PROFESORES_ABIERTO** → `deleteTeacher()` → **PROFESORES_ABIERTO**
+- **PROFESORES_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
 
 ## vocabulario utilizado
 
@@ -163,5 +163,5 @@ Y las transiciones de salida:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [completarGestion()](../completeManagement/README.md) - Caso de uso previo
+- [completeManagement()](../completeManagement/README.md) - Caso de uso previo
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

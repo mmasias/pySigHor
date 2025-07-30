@@ -109,9 +109,9 @@ Especificación detallada del caso de uso `generateSchedule()` mediante diagrama
 |**Administrador**|solicita generar horario||
 ||**Sistema**|presenta|• datos disponibles para generación<br>• advertencia si horario existe|
 |**Administrador**|solicita confirmar generación||
-||**Sistema**|presenta resultado|• horario generado exitosamente<br>• transferir a consultarHorario()|
+||**Sistema**|presenta resultado|• horario generado exitosamente<br>• transferir a viewSchedule()|
 |**Administrador**|solicita cancelar generación||
-||**Sistema**|presenta resultado|• operación cancelada<br>• transferir a completarGestion()|
+||**Sistema**|presenta resultado|• operación cancelada<br>• transferir a completeManagement()|
 
 ## estados internos del caso de uso
 
@@ -125,7 +125,7 @@ Especificación detallada del caso de uso `generateSchedule()` mediante diagrama
 
 ### concepto clave - proceso algorítmico complejo
 
-- **generarHorario()** implementa proceso algorítmico que:
+- **generateSchedule()** implementa proceso algorítmico que:
   - **Valida** datos mínimos necesarios para generación
   - **Detecta** conflictos con horario existente
   - **Ejecuta** algoritmo de optimización de 4 fases
@@ -149,25 +149,25 @@ Especificación detallada del caso de uso `generateSchedule()` mediante diagrama
 
 ### operaciones de generación
 
-- **Generar con confirmación** → Horario generado + **<<include>>** `consultarHorario()`
-- **Cancelar generación** → **<<include>>** `completarGestion()` sin cambios
-- **Datos insuficientes** → **<<include>>** `completarGestion()` con información
+- **Generar con confirmación** → Horario generado + **\<\<include>>** `viewSchedule()`
+- **Cancelar generación** → **\<\<include>>** `completeManagement()` sin cambios
+- **Datos insuficientes** → **\<\<include>>** `completeManagement()` con información
 
 ### navegación del sistema
 
-- **Generación exitosa** → **<<include>>** `consultarHorario()` en `HORARIO_ABIERTO`
-- **Cancelación** → **<<include>>** `completarGestion()` en `SISTEMA_DISPONIBLE`
-- **Error datos** → **<<include>>** `completarGestion()` en `SISTEMA_DISPONIBLE`
+- **Generación exitosa** → **\<\<include>>** `viewSchedule()` en `HORARIO_ABIERTO`
+- **Cancelación** → **\<\<include>>** `completeManagement()` en `SISTEMA_DISPONIBLE`
+- **Error datos** → **\<\<include>>** `completeManagement()` en `SISTEMA_DISPONIBLE`
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a las transiciones:
-- **SISTEMA_DISPONIBLE** → `generarHorario()` → **HORARIO_ABIERTO** (éxito)
-- **SISTEMA_DISPONIBLE** → `generarHorario()` → **SISTEMA_DISPONIBLE** (cancelación/error)
+- **SISTEMA_DISPONIBLE** → `generateSchedule()` → **HORARIO_ABIERTO** (éxito)
+- **SISTEMA_DISPONIBLE** → `generateSchedule()` → **SISTEMA_DISPONIBLE** (cancelación/error)
 
 Las transiciones incluyen:
-- **<<include>>** `consultarHorario()` → **HORARIO_ABIERTO** (tras generación exitosa)
-- **<<include>>** `completarGestion()` → **SISTEMA_DISPONIBLE** (tras cancelación/error)
+- **\<\<include>>** `viewSchedule()` → **HORARIO_ABIERTO** (tras generación exitosa)
+- **\<\<include>>** `completeManagement()` → **SISTEMA_DISPONIBLE** (tras cancelación/error)
 
 ## vocabulario utilizado
 
@@ -217,14 +217,14 @@ Las transiciones incluyen:
 - **Validación previa**: Verificaciones de datos mínimos
 - **Confirmación inteligente**: Solo si hay conflicto con horario existente
 - **Ejecución transparente**: Algoritmo se ejecuta sin intervención del usuario
-- **Transferencia automática**: **<<include>>** `consultarHorario()` para mostrar resultado
+- **Transferencia automática**: **\<\<include>>** `viewSchedule()` para mostrar resultado
 
 ## referencias
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [consultarHorario()](../viewSchedule/README.md) - Caso de transferencia automática
-- [completarGestion()](../completeManagement/README.md) - Caso de navegación alternativa
+- [viewSchedule()](../viewSchedule/README.md) - Caso de transferencia automática
+- [completeManagement()](../completeManagement/README.md) - Caso de navegación alternativa
 - [Análisis algorítmico original](../../../../reverseEngineering.md) - Algoritmo de 4 fases
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada
 - [QyA.log](../../../../QyA.log) - Decisiones de diseño para casos algorítmicos

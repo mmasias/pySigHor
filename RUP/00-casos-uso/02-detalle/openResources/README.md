@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `openResources()` mediante diagrama de
 
 <div align=center>
 
-|![Caso de uso: abrirRecursos()](/images/RUP/00-casos-uso/02-detalle/openResources/openResources.svg)|
+|![Caso de uso: openResources()](/images/RUP/00-casos-uso/02-detalle/openResources/openResources.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -91,7 +91,7 @@ Especificación detallada del caso de uso `openResources()` mediante diagrama de
 ## funcionalidad unificada: listar = filtrar = buscar
 
 ### concepto clave
-- **abrirRecursos()** es un caso de uso que abarca:
+- **openResources()** es un caso de uso que abarca:
   - **Listar** (sin criterio) → muestra todos los recursos
   - **Filtrar/Buscar** (con criterio) → muestra recursos que coinciden
 
@@ -109,7 +109,7 @@ Especificación detallada del caso de uso `openResources()` mediante diagrama de
 - **Solicitar eliminar recurso** → Navegar a `eliminarRecurso()`
 
 ### navegación del sistema
-- **Solicitar salir** → Navegar a `completarGestion()`
+- **Solicitar salir** → Navegar a `completeManagement()`
 
 ## conexión con diagrama de contexto
 
@@ -120,7 +120,7 @@ Y las transiciones de salida:
 - **RECURSOS_ABIERTO** → `crearRecurso()` → **RECURSO_ABIERTO**
 - **RECURSOS_ABIERTO** → `editarRecurso()` → **RECURSO_ABIERTO**
 - **RECURSOS_ABIERTO** → `eliminarRecurso()` → **RECURSOS_ABIERTO**
-- **RECURSOS_ABIERTO** → `completarGestion()` → **SISTEMA_DISPONIBLE**
+- **RECURSOS_ABIERTO** → `completeManagement()` → **SISTEMA_DISPONIBLE**
 
 ## vocabulario utilizado
 
@@ -163,5 +163,5 @@ Y las transiciones de salida:
 
 - [Diagrama de contexto - Administrador](../../01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Modelo del dominio](../../00-modelo-del-dominio/modelo-dominio.md)
-- [completarGestion()](../completeManagement/README.md) - Caso de uso previo
+- [completeManagement()](../completeManagement/README.md) - Caso de uso previo
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de especificación detallada

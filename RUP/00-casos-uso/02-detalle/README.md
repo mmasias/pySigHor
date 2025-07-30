@@ -67,7 +67,7 @@ Cada carpeta de caso de uso contiene:
 
 - **README.md** - Especificación completa del caso de uso
 - **especificacion.puml** - Diagrama de especificación en PlantUML
-- **prototipo.puml** - Wireframes de prototipado en Salt
+- **prototipo.puml** o **wireframe.pml**- Wireframes de prototipado en Salt
 
 ## Metodología aplicada
 

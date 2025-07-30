@@ -42,7 +42,7 @@ Análisis de colaboración del caso de uso `editarRecurso()` mediante el patrón
 **Colaboraciones**:
 - **Entrada**: Recibe `editarRecurso()` desde `:Recursos Abierto` o desde `crearRecurso()`
 - **Control**: Se comunica con `RecursoController`
-- **Salida**: **<<include>>** `:Collaboration AbrirRecursos` al guardar y salir
+- **Salida**: **\<\<include>>** `:Collaboration AbrirRecursos` al guardar y salir
 
 ### clases de control
 

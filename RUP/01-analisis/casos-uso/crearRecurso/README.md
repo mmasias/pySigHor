@@ -43,7 +43,7 @@ Análisis de colaboración del caso de uso `crearRecurso()` mediante el patrón 
 **Colaboraciones**:
 - **Entrada**: Recibe `crearRecurso()` desde `:Recursos Abierto`
 - **Control**: Se comunica con `RecursoController`
-- **Salida**: **<<include>>** `:Collaboration EditarRecurso` tras creación exitosa
+- **Salida**: **\<\<include>>** `:Collaboration EditarRecurso` tras creación exitosa
 
 ### clases de control
 

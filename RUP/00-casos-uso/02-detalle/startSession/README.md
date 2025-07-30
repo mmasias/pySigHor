@@ -33,7 +33,7 @@ Especificación detallada del caso de uso `startSession()` mediante diagrama de 
 
 <div align=center>
 
-|![Caso de uso: iniciarSesion()](/images/RUP/00-casos-uso/02-detalle/startSession/startSession.svg)|
+|![Caso de uso: startSession()](/images/RUP/00-casos-uso/02-detalle/startSession/startSession.svg)|
 |-|
 |Código fuente: [especificacion.puml](especificacion.puml)|
 
@@ -113,13 +113,13 @@ Especificación detallada del caso de uso `startSession()` mediante diagrama de 
 |Validación|Criterio|Resultado|
 |-|-|-|
 |**Credenciales válidas**|usuario:contraseña válida|Se cambia de rol de UsuarioNoRegistrado a Administrador|
-|||Continuar con completarGestion()|
+|||Continuar con completeManagement()|
 |**Credenciales inválidas**|usuario:contraseña no válida|Regresar a SolicitandoAcceso|
 
 ## conexión con diagrama de contexto
 
 Este caso de uso corresponde a la transición:
-- **SESION_CERRADA** → `iniciarSesion()` → **SISTEMA_DISPONIBLE**
+- **SESION_CERRADA** → `startSession()` → **SISTEMA_DISPONIBLE**
 
 La especificación detalla la transición desde **SESION_CERRADA** hacia **SISTEMA_DISPONIBLE** del diagrama de contexto del Administrador de Horarios.
 

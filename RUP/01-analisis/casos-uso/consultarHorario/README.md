@@ -42,7 +42,7 @@ Análisis de colaboración del caso de uso `consultarHorario()` mediante el patr
 **Colaboraciones**:
 - **Entrada**: Recibe `consultarHorario()` desde `:Sistema Disponible` o transferencia automática
 - **Control**: Se comunica con `HorarioController`
-- **Salida**: **<<include>>** `:Collaboration CompletarGestion` al salir
+- **Salida**: **\<\<include>>** `:Collaboration CompletarGestion` al salir
 
 ### clases de control
 
