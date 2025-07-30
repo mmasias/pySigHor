@@ -1,0 +1,28 @@
+@startuml startSession-analysis
+skinparam linetype polyline
+
+actor UnregisteredUser
+package startSession as "startSession()" {
+    rectangle #629EF9 LoginView
+    rectangle #b5bd68 StartSessionController
+    rectangle #F2AC4E UserRepository
+    rectangle #F2AC4E User
+    rectangle #F2AC4E Session
+}
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+
+UnregisteredUser -r-> LoginView: startSession(username, password)
+
+LoginView -d-> StartSessionController: authenticate(username, password) : Session
+
+StartSessionController --> UserRepository: validateCredentials(username, password) : User
+
+UserRepository -- User
+
+StartSessionController --> Session: createSession(user) : Session
+
+LoginView -r-> SystemAvailable: systemAvailable(administrator)
+
+
+
+@enduml

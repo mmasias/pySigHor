@@ -1,6 +1,6 @@
-# pySigHor > iniciarSesion > Análisis
+# pySigHor > startSession > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/startSession/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis del caso de uso `iniciarSesion()` mediante diagrama de colaboración MVC, identificando clases de análisis y sus interacciones conceptuales para realizar el caso de uso.
+Análisis del caso de uso `startSession()` mediante diagrama de colaboración MVC, identificando clases de análisis y sus interacciones conceptuales para realizar el caso de uso.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis iniciarSesion()](/images/RUP/01-analisis/casos-uso/iniciarSesion/iniciarSesion-analisis.svg)|
+|![Análisis startSession()](/images/RUP/01-analisis/casos-uso/startSession/startSession-analysis.svg)|
 |-|
 |**Disciplina**: Análisis RUP<br>**Enfoque**: Diagramas de colaboración MVC|
 
@@ -31,9 +31,9 @@ Análisis del caso de uso `iniciarSesion()` mediante diagrama de colaboración M
 ### clases model (naranja #F2AC4E)
 |Clase|Responsabilidad|Trazabilidad|
 |-|-|-|
-|**Usuario**|Entidad del dominio que representa usuario del sistema|Modelo del dominio|
-|**Sesion**|Entidad que representa estado de autenticación activa|Concepto del caso de uso|
-|**UsuarioRepository**|Concepto puro de acceso a datos de usuarios|Análisis puro|
+|**User**|Entidad del dominio que representa usuario del sistema|Modelo del dominio|
+|**Session**|Entidad que representa estado de autenticación activa|Concepto del caso de uso|
+|**UserRepository**|Concepto puro de acceso a datos de usuarios|Análisis puro|
 
 ### clases view (azul #629EF9)
 |Clase|Responsabilidad|Derivación|
@@ -43,56 +43,56 @@ Análisis del caso de uso `iniciarSesion()` mediante diagrama de colaboración M
 ### clases controller (verde #b5bd68)
 |Clase|Responsabilidad|Caso de uso|
 |-|-|-|
-|**IniciarSesionController**|Control y coordinación completa del caso de uso|iniciarSesion()|
+|**StartSessionController**|Control y coordinación completa del caso de uso|startSession()|
 
 ### colaboraciones (verde claro #CDEBA5)
 |Colaboración|Propósito|Invocación|
 |-|-|-|
-|**:Sistema Disponible**|Transición al estado disponible del sistema|Tras autenticación exitosa|
+|**:System Available**|Transición al estado disponible del sistema|Tras autenticación exitosa|
 
 ## mensajes de colaboración
 
 ### flujo principal
 |Origen|Destino|Mensaje|Intención|
 |-|-|-|-|
-|**UsuarioNoRegistrado**|**LoginView**|`iniciarSesion(usuario, contraseña)`|Solicitar acceso al sistema|
-|**LoginView**|**IniciarSesionController**|`autenticar(usuario, contraseña)`|Delegar proceso de autenticación|
-|**IniciarSesionController**|**UsuarioRepository**|`validarCredenciales(usuario, contraseña)`|Verificar credenciales contra repositorio|
-|**IniciarSesionController**|**Sesion**|`crearSesion(usuario)`|Establecer sesión activa|
-|**LoginView**|**Sesion**|`getSesion()`|Obtener sesión para siguiente caso|
-|**LoginView**|**:Sistema Disponible**|`sistemaDisponible(administrador)`|Transición a sistema disponible|
+|**UnregisteredUser**|**LoginView**|`startSession(username, password)`|Solicitar acceso al sistema|
+|**LoginView**|**StartSessionController**|`authenticate(username, password)`|Delegar proceso de autenticación|
+|**StartSessionController**|**UserRepository**|`validateCredentials(username, password)`|Verificar credenciales contra repositorio|
+|**StartSessionController**|**Session**|`createSession(user)`|Establecer sesión activa|
+|**LoginView**|**Session**|`getSession()`|Obtener sesión para siguiente caso|
+|**LoginView**|**:System Available**|`systemAvailable(administrator)`|Transición a sistema disponible|
 
 ## enlaces de dependencia
-- **LoginView** conoce a **IniciarSesionController** (delegación)
-- **LoginView** conoce a **Sesion** (acceso a resultado)
-- **LoginView** conoce a **:Sistema Disponible** (transición de estado)
-- **IniciarSesionController** conoce a **UsuarioRepository** (validación)
-- **IniciarSesionController** conoce a **Sesion** (creación estado)
-- **IniciarSesionController** conoce a **Usuario** (manipulación entidad)
-- **UsuarioRepository** conoce a **Usuario** (gestión entidad)
+- **LoginView** conoce a **StartSessionController** (delegación)
+- **LoginView** conoce a **Session** (acceso a resultado)
+- **LoginView** conoce a **:System Available** (transición de estado)
+- **StartSessionController** conoce a **UserRepository** (validación)
+- **StartSessionController** conoce a **Session** (creación estado)
+- **StartSessionController** conoce a **User** (manipulación entidad)
+- **UserRepository** conoce a **User** (gestión entidad)
 
 ## trazabilidad con artefactos previos
 
 ### con especificación detallada
 - **Estados internos** → **Clases de análisis**
-- **Choice point** → **UsuarioRepository.validarCredenciales()**
-- **Transformación actor** → **UsuarioNoRegistrado → Administrador**
+- **Choice point** → **UserRepository.validateCredentials()**
+- **Transformación actor** → **UnregisteredUser → Administrator**
 
 ### con wireframe
 - **Diálogo de login** → **LoginView**
 - **Campos usuario/contraseña** → **Atributos de LoginView**
-- **Estados de error** → **Manejo en IniciarSesionController**
+- **Estados de error** → **Manejo en StartSessionController**
 
 ### con modelo del dominio
-- **Usuario** (entidad) → **Usuario** (clase de análisis)
+- **User** (entidad) → **User** (clase de análisis)
 - **Relaciones dominio** → **Enlaces colaboración**
 
 ## principios de análisis aplicados
 
 ### patrón mvc
-- **Un controlador por caso de uso**: IniciarSesionController
+- **Un controlador por caso de uso**: StartSessionController
 - **Vista derivada de prototipo**: LoginView desde wireframe SALT
-- **Modelo del dominio**: Usuario con trazabilidad directa
+- **Modelo del dominio**: User con trazabilidad directa
 
 ### diagramas de colaboración
 - **Foco en enlaces**: dependencias conceptuales, no secuencia temporal
@@ -100,7 +100,7 @@ Análisis del caso de uso `iniciarSesion()` mediante diagrama de colaboración M
 - **Trazabilidad**: cada clase identificada participa en la colaboración
 
 ### análisis puro
-- **Sin tecnología**: UsuarioRepository es concepto, no implementación
+- **Sin tecnología**: UserRepository es concepto, no implementación
 - **Sin detalles de UI**: LoginView es interfaz conceptual
 - **Sin implementación**: mensajes expresan intención de negocio
 
@@ -108,10 +108,10 @@ Análisis del caso de uso `iniciarSesion()` mediante diagrama de colaboración M
 
 ### responsabilidades identificadas
 - **LoginView**: Capturar credenciales y coordinar flujo de autenticación
-- **IniciarSesionController**: Orquestar lógica completa del caso de uso
-- **UsuarioRepository**: Proveer acceso conceptual a datos de usuarios
-- **Usuario**: Representar entidad de dominio en el análisis
-- **Sesion**: Mantener estado de autenticación activa
+- **StartSessionController**: Orquestar lógica completa del caso de uso
+- **UserRepository**: Proveer acceso conceptual a datos de usuarios
+- **User**: Representar entidad de dominio en el análisis
+- **Session**: Mantener estado de autenticación activa
 
 ### relaciones conceptuales
 - **Delegación**: Vista delega lógica de negocio al controlador
@@ -135,6 +135,6 @@ Análisis del caso de uso `iniciarSesion()` mediante diagrama de colaboración M
 
 ## referencias
 
-- [Especificación detallada](../../00-casos-uso/02-detalle/iniciarSesion/README.md)
+- [Especificación detallada](../../00-casos-uso/02-detalle/startSession/README.md)
 - [Modelo del dominio](../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de análisis RUP
