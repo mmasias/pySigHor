@@ -1,6 +1,6 @@
-# pySigHor > editarPrograma > Análisis
+# pySigHor > editProgram > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editarPrograma/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editProgram/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `editarPrograma()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados aplicando la filosofía C→U.
+Análisis de colaboración del caso de uso `editProgram()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados aplicando la filosofía C→U.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: editarPrograma()](/images/RUP/01-analisis/casos-uso/editarPrograma/editarPrograma-analisis.svg)|
+|![Análisis: editProgram()](/images/RUP/01-analisis/casos-uso/editProgram/editProgram-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `editarPrograma()` mediante el patró
 
 ### clases de vista (boundary)
 
-#### EditarProgramaView
+#### editProgramView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de edición de programa
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `editarPrograma()` mediante el patró
 - Manejar las acciones de guardar y cancelar
 
 **Colaboraciones**:
-- **Entrada**: Recibe `editarPrograma(programaId)` desde `:Programas Abierto`
+- **Entrada**: Recibe `editProgram(programaId)` desde `:Programas Abierto`
 - **Control**: Se comunica con `ProgramaController`
 - **Salida**: Retorna control a `:Programas Abierto`
 
@@ -55,7 +55,7 @@ Análisis de colaboración del caso de uso `editarPrograma()` mediante el patró
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EditarProgramaView`
+- **Vista**: Responde a solicitudes de `editProgramView`
 - **Repositorio**: Delega operaciones de datos a `ProgramaRepository`
 
 ### clases de entidad (entity)
@@ -87,20 +87,20 @@ Análisis de colaboración del caso de uso `editarPrograma()` mediante el patró
 
 ### secuencia: editar programa
 
-1. **Inicio**: `:Programas Abierto` → `EditarProgramaView.editarPrograma(programaId)`
-2. **Carga**: `EditarProgramaView` → `ProgramaController.cargarPrograma(programaId)`
+1. **Inicio**: `:Programas Abierto` → `editProgramView.editProgram(programaId)`
+2. **Carga**: `editProgramView` → `ProgramaController.cargarPrograma(programaId)`
 3. **Obtención**: `ProgramaController` → `ProgramaRepository.obtenerPorId(programaId) : Programa`
-4. **Presentación**: `EditarProgramaView` presenta formulario con datos del `Programa`
-5. **Modificación**: Administrador modifica campos en `EditarProgramaView`
-6. **Guardado**: `EditarProgramaView` → `ProgramaController.guardarPrograma(programa)`
+4. **Presentación**: `editProgramView` presenta formulario con datos del `Programa`
+5. **Modificación**: Administrador modifica campos en `editProgramView`
+6. **Guardado**: `editProgramView` → `ProgramaController.guardarPrograma(programa)`
 7. **Persistencia**: `ProgramaController` → `ProgramaRepository.actualizar(programa)`
-8. **Finalización**: `EditarProgramaView` → `:Programas Abierto.abrirProgramas()`
+8. **Finalización**: `editProgramView` → `:Programas Abierto.abrirProgramas()`
 
 ## aplicación de filosofía C→U
 
 ### convergencia de flujos
 
-Este análisis contempla que `editarPrograma()` es "el gordo" que recibe:
+Este análisis contempla que `editProgram()` es "el gordo" que recibe:
 - **Programas existentes**: Desde `abrirProgramas()` con ID válido
 - **Programas nuevos**: Desde `crearPrograma()` con programa recién creado
 
@@ -110,7 +110,7 @@ Este análisis contempla que `editarPrograma()` es "el gordo" que recibe:
 - **Carga existente**: `cargarPrograma(programaId)` obtiene datos persistidos
 - **Carga nuevo**: `cargarPrograma(programaId)` obtiene programa con datos mínimos
 
-**EditarProgramaView** presenta el mismo formulario:
+**editProgramView** presenta el mismo formulario:
 - **Datos existentes**: Campos poblados con información actual
 - **Datos nuevos**: Campos poblados con información mínima inicial
 
@@ -119,7 +119,7 @@ Este análisis contempla que `editarPrograma()` es "el gordo" que recibe:
 ### patrón MVC
 
 - **Model**: `Programa` + `ProgramaRepository` (estado y persistencia)
-- **View**: `EditarProgramaView` (presentación e interacción)
+- **View**: `editProgramView` (presentación e interacción)
 - **Controller**: `ProgramaController` (lógica de coordinación)
 
 ### patrón Repository
@@ -138,15 +138,15 @@ Este análisis contempla que `editarPrograma()` es "el gordo" que recibe:
 
 ### reutilización
 
-El diseño permite que `EditarProgramaView` sea reutilizada por:
-- `editarPrograma()` → formulario con datos existentes
+El diseño permite que `editProgramView` sea reutilizada por:
+- `editProgram()` → formulario con datos existentes
 - `crearPrograma()` → mismo formulario con datos mínimos
 
 ### flexibilidad
 
 - **ProgramaController** puede manejar validaciones específicas
 - **ProgramaRepository** puede cambiar implementación de persistencia
-- **EditarProgramaView** puede adaptarse a diferentes contextos de entrada
+- **editProgramView** puede adaptarse a diferentes contextos de entrada
 
 ### mantenibilidad
 
@@ -156,7 +156,7 @@ El diseño permite que `EditarProgramaView` sea reutilizada por:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editarPrograma/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editProgram/README.md)
 - [Filosofía C→U](../../../../extraDocs/008-filosofia-crud-creacion-edicion/README.md)
 - [Análisis abrirProfesores](../abrirProfesores/README.md) - Patrón de referencia
 - [Modelo del dominio](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)

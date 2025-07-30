@@ -1,6 +1,6 @@
-# pySigHor > crearRecurso > Análisis
+# pySigHor > createResource > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearRecurso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/createResource/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `crearRecurso()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de recursos con transferencia automática a edición completa.
+Análisis de colaboración del caso de uso `createResource()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de recursos con transferencia automática a edición completa.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: crearRecurso()](/images/RUP/01-analisis/casos-uso/crearRecurso/crearRecurso-analisis.svg)|
+|![Análisis: createResource()](/images/RUP/01-analisis/casos-uso/createResource/createResource-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `crearRecurso()` mediante el patrón 
 
 ### clases de vista (boundary)
 
-#### CrearRecursoView
+#### createResourceView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de creación de recurso nuevo
@@ -41,7 +41,7 @@ Análisis de colaboración del caso de uso `crearRecurso()` mediante el patrón 
 - Transferir automáticamente a edición completa tras creación exitosa
 
 **Colaboraciones**:
-- **Entrada**: Recibe `crearRecurso()` desde `:Recursos Abierto`
+- **Entrada**: Recibe `createResource()` desde `:Recursos Abierto`
 - **Control**: Se comunica con `RecursoController`
 - **Salida**: **\<\<include>>** `:Collaboration EditarRecurso` tras creación exitosa
 
@@ -59,7 +59,7 @@ Análisis de colaboración del caso de uso `crearRecurso()` mediante el patrón 
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `CrearRecursoView`
+- **Vista**: Responde a solicitudes de `createResourceView`
 - **Repositorio**: Delega operaciones de datos a `RecursoRepository`
 
 ### clases de entidad (entity)
@@ -106,14 +106,14 @@ Este análisis implementa creación rápida que:
 ### filosofía Create→Update (C→U)
 
 La transferencia automática implementa:
-- **crearRecurso()** como "el delgado": Entrada rápida al sistema
+- **createResource()** como "el delgado": Entrada rápida al sistema
 - **editarRecurso()** como "el gordo": Configuración completa y detallada
 - **Flujo continuo**: Sin pasos intermedios o confirmaciones adicionales
 - **Experiencia integrada**: El usuario percibe un proceso único y fluido
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/crearRecurso/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/createResource/README.md)
 - [editarRecurso() - Caso destino](../editarRecurso/README.md)
 - [eliminarRecurso() - Caso complementario](../eliminarRecurso/README.md)
 - [abrirRecursos() - Contexto de navegación](../abrirRecursos/README.md)

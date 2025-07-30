@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: eliminarProfesor()](/images/RUP/01-analisis/casos-uso/eliminarProfesor/eliminarProfesor-analisis.svg)|
+|![Análisis: eliminarProfesor()](/images/RUP/01-analisis/casos-uso/eliminarProfesor/eliminarProfesor-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/eliminarProfesor/colaboracion.puml)|
 

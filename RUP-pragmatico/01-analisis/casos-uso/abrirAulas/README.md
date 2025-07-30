@@ -11,7 +11,7 @@
 
 <div align=center>
 
-![Análisis: abrirAulas()](/images/RUP/01-analisis/casos-uso/abrirAulas/abrirAulas-analisis.svg)
+![Análisis: abrirAulas()](/images/RUP/01-analisis/casos-uso/abrirAulas/abrirAulas-analysis.svg)
 
 </div>
 

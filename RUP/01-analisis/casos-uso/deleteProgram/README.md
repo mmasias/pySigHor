@@ -1,6 +1,6 @@
-# pySigHor > eliminarPrograma > Análisis
+# pySigHor > deleteProgram > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarPrograma/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/deleteProgram/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `eliminarPrograma()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura con confirmación.
+Análisis de colaboración del caso de uso `deleteProgram()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura con confirmación.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: eliminarPrograma()](/images/RUP/01-analisis/casos-uso/eliminarPrograma/eliminarPrograma-analisis.svg)|
+|![Análisis: deleteProgram()](/images/RUP/01-analisis/casos-uso/deleteProgram/deleteProgram-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `eliminarPrograma()` mediante el patr
 
 ### clases de vista (boundary)
 
-#### EliminarProgramaView
+#### deleteProgramView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de eliminación de programa
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `eliminarPrograma()` mediante el patr
 - Permitir solicitar confirmación o cancelación del administrador
 
 **Colaboraciones**:
-- **Entrada**: Recibe `eliminarPrograma(programaId)` desde `:Programas Abierto` o `:Programa Abierto`
+- **Entrada**: Recibe `deleteProgram(programaId)` desde `:Programas Abierto` o `:Programa Abierto`
 - **Control**: Se comunica con `ProgramaController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProgramas` para mostrar lista actualizada
 
@@ -55,7 +55,7 @@ Análisis de colaboración del caso de uso `eliminarPrograma()` mediante el patr
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EliminarProgramaView`
+- **Vista**: Responde a solicitudes de `deleteProgramView`
 - **Repositorio**: Delega operaciones de datos a `ProgramaRepository`
 
 ### clases de entidad (entity)
@@ -87,14 +87,14 @@ Análisis de colaboración del caso de uso `eliminarPrograma()` mediante el patr
 
 ### secuencia: eliminar programa
 
-1. **Inicio**: `:Programas Abierto` → `EliminarProgramaView.eliminarPrograma(programaId)`
-2. **Carga**: `EliminarProgramaView` → `ProgramaController.cargarProgramaParaEliminacion(programaId)`
+1. **Inicio**: `:Programas Abierto` → `deleteProgramView.deleteProgram(programaId)`
+2. **Carga**: `deleteProgramView` → `ProgramaController.cargarProgramaParaEliminacion(programaId)`
 3. **Obtención**: `ProgramaController` → `ProgramaRepository.obtenerPorId(programaId) : Programa`
-4. **Presentación**: `EliminarProgramaView` presenta información del `Programa` con advertencia
-5. **Confirmación**: Administrador confirma o cancela en `EliminarProgramaView`
-6. **Eliminación**: `EliminarProgramaView` → `ProgramaController.eliminarPrograma(programaId)`
+4. **Presentación**: `deleteProgramView` presenta información del `Programa` con advertencia
+5. **Confirmación**: Administrador confirma o cancela en `deleteProgramView`
+6. **Eliminación**: `deleteProgramView` → `ProgramaController.deleteProgram(programaId)`
 7. **Persistencia**: `ProgramaController` → `ProgramaRepository.eliminar(programaId)`
-8. **Finalización**: `EliminarProgramaView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProgramas.abrirProgramas()`
+8. **Finalización**: `deleteProgramView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProgramas.abrirProgramas()`
 
 ## patrón de eliminación segura
 
@@ -107,7 +107,7 @@ Este análisis implementa eliminación con confirmación que:
 
 ### responsabilidades de seguridad
 
-**EliminarProgramaView** maneja confirmación:
+**deleteProgramView** maneja confirmación:
 - **Presenta datos**: Información completa del programa
 - **Muestra advertencias**: Mensajes de eliminación irreversible
 - **Captura decisión**: Confirmación o cancelación explícita
@@ -122,7 +122,7 @@ Este análisis implementa eliminación con confirmación que:
 ### patrón MVC para eliminación
 
 - **Model**: `Programa` + `ProgramaRepository` (datos y eliminación)
-- **View**: `EliminarProgramaView` (confirmación e interacción)
+- **View**: `deleteProgramView` (confirmación e interacción)
 - **Controller**: `ProgramaController` (coordinación y validación)
 
 ### patrón Repository con eliminación
@@ -143,12 +143,12 @@ Este análisis implementa eliminación con confirmación que:
 
 El diseño permite que `ProgramaController` sea reutilizado:
 - **Compartido**: Con crearPrograma() y editarPrograma()
-- **Método específico**: eliminarPrograma() con validaciones propias
+- **Método específico**: deleteProgram() con validaciones propias
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 
 ### patrón include para navegación
 
-- **Separación de responsabilidades**: eliminarPrograma() se enfoca en eliminar
+- **Separación de responsabilidades**: deleteProgram() se enfoca en eliminar
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** abrirProgramas() evita duplicar funcionalidad de listado
 - **Doble entrada**: Funciona desde `:Programas Abierto` o `:Programa Abierto`
 
@@ -182,9 +182,9 @@ El diseño permite que `ProgramaController` sea reutilizado:
 
 ## diferencias con otros casos CRUD
 
-### eliminarPrograma() vs editarPrograma()
+### deleteProgram() vs editarPrograma()
 
-**eliminarPrograma():**
+**deleteProgram():**
 - **Objetivo**: Confirmación y eliminación
 - **Interacción**: Solo lectura + confirmación
 - **Resultado**: Programa removido del sistema
@@ -198,12 +198,12 @@ El diseño permite que `ProgramaController` sea reutilizado:
 
 - **crearPrograma()**: Añade nuevos programas
 - **editarPrograma()**: Modifica programas existentes  
-- **eliminarPrograma()**: Remueve programas del sistema
+- **deleteProgram()**: Remueve programas del sistema
 - **abrirProgramas()**: Lista y selecciona programas
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/eliminarPrograma/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/deleteProgram/README.md)
 - [editarPrograma() - Caso complementario](../editarPrograma/README.md)
 - [crearPrograma() - Caso complementario](../crearPrograma/README.md)
 - [abrirProgramas() - Contexto de navegación](../abrirProgramas/README.md)

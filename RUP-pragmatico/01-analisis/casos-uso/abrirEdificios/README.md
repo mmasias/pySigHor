@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: abrirEdificios()](/images/RUP/01-analisis/casos-uso/abrirEdificios/abrirEdificios-analisis.svg)|
+|![Análisis: abrirEdificios()](/images/RUP/01-analisis/casos-uso/abrirEdificios/abrirEdificios-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/abrirEdificios/colaboracion.puml)|
 

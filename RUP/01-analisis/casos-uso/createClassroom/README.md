@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > createClassroom > Análisis
 
-</div>
-
-# pySigHor > crearAula > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearAula/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/createClassroom/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `crearAula()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de aulas con filosofía C→U.
+Análisis de colaboración del caso de uso `createClassroom()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de aulas con filosofía C→U.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: crearAula()](/images/RUP/01-analisis/casos-uso/crearAula/crearAula-analisis.svg)|
+|![Análisis: createClassroom()](/images/RUP/01-analisis/casos-uso/createClassroom/createClassroom-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -38,7 +30,7 @@ Análisis de colaboración del caso de uso `crearAula()` mediante el patrón MVC
 
 ### clases de vista (boundary)
 
-#### CrearAulaView
+#### createClassroomView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de creación de aula nueva
@@ -47,7 +39,7 @@ Análisis de colaboración del caso de uso `crearAula()` mediante el patrón MVC
 - Transferir inmediatamente a edición completa tras creación
 
 **Colaboraciones**:
-- **Entrada**: Recibe `crearAula()` desde `:Aulas Abierto`
+- **Entrada**: Recibe `createClassroom()` desde `:Aulas Abierto`
 - **Control**: Se comunica con `AulaController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration EditarAula` para completar datos
 
@@ -63,7 +55,7 @@ Análisis de colaboración del caso de uso `crearAula()` mediante el patrón MVC
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `CrearAulaView`
+- **Vista**: Responde a solicitudes de `createClassroomView`
 - **Repositorio**: Delega operaciones de datos a `AulaRepository`
 
 ### clases de entidad (entity)
@@ -97,14 +89,14 @@ Análisis de colaboración del caso de uso `crearAula()` mediante el patrón MVC
 
 ### secuencia: crear aula
 
-1. **Inicio**: `:Aulas Abierto` → `CrearAulaView.crearAula()`
-2. **Solicitud**: `CrearAulaView` → `AulaController.iniciarCreacion()`
-3. **Presentación**: `CrearAulaView` presenta formulario con campos mínimos
-4. **Datos**: Administrador proporciona código, nombre, edificio en `CrearAulaView`
-5. **Creación**: `CrearAulaView` → `AulaController.crearAula(datosMinimos)`
+1. **Inicio**: `:Aulas Abierto` → `createClassroomView.createClassroom()`
+2. **Solicitud**: `createClassroomView` → `AulaController.iniciarCreacion()`
+3. **Presentación**: `createClassroomView` presenta formulario con campos mínimos
+4. **Datos**: Administrador proporciona código, nombre, edificio en `createClassroomView`
+5. **Creación**: `createClassroomView` → `AulaController.createClassroom(datosMinimos)`
 6. **Validación**: `AulaController` → `AulaRepository.validarDatosMinimos(datos)`
 7. **Persistencia**: `AulaController` → `AulaRepository.crear(aula) : Aula`
-8. **Transferencia**: `CrearAulaView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditarAula.editarAula(aulaNueva)`
+8. **Transferencia**: `createClassroomView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditarAula.editarAula(aulaNueva)`
 
 ## patrón de creación rápida para aulas - "el delgado"
 
@@ -118,7 +110,7 @@ Este análisis implementa creación rápida que:
 
 ### responsabilidades de creación rápida
 
-**CrearAulaView** maneja creación mínima:
+**createClassroomView** maneja creación mínima:
 - **Presenta formulario**: Solo campos esenciales del aula
 - **Captura datos**: Información mínima necesaria para crear
 - **Valida entrada**: Verificación básica antes de enviar
@@ -135,7 +127,7 @@ Este análisis implementa creación rápida que:
 ### patrón MVC para creación de aulas
 
 - **Model**: `Aula` + `AulaRepository` (creación y persistencia mínima)
-- **View**: `CrearAulaView` (formulario mínimo y transferencia)
+- **View**: `createClassroomView` (formulario mínimo y transferencia)
 - **Controller**: `AulaController` (coordinación y validación de creación)
 
 ### patrón Repository con creación rápida
@@ -158,20 +150,20 @@ Este análisis implementa creación rápida que:
 
 El diseño permite que `AulaController` sea reutilizado:
 - **Compartido**: Con editarAula() y eliminarAula()
-- **Método específico**: crearAula() con capacidades de creación rápida
+- **Método específico**: createClassroom() con capacidades de creación rápida
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para creación mínima de aulas
 
 ### patrón include para transferencia automática
 
-- **Separación de responsabilidades**: crearAula() se enfoca en crear
+- **Separación de responsabilidades**: createClassroom() se enfoca en crear
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** editarAula() evita duplicar funcionalidad de edición
 - **Transferencia fluida**: Paso automático de creación a edición completa
 - **Contexto preservado**: Aula recién creada se abre inmediatamente en edición
 
 ### flexibilidad de creación rápida
 
-- **CrearAulaView** puede implementar:
+- **createClassroomView** puede implementar:
   - **Validación en tiempo real**: Verificación inmediata de campos
   - **Generación automática**: Código del aula auto-generado si se omite
   - **Sugerencias inteligentes**: Autocompletado basado en datos existentes
@@ -203,9 +195,9 @@ El diseño permite que `AulaController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de aulas
 
-### crearAula() vs editarAula()
+### createClassroom() vs editarAula()
 
-**crearAula():**
+**createClassroom():**
 - **Objetivo**: Creación rápida con datos mínimos y transferencia automática
 - **Interacción**: Formulario mínimo con redirección inmediata
 - **Validaciones**: Solo restricciones críticas para creación
@@ -219,14 +211,14 @@ El diseño permite que `AulaController` sea reutilizado:
 
 ### complementariedad CRUD para aulas
 
-- **crearAula()**: Crea aulas rápidamente y transfiere a edición
+- **createClassroom()**: Crea aulas rápidamente y transfiere a edición
 - **editarAula()**: Completa y modifica datos de aulas existentes
 - **eliminarAula()**: Remueve aulas con confirmación segura
 - **abrirAulas()**: Lista y selecciona aulas para operaciones
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/crearAula/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/createClassroom/README.md)
 - [editarAula() - Caso de transferencia](../editarAula/README.md)
 - [eliminarAula() - Caso complementario](../eliminarAula/README.md)
 - [abrirAulas() - Contexto de navegación](../abrirAulas/README.md)

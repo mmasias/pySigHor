@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: consultarHorario()](/images/RUP/01-analisis/casos-uso/consultarHorario/consultarHorario-analisis.svg)|
+|![Análisis: consultarHorario()](/images/RUP/01-analisis/casos-uso/consultarHorario/consultarHorario-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/consultarHorario/colaboracion.puml)|
 

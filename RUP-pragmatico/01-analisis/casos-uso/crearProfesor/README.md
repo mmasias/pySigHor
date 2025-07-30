@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: crearProfesor()](/images/RUP/01-analisis/casos-uso/crearProfesor/crearProfesor-analisis.svg)|
+|![Análisis: crearProfesor()](/images/RUP/01-analisis/casos-uso/crearProfesor/crearProfesor-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/crearProfesor/colaboracion.puml)|
 

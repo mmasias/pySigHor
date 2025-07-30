@@ -1,6 +1,6 @@
-# pySigHor > abrirProgramas > Análisis
+# pySigHor > openPrograms > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirProgramas/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/openPrograms/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `abrirProgramas()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
+Análisis de colaboración del caso de uso `openPrograms()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: abrirProgramas()](/images/RUP/01-analisis/casos-uso/abrirProgramas/abrirProgramas-analisis.svg)|
+|![Análisis: openPrograms()](/images/RUP/01-analisis/casos-uso/openPrograms/openPrograms-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `abrirProgramas()` mediante el patró
 
 ### clases de vista (boundary)
 
-#### AbrirProgramasView
+#### openProgramsView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de apertura de programas académicos
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `abrirProgramas()` mediante el patró
 - Manejar la navegación de regreso al sistema y a operaciones CRUD
 
 **Colaboraciones**:
-- **Entrada**: Recibe `abrirProgramas()` desde `:Sistema Disponible`
+- **Entrada**: Recibe `openPrograms()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `ProgramasController`
 - **Salida**: Navega a `:Sistema Disponible` o colaboraciones CRUD
 
@@ -54,7 +54,7 @@ Análisis de colaboración del caso de uso `abrirProgramas()` mediante el patró
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `AbrirProgramasView`
+- **Vista**: Responde a solicitudes de `openProgramsView`
 - **Repositorio**: Delega operaciones de datos a `ProgramaRepository`
 
 ### clases de entidad (entity)
@@ -85,12 +85,12 @@ Análisis de colaboración del caso de uso `abrirProgramas()` mediante el patró
 
 ### secuencia de operaciones
 
-1. **Inicio**: `:Sistema Disponible` → `AbrirProgramasView.abrirProgramas()`
-2. **Listado inicial**: `AbrirProgramasView` → `ProgramasController.listarProgramas()`
+1. **Inicio**: `:Sistema Disponible` → `openProgramsView.openPrograms()`
+2. **Listado inicial**: `openProgramsView` → `ProgramasController.listarProgramas()`
 3. **Acceso a datos**: `ProgramasController` → `ProgramaRepository.obtenerTodos()`
-4. **Filtrado (opcional)**: `AbrirProgramasView` → `ProgramasController.filtrarProgramas(criterio)`
+4. **Filtrado (opcional)**: `openProgramsView` → `ProgramasController.filtrarProgramas(criterio)`
 5. **Búsqueda**: `ProgramasController` → `ProgramaRepository.buscarPorCriterio(criterio)`
-6. **Navegación**: `AbrirProgramasView` → Opciones disponibles
+6. **Navegación**: `openProgramsView` → Opciones disponibles
 
 ### opciones de navegación disponibles
 
@@ -105,8 +105,8 @@ Análisis de colaboración del caso de uso `abrirProgramas()` mediante el patró
 
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
-|Presentar lista de programas|`AbrirProgramasView`|Coordina con `ProgramasController.listarProgramas()`|
-|Permitir filtrado de lista|`AbrirProgramasView`|Invoca `ProgramasController.filtrarProgramas(criterio)`|
+|Presentar lista de programas|`openProgramsView`|Coordina con `ProgramasController.listarProgramas()`|
+|Permitir filtrado de lista|`openProgramsView`|Invoca `ProgramasController.filtrarProgramas(criterio)`|
 |Código, nombre, descripción|`Programa`|Encapsula atributos del programa académico|
 |Acceso a datos de programas|`ProgramaRepository`|`obtenerTodos()`, `buscarPorCriterio()`|
 
@@ -133,7 +133,7 @@ Este análisis sigue el **patrón metodológico universal** establecido para el 
 
 ### trazabilidad completa
 
-- **Origen**: Caso de uso detallado `abrirProgramas()`
+- **Origen**: Caso de uso detallado `openPrograms()`
 - **Destino**: Base para diseño arquitectónico
 - **Conexión**: Diagrama de contexto → Análisis de colaboración
 
@@ -143,13 +143,13 @@ Este análisis sigue el **patrón metodológico universal** establecido para el 
 `ProgramaRepository` abstrae el acceso a datos, permitiendo diferentes implementaciones sin afectar el controlador.
 
 ### mvc pattern
-Separación clara entre presentación (`AbrirProgramasView`), lógica de aplicación (`ProgramasController`) y datos (`Programa`, `ProgramaRepository`).
+Separación clara entre presentación (`openProgramsView`), lógica de aplicación (`ProgramasController`) y datos (`Programa`, `ProgramaRepository`).
 
 ### navigation pattern
 Flechas discontinuas indican opciones de navegación disponibles para el usuario, manteniendo flexibilidad en el flujo.
 
 ## referencias
 
-- [Especificación detallada: abrirProgramas()](../../../00-casos-uso/02-detalle/abrirProgramas/README.md)
+- [Especificación detallada: openPrograms()](../../../00-casos-uso/02-detalle/openPrograms/README.md)
 - [Diagrama de contexto - Administrador](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Patrón metodológico universal](../../../../conversation-log.md) - Marco de análisis establecido

@@ -1,6 +1,6 @@
-# pySigHor > abrirAulas > Análisis
+# pySigHor > openClassrooms > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirAulas/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/openClassrooms/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `abrirAulas()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
+Análisis de colaboración del caso de uso `openClassrooms()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: abrirAulas()](/images/RUP/01-analisis/casos-uso/abrirAulas/abrirAulas-analisis.svg)|
+|![Análisis: openClassrooms()](/images/RUP/01-analisis/casos-uso/openClassrooms/openClassrooms-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `abrirAulas()` mediante el patrón MV
 - Manejar la navegación de regreso al sistema
 
 **Colaboraciones**:
-- **Entrada**: Recibe `abrirAulas()` desde `:Sistema Disponible`
+- **Entrada**: Recibe `openClassrooms()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `AulasController`
 - **Salida**: Retorna control a `:Sistema Disponible`
 
@@ -85,7 +85,7 @@ Análisis de colaboración del caso de uso `abrirAulas()` mediante el patrón MV
 
 ### secuencia de operaciones
 
-1. **Inicio**: `:Sistema Disponible` → `ListarAulasView.abrirAulas()`
+1. **Inicio**: `:Sistema Disponible` → `ListarAulasView.openClassrooms()`
 2. **Listado inicial**: `ListarAulasView` → `AulasController.listarAulas()`
 3. **Acceso a datos**: `AulasController` → `AulaRepository.obtenerTodos()`
 4. **Filtrado (opcional)**: `ListarAulasView` → `AulasController.filtrarAulas(criterio)`
@@ -133,7 +133,7 @@ Aunque no implementadas en este caso de uso, el análisis prepara la base para:
 
 ### trazabilidad completa
 
-- **Origen**: Caso de uso detallado `abrirAulas()`
+- **Origen**: Caso de uso detallado `openClassrooms()`
 - **Destino**: Base para diseño arquitectónico
 - **Conexión**: Diagrama de contexto → Análisis de colaboración
 
@@ -150,6 +150,6 @@ Mantiene coherencia con el diagrama de contexto del administrador, respetando la
 
 ## referencias
 
-- [Especificación detallada: abrirAulas()](../../../00-casos-uso/02-detalle/abrirAulas/README.md)
+- [Especificación detallada: openClassrooms()](../../../00-casos-uso/02-detalle/openClassrooms/README.md)
 - [Diagrama de contexto - Administrador](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Patrón metodológico universal](../../../../conversation-log.md) - Marco de análisis establecido

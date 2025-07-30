@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > createBuilding > Análisis
 
-</div>
-
-# pySigHor > crearEdificio > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearEdificio/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/createBuilding/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `crearEdificio()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de edificios con filosofía C→U.
+Análisis de colaboración del caso de uso `createBuilding()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de edificios con filosofía C→U.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: crearEdificio()](/images/RUP/01-analisis/casos-uso/crearEdificio/crearEdificio-analisis.svg)|
+|![Análisis: createBuilding()](/images/RUP/01-analisis/casos-uso/createBuilding/createBuilding-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -38,7 +30,7 @@ Análisis de colaboración del caso de uso `crearEdificio()` mediante el patrón
 
 ### clases de vista (boundary)
 
-#### CrearEdificioView
+#### createBuildingView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de creación de edificio nuevo
@@ -47,7 +39,7 @@ Análisis de colaboración del caso de uso `crearEdificio()` mediante el patrón
 - Transferir inmediatamente a edición completa tras creación
 
 **Colaboraciones**:
-- **Entrada**: Recibe `crearEdificio()` desde `:Edificios Abierto`
+- **Entrada**: Recibe `createBuilding()` desde `:Edificios Abierto`
 - **Control**: Se comunica con `EdificioController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration EditarEdificio` para completar datos
 
@@ -63,7 +55,7 @@ Análisis de colaboración del caso de uso `crearEdificio()` mediante el patrón
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `CrearEdificioView`
+- **Vista**: Responde a solicitudes de `createBuildingView`
 - **Repositorio**: Delega operaciones de datos a `EdificioRepository`
 
 ### clases de entidad (entity)
@@ -97,14 +89,14 @@ Análisis de colaboración del caso de uso `crearEdificio()` mediante el patrón
 
 ### secuencia: crear edificio
 
-1. **Inicio**: `:Edificios Abierto` → `CrearEdificioView.crearEdificio()`
-2. **Solicitud**: `CrearEdificioView` → `EdificioController.iniciarCreacion()`
-3. **Presentación**: `CrearEdificioView` presenta formulario con campos mínimos
-4. **Datos**: Administrador proporciona código, nombre en `CrearEdificioView`
-5. **Creación**: `CrearEdificioView` → `EdificioController.crearEdificio(datosMinimos)`
+1. **Inicio**: `:Edificios Abierto` → `createBuildingView.createBuilding()`
+2. **Solicitud**: `createBuildingView` → `EdificioController.iniciarCreacion()`
+3. **Presentación**: `createBuildingView` presenta formulario con campos mínimos
+4. **Datos**: Administrador proporciona código, nombre en `createBuildingView`
+5. **Creación**: `createBuildingView` → `EdificioController.createBuilding(datosMinimos)`
 6. **Validación**: `EdificioController` → `EdificioRepository.validarDatosMinimos(datos)`
 7. **Persistencia**: `EdificioController` → `EdificioRepository.crear(edificio) : Edificio`
-8. **Transferencia**: `CrearEdificioView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditarEdificio.editarEdificio(edificioNuevo)`
+8. **Transferencia**: `createBuildingView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditarEdificio.editarEdificio(edificioNuevo)`
 
 ## patrón de creación rápida para edificios - "el delgado"
 
@@ -118,7 +110,7 @@ Este análisis implementa creación rápida que:
 
 ### responsabilidades de creación rápida
 
-**CrearEdificioView** maneja creación mínima:
+**createBuildingView** maneja creación mínima:
 - **Presenta formulario**: Solo campos esenciales del edificio
 - **Captura datos**: Información mínima necesaria para crear
 - **Valida entrada**: Verificación básica antes de enviar
@@ -135,7 +127,7 @@ Este análisis implementa creación rápida que:
 ### patrón MVC para creación de edificios
 
 - **Model**: `Edificio` + `EdificioRepository` (creación y persistencia mínima)
-- **View**: `CrearEdificioView` (formulario mínimo y transferencia)
+- **View**: `createBuildingView` (formulario mínimo y transferencia)
 - **Controller**: `EdificioController` (coordinación y validación de creación)
 
 ### patrón Repository con creación rápida
@@ -158,20 +150,20 @@ Este análisis implementa creación rápida que:
 
 El diseño permite que `EdificioController` sea reutilizado:
 - **Compartido**: Con editarEdificio() y eliminarEdificio()
-- **Método específico**: crearEdificio() con capacidades de creación rápida
+- **Método específico**: createBuilding() con capacidades de creación rápida
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para creación mínima de edificios
 
 ### patrón include para transferencia automática
 
-- **Separación de responsabilidades**: crearEdificio() se enfoca en crear
+- **Separación de responsabilidades**: createBuilding() se enfoca en crear
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** editarEdificio() evita duplicar funcionalidad de edición
 - **Transferencia fluida**: Paso automático de creación a edición completa
 - **Contexto preservado**: Edificio recién creado se abre inmediatamente en edición
 
 ### flexibilidad de creación rápida
 
-- **CrearEdificioView** puede implementar:
+- **createBuildingView** puede implementar:
   - **Validación en tiempo real**: Verificación inmediata de campos
   - **Generación automática**: Código del edificio auto-generado si se omite
   - **Sugerencias inteligentes**: Autocompletado basado en datos existentes
@@ -203,9 +195,9 @@ El diseño permite que `EdificioController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de edificios
 
-### crearEdificio() vs editarEdificio()
+### createBuilding() vs editarEdificio()
 
-**crearEdificio():**
+**createBuilding():**
 - **Objetivo**: Creación rápida con datos mínimos y transferencia automática
 - **Interacción**: Formulario mínimo con redirección inmediata
 - **Validaciones**: Solo restricciones críticas para creación
@@ -219,14 +211,14 @@ El diseño permite que `EdificioController` sea reutilizado:
 
 ### complementariedad CRUD para edificios
 
-- **crearEdificio()**: Crea edificios rápidamente y transfiere a edición
+- **createBuilding()**: Crea edificios rápidamente y transfiere a edición
 - **editarEdificio()**: Completa y modifica datos de edificios existentes
 - **eliminarEdificio()**: Remueve edificios con confirmación segura
 - **abrirEdificios()**: Lista y selecciona edificios para operaciones
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/crearEdificio/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/createBuilding/README.md)
 - [editarEdificio() - Caso de transferencia](../editarEdificio/README.md)
 - [eliminarEdificio() - Caso complementario](../eliminarEdificio/README.md)
 - [abrirEdificios() - Contexto de navegación](../abrirEdificios/README.md)

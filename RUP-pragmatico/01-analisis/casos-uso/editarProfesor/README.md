@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: editarProfesor()](/images/RUP/01-analisis/casos-uso/editarProfesor/editarProfesor-analisis.svg)|
+|![Análisis: editarProfesor()](/images/RUP/01-analisis/casos-uso/editarProfesor/editarProfesor-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/editarProfesor/colaboracion.puml)|
 

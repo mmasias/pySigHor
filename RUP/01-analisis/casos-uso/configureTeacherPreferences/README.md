@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > configureTeacherPreferences > Análisis
 
-</div>
-
-# pySigHor > configurarPreferenciasProfesor > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/configureTeacherPreferences/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `configurarPreferenciasProfesor()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar configuración de orden de prioridad de recursos para profesores específicos.
+Análisis de colaboración del caso de uso `configureTeacherPreferences()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar configuración de orden de prioridad de recursos para profesores específicos.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: configurarPreferenciasProfesor()](/images/RUP/01-analisis/casos-uso/configurarPreferenciasProfesor/configurarPreferenciasProfesor-analisis.svg)|
+|![Análisis: configureTeacherPreferences()](/images/RUP/01-analisis/casos-uso/configureTeacherPreferences/configureTeacherPreferences-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -49,7 +41,7 @@ Análisis de colaboración del caso de uso `configurarPreferenciasProfesor()` me
 - Permitir solicitar guardar configuración o cancelar configuración
 
 **Colaboraciones**:
-- **Entrada**: Recibe `configurarPreferenciasProfesor(profesorId)` desde `:Profesor Abierto` (estado PROFESOR_ABIERTO)
+- **Entrada**: Recibe `configureTeacherPreferences(profesorId)` desde `:Profesor Abierto` (estado PROFESOR_ABIERTO)
 - **Control**: Se comunica con `PreferenciasProfesorController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirEdicionProfesor` para regresar a edición de profesor
 
@@ -136,7 +128,7 @@ Análisis de colaboración del caso de uso `configurarPreferenciasProfesor()` me
 
 ### secuencia: configurar preferencias de profesor
 
-1. **Inicio**: `:Profesor Abierto` → `ConfigurarPreferenciasProfesorView.configurarPreferenciasProfesor(profesorId)`
+1. **Inicio**: `:Profesor Abierto` → `ConfigurarPreferenciasProfesorView.configureTeacherPreferences(profesorId)`
 2. **Carga profesor**: `ConfigurarPreferenciasProfesorView` → `PreferenciasProfesorController.cargarPreferenciasProfesor(profesorId)`
 3. **Obtener profesor**: `PreferenciasProfesorController` → `ProfesorRepository.obtenerConPreferencias(profesorId) : Profesor`
 4. **Obtener recursos**: `PreferenciasProfesorController` → `RecursoRepository.obtenerRecursosDisponibles() : List<Recurso>`
@@ -146,7 +138,7 @@ Análisis de colaboración del caso de uso `configurarPreferenciasProfesor()` me
 8. **Persistencia**: `PreferenciasProfesorController` → `ProfesorRepository.actualizarPreferencias(profesorId, preferencias)`
 9. **Continuación**: 
    - **Configuración continua**: Permanece en `ConfigurarPreferenciasProfesorView` para más modificaciones
-   - **Finalización**: `ConfigurarPreferenciasProfesorView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditarProfesor.editarProfesor(profesorId)`
+   - **Finalización**: `ConfigurarPreferenciasProfesorView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditTeacher.editTeacher(profesorId)`
 
 ## patrón de configuración específica para profesores - "el gordo"
 
@@ -214,8 +206,8 @@ El diseño separa claramente:
 
 ### patrón include para navegación específica
 
-- **Separación de responsabilidades**: configurarPreferenciasProfesor() se enfoca en configuración
-- **Reutilización**: **&lt;&lt;include&gt;&gt;** editarProfesor() regresa al contexto de edición
+- **Separación de responsabilidades**: configureTeacherPreferences() se enfoca en configuración
+- **Reutilización**: **&lt;&lt;include&gt;&gt;** editTeacher() regresa al contexto de edición
 - **Entrada específica**: Solo funciona desde `:Profesor Abierto` (estado PROFESOR_ABIERTO)
 - **Navegación controlada**: Regresa específicamente a edición del mismo profesor
 
@@ -227,17 +219,17 @@ El diseño separa claramente:
 - **Guardado automático**: Guardado inmediato tras cada reordenamiento
 - **Validación en tiempo real**: Verificación inmediata de orden completo
 
-## diferencias con editarProfesor()
+## diferencias con editTeacher()
 
-### configurarPreferenciasProfesor() vs editarProfesor()
+### configureTeacherPreferences() vs editTeacher()
 
-**configurarPreferenciasProfesor():**
+**configureTeacherPreferences():**
 - **Objetivo**: Configuración específica de orden de prioridad de recursos
 - **Interacción**: Configuración continua de preferencias en contexto especializado
 - **Datos**: Solo orden de prioridad de recursos, no datos básicos del profesor
 - **Navegación**: Regresa específicamente a edición del mismo profesor
 
-**editarProfesor():**
+**editTeacher():**
 - **Objetivo**: Modificación de datos básicos del profesor
 - **Interacción**: Edición completa de todos los campos del profesor
 - **Datos**: Información básica del profesor (nombres, apellidos, contacto, etc.)
@@ -245,17 +237,17 @@ El diseño separa claramente:
 
 ### complementariedad con edición de profesores
 
-- **editarProfesor()**: Modifica datos básicos del profesor
-- **configurarPreferenciasProfesor()**: Configura preferencias específicas de recursos
+- **editTeacher()**: Modifica datos básicos del profesor
+- **configureTeacherPreferences()**: Configura preferencias específicas de recursos
 - **Separación clara**: Cada caso maneja un aspecto específico de la información del profesor
-- **Navegación integrada**: configurarPreferenciasProfesor() regresa a editarProfesor()
+- **Navegación integrada**: configureTeacherPreferences() regresa a editTeacher()
 
 ## impacto en el algoritmo de generación de horarios
 
 ### utilización de las preferencias configuradas
 
 Las preferencias configuradas son utilizadas por:
-- **generarHorario()**: El algoritmo considera el orden de prioridad para asignar aulas con recursos preferidos
+- **generateSchedule()**: El algoritmo considera el orden de prioridad para asignar aulas con recursos preferidos
 - **Optimización**: Mejor puntuación en asignaciones que coinciden con preferencias del profesor
 - **Resolución de conflictos**: Preferencias ayudan a decidir entre múltiples opciones válidas
 
@@ -268,8 +260,8 @@ Las preferencias configuradas son utilizadas por:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/configurarPreferenciasProfesor/README.md)
-- [editarProfesor() - Caso relacionado](../editarProfesor/README.md)
-- [generarHorario() - Caso dependiente](../generarHorario/README.md)
-- [abrirProfesores() - Contexto de navegación](../abrirProfesores/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/configureTeacherPreferences/README.md)
+- [editTeacher() - Caso relacionado](../editTeacher/README.md)
+- [generateSchedule() - Caso dependiente](../generateSchedule/README.md)
+- [openTeachers() - Contexto de navegación](../openTeachers/README.md)
 - [Modelo del dominio](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)

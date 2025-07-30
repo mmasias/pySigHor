@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: generarHorario()](/images/RUP/01-analisis/casos-uso/generarHorario/generarHorario-analisis.svg)|
+|![Análisis: generarHorario()](/images/RUP/01-analisis/casos-uso/generarHorario/generarHorario-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/generarHorario/colaboracion.puml)|
 

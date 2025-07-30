@@ -1,6 +1,6 @@
-# pySigHor > completarGestion > Análisis
+# pySigHor > completeManagement > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/completarGestion/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/completeManagement/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,20 +14,20 @@
 
 ## propósito
 
-Análisis del caso de uso `completarGestion()` mediante diagrama de colaboración MVC, identificando clases de análisis y sus interacciones conceptuales para realizar el caso de uso.
+Análisis del caso de uso `completeManagement()` mediante diagrama de colaboración MVC, identificando clases de análisis y sus interacciones conceptuales para realizar el caso de uso.
 
 ### rol metodológico del caso de uso
 
-`completarGestion()` es el **caso de uso de convergencia** del sistema SigHor, funcionando como:
+`completeManagement()` es el **caso de uso de convergencia** del sistema SigHor, funcionando como:
 
 - **Hub central de navegación**: Punto de retorno común desde todas las funcionalidades específicas
 - **Coordinador de capacidades**: Presenta al usuario todas las opciones disponibles según sus permisos
 - **Mantenedor de contexto**: Preserva la sesión activa mientras permite acceso a cualquier funcionalidad
 
 **Invocación**: Este caso de uso es invocado por:
-1. **`iniciarSesion()`** - Al establecer sesión exitosa inicialmente
-2. **Todos los casos de uso de gestión** - Al completar operaciones CRUD (`abrirProgramas()`, `abrirCursos()`, etc.)
-3. **Casos de uso de proceso** - Al finalizar procesos específicos (`generarHorario()`, `consultarHorario()`, etc.)
+1. **`startSession()`** - Al establecer sesión exitosa inicialmente
+2. **Todos los casos de uso de gestión** - Al completar operaciones CRUD (`openPrograms()`, `openCourses()`, etc.)
+3. **Casos de uso de proceso** - Al finalizar procesos específicos (`generateSchedule()`, `viewSchedule()`, etc.)
 
 **Resultado**: Mantiene al sistema en estado `SISTEMA_DISPONIBLE`, permitiendo solicitar cualquier funcionalidad del diagrama de contexto.
 
@@ -35,7 +35,7 @@ Análisis del caso de uso `completarGestion()` mediante diagrama de colaboració
 
 <div align=center>
 
-|![Análisis completarGestion()](/images/RUP/01-analisis/casos-uso/completarGestion/completarGestion-analisis.svg)|
+|![Análisis completeManagement()](/images/RUP/01-analisis/casos-uso/completeManagement/completeManagement-analysis.svg)|
 |-|
 |**Disciplina**: Análisis RUP<br>**Enfoque**: Diagramas de colaboración MVC|
 
@@ -58,7 +58,7 @@ Análisis del caso de uso `completarGestion()` mediante diagrama de colaboració
 ### clases controller (verde #b5bd68)
 |Clase|Responsabilidad|Caso de uso|
 |-|-|-|
-|**CompletarGestionController**|Control y coordinación completa del caso de uso|completarGestion()|
+|**completeManagementController**|Control y coordinación completa del caso de uso|completeManagement()|
 
 ### colaboraciones (verde claro #CDEBA5)
 |Colaboración|Propósito|Invocación|
@@ -79,22 +79,22 @@ Análisis del caso de uso `completarGestion()` mediante diagrama de colaboració
 ### flujo principal
 |Origen|Destino|Mensaje|Intención|
 |-|-|-|-|
-|**:Sistema Disponible**|**GestionView**|`disponibilizarSistema()`|Resultado de iniciarSesion() invoca completarGestion()|
-|**GestionView**|**CompletarGestionController**|`habilitarOpciones(administrador)`|Delegar habilitación de opciones|
-|**CompletarGestionController**|**Sesion**|`getUsuario()`|Obtener información del usuario autenticado|
-|**CompletarGestionController**|**PermisosRepository**|`obtenerOpciones(usuario)`|Obtener opciones disponibles para el usuario|
-|**CompletarGestionController**|**OpcionesMenu**|`crearOpciones(opciones)`|Crear estructura de opciones|
+|**:Sistema Disponible**|**GestionView**|`disponibilizarSistema()`|Resultado de iniciarSesion() invoca completeManagement()|
+|**GestionView**|**completeManagementController**|`habilitarOpciones(administrador)`|Delegar habilitación de opciones|
+|**completeManagementController**|**Sesion**|`getUsuario()`|Obtener información del usuario autenticado|
+|**completeManagementController**|**PermisosRepository**|`obtenerOpciones(usuario)`|Obtener opciones disponibles para el usuario|
+|**completeManagementController**|**OpcionesMenu**|`crearOpciones(opciones)`|Crear estructura de opciones|
 |**GestionView**|**OpcionesMenu**|`getOpciones()`|Obtener opciones para presentar|
 |**GestionView**|**:Collaboration [Según selección]**|`abrirX() / asignarX() / generarX() / etc.`|Invocar colaboración según opción seleccionada|
 
 ## enlaces de dependencia
-- **GestionView** conoce a **CompletarGestionController** (delegación)
+- **GestionView** conoce a **completeManagementController** (delegación)
 - **GestionView** conoce a **OpcionesMenu** (acceso a opciones)
 - **GestionView** conoce a **Sesion** (acceso a estado)
 - **GestionView** conoce a **todas las colaboraciones** (invocación según selección)
-- **CompletarGestionController** conoce a **PermisosRepository** (obtención opciones)
-- **CompletarGestionController** conoce a **OpcionesMenu** (creación estructura)
-- **CompletarGestionController** conoce a **Sesion** (acceso a usuario)
+- **completeManagementController** conoce a **PermisosRepository** (obtención opciones)
+- **completeManagementController** conoce a **OpcionesMenu** (creación estructura)
+- **completeManagementController** conoce a **Sesion** (acceso a usuario)
 - **PermisosRepository** conoce a **OpcionesMenu** (gestión opciones)
 
 ## trazabilidad con artefactos previos
@@ -117,7 +117,7 @@ Análisis del caso de uso `completarGestion()` mediante diagrama de colaboració
 ## principios de análisis aplicados
 
 ### patrón mvc
-- **Un controlador por caso de uso**: CompletarGestionController
+- **Un controlador por caso de uso**: completeManagementController
 - **Vista derivada de prototipo**: GestionView desde wireframe SALT
 - **Modelo del dominio**: OpcionesMenu con trazabilidad directa
 
@@ -135,7 +135,7 @@ Análisis del caso de uso `completarGestion()` mediante diagrama de colaboració
 
 ### responsabilidades identificadas
 - **GestionView**: Habilitar solicitud de opciones y capturar selección del usuario
-- **CompletarGestionController**: Orquestar lógica completa del caso de uso
+- **completeManagementController**: Orquestar lógica completa del caso de uso
 - **PermisosRepository**: Proveer acceso conceptual a opciones disponibles
 - **OpcionesMenu**: Representar estructura de opciones disponibles
 - **Sesion**: Mantener estado de autenticación y información del usuario
@@ -157,7 +157,7 @@ Análisis del caso de uso `completarGestion()` mediante diagrama de colaboració
 ## centralidad del caso de uso
 
 ### hub de navegación
-- **Punto de convergencia**: Todos los casos de uso regresan al estado `SISTEMA_DISPONIBLE` vía `completarGestion()`
+- **Punto de convergencia**: Todos los casos de uso regresan al estado `SISTEMA_DISPONIBLE` vía `completeManagement()`
 - **Punto de divergencia**: Desde aquí se accede a todas las funcionalidades del sistema
 - **Multiplicidad de colaboraciones**: Conecta con todos los casos de uso según el patrón metodológico establecido
 
@@ -182,6 +182,6 @@ Análisis del caso de uso `completarGestion()` mediante diagrama de colaboració
 
 ## referencias
 
-- [Especificación detallada](../../00-casos-uso/02-detalle/completarGestion/README.md)
+- [Especificación detallada](../../00-casos-uso/02-detalle/completeManagement/README.md)
 - [Modelo del dominio](../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)
 - [conversation-log.md](../../../../conversation-log.md) - Metodología de análisis RUP

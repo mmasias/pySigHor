@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: eliminarAula()](/images/RUP/01-analisis/casos-uso/eliminarAula/eliminarAula-analisis.svg)|
+|![Análisis: eliminarAula()](/images/RUP/01-analisis/casos-uso/eliminarAula/eliminarAula-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/eliminarAula/colaboracion.puml)|
 

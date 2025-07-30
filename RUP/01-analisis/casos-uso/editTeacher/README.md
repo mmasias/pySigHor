@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > editTeacher > Análisis
 
-</div>
-
-# pySigHor > editarProfesor > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editarProfesor/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editTeacher/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `editarProfesor()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de profesores con capacidad de modificación continua.
+Análisis de colaboración del caso de uso `editTeacher()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de profesores con capacidad de modificación continua.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: editarProfesor()](/images/RUP/01-analisis/casos-uso/editarProfesor/editarProfesor-analisis.svg)|
+|![Análisis: editTeacher()](/images/RUP/01-analisis/casos-uso/editTeacher/editTeacher-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -38,7 +30,7 @@ Análisis de colaboración del caso de uso `editarProfesor()` mediante el patró
 
 ### clases de vista (boundary)
 
-#### EditarProfesorView
+#### editTeacherView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de edición de profesor
@@ -49,7 +41,7 @@ Análisis de colaboración del caso de uso `editarProfesor()` mediante el patró
 - Permitir solicitar guardar cambios o cancelar edición
 
 **Colaboraciones**:
-- **Entrada**: Recibe `editarProfesor(profesorId)` desde `:Profesores Abierto`, `:Profesor Abierto` o desde `:Collaboration CrearProfesor`
+- **Entrada**: Recibe `editTeacher(profesorId)` desde `:Profesores Abierto`, `:Profesor Abierto` o desde `:Collaboration CrearProfesor`
 - **Control**: Se comunica con `ProfesorController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProfesores` para mostrar lista actualizada o mantiene `:Profesor Abierto`
 
@@ -66,7 +58,7 @@ Análisis de colaboración del caso de uso `editarProfesor()` mediante el patró
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EditarProfesorView`
+- **Vista**: Responde a solicitudes de `editTeacherView`
 - **Repositorio**: Delega operaciones de datos a `ProfesorRepository`
 
 ### clases de entidad (entity)
@@ -100,16 +92,16 @@ Análisis de colaboración del caso de uso `editarProfesor()` mediante el patró
 
 ### secuencia: editar profesor
 
-1. **Inicio**: `:Profesores Abierto` → `EditarProfesorView.editarProfesor(profesorId)`
-2. **Carga**: `EditarProfesorView` → `ProfesorController.cargarProfesorParaEdicion(profesorId)`
+1. **Inicio**: `:Profesores Abierto` → `editTeacherView.editTeacher(profesorId)`
+2. **Carga**: `editTeacherView` → `ProfesorController.cargarProfesorParaEdicion(profesorId)`
 3. **Obtención**: `ProfesorController` → `ProfesorRepository.obtenerPorId(profesorId) : Profesor`
-4. **Presentación**: `EditarProfesorView` presenta datos completos del `Profesor` para edición
-5. **Modificación**: Administrador modifica campos en `EditarProfesorView`
-6. **Guardado**: `EditarProfesorView` → `ProfesorController.guardarCambios(profesorModificado)`
+4. **Presentación**: `editTeacherView` presenta datos completos del `Profesor` para edición
+5. **Modificación**: Administrador modifica campos en `editTeacherView`
+6. **Guardado**: `editTeacherView` → `ProfesorController.guardarCambios(profesorModificado)`
 7. **Persistencia**: `ProfesorController` → `ProfesorRepository.actualizar(profesor)`
 8. **Continuación**: 
-   - **Edición continua**: Permanece en `EditarProfesorView` para más modificaciones
-   - **Finalización**: `EditarProfesorView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProfesores.abrirProfesores()`
+   - **Edición continua**: Permanece en `editTeacherView` para más modificaciones
+   - **Finalización**: `editTeacherView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProfesores.abrirProfesores()`
 
 ## patrón de edición completa para profesores - "el gordo"
 
@@ -123,7 +115,7 @@ Este análisis implementa edición completa que:
 
 ### responsabilidades de edición continua
 
-**EditarProfesorView** maneja edición continua:
+**editTeacherView** maneja edición continua:
 - **Presenta datos**: Información completa del profesor con campos editables
 - **Captura modificaciones**: Cambios en cualquier campo del profesor
 - **Mantiene contexto**: Sesión de edición activa para múltiples modificaciones
@@ -140,7 +132,7 @@ Este análisis implementa edición completa que:
 ### patrón MVC para edición de profesores
 
 - **Model**: `Profesor` + `ProfesorRepository` (datos del profesor y persistencia)
-- **View**: `EditarProfesorView` (edición continua e interacción)
+- **View**: `editTeacherView` (edición continua e interacción)
 - **Controller**: `ProfesorController` (coordinación y validación de edición)
 
 ### patrón Repository con edición continua
@@ -163,20 +155,20 @@ Este análisis implementa edición completa que:
 
 El diseño permite que `ProfesorController` sea reutilizado:
 - **Compartido**: Con crearProfesor() y eliminarProfesor()
-- **Método específico**: editarProfesor() con capacidades de edición continua
+- **Método específico**: editTeacher() con capacidades de edición continua
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para edición continua de profesores
 
 ### patrón include para navegación flexible
 
-- **Separación de responsabilidades**: editarProfesor() se enfoca en editar
+- **Separación de responsabilidades**: editTeacher() se enfoca en editar
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** abrirProfesores() evita duplicar funcionalidad de listado
 - **Múltiples entradas**: Funciona desde `:Profesores Abierto`, `:Profesor Abierto` o desde creación
 - **Navegación controlada**: Permite continuar editando o regresar a lista actualizada
 
 ### flexibilidad de edición continua
 
-- **EditarProfesorView** puede implementar:
+- **editTeacherView** puede implementar:
   - **Edición por campos**: Modificación campo por campo
   - **Edición en bloque**: Modificación de múltiples campos simultáneamente
   - **Guardado incremental**: Guardado automático o manual por cambios
@@ -208,9 +200,9 @@ El diseño permite que `ProfesorController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de profesores
 
-### editarProfesor() vs crearProfesor()
+### editTeacher() vs crearProfesor()
 
-**editarProfesor():**
+**editTeacher():**
 - **Objetivo**: Modificación de datos existentes con edición continua
 - **Interacción**: Múltiples ciclos de edición en sesión activa
 - **Validaciones**: Preservar integridad con datos relacionados existentes
@@ -225,13 +217,13 @@ El diseño permite que `ProfesorController` sea reutilizado:
 ### complementariedad CRUD para profesores
 
 - **crearProfesor()**: Crea nuevos profesores y redirige a edición
-- **editarProfesor()**: Modifica profesores existentes con edición continua
+- **editTeacher()**: Modifica profesores existentes con edición continua
 - **eliminarProfesor()**: Remueve profesores con confirmación segura
 - **abrirProfesores()**: Lista y selecciona profesores para edición
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editarProfesor/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editTeacher/README.md)
 - [crearProfesor() - Caso complementario](../crearProfesor/README.md)
 - [eliminarProfesor() - Caso complementario](../eliminarProfesor/README.md)
 - [abrirProfesores() - Contexto de navegación](../abrirProfesores/README.md)

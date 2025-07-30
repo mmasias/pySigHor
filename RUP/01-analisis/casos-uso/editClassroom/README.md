@@ -1,6 +1,6 @@
-# pySigHor > editarAula > Análisis
+# pySigHor > editClassroom > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editarAula/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editClassroom/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `editarAula()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de aulas.
+Análisis de colaboración del caso de uso `editClassroom()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de aulas.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: editarAula()](/images/RUP/01-analisis/casos-uso/editarAula/editarAula-analisis.svg)|
+|![Análisis: editClassroom()](/images/RUP/01-analisis/casos-uso/editClassroom/editClassroom-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `editarAula()` mediante el patrón MV
 
 ### clases de vista (boundary)
 
-#### EditarAulaView
+#### editClassroomView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de edición de aula existente
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `editarAula()` mediante el patrón MV
 - Manejar navegación de vuelta a la lista de aulas
 
 **Colaboraciones**:
-- **Entrada**: Recibe `editarAula()` desde `:Aulas Abierto` o desde `crearAula()`
+- **Entrada**: Recibe `editClassroom()` desde `:Aulas Abierto` o desde `crearAula()`
 - **Control**: Se comunica con `AulaController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirAulas` al guardar y salir
 
@@ -57,7 +57,7 @@ Análisis de colaboración del caso de uso `editarAula()` mediante el patrón MV
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EditarAulaView`
+- **Vista**: Responde a solicitudes de `editClassroomView`
 - **Repositorio**: Delega operaciones de datos a `AulaRepository`
 
 ### clases de entidad (entity)
@@ -99,7 +99,7 @@ Este análisis implementa edición completa que:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editarAula/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editClassroom/README.md)
 - [crearAula() - Caso de transferencia](../crearAula/README.md)
 - [eliminarAula() - Caso complementario](../eliminarAula/README.md)
 - [abrirAulas() - Contexto de navegación](../abrirAulas/README.md)

@@ -1,6 +1,6 @@
-# pySigHor > abrirCursos > Análisis
+# pySigHor > openCourses > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirCursos/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/openCourses/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 
@@ -15,13 +15,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `abrirCursos()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
+Análisis de colaboración del caso de uso `openCourses()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: abrirCursos()](/images/RUP/01-analisis/casos-uso/abrirCursos/abrirCursos-analisis.svg)|
+|![Análisis: openCourses()](/images/RUP/01-analisis/casos-uso/openCourses/openCourses-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -31,7 +31,7 @@ Análisis de colaboración del caso de uso `abrirCursos()` mediante el patrón M
 
 ### clases de vista (boundary)
 
-#### AbrirCursosView
+#### openCoursesView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de apertura de cursos académicos
@@ -41,7 +41,7 @@ Análisis de colaboración del caso de uso `abrirCursos()` mediante el patrón M
 - Manejar la navegación de regreso al sistema y a operaciones CRUD
 
 **Colaboraciones**:
-- **Entrada**: Recibe `abrirCursos()` desde `:Sistema Disponible`
+- **Entrada**: Recibe `openCourses()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `CursosController`
 - **Salida**: Navega a `:Sistema Disponible` o colaboraciones CRUD
 
@@ -55,7 +55,7 @@ Análisis de colaboración del caso de uso `abrirCursos()` mediante el patrón M
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `AbrirCursosView`
+- **Vista**: Responde a solicitudes de `openCoursesView`
 - **Repositorio**: Delega operaciones de datos a `CursoRepository`
 
 ### clases de entidad (entity)
@@ -86,12 +86,12 @@ Análisis de colaboración del caso de uso `abrirCursos()` mediante el patrón M
 
 ### secuencia de operaciones
 
-1. **Inicio**: `:Sistema Disponible` → `AbrirCursosView.abrirCursos()`
-2. **Listado inicial**: `AbrirCursosView` → `CursosController.listarCursos()`
+1. **Inicio**: `:Sistema Disponible` → `openCoursesView.openCourses()`
+2. **Listado inicial**: `openCoursesView` → `CursosController.listarCursos()`
 3. **Acceso a datos**: `CursosController` → `CursoRepository.obtenerTodos()`
-4. **Filtrado (opcional)**: `AbrirCursosView` → `CursosController.filtrarCursos(criterio)`
+4. **Filtrado (opcional)**: `openCoursesView` → `CursosController.filtrarCursos(criterio)`
 5. **Búsqueda**: `CursosController` → `CursoRepository.buscarPorCriterio(criterio)`
-6. **Navegación**: `AbrirCursosView` → Opciones disponibles
+6. **Navegación**: `openCoursesView` → Opciones disponibles
 
 ### opciones de navegación disponibles
 
@@ -106,8 +106,8 @@ Análisis de colaboración del caso de uso `abrirCursos()` mediante el patrón M
 
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
-|Presentar lista de cursos|`AbrirCursosView`|Coordina con `CursosController.listarCursos()`|
-|Permitir filtrado de lista|`AbrirCursosView`|Invoca `CursosController.filtrarCursos(criterio)`|
+|Presentar lista de cursos|`openCoursesView`|Coordina con `CursosController.listarCursos()`|
+|Permitir filtrado de lista|`openCoursesView`|Invoca `CursosController.filtrarCursos(criterio)`|
 |Código, nombre, descripción|`Curso`|Encapsula atributos del curso académico|
 |Acceso a datos de cursos|`CursoRepository`|`obtenerTodos()`, `buscarPorCriterio()`|
 
@@ -134,7 +134,7 @@ Este análisis sigue el **patrón metodológico universal** establecido para el 
 
 ### trazabilidad completa
 
-- **Origen**: Caso de uso detallado `abrirCursos()`
+- **Origen**: Caso de uso detallado `openCourses()`
 - **Destino**: Base para diseño arquitectónico
 - **Conexión**: Diagrama de contexto → Análisis de colaboración
 
@@ -144,13 +144,13 @@ Este análisis sigue el **patrón metodológico universal** establecido para el 
 `CursoRepository` abstrae el acceso a datos, permitiendo diferentes implementaciones sin afectar el controlador.
 
 ### mvc pattern
-Separación clara entre presentación (`AbrirCursosView`), lógica de aplicación (`CursosController`) y datos (`Curso`, `CursoRepository`).
+Separación clara entre presentación (`openCoursesView`), lógica de aplicación (`CursosController`) y datos (`Curso`, `CursoRepository`).
 
 ### navigation pattern
 Flechas discontinuas indican opciones de navegación disponibles para el usuario, manteniendo flexibilidad en el flujo.
 
 ## referencias
 
-- [Especificación detallada: abrirCursos()](../../../00-casos-uso/02-detalle/abrirCursos/README.md)
+- [Especificación detallada: openCourses()](../../../00-casos-uso/02-detalle/openCourses/README.md)
 - [Diagrama de contexto - Administrador](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Patrón metodológico universal](../../../../conversation-log.md) - Marco de análisis establecido

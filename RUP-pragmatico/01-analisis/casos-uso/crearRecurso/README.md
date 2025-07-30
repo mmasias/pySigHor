@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: crearRecurso()](/images/RUP/01-analisis/casos-uso/crearRecurso/crearRecurso-analisis.svg)|
+|![Análisis: crearRecurso()](/images/RUP/01-analisis/casos-uso/crearRecurso/crearRecurso-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/crearRecurso/colaboracion.puml)|
 

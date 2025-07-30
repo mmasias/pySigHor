@@ -1,6 +1,6 @@
-# pySigHor > eliminarCurso > Análisis
+# pySigHor > deleteCourse > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarCurso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/deleteCourse/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `eliminarCurso()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de cursos con confirmación.
+Análisis de colaboración del caso de uso `deleteCourse()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de cursos con confirmación.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: eliminarCurso()](/images/RUP/01-analisis/casos-uso/eliminarCurso/eliminarCurso-analisis.svg)|
+|![Análisis: deleteCourse()](/images/RUP/01-analisis/casos-uso/deleteCourse/deleteCourse-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `eliminarCurso()` mediante el patrón
 
 ### clases de vista (boundary)
 
-#### EliminarCursoView
+#### deleteCourseView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de eliminación de curso
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `eliminarCurso()` mediante el patrón
 - Permitir solicitar confirmación o cancelación del administrador
 
 **Colaboraciones**:
-- **Entrada**: Recibe `eliminarCurso(cursoId)` desde `:Cursos Abierto` o `:Curso Abierto`
+- **Entrada**: Recibe `deleteCourse(cursoId)` desde `:Cursos Abierto` o `:Curso Abierto`
 - **Control**: Se comunica con `CursoController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirCursos` para mostrar lista actualizada
 
@@ -56,7 +56,7 @@ Análisis de colaboración del caso de uso `eliminarCurso()` mediante el patrón
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EliminarCursoView`
+- **Vista**: Responde a solicitudes de `deleteCourseView`
 - **Repositorio**: Delega operaciones de datos a `CursoRepository`
 
 ### clases de entidad (entity)
@@ -90,14 +90,14 @@ Análisis de colaboración del caso de uso `eliminarCurso()` mediante el patrón
 
 ### secuencia: eliminar curso
 
-1. **Inicio**: `:Cursos Abierto` → `EliminarCursoView.eliminarCurso(cursoId)`
-2. **Carga**: `EliminarCursoView` → `CursoController.cargarCursoParaEliminacion(cursoId)`
+1. **Inicio**: `:Cursos Abierto` → `deleteCourseView.deleteCourse(cursoId)`
+2. **Carga**: `deleteCourseView` → `CursoController.cargarCursoParaEliminacion(cursoId)`
 3. **Obtención**: `CursoController` → `CursoRepository.obtenerPorId(cursoId) : Curso`
-4. **Presentación**: `EliminarCursoView` presenta información del `Curso` con advertencia
-5. **Confirmación**: Administrador confirma o cancela en `EliminarCursoView`
-6. **Eliminación**: `EliminarCursoView` → `CursoController.eliminarCurso(cursoId)`
+4. **Presentación**: `deleteCourseView` presenta información del `Curso` con advertencia
+5. **Confirmación**: Administrador confirma o cancela en `deleteCourseView`
+6. **Eliminación**: `deleteCourseView` → `CursoController.deleteCourse(cursoId)`
 7. **Persistencia**: `CursoController` → `CursoRepository.eliminar(cursoId)`
-8. **Finalización**: `EliminarCursoView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirCursos.abrirCursos()`
+8. **Finalización**: `deleteCourseView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirCursos.abrirCursos()`
 
 ## patrón de eliminación segura para cursos
 
@@ -111,7 +111,7 @@ Este análisis implementa eliminación con confirmación que:
 
 ### responsabilidades de seguridad
 
-**EliminarCursoView** maneja confirmación:
+**deleteCourseView** maneja confirmación:
 - **Presenta datos**: Información académica completa del curso
 - **Muestra advertencias**: Mensajes de eliminación irreversible
 - **Captura decisión**: Confirmación o cancelación explícita
@@ -127,7 +127,7 @@ Este análisis implementa eliminación con confirmación que:
 ### patrón MVC para eliminación de cursos
 
 - **Model**: `Curso` + `CursoRepository` (datos académicos y eliminación)
-- **View**: `EliminarCursoView` (confirmación e interacción)
+- **View**: `deleteCourseView` (confirmación e interacción)
 - **Controller**: `CursoController` (coordinación y validación académica)
 
 ### patrón Repository con eliminación académica
@@ -150,13 +150,13 @@ Este análisis implementa eliminación con confirmación que:
 
 El diseño permite que `CursoController` sea reutilizado:
 - **Compartido**: Con crearCurso() y editarCurso()
-- **Método específico**: eliminarCurso() con validaciones académicas propias
+- **Método específico**: deleteCourse() con validaciones académicas propias
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para entidad académica
 
 ### patrón include para navegación
 
-- **Separación de responsabilidades**: eliminarCurso() se enfoca en eliminar
+- **Separación de responsabilidades**: deleteCourse() se enfoca en eliminar
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** abrirCursos() evita duplicar funcionalidad de listado
 - **Doble entrada**: Funciona desde `:Cursos Abierto` o `:Curso Abierto`
 - **Navegación consistente**: Regresa siempre a lista actualizada
@@ -193,9 +193,9 @@ El diseño permite que `CursoController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de cursos
 
-### eliminarCurso() vs editarCurso()
+### deleteCourse() vs editarCurso()
 
-**eliminarCurso():**
+**deleteCourse():**
 - **Objetivo**: Confirmación y eliminación
 - **Interacción**: Solo lectura + confirmación
 - **Validaciones**: Restricciones de integridad curricular
@@ -211,12 +211,12 @@ El diseño permite que `CursoController` sea reutilizado:
 
 - **crearCurso()**: Añade nuevos cursos al programa
 - **editarCurso()**: Modifica cursos existentes del programa
-- **eliminarCurso()**: Remueve cursos del programa académico
+- **deleteCourse()**: Remueve cursos del programa académico
 - **abrirCursos()**: Lista y selecciona cursos del programa
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/eliminarCurso/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/deleteCourse/README.md)
 - [editarCurso() - Caso complementario](../editarCurso/README.md)
 - [crearCurso() - Caso complementario](../crearCurso/README.md)
 - [abrirCursos() - Contexto de navegación](../abrirCursos/README.md)

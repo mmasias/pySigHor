@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis cerrarSesion()](/images/RUP/01-analisis/casos-uso/cerrarSesion/cerrarSesion-analisis.svg)|
+|![Análisis cerrarSesion()](/images/RUP/01-analisis/casos-uso/cerrarSesion/cerrarSesion-analysis.svg)|
 |-|
 |**Disciplina**: Análisis RUP<br>**Enfoque**: Diagramas de colaboración MVC|
 

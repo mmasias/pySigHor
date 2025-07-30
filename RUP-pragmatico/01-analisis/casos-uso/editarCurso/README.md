@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: editarCurso()](/images/RUP/01-analisis/casos-uso/editarCurso/editarCurso-analisis.svg)|
+|![Análisis: editarCurso()](/images/RUP/01-analisis/casos-uso/editarCurso/editarCurso-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/editarCurso/colaboracion.puml)|
 

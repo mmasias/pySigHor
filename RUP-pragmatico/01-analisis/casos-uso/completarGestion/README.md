@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis completarGestion()](/images/RUP/01-analisis/casos-uso/completarGestion/completarGestion-analisis.svg)|
+|![Análisis completarGestion()](/images/RUP/01-analisis/casos-uso/completarGestion/completarGestion-analysis.svg)|
 |-|
 |**Disciplina**: Análisis RUP<br>**Enfoque**: Diagramas de colaboración MVC|
 

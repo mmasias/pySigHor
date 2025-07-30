@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: eliminarEdificio()](/images/RUP/01-analisis/casos-uso/eliminarEdificio/eliminarEdificio-analisis.svg)|
+|![Análisis: eliminarEdificio()](/images/RUP/01-analisis/casos-uso/eliminarEdificio/eliminarEdificio-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/eliminarEdificio/colaboracion.puml)|
 

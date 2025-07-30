@@ -89,7 +89,7 @@ Análisis de colaboración del caso de uso `createProgram()` mediante el patrón
 1. **Inicio**: `:Programas Abierto` → `CrearProgramaView.createProgram()`
 2. **Solicitud**: `CrearProgramaView` presenta diálogo de datos mínimos
 3. **Captura**: Administrador proporciona nombre en `CrearProgramaView`
-4. **Creación**: `CrearProgramaView` → `ProgramaController.crearProgramaMinimo(nombre)`
+4. **Creación**: `CreateProgramView` → `ProgramController.createMinimalProgram(nombre)`
 5. **Generación**: `ProgramaController` → `ProgramaRepository.crear(nombre) : Programa`
 6. **Persistencia**: `ProgramaRepository` crea nueva instancia de `Programa`
 7. **Transferencia**: `CrearProgramaView` → `:Collaboration EditarPrograma.editarPrograma(programaNuevo)`
@@ -173,7 +173,7 @@ El diseño permite que ambos casos de uso compartan:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/crearPrograma/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/createProgram/README.md)
 - [editProgram() - "El gordo"](../editarPrograma/README.md)
 - [Filosofía C→U](../../../../extraDocs/008-filosofia-crud-creacion-edicion/README.md)
 - [Análisis abrirProfesores](../abrirProfesores/README.md) - Patrón de referencia

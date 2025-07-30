@@ -1,6 +1,6 @@
-# pySigHor > abrirProfesores > Análisis
+# pySigHor > openTeachers > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirProfesores/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/openTeachers/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `abrirProfesores()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
+Análisis de colaboración del caso de uso `openTeachers()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: abrirProfesores()](/images/RUP/01-analisis/casos-uso/abrirProfesores/abrirProfesores-analisis.svg)|
+|![Análisis: openTeachers()](/images/RUP/01-analisis/casos-uso/openTeachers/openTeachers-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `abrirProfesores()` mediante el patr�
 - Manejar la navegación de regreso al sistema
 
 **Colaboraciones**:
-- **Entrada**: Recibe `abrirProfesores()` desde `:Sistema Disponible`
+- **Entrada**: Recibe `openTeachers()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `ProfesoresController`
 - **Salida**: Retorna control a `:Sistema Disponible`
 
@@ -85,7 +85,7 @@ Análisis de colaboración del caso de uso `abrirProfesores()` mediante el patr�
 
 ### secuencia de operaciones
 
-1. **Inicio**: `:Sistema Disponible` → `ListarProfesoresView.abrirProfesores()`
+1. **Inicio**: `:Sistema Disponible` → `ListarProfesoresView.openTeachers()`
 2. **Listado inicial**: `ListarProfesoresView` → `ProfesoresController.listarProfesores()`
 3. **Acceso a datos**: `ProfesoresController` → `ProfesorRepository.obtenerTodos()`
 4. **Filtrado (opcional)**: `ListarProfesoresView` → `ProfesoresController.filtrarProfesores(criterio)`
@@ -133,7 +133,7 @@ Aunque no implementadas en este caso de uso, el análisis prepara la base para:
 
 ### trazabilidad completa
 
-- **Origen**: Caso de uso detallado `abrirProfesores()`
+- **Origen**: Caso de uso detallado `openTeachers()`
 - **Destino**: Base para diseño arquitectónico
 - **Conexión**: Diagrama de contexto → Análisis de colaboración
 
@@ -150,6 +150,6 @@ Mantiene coherencia con el diagrama de contexto del administrador, respetando la
 
 ## referencias
 
-- [Especificación detallada: abrirProfesores()](../../../00-casos-uso/02-detalle/abrirProfesores/README.md)
+- [Especificación detallada: openTeachers()](../../../00-casos-uso/02-detalle/openTeachers/README.md)
 - [Diagrama de contexto - Administrador](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Patrón metodológico universal](../../../../conversation-log.md) - Marco de análisis establecido

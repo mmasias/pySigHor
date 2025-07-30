@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: editarPrograma()](/images/RUP/01-analisis/casos-uso/editarPrograma/editarPrograma-analisis.svg)|
+|![Análisis: editarPrograma()](/images/RUP/01-analisis/casos-uso/editarPrograma/editarPrograma-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/editarPrograma/colaboracion.puml)|
 

@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > editBuilding > Análisis
 
-</div>
-
-# pySigHor > editarEdificio > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editarEdificio/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editBuilding/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `editarEdificio()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de edificios.
+Análisis de colaboración del caso de uso `editBuilding()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de edificios.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: editarEdificio()](/images/RUP/01-analisis/casos-uso/editarEdificio/editarEdificio-analisis.svg)|
+|![Análisis: editBuilding()](/images/RUP/01-analisis/casos-uso/editBuilding/editBuilding-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -38,7 +30,7 @@ Análisis de colaboración del caso de uso `editarEdificio()` mediante el patró
 
 ### clases de vista (boundary)
 
-#### EditarEdificioView
+#### editBuildingView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de edición de edificio existente
@@ -48,7 +40,7 @@ Análisis de colaboración del caso de uso `editarEdificio()` mediante el patró
 - Manejar navegación de vuelta a la lista de edificios
 
 **Colaboraciones**:
-- **Entrada**: Recibe `editarEdificio()` desde `:Edificios Abierto` o desde `crearEdificio()`
+- **Entrada**: Recibe `editBuilding()` desde `:Edificios Abierto` o desde `crearEdificio()`
 - **Control**: Se comunica con `EdificioController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirEdificios` al guardar y salir
 
@@ -65,7 +57,7 @@ Análisis de colaboración del caso de uso `editarEdificio()` mediante el patró
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EditarEdificioView`
+- **Vista**: Responde a solicitudes de `editBuildingView`
 - **Repositorio**: Delega operaciones de datos a `EdificioRepository`
 
 ### clases de entidad (entity)
@@ -99,15 +91,15 @@ Análisis de colaboración del caso de uso `editarEdificio()` mediante el patró
 
 ### secuencia: editar edificio
 
-1. **Inicio**: `:Edificios Abierto` → `EditarEdificioView.editarEdificio(edificioId)`
-2. **Carga**: `EditarEdificioView` → `EdificioController.cargarEdificio(edificioId)`
+1. **Inicio**: `:Edificios Abierto` → `editBuildingView.editBuilding(edificioId)`
+2. **Carga**: `editBuildingView` → `EdificioController.cargarEdificio(edificioId)`
 3. **Recuperación**: `EdificioController` → `EdificioRepository.obtenerPorId(edificioId) : Edificio`
-4. **Presentación**: `EditarEdificioView` presenta formulario completo con datos del edificio
-5. **Modificación**: Administrador modifica campos en `EditarEdificioView`
-6. **Guardado**: `EditarEdificioView` → `EdificioController.guardarCambios(edificioModificado)`
+4. **Presentación**: `editBuildingView` presenta formulario completo con datos del edificio
+5. **Modificación**: Administrador modifica campos en `editBuildingView`
+6. **Guardado**: `editBuildingView` → `EdificioController.guardarCambios(edificioModificado)`
 7. **Validación**: `EdificioController` → `EdificioRepository.validarModificaciones(edificio)`
 8. **Persistencia**: `EdificioController` → `EdificioRepository.actualizar(edificio) : Edificio`
-9. **Navegación**: `EditarEdificioView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirEdificios` (opcional)
+9. **Navegación**: `editBuildingView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirEdificios` (opcional)
 
 ## patrón de edición completa para edificios - "el gordo"
 
@@ -121,7 +113,7 @@ Este análisis implementa edición completa que:
 
 ### responsabilidades de edición completa
 
-**EditarEdificioView** maneja edición completa:
+**editBuildingView** maneja edición completa:
 - **Presenta formulario completo**: Todos los campos editables del edificio
 - **Captura modificaciones**: Cambios en cualquier campo del edificio
 - **Valida entrada**: Verificación completa antes de enviar
@@ -138,7 +130,7 @@ Este análisis implementa edición completa que:
 ### patrón MVC para edición de edificios
 
 - **Model**: `Edificio` + `EdificioRepository` (edición y persistencia completa)
-- **View**: `EditarEdificioView` (formulario completo y navegación)
+- **View**: `editBuildingView` (formulario completo y navegación)
 - **Controller**: `EdificioController` (coordinación y validación de edición)
 
 ### patrón Repository con edición completa
@@ -161,20 +153,20 @@ Este análisis implementa edición completa que:
 
 El diseño permite que `EdificioController` sea reutilizado:
 - **Compartido**: Con crearEdificio() y eliminarEdificio()
-- **Método específico**: editarEdificio() con capacidades de edición completa
+- **Método específico**: editBuilding() con capacidades de edición completa
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para edición completa de edificios
 
 ### patrón include para navegación
 
-- **Separación de responsabilidades**: editarEdificio() se enfoca en editar
+- **Separación de responsabilidades**: editBuilding() se enfoca en editar
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** abrirEdificios() evita duplicar funcionalidad de navegación
 - **Navegación fluida**: Regreso automático a lista tras guardar y salir
 - **Contexto actualizado**: Lista de edificios se actualiza con cambios realizados
 
 ### flexibilidad de edición completa
 
-- **EditarEdificioView** puede implementar:
+- **editBuildingView** puede implementar:
   - **Edición en línea**: Modificación directa de campos en vista
   - **Validación en tiempo real**: Verificación inmediata de cambios
   - **Guardado automático**: Persistencia de cambios incrementales
@@ -206,9 +198,9 @@ El diseño permite que `EdificioController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de edificios
 
-### editarEdificio() vs crearEdificio()
+### editBuilding() vs crearEdificio()
 
-**editarEdificio():**
+**editBuilding():**
 - **Objetivo**: Modificación completa de datos existentes
 - **Interacción**: Formulario completo con edición continua
 - **Validaciones**: Restricciones completas de integridad
@@ -229,7 +221,7 @@ El diseño permite que `EdificioController` sea reutilizado:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editarEdificio/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editBuilding/README.md)
 - [crearEdificio() - Caso de transferencia](../crearEdificio/README.md)
 - [eliminarEdificio() - Caso complementario](../eliminarEdificio/README.md)
 - [abrirEdificios() - Contexto de navegación](../abrirEdificios/README.md)

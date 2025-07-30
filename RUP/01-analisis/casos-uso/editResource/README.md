@@ -1,6 +1,6 @@
-# pySigHor > editarRecurso > Análisis
+# pySigHor > editResource > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editarRecurso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editResource/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `editarRecurso()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de recursos.
+Análisis de colaboración del caso de uso `editResource()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de recursos.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: editarRecurso()](/images/RUP/01-analisis/casos-uso/editarRecurso/editarRecurso-analisis.svg)|
+|![Análisis: editResource()](/images/RUP/01-analisis/casos-uso/editResource/editResource-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `editarRecurso()` mediante el patrón
 
 ### clases de vista (boundary)
 
-#### EditarRecursoView
+#### editResourceView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de edición de recurso existente
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `editarRecurso()` mediante el patrón
 - Manejar navegación de vuelta a la lista de recursos
 
 **Colaboraciones**:
-- **Entrada**: Recibe `editarRecurso()` desde `:Recursos Abierto` o desde `crearRecurso()`
+- **Entrada**: Recibe `editResource()` desde `:Recursos Abierto` o desde `crearRecurso()`
 - **Control**: Se comunica con `RecursoController`
 - **Salida**: **\<\<include>>** `:Collaboration AbrirRecursos` al guardar y salir
 
@@ -57,7 +57,7 @@ Análisis de colaboración del caso de uso `editarRecurso()` mediante el patrón
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EditarRecursoView`
+- **Vista**: Responde a solicitudes de `editResourceView`
 - **Repositorio**: Delega operaciones de datos a `RecursoRepository`
 
 ### clases de entidad (entity)
@@ -99,7 +99,7 @@ Este análisis implementa edición completa que:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editarRecurso/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editResource/README.md)
 - [crearRecurso() - Caso de transferencia](../crearRecurso/README.md)
 - [eliminarRecurso() - Caso complementario](../eliminarRecurso/README.md)
 - [abrirRecursos() - Contexto de navegación](../abrirRecursos/README.md)

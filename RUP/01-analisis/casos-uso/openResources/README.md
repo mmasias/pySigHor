@@ -1,6 +1,6 @@
-# pySigHor > abrirRecursos > Análisis
+# pySigHor > openResources > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/openResources/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `abrirRecursos()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
+Análisis de colaboración del caso de uso `openResources()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: abrirRecursos()](/images/RUP/01-analisis/casos-uso/abrirRecursos/abrirRecursos-analisis.svg)|
+|![Análisis: openResources()](/images/RUP/01-analisis/casos-uso/openResources/openResources-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `abrirRecursos()` mediante el patrón
 - Manejar la navegación de regreso al sistema
 
 **Colaboraciones**:
-- **Entrada**: Recibe `abrirRecursos()` desde `:Sistema Disponible`
+- **Entrada**: Recibe `openResources()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `RecursosController`
 - **Salida**: Retorna control a `:Sistema Disponible`
 
@@ -85,7 +85,7 @@ Análisis de colaboración del caso de uso `abrirRecursos()` mediante el patrón
 
 ### secuencia de operaciones
 
-1. **Inicio**: `:Sistema Disponible` → `ListarRecursosView.abrirRecursos()`
+1. **Inicio**: `:Sistema Disponible` → `ListarRecursosView.openResources()`
 2. **Listado inicial**: `ListarRecursosView` → `RecursosController.listarRecursos()`
 3. **Acceso a datos**: `RecursosController` → `RecursoRepository.obtenerTodos()`
 4. **Filtrado (opcional)**: `ListarRecursosView` → `RecursosController.filtrarRecursos(criterio)`
@@ -133,7 +133,7 @@ Aunque no implementadas en este caso de uso, el análisis prepara la base para:
 
 ### trazabilidad completa
 
-- **Origen**: Caso de uso detallado `abrirRecursos()`
+- **Origen**: Caso de uso detallado `openResources()`
 - **Destino**: Base para diseño arquitectónico
 - **Conexión**: Diagrama de contexto → Análisis de colaboración
 
@@ -150,6 +150,6 @@ Mantiene coherencia con el diagrama de contexto del administrador, respetando la
 
 ## referencias
 
-- [Especificación detallada: abrirRecursos()](../../../00-casos-uso/02-detalle/abrirRecursos/README.md)
+- [Especificación detallada: openResources()](../../../00-casos-uso/02-detalle/openResources/README.md)
 - [Diagrama de contexto - Administrador](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Patrón metodológico universal](../../../../conversation-log.md) - Marco de análisis establecido

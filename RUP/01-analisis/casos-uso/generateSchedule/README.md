@@ -1,6 +1,6 @@
-# pySigHor > generarHorario > Análisis
+# pySigHor > generateSchedule > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/generarHorario/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/generateSchedule/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `generarHorario()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar el proceso algorítmico de generación de horarios académicos.
+Análisis de colaboración del caso de uso `generateSchedule()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar el proceso algorítmico de generación de horarios académicos.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: generarHorario()](/images/RUP/01-analisis/casos-uso/generarHorario/generarHorario-analisis.svg)|
+|![Análisis: generateSchedule()](/images/RUP/01-analisis/casos-uso/generateSchedule/generateSchedule-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `generarHorario()` mediante el patró
 
 ### clases de vista (boundary)
 
-#### GenerarHorarioView
+#### generateScheduleView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de generación de horario
@@ -41,7 +41,7 @@ Análisis de colaboración del caso de uso `generarHorario()` mediante el patró
 - Transferir automáticamente a visualización del horario generado
 
 **Colaboraciones**:
-- **Entrada**: Recibe `generarHorario()` desde `:Sistema Disponible`
+- **Entrada**: Recibe `generateSchedule()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `HorarioController`
 - **Salida**: **\<\<include>>** `:Collaboration ConsultarHorario` tras generación exitosa
 - **Salida**: **\<\<include>>** `:Collaboration CompletarGestion` tras cancelación/error
@@ -59,7 +59,7 @@ Análisis de colaboración del caso de uso `generarHorario()` mediante el patró
 - Servir como intermediario entre vista, repositorio y generador algorítmico
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `GenerarHorarioView`
+- **Vista**: Responde a solicitudes de `generateScheduleView`
 - **Repositorio**: Delega operaciones de datos a `HorarioRepository`
 - **Validador**: Delega validaciones a `Validador`
 - **Generador**: Delega generación algorítmica a `HorarioGenerator`
@@ -128,7 +128,7 @@ La separación implementa:
 - **Validador**: Verificaciones previas y validaciones de integridad
 - **HorarioGenerator**: Encapsulación completa del algoritmo de 4 fases
 - **HorarioRepository**: Abstracción de persistencia y acceso a datos
-- **GenerarHorarioView**: Interacción con usuario y presentación de estados
+- **generateScheduleView**: Interacción con usuario y presentación de estados
 
 ### algoritmo como servicio
 
@@ -139,7 +139,7 @@ La separación implementa:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/generarHorario/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/generateSchedule/README.md)
 - [consultarHorario() - Caso de transferencia automática](../consultarHorario/README.md)
 - [completarGestion() - Caso de navegación alternativa](../completarGestion/README.md)
 - [Modelo del dominio](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)

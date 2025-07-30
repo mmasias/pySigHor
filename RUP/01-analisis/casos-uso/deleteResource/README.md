@@ -1,6 +1,6 @@
-# pySigHor > eliminarRecurso > Análisis
+# pySigHor > deleteResource > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarRecurso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/deleteResource/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `eliminarRecurso()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de recursos con confirmación previa.
+Análisis de colaboración del caso de uso `deleteResource()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de recursos con confirmación previa.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: eliminarRecurso()](/images/RUP/01-analisis/casos-uso/eliminarRecurso/eliminarRecurso-analisis.svg)|
+|![Análisis: deleteResource()](/images/RUP/01-analisis/casos-uso/deleteResource/deleteResource-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `eliminarRecurso()` mediante el patr�
 
 ### clases de vista (boundary)
 
-#### EliminarRecursoView
+#### deleteResourceView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de eliminación de recurso existente
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `eliminarRecurso()` mediante el patr�
 - Gestionar navegación de vuelta a la lista de recursos
 
 **Colaboraciones**:
-- **Entrada**: Recibe `eliminarRecurso()` desde `:Recursos Abierto`
+- **Entrada**: Recibe `deleteResource()` desde `:Recursos Abierto`
 - **Control**: Se comunica con `RecursoController`
 - **Salida**: **\<\<include>>** `:Collaboration AbrirRecursos` tras eliminación o cancelación
 
@@ -57,7 +57,7 @@ Análisis de colaboración del caso de uso `eliminarRecurso()` mediante el patr�
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EliminarRecursoView`
+- **Vista**: Responde a solicitudes de `deleteResourceView`
 - **Repositorio**: Delega operaciones de datos a `RecursoRepository`
 
 ### clases de entidad (entity)
@@ -99,7 +99,7 @@ Este análisis implementa eliminación segura que:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/eliminarRecurso/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/deleteResource/README.md)
 - [crearRecurso() - Caso complementario](../crearRecurso/README.md)
 - [editarRecurso() - Caso complementario](../editarRecurso/README.md)
 - [abrirRecursos() - Contexto de navegación](../abrirRecursos/README.md)

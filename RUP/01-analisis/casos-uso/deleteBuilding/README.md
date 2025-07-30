@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > deleteBuilding > Análisis
 
-</div>
-
-# pySigHor > eliminarEdificio > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarEdificio/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/deleteBuilding/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `eliminarEdificio()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de edificios con confirmación previa.
+Análisis de colaboración del caso de uso `deleteBuilding()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de edificios con confirmación previa.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: eliminarEdificio()](/images/RUP/01-analisis/casos-uso/eliminarEdificio/eliminarEdificio-analisis.svg)|
+|![Análisis: deleteBuilding()](/images/RUP/01-analisis/casos-uso/deleteBuilding/deleteBuilding-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -38,7 +30,7 @@ Análisis de colaboración del caso de uso `eliminarEdificio()` mediante el patr
 
 ### clases de vista (boundary)
 
-#### EliminarEdificioView
+#### deleteBuildingView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de eliminación de edificio existente
@@ -48,7 +40,7 @@ Análisis de colaboración del caso de uso `eliminarEdificio()` mediante el patr
 - Gestionar navegación de vuelta a la lista de edificios
 
 **Colaboraciones**:
-- **Entrada**: Recibe `eliminarEdificio()` desde `:Edificios Abierto`
+- **Entrada**: Recibe `deleteBuilding()` desde `:Edificios Abierto`
 - **Control**: Se comunica con `EdificioController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirEdificios` tras eliminación o cancelación
 
@@ -65,7 +57,7 @@ Análisis de colaboración del caso de uso `eliminarEdificio()` mediante el patr
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EliminarEdificioView`
+- **Vista**: Responde a solicitudes de `deleteBuildingView`
 - **Repositorio**: Delega operaciones de datos a `EdificioRepository`
 
 ### clases de entidad (entity)
@@ -99,15 +91,15 @@ Análisis de colaboración del caso de uso `eliminarEdificio()` mediante el patr
 
 ### secuencia: eliminar edificio
 
-1. **Inicio**: `:Edificios Abierto` → `EliminarEdificioView.eliminarEdificio(edificioId)`
-2. **Carga**: `EliminarEdificioView` → `EdificioController.cargarParaEliminacion(edificioId)`
+1. **Inicio**: `:Edificios Abierto` → `deleteBuildingView.deleteBuilding(edificioId)`
+2. **Carga**: `deleteBuildingView` → `EdificioController.cargarParaEliminacion(edificioId)`
 3. **Recuperación**: `EdificioController` → `EdificioRepository.obtenerConDependencias(edificioId) : Edificio`
-4. **Presentación**: `EliminarEdificioView` presenta información completa del edificio y advertencia
-5. **Confirmación**: Administrador confirma o cancela eliminación en `EliminarEdificioView`
-6. **Validación**: `EliminarEdificioView` → `EdificioController.confirmarEliminacion(edificioId)`
+4. **Presentación**: `deleteBuildingView` presenta información completa del edificio y advertencia
+5. **Confirmación**: Administrador confirma o cancela eliminación en `deleteBuildingView`
+6. **Validación**: `deleteBuildingView` → `EdificioController.confirmarEliminacion(edificioId)`
 7. **Verificación**: `EdificioController` → `EdificioRepository.validarEliminacion(edificioId) : boolean`
 8. **Eliminación**: `EdificioController` → `EdificioRepository.eliminar(edificioId) : boolean`
-9. **Navegación**: `EliminarEdificioView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirEdificios`
+9. **Navegación**: `deleteBuildingView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirEdificios`
 
 ## patrón de eliminación segura para edificios
 
@@ -121,7 +113,7 @@ Este análisis implementa eliminación segura que:
 
 ### responsabilidades de eliminación segura
 
-**EliminarEdificioView** maneja confirmación:
+**deleteBuildingView** maneja confirmación:
 - **Presenta información completa**: Todos los datos del edificio para revisión
 - **Muestra advertencias**: Información sobre consecuencias de eliminación
 - **Captura confirmación**: Decisión explícita del administrador
@@ -138,7 +130,7 @@ Este análisis implementa eliminación segura que:
 ### patrón MVC para eliminación de edificios
 
 - **Model**: `Edificio` + `EdificioRepository` (eliminación y validación de integridad)
-- **View**: `EliminarEdificioView` (confirmación y advertencias)
+- **View**: `deleteBuildingView` (confirmación y advertencias)
 - **Controller**: `EdificioController` (coordinación y validación de eliminación)
 
 ### patrón Repository con eliminación segura
@@ -161,13 +153,13 @@ Este análisis implementa eliminación segura que:
 
 El diseño permite que `EdificioController` sea reutilizado:
 - **Compartido**: Con crearEdificio() y editarEdificio()
-- **Método específico**: eliminarEdificio() con capacidades de eliminación segura
+- **Método específico**: deleteBuilding() con capacidades de eliminación segura
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para eliminación segura de edificios
 
 ### patrón include para navegación
 
-- **Separación de responsabilidades**: eliminarEdificio() se enfoca en eliminar
+- **Separación de responsabilidades**: deleteBuilding() se enfoca en eliminar
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** abrirEdificios() evita duplicar funcionalidad de navegación
 - **Navegación fluida**: Regreso automático a lista tras eliminación o cancelación
 - **Contexto actualizado**: Lista de edificios se actualiza tras eliminación
@@ -206,9 +198,9 @@ El diseño permite que `EdificioController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de edificios
 
-### eliminarEdificio() vs editarEdificio()
+### deleteBuilding() vs editarEdificio()
 
-**eliminarEdificio():**
+**deleteBuilding():**
 - **Objetivo**: Eliminación segura con confirmación previa
 - **Interacción**: Confirmación de información completa
 - **Validaciones**: Verificación de dependencias e integridad
@@ -229,7 +221,7 @@ El diseño permite que `EdificioController` sea reutilizado:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/eliminarEdificio/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/deleteBuilding/README.md)
 - [crearEdificio() - Caso complementario](../crearEdificio/README.md)
 - [editarEdificio() - Caso complementario](../editarEdificio/README.md)
 - [abrirEdificios() - Contexto de navegación](../abrirEdificios/README.md)

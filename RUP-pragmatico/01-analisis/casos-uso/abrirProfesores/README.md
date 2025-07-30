@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![Análisis: abrirProfesores()](/images/RUP/01-analisis/casos-uso/abrirProfesores/abrirProfesores-analisis.svg)|
+|![Análisis: abrirProfesores()](/images/RUP/01-analisis/casos-uso/abrirProfesores/abrirProfesores-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/abrirProfesores/colaboracion.puml)|
 

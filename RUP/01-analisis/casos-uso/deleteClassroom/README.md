@@ -1,6 +1,6 @@
-# pySigHor > eliminarAula > Análisis
+# pySigHor > deleteClassroom > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarAula/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/deleteClassroom/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `eliminarAula()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de aulas con confirmación previa.
+Análisis de colaboración del caso de uso `deleteClassroom()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de aulas con confirmación previa.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: eliminarAula()](/images/RUP/01-analisis/casos-uso/eliminarAula/eliminarAula-analisis.svg)|
+|![Análisis: deleteClassroom()](/images/RUP/01-analisis/casos-uso/deleteClassroom/deleteClassroom-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `eliminarAula()` mediante el patrón 
 
 ### clases de vista (boundary)
 
-#### EliminarAulaView
+#### deleteClassroomView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de eliminación de aula existente
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `eliminarAula()` mediante el patrón 
 - Gestionar navegación de vuelta a la lista de aulas
 
 **Colaboraciones**:
-- **Entrada**: Recibe `eliminarAula()` desde `:Aulas Abierto`
+- **Entrada**: Recibe `deleteClassroom()` desde `:Aulas Abierto`
 - **Control**: Se comunica con `AulaController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirAulas` tras eliminación o cancelación
 
@@ -57,7 +57,7 @@ Análisis de colaboración del caso de uso `eliminarAula()` mediante el patrón 
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EliminarAulaView`
+- **Vista**: Responde a solicitudes de `deleteClassroomView`
 - **Repositorio**: Delega operaciones de datos a `AulaRepository`
 
 ### clases de entidad (entity)
@@ -99,7 +99,7 @@ Este análisis implementa eliminación segura que:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/eliminarAula/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/deleteClassroom/README.md)
 - [crearAula() - Caso complementario](../crearAula/README.md)
 - [editarAula() - Caso complementario](../editarAula/README.md)
 - [abrirAulas() - Contexto de navegación](../abrirAulas/README.md)

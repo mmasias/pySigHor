@@ -1,6 +1,6 @@
-# pySigHor > crearCurso > Análisis
+# pySigHor > createCourse > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearCurso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/createCourse/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `crearCurso()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de cursos académicos con filosofía C→U.
+Análisis de colaboración del caso de uso `createCourse()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de cursos académicos con filosofía C→U.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: crearCurso()](/images/RUP/01-analisis/casos-uso/crearCurso/crearCurso-analisis.svg)|
+|![Análisis: createCourse()](/images/RUP/01-analisis/casos-uso/createCourse/createCourse-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 

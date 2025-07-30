@@ -10,7 +10,7 @@
 
 <div align=center>
 
-|![Análisis: crearAula()](/images/RUP/01-analisis/casos-uso/crearAula/crearAula-analisis.svg)|
+|![Análisis: crearAula()](/images/RUP/01-analisis/casos-uso/crearAula/crearAula-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](../../../../RUP/01-analisis/casos-uso/crearAula/colaboracion.puml)|
 

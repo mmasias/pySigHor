@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > deleteTeacher > Análisis
 
-</div>
-
-# pySigHor > eliminarProfesor > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarProfesor/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/deleteTeacher/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `eliminarProfesor()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de profesores con confirmación.
+Análisis de colaboración del caso de uso `deleteTeacher()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar eliminación segura de profesores con confirmación.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: eliminarProfesor()](/images/RUP/01-analisis/casos-uso/eliminarProfesor/eliminarProfesor-analisis.svg)|
+|![Análisis: deleteTeacher()](/images/RUP/01-analisis/casos-uso/deleteTeacher/deleteTeacher-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -38,7 +30,7 @@ Análisis de colaboración del caso de uso `eliminarProfesor()` mediante el patr
 
 ### clases de vista (boundary)
 
-#### EliminarProfesorView
+#### deleteTeacherView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de eliminación de profesor
@@ -48,7 +40,7 @@ Análisis de colaboración del caso de uso `eliminarProfesor()` mediante el patr
 - Permitir solicitar confirmación o cancelación del administrador
 
 **Colaboraciones**:
-- **Entrada**: Recibe `eliminarProfesor(profesorId)` desde `:Profesores Abierto` o `:Profesor Abierto`
+- **Entrada**: Recibe `deleteTeacher(profesorId)` desde `:Profesores Abierto` o `:Profesor Abierto`
 - **Control**: Se comunica con `ProfesorController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProfesores` para mostrar lista actualizada
 
@@ -64,7 +56,7 @@ Análisis de colaboración del caso de uso `eliminarProfesor()` mediante el patr
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `EliminarProfesorView`
+- **Vista**: Responde a solicitudes de `deleteTeacherView`
 - **Repositorio**: Delega operaciones de datos a `ProfesorRepository`
 
 ### clases de entidad (entity)
@@ -98,14 +90,14 @@ Análisis de colaboración del caso de uso `eliminarProfesor()` mediante el patr
 
 ### secuencia: eliminar profesor
 
-1. **Inicio**: `:Profesores Abierto` → `EliminarProfesorView.eliminarProfesor(profesorId)`
-2. **Carga**: `EliminarProfesorView` → `ProfesorController.cargarProfesorParaEliminacion(profesorId)`
+1. **Inicio**: `:Profesores Abierto` → `deleteTeacherView.deleteTeacher(profesorId)`
+2. **Carga**: `deleteTeacherView` → `ProfesorController.cargarProfesorParaEliminacion(profesorId)`
 3. **Obtención**: `ProfesorController` → `ProfesorRepository.obtenerPorId(profesorId) : Profesor`
-4. **Presentación**: `EliminarProfesorView` presenta información del `Profesor` con advertencia
-5. **Confirmación**: Administrador confirma o cancela en `EliminarProfesorView`
-6. **Eliminación**: `EliminarProfesorView` → `ProfesorController.eliminarProfesor(profesorId)`
+4. **Presentación**: `deleteTeacherView` presenta información del `Profesor` con advertencia
+5. **Confirmación**: Administrador confirma o cancela en `deleteTeacherView`
+6. **Eliminación**: `deleteTeacherView` → `ProfesorController.deleteTeacher(profesorId)`
 7. **Persistencia**: `ProfesorController` → `ProfesorRepository.eliminar(profesorId)`
-8. **Finalización**: `EliminarProfesorView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProfesores.abrirProfesores()`
+8. **Finalización**: `deleteTeacherView` → **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirProfesores.abrirProfesores()`
 
 ## patrón de eliminación segura para profesores
 
@@ -119,7 +111,7 @@ Este análisis implementa eliminación con confirmación que:
 
 ### responsabilidades de seguridad
 
-**EliminarProfesorView** maneja confirmación:
+**deleteTeacherView** maneja confirmación:
 - **Presenta datos**: Información completa del profesor
 - **Muestra advertencias**: Mensajes de eliminación irreversible
 - **Captura decisión**: Confirmación o cancelación explícita
@@ -135,7 +127,7 @@ Este análisis implementa eliminación con confirmación que:
 ### patrón MVC para eliminación de profesores
 
 - **Model**: `Profesor` + `ProfesorRepository` (datos del profesor y eliminación)
-- **View**: `EliminarProfesorView` (confirmación e interacción)
+- **View**: `deleteTeacherView` (confirmación e interacción)
 - **Controller**: `ProfesorController` (coordinación y validación)
 
 ### patrón Repository con eliminación segura
@@ -158,13 +150,13 @@ Este análisis implementa eliminación con confirmación que:
 
 El diseño permite que `ProfesorController` sea reutilizado:
 - **Compartido**: Con crearProfesor() y editarProfesor()
-- **Método específico**: eliminarProfesor() con validaciones propias
+- **Método específico**: deleteTeacher() con validaciones propias
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para entidad profesor
 
 ### patrón include para navegación
 
-- **Separación de responsabilidades**: eliminarProfesor() se enfoca en eliminar
+- **Separación de responsabilidades**: deleteTeacher() se enfoca en eliminar
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** abrirProfesores() evita duplicar funcionalidad de listado
 - **Doble entrada**: Funciona desde `:Profesores Abierto` o `:Profesor Abierto`
 - **Navegación consistente**: Regresa siempre a lista actualizada
@@ -201,9 +193,9 @@ El diseño permite que `ProfesorController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de profesores
 
-### eliminarProfesor() vs editarProfesor()
+### deleteTeacher() vs editarProfesor()
 
-**eliminarProfesor():**
+**deleteTeacher():**
 - **Objetivo**: Confirmación y eliminación
 - **Interacción**: Solo lectura + confirmación
 - **Validaciones**: Restricciones de integridad
@@ -219,12 +211,12 @@ El diseño permite que `ProfesorController` sea reutilizado:
 
 - **crearProfesor()**: Añade nuevos profesores al sistema
 - **editarProfesor()**: Modifica profesores existentes
-- **eliminarProfesor()**: Remueve profesores del sistema
+- **deleteTeacher()**: Remueve profesores del sistema
 - **abrirProfesores()**: Lista y selecciona profesores
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/eliminarProfesor/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/deleteTeacher/README.md)
 - [editarProfesor() - Caso complementario](../editarProfesor/README.md)
 - [crearProfesor() - Caso complementario](../crearProfesor/README.md)
 - [abrirProfesores() - Contexto de navegación](../abrirProfesores/README.md)

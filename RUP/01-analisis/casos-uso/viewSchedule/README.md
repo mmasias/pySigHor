@@ -1,6 +1,6 @@
-# pySigHor > consultarHorario > Análisis
+# pySigHor > viewSchedule > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/consultarHorario/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/viewSchedule/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `consultarHorario()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar la visualización del horario académico generado.
+Análisis de colaboración del caso de uso `viewSchedule()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar la visualización del horario académico generado.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: consultarHorario()](/images/RUP/01-analisis/casos-uso/consultarHorario/consultarHorario-analisis.svg)|
+|![Análisis: viewSchedule()](/images/RUP/01-analisis/casos-uso/viewSchedule/viewSchedule-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -30,7 +30,7 @@ Análisis de colaboración del caso de uso `consultarHorario()` mediante el patr
 
 ### clases de vista (boundary)
 
-#### ConsultarHorarioView
+#### viewScheduleView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de consulta de horario académico
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `consultarHorario()` mediante el patr
 - Manejar salida de la consulta hacia el menú principal
 
 **Colaboraciones**:
-- **Entrada**: Recibe `consultarHorario()` desde `:Sistema Disponible` o transferencia automática
+- **Entrada**: Recibe `viewSchedule()` desde `:Sistema Disponible` o transferencia automática
 - **Control**: Se comunica con `HorarioController`
 - **Salida**: **\<\<include>>** `:Collaboration CompletarGestion` al salir
 
@@ -57,7 +57,7 @@ Análisis de colaboración del caso de uso `consultarHorario()` mediante el patr
 - Servir como intermediario entre vista y repositorio de horarios
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `ConsultarHorarioView`
+- **Vista**: Responde a solicitudes de `viewScheduleView`
 - **Repositorio**: Delega operaciones de datos a `HorarioRepository`
 
 ### clases de entidad (entity)
@@ -105,7 +105,7 @@ La separación implementa:
 - **HorarioController**: Coordinación del flujo de consulta y verificaciones
 - **HorarioRepository**: Abstracción del acceso a datos de horario generado
 - **Horario**: Encapsulación de la información académica estructurada
-- **ConsultarHorarioView**: Presentación visual del horario y manejo de ausencia
+- **viewScheduleView**: Presentación visual del horario y manejo de ausencia
 
 ### consulta como operación de solo lectura
 
@@ -116,7 +116,7 @@ La separación implementa:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/consultarHorario/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/viewSchedule/README.md)
 - [generarHorario() - Caso que genera el horario](../generarHorario/README.md)
 - [completarGestion() - Caso de navegación de salida](../completarGestion/README.md)
 - [Modelo del dominio](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)

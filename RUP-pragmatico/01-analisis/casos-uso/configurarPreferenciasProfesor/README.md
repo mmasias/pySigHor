@@ -11,7 +11,7 @@
 
 <div align=center>
 
-|![](/images/RUP/01-analisis/casos-uso/configurarPreferenciasProfesor/configurarPreferenciasProfesor-analisis.svg)|
+|![](/images/RUP/01-analisis/casos-uso/configurarPreferenciasProfesor/configurarPreferenciasProfesor-analysis.svg)|
 |-|
 |**Disciplina**: Análisis RUP<br>**Enfoque**: Diagramas de colaboración MVC|
 

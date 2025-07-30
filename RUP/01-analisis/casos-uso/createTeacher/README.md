@@ -1,14 +1,6 @@
-<div align=right>
- 
-|[![](https://img.shields.io/badge/-Inicio-FFF?style=flat&logo=Emlakjet&logoColor=black)](../../../../README.md) [![](https://img.shields.io/badge/-RUP-FFF?style=flat&logo=Elsevier&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Modelo_del_dominio-FFF?style=flat&logo=freedesktop.org&logoColor=black)](../../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md) [![](https://img.shields.io/badge/-Actores_&_Casos_de_Uso-FFF?style=flat&logo=crewunited&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/actores-casos-uso.md) [![](https://img.shields.io/badge/-Diagrama_de_contexto-FFF?style=flat&logo=diagramsdotnet&logoColor=black)](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md) [![](https://img.shields.io/badge/-Detalle_&_Prototipo-FFF?style=flat&logo=typeorm&logoColor=black)](../../../00-casos-uso/02-detalle/README.md) [![](https://img.shields.io/badge/-Análisis-FFF?style=flat&logo=multisim&logoColor=black)](../README.md)|
-|-:|
-|[![](https://img.shields.io/badge/-Estado-FFF?style=flat&logo=greensock&logoColor=black)](../../../README.md) [![](https://img.shields.io/badge/-Propuesta_de_dashboard-FFF?style=flat&logo=composer&logoColor=black)](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) [![](https://img.shields.io/badge/-Reflexiones-FFF?style=flat&logo=hootsuite&logoColor=black)](../../../../extraDocs/README.md) [![](https://img.shields.io/badge/-Log_de_conversación-FFF?style=flat&logo=gnometerminal&logoColor=black)](../../../../conversation-log.md)|
+# pySigHor > createTeacher > Análisis
 
-</div>
-
-# pySigHor > crearProfesor > Análisis
-
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearProfesor/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/createTeacher/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -22,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de profesores con filosofía C→U.
+Análisis de colaboración del caso de uso `createTeacher()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar creación rápida de profesores con filosofía C→U.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: crearProfesor()](/images/RUP/01-analisis/casos-uso/crearProfesor/crearProfesor-analisis.svg)|
+|![Análisis: createTeacher()](/images/RUP/01-analisis/casos-uso/createTeacher/createTeacher-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -38,7 +30,7 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 
 ### clases de vista (boundary)
 
-#### CrearProfesorView
+#### createTeacherView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Recibir la solicitud de creación de profesor nuevo
@@ -47,7 +39,7 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 - Transferir inmediatamente a edición completa tras creación
 
 **Colaboraciones**:
-- **Entrada**: Recibe `crearProfesor()` desde `:Profesores Abierto`
+- **Entrada**: Recibe `createTeacher()` desde `:Profesores Abierto`
 - **Control**: Se comunica con `ProfesorController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration EditarProfesor` para completar datos
 
@@ -63,7 +55,7 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 - Servir como intermediario entre la vista y el repositorio
 
 **Colaboraciones**:
-- **Vista**: Responde a solicitudes de `CrearProfesorView`
+- **Vista**: Responde a solicitudes de `createTeacherView`
 - **Repositorio**: Delega operaciones de datos a `ProfesorRepository`
 
 ### clases de entidad (entity)
@@ -97,14 +89,14 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 
 ### secuencia: crear profesor
 
-1. **Inicio**: `:Profesores Abierto` → `CrearProfesorView.crearProfesor()`
-2. **Solicitud**: `CrearProfesorView` → `ProfesorController.iniciarCreacion()`
-3. **Presentación**: `CrearProfesorView` presenta formulario con campos mínimos
-4. **Datos**: Administrador proporciona código, nombres, apellidos en `CrearProfesorView`
-5. **Creación**: `CrearProfesorView` → `ProfesorController.crearProfesor(datosMinimos)`
+1. **Inicio**: `:Profesores Abierto` → `createTeacherView.createTeacher()`
+2. **Solicitud**: `createTeacherView` → `ProfesorController.iniciarCreacion()`
+3. **Presentación**: `createTeacherView` presenta formulario con campos mínimos
+4. **Datos**: Administrador proporciona código, nombres, apellidos en `createTeacherView`
+5. **Creación**: `createTeacherView` → `ProfesorController.createTeacher(datosMinimos)`
 6. **Validación**: `ProfesorController` → `ProfesorRepository.validarDatosMinimos(datos)`
 7. **Persistencia**: `ProfesorController` → `ProfesorRepository.crear(profesor) : Profesor`
-8. **Transferencia**: `CrearProfesorView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditarProfesor.editarProfesor(profesorNuevo)`
+8. **Transferencia**: `createTeacherView` → **&lt;&lt;include&gt;&gt;** `:Collaboration EditarProfesor.editarProfesor(profesorNuevo)`
 
 ## patrón de creación rápida para profesores - "el delgado"
 
@@ -118,7 +110,7 @@ Este análisis implementa creación rápida que:
 
 ### responsabilidades de creación rápida
 
-**CrearProfesorView** maneja creación mínima:
+**createTeacherView** maneja creación mínima:
 - **Presenta formulario**: Solo campos esenciales del profesor
 - **Captura datos**: Información mínima necesaria para crear
 - **Valida entrada**: Verificación básica antes de enviar
@@ -135,7 +127,7 @@ Este análisis implementa creación rápida que:
 ### patrón MVC para creación de profesores
 
 - **Model**: `Profesor` + `ProfesorRepository` (creación y persistencia mínima)
-- **View**: `CrearProfesorView` (formulario mínimo y transferencia)
+- **View**: `createTeacherView` (formulario mínimo y transferencia)
 - **Controller**: `ProfesorController` (coordinación y validación de creación)
 
 ### patrón Repository con creación rápida
@@ -158,20 +150,20 @@ Este análisis implementa creación rápida que:
 
 El diseño permite que `ProfesorController` sea reutilizado:
 - **Compartido**: Con editarProfesor() y eliminarProfesor()
-- **Método específico**: crearProfesor() con capacidades de creación rápida
+- **Método específico**: createTeacher() con capacidades de creación rápida
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para creación mínima de profesores
 
 ### patrón include para transferencia automática
 
-- **Separación de responsabilidades**: crearProfesor() se enfoca en crear
+- **Separación de responsabilidades**: createTeacher() se enfoca en crear
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** editarProfesor() evita duplicar funcionalidad de edición
 - **Transferencia fluida**: Paso automático de creación a edición completa
 - **Contexto preservado**: Profesor recién creado se abre inmediatamente en edición
 
 ### flexibilidad de creación rápida
 
-- **CrearProfesorView** puede implementar:
+- **createTeacherView** puede implementar:
   - **Validación en tiempo real**: Verificación inmediata de campos
   - **Generación automática**: Código del profesor auto-generado si se omite
   - **Sugerencias inteligentes**: Autocompletado basado en datos existentes
@@ -203,9 +195,9 @@ El diseño permite que `ProfesorController` sea reutilizado:
 
 ## diferencias con otros casos CRUD de profesores
 
-### crearProfesor() vs editarProfesor()
+### createTeacher() vs editarProfesor()
 
-**crearProfesor():**
+**createTeacher():**
 - **Objetivo**: Creación rápida con datos mínimos y transferencia automática
 - **Interacción**: Formulario mínimo con redirección inmediata
 - **Validaciones**: Solo restricciones críticas para creación
@@ -219,14 +211,14 @@ El diseño permite que `ProfesorController` sea reutilizado:
 
 ### complementariedad CRUD para profesores
 
-- **crearProfesor()**: Crea profesores rápidamente y transfiere a edición
+- **createTeacher()**: Crea profesores rápidamente y transfiere a edición
 - **editarProfesor()**: Completa y modifica datos de profesores existentes
 - **eliminarProfesor()**: Remueve profesores con confirmación segura
 - **abrirProfesores()**: Lista y selecciona profesores para operaciones
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/crearProfesor/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/createTeacher/README.md)
 - [editarProfesor() - Caso de transferencia](../editarProfesor/README.md)
 - [eliminarProfesor() - Caso complementario](../eliminarProfesor/README.md)
 - [abrirProfesores() - Contexto de navegación](../abrirProfesores/README.md)

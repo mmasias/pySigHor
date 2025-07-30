@@ -1,6 +1,6 @@
-# pySigHor > abrirEdificios > Análisis
+# pySigHor > openBuildings > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirEdificios/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/openBuildings/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `abrirEdificios()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
+Análisis de colaboración del caso de uso `openBuildings()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para cumplir con los requisitos especificados.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: abrirEdificios()](/images/RUP/01-analisis/casos-uso/abrirEdificios/abrirEdificios-analisis.svg)|
+|![Análisis: openBuildings()](/images/RUP/01-analisis/casos-uso/openBuildings/openBuildings-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -40,7 +40,7 @@ Análisis de colaboración del caso de uso `abrirEdificios()` mediante el patró
 - Manejar la navegación de regreso al sistema
 
 **Colaboraciones**:
-- **Entrada**: Recibe `abrirEdificios()` desde `:Sistema Disponible`
+- **Entrada**: Recibe `openBuildings()` desde `:Sistema Disponible`
 - **Control**: Se comunica con `EdificiosController`
 - **Salida**: Retorna control a `:Sistema Disponible`
 
@@ -85,7 +85,7 @@ Análisis de colaboración del caso de uso `abrirEdificios()` mediante el patró
 
 ### secuencia de operaciones
 
-1. **Inicio**: `:Sistema Disponible` → `ListarEdificiosView.abrirEdificios()`
+1. **Inicio**: `:Sistema Disponible` → `ListarEdificiosView.openBuildings()`
 2. **Listado inicial**: `ListarEdificiosView` → `EdificiosController.listarEdificios()`
 3. **Acceso a datos**: `EdificiosController` → `EdificioRepository.obtenerTodos()`
 4. **Filtrado (opcional)**: `ListarEdificiosView` → `EdificiosController.filtrarEdificios(criterio)`
@@ -133,7 +133,7 @@ Aunque no implementadas en este caso de uso, el análisis prepara la base para:
 
 ### trazabilidad completa
 
-- **Origen**: Caso de uso detallado `abrirEdificios()`
+- **Origen**: Caso de uso detallado `openBuildings()`
 - **Destino**: Base para diseño arquitectónico
 - **Conexión**: Diagrama de contexto → Análisis de colaboración
 
@@ -150,6 +150,6 @@ Mantiene coherencia con el diagrama de contexto del administrador, respetando la
 
 ## referencias
 
-- [Especificación detallada: abrirEdificios()](../../../00-casos-uso/02-detalle/abrirEdificios/README.md)
+- [Especificación detallada: openBuildings()](../../../00-casos-uso/02-detalle/openBuildings/README.md)
 - [Diagrama de contexto - Administrador](../../../00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md)
 - [Patrón metodológico universal](../../../../conversation-log.md) - Marco de análisis establecido

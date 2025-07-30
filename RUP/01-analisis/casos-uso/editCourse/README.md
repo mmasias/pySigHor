@@ -1,6 +1,6 @@
-# pySigHor > editarCurso > Análisis
+# pySigHor > editCourse > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editarCurso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editCourse/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -14,13 +14,13 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `editarCurso()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de cursos académicos con capacidad de modificación continua.
+Análisis de colaboración del caso de uso `editCourse()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y colaboraciones necesarias para implementar edición completa de cursos académicos con capacidad de modificación continua.
 
 ## diagrama de colaboración
 
 <div align=center>
 
-|![Análisis: editarCurso()](/images/RUP/01-analisis/casos-uso/editarCurso/editarCurso-analisis.svg)|
+|![Análisis: editCourse()](/images/RUP/01-analisis/casos-uso/editCourse/editCourse-analysis.svg)|
 |-|
 |Código fuente: [colaboracion.puml](colaboracion.puml)|
 
@@ -41,7 +41,7 @@ Análisis de colaboración del caso de uso `editarCurso()` mediante el patrón M
 - Permitir solicitar guardar cambios o cancelar edición
 
 **Colaboraciones**:
-- **Entrada**: Recibe `editarCurso(cursoId)` desde `:Cursos Abierto`, `:Curso Abierto` o desde `:Collaboration CrearCurso`
+- **Entrada**: Recibe `editCourse(cursoId)` desde `:Cursos Abierto`, `:Curso Abierto` o desde `:Collaboration CreateCourse`
 - **Control**: Se comunica con `CursoController`
 - **Salida**: **&lt;&lt;include&gt;&gt;** `:Collaboration AbrirCursos` para mostrar lista actualizada o mantiene `:Curso Abierto`
 
@@ -94,7 +94,7 @@ Análisis de colaboración del caso de uso `editarCurso()` mediante el patrón M
 
 ### secuencia: editar curso
 
-1. **Inicio**: `:Cursos Abierto` o `:CrearCurso` → `EditarCursoView.editarCurso(cursoId)`
+1. **Inicio**: `:Cursos Abierto` o `:CreateCourse` → `EditCourseView.editCourse(cursoId)`
 2. **Carga**: `EditarCursoView` → `CursoController.cargarCursoParaEdición(cursoId)`
 3. **Obtención**: `CursoController` → `CursoRepository.obtenerPorId(cursoId) : Curso`
 4. **Presentación**: `EditarCursoView` presenta datos completos de edición del `Curso`
@@ -158,7 +158,7 @@ Este análisis implementa edición integral que:
 
 El diseño permite que `CursoController` sea reutilizado:
 - **Compartido**: Con crearCurso() y eliminarCurso()
-- **Método específico**: editarCurso() con validaciones de modificación propias
+- **Método específico**: editCourse() con validaciones de modificación propias
 - **Consistencia**: Mismo patrón de comunicación con repositorio
 - **Validaciones**: Específicas para modificación académica completa
 
@@ -171,7 +171,7 @@ El diseño permite entrada desde múltiples contextos:
 
 ### patrón include para navegación
 
-- **Separación de responsabilidades**: editarCurso() se enfoca en editar
+- **Separación de responsabilidades**: editCourse() se enfoca en editar
 - **Reutilización**: **&lt;&lt;include&gt;&gt;** abrirCursos() evita duplicar funcionalidad de listado
 - **Navegación consistente**: Regresa a contexto apropiado
 - **Flexibilidad**: Puede permanecer en edición o salir
@@ -211,9 +211,9 @@ El diseño permite entrada desde múltiples contextos:
 
 ## diferencias con otros casos CRUD de cursos
 
-### editarCurso() vs crearCurso()
+### editCourse() vs createCourse()
 
-**editarCurso():**
+**editCourse():**
 - **Objetivo**: Modificación de datos académicos completos
 - **Interacción**: Lectura + escritura múltiple de todos los campos
 - **Validaciones**: Restricciones académicas de contenido completo
@@ -225,9 +225,9 @@ El diseño permite entrada desde múltiples contextos:
 - **Validaciones**: Restricciones básicas de creación
 - **Resultado**: Curso básico creado + transferencia a edición
 
-### editarCurso() vs eliminarCurso()
+### editCourse() vs deleteCourse()
 
-**editarCurso():**
+**editCourse():**
 - **Objetivo**: Modificación de información académica
 - **Interacción**: Lectura + escritura continua
 - **Validaciones**: Restricciones académicas de contenido
@@ -242,7 +242,7 @@ El diseño permite entrada desde múltiples contextos:
 ### complementariedad CRUD para cursos
 
 - **crearCurso()**: "El delgado" - añade curso básico al programa
-- **editarCurso()**: "El gordo" - completa y modifica información académica completa
+- **editCourse()**: "El gordo" - completa y modifica información académica completa
 - **eliminarCurso()**: Remueve cursos del programa académico con confirmación
 - **abrirCursos()**: Lista y selecciona cursos del programa para operaciones
 
@@ -250,7 +250,7 @@ El diseño permite entrada desde múltiples contextos:
 
 <div align=center>
 
-|![Secuencia: editarCurso()](/images/RUP/01-analisis/casos-uso/editarCurso/editarCurso-analisis-secuencia.svg)|
+|![Secuencia: editCourse()](/images/RUP/01-analisis/casos-uso/editCourse/editCourse-analisis-secuencia.svg)|
 |-|
 |Código fuente: [secuencia.puml](secuencia.puml)|
 
@@ -258,7 +258,7 @@ El diseño permite entrada desde múltiples contextos:
 
 ## referencias
 
-- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editarCurso/README.md)
+- [Caso de uso detallado](../../../00-casos-uso/02-detalle/editCourse/README.md)
 - [crearCurso() - Caso complementario](../crearCurso/README.md)
 - [eliminarCurso() - Caso complementario](../eliminarCurso/README.md)
 - [abrirCursos() - Contexto de navegación](../abrirCursos/README.md)
