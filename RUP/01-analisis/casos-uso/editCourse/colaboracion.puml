@@ -1,0 +1,32 @@
+@startuml editCourse-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Courses Open" as CoursesOpen
+rectangle #CDEBA5 ":Course Open" as CourseOpen
+rectangle #CDEBA5 ":Collaboration CreateCourse" as CreateCourse
+rectangle #CDEBA5 ":Collaboration OpenCourses" as OpenCourses
+
+package editCourse as "editCourse()" {
+    rectangle #629EF9 EditCourseView
+    rectangle #b5bd68 CourseController
+    rectangle #F2AC4E CourseRepository
+    rectangle #F2AC4E Course
+}
+
+CoursesOpen --> EditCourseView: editCourse(courseId)
+CourseOpen --> EditCourseView: editCourse(courseId)
+CreateCourse --> EditCourseView: editCourse(newCourse)
+
+EditCourseView -d-> CourseController: loadCourseForEditing(courseId) : Course
+
+CourseController --> CourseRepository: getById(courseId) : Course
+
+EditCourseView --> CourseController: modifyFields(courseId, changes) : boolean
+
+CourseController --> CourseRepository: update(course) : boolean
+
+CourseRepository -- Course
+
+EditCourseView ..> OpenCourses: <<include>> openCourses()
+
+@enduml

@@ -1,0 +1,30 @@
+@startuml deleteClassroom-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Classrooms Open" as ClassroomsOpen
+rectangle #CDEBA5 ":Classroom Open" as ClassroomOpen
+rectangle #CDEBA5 ":Collaboration OpenClassrooms" as OpenClassrooms
+
+package deleteClassroom as "deleteClassroom()" {
+    rectangle #629EF9 DeleteClassroomView
+    rectangle #b5bd68 ClassroomController
+    rectangle #F2AC4E ClassroomRepository
+    rectangle #F2AC4E Classroom
+}
+
+ClassroomsOpen --> DeleteClassroomView: deleteClassroom(classroomId)
+ClassroomOpen --> DeleteClassroomView: deleteClassroom(classroomId)
+
+DeleteClassroomView -d-> ClassroomController: loadClassroomForDeletion(classroomId) : Classroom
+
+ClassroomController --> ClassroomRepository: getById(classroomId) : Classroom
+
+ClassroomRepository -- Classroom
+
+DeleteClassroomView --> ClassroomController: deleteClassroom(classroomId) : void
+
+ClassroomController --> ClassroomRepository: delete(classroomId) : void
+
+DeleteClassroomView ..> OpenClassrooms: <<include>> openClassrooms()
+
+@enduml

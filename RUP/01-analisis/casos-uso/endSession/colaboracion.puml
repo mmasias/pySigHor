@@ -1,0 +1,28 @@
+@startuml endSession-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package endSession as "endSession()" {
+    rectangle #629EF9 EndSessionView
+    rectangle #b5bd68 EndSessionController
+    rectangle #F2AC4E SessionRepository
+    rectangle #F2AC4E Session
+    rectangle #F2AC4E User
+}
+
+rectangle #CDEBA5 ":Collaboration SESSION_CLOSED" as SESSION_CLOSED
+
+SystemAvailable -r-> EndSessionView : endSession(User)
+
+EndSessionView -d-> EndSessionController: requestClosure(User)
+
+'EndSessionController --> Session: getUser() : User
+'EndSessionController --> EndSessionView: showConfirmation()
+EndSessionController --> SessionRepository: terminateSession(User)
+SessionRepository --> Session: destroySession(User)
+
+Session -d- User
+
+EndSessionView ..r.> SESSION_CLOSED: endSession()
+
+@enduml

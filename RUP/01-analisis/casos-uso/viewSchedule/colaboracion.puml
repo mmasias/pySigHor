@@ -1,0 +1,31 @@
+@startuml viewSchedule-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+rectangle #CDEBA5 ":Schedule Open" as ScheduleOpen
+rectangle #CDEBA5 ":Collaboration GenerateSchedule" as GenerateSchedule
+rectangle #CDEBA5 ":Collaboration CompleteManagement" as CompleteManagement
+
+package viewSchedule as "viewSchedule()" {
+    rectangle #629EF9 ViewScheduleView
+    rectangle #b5bd68 ScheduleController
+    rectangle #F2AC4E ScheduleRepository
+    rectangle #F2AC4E Schedule
+}
+
+SystemAvailable --> ViewScheduleView: viewSchedule()
+ScheduleOpen --> ViewScheduleView: viewSchedule()
+GenerateSchedule --> ViewScheduleView: consultSchedule(generatedSchedule)
+
+ViewScheduleView -d-> ScheduleController: processQuery() : QueryResult
+
+ScheduleController --> ScheduleRepository: loadSchedule() : Schedule
+ScheduleController --> ScheduleRepository: scheduleExists() : boolean
+
+ScheduleRepository --> Schedule: getCompleteData() : ScheduleData
+
+ScheduleRepository -- Schedule
+
+ViewScheduleView ..> CompleteManagement: <<include>> completeManagement() [on exit]
+
+@enduml

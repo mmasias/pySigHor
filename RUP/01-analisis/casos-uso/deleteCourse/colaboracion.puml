@@ -1,0 +1,30 @@
+@startuml deleteCourse-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Courses Open" as CoursesOpen
+rectangle #CDEBA5 ":Course Open" as CourseOpen
+rectangle #CDEBA5 ":Collaboration OpenCourses" as OpenCourses
+
+package deleteCourse as "deleteCourse()" {
+    rectangle #629EF9 DeleteCourseView
+    rectangle #b5bd68 CourseController
+    rectangle #F2AC4E CourseRepository
+    rectangle #F2AC4E Course
+}
+
+CoursesOpen --> DeleteCourseView: deleteCourse(courseId)
+CourseOpen --> DeleteCourseView: deleteCourse(courseId)
+
+DeleteCourseView -d-> CourseController: loadCourseForDeletion(courseId) : Course
+
+CourseController --> CourseRepository: getById(courseId) : Course
+
+CourseRepository -- Course
+
+DeleteCourseView --> CourseController: deleteCourse(courseId) : void
+
+CourseController --> CourseRepository: delete(courseId) : void
+
+DeleteCourseView ..> OpenCourses: <<include>> openCourses()
+
+@enduml

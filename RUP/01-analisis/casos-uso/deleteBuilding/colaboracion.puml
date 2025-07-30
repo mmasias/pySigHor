@@ -1,0 +1,30 @@
+@startuml deleteBuilding-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Buildings Open" as BuildingsOpen
+rectangle #CDEBA5 ":Building Open" as BuildingOpen
+rectangle #CDEBA5 ":Collaboration OpenBuildings" as OpenBuildings
+
+package deleteBuilding as "deleteBuilding()" {
+    rectangle #629EF9 DeleteBuildingView
+    rectangle #b5bd68 BuildingController
+    rectangle #F2AC4E BuildingRepository
+    rectangle #F2AC4E Building
+}
+
+BuildingsOpen --> DeleteBuildingView: deleteBuilding(buildingId)
+BuildingOpen --> DeleteBuildingView: deleteBuilding(buildingId)
+
+DeleteBuildingView -d-> BuildingController: loadBuildingForDeletion(buildingId) : Building
+
+BuildingController --> BuildingRepository: getById(buildingId) : Building
+
+BuildingRepository -- Building
+
+DeleteBuildingView --> BuildingController: deleteBuilding(buildingId) : void
+
+BuildingController --> BuildingRepository: delete(buildingId) : void
+
+DeleteBuildingView ..> OpenBuildings: <<include>> openBuildings()
+
+@enduml

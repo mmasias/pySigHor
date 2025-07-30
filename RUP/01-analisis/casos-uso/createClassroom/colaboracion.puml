@@ -1,0 +1,28 @@
+@startuml createClassroom-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Classrooms Open" as ClassroomsOpen
+rectangle #CDEBA5 ":Collaboration EditClassroom" as EditClassroom
+
+package createClassroom as "createClassroom()" {
+    rectangle #629EF9 CreateClassroomView
+    rectangle #b5bd68 ClassroomController
+    rectangle #F2AC4E ClassroomRepository
+    rectangle #F2AC4E Classroom
+}
+
+ClassroomsOpen -r-> CreateClassroomView: createClassroom()
+
+CreateClassroomView -d-> ClassroomController: validateMinimalData(code, name, building) : boolean
+
+ClassroomController --> ClassroomRepository: checkUniqueness(code) : boolean
+
+CreateClassroomView --> ClassroomController: createClassroom(code, name, building) : Classroom
+
+ClassroomController --> ClassroomRepository: create(code, name, building) : Classroom
+
+ClassroomRepository -- Classroom
+
+CreateClassroomView ..> EditClassroom: <<include>> editClassroom(newClassroom)
+
+@enduml

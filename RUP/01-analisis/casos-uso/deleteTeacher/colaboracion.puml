@@ -1,0 +1,30 @@
+@startuml deleteTeacher-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Teachers Open" as TeachersOpen
+rectangle #CDEBA5 ":Teacher Open" as TeacherOpen
+rectangle #CDEBA5 ":Collaboration OpenTeachers" as OpenTeachers
+
+package deleteTeacher as "deleteTeacher()" {
+    rectangle #629EF9 DeleteTeacherView
+    rectangle #b5bd68 TeacherController
+    rectangle #F2AC4E TeacherRepository
+    rectangle #F2AC4E Teacher
+}
+
+TeachersOpen --> DeleteTeacherView: deleteTeacher(teacherId)
+TeacherOpen --> DeleteTeacherView: deleteTeacher(teacherId)
+
+DeleteTeacherView -d-> TeacherController: loadTeacherForDeletion(teacherId) : Teacher
+
+TeacherController --> TeacherRepository: getById(teacherId) : Teacher
+
+TeacherRepository -- Teacher
+
+DeleteTeacherView --> TeacherController: deleteTeacher(teacherId) : void
+
+TeacherController --> TeacherRepository: delete(teacherId) : void
+
+DeleteTeacherView ..> OpenTeachers: <<include>> openTeachers()
+
+@enduml

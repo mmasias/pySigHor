@@ -13,53 +13,53 @@ Esta carpeta contiene la especificación detallada y prototipado de cada caso de
 ## Casos de uso especificados
 
 ### Gestión del sistema
-- [startSession](startSession/) - Autenticación de usuarios
-- [closeSession](closeSession/) - Cierre de sesión
-- [completeManagement](completeManagement/) - Hub de convergencia del sistema
+- [startSession](startSession/README.md) - Autenticación de usuarios
+- [closeSession](closeSession/README.md) - Cierre de sesión
+- [completeManagement](completeManagement/README.md) - Hub de convergencia del sistema
 
 ### Apertura de entidades
-- [openPrograms](openPrograms/) - Gestión de programas académicos
-- [openCourses](openCourses/) - Gestión de cursos
-- [openTeachers](openTeachers/) - Gestión de profesores
-- [openBuildings](openBuildings/) - Gestión de edificios
-- [openClassrooms](openClassrooms/) - Gestión de aulas
-- [openResources](openResources/) - Gestión de recursos
+- [openPrograms](openPrograms/README.md) - Gestión de programas académicos
+- [openCourses](openCourses/README.md) - Gestión de cursos
+- [openTeachers](openTeachers/README.md) - Gestión de profesores
+- [openBuildings](openBuildings/README.md) - Gestión de edificios
+- [openClassrooms](openClassrooms/README.md) - Gestión de aulas
+- [openResources](openResources/README.md) - Gestión de recursos
 
 ### CRUD de Programas
-- [createProgram](createProgram/) - Creación de programas académicos
-- [editProgram](editProgram/) - Edición de programas académicos
-- [deleteProgram](deleteProgram/) - Eliminación de programas académicos
+- [createProgram](createProgram/README.md) - Creación de programas académicos
+- [editProgram](editProgram/README.md) - Edición de programas académicos
+- [deleteProgram](deleteProgram/README.md) - Eliminación de programas académicos
 
 ### CRUD de Cursos
-- [createCourse](createCourse/) - Creación de cursos académicos
-- [editCourse](editCourse/) - Edición de cursos académicos
-- [deleteCourse](deleteCourse/) - Eliminación de cursos académicos
+- [createCourse](createCourse/README.md) - Creación de cursos académicos
+- [editCourse](editCourse/README.md) - Edición de cursos académicos
+- [deleteCourse](deleteCourse/README.md) - Eliminación de cursos académicos
 
 ### CRUD de Profesores
-- [createTeacher](createTeacher/) - Creación de profesores
-- [editTeacher](editTeacher/) - Edición de profesores
-- [deleteTeacher](deleteTeacher/) - Eliminación de profesores
-- [configureTeacherPreferences](configureTeacherPreferences/) - Configuración de preferencias de recursos
-- [assignTeacherToCourse](assignTeacherToCourse/) - Gestión de asignaciones profesor-curso
+- [createTeacher](createTeacher/README.md) - Creación de profesores
+- [editTeacher](editTeacher/README.md) - Edición de profesores
+- [deleteTeacher](deleteTeacher/README.md) - Eliminación de profesores
+- [configureTeacherPreferences](configureTeacherPreferences/README.md) - Configuración de preferencias de recursos
+- [assignTeacherToCourse](assignTeacherToCourse/README.md) - Gestión de asignaciones profesor-curso
 
 ### CRUD de Edificios
-- [createBuilding](createBuilding/) - Creación de edificios
-- [editBuilding](editBuilding/) - Edición de edificios
-- [deleteBuilding](deleteBuilding/) - Eliminación de edificios
+- [createBuilding](createBuilding/README.md) - Creación de edificios
+- [editBuilding](editBuilding/README.md) - Edición de edificios
+- [deleteBuilding](deleteBuilding/README.md) - Eliminación de edificios
 
 ### CRUD de Aulas
-- [createClassroom](createClassroom/) - Creación de aulas
-- [editClassroom](editClassroom/) - Edición de aulas
-- [deleteClassroom](deleteClassroom/) - Eliminación de aulas
+- [createClassroom](createClassroom/README.md) - Creación de aulas
+- [editClassroom](editClassroom/README.md) - Edición de aulas
+- [deleteClassroom](deleteClassroom/README.md) - Eliminación de aulas
 
 ### CRUD de Recursos
-- [createResource](createResource/) - Creación de recursos
-- [editResource](editResource/) - Edición de recursos
-- [deleteResource](deleteResource/) - Eliminación de recursos
+- [createResource](createResource/README.md) - Creación de recursos
+- [editResource](editResource/README.md) - Edición de recursos
+- [deleteResource](deleteResource/README.md) - Eliminación de recursos
 
 ### Gestión de Horarios
-- [generateSchedule](generateSchedule/) - Generación automática de horarios
-- [viewSchedule](viewSchedule/) - Consulta de horarios generados
+- [generateSchedule](generateSchedule/README.md) - Generación automática de horarios
+- [viewSchedule](viewSchedule/README.md) - Consulta de horarios generados
 
 ## Estructura de cada caso de uso
 

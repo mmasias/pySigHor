@@ -1,0 +1,34 @@
+@startuml openClassrooms-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openClassrooms as "openClassrooms()" {
+    rectangle #629EF9 OpenClassroomsView
+    rectangle #b5bd68 ClassroomsController
+    rectangle #F2AC4E ClassroomRepository
+    rectangle #F2AC4E Classroom
+}
+
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateClassroom" as CreateClassroom
+rectangle #CDEBA5 ":Collaboration EditClassroom" as EditClassroom
+rectangle #CDEBA5 ":Collaboration DeleteClassroom" as DeleteClassroom
+
+SystemAvailable -r-> OpenClassroomsView: openClassrooms()
+
+OpenClassroomsView -d-> ClassroomsController: listClassrooms() : List<Classroom>
+
+ClassroomsController --> ClassroomRepository: getAll() : List<Classroom>
+
+ClassroomRepository -- Classroom
+
+OpenClassroomsView --> ClassroomsController: filterClassrooms(criteria) : List<Classroom>
+
+ClassroomsController --> ClassroomRepository: findByCriteria(criteria) : List<Classroom>
+
+OpenClassroomsView ..> SystemAvailableSalida: completeManagement()
+OpenClassroomsView ..> CreateClassroom: createClassroom()
+OpenClassroomsView ..> EditClassroom: editClassroom()
+OpenClassroomsView ..> DeleteClassroom: deleteClassroom()
+
+@enduml

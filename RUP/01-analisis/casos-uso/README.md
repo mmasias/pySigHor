@@ -13,53 +13,53 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 ## Casos de uso analizados
 
 ### Gestión del sistema
-- [iniciarSesion](iniciarSesion/) - Autenticación con clases de análisis MVC
-- [cerrarSesion](cerrarSesion/) - Cierre de sesión con validación de estado
-- [completarGestion](completarGestion/) - Hub de convergencia con coordinación de colaboraciones
+- [startSession](startSession/README.md) - Autenticación con clases de análisis MVC
+- [endSession](endSession/README.md) - Cierre de sesión con validación de estado
+- [completeManagement](completeManagement/README.md) - Hub de convergencia con coordinación de colaboraciones
 
 ### Apertura de entidades
-- [abrirProgramas](abrirProgramas/) - Gestión de vista de listado de programas
-- [abrirCursos](abrirCursos/) - Gestión de vista de listado de cursos
-- [abrirProfesores](abrirProfesores/) - Gestión de vista de listado de profesores
-- [abrirEdificios](abrirEdificios/) - Gestión de vista de listado de edificios
-- [abrirAulas](abrirAulas/) - Gestión de vista de listado de aulas
-- [abrirRecursos](abrirRecursos/) - Gestión de vista de listado de recursos
+- [openPrograms](openPrograms/README.md) - Gestión de vista de listado de programas
+- [openCourses](openCourses/README.md) - Gestión de vista de listado de cursos
+- [openTeachers](openTeachers/README.md) - Gestión de vista de listado de profesores
+- [openBuildings](openBuildings/README.md) - Gestión de vista de listado de edificios
+- [openClassrooms](openClassrooms/README.md) - Gestión de vista de listado de aulas
+- [openResources](openResources/README.md) - Gestión de vista de listado de recursos
 
 ### CRUD de Programas
-- [crearPrograma](crearPrograma/) - Análisis de creación con filosofía C→U
-- [editarPrograma](editarPrograma/) - Análisis de edición continua "el gordo"
-- [eliminarPrograma](eliminarPrograma/) - Análisis de eliminación segura
+- [createProgram](createProgram/README.md) - Análisis de creación con filosofía C→U
+- [editProgram](editProgram/README.md) - Análisis de edición continua "el gordo"
+- [deleteProgram](deleteProgram/README.md) - Análisis de eliminación segura
 
 ### CRUD de Cursos (Completo)
-- [crearCurso](crearCurso/) - Análisis completo con colaboración y secuencia
-- [editarCurso](editarCurso/) - Análisis completo con colaboración y secuencia
-- [eliminarCurso](eliminarCurso/) - Análisis de eliminación segura de cursos
+- [createCourse](createCourse/README.md) - Análisis completo con colaboración y secuencia
+- [editCourse](editCourse/README.md) - Análisis completo con colaboración y secuencia
+- [deleteCourse](deleteCourse/README.md) - Análisis de eliminación segura de cursos
 
 ### CRUD de Profesores
-- [crearProfesor](crearProfesor/) - Análisis de creación con filosofía C→U
-- [editarProfesor](editarProfesor/) - Análisis de edición continua "el gordo"
-- [eliminarProfesor](eliminarProfesor/) - Análisis de eliminación segura
-- [configurarPreferenciasProfesor](configurarPreferenciasProfesor/) - Análisis de configuración específica
-- [asignarProfesorACurso](asignarProfesorACurso/) - Análisis de gestión de asignaciones profesor-curso
+- [createTeacher](createTeacher/README.md) - Análisis de creación con filosofía C→U
+- [editTeacher](editTeacher/README.md) - Análisis de edición continua "el gordo"
+- [deleteTeacher](deleteTeacher/README.md) - Análisis de eliminación segura
+- [configureTeacherPreferences](configureTeacherPreferences/README.md) - Análisis de configuración específica
+- [assignTeacherToCourse](assignTeacherToCourse/README.md) - Análisis de gestión de asignaciones profesor-curso
 
 ### CRUD de Edificios
-- [crearEdificio](crearEdificio/) - Análisis de creación con relación a aulas
-- [editarEdificio](editarEdificio/) - Análisis de edición con impacto en aulas
-- [eliminarEdificio](eliminarEdificio/) - Análisis de eliminación con validación de dependencias
+- [createBuilding](createBuilding/README.md) - Análisis de creación con relación a aulas
+- [editBuilding](editBuilding/README.md) - Análisis de edición con impacto en aulas
+- [deleteBuilding](deleteBuilding/README.md) - Análisis de eliminación con validación de dependencias
 
 ### CRUD de Aulas
-- [crearAula](crearAula/) - Análisis de creación con asignación de edificio y recursos
-- [editarAula](editarAula/) - Análisis de edición con gestión de recursos y capacidad
-- [eliminarAula](eliminarAula/) - Análisis de eliminación con validación de horarios
+- [createClassroom](createClassroom/README.md) - Análisis de creación con asignación de edificio y recursos
+- [editClassroom](editClassroom/README.md) - Análisis de edición con gestión de recursos y capacidad
+- [deleteClassroom](deleteClassroom/README.md) - Análisis de eliminación con validación de horarios
 
 ### CRUD de Recursos
-- [crearRecurso](crearRecurso/) - Análisis de creación de recursos para aulas
-- [editarRecurso](editarRecurso/) - Análisis de edición con impacto en preferencias
-- [eliminarRecurso](eliminarRecurso/) - Análisis de eliminación con validación de asignaciones
+- [createResource](createResource/README.md) - Análisis de creación de recursos para aulas
+- [editResource](editResource/README.md) - Análisis de edición con impacto en preferencias
+- [deleteResource](deleteResource/README.md) - Análisis de eliminación con validación de asignaciones
 
 ### Gestión de Horarios
-- [generarHorario](generarHorario/) - Análisis del algoritmo de optimización
-- [consultarHorario](consultarHorario/) - Análisis de consulta y filtrado de horarios
+- [generateSchedule](generateSchedule/README.md) - Análisis del algoritmo de optimización
+- [viewSchedule](viewSchedule/README.md) - Análisis de consulta y filtrado de horarios
 
 ## Estructura de análisis
 

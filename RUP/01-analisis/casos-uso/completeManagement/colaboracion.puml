@@ -1,0 +1,44 @@
+@startuml completeManagement-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package completeManagement as "completeManagement()" {
+    rectangle #629EF9 ManagementView
+    rectangle #b5bd68 CompleteManagementController
+    rectangle #F2AC4E PermissionsRepository
+    rectangle #F2AC4E MenuOptions
+    rectangle #F2AC4E Session
+}
+
+rectangle #CDEBA5 ":Collaboration OpenPrograms" as OpenPrograms
+rectangle #CDEBA5 ":Collaboration OpenCourses" as OpenCourses
+rectangle #CDEBA5 ":Collaboration OpenTeachers" as OpenTeachers
+rectangle #CDEBA5 ":Collaboration OpenBuildings" as OpenBuildings
+rectangle #CDEBA5 ":Collaboration OpenClassrooms" as OpenClassrooms
+rectangle #CDEBA5 ":Collaboration OpenResources" as OpenResources
+rectangle #CDEBA5 ":Collaboration AssignTeacher" as AssignTeacher
+rectangle #CDEBA5 ":Collaboration GenerateSchedule" as GenerateSchedule
+rectangle #CDEBA5 ":Collaboration ViewSchedule" as ViewSchedule
+rectangle #CDEBA5 ":Collaboration EndSession" as EndSession
+
+SystemAvailable -r-> ManagementView : makeSystemAvailable()
+
+ManagementView -d-> CompleteManagementController: enableOptions(administrator)
+
+CompleteManagementController --> Session: getUser() : User
+CompleteManagementController --> PermissionsRepository: getOptions(user) : List<Option>
+CompleteManagementController --> MenuOptions: createOptions(options) : MenuOptions
+
+ManagementView --> MenuOptions: getOptions() : List<Option>
+ManagementView ..> OpenPrograms: openPrograms()
+ManagementView ..> OpenCourses: openCourses()
+ManagementView ..> OpenTeachers: openTeachers()
+ManagementView ..> OpenBuildings: openBuildings()
+ManagementView ..> OpenClassrooms: openClassrooms()
+ManagementView ..> OpenResources: openResources()
+ManagementView ..> AssignTeacher: assignTeacherToCourse()
+ManagementView ..> GenerateSchedule: generateSchedule()
+ManagementView ..> ViewSchedule: viewSchedule()
+ManagementView ..> EndSession: logout()
+
+@enduml

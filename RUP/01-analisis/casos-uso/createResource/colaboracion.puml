@@ -1,0 +1,28 @@
+@startuml createResource-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Resources Open" as ResourcesOpen
+rectangle #CDEBA5 ":Collaboration EditResource" as EditResource
+
+package createResource as "createResource()" {
+    rectangle #629EF9 CreateResourceView
+    rectangle #b5bd68 ResourceController
+    rectangle #F2AC4E ResourceRepository
+    rectangle #F2AC4E Resource
+}
+
+ResourcesOpen -r-> CreateResourceView: createResource()
+
+CreateResourceView -d-> ResourceController: validateMinimalData(code, name) : boolean
+
+ResourceController --> ResourceRepository: checkUniqueness(code) : boolean
+
+CreateResourceView --> ResourceController: createResource(code, name) : Resource
+
+ResourceController --> ResourceRepository: create(code, name) : Resource
+
+ResourceRepository -- Resource
+
+CreateResourceView ..> EditResource: <<include>> editResource(newResource)
+
+@enduml

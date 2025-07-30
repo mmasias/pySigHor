@@ -1,0 +1,32 @@
+@startuml editClassroom-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Classrooms Open" as ClassroomsOpen
+rectangle #CDEBA5 ":Classroom Open" as ClassroomOpen
+rectangle #CDEBA5 ":Collaboration CreateClassroom" as CreateClassroom
+rectangle #CDEBA5 ":Collaboration OpenClassrooms" as OpenClassrooms
+
+package editClassroom as "editClassroom()" {
+    rectangle #629EF9 EditClassroomView
+    rectangle #b5bd68 ClassroomController
+    rectangle #F2AC4E ClassroomRepository
+    rectangle #F2AC4E Classroom
+}
+
+ClassroomsOpen --> EditClassroomView: editClassroom(classroomId)
+ClassroomOpen --> EditClassroomView: editClassroom(classroomId)
+CreateClassroom --> EditClassroomView: editClassroom(newClassroom)
+
+EditClassroomView -d-> ClassroomController: loadClassroomForEditing(classroomId) : Classroom
+
+ClassroomController --> ClassroomRepository: getById(classroomId) : Classroom
+
+EditClassroomView --> ClassroomController: modifyFields(classroomId, changes) : boolean
+
+ClassroomController --> ClassroomRepository: update(classroom) : boolean
+
+ClassroomRepository -- Classroom
+
+EditClassroomView ..> OpenClassrooms: <<include>> openClassrooms()
+
+@enduml

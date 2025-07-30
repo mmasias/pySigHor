@@ -1,0 +1,30 @@
+@startuml deleteProgram-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Programs Open" as ProgramsOpen
+rectangle #CDEBA5 ":Program Open" as ProgramOpen
+rectangle #CDEBA5 ":Collaboration OpenPrograms" as OpenPrograms
+
+package deleteProgram as "deleteProgram()" {
+    rectangle #629EF9 DeleteProgramView
+    rectangle #b5bd68 ProgramController
+    rectangle #F2AC4E ProgramRepository
+    rectangle #F2AC4E Program
+}
+
+ProgramsOpen --> DeleteProgramView: deleteProgram(programId)
+ProgramOpen --> DeleteProgramView: deleteProgram(programId)
+
+DeleteProgramView -d-> ProgramController: loadProgramForDeletion(programId) : Program
+
+ProgramController --> ProgramRepository: getById(programId) : Program
+
+ProgramRepository -- Program
+
+DeleteProgramView --> ProgramController: deleteProgram(programId) : void
+
+ProgramController --> ProgramRepository: delete(programId) : void
+
+DeleteProgramView ..> OpenPrograms: <<include>> openPrograms()
+
+@enduml

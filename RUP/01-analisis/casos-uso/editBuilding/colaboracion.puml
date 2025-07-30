@@ -1,0 +1,32 @@
+@startuml editBuilding-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Buildings Open" as BuildingsOpen
+rectangle #CDEBA5 ":Building Open" as BuildingOpen
+rectangle #CDEBA5 ":Collaboration CreateBuilding" as CreateBuilding
+rectangle #CDEBA5 ":Collaboration OpenBuildings" as OpenBuildings
+
+package editBuilding as "editBuilding()" {
+    rectangle #629EF9 EditBuildingView
+    rectangle #b5bd68 BuildingController
+    rectangle #F2AC4E BuildingRepository
+    rectangle #F2AC4E Building
+}
+
+BuildingsOpen --> EditBuildingView: editBuilding(buildingId)
+BuildingOpen --> EditBuildingView: editBuilding(buildingId)
+CreateBuilding --> EditBuildingView: editBuilding(newBuilding)
+
+EditBuildingView -d-> BuildingController: loadBuildingForEditing(buildingId) : Building
+
+BuildingController --> BuildingRepository: getById(buildingId) : Building
+
+EditBuildingView --> BuildingController: modifyFields(buildingId, changes) : boolean
+
+BuildingController --> BuildingRepository: update(building) : boolean
+
+BuildingRepository -- Building
+
+EditBuildingView ..> OpenBuildings: <<include>> openBuildings()
+
+@enduml

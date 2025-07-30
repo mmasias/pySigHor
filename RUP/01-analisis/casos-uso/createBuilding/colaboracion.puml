@@ -1,0 +1,28 @@
+@startuml createBuilding-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Buildings Open" as BuildingsOpen
+rectangle #CDEBA5 ":Collaboration EditBuilding" as EditBuilding
+
+package createBuilding as "createBuilding()" {
+    rectangle #629EF9 CreateBuildingView
+    rectangle #b5bd68 BuildingController
+    rectangle #F2AC4E BuildingRepository
+    rectangle #F2AC4E Building
+}
+
+BuildingsOpen -r-> CreateBuildingView: createBuilding()
+
+CreateBuildingView -d-> BuildingController: validateMinimalData(code, name) : boolean
+
+BuildingController --> BuildingRepository: checkUniqueness(code) : boolean
+
+CreateBuildingView --> BuildingController: createBuilding(code, name) : Building
+
+BuildingController --> BuildingRepository: create(code, name) : Building
+
+BuildingRepository -- Building
+
+CreateBuildingView ..> EditBuilding: <<include>> editBuilding(newBuilding)
+
+@enduml

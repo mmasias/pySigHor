@@ -1,0 +1,30 @@
+@startuml deleteResource-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Resources Open" as ResourcesOpen
+rectangle #CDEBA5 ":Resource Open" as ResourceOpen
+rectangle #CDEBA5 ":Collaboration OpenResources" as OpenResources
+
+package deleteResource as "deleteResource()" {
+    rectangle #629EF9 DeleteResourceView
+    rectangle #b5bd68 ResourceController
+    rectangle #F2AC4E ResourceRepository
+    rectangle #F2AC4E Resource
+}
+
+ResourcesOpen --> DeleteResourceView: deleteResource(resourceId)
+ResourceOpen --> DeleteResourceView: deleteResource(resourceId)
+
+DeleteResourceView -d-> ResourceController: loadResourceForDeletion(resourceId) : Resource
+
+ResourceController --> ResourceRepository: getById(resourceId) : Resource
+
+ResourceRepository -- Resource
+
+DeleteResourceView --> ResourceController: deleteResource(resourceId) : void
+
+ResourceController --> ResourceRepository: delete(resourceId) : void
+
+DeleteResourceView ..> OpenResources: <<include>> openResources()
+
+@enduml

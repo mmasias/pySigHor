@@ -41,11 +41,11 @@ Análisis completo de cada caso de uso especificado mediante:
 ## Cobertura de análisis
 
 ### Casos completamente analizados
-- **Gestión del sistema**: iniciarSesion(), cerrarSesion(), completarGestion()
-- **Apertura de entidades**: Todos los casos abrirXXX() con patrón de listado
+- **Gestión del sistema**: startSession(), endSession(), completeManagement()
+- **Apertura de entidades**: Todos los casos openXXX() con patrón de listado
 - **CRUD de Programas**: Casos completos con filosofía C→U
 - **CRUD de Cursos**: Análisis completo incluyendo secuencias detalladas
-- **CRUD de Profesores**: Incluyendo configurarPreferenciasProfesor() especializado
+- **CRUD de Profesores**: Incluyendo configureTeacherPreferences() especializado
 - **CRUD de Edificios**: Con validación de dependencias de aulas
 - **CRUD de Aulas**: Con gestión de recursos y validación de horarios
 - **CRUD de Recursos**: Con impacto en preferencias de profesores
@@ -53,7 +53,7 @@ Análisis completo de cada caso de uso especificado mediante:
 
 ### Patrones de colaboración identificados
 
-#### Patrón de apertura (abrirXXX)
+#### Patrón de apertura (openXXX)
 - **Vista**: Presenta lista de entidades con opciones de acción
 - **Controlador**: Coordina carga de datos y navegación
 - **Repositorio**: Proporciona datos de listado paginado o filtrado

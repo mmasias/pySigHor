@@ -1,0 +1,34 @@
+@startuml openPrograms-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openPrograms as "openPrograms()" {
+    rectangle #629EF9 OpenProgramsView
+    rectangle #b5bd68 ProgramsController
+    rectangle #F2AC4E ProgramRepository
+    rectangle #F2AC4E Program
+}
+
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateProgram" as CreateProgram
+rectangle #CDEBA5 ":Collaboration EditProgram" as EditProgram
+rectangle #CDEBA5 ":Collaboration DeleteProgram" as DeleteProgram
+
+SystemAvailable -r-> OpenProgramsView: openPrograms()
+
+OpenProgramsView -d-> ProgramsController: listPrograms() : List<Program>
+
+ProgramsController --> ProgramRepository: getAll() : List<Program>
+
+ProgramRepository -- Program
+
+OpenProgramsView --> ProgramsController: filterPrograms(criteria) : List<Program>
+
+ProgramsController --> ProgramRepository: findByCriteria(criteria) : List<Program>
+
+OpenProgramsView ..> SystemAvailableSalida: completeManagement()
+OpenProgramsView ..> CreateProgram: createProgram()
+OpenProgramsView ..> EditProgram: editProgram()
+OpenProgramsView ..> DeleteProgram: deleteProgram()
+
+@enduml

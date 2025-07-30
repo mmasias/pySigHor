@@ -1,0 +1,33 @@
+@startuml editProgram-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Programs Open" as ProgramsOpen
+rectangle #CDEBA5 ":Collaboration CreateProgram" as CreateProgram
+rectangle #CDEBA5 ":Programs Open" as ProgramsOpenOutput
+
+package editProgram as "editProgram()" {
+    rectangle #629EF9 EditProgramView
+    rectangle #b5bd68 ProgramController
+    rectangle #F2AC4E ProgramRepository
+    rectangle #F2AC4E Program
+}
+
+
+ProgramsOpen --> EditProgramView: editProgram(programId)
+CreateProgram --> EditProgramView: editProgram(newProgram)
+
+EditProgramView -d-> ProgramController: loadProgram(programId) : Program
+
+ProgramController --> ProgramRepository: getById(programId) : Program
+
+ProgramRepository -- Program
+
+EditProgramView --> ProgramController: modifyFields(program) : void
+
+EditProgramView --> ProgramController: saveProgram(program) : void
+
+ProgramController --> ProgramRepository: update(program) : void
+
+EditProgramView ..> ProgramsOpenOutput: openPrograms()
+
+@enduml

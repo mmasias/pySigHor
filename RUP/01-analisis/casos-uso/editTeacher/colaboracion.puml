@@ -1,0 +1,32 @@
+@startuml editTeacher-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Teachers Open" as TeachersOpen
+rectangle #CDEBA5 ":Teacher Open" as TeacherOpen
+rectangle #CDEBA5 ":Collaboration CreateTeacher" as CreateTeacher
+rectangle #CDEBA5 ":Collaboration OpenTeachers" as OpenTeachers
+
+package editTeacher as "editTeacher()" {
+    rectangle #629EF9 EditTeacherView
+    rectangle #b5bd68 TeacherController
+    rectangle #F2AC4E TeacherRepository
+    rectangle #F2AC4E Teacher
+}
+
+TeachersOpen --> EditTeacherView: editTeacher(teacherId)
+TeacherOpen --> EditTeacherView: editTeacher(teacherId)
+CreateTeacher --> EditTeacherView: editTeacher(newTeacher)
+
+EditTeacherView -d-> TeacherController: loadTeacherForEditing(teacherId) : Teacher
+
+TeacherController --> TeacherRepository: getById(teacherId) : Teacher
+
+EditTeacherView --> TeacherController: modifyFields(teacherId, changes) : boolean
+
+TeacherController --> TeacherRepository: update(teacher) : boolean
+
+TeacherRepository -- Teacher
+
+EditTeacherView ..> OpenTeachers: <<include>> openTeachers()
+
+@enduml

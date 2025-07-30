@@ -1,0 +1,34 @@
+@startuml openBuildings-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":System Available" as SystemAvailable
+package openBuildings as "openBuildings()" {
+    rectangle #629EF9 OpenBuildingsView
+    rectangle #b5bd68 BuildingsController
+    rectangle #F2AC4E BuildingRepository
+    rectangle #F2AC4E Building
+}
+
+rectangle #CDEBA5 ":System Available" as SystemAvailableSalida
+rectangle #CDEBA5 ":Collaboration CreateBuilding" as CreateBuilding
+rectangle #CDEBA5 ":Collaboration EditBuilding" as EditBuilding
+rectangle #CDEBA5 ":Collaboration DeleteBuilding" as DeleteBuilding
+
+SystemAvailable -r-> OpenBuildingsView: openBuildings()
+
+OpenBuildingsView -d-> BuildingsController: listBuildings() : List<Building>
+
+BuildingsController --> BuildingRepository: getAll() : List<Building>
+
+BuildingRepository -- Building
+
+OpenBuildingsView --> BuildingsController: filterBuildings(criteria) : List<Building>
+
+BuildingsController --> BuildingRepository: findByCriteria(criteria) : List<Building>
+
+OpenBuildingsView ..> SystemAvailableSalida: completeManagement()
+OpenBuildingsView ..> CreateBuilding: createBuilding()
+OpenBuildingsView ..> EditBuilding: editBuilding()
+OpenBuildingsView ..> DeleteBuilding: deleteBuilding()
+
+@enduml

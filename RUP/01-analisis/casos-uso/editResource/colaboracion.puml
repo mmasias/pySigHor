@@ -1,0 +1,32 @@
+@startuml editResource-analysis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Resources Open" as ResourcesOpen
+rectangle #CDEBA5 ":Resource Open" as ResourceOpen
+rectangle #CDEBA5 ":Collaboration CreateResource" as CreateResource
+rectangle #CDEBA5 ":Collaboration OpenResources" as OpenResources
+
+package editResource as "editResource()" {
+    rectangle #629EF9 EditResourceView
+    rectangle #b5bd68 ResourceController
+    rectangle #F2AC4E ResourceRepository
+    rectangle #F2AC4E Resource
+}
+
+ResourcesOpen --> EditResourceView: editResource(resourceId)
+ResourceOpen --> EditResourceView: editResource(resourceId)
+CreateResource --> EditResourceView: editResource(newResource)
+
+EditResourceView -d-> ResourceController: loadResourceForEditing(resourceId) : Resource
+
+ResourceController --> ResourceRepository: getById(resourceId) : Resource
+
+EditResourceView --> ResourceController: modifyFields(resourceId, changes) : boolean
+
+ResourceController --> ResourceRepository: update(resource) : boolean
+
+ResourceRepository -- Resource
+
+EditResourceView ..> OpenResources: <<include>> openResources()
+
+@enduml
