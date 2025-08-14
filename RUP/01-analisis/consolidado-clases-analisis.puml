@@ -1,0 +1,234 @@
+@startuml consolidado-clases-analisis
+!theme plain
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diagrama Consolidado de Clases de Análisis\nSistema pySigHor - Arquitectura MVC
+
+package "VIEW (Boundary)" #ALICEBLUE {
+    ' === Gestión del Sistema ===
+    boundary LoginView
+    boundary GestionView
+    boundary CerrarSesionView
+    boundary ConsultarHorarioView
+    boundary GenerarHorarioView
+    
+    ' === Vistas de Listado (Abrir entidades) ===
+    boundary AbrirProgramasView
+    boundary AbrirCursosView
+    boundary AbrirProfesoresView
+    boundary ListarEdificiosView
+    boundary ListarAulasView
+    boundary ListarRecursosView
+    
+    ' === CRUD Programas ===
+    boundary CrearProgramaView
+    boundary EditarProgramaView
+    boundary EliminarProgramaView
+    
+    ' === CRUD Cursos ===
+    boundary CrearCursoView
+    boundary EditarCursoView
+    boundary EliminarCursoView
+    
+    ' === CRUD Profesores ===
+    boundary CrearProfesorView
+    boundary EditarProfesorView
+    boundary EliminarProfesorView
+    boundary ConfigurarPreferenciasProfesorView
+    boundary AsignarProfesorACursoView
+    
+    ' === CRUD Edificios ===
+    boundary CrearEdificioView
+    boundary EditarEdificioView
+    boundary EliminarEdificioView
+    
+    ' === CRUD Aulas ===
+    boundary CrearAulaView
+    boundary EditarAulaView
+    boundary EliminarAulaView
+    
+    ' === CRUD Recursos ===
+    boundary CrearRecursoView
+    boundary EditarRecursoView
+    boundary EliminarRecursoView
+}
+
+package "CONTROLLER (Control)" #LIGHTGREEN {
+    ' === Controladores del Sistema ===
+    control IniciarSesionController
+    control CompletarGestionController
+    control CerrarSesionController
+    control HorarioController
+    
+    ' === Controladores de Colección (Listados) ===
+    control ProgramasController
+    control CursosController
+    control ProfesoresController
+    control EdificiosController
+    control AulasController
+    control RecursosController
+    
+    ' === Controladores de Entidad Individual ===
+    control ProgramaController
+    control CursoController
+    control ProfesorController
+    control EdificioController
+    control AulaController
+    control RecursoController
+    
+    ' === Controladores Especializados ===
+    control AsignacionProfesorCursoController
+    control PreferenciasProfesorController
+}
+
+package "MODEL (Entity)" #LIGHTYELLOW {
+    ' === Entidades de Dominio ===
+    entity Usuario
+    entity Programa
+    entity Curso
+    entity Profesor
+    entity Edificio
+    entity Aula
+    entity Recurso
+    entity Horario
+    entity Sesion
+    
+    ' === Repositorios ===
+    entity UsuarioRepository
+    entity ProgramaRepository
+    entity CursoRepository
+    entity ProfesorRepository
+    entity EdificioRepository
+    entity AulaRepository
+    entity RecursoRepository
+    entity HorarioRepository
+    entity SesionRepository
+    entity PermisosRepository
+    
+    ' === Entidades de Relación ===
+    entity AsignacionProfesorCurso
+    entity PreferenciasRecurso
+    
+    ' === Entidades Especiales ===
+    entity HorarioGenerator
+    entity Validador
+    entity OpcionesMenu
+}
+
+' ========================================
+' RELACIONES REPOSITORY -> ENTITY
+' ========================================
+
+UsuarioRepository o-- Usuario : gestiona
+ProgramaRepository o-- Programa : gestiona
+CursoRepository o-- Curso : gestiona
+ProfesorRepository o-- Profesor : gestiona
+EdificioRepository o-- Edificio : gestiona
+AulaRepository o-- Aula : gestiona
+RecursoRepository o-- Recurso : gestiona
+HorarioRepository o-- Horario : gestiona
+SesionRepository o-- Sesion : gestiona
+
+' Repositorios especializados gestionan entidades de relación
+ProfesorRepository o-- AsignacionProfesorCurso : gestiona
+ProfesorRepository o-- PreferenciasRecurso : gestiona
+
+' ========================================
+' RELACIONES CONTROLLER -> REPOSITORY
+' ========================================
+
+' Controladores del Sistema
+IniciarSesionController --> UsuarioRepository : valida credenciales
+CompletarGestionController --> PermisosRepository : obtiene opciones
+CerrarSesionController --> SesionRepository : cierra sesión
+HorarioController --> HorarioRepository : gestiona horarios
+
+' Controladores de Colección
+ProgramasController --> ProgramaRepository : lista programas
+CursosController --> CursoRepository : lista cursos
+ProfesoresController --> ProfesorRepository : lista profesores
+EdificiosController --> EdificioRepository : lista edificios
+AulasController --> AulaRepository : lista aulas
+RecursosController --> RecursoRepository : lista recursos
+
+' Controladores de Entidad Individual
+ProgramaController --> ProgramaRepository : CRUD programa
+CursoController --> CursoRepository : CRUD curso
+ProfesorController --> ProfesorRepository : CRUD profesor
+EdificioController --> EdificioRepository : CRUD edificio
+AulaController --> AulaRepository : CRUD aula
+RecursoController --> RecursoRepository : CRUD recurso
+
+' Controladores Especializados
+AsignacionProfesorCursoController --> ProfesorRepository : gestiona profesor
+AsignacionProfesorCursoController --> CursoRepository : gestiona curso
+PreferenciasProfesorController --> ProfesorRepository : configura profesor
+PreferenciasProfesorController --> RecursoRepository : gestiona recursos
+
+' ========================================
+' RELACIONES VIEW -> CONTROLLER
+' ========================================
+
+' Gestión del Sistema
+LoginView --> IniciarSesionController : autentica usuario
+GestionView --> CompletarGestionController : habilita opciones
+CerrarSesionView --> CerrarSesionController : cierra sesión
+ConsultarHorarioView --> HorarioController : consulta horario
+GenerarHorarioView --> HorarioController : genera horario
+
+' Vistas de Listado -> Controladores de Colección
+AbrirProgramasView --> ProgramasController : lista programas
+AbrirCursosView --> CursosController : lista cursos
+AbrirProfesoresView --> ProfesoresController : lista profesores
+ListarEdificiosView --> EdificiosController : lista edificios
+ListarAulasView --> AulasController : lista aulas
+ListarRecursosView --> RecursosController : lista recursos
+
+' CRUD Programas -> Controlador Individual
+CrearProgramaView --> ProgramaController : crea programa
+EditarProgramaView --> ProgramaController : edita programa
+EliminarProgramaView --> ProgramaController : elimina programa
+
+' CRUD Cursos -> Controlador Individual
+CrearCursoView --> CursoController : crea curso
+EditarCursoView --> CursoController : edita curso
+EliminarCursoView --> CursoController : elimina curso
+
+' CRUD Profesores -> Controlador Individual
+CrearProfesorView --> ProfesorController : crea profesor
+EditarProfesorView --> ProfesorController : edita profesor
+EliminarProfesorView --> ProfesorController : elimina profesor
+
+' CRUD Edificios -> Controlador Individual
+CrearEdificioView --> EdificioController : crea edificio
+EditarEdificioView --> EdificioController : edita edificio
+EliminarEdificioView --> EdificioController : elimina edificio
+
+' CRUD Aulas -> Controlador Individual
+CrearAulaView --> AulaController : crea aula
+EditarAulaView --> AulaController : edita aula
+EliminarAulaView --> AulaController : elimina aula
+
+' CRUD Recursos -> Controlador Individual
+CrearRecursoView --> RecursoController : crea recurso
+EditarRecursoView --> RecursoController : edita recurso
+EliminarRecursoView --> RecursoController : elimina recurso
+
+' Vistas Especializadas -> Controladores Especializados
+AsignarProfesorACursoView --> AsignacionProfesorCursoController : asigna profesor
+ConfigurarPreferenciasProfesorView --> PreferenciasProfesorController : configura preferencias
+
+' ========================================
+' RELACIONES ESPECIALES
+' ========================================
+
+' Controladores acceden a entidades especiales
+HorarioController --> HorarioGenerator : ejecuta algoritmo
+HorarioController --> Validador : valida datos
+HorarioRepository --> Validador : valida integridad
+CompletarGestionController --> OpcionesMenu : crea opciones
+CompletarGestionController --> Sesion : obtiene usuario
+IniciarSesionController --> Sesion : crea sesión
+
+@enduml
