@@ -1,0 +1,391 @@
+@startuml consolidacion-metodos-clases-analisis
+
+!define BOUNDARY_COLOR #629EF9
+!define CONTROL_COLOR #b5bd68  
+!define ENTITY_COLOR #F2AC4E
+
+title Consolidación de Métodos de Clases de Análisis
+subtitle pySigHor - Mapa de Interfaces para Especificación de Componentes
+
+package "VIEW (Boundary)" {
+    boundary LoginView {
+        +iniciarSesion(usuario: String, contraseña: String) : void
+        +mostrarError(mensaje: String) : void
+    }
+    
+    boundary AbrirProgramasView {
+        +abrirProgramas() : void
+        +presentarOpciones(opciones: List<Opcion>) : void
+    }
+    
+    boundary CrearProgramaView {
+        +crearPrograma() : void
+        +capturarDatosMinimos() : void
+    }
+    
+    boundary EditarProgramaView {
+        +editarPrograma(programaId: String) : void
+        +editarPrograma(programaNuevo: Programa) : void
+        +presentarFormulario(programa: Programa) : void
+        +capturarModificaciones() : void
+    }
+    
+    boundary EliminarProgramaView {
+        +eliminarPrograma(programaId: String) : void
+        +mostrarConfirmacion(programa: Programa) : void
+        +confirmarEliminacion() : boolean
+    }
+    
+    boundary AbrirCursosView {
+        +abrirCursos() : void
+        +presentarLista(cursos: List<Curso>) : void
+        +aplicarFiltros() : void
+    }
+    
+    boundary CrearCursoView {
+        +crearCurso() : void
+        +capturarDatosBasicos() : void
+    }
+    
+    boundary EditarCursoView {
+        +editarCurso(cursoId: String) : void
+        +editarCurso(cursoNuevo: Curso) : void
+        +presentarFormularioCompleto() : void
+    }
+    
+    boundary EliminarCursoView {
+        +eliminarCurso(cursoId: String) : void
+        +verificarDependencias() : void
+    }
+    
+    boundary AbrirProfesoresView {
+        +abrirProfesores() : void
+        +presentarGrilla() : void
+    }
+    
+    boundary CrearProfesorView {
+        +crearProfesor() : void
+        +capturarIdentificacion() : void
+    }
+    
+    boundary EditarProfesorView {
+        +editarProfesor(profesorId: String) : void
+        +editarProfesor(profesorNuevo: Profesor) : void
+        +gestionarDatosCompletos() : void
+    }
+    
+    boundary ConfigurarPreferenciasProfesorView {
+        +configurarPreferenciasProfesor(profesorId: String) : void
+        +presentarConfiguracion() : void
+    }
+    
+    boundary AbrirEdificiosView {
+        +abrirEdificios() : void
+    }
+    
+    boundary AbrirAulasView {
+        +abrirAulas() : void
+        +filtrarPorEdificio() : void
+    }
+    
+    boundary AbrirRecursosView {
+        +abrirRecursos() : void
+    }
+    
+    boundary GenerarHorarioView {
+        +generarHorario() : void
+        +mostrarProgreso() : void
+        +presentarResultado() : void
+    }
+    
+    boundary ConsultarHorarioView {
+        +consultarHorario() : void
+        +consultarHorario(horarioGenerado: Horario) : void
+        +aplicarFiltros(criterios: Map) : void
+    }
+    
+    boundary AsignarProfesorACursoView {
+        +asignarProfesorACurso(profesorId: String) : void
+        +presentarCursosDisponibles() : void
+    }
+    
+    boundary CerrarSesionView {
+        +cerrarSesion(usuario: Usuario) : void
+        +mostrarConfirmacion() : void
+    }
+}
+
+package "CONTROLLER (Control)" {
+    control IniciarSesionController {
+        +autenticar(usuario: String, contraseña: String) : Sesion
+        -validarCredenciales(usuario: String, contraseña: String) : boolean
+        -crearSesion(usuario: Usuario) : Sesion
+    }
+    
+    control ProgramaController {
+        +listarProgramas() : List<Programa>
+        +filtrarProgramas(criterio: String) : List<Programa>
+        +crearProgramaMinimo(nombre: String) : Programa
+        +cargarPrograma(programaId: String) : Programa
+        +guardarPrograma(programa: Programa) : void
+        +modificarCampos(programa: Programa) : void
+        +eliminarPrograma(programaId: String) : void
+        +cargarProgramaParaEliminacion(programaId: String) : Programa
+    }
+    
+    control CursoController {
+        +listarCursos() : List<Curso>
+        +filtrarCursos(criterio: String) : List<Curso>
+        +crearCurso(nombre: String) : Curso
+        +cargarCurso(cursoId: String) : Curso
+        +guardarCurso(curso: Curso) : void
+        +modificarCampos(cursoId: String, cambios: Map) : boolean
+        +eliminarCurso(cursoId: String) : void
+        +validarEliminacion(cursoId: String) : boolean
+    }
+    
+    control ProfesorController {
+        +listarProfesores() : List<Profesor>
+        +filtrarProfesores(criterio: String) : List<Profesor>
+        +crearProfesor(codigo: String, nombres: String, apellidos: String) : Profesor
+        +cargarProfesor(profesorId: String) : Profesor
+        +guardarProfesor(profesor: Profesor) : void
+        +modificarCampos(profesorId: String, cambios: Map) : boolean
+        +eliminarProfesor(profesorId: String) : void
+        +configurarPreferencias(profesorId: String, preferencias: Map) : void
+        +asignarACurso(profesorId: String, cursoId: String) : void
+    }
+    
+    control EdificioController {
+        +listarEdificios() : List<Edificio>
+        +crearEdificio(codigo: String, nombre: String) : Edificio
+        +modificarCampos(edificioId: String, cambios: Map) : boolean
+        +eliminarEdificio(edificioId: String) : void
+    }
+    
+    control AulaController {
+        +listarAulas() : List<Aula>
+        +filtrarAulas(criterio: String) : List<Aula>
+        +crearAula(codigo: String, nombre: String, edificio: Edificio) : Aula
+        +modificarCampos(aulaId: String, cambios: Map) : boolean
+        +eliminarAula(aulaId: String) : void
+    }
+    
+    control RecursoController {
+        +listarRecursos() : List<Recurso>
+        +crearRecurso(codigo: String, nombre: String) : Recurso
+        +modificarCampos(recursoId: String, cambios: Map) : boolean
+        +eliminarRecurso(recursoId: String) : void
+    }
+    
+    control HorarioController {
+        +generarHorario() : Horario
+        +consultarHorario() : Horario
+        +aplicarFiltros(criterios: Map) : List<AsignacionHorario>
+        +optimizar() : void
+        -ejecutarAlgoritmo() : void
+        -validarRestricciones() : boolean
+    }
+    
+    control SesionController {
+        +cerrarSesion(sesion: Sesion) : void
+        +validarEstado(sesion: Sesion) : boolean
+    }
+}
+
+package "MODEL (Entity)" {
+    entity UsuarioRepository <<Repository>> {
+        +validarCredenciales(usuario: String, contraseña: String) : Usuario
+    }
+    
+    entity ProgramaRepository <<Repository>> {
+        +obtenerTodos() : List<Programa>
+        +obtenerPorId(programaId: String) : Programa
+        +buscarPorCriterio(criterio: String) : List<Programa>
+        +crear(nombre: String) : Programa
+        +actualizar(programa: Programa) : void
+        +eliminar(programaId: String) : void
+    }
+    
+    entity CursoRepository <<Repository>> {
+        +obtenerTodos() : List<Curso>
+        +obtenerPorId(cursoId: String) : Curso
+        +buscarPorCriterio(criterio: String) : List<Curso>
+        +crear(nombre: String) : Curso
+        +actualizar(curso: Curso) : boolean
+        +eliminar(cursoId: String) : void
+        +verificarUnicidad(nombre: String) : boolean
+    }
+    
+    entity ProfesorRepository <<Repository>> {
+        +obtenerTodos() : List<Profesor>
+        +obtenerPorId(profesorId: String) : Profesor
+        +buscarPorCriterio(criterio: String) : List<Profesor>
+        +crear(codigo: String, nombres: String, apellidos: String) : Profesor
+        +actualizar(profesor: Profesor) : boolean
+        +eliminar(profesorId: String) : void
+        +verificarUnicidad(codigo: String) : boolean
+        +guardarPreferencias(profesorId: String, preferencias: Map) : void
+    }
+    
+    entity EdificioRepository <<Repository>> {
+        +obtenerTodos() : List<Edificio>
+        +obtenerPorId(edificioId: String) : Edificio
+        +buscarPorCriterio(criterio: String) : List<Edificio>
+        +crear(codigo: String, nombre: String) : Edificio
+        +actualizar(edificio: Edificio) : boolean
+        +eliminar(edificioId: String) : void
+        +verificarUnicidad(codigo: String) : boolean
+    }
+    
+    entity AulaRepository <<Repository>> {
+        +obtenerTodos() : List<Aula>
+        +obtenerPorId(aulaId: String) : Aula
+        +buscarPorCriterio(criterio: String) : List<Aula>
+        +crear(codigo: String, nombre: String, edificio: Edificio) : Aula
+        +actualizar(aula: Aula) : boolean
+        +eliminar(aulaId: String) : void
+        +verificarUnicidad(codigo: String) : boolean
+        +filtrarPorEdificio(edificioId: String) : List<Aula>
+    }
+    
+    entity RecursoRepository <<Repository>> {
+        +obtenerTodos() : List<Recurso>
+        +obtenerPorId(recursoId: String) : Recurso
+        +buscarPorCriterio(criterio: String) : List<Recurso>
+        +crear(codigo: String, nombre: String) : Recurso
+        +actualizar(recurso: Recurso) : boolean
+        +eliminar(recursoId: String) : void
+        +verificarUnicidad(codigo: String) : boolean
+    }
+    
+    entity HorarioRepository <<Repository>> {
+        +obtenerHorarioActual() : Horario
+        +guardarHorario(horario: Horario) : void
+        +obtenerAsignaciones() : List<AsignacionHorario>
+        +aplicarFiltros(criterios: Map) : List<AsignacionHorario>
+    }
+    
+    entity Usuario {
+        +getNombre() : String
+        +getPermisos() : List<Permiso>
+        +esAdministrador() : boolean
+    }
+    
+    entity Programa {
+        +getCodigo() : String
+        +getNombre() : String
+        +getDescripcion() : String
+        +setCodigo(codigo: String) : void
+        +setNombre(nombre: String) : void
+        +setDescripcion(descripcion: String) : void
+    }
+    
+    entity Curso {
+        +getCodigo() : String
+        +getNombre() : String
+        +getCreditos() : int
+        +getHorasTeoricas() : int
+        +getHorasPracticas() : int
+        +getPrograma() : Programa
+    }
+    
+    entity Profesor {
+        +getCodigo() : String
+        +getNombres() : String
+        +getApellidos() : String
+        +getPreferencias() : Map
+        +getCursos() : List<Curso>
+    }
+    
+    entity Edificio {
+        +getCodigo() : String
+        +getNombre() : String
+        +getAulas() : List<Aula>
+    }
+    
+    entity Aula {
+        +getCodigo() : String
+        +getNombre() : String
+        +getCapacidad() : int
+        +getEdificio() : Edificio
+        +getRecursos() : List<Recurso>
+    }
+    
+    entity Recurso {
+        +getCodigo() : String
+        +getNombre() : String
+        +getDescripcion() : String
+    }
+    
+    entity Horario {
+        +getFechaGeneracion() : Date
+        +getAsignaciones() : List<AsignacionHorario>
+        +isGenerado() : boolean
+    }
+    
+    entity AsignacionHorario {
+        +getCurso() : Curso
+        +getProfesor() : Profesor
+        +getAula() : Aula
+        +getDia() : String
+        +getHora() : String
+        +getDuracion() : int
+    }
+    
+    entity Sesion {
+        +getUsuario() : Usuario
+        +getFechaInicio() : Date
+        +isActiva() : boolean
+        +cerrar() : void
+    }
+}
+
+' Relaciones principales
+LoginView --> IniciarSesionController
+IniciarSesionController --> UsuarioRepository
+IniciarSesionController --> Usuario
+IniciarSesionController --> Sesion
+
+AbrirProgramasView --> ProgramaController
+CrearProgramaView --> ProgramaController
+EditarProgramaView --> ProgramaController
+EliminarProgramaView --> ProgramaController
+ProgramaController --> ProgramaRepository
+ProgramaRepository --> Programa
+
+AbrirCursosView --> CursoController
+CrearCursoView --> CursoController
+EditarCursoView --> CursoController
+EliminarCursoView --> CursoController
+CursoController --> CursoRepository
+CursoRepository --> Curso
+
+AbrirProfesoresView --> ProfesorController
+CrearProfesorView --> ProfesorController
+EditarProfesorView --> ProfesorController
+ConfigurarPreferenciasProfesorView --> ProfesorController
+AsignarProfesorACursoView --> ProfesorController
+ProfesorController --> ProfesorRepository
+ProfesorRepository --> Profesor
+
+GenerarHorarioView --> HorarioController
+ConsultarHorarioView --> HorarioController
+HorarioController --> HorarioRepository
+HorarioRepository --> Horario
+HorarioRepository --> AsignacionHorario
+
+CerrarSesionView --> SesionController
+SesionController --> Sesion
+
+legend top left
+📱 VIEW: Interfaces de usuario y presentación (31 clases)
+🎛️  CONTROLLER: Coordinación y lógica de casos de uso (18 clases)
+📦 MODEL: Entidades de dominio y repositorios (24 clases)
+
+Total: 73 clases consolidadas de 31 casos de uso RUP
+endlegend
+
+note top : Mapa de interfaces para especificación de componentes\nBasado en análisis de colaboraciones MVC
+
+@enduml

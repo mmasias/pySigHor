@@ -90,3 +90,16 @@ Cada carpeta de análisis contiene:
 - **Secuencias detalladas** para casos de uso complejos (CRUD completo)
 - **Trazabilidad** desde especificación hasta análisis
 - **Nomenclatura consistente** con las leyes del proyecto
+
+## Análisis Consolidado
+
+### Consolidación de Métodos
+- **[Consolidación de Métodos de Clases](../consolidacion-metodos-clases.md)** - Mapa detallado de interfaces para especificación de componentes
+- **[Diagrama de Clases Consolidado](../consolidacion-metodos-clases.puml)** - 73 clases de análisis con métodos completos
+- **[Reporte de Inconsistencias](../reporte-inconsistencias.md)** - Análisis de duplicaciones y recomendaciones de refactorización
+
+### Estadísticas del Análisis
+- **Total clases consolidadas**: 73 de 31 casos de uso
+- **Distribución**: 31 Views, 18 Controllers, 24 Entities
+- **Métodos únicos**: 186 con análisis de consistencia
+- **Patrones identificados**: CRUD, Repository, Controller, View
