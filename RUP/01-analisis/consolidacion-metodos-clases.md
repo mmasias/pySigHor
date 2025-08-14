@@ -34,7 +34,7 @@ Obtener un **mapa detallado de interfaces** que revele la distribución real de 
 
 <div align=center>
 
-|![Consolidación de Métodos](/images/RUP/01-analisis/consolidacion-metodos-clases.svg)|
+|![Consolidación de Métodos](/images/RUP/01-analisis/consolidacion-metodos-clases-analisis.svg)|
 |-|
 |**Mapa de Interfaces para Especificación de Componentes**<br>Código fuente: [consolidacion-metodos-clases.puml](consolidacion-metodos-clases.puml)|
 

@@ -1,128 +1,124 @@
 @startuml consolidacion-metodos-clases-analisis
 
-!define BOUNDARY_COLOR #629EF9
-!define CONTROL_COLOR #b5bd68  
-!define ENTITY_COLOR #F2AC4E
-
-title Consolidación de Métodos de Clases de Análisis
-subtitle pySigHor - Mapa de Interfaces para Especificación de Componentes
+left to right direction
+skinparam linetype polyline
 
 package "VIEW (Boundary)" {
-    boundary LoginView {
+    class LoginView {
         +iniciarSesion(usuario: String, contraseña: String) : void
         +mostrarError(mensaje: String) : void
     }
     
-    boundary AbrirProgramasView {
+    class AbrirProgramasView {
         +abrirProgramas() : void
         +presentarOpciones(opciones: List<Opcion>) : void
     }
     
-    boundary CrearProgramaView {
+    class CrearProgramaView {
         +crearPrograma() : void
         +capturarDatosMinimos() : void
     }
     
-    boundary EditarProgramaView {
+    class EditarProgramaView {
         +editarPrograma(programaId: String) : void
         +editarPrograma(programaNuevo: Programa) : void
         +presentarFormulario(programa: Programa) : void
         +capturarModificaciones() : void
     }
     
-    boundary EliminarProgramaView {
+    class EliminarProgramaView {
         +eliminarPrograma(programaId: String) : void
         +mostrarConfirmacion(programa: Programa) : void
         +confirmarEliminacion() : boolean
     }
     
-    boundary AbrirCursosView {
+    class AbrirCursosView {
         +abrirCursos() : void
         +presentarLista(cursos: List<Curso>) : void
         +aplicarFiltros() : void
     }
     
-    boundary CrearCursoView {
+    class CrearCursoView {
         +crearCurso() : void
         +capturarDatosBasicos() : void
     }
     
-    boundary EditarCursoView {
+    class EditarCursoView {
         +editarCurso(cursoId: String) : void
         +editarCurso(cursoNuevo: Curso) : void
         +presentarFormularioCompleto() : void
     }
     
-    boundary EliminarCursoView {
+    class EliminarCursoView {
         +eliminarCurso(cursoId: String) : void
         +verificarDependencias() : void
     }
     
-    boundary AbrirProfesoresView {
+    class AbrirProfesoresView {
         +abrirProfesores() : void
         +presentarGrilla() : void
     }
     
-    boundary CrearProfesorView {
+    class CrearProfesorView {
         +crearProfesor() : void
         +capturarIdentificacion() : void
     }
     
-    boundary EditarProfesorView {
+    class EditarProfesorView {
         +editarProfesor(profesorId: String) : void
         +editarProfesor(profesorNuevo: Profesor) : void
         +gestionarDatosCompletos() : void
     }
     
-    boundary ConfigurarPreferenciasProfesorView {
+    class ConfigurarPreferenciasProfesorView {
         +configurarPreferenciasProfesor(profesorId: String) : void
         +presentarConfiguracion() : void
     }
     
-    boundary AbrirEdificiosView {
+    class AbrirEdificiosView {
         +abrirEdificios() : void
     }
     
-    boundary AbrirAulasView {
+    class AbrirAulasView {
         +abrirAulas() : void
         +filtrarPorEdificio() : void
     }
     
-    boundary AbrirRecursosView {
+    class AbrirRecursosView {
         +abrirRecursos() : void
     }
     
-    boundary GenerarHorarioView {
+    class GenerarHorarioView {
         +generarHorario() : void
         +mostrarProgreso() : void
         +presentarResultado() : void
     }
     
-    boundary ConsultarHorarioView {
+    class ConsultarHorarioView {
         +consultarHorario() : void
         +consultarHorario(horarioGenerado: Horario) : void
         +aplicarFiltros(criterios: Map) : void
     }
     
-    boundary AsignarProfesorACursoView {
+    class AsignarProfesorACursoView {
         +asignarProfesorACurso(profesorId: String) : void
         +presentarCursosDisponibles() : void
     }
     
-    boundary CerrarSesionView {
+    class CerrarSesionView {
         +cerrarSesion(usuario: Usuario) : void
         +mostrarConfirmacion() : void
     }
 }
 
 package "CONTROLLER (Control)" {
-    control IniciarSesionController {
+    class IniciarSesionController {
         +autenticar(usuario: String, contraseña: String) : Sesion
         -validarCredenciales(usuario: String, contraseña: String) : boolean
         -crearSesion(usuario: Usuario) : Sesion
     }
     
-    control ProgramaController {
+    class ProgramaController {
         +listarProgramas() : List<Programa>
         +filtrarProgramas(criterio: String) : List<Programa>
         +crearProgramaMinimo(nombre: String) : Programa
@@ -133,7 +129,7 @@ package "CONTROLLER (Control)" {
         +cargarProgramaParaEliminacion(programaId: String) : Programa
     }
     
-    control CursoController {
+    class CursoController {
         +listarCursos() : List<Curso>
         +filtrarCursos(criterio: String) : List<Curso>
         +crearCurso(nombre: String) : Curso
@@ -144,7 +140,7 @@ package "CONTROLLER (Control)" {
         +validarEliminacion(cursoId: String) : boolean
     }
     
-    control ProfesorController {
+    class ProfesorController {
         +listarProfesores() : List<Profesor>
         +filtrarProfesores(criterio: String) : List<Profesor>
         +crearProfesor(codigo: String, nombres: String, apellidos: String) : Profesor
@@ -156,14 +152,14 @@ package "CONTROLLER (Control)" {
         +asignarACurso(profesorId: String, cursoId: String) : void
     }
     
-    control EdificioController {
+    class EdificioController {
         +listarEdificios() : List<Edificio>
         +crearEdificio(codigo: String, nombre: String) : Edificio
         +modificarCampos(edificioId: String, cambios: Map) : boolean
         +eliminarEdificio(edificioId: String) : void
     }
     
-    control AulaController {
+    class AulaController {
         +listarAulas() : List<Aula>
         +filtrarAulas(criterio: String) : List<Aula>
         +crearAula(codigo: String, nombre: String, edificio: Edificio) : Aula
@@ -171,14 +167,14 @@ package "CONTROLLER (Control)" {
         +eliminarAula(aulaId: String) : void
     }
     
-    control RecursoController {
+    class RecursoController {
         +listarRecursos() : List<Recurso>
         +crearRecurso(codigo: String, nombre: String) : Recurso
         +modificarCampos(recursoId: String, cambios: Map) : boolean
         +eliminarRecurso(recursoId: String) : void
     }
     
-    control HorarioController {
+    class HorarioController {
         +generarHorario() : Horario
         +consultarHorario() : Horario
         +aplicarFiltros(criterios: Map) : List<AsignacionHorario>
@@ -187,18 +183,18 @@ package "CONTROLLER (Control)" {
         -validarRestricciones() : boolean
     }
     
-    control SesionController {
+    class SesionController {
         +cerrarSesion(sesion: Sesion) : void
         +validarEstado(sesion: Sesion) : boolean
     }
 }
 
 package "MODEL (Entity)" {
-    entity UsuarioRepository <<Repository>> {
+    class UsuarioRepository <<Repository>> {
         +validarCredenciales(usuario: String, contraseña: String) : Usuario
     }
     
-    entity ProgramaRepository <<Repository>> {
+    class ProgramaRepository <<Repository>> {
         +obtenerTodos() : List<Programa>
         +obtenerPorId(programaId: String) : Programa
         +buscarPorCriterio(criterio: String) : List<Programa>
@@ -207,7 +203,7 @@ package "MODEL (Entity)" {
         +eliminar(programaId: String) : void
     }
     
-    entity CursoRepository <<Repository>> {
+    class CursoRepository <<Repository>> {
         +obtenerTodos() : List<Curso>
         +obtenerPorId(cursoId: String) : Curso
         +buscarPorCriterio(criterio: String) : List<Curso>
@@ -217,7 +213,7 @@ package "MODEL (Entity)" {
         +verificarUnicidad(nombre: String) : boolean
     }
     
-    entity ProfesorRepository <<Repository>> {
+    class ProfesorRepository <<Repository>> {
         +obtenerTodos() : List<Profesor>
         +obtenerPorId(profesorId: String) : Profesor
         +buscarPorCriterio(criterio: String) : List<Profesor>
@@ -228,7 +224,7 @@ package "MODEL (Entity)" {
         +guardarPreferencias(profesorId: String, preferencias: Map) : void
     }
     
-    entity EdificioRepository <<Repository>> {
+    class EdificioRepository <<Repository>> {
         +obtenerTodos() : List<Edificio>
         +obtenerPorId(edificioId: String) : Edificio
         +buscarPorCriterio(criterio: String) : List<Edificio>
@@ -238,7 +234,7 @@ package "MODEL (Entity)" {
         +verificarUnicidad(codigo: String) : boolean
     }
     
-    entity AulaRepository <<Repository>> {
+    class AulaRepository <<Repository>> {
         +obtenerTodos() : List<Aula>
         +obtenerPorId(aulaId: String) : Aula
         +buscarPorCriterio(criterio: String) : List<Aula>
@@ -249,7 +245,7 @@ package "MODEL (Entity)" {
         +filtrarPorEdificio(edificioId: String) : List<Aula>
     }
     
-    entity RecursoRepository <<Repository>> {
+    class RecursoRepository <<Repository>> {
         +obtenerTodos() : List<Recurso>
         +obtenerPorId(recursoId: String) : Recurso
         +buscarPorCriterio(criterio: String) : List<Recurso>
@@ -259,20 +255,20 @@ package "MODEL (Entity)" {
         +verificarUnicidad(codigo: String) : boolean
     }
     
-    entity HorarioRepository <<Repository>> {
+    class HorarioRepository <<Repository>> {
         +obtenerHorarioActual() : Horario
         +guardarHorario(horario: Horario) : void
         +obtenerAsignaciones() : List<AsignacionHorario>
         +aplicarFiltros(criterios: Map) : List<AsignacionHorario>
     }
     
-    entity Usuario {
+    class Usuario {
         +getNombre() : String
         +getPermisos() : List<Permiso>
         +esAdministrador() : boolean
     }
     
-    entity Programa {
+    class Programa {
         +getCodigo() : String
         +getNombre() : String
         +getDescripcion() : String
@@ -281,7 +277,7 @@ package "MODEL (Entity)" {
         +setDescripcion(descripcion: String) : void
     }
     
-    entity Curso {
+    class Curso {
         +getCodigo() : String
         +getNombre() : String
         +getCreditos() : int
@@ -290,7 +286,7 @@ package "MODEL (Entity)" {
         +getPrograma() : Programa
     }
     
-    entity Profesor {
+    class Profesor {
         +getCodigo() : String
         +getNombres() : String
         +getApellidos() : String
@@ -298,13 +294,13 @@ package "MODEL (Entity)" {
         +getCursos() : List<Curso>
     }
     
-    entity Edificio {
+    class Edificio {
         +getCodigo() : String
         +getNombre() : String
         +getAulas() : List<Aula>
     }
     
-    entity Aula {
+    class Aula {
         +getCodigo() : String
         +getNombre() : String
         +getCapacidad() : int
@@ -312,19 +308,19 @@ package "MODEL (Entity)" {
         +getRecursos() : List<Recurso>
     }
     
-    entity Recurso {
+    class Recurso {
         +getCodigo() : String
         +getNombre() : String
         +getDescripcion() : String
     }
     
-    entity Horario {
+    class Horario {
         +getFechaGeneracion() : Date
         +getAsignaciones() : List<AsignacionHorario>
         +isGenerado() : boolean
     }
     
-    entity AsignacionHorario {
+    class AsignacionHorario {
         +getCurso() : Curso
         +getProfesor() : Profesor
         +getAula() : Aula
@@ -333,7 +329,7 @@ package "MODEL (Entity)" {
         +getDuracion() : int
     }
     
-    entity Sesion {
+    class Sesion {
         +getUsuario() : Usuario
         +getFechaInicio() : Date
         +isActiva() : boolean
@@ -342,50 +338,40 @@ package "MODEL (Entity)" {
 }
 
 ' Relaciones principales
-LoginView --> IniciarSesionController
-IniciarSesionController --> UsuarioRepository
-IniciarSesionController --> Usuario
-IniciarSesionController --> Sesion
+LoginView ---> IniciarSesionController
+IniciarSesionController ---> UsuarioRepository
+IniciarSesionController ---> Usuario
+IniciarSesionController ---> Sesion
 
-AbrirProgramasView --> ProgramaController
-CrearProgramaView --> ProgramaController
-EditarProgramaView --> ProgramaController
-EliminarProgramaView --> ProgramaController
-ProgramaController --> ProgramaRepository
-ProgramaRepository --> Programa
+AbrirProgramasView ---> ProgramaController
+CrearProgramaView ---> ProgramaController
+EditarProgramaView ---> ProgramaController
+EliminarProgramaView ---> ProgramaController
+ProgramaController ---> ProgramaRepository
+ProgramaRepository ---> Programa
 
-AbrirCursosView --> CursoController
-CrearCursoView --> CursoController
-EditarCursoView --> CursoController
-EliminarCursoView --> CursoController
-CursoController --> CursoRepository
-CursoRepository --> Curso
+AbrirCursosView ---> CursoController
+CrearCursoView ---> CursoController
+EditarCursoView ---> CursoController
+EliminarCursoView ---> CursoController
+CursoController ---> CursoRepository
+CursoRepository ---> Curso
 
-AbrirProfesoresView --> ProfesorController
-CrearProfesorView --> ProfesorController
-EditarProfesorView --> ProfesorController
-ConfigurarPreferenciasProfesorView --> ProfesorController
-AsignarProfesorACursoView --> ProfesorController
-ProfesorController --> ProfesorRepository
-ProfesorRepository --> Profesor
+AbrirProfesoresView ---> ProfesorController
+CrearProfesorView ---> ProfesorController
+EditarProfesorView ---> ProfesorController
+ConfigurarPreferenciasProfesorView ---> ProfesorController
+AsignarProfesorACursoView ---> ProfesorController
+ProfesorController ---> ProfesorRepository
+ProfesorRepository ---> Profesor
 
-GenerarHorarioView --> HorarioController
-ConsultarHorarioView --> HorarioController
-HorarioController --> HorarioRepository
-HorarioRepository --> Horario
-HorarioRepository --> AsignacionHorario
+GenerarHorarioView ---> HorarioController
+ConsultarHorarioView ---> HorarioController
+HorarioController ---> HorarioRepository
+HorarioRepository ---> Horario
+HorarioRepository ---> AsignacionHorario
 
-CerrarSesionView --> SesionController
-SesionController --> Sesion
-
-legend top left
-📱 VIEW: Interfaces de usuario y presentación (31 clases)
-🎛️  CONTROLLER: Coordinación y lógica de casos de uso (18 clases)
-📦 MODEL: Entidades de dominio y repositorios (24 clases)
-
-Total: 73 clases consolidadas de 31 casos de uso RUP
-endlegend
-
-note top : Mapa de interfaces para especificación de componentes\nBasado en análisis de colaboraciones MVC
+CerrarSesionView ---> SesionController
+SesionController ---> Sesion
 
 @enduml
