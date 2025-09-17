@@ -1,0 +1,212 @@
+@startsalt dashboard-principal-mockup
+title Mockup de Alta Fidelidad - Dashboard Principal pySigHor Web\nDerivado del Estado "MENU_PRINCIPAL" del Diagrama de Contexto RUP
+
+{SI
+  {T
+    + pySigHor | Sistema Generador de Horarios | 👤 Admin (Juan García) | 🔓 Cerrar Sesión
+  }
+  {T
+    {-
+      📊 **Dashboard** | 📚 Gestión Académica | 🏢 Infraestructura | ⏰ Horarios
+    }
+    {-
+      {<b>🏠 Dashboard Principal</b> | Inicio > Dashboard}
+    }
+  }
+  {+
+    ==
+    .
+    {
+      {[
+        🎯 **Estado del Sistema**
+        --
+        • Último horario generado: **2025-01-13 10:45**
+        • Cursos procesados: **14/15** (93% éxito)
+        • Conflictos resueltos: **3**
+        • Tiempo de ejecución: **2.5 segundos**
+        --
+        [ 📅 Ver Horario Completo ] [ 🔄 Generar Nuevo ]
+      ]}
+      .
+      {[
+        📊 **Estadísticas Rápidas**
+        --
+        **Entidades del Sistema:**
+        • Programas Activos: **4**
+        • Cursos Registrados: **11**  
+        • Profesores Activos: **5**
+        • Aulas Disponibles: **12**
+        --
+        **Algoritmo de Optimización:**
+        • Fase PrepararH(): ✅ **Completada**
+        • Fase GeneraPreHorario(): ✅ **Completada**
+        • Fase GeneraHorario(): ✅ **Completada**
+        • Fase IngresoHE(): ✅ **Completada**
+      ]}
+    }
+    --
+    {
+      {[
+        🎓 **Gestión Académica**
+        ==
+        **Programas** (4 activos)
+        • PI - Ingeniería de Sistemas
+        • PC - Ciencias de la Computación  
+        • PS - Ingeniería de Software
+        • PE - Ingeniería Electrónica
+        --
+        [ 📝 Gestionar Programas ]
+        --
+        **Cursos** (11 registrados)
+        • H1-H4: **8 cursos** asignados
+        • H5-H8: **3 cursos** en overflow
+        • Conflictos detectados: **0**
+        --
+        [ 📚 Gestionar Cursos ]
+        --
+        **Profesores** (5 activos)
+        • Con preferencias configuradas: **5/5**
+        • Carga promedio: **2.8 horas/semana**
+        --
+        [ 👨‍🏫 Gestionar Profesores ]
+      ]}
+      .
+      {[
+        🏢 **Infraestructura**
+        ==
+        **Edificios** (4 disponibles)
+        • Edificio A: **5 aulas** (capacidad total: 210)
+        • Edificio B: **3 laboratorios** (75 puestos)
+        • Edificio C: **2 aulas premium** (160)
+        • Edificio D: **2 seminarios** (35)
+        --
+        [ 🏗️ Gestionar Edificios ]
+        --
+        **Aulas** (12 disponibles)
+        • Ocupación promedio: **65%**
+        • Con proyector: **10/12**
+        • Con laboratorio: **3/12**
+        • Disponibilidad tiempo real: ✅
+        --
+        [ 🚪 Gestionar Aulas ]
+        --
+        **Recursos** (6 tipos)
+        • Proyectores: **10** unidades
+        • Laboratorios: **3** equipados
+        • WiFi: **12/12** aulas
+        --
+        [ 🔧 Gestionar Recursos ]
+      ]}
+    }
+    --
+    {
+      {[
+        ⏰ **Generación de Horarios**
+        ==
+        **Último Proceso Ejecutado**
+        • Iniciado: **2025-01-13 10:44:30**
+        • Completado: **2025-01-13 10:45:12**
+        • Duración total: **42 segundos**
+        --
+        **Fases del Algoritmo:**
+        🔸 PrepararH(): **8 segundos** (3 conflictos)
+        🔸 GeneraPreHorario(): **22 segundos** (optimization)  
+        🔸 GeneraHorario(): **8 segundos** (materialization)
+        🔸 IngresoHE(): **4 segundos** (special cases)
+        --
+        **Resultado:**
+        ✅ **14 cursos** asignados exitosamente
+        ⚠️ **1 curso** sin asignar (PE102 - sin aula disponible)
+        📊 **Puntuación promedio**: 87.3/100
+        --
+        [ 🎲 Generar Nuevo Horario ]
+        [ ⚙️ Configurar Parámetros ]
+      ]}
+      .
+      {[
+        📅 **Consulta de Horarios**
+        ==
+        **Vistas Disponibles**
+        --
+        [ 📋 Horario General ]
+        *Vista completa institucional*
+        --
+        [ 👨‍🏫 Por Profesor ]
+        *Horario personal de cada docente*
+        --
+        [ 🚪 Por Aula ]
+        *Ocupación de espacios físicos*
+        --
+        [ 🎓 Por Programa ]
+        *Horarios por carrera académica*
+        --
+        **Herramientas:**
+        [ 📊 Estadísticas ] [ 📄 Exportar PDF ]
+        [ 📧 Enviar por Email ] [ 🔍 Buscar Conflictos ]
+        --
+        **Estado Actual:**
+        🟢 **Sin conflictos detectados**
+        📈 **Optimización: 87.3%**
+        ⏱️ **Generado hace: 2 horas**
+      ]}
+    }
+    --
+    {
+      {[
+        🔧 **Acciones Rápidas**
+        ==
+        [ ➕ Crear Programa ] [ ➕ Crear Curso ] [ ➕ Crear Profesor ]
+        --
+        [ ➕ Crear Edificio ] [ ➕ Crear Aula ] [ ➕ Crear Recurso ]
+        --
+        [ 🎲 Regenerar Todo ] [ 🔍 Detectar Conflictos ] [ 📊 Ver Estadísticas ]
+      ]}
+      .
+      {[
+        📈 **Actividad Reciente**
+        ==
+        **Hoy:**
+        • 10:45 - Horario regenerado (exitoso)
+        • 09:30 - Curso PI102 editado
+        • 09:15 - Profesor P005 agregado
+        --
+        **Ayer:**
+        • 16:45 - Aula B201 capacidad actualizada
+        • 14:20 - Conflicto H3 resuelto
+        • 11:10 - Backup automático completado
+        --
+        [ 📋 Ver Actividad Completa ]
+      ]}
+    }
+  }
+}
+
+' Nota explicativa en el mockup
+note right
+  **Mapeo Estados RUP → UI:**
+  
+  • Estado actual: **MENU_PRINCIPAL**
+  
+  • Transiciones disponibles:
+    - abrirProgramas() → PROGRAMAS_ABIERTO
+    - abrirCursos() → CURSOS_ABIERTO  
+    - abrirProfesores() → PROFESORES_ABIERTO
+    - abrirEdificios() → EDIFICIOS_ABIERTO
+    - abrirAulas() → AULAS_ABIERTO
+    - abrirRecursos() → RECURSOS_ABIERTO
+    - generarHorario() → GENERANDO_HORARIO
+    - consultarHorario() → CONSULTANDO_HORARIOS
+  
+  • Elementos UI derivados del análisis MVC:
+    - Cards de información → Views del análisis
+    - Botones de acción → Controllers del análisis  
+    - Datos mostrados → Models del análisis
+    
+  • Colores aplicados del design system:
+    - 🟢 Estados exitosos (success)
+    - 🟡 Estados en progreso (warning)
+    - 🟦 Información general (info)
+    - ⚪ Datos neutros (gray)
+end note
+
+@endsalt
