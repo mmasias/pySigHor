@@ -1,0 +1,211 @@
+@startuml arquitectura-despliegue-pysighor
+title Arquitectura de Despliegue - pySigHor Web\nStack: React + Spring Boot + PostgreSQL
+
+skinparam linetype polyline
+
+' Definición de nodos de despliegue
+node "Cliente (Navegador Web)" as ClientNode {
+  artifact "React App\n(Build estático)" as ReactBuild
+  component "JavaScript Engine" as JSEngine
+  component "HTTP Client" as HttpClient
+  
+  ReactBuild --> JSEngine
+  JSEngine --> HttpClient
+}
+
+node "Servidor Web" as WebServer {
+  artifact "Nginx" as Nginx {
+    note right : Sirve assets estáticos React\nProxy reverso para API\nBalanceador de carga
+  }
+}
+
+node "Servidor de Aplicación" as AppServer {
+  artifact "Spring Boot JAR" as SpringJar {
+    component "Embedded Tomcat" as Tomcat
+    component "Spring MVC" as SpringMVC
+    component "Spring Security" as SpringSecurity
+    component "Spring Data JPA" as SpringDataJPA
+    
+    SpringJar --> Tomcat
+    Tomcat --> SpringMVC
+    SpringMVC --> SpringSecurity
+    SpringMVC --> SpringDataJPA
+  }
+  
+  note right of SpringJar : Implementa 32 casos de uso RUP\nAlgoritmo de optimización 4 fases\nPatrones MVC del análisis
+}
+
+node "Servidor de Base de Datos" as DBServer {
+  database "PostgreSQL 15" as PostgresDB {
+    component "Connection Pool" as ConnPool
+    storage "Tablas del Dominio" as DomainTables {
+      artifact "programas" as ProgramasTable
+      artifact "cursos" as CursosTable  
+      artifact "profesores" as ProfesoresTable
+      artifact "aulas" as AulasTable
+      artifact "edificios" as EdificiosTable
+      artifact "recursos" as RecursosTable
+      artifact "horarios" as HorariosTable
+    }
+    
+    ConnPool --> DomainTables
+  }
+  
+  note right of PostgresDB : Modelo físico derivado\ndel modelo del dominio RUP\nOptimizado para algoritmo\nde generación de horarios
+}
+
+' Servicios de infraestructura
+cloud "Servicios Cloud" as CloudServices {
+  component "CI/CD Pipeline" as CICD
+  component "Monitoring" as Monitoring
+  component "Backup Service" as Backup
+  component "Email Service" as EmailService
+}
+
+' Conexiones de despliegue
+ClientNode --> WebServer : "HTTPS\nPuerto 443"
+WebServer --> AppServer : "HTTP\nPuerto 8080\n(Proxy reverso)"
+AppServer --> DBServer : "JDBC\nPuerto 5432\n(Connection Pool)"
+
+' Servicios externos
+AppServer ..> CloudServices : "APIs externas"
+DBServer ..> Backup : "Backup automático"
+AppServer ..> Monitoring : "Métricas y logs"
+
+' Flujo de datos principal derivado del análisis RUP
+note as DataFlow
+**Flujo de Datos Típico (Caso de Uso RUP)**
+1. Usuario interactúa con React App
+2. HTTP Request → Nginx → Spring Boot
+3. Spring MVC → Service → Repository
+4. JDBC → PostgreSQL → Respuesta
+5. JSON → React → UI Update
+
+**Ejemplo: editarCurso()**
+- React Form → PUT /api/cursos/{id}
+- CursoController → CursoService → CursoRepository  
+- UPDATE cursos SET ... WHERE id = ?
+- Respuesta JSON → React State Update
+end note
+
+' Especificaciones de infraestructura
+note as InfraSpecs
+**Especificaciones de Infraestructura**
+
+**Servidor Web (Nginx)**
+- RAM: 1GB
+- CPU: 1 vCore
+- Storage: 10GB SSD
+
+**Servidor de Aplicación**
+- RAM: 4GB (JVM heap 2-3GB)
+- CPU: 2-4 vCores
+- Storage: 20GB SSD
+- JVM: Java 17 OpenJDK
+
+**Servidor de Base de Datos**
+- RAM: 8GB (shared_buffers 2GB)
+- CPU: 2-4 vCores  
+- Storage: 100GB SSD
+- PostgreSQL 15 con extensiones
+
+**Red**
+- Latencia < 1ms entre servicios
+- Ancho de banda: 1Gbps
+- SSL/TLS para comunicación externa
+end note
+
+' Configuración de alta disponibilidad (opcional)
+package "Configuración HA (Opcional)" as HAConfig {
+  node "App Server 2" as AppServer2 {
+    artifact "Spring Boot JAR (Replica)" as SpringJar2
+  }
+  
+  node "DB Slave" as DBSlave {
+    database "PostgreSQL Replica" as PostgresReplica
+  }
+  
+  WebServer --> AppServer2 : "Load balancing"
+  PostgresDB --> PostgresReplica : "Streaming replication"
+}
+
+' Variables de entorno y configuración
+note as Configuration
+**Configuración de Despliegue**
+
+**Spring Boot (application.yml)**
+```yaml
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/pysighor
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+```
+
+**Nginx (nginx.conf)**
+```nginx
+upstream backend {
+  server app:8080;
+}
+
+server {
+  listen 443 ssl;
+  location /api/ {
+    proxy_pass http://backend;
+  }
+  location / {
+    root /usr/share/nginx/html;
+    try_files $uri $uri/ /index.html;
+  }
+}
+```
+end note
+
+' Docker Compose para desarrollo local
+note as DockerCompose
+**Docker Compose (Desarrollo Local)**
+
+```yaml
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: pysighor
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  frontend:
+    build: ./frontend  
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+```
+end note
+
+@enduml

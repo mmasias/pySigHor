@@ -1,0 +1,1586 @@
+openapi: 3.0.3
+info:
+  title: pySigHor API REST
+  description: |
+    API REST para el Sistema Generador de Horarios (pySigHor)
+    
+    **Derivada del Análisis RUP Completado:**
+    - 32 casos de uso especificados y analizados
+    - 6 entidades del dominio con modelo físico optimizado
+    - Algoritmo de optimización de 4 fases implementado
+    
+    **Stack Tecnológico:**
+    - Backend: Spring Boot 3.2 + Java 17
+    - Base de Datos: PostgreSQL 15
+    - Autenticación: JWT con Spring Security
+    
+    **Casos de Uso Implementados:**
+    - Autenticación: iniciarSesion(), cerrarSesion()
+    - CRUD Completo: 6 entidades × 4 operaciones (crear, editar, eliminar, abrir)
+    - Algoritmo: generarHorario(), consultarHorario()
+    - Configuración: configurarPreferenciasProfesor(), asignarProfesorACurso()
+    
+  version: 1.0.0
+  contact:
+    name: Equipo pySigHor
+    email: equipo@pysighor.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8080/api
+    description: Servidor de desarrollo local
+  - url: https://api.pysighor.com/api  
+    description: Servidor de producción
+
+# =====================================================
+# ESQUEMAS DE DATOS (Derivados del Modelo del Dominio)
+# =====================================================
+
+components:
+  schemas:
+    # ===== ENTIDADES DEL DOMINIO =====
+    
+    Programa:
+      type: object
+      description: Programa académico (carrera universitaria)
+      required: [codigo, nombre]
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Identificador único generado automáticamente
+        codigo:
+          type: string
+          maxLength: 10
+          pattern: '^[A-Z]{2,4}$'
+          description: Código único del programa (ej. PI, PC, PS)
+          example: "PI"
+        nombre:
+          type: string
+          maxLength: 255
+          description: Nombre completo del programa
+          example: "Ingeniería de Sistemas e Informática"
+        descripcion:
+          type: string
+          description: Descripción detallada del programa
+          example: "Programa de pregrado en ingeniería de sistemas"
+        activo:
+          type: boolean
+          default: true
+          description: Indica si el programa está activo
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    Curso:
+      type: object
+      description: Curso/materia que se dicta en un programa
+      required: [codigo, nombre, creditos, vacantes, bloqueHorario, programaId]
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        codigo:
+          type: string
+          maxLength: 15
+          pattern: '^[A-Z]{2,4}[0-9]{3}$'
+          description: Código único del curso (ej. PI101, PC201)
+          example: "PI101"
+        nombre:
+          type: string
+          maxLength: 255
+          example: "Introducción a la Programación"
+        descripcion:
+          type: string
+          example: "Fundamentos de programación en Python"
+        creditos:
+          type: integer
+          minimum: 1
+          maximum: 8
+          description: Número de créditos académicos
+          example: 4
+        horasTeoricas:
+          type: integer
+          minimum: 0
+          default: 0
+          example: 3
+        horasPracticas:
+          type: integer
+          minimum: 0
+          default: 0
+          example: 2
+        vacantes:
+          type: integer
+          minimum: 1
+          description: Número de estudiantes que pueden inscribirse
+          example: 40
+        bloqueHorario:
+          type: string
+          enum: [H1, H2, H3, H4, H5, H6, H7, H8, HE, HV]
+          description: Bloque horario preferido para el curso
+          example: "H1"
+        programaId:
+          type: integer
+          format: int64
+          description: ID del programa al que pertenece
+        programa:
+          $ref: '#/components/schemas/Programa'
+          readOnly: true
+        activo:
+          type: boolean
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    Profesor:
+      type: object
+      description: Docente que imparte cursos
+      required: [codigo, nombres, apellidos]
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        codigo:
+          type: string
+          maxLength: 10
+          pattern: '^P[0-9]{3}$'
+          description: Código único del profesor
+          example: "P001"
+        nombres:
+          type: string
+          maxLength: 255
+          example: "Juan Carlos"
+        apellidos:
+          type: string
+          maxLength: 255
+          example: "García Mendoza"
+        email:
+          type: string
+          format: email
+          maxLength: 255
+          example: "jgarcia@udep.pe"
+        telefono:
+          type: string
+          maxLength: 20
+          example: "+51 999 888 777"
+        username:
+          type: string
+          maxLength: 50
+          description: Usuario para autenticación
+          example: "jgarcia"
+        activo:
+          type: boolean
+          default: true
+        ultimoLogin:
+          type: string
+          format: date-time
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    Edificio:
+      type: object
+      description: Edificio del campus universitario
+      required: [codigo, nombre]
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        codigo:
+          type: string
+          maxLength: 10
+          pattern: '^[A-Z]$'
+          description: Código del edificio (una letra)
+          example: "A"
+        nombre:
+          type: string
+          maxLength: 255
+          example: "Edificio A - Aulas"
+        descripcion:
+          type: string
+          example: "Edificio principal de aulas de pregrado"
+        activo:
+          type: boolean
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    Aula:
+      type: object
+      description: Espacio físico donde se realizan las clases
+      required: [codigo, nombre, capacidad, edificioId]
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        codigo:
+          type: string
+          maxLength: 15
+          pattern: '^[A-Z][0-9]{3}$'
+          description: Código del aula (letra del edificio + número)
+          example: "A101"
+        nombre:
+          type: string
+          maxLength: 255
+          example: "Aula A101"
+        capacidad:
+          type: integer
+          minimum: 1
+          description: Número máximo de estudiantes
+          example: 40
+        edificioId:
+          type: integer
+          format: int64
+          description: ID del edificio donde está ubicada
+        edificio:
+          $ref: '#/components/schemas/Edificio'
+          readOnly: true
+        recursos:
+          type: array
+          items:
+            $ref: '#/components/schemas/AulaRecurso'
+          readOnly: true
+          description: Recursos disponibles en el aula
+        activo:
+          type: boolean
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    Recurso:
+      type: object
+      description: Recurso/equipamiento disponible
+      required: [codigo, nombre]
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        codigo:
+          type: string
+          maxLength: 10
+          pattern: '^[A-Z_]+$'
+          description: Código del recurso
+          example: "PROJ"
+        nombre:
+          type: string
+          maxLength: 255
+          example: "Proyector"
+        descripcion:
+          type: string
+          example: "Proyector multimedia para presentaciones"
+        activo:
+          type: boolean
+          default: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    Horario:
+      type: object
+      description: Resultado del algoritmo de optimización - asignación final
+      readOnly: true
+      properties:
+        id:
+          type: integer
+          format: int64
+        profesorId:
+          type: integer
+          format: int64
+        cursoId:
+          type: integer
+          format: int64
+        aulaId:
+          type: integer
+          format: int64
+        profesor:
+          $ref: '#/components/schemas/Profesor'
+        curso:
+          $ref: '#/components/schemas/Curso'
+        aula:
+          $ref: '#/components/schemas/Aula'
+        bloqueHorario:
+          type: string
+          enum: [H1, H2, H3, H4, H5, H6, H7, H8, HE, HV]
+        diasSemana:
+          type: string
+          pattern: '^[LMXJVS]+$'
+          description: Días de la semana (L=Lunes, M=Martes, X=Miércoles, J=Jueves, V=Viernes, S=Sábado)
+          example: "LXV"
+        horaInicio:
+          type: string
+          format: time
+          example: "07:00"
+        horaFin:
+          type: string
+          format: time
+          example: "08:00"
+        puntuacionCompatibilidad:
+          type: number
+          format: decimal
+          minimum: 0
+          maximum: 100
+          description: Puntuación de compatibilidad aula-profesor (algoritmo)
+        algoritmoVersion:
+          type: string
+          default: "1.0"
+          readOnly: true
+        fechaGeneracion:
+          type: string
+          format: date-time
+          readOnly: true
+        generadoPor:
+          type: integer
+          format: int64
+          description: ID del profesor que ejecutó la generación
+
+    # ===== ENTIDADES DE RELACIÓN =====
+
+    ProfesorRecurso:
+      type: object
+      description: Preferencia de un profesor sobre un recurso específico
+      required: [profesorId, recursoId]
+      properties:
+        profesorId:
+          type: integer
+          format: int64
+        recursoId:
+          type: integer
+          format: int64
+        nivelPreferencia:
+          type: integer
+          minimum: 1
+          maximum: 5
+          default: 3
+          description: Nivel de preferencia (1=mínimo, 5=máximo)
+        profesor:
+          $ref: '#/components/schemas/Profesor'
+          readOnly: true
+        recurso:
+          $ref: '#/components/schemas/Recurso'
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    AulaRecurso:
+      type: object
+      description: Recurso disponible en un aula específica
+      readOnly: true
+      properties:
+        aulaId:
+          type: integer
+          format: int64
+        recursoId:
+          type: integer
+          format: int64
+        cantidad:
+          type: integer
+          minimum: 1
+          default: 1
+          description: Cantidad del recurso disponible
+        estado:
+          type: string
+          enum: [disponible, mantenimiento, fuera_servicio]
+          default: disponible
+        aula:
+          $ref: '#/components/schemas/Aula'
+        recurso:
+          $ref: '#/components/schemas/Recurso'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    # ===== DTOs PARA OPERACIONES ESPECÍFICAS =====
+
+    LoginRequest:
+      type: object
+      description: Datos para iniciarSesion()
+      required: [username, password]
+      properties:
+        username:
+          type: string
+          maxLength: 50
+          example: "admin"
+        password:
+          type: string
+          maxLength: 255
+          format: password
+          example: "admin123"
+
+    LoginResponse:
+      type: object
+      description: Respuesta de iniciarSesion() exitoso
+      properties:
+        token:
+          type: string
+          description: JWT token para autenticación
+          example: "eyJhbGciOiJIUzI1NiIs..."
+        profesor:
+          $ref: '#/components/schemas/Profesor'
+        expiresIn:
+          type: integer
+          description: Tiempo de expiración en segundos
+          example: 3600
+
+    GenerarHorarioRequest:
+      type: object
+      description: Parámetros para generarHorario()
+      properties:
+        programaIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: IDs de programas a incluir (vacío = todos)
+        forzarRegeneracion:
+          type: boolean
+          default: false
+          description: Eliminar horarios existentes antes de generar
+        configuracion:
+          type: object
+          properties:
+            prioridadCapacidad:
+              type: number
+              format: decimal
+              minimum: 0
+              maximum: 1
+              default: 0.6
+              description: Peso de capacidad vs compatibilidad (0.6 = 60% capacidad)
+            permitirHorariosEspeciales:
+              type: boolean
+              default: true
+              description: Permitir uso de bloques HE y HV
+            maximoConflictos:
+              type: integer
+              minimum: 0
+              default: 5
+              description: Máximo número de conflictos antes de abortar
+
+    GenerarHorarioResponse:
+      type: object
+      description: Resultado de generarHorario()
+      properties:
+        exitoso:
+          type: boolean
+          description: Indica si la generación fue exitosa
+        mensaje:
+          type: string
+          description: Mensaje descriptivo del resultado
+          example: "Horario generado exitosamente"
+        estadisticas:
+          type: object
+          properties:
+            totalCursos:
+              type: integer
+              description: Total de cursos procesados
+            cursosAsignados:
+              type: integer
+              description: Cursos exitosamente asignados
+            conflictosResueltos:
+              type: integer
+              description: Conflictos detectados y resueltos en PrepararH()
+            tiempoEjecucion:
+              type: integer
+              description: Tiempo de ejecución en millisegundos
+            faseCompletada:
+              type: string
+              enum: [PrepararH, GeneraPreHorario, GeneraHorario, IngresoHE]
+              description: Última fase completada del algoritmo
+        sessionId:
+          type: string
+          format: uuid
+          description: ID de sesión para tracking del algoritmo
+        fechaGeneracion:
+          type: string
+          format: date-time
+
+    # ===== RESPONSES ESTÁNDAR =====
+
+    ApiResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indica si la operación fue exitosa
+        message:
+          type: string
+          description: Mensaje descriptivo
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp de la respuesta
+
+    ValidationError:
+      type: object
+      properties:
+        field:
+          type: string
+          description: Campo que falló la validación
+        message:
+          type: string
+          description: Mensaje de error específico
+        rejectedValue:
+          description: Valor que fue rechazado
+
+    ErrorResponse:
+      allOf:
+        - $ref: '#/components/schemas/ApiResponse'
+        - type: object
+          properties:
+            error:
+              type: string
+              description: Código de error
+            details:
+              type: array
+              items:
+                $ref: '#/components/schemas/ValidationError'
+
+  # ===== CONFIGURACIÓN DE SEGURIDAD =====
+  
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        JWT token obtenido a través del endpoint de login.
+        Incluir en header: Authorization: Bearer {token}
+
+# ===== APLICAR SEGURIDAD GLOBALMENTE =====
+security:
+  - bearerAuth: []
+
+# =====================================================
+# ENDPOINTS DE LA API (Derivados de Casos de Uso RUP)
+# =====================================================
+
+paths:
+  # ===== AUTENTICACIÓN =====
+  
+  /auth/login:
+    post:
+      tags: [Autenticación]
+      summary: Iniciar sesión (iniciarSesion)
+      description: |
+        Implementa el caso de uso `iniciarSesion()` del análisis RUP.
+        
+        **Estados RUP:**
+        - Entrada: NO_AUTENTICADO
+        - Salida: MENU_PRINCIPAL (si exitoso)
+        
+        **Validaciones:**
+        - Usuario debe existir y estar activo
+        - Password debe coincidir con hash almacenado
+        - Actualiza timestamp de último login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Credenciales incorrectas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                message: "Credenciales incorrectas"
+                error: "UNAUTHORIZED"
+                timestamp: "2025-01-13T10:30:00Z"
+
+  /auth/logout:
+    post:
+      tags: [Autenticación]
+      summary: Cerrar sesión (cerrarSesion)
+      description: |
+        Implementa el caso de uso `cerrarSesion()` del análisis RUP.
+        
+        **Estados RUP:**
+        - Entrada: Cualquier estado autenticado
+        - Salida: NO_AUTENTICADO
+        
+        Invalida el token JWT en el lado del servidor.
+      responses:
+        '200':
+          description: Logout exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+              example:
+                success: true
+                message: "Sesión cerrada exitosamente"
+                timestamp: "2025-01-13T10:35:00Z"
+
+  # ===== GESTIÓN DE PROGRAMAS =====
+
+  /programas:
+    get:
+      tags: [Programas]
+      summary: Listar programas (abrirProgramas)
+      description: |
+        Implementa el caso de uso `abrirProgramas()` del análisis RUP.
+        
+        **Estados RUP:**
+        - Entrada: MENU_PRINCIPAL
+        - Salida: PROGRAMAS_ABIERTO
+      parameters:
+        - name: activo
+          in: query
+          schema:
+            type: boolean
+          description: Filtrar por estado activo
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Búsqueda por código o nombre
+      responses:
+        '200':
+          description: Lista de programas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Programa'
+
+    post:
+      tags: [Programas]
+      summary: Crear programa (crearPrograma)
+      description: |
+        Implementa el caso de uso `crearPrograma()` del análisis RUP.
+        Filosofía C→U: "El delgado" - crea con datos mínimos.
+        
+        **Estados RUP:**
+        - Entrada: PROGRAMAS_ABIERTO
+        - Salida: PROGRAMA_ABIERTO (automático hacia edición)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Programa'
+            example:
+              codigo: "PI"
+              nombre: "Ingeniería de Sistemas"
+              descripcion: "Programa de pregrado"
+      responses:
+        '201':
+          description: Programa creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Programa'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /programas/{id}:
+    get:
+      tags: [Programas]
+      summary: Obtener programa por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Programa encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Programa'
+        '404':
+          description: Programa no encontrado
+
+    put:
+      tags: [Programas]
+      summary: Editar programa (editarPrograma)
+      description: |
+        Implementa el caso de uso `editarPrograma()` del análisis RUP.
+        Filosofía C→U: "El gordo" - edición completa con todas las funcionalidades.
+        
+        **Estados RUP:**
+        - Entrada: PROGRAMAS_ABIERTO o PROGRAMA_ABIERTO
+        - Salida: PROGRAMA_ABIERTO (sesión continua de edición)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Programa'
+      responses:
+        '200':
+          description: Programa actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Programa'
+
+    delete:
+      tags: [Programas]
+      summary: Eliminar programa (eliminarPrograma)
+      description: |
+        Implementa el caso de uso `eliminarPrograma()` del análisis RUP.
+        Incluye navegación automática: <<include>> abrirProgramas()
+        
+        **Estados RUP:**
+        - Entrada: PROGRAMAS_ABIERTO o PROGRAMA_ABIERTO
+        - Salida: PROGRAMAS_ABIERTO (lista actualizada)
+        
+        **Validaciones:**
+        - No eliminar si tiene cursos asociados
+        - Confirmación requerida en el frontend
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Programa eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '409':
+          description: No se puede eliminar - tiene dependencias
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  # ===== GESTIÓN DE CURSOS =====
+
+  /cursos:
+    get:
+      tags: [Cursos]
+      summary: Listar cursos (abrirCursos)
+      parameters:
+        - name: programaId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: Filtrar por programa
+        - name: bloqueHorario
+          in: query
+          schema:
+            type: string
+            enum: [H1, H2, H3, H4, H5, H6, H7, H8, HE, HV]
+          description: Filtrar por bloque horario
+        - name: activo
+          in: query
+          schema:
+            type: boolean
+          description: Filtrar por estado activo
+      responses:
+        '200':
+          description: Lista de cursos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Curso'
+
+    post:
+      tags: [Cursos]
+      summary: Crear curso (crearCurso)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Curso'
+      responses:
+        '201':
+          description: Curso creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+
+  /cursos/{id}:
+    get:
+      tags: [Cursos]
+      summary: Obtener curso por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Curso encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+
+    put:
+      tags: [Cursos]
+      summary: Editar curso (editarCurso)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Curso'
+      responses:
+        '200':
+          description: Curso actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+
+    delete:
+      tags: [Cursos]
+      summary: Eliminar curso (eliminarCurso)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Curso eliminado exitosamente
+
+  # ===== GESTIÓN DE PROFESORES =====
+
+  /profesores:
+    get:
+      tags: [Profesores]
+      summary: Listar profesores (abrirProfesores)
+      parameters:
+        - name: activo
+          in: query
+          schema:
+            type: boolean
+        - name: conCursos
+          in: query
+          schema:
+            type: boolean
+          description: Solo profesores con cursos asignados
+      responses:
+        '200':
+          description: Lista de profesores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Profesor'
+
+    post:
+      tags: [Profesores]
+      summary: Crear profesor (crearProfesor)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profesor'
+      responses:
+        '201':
+          description: Profesor creado exitosamente
+
+  /profesores/{id}:
+    get:
+      tags: [Profesores]
+      summary: Obtener profesor por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Profesor encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profesor'
+
+    put:
+      tags: [Profesores]
+      summary: Editar profesor (editarProfesor)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profesor'
+      responses:
+        '200':
+          description: Profesor actualizado
+
+    delete:
+      tags: [Profesores]
+      summary: Eliminar profesor (eliminarProfesor)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Profesor eliminado exitosamente
+
+  # ===== CONFIGURACIÓN DE PREFERENCIAS =====
+
+  /profesores/{id}/preferencias:
+    get:
+      tags: [Profesores]
+      summary: Obtener preferencias de recursos del profesor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Preferencias del profesor
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProfesorRecurso'
+
+    put:
+      tags: [Profesores]
+      summary: Configurar preferencias del profesor (configurarPreferenciasProfesor)
+      description: |
+        Implementa el caso de uso `configurarPreferenciasProfesor()` del análisis RUP.
+        Utilizado por el algoritmo GeneraPreHorario() para optimización dual.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProfesorRecurso'
+      responses:
+        '200':
+          description: Preferencias actualizadas exitosamente
+
+  # ===== GESTIÓN DE EDIFICIOS =====
+
+  /edificios:
+    get:
+      tags: [Edificios]
+      summary: Listar edificios (abrirEdificios)
+      responses:
+        '200':
+          description: Lista de edificios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Edificio'
+
+    post:
+      tags: [Edificios]
+      summary: Crear edificio (crearEdificio)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Edificio'
+      responses:
+        '201':
+          description: Edificio creado exitosamente
+
+  /edificios/{id}:
+    get:
+      tags: [Edificios]
+      summary: Obtener edificio por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Edificio encontrado
+
+    put:
+      tags: [Edificios]
+      summary: Editar edificio (editarEdificio)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Edificio'
+      responses:
+        '200':
+          description: Edificio actualizado
+
+    delete:
+      tags: [Edificios]
+      summary: Eliminar edificio (eliminarEdificio)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Edificio eliminado exitosamente
+
+  # ===== GESTIÓN DE AULAS =====
+
+  /aulas:
+    get:
+      tags: [Aulas]
+      summary: Listar aulas (abrirAulas)
+      parameters:
+        - name: edificioId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: Filtrar por edificio
+        - name: capacidadMinima
+          in: query
+          schema:
+            type: integer
+          description: Capacidad mínima requerida
+        - name: recursoId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: Aulas que tienen un recurso específico
+      responses:
+        '200':
+          description: Lista de aulas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Aula'
+
+    post:
+      tags: [Aulas]
+      summary: Crear aula (crearAula)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Aula'
+      responses:
+        '201':
+          description: Aula creada exitosamente
+
+  /aulas/{id}:
+    get:
+      tags: [Aulas]
+      summary: Obtener aula por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Aula encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aula'
+
+    put:
+      tags: [Aulas]
+      summary: Editar aula (editarAula)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Aula'
+      responses:
+        '200':
+          description: Aula actualizada
+
+    delete:
+      tags: [Aulas]
+      summary: Eliminar aula (eliminarAula)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Aula eliminada exitosamente
+
+  # ===== GESTIÓN DE RECURSOS =====
+
+  /recursos:
+    get:
+      tags: [Recursos]
+      summary: Listar recursos (abrirRecursos)
+      responses:
+        '200':
+          description: Lista de recursos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recurso'
+
+    post:
+      tags: [Recursos]
+      summary: Crear recurso (crearRecurso)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recurso'
+      responses:
+        '201':
+          description: Recurso creado exitosamente
+
+  /recursos/{id}:
+    get:
+      tags: [Recursos]
+      summary: Obtener recurso por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Recurso encontrado
+
+    put:
+      tags: [Recursos]
+      summary: Editar recurso (editarRecurso)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recurso'
+      responses:
+        '200':
+          description: Recurso actualizado
+
+    delete:
+      tags: [Recursos]
+      summary: Eliminar recurso (eliminarRecurso)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Recurso eliminado exitosamente
+
+  # ===== ALGORITMO DE GENERACIÓN DE HORARIOS =====
+
+  /horarios/generar:
+    post:
+      tags: [Horarios]
+      summary: Generar horario (generarHorario)
+      description: |
+        Implementa el caso de uso `generarHorario()` del análisis RUP.
+        Ejecuta el algoritmo de optimización de 4 fases:
+        
+        1. **PrepararH()** - Resolución de conflictos de horarios
+        2. **GeneraPreHorario()** - Optimización dual (capacidad + compatibilidad)  
+        3. **GeneraHorario()** - Materialización del horario final
+        4. **IngresoHE()** - Manejo de casos especiales (HE, HV)
+        
+        **Estados RUP:**
+        - Entrada: MENU_PRINCIPAL
+        - Estados intermedios: GENERANDO_HORARIO
+        - Salida: MENU_PRINCIPAL (con horario generado)
+        
+        **Procesamiento asíncrono:** Este endpoint puede tomar varios minutos
+        para procesar todos los cursos. Se recomienda implementar polling
+        o WebSockets para seguimiento del progreso.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerarHorarioRequest'
+            example:
+              programaIds: [1, 2]
+              forzarRegeneracion: false
+              configuracion:
+                prioridadCapacidad: 0.6
+                permitirHorariosEspeciales: true
+                maximoConflictos: 5
+      responses:
+        '200':
+          description: Generación de horario completada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerarHorarioResponse'
+              example:
+                exitoso: true
+                mensaje: "Horario generado exitosamente"
+                estadisticas:
+                  totalCursos: 15
+                  cursosAsignados: 14
+                  conflictosResueltos: 3
+                  tiempoEjecucion: 2500
+                  faseCompletada: "IngresoHE"
+                sessionId: "123e4567-e89b-12d3-a456-426614174000"
+                fechaGeneracion: "2025-01-13T10:45:00Z"
+        '400':
+          description: Error en parámetros de generación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Error interno del algoritmo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: false
+                message: "Error en fase GeneraPreHorario: No se encontraron aulas disponibles"
+                error: "ALGORITHM_ERROR"
+                timestamp: "2025-01-13T10:45:00Z"
+
+  # ===== CONSULTA DE HORARIOS =====
+
+  /horarios:
+    get:
+      tags: [Horarios]
+      summary: Consultar horarios (consultarHorario)
+      description: |
+        Implementa el caso de uso `consultarHorario()` del análisis RUP.
+        Permite consultas con diferentes filtros y formatos de visualización.
+        
+        **Estados RUP:**
+        - Entrada: MENU_PRINCIPAL
+        - Salida: CONSULTANDO_HORARIOS
+        
+        **Tipos de consulta:**
+        - Por profesor: Horario personal de un docente
+        - Por aula: Ocupación de un espacio físico
+        - Por programa: Horarios de un programa académico
+        - General: Vista completa del horario institucional
+      parameters:
+        - name: profesorId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: Filtrar por profesor específico
+        - name: aulaId  
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: Filtrar por aula específica
+        - name: programaId
+          in: query
+          schema:
+            type: integer
+            format: int64
+          description: Filtrar por programa académico
+        - name: bloqueHorario
+          in: query
+          schema:
+            type: string
+            enum: [H1, H2, H3, H4, H5, H6, H7, H8, HE, HV]
+          description: Filtrar by bloque horario
+        - name: fechaGeneracion
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Filtrar por fecha de generación (formato YYYY-MM-DD)
+        - name: formato
+          in: query
+          schema:
+            type: string
+            enum: [tabla, calendario, grid]
+            default: tabla
+          description: Formato de respuesta
+      responses:
+        '200':
+          description: Horarios encontrados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Horario'
+              example:
+                - id: 1
+                  profesorId: 1
+                  cursoId: 1
+                  aulaId: 6
+                  profesor:
+                    codigo: "P001"
+                    nombres: "Juan Carlos"  
+                    apellidos: "García Mendoza"
+                  curso:
+                    codigo: "PI101"
+                    nombre: "Introducción a la Programación"
+                  aula:
+                    codigo: "B101"
+                    nombre: "Lab Sistemas 1"
+                  bloqueHorario: "H1"
+                  diasSemana: "LXV"
+                  horaInicio: "07:00"
+                  horaFin: "08:00"
+                  puntuacionCompatibilidad: 100.0
+                  fechaGeneracion: "2025-01-13T10:45:00Z"
+
+  /horarios/estadisticas:
+    get:
+      tags: [Horarios]
+      summary: Estadísticas del horario generado
+      description: Métricas y estadísticas de la última generación de horarios
+      responses:
+        '200':
+          description: Estadísticas del horario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalHorarios:
+                    type: integer
+                    description: Total de horarios generados
+                  ocupacionAulas:
+                    type: object
+                    additionalProperties:
+                      type: number
+                      format: decimal
+                    description: Porcentaje de ocupación por aula
+                  cargaDocente:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    description: Horas asignadas por profesor
+                  distribucionBloques:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    description: Cantidad de cursos por bloque horario
+                  puntuacionPromedio:
+                    type: number
+                    format: decimal
+                    description: Puntuación promedio de compatibilidad
+
+  # ===== ASIGNACIÓN PROFESOR-CURSO =====
+
+  /cursos/{cursoId}/profesor:
+    put:
+      tags: [Configuración]
+      summary: Asignar profesor a curso (asignarProfesorACurso)
+      description: |
+        Implementa el caso de uso `asignarProfesorACurso()` del análisis RUP.
+        Establece la relación profesor-curso requerida para la generación de horarios.
+      parameters:
+        - name: cursoId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [profesorId]
+              properties:
+                profesorId:
+                  type: integer
+                  format: int64
+                  description: ID del profesor a asignar
+                reemplazar:
+                  type: boolean
+                  default: false
+                  description: Si true, reemplaza asignación existente
+      responses:
+        '200':
+          description: Profesor asignado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '409':
+          description: Conflicto - profesor ya asignado a otro curso en el mismo horario
+
+# ===== TAGS PARA ORGANIZACIÓN =====
+tags:
+  - name: Autenticación
+    description: Casos de uso de login/logout del sistema
+  - name: Programas
+    description: Gestión CRUD de programas académicos
+  - name: Cursos
+    description: Gestión CRUD de cursos/materias
+  - name: Profesores
+    description: Gestión CRUD de profesores y sus preferencias
+  - name: Edificios
+    description: Gestión CRUD de edificios del campus
+  - name: Aulas
+    description: Gestión CRUD de aulas y sus recursos
+  - name: Recursos
+    description: Gestión CRUD de recursos/equipamiento
+  - name: Horarios
+    description: Algoritmo de generación y consulta de horarios
+  - name: Configuración
+    description: Configuraciones y asignaciones del sistema

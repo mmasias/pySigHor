@@ -1,0 +1,248 @@
+@startuml modelo-fisico-bd-pysighor
+title Modelo Físico de Base de Datos - pySigHor\nDerivado del Modelo del Dominio RUP
+
+skinparam linetype polyline
+
+' Estilo para tablas SQL
+skinparam class {
+  BackgroundColor #F8F9FA
+  BorderColor #6C757D
+  ArrowColor #495057
+}
+
+' Tablas principales derivadas de las entidades del dominio RUP
+entity "programas" as programa {
+  **id** : SERIAL PRIMARY KEY
+  --
+  codigo : VARCHAR(10) NOT NULL UNIQUE
+  nombre : VARCHAR(255) NOT NULL
+  descripcion : TEXT
+  activo : BOOLEAN DEFAULT TRUE
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+}
+
+entity "cursos" as curso {
+  **id** : SERIAL PRIMARY KEY
+  --
+  codigo : VARCHAR(15) NOT NULL UNIQUE
+  nombre : VARCHAR(255) NOT NULL
+  descripcion : TEXT
+  creditos : INTEGER NOT NULL CHECK (creditos > 0)
+  horas_teoricas : INTEGER DEFAULT 0
+  horas_practicas : INTEGER DEFAULT 0
+  vacantes : INTEGER NOT NULL CHECK (vacantes > 0)
+  bloque_horario : VARCHAR(5) NOT NULL
+  programa_id : INTEGER NOT NULL
+  activo : BOOLEAN DEFAULT TRUE
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  --
+  FOREIGN KEY (programa_id) REFERENCES programas(id)
+  CONSTRAINT chk_bloque_horario CHECK (bloque_horario IN ('H1','H2','H3','H4','H5','H6','H7','H8','HE','HV'))
+}
+
+entity "profesores" as profesor {
+  **id** : SERIAL PRIMARY KEY
+  --
+  codigo : VARCHAR(10) NOT NULL UNIQUE
+  nombres : VARCHAR(255) NOT NULL
+  apellidos : VARCHAR(255) NOT NULL
+  email : VARCHAR(255) UNIQUE
+  telefono : VARCHAR(20)
+  activo : BOOLEAN DEFAULT TRUE
+  --
+  ' Campos de autenticación (para iniciarSesion)
+  username : VARCHAR(50) UNIQUE
+  password_hash : VARCHAR(255)
+  ultimo_login : TIMESTAMP
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+}
+
+entity "edificios" as edificio {
+  **id** : SERIAL PRIMARY KEY
+  --
+  codigo : VARCHAR(10) NOT NULL UNIQUE
+  nombre : VARCHAR(255) NOT NULL
+  descripcion : TEXT
+  activo : BOOLEAN DEFAULT TRUE
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+}
+
+entity "aulas" as aula {
+  **id** : SERIAL PRIMARY KEY
+  --
+  codigo : VARCHAR(15) NOT NULL UNIQUE
+  nombre : VARCHAR(255) NOT NULL
+  capacidad : INTEGER NOT NULL CHECK (capacidad > 0)
+  edificio_id : INTEGER NOT NULL
+  activo : BOOLEAN DEFAULT TRUE
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  --
+  FOREIGN KEY (edificio_id) REFERENCES edificios(id)
+}
+
+entity "recursos" as recurso {
+  **id** : SERIAL PRIMARY KEY
+  --
+  codigo : VARCHAR(10) NOT NULL UNIQUE
+  nombre : VARCHAR(255) NOT NULL
+  descripcion : TEXT
+  activo : BOOLEAN DEFAULT TRUE
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+}
+
+' Tabla integradora - Resultado del algoritmo de optimización
+entity "horarios" as horario {
+  **id** : SERIAL PRIMARY KEY
+  --
+  ' Referencias a entidades del dominio (agregación del análisis RUP)
+  profesor_id : INTEGER NOT NULL
+  curso_id : INTEGER NOT NULL
+  aula_id : INTEGER NOT NULL
+  --
+  ' Datos temporales del horario asignado
+  bloque_horario : VARCHAR(5) NOT NULL
+  dias_semana : VARCHAR(10) NOT NULL
+  hora_inicio : TIME NOT NULL
+  hora_fin : TIME NOT NULL
+  --
+  ' Metadatos del algoritmo de generación
+  algoritmo_version : VARCHAR(10) DEFAULT '1.0'
+  puntuacion_compatibilidad : DECIMAL(5,2)
+  fecha_generacion : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  generado_por : INTEGER
+  --
+  ' Constraints de integridad derivadas del dominio
+  UNIQUE (profesor_id, bloque_horario, dias_semana, hora_inicio)
+  UNIQUE (aula_id, bloque_horario, dias_semana, hora_inicio)
+  --
+  FOREIGN KEY (profesor_id) REFERENCES profesores(id)
+  FOREIGN KEY (curso_id) REFERENCES cursos(id)
+  FOREIGN KEY (aula_id) REFERENCES aulas(id)
+  FOREIGN KEY (generado_por) REFERENCES profesores(id)
+  --
+  CONSTRAINT chk_horario_bloque CHECK (bloque_horario IN ('H1','H2','H3','H4','H5','H6','H7','H8','HE','HV'))
+  CONSTRAINT chk_dias_semana CHECK (dias_semana ~ '^[LMXJVS]+$')
+  CONSTRAINT chk_horas CHECK (hora_fin > hora_inicio)
+}
+
+' Tabla de relación many-to-many: Preferencias de profesores sobre recursos
+entity "profesor_recursos" as profesor_recurso {
+  **profesor_id** : INTEGER
+  **recurso_id** : INTEGER
+  --
+  ' Nivel de preferencia (1=mínimo, 5=máximo)
+  nivel_preferencia : INTEGER DEFAULT 3 CHECK (nivel_preferencia BETWEEN 1 AND 5)
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  --
+  PRIMARY KEY (profesor_id, recurso_id)
+  FOREIGN KEY (profesor_id) REFERENCES profesores(id) ON DELETE CASCADE
+  FOREIGN KEY (recurso_id) REFERENCES recursos(id) ON DELETE CASCADE
+}
+
+' Tabla de relación many-to-many: Recursos disponibles en aulas
+entity "aula_recursos" as aula_recurso {
+  **aula_id** : INTEGER
+  **recurso_id** : INTEGER
+  --
+  cantidad : INTEGER DEFAULT 1 CHECK (cantidad > 0)
+  estado : VARCHAR(20) DEFAULT 'disponible'
+  --
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  --
+  PRIMARY KEY (aula_id, recurso_id)
+  FOREIGN KEY (aula_id) REFERENCES aulas(id) ON DELETE CASCADE
+  FOREIGN KEY (recurso_id) REFERENCES recursos(id) ON DELETE CASCADE
+  CONSTRAINT chk_estado CHECK (estado IN ('disponible', 'mantenimiento', 'fuera_servicio'))
+}
+
+' Tablas temporales para el algoritmo de optimización
+entity "temp_cursos_h_modificado" as temp_cursos {
+  **curso_id** : INTEGER
+  **bloque_original** : VARCHAR(5)
+  --
+  bloque_asignado : VARCHAR(5) NOT NULL
+  motivo_cambio : VARCHAR(50)
+  fase_algoritmo : INTEGER DEFAULT 1
+  --
+  session_id : UUID NOT NULL
+  created_at : TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  --
+  FOREIGN KEY (curso_id) REFERENCES cursos(id)
+}
+
+entity "temp_aula_ocupada" as temp_aula {
+  **aula_id** : INTEGER
+  **bloque_horario** : VARCHAR(5)
+  **session_id** : UUID
+  --
+  curso_asignado_id : INTEGER
+  reservado_hasta : TIMESTAMP
+  --
+  PRIMARY KEY (aula_id, bloque_horario, session_id)
+  FOREIGN KEY (aula_id) REFERENCES aulas(id)
+  FOREIGN KEY (curso_asignado_id) REFERENCES cursos(id)
+}
+
+' Relaciones derivadas del modelo del dominio RUP
+curso }|--|| programa : "pertenece a"
+aula }|--|| edificio : "ubicada en"
+horario }|--|| profesor : "asignado a >"
+horario }|--|| curso : "programa >"
+horario }|--|| aula : "en aula >"
+
+' Relaciones de preferencias (many-to-many)
+profesor ||--o{ profesor_recurso : "prefiere"
+recurso ||--o{ profesor_recurso : "preferido por"
+aula ||--o{ aula_recurso : "tiene"
+recurso ||--o{ aula_recurso : "disponible en"
+
+' Relaciones con tablas temporales
+curso ||--o{ temp_cursos : "procesado en"
+aula ||--o{ temp_aula : "reservado en"
+
+note top of horario : **Tabla Integradora**\n\nMaterializa la solución del algoritmo\nde optimización de 4 fases:\n\n1. PrepararH() → temp_cursos_h_modificado\n2. GeneraPreHorario() → temp_aula_ocupada\n3. GeneraHorario() → horarios\n4. IngresoHE() → horarios (casos especiales)
+
+note bottom of programa : **Entidades del Dominio**\n\nDerivadas directamente del\nmodelo conceptual RUP:\n\n• 6 entidades principales\n• 1 tabla integradora (horarios)\n• 2 tablas de relación (M:N)\n• 2 tablas temporales (algoritmo)
+
+note right of temp_cursos : **Tablas Temporales**\n\nUsadas durante la ejecución\ndel algoritmo de optimización:\n\n• Una sesión por generación\n• Datos intermedios de fases\n• Limpieza automática post-proceso
+
+' Índices para optimización del algoritmo
+note as indices
+**Índices de Optimización para el Algoritmo**
+
+```sql
+-- Índices para PrepararH()
+CREATE INDEX idx_cursos_bloque_programa ON cursos(bloque_horario, programa_id);
+CREATE INDEX idx_cursos_vacantes_desc ON cursos(vacantes DESC);
+
+-- Índices para GeneraPreHorario()  
+CREATE INDEX idx_aulas_capacidad_edificio ON aulas(capacidad, edificio_id);
+CREATE INDEX idx_profesor_recursos_nivel ON profesor_recursos(profesor_id, nivel_preferencia DESC);
+CREATE INDEX idx_aula_recursos_cantidad ON aula_recursos(aula_id, cantidad);
+
+-- Índices para consultas de horarios
+CREATE INDEX idx_horarios_profesor_bloque ON horarios(profesor_id, bloque_horario);
+CREATE INDEX idx_horarios_aula_fecha ON horarios(aula_id, fecha_generacion);
+CREATE INDEX idx_horarios_curso_activo ON horarios(curso_id) WHERE activo = true;
+
+-- Índice compuesto para detección de conflictos
+CREATE UNIQUE INDEX idx_no_conflicto_profesor ON horarios(profesor_id, bloque_horario, dias_semana, hora_inicio);
+CREATE UNIQUE INDEX idx_no_conflicto_aula ON horarios(aula_id, bloque_horario, dias_semana, hora_inicio);
+```
+end note
+
+@enduml

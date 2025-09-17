@@ -1,0 +1,147 @@
+@startuml arquitectura-componentes-pysighor
+title Arquitetura de Componentes - pySigHor Web\nDerivada del Análisis RUP Completado
+
+skinparam componentStyle rectangle
+skinparam linetype polyline
+
+' Colores basados en responsabilidades MVC del análisis
+skinparam component {
+  BackgroundColor<<Frontend>> #E3F2FD
+  BackgroundColor<<Backend>> #F1F8E9  
+  BackgroundColor<<Data>> #FFF3E0
+  BackgroundColor<<External>> #F3E5F5
+}
+
+package "Cliente Web" <<Frontend>> {
+  [React App] as ReactApp
+  [React Router] as Router
+  [State Management] as StateManagement
+  [HTTP Client] as HttpClient
+  
+  package "Componentes UI" {
+    [Dashboard] 
+    [CRUD Components] as CRUDComponents
+    [Horario Views] as HorarioViews
+  }
+  
+  ReactApp --> Router
+  ReactApp --> StateManagement
+  ReactApp --> CRUDComponents
+  ReactApp --> HorarioViews
+  ReactApp ..> HttpClient : HTTP REST
+}
+
+package "Servidor de Aplicación" <<Backend>> {
+  [Spring Boot App] as SpringBootApp
+  
+  package "Controllers (REST API)" {
+    [Programa Controller] as ProgramaController
+    [Curso Controller] as CursoController 
+    [Profesor Controller] as ProfesorController
+    [Aula Controller] as AulaController
+    [Edificio Controller] as EdificioController
+    [Recurso Controller] as RecursoController
+    [Horario Controller] as HorarioController
+    [Auth Controller] as AuthController
+  }
+  
+  package "Services (Lógica de Negocio)" {
+    [Programa Service] as ProgramaService
+    [Curso Service] as CursoService
+    [Profesor Service] as ProfesorService
+    [Aula Service] as AulaService
+    [Edificio Service] as EdificioService
+    [Recurso Service] as RecursoService
+    [Generar Horario Service] as GenerarHorarioService
+    [Auth Service] as AuthService
+  }
+  
+  package "Repositories (Acceso a Datos)" {
+    [Programa Repository] as ProgramaRepository
+    [Curso Repository] as CursoRepository
+    [Profesor Repository] as ProfesorRepository
+    [Aula Repository] as AulaRepository
+    [Edificio Repository] as EdificioRepository
+    [Recurso Repository] as RecursoRepository
+    [Horario Repository] as HorarioRepository
+  }
+  
+  ' Conexiones Controller → Service (derivadas del análisis MVC)
+  ProgramaController --> ProgramaService
+  CursoController --> CursoService
+  ProfesorController --> ProfesorService
+  AulaController --> AulaService
+  EdificioController --> EdificioService
+  RecursoController --> RecursoService
+  HorarioController --> GenerarHorarioService
+  AuthController --> AuthService
+  
+  ' Conexiones Service → Repository (derivadas del análisis MVC)
+  ProgramaService --> ProgramaRepository
+  CursoService --> CursoRepository
+  ProfesorService --> ProfesorRepository
+  AulaService --> AulaRepository
+  EdificioService --> EdificioRepository
+  RecursoService --> RecursoRepository
+  GenerarHorarioService --> HorarioRepository
+  GenerarHorarioService --> CursoRepository
+  GenerarHorarioService --> ProfesorRepository
+  GenerarHorarioService --> AulaRepository
+  AuthService --> ProfesorRepository
+}
+
+package "Base de Datos" <<Data>> {
+  database "PostgreSQL" {
+    [programas] as TablaPrograma
+    [cursos] as TablaCurso
+    [profesores] as TablaProfesor
+    [aulas] as TablaAula
+    [edificios] as TablaEdificio
+    [recursos] as TablaRecurso
+    [horarios] as TablaHorario
+    [profesor_recursos] as TablaProfesorRecursos
+  }
+  
+  ' Relaciones derivadas del modelo del dominio RUP
+  TablaCurso }|--|| TablaPrograma : "pertenece a"
+  TablaProfesor ||--o{ TablaProfesorRecursos : "prefiere"
+  TablaRecurso ||--o{ TablaProfesorRecursos : "preferido por"
+  TablaAula }|--|| TablaEdificio : "ubicada en"
+  TablaHorario }|--|| TablaProfesor : "asignado a"
+  TablaHorario }|--|| TablaCurso : "programado"
+  TablaHorario }|--|| TablaAula : "en aula"
+}
+
+package "Servicios Externos" <<External>> {
+  [Sistema de Autenticación] as AuthSystem
+  [Servicio de Email] as EmailService
+  [Monitoring] as MonitoringService
+}
+
+' Conexiones principales derivadas del análisis RUP
+HttpClient --> SpringBootApp : "HTTP/REST\n(32 endpoints derivados\nde casos de uso RUP)"
+
+' Conexiones a base de datos (implementación del análisis Repository)
+ProgramaRepository --> TablaPrograma
+CursoRepository --> TablaCurso
+ProfesorRepository --> TablaProfesor
+AulaRepository --> TablaAula
+EdificioRepository --> TablaEdificio
+RecursoRepository --> TablaRecurso
+HorarioRepository --> TablaHorario
+
+' Servicios externos
+AuthService ..> AuthSystem
+SpringBootApp ..> EmailService
+SpringBootApp ..> MonitoringService
+
+' Notas explicativas basadas en análisis RUP
+note top of ReactApp : Estados del sistema derivados\ndel diagrama de contexto:\n- NO_AUTENTICADO\n- MENU_PRINCIPAL\n- PROGRAMAS_ABIERTO\n- etc.
+
+note top of GenerarHorarioService : Implementa algoritmo de 4 fases\nespecificado en l'Algoritmo.md:\n1. PrepararH()\n2. GeneraPreHorario()\n3. GeneraHorario()\n4. IngresoHE()
+
+note top of CRUDComponents : Componentes reutilizables\nbasados en filosofía C→U:\n- "El delgado" → "El gordo"\n- Patrón <<include>> para eliminaciones
+
+note bottom of TablaHorario : Tabla integradora que materializa\nla solución del algoritmo de optimización\n(agregación del modelo del dominio)
+
+@enduml
