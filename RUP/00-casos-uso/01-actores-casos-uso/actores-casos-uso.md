@@ -32,9 +32,14 @@ Este documento identifica los actores del sistema y sus casos de uso correspondi
 
 <div align=center>
 
-|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-001.svg)|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-002.svg)|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-003.svg)
-|:-:|:-:|:-:
-|Código fuente: [actores-casos-uso-001.puml](actores-casos-uso-001.puml)|Código fuente: [actores-casos-uso-002.puml](actores-casos-uso-002.puml)|Código fuente: [actores-casos-uso-003.puml](actores-casos-uso-003.puml)
+|Actores y casos de uso
+|:-:|
+|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-001.svg)
+|Código fuente:[actores-casos-uso-001.puml](actores-casos-uso-001.puml)
+|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-002.svg)
+|Código fuente: [actores-casos-uso-002.puml](actores-casos-uso-002.puml)
+|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-003.svg)
+|Código fuente: [actores-casos-uso-003.puml](actores-casos-uso-003.puml)
 
 </div>
 
