@@ -101,20 +101,11 @@ El caso de uso `abrirAulas()` del proyecto pySigHor ilustra perfectamente esta d
 
 ### prototipo GUI (tradicional)
 
-```
-┌────────────────────────────────────────┐
-│  Gestión de Aulas              [Nuevo] │
-├────────────────────────────────────────┤
-│ Buscar: [101           ] [🔍]          │
-├────┬─────────┬──────────┬──────────────┤
-│ ID │ Nombre  │ Capacidad│ Edificio     │
-├────┼─────────┼──────────┼──────────────┤
-│001 │ Aula 101│    30    │ Edif. Princ. │
-│002 │ Aula 102│    45    │ Edif. Princ. │
-│003 │ Aula 201│    60    │ Edif. Cienc. │
-└────┴─────────┴──────────┴──────────────┘
-     [Editar] [Eliminar] [Volver]
-```
+<div align=center>
+
+![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)
+
+</div>
 
 **Valida:**
 - Disposición visual de información
@@ -372,11 +363,6 @@ Este proyecto sirve como:
 - **The Design of Everyday Things** (Don Norman) - Principios de diseño de interfaces
 - **Sketching User Experiences** (Bill Buxton) - Importancia del prototipado temprano
 - **Lean UX** (Jeff Gothelf) - Prototipado rápido e iterativo
-
-### sobre arquitectura
-- **Building Microservices** (Sam Newman) - Contratos entre servicios
-- **Domain-Driven Design** (Eric Evans) - Bounded contexts y contratos
-- **Clean Architecture** (Robert Martin) - Separación de responsabilidades
 
 ## conclusión
 
