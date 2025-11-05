@@ -39,10 +39,19 @@ Especificación detallada del caso de uso `abrirAulas()` mediante diagrama de es
 
 </div>
 
-## prototipo de interfaz
+## prototipos de interfaz
 
-### propósito del prototipo
+### propósito de los prototipos
 **Objetivo:** Que te digan que NO lo antes posible - validar la especificación antes de invertir en desarrollo.
+
+El prototipado NO se limita a wireframes de GUI. Cualquier punto de contacto del sistema con el exterior requiere ser prototipado.
+
+### tipos de prototipos disponibles
+
+|Tipo|Documento|Descripción|
+|-|-|-|
+|**GUI (Wireframes)**|[Ver más abajo](#wireframes)|Prototipo de interfaz gráfica de usuario|
+|**API REST**|[prototipo-api.md](prototipo-api.md)|Especificación del contrato HTTP/JSON|
 
 ### wireframes
 
