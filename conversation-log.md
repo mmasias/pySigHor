@@ -4282,6 +4282,30 @@ Manuel compartió los artículos de la carpeta `013-consolidacion-arquitectonica
 
 ---
 
+## Conversación 48: Artículo 014 - Prototipado Más Allá de GUI
+**Fecha**: 2025-11-05
+**Participantes**: Manuel (Usuario) + Claude Sonnet 4.5
+
+### Contexto
+Manuel identificó problema didáctico: estudiantes asocian "prototipado" únicamente con wireframes/GUI, sin considerar APIs REST, CLIs u otras interfaces.
+
+### Solución Implementada
+**Artefactos creados:**
+1. `/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo-api.md` - Especificación API REST completa
+2. `/extraDocs/014-prototipado-mas-alla-gui/patron-familia-abrir.md` - Patrón arquitectónico replicable
+3. `/extraDocs/014-prototipado-mas-alla-gui/README.md` - Artículo didáctico principal
+4. Actualización de README de `abrirAulas()` con tabla de tipos de prototipos
+
+### Valor Generado
+- **Didáctico**: Material concreto para clases sobre prototipado multi-interfaz
+- **Proyecto**: Patrón replicable a familia "abrir*" (5 casos de uso)
+- **Metodológico**: Expansión de concepto de prototipado en RUP
+
+### Estado Final
+✅ 1/32 casos de uso con prototipo API | ✅ Patrón definido para replicar | ✅ Artículo 014 documentado
+
+---
+
 *Este registro se actualizará continuamente conforme avance el proyecto*
 
 
