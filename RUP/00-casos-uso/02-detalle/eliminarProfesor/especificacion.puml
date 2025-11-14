@@ -33,12 +33,12 @@ state eliminarProfesor as "eliminarProfesor()" {
 
 eliminarProfesor -[#green]-> PROFESORES_ABIERTO
 note on link
-<<include>> abrirProfesores() - lista actualizada
+abrirProfesores() - lista actualizada
 end note
 
 eliminarProfesor -[#blue]-> PROFESORES_ABIERTO
 note on link
-<<include>> abrirProfesores() - cancelar eliminación
+abrirProfesores() - cancelar eliminación
 end note
 
 @enduml

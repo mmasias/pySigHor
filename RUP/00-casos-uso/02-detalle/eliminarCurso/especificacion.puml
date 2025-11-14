@@ -33,12 +33,12 @@ state eliminarCurso as "eliminarCurso()" {
 
 eliminarCurso -[#green]-> CURSOS_ABIERTO
 note on link
-<<include>> abrirCursos() - lista actualizada
+abrirCursos() - lista actualizada
 end note
 
 eliminarCurso -[#blue]-> CURSOS_ABIERTO
 note on link
-<<include>> abrirCursos() - cancelar eliminación
+abrirCursos() - cancelar eliminación
 end note
 
 @enduml

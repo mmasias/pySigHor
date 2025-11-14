@@ -31,12 +31,12 @@ state eliminarPrograma as "eliminarPrograma()" {
 
 eliminarPrograma -[#green]-> PROGRAMAS_ABIERTO
 note on link
-<<include>> abrirProgramas() - lista actualizada
+abrirProgramas() - lista actualizada
 end note
 
 eliminarPrograma -[#blue]-> PROGRAMAS_ABIERTO
 note on link
-<<include>> abrirProgramas() - cancelar eliminación
+abrirProgramas() - cancelar eliminación
 end note
 
 @enduml

@@ -33,12 +33,12 @@ state eliminarEdificio as "eliminarEdificio()" {
 
 eliminarEdificio -[#green]-> EDIFICIOS_ABIERTO
 note on link
-<<include>> abrirEdificios() - lista actualizada
+abrirEdificios() - lista actualizada
 end note
 
 eliminarEdificio -[#blue]-> EDIFICIOS_ABIERTO
 note on link
-<<include>> abrirEdificios() - cancelar eliminación
+abrirEdificios() - cancelar eliminación
 end note
 
 @enduml

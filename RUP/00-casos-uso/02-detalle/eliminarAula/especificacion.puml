@@ -33,12 +33,12 @@ state eliminarAula as "eliminarAula()" {
 
 eliminarAula -[#green]-> AULAS_ABIERTO
 note on link
-<<include>> abrirAulas() - lista actualizada
+abrirAulas() - lista actualizada
 end note
 
 eliminarAula -[#blue]-> AULAS_ABIERTO
 note on link
-<<include>> abrirAulas() - cancelar eliminación
+abrirAulas() - cancelar eliminación
 end note
 
 @enduml
