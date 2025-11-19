@@ -29,17 +29,38 @@ Para la modernización de **pySigHor**, se ha seleccionado una arquitectura de *
 
 Vista de alto nivel de los contenedores y su interacción.
 
-![Diagrama de Arquitectura](/images/RUP/02-diseño/arquitectura.svg)
+<div align=center>
 
-[Código PlantUML](arquitectura.puml)
+|![Diagrama de Arquitectura](/images/RUP/02-diseño/arquitectura.svg)
+|:-:
+|[Código PlantUML](arquitectura.puml)
+
+</div>
 
 ### Diagrama de clases de diseño (dominio y datos)
 
 Modelado de las entidades principales, esquemas de API (Pydantic) y modelos de persistencia.
 
-![Diagrama de Clases](/images/RUP/02-diseño/clases-diseño.svg)
+<div align=center>
 
-[Código PlantUML](clases-diseño.puml)
+|![Diagrama de Clases](/images/RUP/02-diseño/clases-diseño.svg)
+|:-:
+|[Código PlantUML](clases-diseño.puml)
+
+</div>
+
+### Configuración y estructura del proyecto
+
+Definición de la estructura de directorios, configuraciones iniciales y decisiones técnicas para materializar la arquitectura en código ejecutable.
+
+[Documento completo](configuracion-proyecto.md)
+
+**Contenido**:
+*   Estructura de directorios (Backend y Frontend)
+*   Configuraciones iniciales (dependencias, variables de entorno)
+*   Esquema de base de datos
+*   Mapeo entre artefactos de diseño y código
+*   Comandos de desarrollo
 
 ## Diseño de casos de uso
 
