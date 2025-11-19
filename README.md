@@ -17,7 +17,7 @@ En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Indu
 |[Proceso(s)](/RUP/README.md)|[Proceso(s)<br><sub>*vPragmática*</sub>](/RUP-pragmatico/README.md)|[Estado actual](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Reflexiones...](/extraDocs/README.md)|
 |-|-|-|-|
 |Aplicación de la metodología RUP para la reingeniería del sistema, con énfasis en pureza metodológica y trazabilidad sistemática.|Versión "ligera" de los procesos.|Propuesta de artefacto dinámico de seguimiento|Artículos de reflexión a partir de la dinámica de trabajo
-|||<sub>enProgreso: [RamaDiseño](https://raw.githubusercontent.com/mmasias/pySigHor/faseDise%C3%B1o-Iteracion001/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)</sub>
+|||<sub>WIP: [RamaDiseño](https://github.com/mmasias/pySigHor/tree/faseDise%C3%B1o-Iteracion001/)</sub>
 
 </div>
 
