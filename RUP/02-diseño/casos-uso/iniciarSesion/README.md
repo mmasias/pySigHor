@@ -3,6 +3,15 @@
 > |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md)|[Análisis](/RUP/01-analisis/casos-uso/iniciarSesion/README.md)|**Diseño**|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
+## Información del artefacto
+
+- **Proyecto**: pySigHor
+- **Fase RUP**: Elaboración
+- **Disciplina**: Diseño
+- **Versión**: 1.0
+- **Fecha**: 2025-11-19
+- **Autor**: Gemini
+
 ## Propósito
 Detallar la interacción entre los componentes del sistema (Frontend, API, Servicios) para autenticar a un usuario y generar un token de acceso.
 

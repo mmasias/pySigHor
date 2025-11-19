@@ -3,6 +3,15 @@
 > |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/editarAula/README.md)|[Análisis](/RUP/01-analisis/casos-uso/editarAula/README.md)|**Diseño**|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
+## Información del artefacto
+
+- **Proyecto**: pySigHor
+- **Fase RUP**: Elaboración
+- **Disciplina**: Diseño
+- **Versión**: 1.0
+- **Fecha**: 2025-11-19
+- **Autor**: Gemini
+
 ## Propósito
 Detallar el proceso de actualización de una aula existente.
 
