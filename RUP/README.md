@@ -31,7 +31,7 @@ Emojis para fases futuras:
 
 <div align=center>
 
-|Caso de uso|[Detalle](/RUP/00-casos-uso/02-detalle/README.md)|Prototipo|[Análisis](/RUP/01-analisis/casos-uso/README.md)|Diseño|Desarrollo|Pruebas|Comentario|
+|Caso de uso|[Detalle](/RUP/00-casos-uso/02-detalle/README.md)|Prototipo|[Análisis](/RUP/01-analisis/casos-uso/README.md)|[Diseño](/RUP/02-diseño/README.md)|Desarrollo|Pruebas|Comentario|
 |-|:-:|:-:|:-:|:-:|:-:|:-:|-|
 |**iniciarSesion()** |[📋](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/iniciarSesion/README.md)|[🏗️](/RUP/02-diseño/casos-uso/iniciarSesion/README.md)|⚪|⚪|*Punto de entrada al sistema*
 |***completarGestion()***   |[📋](/RUP/00-casos-uso/02-detalle/completarGestion/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/completarGestion/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/completarGestion/README.md)|⚪|⚪|⚪|*Hub de convergencia del sistema*
