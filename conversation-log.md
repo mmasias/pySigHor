@@ -4285,3 +4285,46 @@ Manuel compartió los artículos de la carpeta `013-consolidacion-arquitectonica
 *Este registro se actualizará continuamente conforme avance el proyecto*
 
 
+
+## Conversación 48: Inicio de Fase de Diseño y Trazabilidad Total
+**Fecha**: 2025-11-19
+**Participantes**: Manuel (Usuario), Gemini (Asistente)
+
+### Contexto de la Sesión
+Tras completar el análisis de los 32 casos de uso y corregir la secuencialidad del log, el objetivo fue iniciar formalmente la **Fase de Diseño** del proyecto `pySigHor`. Se seleccionó un "Vertical Slice" de 5 casos de uso para validar la arquitectura completa.
+
+### Desarrollo Principal
+
+#### 1. **Definición del Stack y Alcance**
+- **Vertical Slice**: `iniciarSesion`, `abrirAulas`, `crearAula`, `editarAula`, `eliminarAula`.
+- **Stack Tecnológico**:
+    - **Backend**: Python + FastAPI.
+    - **Frontend**: React + TypeScript (Vite).
+    - **Base de Datos**: SQLite + SQLAlchemy (Async).
+- **Rama de Trabajo**: `faseDiseño-Iteracion001`.
+
+#### 2. **Creación de Artefactos de Diseño**
+- **Arquitectura**: Diagrama de alto nivel (`RUP/02-diseño/arquitectura.puml`).
+- **Clases de Diseño**: Modelado de dominio y datos (`RUP/02-diseño/clases-diseño.puml`).
+- **Secuencia**: Diagramas detallados para los 5 casos de uso.
+- **Documentación Central**: Creación de `RUP/02-diseño/README.md` unificando stack y diagramas generales.
+
+#### 3. **Estandarización y Organización**
+- **Reorganización**: Estructura `RUP/02-diseño/casos-uso/[nombre]/` para cada diseño.
+- **Capitalización**: Corrección de títulos a "Sentence case" (reglas del castellano).
+- **Navegación Cruzada**: Implementación de tablas de navegación en los 15 artefactos involucrados (5 Detalle, 5 Análisis, 5 Diseño) para garantizar trazabilidad total:
+    `Requisitos <--> Análisis <--> Diseño`
+
+#### 4. **Actualización de Seguimiento**
+- **Dashboard**: Actualización de `diagrama-contexto-administrador.puml` marcando en **Verde (Diseñado)** los 5 casos de uso y añadiendo enlaces a sus documentos de diseño.
+
+### Reflexiones Metodológicas
+- **Trazabilidad como Valor**: La conexión explícita entre disciplinas elimina ambigüedad y facilita el mantenimiento.
+- **Construcción Sólida**: Invertir tiempo en planos detallados (diseño) antes de codificar asegura una implementación fluida ("construir sobre roca").
+- **Efecto Psicológico**: La visualización del progreso en el dashboard motiva y clarifica el estado del proyecto.
+- **Calidad Profesional**: El cuidado en los detalles (ortografía, estructura) diferencia un proyecto amateur de uno de ingeniería.
+
+### Estado del Proyecto
+- **Fase**: Diseño (Iteración 1 en curso).
+- **Artefactos**: Completos y enlazados para el Vertical Slice.
+- **Próximo Paso**: Generación de SVGs y comienzo de la implementación (Código).

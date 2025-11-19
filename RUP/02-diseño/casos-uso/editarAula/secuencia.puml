@@ -1,0 +1,44 @@
+@startuml
+title Diagrama de Secuencia - Editar Aula
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "AulaService" as Service
+participant "AulaRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Editar" (en una fila)
+activate FE
+FE --> Admin: Mostrar Formulario con datos precargados
+Admin -> FE: Modifica datos y Guardar
+FE -> API: PUT /aulas/{id} (AulaUpdate JSON)
+activate API
+API -> Service: editar_aula(id, aula_update)
+activate Service
+Service -> Repo: get_by_id(id)
+activate Repo
+Repo -> DB: SELECT * FROM aulas WHERE id = ?
+activate DB
+DB --> Repo: Aula existente
+deactivate DB
+Repo --> Service: Aula
+deactivate Repo
+Service -> Service: Actualizar campos
+Service -> Repo: update(aula)
+activate Repo
+Repo -> DB: UPDATE aulas SET ... WHERE id = ?
+activate DB
+DB --> Repo: OK
+deactivate DB
+Repo --> Service: Aula actualizada
+deactivate Repo
+Service --> API: AulaResponse
+deactivate Service
+API --> FE: 200 OK (Aula JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Aula actualizada correctamente"
+deactivate FE
+
+@enduml

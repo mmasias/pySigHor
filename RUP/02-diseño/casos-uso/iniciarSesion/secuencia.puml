@@ -1,0 +1,41 @@
+@startuml
+title Diagrama de Secuencia - Iniciar Sesión
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "AuthService" as Auth
+participant "UsuarioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Ingresa credenciales (user, pass)
+activate FE
+FE -> API: POST /token (username, password)
+activate API
+API -> Auth: authenticate_user(username, password)
+activate Auth
+Auth -> Repo: get_by_username(username)
+activate Repo
+Repo -> DB: SELECT * FROM usuarios WHERE username = ?
+activate DB
+DB --> Repo: Usuario (hash)
+deactivate DB
+Repo --> Auth: Usuario
+deactivate Repo
+Auth -> Auth: verify_password(password, hash)
+alt Credenciales Válidas
+    Auth -> Auth: create_access_token(data)
+    Auth --> API: Token JWT
+    API --> FE: 200 OK (access_token)
+    FE -> FE: Guardar Token (LocalStorage/Context)
+    FE --> Admin: Redirigir a Dashboard
+else Credenciales Inválidas
+    Auth --> API: False / Exception
+    deactivate Auth
+    API --> FE: 401 Unauthorized
+    deactivate API
+    FE --> Admin: Mostrar Error "Credenciales inválidas"
+end
+deactivate FE
+
+@enduml

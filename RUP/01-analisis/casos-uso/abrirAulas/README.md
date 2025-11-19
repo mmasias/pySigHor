@@ -1,6 +1,6 @@
 # pySigHor > abrirAulas > Análisis
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirAulas/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirAulas/README.md)|**Análisis**|[Diseño](/RUP/02-diseño/casos-uso/abrirAulas/README.md)|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto

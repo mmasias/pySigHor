@@ -1,0 +1,34 @@
+@startuml
+title Diagrama de Secuencia - Abrir Aulas (Listar)
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "AulaService" as Service
+participant "AulaRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Navega a "Gestión de Aulas"
+activate FE
+FE -> FE: Verificar Token
+FE -> API: GET /aulas (Header: Bearer Token)
+activate API
+API -> Service: listar_aulas()
+activate Service
+Service -> Repo: get_all()
+activate Repo
+Repo -> DB: SELECT * FROM aulas
+activate DB
+DB --> Repo: List[Aula]
+deactivate DB
+Repo --> Service: List[Aula]
+deactivate Repo
+Service --> API: List[AulaResponse]
+deactivate Service
+API --> FE: 200 OK (JSON List)
+deactivate API
+FE -> FE: Renderizar Tabla de Aulas
+FE --> Admin: Mostrar Lista de Aulas
+deactivate FE
+
+@enduml

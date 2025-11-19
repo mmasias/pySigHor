@@ -1,0 +1,84 @@
+@startuml
+title Diagrama de Clases de Diseño - Iteración 1 (Auth + Aulas)
+
+package "Dominio / Modelos" {
+    class Usuario {
+        +id: int
+        +username: str
+        +password_hash: str
+        +rol: str
+        +is_active: bool
+    }
+
+    class Aula {
+        +id: int
+        +nombre: str
+        +capacidad: int
+        +edificio: str
+    }
+}
+
+package "API / Schemas (Pydantic)" {
+    class Token {
+        +access_token: str
+        +token_type: str
+    }
+
+    class TokenData {
+        +username: str
+    }
+
+    class AulaCreate {
+        +nombre: str
+        +capacidad: int
+        +edificio: str
+    }
+
+    class AulaUpdate {
+        +nombre: str?
+        +capacidad: int?
+        +edificio: str?
+    }
+    
+    class AulaResponse {
+        +id: int
+        +nombre: str
+        +capacidad: int
+        +edificio: str
+    }
+    
+    AulaCreate <|-- AulaResponse
+}
+
+package "Capa de Acceso a Datos (Repositories)" {
+    interface IUsuarioRepository {
+        +get_by_username(username: str): Usuario
+    }
+
+    interface IAulaRepository {
+        +get_all(skip: int, limit: int): List[Aula]
+        +get_by_id(id: int): Aula
+        +create(aula: AulaCreate): Aula
+        +update(id: int, aula: AulaUpdate): Aula
+        +delete(id: int): bool
+    }
+}
+
+package "Capa de Servicios / Controladores" {
+    class AuthService {
+        +authenticate_user(username, password): Token
+    }
+    
+    class AulaService {
+        +listar_aulas(): List[AulaResponse]
+        +crear_aula(aula: AulaCreate): AulaResponse
+        +editar_aula(id, aula: AulaUpdate): AulaResponse
+        +eliminar_aula(id): bool
+    }
+}
+
+Usuario "1" -- "0..*" Token : genera >
+AulaService ..> IAulaRepository : usa >
+AuthService ..> IUsuarioRepository : usa >
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+title Diagrama de Secuencia - Crear Aula
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "AulaService" as Service
+participant "AulaRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Nueva Aula"
+activate FE
+FE --> Admin: Mostrar Formulario
+Admin -> FE: Ingresa datos (Nombre, Capacidad, Edificio) y Guardar
+FE -> API: POST /aulas (AulaCreate JSON)
+activate API
+API -> Service: crear_aula(aula_create)
+activate Service
+Service -> Repo: create(aula_model)
+activate Repo
+Repo -> DB: INSERT INTO aulas ...
+activate DB
+DB --> Repo: ID nueva aula
+deactivate DB
+Repo --> Service: Aula (con ID)
+deactivate Repo
+Service --> API: AulaResponse
+deactivate Service
+API --> FE: 201 Created (Aula JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Aula creada correctamente"
+deactivate FE
+
+@enduml
