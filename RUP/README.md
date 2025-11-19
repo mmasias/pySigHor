@@ -18,6 +18,8 @@ Esto a modo de mapa inicial, luego lo refinamos. También hay una [propuesta de 
 
   - [Diagrama de contexto (actor administrador)](/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.md#diagrama)
 
+- [02 - Diseño](/RUP/02-diseño/README.md)
+
 ### Casos de uso identificados & avance
 
 <!-- 
@@ -31,13 +33,13 @@ Emojis para fases futuras:
 
 |Caso de uso|[Detalle](/RUP/00-casos-uso/02-detalle/README.md)|Prototipo|[Análisis](/RUP/01-analisis/casos-uso/README.md)|Diseño|Desarrollo|Pruebas|Comentario|
 |-|:-:|:-:|:-:|:-:|:-:|:-:|-|
-|**iniciarSesion()** |[📋](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/iniciarSesion/README.md)|⚪|⚪|⚪|*Punto de entrada al sistema*
+|**iniciarSesion()** |[📋](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/iniciarSesion/README.md)|[🏗️](/RUP/02-diseño/casos-uso/iniciarSesion/README.md)|⚪|⚪|*Punto de entrada al sistema*
 |***completarGestion()***   |[📋](/RUP/00-casos-uso/02-detalle/completarGestion/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/completarGestion/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/completarGestion/README.md)|⚪|⚪|⚪|*Hub de convergencia del sistema*
 |**abrirProgramas()**|[📋](/RUP/00-casos-uso/02-detalle/abrirProgramas/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/abrirProgramas/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/abrirProgramas/README.md)|⚪|⚪|⚪|*Patrón de apertura de entidades*
 |**abrirCursos()**|[📋](/RUP/00-casos-uso/02-detalle/abrirCursos/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/abrirCursos/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/abrirCursos/README.md)|⚪|⚪|⚪|
 |**abrirProfesores()**|[📋](/RUP/00-casos-uso/02-detalle/abrirProfesores/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/abrirProfesores/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/abrirProfesores/README.md)|⚪|⚪|⚪|
 |**abrirEdificios()**|[📋](/RUP/00-casos-uso/02-detalle/abrirEdificios/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/abrirEdificios/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/abrirEdificios/README.md)|⚪|⚪|⚪|
-|**abrirAulas()**|[📋](/RUP/00-casos-uso/02-detalle/abrirAulas/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/abrirAulas/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/abrirAulas/README.md)|⚪|⚪|⚪|
+|**abrirAulas()**|[📋](/RUP/00-casos-uso/02-detalle/abrirAulas/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/abrirAulas/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/abrirAulas/README.md)|[🏗️](/RUP/02-diseño/casos-uso/abrirAulas/README.md)|⚪|⚪|⚪|
 |**abrirRecursos()**|[📋](/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/abrirRecursos/README.md)|⚪|⚪|⚪|
 |**crearPrograma()**|[📋](/RUP/00-casos-uso/02-detalle/crearPrograma/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/crearPrograma/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/crearPrograma/README.md)|⚪|⚪|⚪|*"El delgado" filosofía C→U*
 |**editarPrograma()**|[📋](/RUP/00-casos-uso/02-detalle/editarPrograma/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/editarPrograma/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/editarPrograma/README.md)|⚪|⚪|⚪|*Aplicando filosofía C→U*
@@ -52,9 +54,9 @@ Emojis para fases futuras:
 |**crearEdificio()**|[📋](/RUP/00-casos-uso/02-detalle/crearEdificio/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/crearEdificio/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/crearEdificio/README.md)|⚪|⚪|⚪|*"El delgado" filosofía C→U*
 |**editarEdificio()**|[📋](/RUP/00-casos-uso/02-detalle/editarEdificio/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/editarEdificio/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/editarEdificio/README.md)|⚪|⚪|⚪|*"El gordo" con edición continua*
 |**eliminarEdificio()**|[📋](/RUP/00-casos-uso/02-detalle/eliminarEdificio/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/eliminarEdificio/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/eliminarEdificio/README.md)|⚪|⚪|⚪|*Eliminación segura con confirmación*
-|**crearAula()**|[📋](/RUP/00-casos-uso/02-detalle/crearAula/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/crearAula/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/crearAula/README.md)|⚪|⚪|⚪|*"El delgado" filosofía C→U*
-|**editarAula()**|[📋](/RUP/00-casos-uso/02-detalle/editarAula/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/editarAula/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/editarAula/README.md)|⚪|⚪|⚪|*"El gordo" con edición continua*
-|**eliminarAula()**|[📋](/RUP/00-casos-uso/02-detalle/eliminarAula/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/eliminarAula/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/eliminarAula/README.md)|⚪|⚪|⚪|*Eliminación segura con confirmación*
+|**crearAula()**|[📋](/RUP/00-casos-uso/02-detalle/crearAula/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/crearAula/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/crearAula/README.md)|[🏗️](/RUP/02-diseño/casos-uso/crearAula/README.md)|⚪|⚪|⚪|*"El delgado" filosofía C→U*
+|**editarAula()**|[📋](/RUP/00-casos-uso/02-detalle/editarAula/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/editarAula/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/editarAula/README.md)|[🏗️](/RUP/02-diseño/casos-uso/editarAula/README.md)|⚪|⚪|⚪|*"El gordo" con edición continua*
+|**eliminarAula()**|[📋](/RUP/00-casos-uso/02-detalle/eliminarAula/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/eliminarAula/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/eliminarAula/README.md)|[🏗️](/RUP/02-diseño/casos-uso/eliminarAula/README.md)|⚪|⚪|⚪|*Eliminación segura con confirmación*
 |**crearRecurso()**|[📋](/RUP/00-casos-uso/02-detalle/crearRecurso/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/crearRecurso/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/crearRecurso/README.md)|⚪|⚪|⚪|*"El delgado" filosofía C→U*
 |**editarRecurso()**|[📋](/RUP/00-casos-uso/02-detalle/editarRecurso/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/editarRecurso/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/editarRecurso/README.md)|⚪|⚪|⚪|*"El gordo" con edición continua*
 |**eliminarRecurso()**|[📋](/RUP/00-casos-uso/02-detalle/eliminarRecurso/README.md#diagrama-de-especificación)|[🎨](/RUP/00-casos-uso/02-detalle/eliminarRecurso/README.md#wireframes)|[🔍](/RUP/01-analisis/casos-uso/eliminarRecurso/README.md)|⚪|⚪|⚪|*Eliminación segura con confirmación*
