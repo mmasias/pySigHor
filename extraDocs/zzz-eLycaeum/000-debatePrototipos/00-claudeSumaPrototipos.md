@@ -27,10 +27,10 @@ Manuel utiliza este repositorio para enseñar RUP a sus alumnos de Ingeniería d
 **Pantalla final consolidada** (realidad de implementación):
 ```
 ┌─ Gestión de Aulas ────────────────────┐
-│ [+ Nueva Aula]  [🔍 Buscar]           │ ← abrirAulas + crearAula
+│ [+ Nueva Aula]  [Buscar]              │ ← abrirAulas + crearAula
 │ ┌──────────────────────────────────┐  │
-│ │ ☑ A-101  Cap:40  [✏️] [🗑️]      │ ← editarAula + eliminarAula
-│ │ ☑ A-102  Cap:35  [✏️] [🗑️]      │
+│ │ A-101  Cap:40  [Editar] [Eliminar]│ ← editarAula + eliminarAula
+│ │ A-102  Cap:35  [Editar] [Eliminar]│
 │ └──────────────────────────────────┘  │
 └───────────────────────────────────────┘
 ```
@@ -77,8 +77,8 @@ Siguiendo la filosofía del proyecto de **validar contra fuentes autoritativas**
 - Las boundary classes corresponden a la asociación entre un Caso de Uso y un Actor
 
 **Lo que NO dice**:
-- ❌ Cómo consolidar múltiples boundary classes en una sola pantalla
-- ❌ Proceso sistemático de fusión de interfaces
+- Cómo consolidar múltiples boundary classes en una sola pantalla
+- Proceso sistemático de fusión de interfaces
 
 #### 2. Paper Académico: "In Support of User Interface Design in the Rational Unified Process"
 
@@ -103,8 +103,8 @@ Siguiendo la filosofía del proyecto de **validar contra fuentes autoritativas**
 - Esto se llama "use case storyboard"
 
 **Lo que NO dice**:
-- ❌ Cómo consolidar múltiples storyboards en pantallas finales
-- ❌ Artefacto o proceso sistemático de consolidación
+- Cómo consolidar múltiples storyboards en pantallas finales
+- Artefacto o proceso sistemático de consolidación
 
 #### 4. Investigación Reciente sobre Fragmentación de UI
 
@@ -121,9 +121,9 @@ Siguiendo la filosofía del proyecto de **validar contra fuentes autoritativas**
 #### 5. Búsquedas Sin Resultados (Significativo)
 
 Las siguientes búsquedas NO arrojaron resultados:
-- ❌ "UI element clusters" RUP boundary classes "use case" consolidation
-- ❌ RUP gaps UI design usability "use case to screen" mapping
-- ❌ "use case storyboard" Constantine Lockwood essential UI prototyping
+- "UI element clusters" RUP boundary classes "use case" consolidation
+- RUP gaps UI design usability "use case to screen" mapping
+- "use case storyboard" Constantine Lockwood essential UI prototyping
 
 **Implicación**: No existe terminología estándar ni proceso establecido para este problema.
 
@@ -144,16 +144,16 @@ La existencia de papers académicos y propuestas de "soporte adicional" confirma
 ### 3. Hallazgos Específicos
 
 **Lo que SÍ dice la teoría**:
-✅ Usar boundary classes (una por asociación actor-caso de uso)
-✅ Crear prototipos/wireframes por caso de uso
-✅ Use case storyboards para flujos
-✅ El problema de fragmentación existe
+- Usar boundary classes (una por asociación actor-caso de uso)
+- Crear prototipos/wireframes por caso de uso
+- Use case storyboards para flujos
+- El problema de fragmentación existe
 
 **Lo que NO dice la teoría**:
-❌ Proceso sistemático de consolidación
-❌ Artefacto estándar para mapear N casos de uso → 1 pantalla
-❌ Guía metodológica paso a paso
-❌ Referencias en literatura clásica (Larman, Jacobson, Kruchten)
+- Proceso sistemático de consolidación
+- Artefacto estándar para mapear N casos de uso → 1 pantalla
+- Guía metodológica paso a paso
+- Referencias en literatura clásica (Larman, Jacobson, Kruchten)
 
 ### 4. Implicaciones para la Enseñanza
 
