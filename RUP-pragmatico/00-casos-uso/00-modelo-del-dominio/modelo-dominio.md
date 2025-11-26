@@ -5,8 +5,8 @@
 **Versión simplificada y orientada a la práctica de la documentación RUP**  
 *Enfocada en artefactos clave para comprensión rápida y eficiente*
 
-||||
-|-|-|-|
+|||||
+|-|-|-|-|
 |[Inicio](../../README.md)|**Modelo del dominio**|[Casos de uso](../02-detalle/README.md)|[Análisis](../../01-analisis/casos-uso/README.md)|
 
 </div>
