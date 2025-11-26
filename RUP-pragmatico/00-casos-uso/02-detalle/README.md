@@ -11,9 +11,26 @@
 
 </div>
 
-Esta carpeta contiene las versiones pragmáticas de los casos de uso detallados.
+## Actores y casos de uso identificados
 
-## Casos de uso especificados
+<div align=center>
+
+||||
+|:-:|:-:|:-:|
+|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-001.svg)|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-002.svg)|![Actores y Casos de Uso](/images/RUP/00-casos-uso/01-actores-casos-uso/actores-casos-uso-003.svg)
+|Código fuente:[actores-casos-uso-001.puml](actores-casos-uso-001.puml)|Código fuente: [actores-casos-uso-002.puml](actores-casos-uso-002.puml)|Código fuente: [actores-casos-uso-003.puml](actores-casos-uso-003.puml)
+
+</div>
+
+## Diagrama de contexto
+
+<div align=center>
+
+![](/images/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.svg)
+
+</div>
+
+## Detalle de los casos de uso
 
 ### Gestión del sistema
 - [iniciarSesion](./iniciarSesion/README.md) - Autenticación de usuarios
@@ -61,11 +78,3 @@ Esta carpeta contiene las versiones pragmáticas de los casos de uso detallados.
 ### Operaciones de Horarios
 - [consultarHorario](./consultarHorario/README.md) - Consulta de horarios
 - [generarHorario](./generarHorario/README.md) - Generación de horarios
-
-## Diagrama de contexto
-
-<div align=center>
-
-![](/images/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.svg)
-
-</div>

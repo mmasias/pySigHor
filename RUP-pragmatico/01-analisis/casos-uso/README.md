@@ -11,8 +11,6 @@
 
 </div>
 
-Esta carpeta contiene las versiones pragmáticas de los artefactos de análisis de los casos de uso.
-
 ## Casos de uso analizados
 
 ### Gestión del sistema

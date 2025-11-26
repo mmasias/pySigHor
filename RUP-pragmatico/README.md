@@ -15,18 +15,9 @@
 
 Esta versión de la documentación RUP demuestra la **flexibilidad metodológica** manteniendo la pureza conceptual.
 
-Ideal para:
+## ¿Para qué?
 
 - **Revisión rápida** de casos de uso implementados.
 - **Comprensión ágil** del análisis MVC realizado.
 - **Demostración didáctica** de adaptabilidad de RUP.
 - **Navegación eficiente** sin perder rigor metodológico.
-
-## Filosofía de la versión *pragmática*
-
-> **"RUP no es dogmático"**
-> 
-> Esta versión demuestra que la metodología RUP puede adaptarse a diferentes necesidades de documentación sin perder su esencia metodológica. La **pureza conceptual** se mantiene mientras la **presentación** se optimiza para diferentes audiencias y propósitos.
-
-**Creado por**: becario Gemini (Conversación 41)  
-**Documentado en**: [Artículo 011 - Sobreoptimización de LLMs](/extraDocs/011-sobreoptimizacion-llms-navegacion-rup/README.md)
