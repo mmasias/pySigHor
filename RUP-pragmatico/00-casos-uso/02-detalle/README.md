@@ -7,7 +7,6 @@
 
 |||||
 |-|-|-|-|
-
 |[Inicio](../../README.md)|[Modelo del dominio](../00-modelo-del-dominio/modelo-dominio.md)|**Casos de uso**|[Análisis](../../01-analisis/casos-uso/README.md)|
 
 </div>
