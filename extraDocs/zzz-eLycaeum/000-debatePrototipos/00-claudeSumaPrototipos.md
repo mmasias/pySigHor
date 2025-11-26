@@ -19,21 +19,22 @@ Manuel utiliza este repositorio para enseñar RUP a sus alumnos de Ingeniería d
 ### Situación Actual en el Proyecto
 
 **Prototipos atómicos** (uno por caso de uso, en fase de Requisitos):
-- `crearAula()` - Formulario de creación
-- `editarAula()` - Formulario de edición
-- `eliminarAula()` - Confirmación de eliminación
-- `abrirAulas()` - Listado de aulas
+
+<div align=center>
+
+|`crearAula()`|`editarAula()`|`eliminarAula()`|`abrirAulas()`|
+|-|-|-|-|
+![](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula-wireframe.svg)|![](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula-wireframe.svg)|![](/images/RUP/00-casos-uso/02-detalle/eliminarAula/eliminarAula-wireframe.svg)|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)
+
+</div>
 
 **Pantalla final consolidada** (realidad de implementación):
-```
-┌─ Gestión de Aulas ────────────────────┐
-│ [+ Nueva Aula]  [Buscar]              │ ← abrirAulas + crearAula
-│ ┌──────────────────────────────────┐  │
-│ │ A-101  Cap:40  [Editar] [Eliminar]│ ← editarAula + eliminarAula
-│ │ A-102  Cap:35  [Editar] [Eliminar]│
-│ └──────────────────────────────────┘  │
-└───────────────────────────────────────┘
-```
+
+<div align=center>
+
+![](/images/extraDocs/zzz-eLycaeum/000-debatePrototipos/prototipoEjemplo.svg)
+
+</div>
 
 ### La Brecha Conceptual
 

@@ -1,0 +1,16 @@
+@startsalt
+{
+  {^ Gestión de Aulas
+    {
+      [+ Nueva Aula] | [Buscar] | "        "
+    }
+    {SI
+      .
+      | . | <b>A-101</b> | ... | Cap:40  | ... |  [ Editar ]  | ... |  [ Eliminar ] | ...
+      | . | <b>A-102</b> | ... | Cap:35  | ... |  [ Editar ]  | ... |  [ Eliminar ] | ...
+      | . | <b>A-103</b> | ... | Cap:35  | ... |  [ Editar ]  | ... |  [ Eliminar ] | ...
+      | . | <b>A-104</b> | ... | Cap:35  | ... |  [ Editar ]  | ... |  [ Eliminar ] | ...
+    }
+  }
+}
+@endsalt
