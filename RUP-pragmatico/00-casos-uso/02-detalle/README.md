@@ -33,11 +33,13 @@
 ## Detalle de los casos de uso
 
 ### Gestión del sistema
-- [iniciarSesion](./iniciarSesion/README.md) - Autenticación de usuarios
-- [cerrarSesion](./cerrarSesion/README.md) - Cierre de sesión
+
+- [iniciarSesion](./iniciarSesion/README.md)
+- [cerrarSesion](./cerrarSesion/README.md)
 - [completarGestion](./completarGestion/README.md) - Hub de convergencia del sistema
 
-### Apertura de entidades
+### Apertura de entidades (a.k.a. "*gestión*")
+
 - [abrirProgramas](./abrirProgramas/README.md) - Gestión de programas académicos
 - [abrirCursos](./abrirCursos/README.md) - Gestión de cursos
 - [abrirProfesores](./abrirProfesores/README.md) - Gestión de profesores
@@ -45,35 +47,13 @@
 - [abrirAulas](./abrirAulas/README.md) - Gestión de aulas
 - [abrirRecursos](./abrirRecursos/README.md) - Gestión de recursos
 
-### CRUD de Programas
-- [crearPrograma](./crearPrograma/README.md) - Creación de programas académicos
-- [editarPrograma](./editarPrograma/README.md) - Edición de programas académicos
-- [eliminarPrograma](./eliminarPrograma/README.md) - Eliminación de programas académicos
+### Los CRUDs
 
-### CRUD de Cursos
-- [crearCurso](./crearCurso/README.md) - Creación de cursos académicos
-- [editarCurso](./editarCurso/README.md) - Edición de cursos académicos
-- [eliminarCurso](./eliminarCurso/README.md) - Eliminación de cursos académicos
-
-### CRUD de Aulas
-- [crearAula](./crearAula/README.md) - Creación de aulas
-- [editarAula](./editarAula/README.md) - Edición de aulas
-- [eliminarAula](./eliminarAula/README.md) - Eliminación de aulas
-
-### CRUD de Edificios
-- [crearEdificio](./crearEdificio/README.md) - Creación de edificios
-- [editarEdificio](./editarEdificio/README.md) - Edición de edificios
-- [eliminarEdificio](./eliminarEdificio/README.md) - Eliminación de edificios
-
-### CRUD de Profesores
-- [crearProfesor](./crearProfesor/README.md) - Creación de profesores
-- [editarProfesor](./editarProfesor/README.md) - Edición de profesores
-- [eliminarProfesor](./eliminarProfesor/README.md) - Eliminación de profesores
-
-### CRUD de Recursos
-- [crearRecurso](./crearRecurso/README.md) - Creación de recursos
-- [editarRecurso](./editarRecurso/README.md) - Edición de recursos
-- [eliminarRecurso](./eliminarRecurso/README.md) - Eliminación de recursos
+||Programas|Cursos|Aulas|Edificios|Profesores|Recursos|
+|-|-|-|-|-|-|-|
+||[crearPrograma()](./crearPrograma/README.md)|[crearCurso()](./crearCurso/README.md)|[crearAula()](./crearAula/README.md)|[crearEdificio()](./crearEdificio/README.md)|[crearProfesor()](./crearProfesor/README.md)|[crearRecurso()](./crearRecurso/README.md)|
+||[editarPrograma()](./editarPrograma/README.md)|[editarCurso()](./editarCurso/README.md)|[editarAula()](./editarAula/README.md)|[editarEdificio()](./editarEdificio/README.md)|[editarProfesor()](./editarProfesor/README.md)|[editarRecurso()](./editarRecurso/README.md)|
+||[eliminarPrograma()](./eliminarPrograma/README.md)|[eliminarCurso()](./eliminarCurso/README.md)|[eliminarAula()](./eliminarAula/README.md)|[eliminarEdificio()](./eliminarEdificio/README.md)|[eliminarProfesor()](./eliminarProfesor/README.md)|[eliminarRecurso()](./eliminarRecurso/README.md)|
 
 ### Operaciones de Horarios
 - [consultarHorario](./consultarHorario/README.md) - Consulta de horarios
