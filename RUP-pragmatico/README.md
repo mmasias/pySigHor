@@ -1,4 +1,4 @@
-# pySigHor - Documentación RUP Pragmática
+# pySigHor - vPragmática
 
 <div align=center>
 
@@ -7,7 +7,7 @@
 
 ||||
 |-|-|-|
-|**Inicio**|[Casos de uso](./00-casos-uso/02-detalle/README.md)|[Análisis](./01-analisis/casos-uso/README.md)|
+|**Inicio**|[Modelo del dominio](./00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)|[Casos de uso](./00-casos-uso/02-detalle/README.md)|[Análisis](./01-analisis/casos-uso/README.md)|
 
 </div>
 

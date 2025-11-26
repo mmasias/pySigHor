@@ -1,4 +1,4 @@
-# Casos de Uso Pragmáticos
+# Casos de Uso - vPragmática
 
 <div align=center>
 
@@ -7,7 +7,7 @@
 
 ||||
 |-|-|-|
-|[Inicio](../../README.md)|**Casos de uso**|[Análisis](../../01-analisis/casos-uso/README.md)|
+|[Inicio](../../README.md)|[Modelo del dominio](../00-modelo-del-dominio/modelo-dominio.md)|**Casos de uso**|[Análisis](../../01-analisis/casos-uso/README.md)|
 
 </div>
 
@@ -61,3 +61,11 @@ Esta carpeta contiene las versiones pragmáticas de los casos de uso detallados.
 ### Operaciones de Horarios
 - [consultarHorario](./consultarHorario/README.md) - Consulta de horarios
 - [generarHorario](./generarHorario/README.md) - Generación de horarios
+
+## Diagrama de contexto
+
+<div align=center>
+
+![](/images/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.svg)
+
+</div>

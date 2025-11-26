@@ -1,4 +1,4 @@
-# Casos de Uso de Análisis Pragmáticos
+# Análisis de Casos de Uso - vPragmática
 
 <div align=center>
 
@@ -7,7 +7,7 @@
 
 ||||
 |-|-|-|
-|[Inicio](../../README.md)|[Casos de uso](../../00-casos-uso/02-detalle/README.md)|**Análisis**|
+|[Inicio](../../README.md)|[Modelo del dominio](../../00-casos-uso/00-modelo-del-dominio/modelo-dominio.md)|[Casos de uso](../../00-casos-uso/02-detalle/README.md)|**Análisis**|
 
 </div>
 
