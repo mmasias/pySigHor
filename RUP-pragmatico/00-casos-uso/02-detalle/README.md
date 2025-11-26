@@ -47,13 +47,13 @@
 - [abrirAulas](./abrirAulas/README.md) - Gestión de aulas
 - [abrirRecursos](./abrirRecursos/README.md) - Gestión de recursos
 
-### Los CRUDs
+### Los *CRUD*s
 
-||Programas|Cursos|Aulas|Edificios|Profesores|Recursos|
-|-|-|-|-|-|-|-|
-||[crearPrograma()](./crearPrograma/README.md)|[crearCurso()](./crearCurso/README.md)|[crearAula()](./crearAula/README.md)|[crearEdificio()](./crearEdificio/README.md)|[crearProfesor()](./crearProfesor/README.md)|[crearRecurso()](./crearRecurso/README.md)|
-||[editarPrograma()](./editarPrograma/README.md)|[editarCurso()](./editarCurso/README.md)|[editarAula()](./editarAula/README.md)|[editarEdificio()](./editarEdificio/README.md)|[editarProfesor()](./editarProfesor/README.md)|[editarRecurso()](./editarRecurso/README.md)|
-||[eliminarPrograma()](./eliminarPrograma/README.md)|[eliminarCurso()](./eliminarCurso/README.md)|[eliminarAula()](./eliminarAula/README.md)|[eliminarEdificio()](./eliminarEdificio/README.md)|[eliminarProfesor()](./eliminarProfesor/README.md)|[eliminarRecurso()](./eliminarRecurso/README.md)|
+|Programas|Cursos|Aulas|Edificios|Profesores|Recursos|
+|-|-|-|-|-|-|
+|[crearPrograma()](./crearPrograma/README.md)|[crearCurso()](./crearCurso/README.md)|[crearAula()](./crearAula/README.md)|[crearEdificio()](./crearEdificio/README.md)|[crearProfesor()](./crearProfesor/README.md)|[crearRecurso()](./crearRecurso/README.md)|
+|[editarPrograma()](./editarPrograma/README.md)|[editarCurso()](./editarCurso/README.md)|[editarAula()](./editarAula/README.md)|[editarEdificio()](./editarEdificio/README.md)|[editarProfesor()](./editarProfesor/README.md)|[editarRecurso()](./editarRecurso/README.md)|
+|[eliminarPrograma()](./eliminarPrograma/README.md)|[eliminarCurso()](./eliminarCurso/README.md)|[eliminarAula()](./eliminarAula/README.md)|[eliminarEdificio()](./eliminarEdificio/README.md)|[eliminarProfesor()](./eliminarProfesor/README.md)|[eliminarRecurso()](./eliminarRecurso/README.md)|
 
 ### Operaciones de Horarios
 - [consultarHorario](./consultarHorario/README.md) - Consulta de horarios
