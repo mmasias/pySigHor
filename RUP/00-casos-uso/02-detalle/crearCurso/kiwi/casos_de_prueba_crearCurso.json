@@ -1,0 +1,34 @@
+[
+  {
+    "summary": "Flujo principal: Crear curso con datos mínimos y navegar a edición",
+    "category__name": "crearCurso",
+    "priority__value": "1",
+    "is_automated": true,
+    "case_status__name": "PROPOSED",
+    "text": "Este caso de prueba verifica el flujo principal del caso de uso 'crearCurso' según la filosofía C->U (Crear-delgado -> Editar-gordo).\n\n**Precondiciones:**\n- El usuario está autenticado en el sistema con el rol de 'Administrador'.\n- El sistema se encuentra en el estado 'CURSOS_ABIERTO' (vista de lista de cursos).\n\n**Pasos:**\n1. El Administrador hace clic en el botón 'Crear Nuevo Curso'.\n2. El sistema muestra un formulario que solicita los datos mínimos (solo el nombre del curso).\n3. El Administrador introduce un nombre válido para el curso (ej: 'Análisis de Sistemas I').\n4. El Administrador confirma la operación (ej: hace clic en 'Guardar' o 'Crear').\n\n**Resultados Esperados:**\n1. El sistema crea una nueva entidad 'Curso' en la base de datos con el nombre proporcionado.\n2. Inmediatamente después de la creación, el sistema redirige al usuario a la pantalla de edición completa ('editarCurso') para el curso recién creado.\n3. El nuevo curso tiene un ID único asignado por el sistema."
+  },
+  {
+    "summary": "Flujo alternativo: Intentar crear un curso con nombre nulo",
+    "category__name": "crearCurso",
+    "priority__value": "2",
+    "is_automated": true,
+    "case_status__name": "PROPOSED",
+    "text": "Este caso de prueba valida que el sistema rechaza la creación de un curso si el nombre es nulo, reforzando que es un campo obligatorio.\n\n**Precondiciones:**\n- El usuario es un 'Administrador' y está en el formulario de creación de curso.\n\n**Pasos:**\n1. El Administrador intenta crear el curso sin proporcionar ningún valor en el campo 'Nombre' (se envía un valor nulo a la lógica de negocio).\n2. El Administrador confirma la operación.\n\n**Resultados Esperados:**\n1. El sistema lanza una excepción o muestra un mensaje de error claro al usuario indicando que 'El nombre del curso es obligatorio'.\n2. No se crea ninguna nueva entidad 'Curso' en la base de datos.\n3. El sistema permanece en el formulario de creación para que el usuario pueda corregir el error."
+  },
+  {
+    "summary": "Flujo alternativo: Intentar crear un curso con nombre vacío",
+    "category__name": "crearCurso",
+    "priority__value": "2",
+    "is_automated": true,
+    "case_status__name": "PROPOSED",
+    "text": "Este caso de prueba valida que el sistema rechaza la creación de un curso si el nombre está vacío o solo contiene espacios en blanco.\n\n**Precondiciones:**\n- El usuario es un 'Administrador' y está en el formulario de creación de curso.\n\n**Pasos:**\n1. El Administrador introduce un nombre que consiste únicamente en espacios en blanco (ej: '   ').\n2. El Administrador confirma la operación.\n\n**Resultados Esperados:**\n1. El sistema lanza una excepción o muestra un mensaje de error claro indicando que 'El nombre del curso es obligatorio'.\n2. No se crea ninguna nueva entidad 'Curso' en la base de datos.\n3. El sistema permanece en el formulario de creación para que el usuario pueda corregir el error."
+  },
+  {
+    "summary": "Flujo de cancelación: El usuario cancela la operación de creación",
+    "category__name": "crearCurso",
+    "priority__value": "3",
+    "is_automated": true,
+    "case_status__name": "PROPOSED",
+    "text": "Este caso de prueba verifica que el flujo de cancelación funciona como se espera, sin realizar cambios en el sistema.\n\n**Precondiciones:**\n- El usuario es un 'Administrador' y ha abierto el formulario para la creación de un nuevo curso.\n\n**Pasos:**\n1. El Administrador hace clic en el botón 'Cancelar' o cierra el formulario de creación.\n\n**Resultados Esperados:**\n1. No se crea ninguna nueva entidad 'Curso' en la base de datos.\n2. El sistema regresa a la pantalla anterior, que debería ser la lista de cursos ('CURSOS_ABIERTO').\n3. No se guarda ningún estado intermedio de la operación de creación."
+  }
+]
