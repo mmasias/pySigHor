@@ -1,0 +1,112 @@
+@startuml
+title Diagrama de Clases de Diseño - Spring Boot + Angular (Auth + Aulas)
+
+package "Entidades JPA (@Entity)" {
+    class Usuario {
+        +id: Long
+        +username: String
+        +passwordHash: String
+        +rol: String
+        +isActive: Boolean
+    }
+
+    class Aula {
+        +id: Long
+        +nombre: String
+        +capacidad: Integer
+        +edificio: String
+    }
+}
+
+package "DTOs (Data Transfer Objects)" {
+    class JwtResponse {
+        +accessToken: String
+        +tokenType: String
+    }
+
+    class LoginRequest {
+        +username: String
+        +password: String
+    }
+
+    class AulaDTO {
+        +id: Long
+        +nombre: String
+        +capacidad: Integer
+        +edificio: String
+    }
+
+    class AulaCreateDTO {
+        +nombre: String
+        +capacidad: Integer
+        +edificio: String
+    }
+
+    class AulaUpdateDTO {
+        +nombre: String
+        +capacidad: Integer
+        +edificio: String
+    }
+}
+
+package "Repositorios Spring Data JPA" {
+    interface UsuarioRepository {
+        +findByUsername(username: String): Optional<Usuario>
+    }
+
+    interface AulaRepository {
+        +findAll(pageable: Pageable): Page<Aula>
+        +findById(id: Long): Optional<Aula>
+        +save(aula: Aula): Aula
+        +deleteById(id: Long): void
+    }
+}
+
+package "Servicios (@Service)" {
+    class AuthService {
+        +authenticate(username: String, password: String): JwtResponse
+        +validateToken(token: String): Boolean
+    }
+
+    class AulaService {
+        +listarAulas(page: int, size: int): Page<AulaDTO>
+        +crearAula(aulaDTO: AulaCreateDTO): AulaDTO
+        +editarAula(id: Long, aulaDTO: AulaUpdateDTO): AulaDTO
+        +eliminarAula(id: Long): void
+    }
+}
+
+package "Controladores (@RestController)" {
+    class AuthController {
+        +login(loginRequest: LoginRequest): ResponseEntity<JwtResponse>
+    }
+
+    class AulaController {
+        +listar(page: int, size: int): ResponseEntity<Page<AulaDTO>>
+        +crear(aulaDTO: AulaCreateDTO): ResponseEntity<AulaDTO>
+        +editar(id: Long, aulaDTO: AulaUpdateDTO): ResponseEntity<AulaDTO>
+        +eliminar(id: Long): ResponseEntity<Void>
+    }
+}
+
+package "Seguridad (Spring Security)" {
+    class JwtTokenProvider {
+        +generateToken(username: String): String
+        +validateToken(token: String): Boolean
+        +getUsernameFromToken(token: String): String
+    }
+
+    class JwtAuthenticationFilter {
+        +doFilterInternal()
+    }
+}
+
+Usuario "1" -- "0..*" JwtResponse : genera >
+AulaController ..> AulaService : usa >
+AuthController ..> AuthService : usa >
+AulaService ..> AulaRepository : usa >
+AuthService ..> UsuarioRepository : usa >
+AuthService ..> JwtTokenProvider : usa >
+JwtAuthenticationFilter ..> JwtTokenProvider : usa >
+
+@enduml

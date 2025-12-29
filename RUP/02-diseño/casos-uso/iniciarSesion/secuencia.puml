@@ -1,0 +1,45 @@
+@startuml
+title Diagrama de Secuencia - Iniciar Sesión (Spring Boot + Angular)
+
+actor "Administrador" as Admin
+participant "Frontend (Angular)" as FE
+participant "AuthController" as Controller
+participant "AuthService" as Service
+participant "UsuarioRepository" as Repo
+participant "JwtTokenProvider" as JWT
+database "Base de Datos (H2)" as DB
+
+Admin -> FE: Ingresa credenciales (username, password)
+activate FE
+FE -> Controller: POST /api/auth/login (LoginRequest)
+activate Controller
+Controller -> Service: authenticate(username, password)
+activate Service
+Service -> Repo: findByUsername(username)
+activate Repo
+Repo -> DB: SELECT * FROM usuarios WHERE username = ?
+activate DB
+DB --> Repo: Optional<Usuario>
+deactivate DB
+Repo --> Service: Optional<Usuario>
+deactivate Repo
+Service -> Service: passwordEncoder.matches(password, hash)
+alt Credenciales Válidas
+    Service -> JWT: generateToken(username)
+    activate JWT
+    JWT --> Service: String token
+    deactivate JWT
+    Service --> Controller: JwtResponse(token, "Bearer")
+    Controller --> FE: 200 OK (JwtResponse)
+    FE -> FE: Guardar Token (LocalStorage/Session)
+    FE --> Admin: Redirigir a Dashboard
+else Credenciales Inválidas
+    Service --> Controller: throw BadCredentialsException
+    deactivate Service
+    Controller --> FE: 401 Unauthorized
+    deactivate Controller
+    FE --> Admin: Mostrar Error "Credenciales inválidas"
+end
+deactivate FE
+
+@enduml

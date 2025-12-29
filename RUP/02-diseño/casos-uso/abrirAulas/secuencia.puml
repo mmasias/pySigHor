@@ -1,0 +1,35 @@
+@startuml
+title Diagrama de Secuencia - Abrir Aulas (Listar) - Spring Boot + Angular
+
+actor "Administrador" as Admin
+participant "Frontend (Angular)" as FE
+participant "AulaController" as Controller
+participant "AulaService" as Service
+participant "AulaRepository" as Repo
+database "Base de Datos (H2)" as DB
+
+Admin -> FE: Navega a "Gestión de Aulas"
+activate FE
+FE -> FE: Verificar Token (AuthGuard)
+FE -> Controller: GET /api/aulas?page=0&size=10\n(Header: Authorization: Bearer <token>)
+activate Controller
+Controller -> Service: listarAulas(page, size)
+activate Service
+Service -> Repo: findAll(PageRequest.of(page, size))
+activate Repo
+Repo -> DB: SELECT * FROM aulas LIMIT ? OFFSET ?
+activate DB
+DB --> Repo: List<Aula>
+deactivate DB
+Repo --> Service: Page<Aula>
+deactivate Repo
+Service -> Service: convertir a List<AulaDTO>
+Service --> Controller: Page<AulaDTO>
+deactivate Service
+Controller --> FE: 200 OK (Page<AulaDTO> JSON)
+deactivate Controller
+FE -> FE: Renderizar Tabla de Aulas (Angular Component)
+FE --> Admin: Mostrar Lista de Aulas
+deactivate FE
+
+@enduml

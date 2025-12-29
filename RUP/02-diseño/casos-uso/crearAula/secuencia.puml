@@ -1,0 +1,38 @@
+@startuml
+title Diagrama de Secuencia - Crear Aula - Spring Boot + Angular
+
+actor "Administrador" as Admin
+participant "Frontend (Angular)" as FE
+participant "AulaController" as Controller
+participant "AulaService" as Service
+participant "AulaRepository" as Repo
+database "Base de Datos (H2)" as DB
+
+Admin -> FE: Clic en "Nueva Aula"
+activate FE
+FE --> Admin: Mostrar Formulario (Reactive Form)
+Admin -> FE: Ingresa datos (nombre, capacidad, edificio) y Guardar
+FE -> FE: Validar formulario
+FE -> Controller: POST /api/aulas (AulaCreateDTO JSON)\n(Header: Authorization: Bearer <token>)
+activate Controller
+Controller -> Service: crearAula(aulaCreateDTO)
+activate Service
+Service -> Service: Mapear DTO a Entidad
+Service -> Repo: save(aula)
+activate Repo
+Repo -> DB: INSERT INTO aulas (nombre, capacidad, edificio) VALUES (?, ?, ?)
+activate DB
+DB --> Repo: Aula (con ID generado)
+deactivate DB
+Repo --> Service: Aula
+deactivate Repo
+Service -> Service: Mapear Entidad a AulaDTO
+Service --> Controller: AulaDTO
+deactivate Service
+Controller --> FE: 201 Created (AulaDTO JSON)
+deactivate Controller
+FE -> FE: Actualizar Lista / Mostrar Toast
+FE --> Admin: Notificación "Aula creada correctamente"
+deactivate FE
+
+@enduml

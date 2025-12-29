@@ -1,0 +1,52 @@
+@startuml
+title Diagrama de Secuencia - Editar Aula - Spring Boot + Angular
+
+actor "Administrador" as Admin
+participant "Frontend (Angular)" as FE
+participant "AulaController" as Controller
+participant "AulaService" as Service
+participant "AulaRepository" as Repo
+database "Base de Datos (H2)" as DB
+
+Admin -> FE: Clic en "Editar" (en una fila)
+activate FE
+FE --> Admin: Mostrar Formulario con datos precargados (Reactive Form)
+Admin -> FE: Modifica datos y Guardar
+FE -> FE: Validar formulario
+FE -> Controller: PUT /api/aulas/{id} (AulaUpdateDTO JSON)\n(Header: Authorization: Bearer <token>)
+activate Controller
+Controller -> Service: editarAula(id, aulaUpdateDTO)
+activate Service
+Service -> Repo: findById(id)
+activate Repo
+Repo -> DB: SELECT * FROM aulas WHERE id = ?
+activate DB
+DB --> Repo: Optional<Aula>
+deactivate DB
+Repo --> Service: Optional<Aula>
+deactivate Repo
+alt Aula Existe
+    Service -> Service: Actualizar campos desde DTO
+    Service -> Repo: save(aula)
+    activate Repo
+    Repo -> DB: UPDATE aulas SET nombre=?, capacidad=?, edificio=? WHERE id=?
+    activate DB
+    DB --> Repo: Aula actualizada
+    deactivate DB
+    Repo --> Service: Aula
+    deactivate Repo
+    Service -> Service: Mapear Entidad a AulaDTO
+    Service --> Controller: AulaDTO
+    Controller --> FE: 200 OK (AulaDTO JSON)
+    FE -> FE: Actualizar Lista / Mostrar Toast
+    FE --> Admin: Notificación "Aula actualizada correctamente"
+else Aula No Existe
+    Service --> Controller: throw EntityNotFoundException
+    deactivate Service
+    Controller --> FE: 404 Not Found
+    deactivate Controller
+    FE --> Admin: Mostrar Error "Aula no encontrada"
+end
+deactivate FE
+
+@enduml

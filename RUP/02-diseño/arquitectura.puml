@@ -1,0 +1,18 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Diagrama de Arquitectura - Spring Boot + Angular
+
+Person(admin, "Administrador", "Usuario principal del sistema")
+
+System_Boundary(c1, "pySigHor Modernizado") {
+    Container(web_app, "Single Page Application", "Angular + TypeScript", "Interfaz de usuario para gestión de horarios")
+    Container(api, "API Backend", "Java + Spring Boot", "Lógica de negocio y gestión de datos")
+    ContainerDb(database, "Base de Datos", "H2 Database", "Almacenamiento persistente")
+}
+
+Rel(admin, web_app, "Usa", "HTTPS")
+Rel(web_app, api, "Realiza peticiones API", "JSON/HTTPS")
+Rel(api, database, "Lee/Escribe", "SQL/JPA")
+
+@enduml

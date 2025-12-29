@@ -1,0 +1,51 @@
+@startuml
+title Diagrama de Secuencia - Eliminar Aula - Spring Boot + Angular
+
+actor "Administrador" as Admin
+participant "Frontend (Angular)" as FE
+participant "AulaController" as Controller
+participant "AulaService" as Service
+participant "AulaRepository" as Repo
+database "Base de Datos (H2)" as DB
+
+Admin -> FE: Clic en "Eliminar" (en una fila)
+activate FE
+FE --> Admin: Mostrar Diálogo de Confirmación (Modal)
+Admin -> FE: Confirma eliminación
+FE -> Controller: DELETE /api/aulas/{id}\n(Header: Authorization: Bearer <token>)
+activate Controller
+Controller -> Service: eliminarAula(id)
+activate Service
+Service -> Repo: findById(id)
+activate Repo
+Repo -> DB: SELECT * FROM aulas WHERE id = ?
+activate DB
+DB --> Repo: Optional<Aula>
+deactivate DB
+Repo --> Service: Optional<Aula>
+deactivate Repo
+alt Aula Existe
+    Service -> Repo: deleteById(id)
+    activate Repo
+    Repo -> DB: DELETE FROM aulas WHERE id = ?
+    activate DB
+    DB --> Repo: OK
+    deactivate DB
+    Repo --> Service: void
+    deactivate Repo
+    Service --> Controller: void
+    deactivate Service
+    Controller --> FE: 204 No Content
+    deactivate Controller
+    FE -> FE: Remover de la lista (actualizar vista)
+    FE --> Admin: Notificación "Aula eliminada correctamente"
+else Aula No Existe
+    Service --> Controller: throw EntityNotFoundException
+    deactivate Service
+    Controller --> FE: 404 Not Found
+    deactivate Controller
+    FE --> Admin: Mostrar Error "Aula no encontrada"
+end
+deactivate FE
+
+@enduml
