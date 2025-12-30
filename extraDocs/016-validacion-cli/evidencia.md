@@ -46,6 +46,8 @@
 
 ## Evidencia de la Arquitectura 1: CLI como cliente HTTP
 
+> **Nota:** Los ejemplos de código presentados están simplificados para enfocarse en lo esencial. Se han omitido imports completos, manejo exhaustivo de errores y validaciones detalladas.
+
 ### Estructura esperada del proyecto
 
 <details>
@@ -80,47 +82,19 @@ diseño-cli-python-http/
 <summary>Archivo: <code>pysighor_cli/commands/auth.py</code></summary>
 
 ```python
-import click
-import requests
-from pysighor_cli.api_client.client import APIClient
-from pysighor_cli.utils.config import save_token
-
 @click.command()
 def login():
-    """
-    Iniciar sesión en el sistema pySigHor.
-
-    Este comando consume el endpoint POST /api/login del backend FastAPI.
-    Mapea desde la vista CLI de análisis hacia la vista API existente.
-    """
-    # Vista CLI: Interacción con usuario
+    """Iniciar sesión consumiendo POST /api/login del backend FastAPI."""
     username = click.prompt('Usuario')
     password = click.prompt('Contraseña', hide_input=True)
 
-    # Llamada a API (Controlador Service ya implementado en FastAPI)
     client = APIClient()
+    response = client.post('/login', json={'username': username, 'password': password})
 
-    try:
-        response = client.post('/login', json={
-            'username': username,
-            'password': password
-        })
-
-        if response.status_code == 200:
-            data = response.json()
-            token = data['token']
-
-            # Persistencia de token (Modelo en análisis)
-            save_token(token)
-
-            click.echo('✓ Sesión iniciada exitosamente')
-            click.echo(f'Bienvenido, {data["user"]["nombre"]}')
-        else:
-            click.echo('✗ Credenciales inválidas', err=True)
-
-    except requests.exceptions.ConnectionError:
-        click.echo('✗ Error: No se puede conectar con el servidor', err=True)
-        click.echo('  Asegúrate de que el backend FastAPI esté corriendo en http://localhost:8000')
+    if response.status_code == 200:
+        save_token(response.json()['token'])
+        click.echo('✓ Sesión iniciada exitosamente')
+    # ... manejo de errores
 ```
 
 </details>
@@ -129,46 +103,21 @@ def login():
 <summary>Archivo: <code>pysighor_cli/api_client/client.py</code></summary>
 
 ```python
-import requests
-from pysighor_cli.utils.config import get_api_base_url, get_token
-
 class APIClient:
-    """
-    Cliente HTTP para consumir API FastAPI.
-
-    En términos de análisis MVC:
-    - Este es una vista técnica que traduce comandos CLI a llamadas HTTP
-    - Reutiliza completamente el controlador y modelo del backend FastAPI
-    """
-
+    """Cliente HTTP que reutiliza el backend FastAPI existente."""
     def __init__(self):
         self.base_url = get_api_base_url()
         self.session = requests.Session()
 
     def _get_headers(self):
-        """Incluye token de autenticación si existe"""
         token = get_token()
-        if token:
-            return {'Authorization': f'Bearer {token}'}
-        return {}
+        return {'Authorization': f'Bearer {token}'} if token else {}
 
     def get(self, endpoint, **kwargs):
-        """GET request con headers de autenticación"""
-        headers = self._get_headers()
-        return self.session.get(
-            f'{self.base_url}{endpoint}',
-            headers=headers,
-            **kwargs
-        )
+        return self.session.get(f'{self.base_url}{endpoint}', headers=self._get_headers(), **kwargs)
 
     def post(self, endpoint, **kwargs):
-        """POST request con headers de autenticación"""
-        headers = self._get_headers()
-        return self.session.post(
-            f'{self.base_url}{endpoint}',
-            headers=headers,
-            **kwargs
-        )
+        return self.session.post(f'{self.base_url}{endpoint}', headers=self._get_headers(), **kwargs)
 ```
 
 </details>
@@ -179,51 +128,20 @@ class APIClient:
 <summary>Archivo: <code>pysighor_cli/commands/aulas.py</code></summary>
 
 ```python
-import click
-from pysighor_cli.api_client.client import APIClient
-from pysighor_cli.utils.formatters import format_table
-
 @click.command()
-@click.option('--page', default=1, help='Número de página')
-@click.option('--limit', default=10, help='Resultados por página')
+@click.option('--page', default=1)
+@click.option('--limit', default=10)
 def list_aulas(page, limit):
-    """
-    Listar todas las aulas del sistema.
-
-    Este comando consume el endpoint GET /api/aulas del backend FastAPI.
-    El análisis MVC se mantiene intacto: vista CLI → API REST → controlador → modelo.
-    """
+    """Listar aulas consumiendo GET /api/aulas del backend FastAPI."""
     client = APIClient()
+    response = client.get('/aulas', params={'page': page, 'limit': limit})
 
-    try:
-        response = client.get('/aulas', params={
-            'page': page,
-            'limit': limit
-        })
-
-        if response.status_code == 200:
-            data = response.json()
-            aulas = data['items']
-            total = data['total']
-
-            if not aulas:
-                click.echo('No se encontraron aulas.')
-                return
-
-            # Formateo de tabla para terminal
-            headers = ['ID', 'Código', 'Capacidad', 'Edificio', 'Tipo']
-            rows = [
-                [a['id'], a['codigo'], a['capacidad'], a['edificio'], a['tipo']]
-                for a in aulas
-            ]
-
-            click.echo(format_table(headers, rows))
-            click.echo(f'\nMostrando {len(aulas)} de {total} aulas (Página {page})')
-        else:
-            click.echo(f'✗ Error al obtener aulas: {response.status_code}', err=True)
-
-    except Exception as e:
-        click.echo(f'✗ Error: {str(e)}', err=True)
+    if response.status_code == 200:
+        aulas = response.json()['items']
+        headers = ['ID', 'Código', 'Capacidad', 'Edificio', 'Tipo']
+        rows = [[a['id'], a['codigo'], a['capacidad'], a['edificio'], a['tipo']] for a in aulas]
+        click.echo(format_table(headers, rows))
+    # ... manejo de errores
 ```
 
 </details>
@@ -247,6 +165,8 @@ def list_aulas(page, limit):
 - Solo se agrega un nuevo punto de contacto (CLI) al sistema existente
 
 ## Evidencia de la Arquitectura 2: CLI monolítico
+
+> **Nota:** Los ejemplos de código presentados están simplificados para enfocarse en lo esencial. Se han omitido imports completos, manejo exhaustivo de errores y validaciones detalladas.
 
 ### Estructura esperada del proyecto
 
@@ -290,52 +210,20 @@ diseño-cli-python-standalone/
 <summary>Archivo: <code>pysighor_cli/commands/auth.py</code></summary>
 
 ```python
-import click
-from pysighor_cli.services.auth_service import AuthenticationService
-from pysighor_cli.repositories.user_repository import UserRepository
-from pysighor_cli.repositories.session_repository import SessionRepository
-from pysighor_cli.utils.database import get_db_session
-from pysighor_cli.utils.config import save_token
-
 @click.command()
 def login():
-    """
-    Iniciar sesión en el sistema pySigHor (standalone).
-
-    Este comando implementa directamente el análisis MVC sin intermediarios HTTP:
-    - Vista: Este comando CLI
-    - Controlador: AuthenticationService
-    - Modelo: UserRepository, SessionRepository
-    """
-    # Vista CLI: Interacción con usuario
+    """Iniciar sesión (standalone) con acceso directo a DB."""
     username = click.prompt('Usuario')
     password = click.prompt('Contraseña', hide_input=True)
 
-    # Obtener sesión de base de datos
     db_session = get_db_session()
+    auth_service = AuthenticationService(UserRepository(db_session), SessionRepository(db_session))
 
-    # Instanciar services y repositories (Controlador + Modelo del análisis)
-    user_repo = UserRepository(db_session)
-    session_repo = SessionRepository(db_session)
-    auth_service = AuthenticationService(user_repo, session_repo)
-
-    try:
-        # Controlador: Validación de credenciales
-        session_obj = auth_service.authenticate(username, password)
-
-        if session_obj:
-            # Persistencia de token
-            save_token(session_obj.token)
-
-            click.echo('✓ Sesión iniciada exitosamente')
-            click.echo(f'Bienvenido, {session_obj.user.nombre}')
-        else:
-            click.echo('✗ Credenciales inválidas', err=True)
-
-    except Exception as e:
-        click.echo(f'✗ Error al iniciar sesión: {str(e)}', err=True)
-    finally:
-        db_session.close()
+    session_obj = auth_service.authenticate(username, password)
+    if session_obj:
+        save_token(session_obj.token)
+        click.echo('✓ Sesión iniciada exitosamente')
+    # ... manejo de errores y db_session.close()
 ```
 
 </details>
@@ -344,55 +232,23 @@ def login():
 <summary>Archivo: <code>pysighor_cli/services/auth_service.py</code></summary>
 
 ```python
-from typing import Optional
-from pysighor_cli.models.session import Session
-from pysighor_cli.repositories.user_repository import UserRepository
-from pysighor_cli.repositories.session_repository import SessionRepository
-
 class AuthenticationService:
-    """
-    Controlador Service para autenticación.
-
-    Esta clase implementa directamente el controlador del análisis MVC.
-    Es equivalente al AuthenticationService del backend FastAPI,
-    pero sin dependencias de HTTP/REST.
-    """
-
+    """Controlador para autenticación (implementación standalone sin dependencias HTTP)."""
     def __init__(self, user_repo: UserRepository, session_repo: SessionRepository):
         self.user_repo = user_repo
         self.session_repo = session_repo
 
     def authenticate(self, username: str, password: str) -> Optional[Session]:
-        """
-        Autentica usuario y crea sesión.
-
-        Responsabilidades (del análisis):
-        1. Validar formato de credenciales
-        2. Buscar usuario en repositorio
-        3. Verificar contraseña
-        4. Crear sesión si es válido
-        """
-        # Validación de formato
+        """Autentica usuario y crea sesión según análisis MVC."""
         if not self._validate_credentials(username, password):
             return None
 
-        # Buscar usuario (delegación a Modelo)
         user = self.user_repo.find_by_username(username)
-
-        if not user:
-            return None
-
-        # Verificar contraseña
-        if not user.verify_password(password):
-            return None
-
-        # Crear sesión (delegación a Modelo)
-        session = self.session_repo.create(user.id)
-
-        return session
+        if user and user.verify_password(password):
+            return self.session_repo.create(user.id)
+        return None
 
     def _validate_credentials(self, username: str, password: str) -> bool:
-        """Validación de formato de credenciales"""
         return bool(username and password and len(username) >= 3)
 ```
 
@@ -402,31 +258,15 @@ class AuthenticationService:
 <summary>Archivo: <code>pysighor_cli/repositories/user_repository.py</code></summary>
 
 ```python
-from typing import Optional
-from sqlalchemy.orm import Session
-from pysighor_cli.models.user import User
-
 class UserRepository:
-    """
-    Modelo Repository para usuarios.
-
-    Esta clase implementa el acceso a datos del análisis MVC.
-    Encapsula todas las operaciones de persistencia de usuarios.
-    """
-
+    """Modelo Repository: acceso a datos de usuarios."""
     def __init__(self, db_session: Session):
         self.db = db_session
 
     def find_by_username(self, username: str) -> Optional[User]:
-        """
-        Busca usuario por nombre de usuario.
-
-        Responsabilidad del Modelo: Acceso a datos.
-        """
         return self.db.query(User).filter(User.username == username).first()
 
     def find_by_id(self, user_id: int) -> Optional[User]:
-        """Busca usuario por ID"""
         return self.db.query(User).filter(User.id == user_id).first()
 ```
 
@@ -436,18 +276,8 @@ class UserRepository:
 <summary>Archivo: <code>pysighor_cli/models/user.py</code></summary>
 
 ```python
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-import bcrypt
-
-Base = declarative_base()
-
 class User(Base):
-    """
-    Modelo Model para usuarios.
-
-    Representa la entidad Usuario del análisis MVC.
-    """
+    """Modelo: entidad Usuario del análisis MVC."""
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
@@ -457,15 +287,8 @@ class User(Base):
     email = Column(String(100))
 
     def verify_password(self, password: str) -> bool:
-        """
-        Verifica contraseña contra hash almacenado.
-
-        Responsabilidad del Modelo: Lógica de negocio de la entidad.
-        """
-        return bcrypt.checkpw(
-            password.encode('utf-8'),
-            self.password_hash.encode('utf-8')
-        )
+        """Verifica contraseña contra hash almacenado."""
+        return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
 ```
 
 </details>
