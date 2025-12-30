@@ -26,7 +26,7 @@ Ambas arquitecturas implementan los mismos casos de uso sin modificar el anális
 El [artículo 015](/extraDocs/015-dashboards-multistack-validacion-experimental/) demostró independencia tecnológica entre dos "primos tecnológicos":
 
 - **FastAPI/React:** Stack minimalista, Python, biblioteca compositiva
-- **Spring/Angular:** Stack enterprise, Java, framework con opinión
+- **Spring/Angular:** Stack enterprise, Java, framework *con opinión*
 
 **Similitudes entre ambos stacks:**
 
