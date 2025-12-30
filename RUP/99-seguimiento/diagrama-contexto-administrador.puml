@@ -19,11 +19,11 @@ legend top
     **DASHBOARD DE CONTEXTO** - <i>Casos de uso</i>
     '====
     |<#gray>     | Identificado |<#red>     | Requisitado |<#darkgoldenrod>     | Analizado |<#green>     | Diseñado |<#lightblue>     | Desarrollado |<#blue>     | Probado |<#black>     | Completado |
+    | | | | | | | | - FastAPI/React |
     | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - Spring/Angular]] |
     '====
     '[**nombreCasoUso()**] -> Especificación detallada / [**A**] -> Análisis MVC / [**D**] -> Diseño
     '====
-    Stack tecnológico: **FastAPI/React**
 end legend
 
 footer
