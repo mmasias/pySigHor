@@ -71,6 +71,7 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 | 012 | [Reflexión: Fase de Análisis RUP Completada al 100%](012-reflexion-fase-analisis-completada/README.md) | [`4facee8`](https://github.com/mmasias/pySigHor/commit/4facee8) | Evaluación final contra hitos metodológicos, métricas completas y preparación para fase de Diseño |
 | 013 | [Triangulación metodológica: equipos independientes para consolidación arquitectónica en RUP](013-consolidacion-arquitectonica/README.md) | [Por determinar] | Innovación en validación cruzada para transición crítica Análisis → Diseño |
 | 014 | [Prototipado más allá de GUI: validación de interfaces en arquitecturas modernas](014-prototipado-mas-alla-gui/README.md) | [Por determinar] | Expansión del concepto de prototipado para APIs REST, CLIs y múltiples puntos de contacto del sistema |
+| 015 | [Dashboards multi-stack y validación experimental: RUP con FastAPI/React y Spring/Angular](015-dashboards-multistack-validacion-experimental/README.md) | [Por determinar] | Validación práctica de independencia tecnológica RUP con implementaciones paralelas |
 
 ### Estructura de artículos
 
