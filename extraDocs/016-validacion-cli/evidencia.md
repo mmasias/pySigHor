@@ -44,7 +44,6 @@
 4. `editarAula()` - Edición de aulas
 5. `eliminarAula()` - Eliminación segura con confirmación
 
-
 ## Evidencia de la Arquitectura 1: CLI como cliente HTTP
 
 ### Estructura esperada del proyecto
@@ -231,10 +230,14 @@ def list_aulas(page, limit):
 
 ### Diagrama de secuencia: CLI → API REST → Database
 
+<div align=center>
+
 |Diagrama PlantUML|
 |-|
 |![Secuencia CLI HTTP](../../images/extraDocs/016-validacion-cli/secuencia-cli-http.svg)|
 |Archivo fuente: [secuencia-cli-http.puml](secuencia-cli-http.puml)|
+
+</div>
 
 **Observación clave:**
 
@@ -469,10 +472,14 @@ class User(Base):
 
 ### Diagrama de secuencia: CLI → Services → Repositories → Database
 
+<div align=center>
+
 |Diagrama PlantUML|
 |-|
 |![Secuencia CLI Standalone](../../images/extraDocs/016-validacion-cli/secuencia-cli-standalone.svg)|
 |Archivo fuente: [secuencia-cli-standalone.puml](secuencia-cli-standalone.puml)|
+
+</div>
 
 **Observación clave:**
 
@@ -481,33 +488,40 @@ class User(Base):
 - El análisis MVC se mapea **directamente** a código Python standalone
 - El análisis permanece **sin modificación** - solo cambia la implementación técnica
 
-
 ## Comparación lado a lado: Arquitectura 1 vs Arquitectura 2
 
 ### Caso de uso: `iniciarSesion()`
 
-| Aspecto | Arquitectura 1 (HTTP) | Arquitectura 2 (Monolítico) |
+<div align=center>
+
+|Aspecto|Arquitectura 1 (HTTP)|Arquitectura 2 (Monolítico)|
 |-|-|-|
-| **Vista** | `commands/auth.py` → APIClient | `commands/auth.py` → AuthService |
-| **Controlador** | Reutiliza FastAPI backend | Implementa `AuthenticationService` |
-| **Modelo** | Reutiliza FastAPI backend | Implementa `UserRepository` + `SessionRepository` |
-| **Dependencias** | `click`, `requests` | `click`, `sqlalchemy`, `psycopg2` |
-| **Servidor requerido** | Sí (FastAPI corriendo) | No (standalone) |
-| **Tiempo estimado** | ~30 min | ~1.5 horas |
-| **Artefactos nuevos** | 3 archivos | 7 archivos |
-| **Líneas de código** | ~80 LOC | ~250 LOC |
-| **Reutilización** | 100% de backend | 0% de backend (reimplementación) |
-| **Análisis MVC modificado** | No | No |
+|**Vista**|`commands/auth.py` → APIClient|`commands/auth.py` → AuthService|
+|**Controlador**|Reutiliza FastAPI backend|Implementa `AuthenticationService`|
+|**Modelo**|Reutiliza FastAPI backend|Implementa `UserRepository` + `SessionRepository`|
+|**Dependencias**|`click`, `requests`|`click`, `sqlalchemy`, `psycopg2`|
+|**Servidor requerido**|Sí (FastAPI corriendo)|No (standalone)|
+|**Tiempo estimado**|~30 min|~1.5 horas|
+|**Artefactos nuevos**|3 archivos|7 archivos|
+|**Líneas de código**|~80 LOC|~250 LOC|
+|**Reutilización**|100% de backend|0% de backend (reimplementación)|
+|**Análisis MVC modificado**|No|No|
+
+</div>
 
 ### Validación de independencia tecnológica
 
-| Dimensión | Arquitectura 1 | Arquitectura 2 | Análisis afectado |
+<div align=center>
+
+|Dimensión|Arquitectura 1|Arquitectura 2|Análisis afectado|
 |-|-|-|-|
-| **Paradigma de interfaz** | CLI (terminal) | CLI (terminal) | No |
-| **Arquitectura de sistema** | Cliente HTTP | Monolítico standalone | No |
-| **Tecnología de persistencia** | API REST | SQLAlchemy ORM | No |
-| **Patrón de comunicación** | HTTP/JSON | Llamadas directas | No |
-| **Responsabilidades MVC** | Vista → Controlador → Modelo | Vista → Controlador → Modelo | No |
+|**Paradigma de interfaz**|CLI (terminal)|CLI (terminal)|No|
+|**Arquitectura de sistema**|Cliente HTTP|Monolítico standalone|No|
+|**Tecnología de persistencia**|API REST|SQLAlchemy ORM|No|
+|**Patrón de comunicación**|HTTP/JSON|Llamadas directas|No|
+|**Responsabilidades MVC**|Vista → Controlador → Modelo|Vista → Controlador → Modelo|No|
+
+</div>
 
 **Conclusión visual:** El análisis MVC permanece **100% inalterado** independientemente de:
 
@@ -515,37 +529,43 @@ class User(Base):
 2. Arquitectura de sistema (cliente HTTP → monolítico)
 3. Stack tecnológico (FastAPI/React → Python/Click)
 
-
 ## Métricas del experimento CLI
 
 ### Resistencia del análisis
 
-| Métrica | Valor | Interpretación |
+<div align=center>
+
+|Métrica|Valor|Interpretación|
 |-|-|-|
-| **Casos de uso analizados** | 32 | Base completa sin modificación |
-| **Casos diseñados CLI (HTTP)** | 5 | Mismo conjunto de casos que web stacks |
-| **Casos diseñados CLI (standalone)** | 5 | Mismo conjunto de casos que web stacks |
-| **Artefactos de análisis modificados** | 0 | **100% de independencia tecnológica** |
-| **Diagramas MVC modificados** | 0 | **100% de validez transversal** |
-| **Especificaciones detalladas modificadas** | 0 | **100% de reutilización** |
+|**Casos de uso analizados**|32|Base completa sin modificación|
+|**Casos diseñados CLI (HTTP)**|5|Mismo conjunto de casos que web stacks|
+|**Casos diseñados CLI (standalone)**|5|Mismo conjunto de casos que web stacks|
+|**Artefactos de análisis modificados**|0|**100% de independencia tecnológica**|
+|**Diagramas MVC modificados**|0|**100% de validez transversal**|
+|**Especificaciones detalladas modificadas**|0|**100% de reutilización**|
+
+</div>
 
 ### Comparativa de esfuerzo
 
-| Caso de Uso | GUI React | GUI Angular | CLI HTTP | CLI Standalone |
+<div align=center>
+
+|Caso de Uso|GUI React|GUI Angular|CLI HTTP|CLI Standalone|
 |-|-|-|-|-|
-| `iniciarSesion()` | 1h | 1h | 0.5h | 1.5h |
-| `abrirAulas()` | 1h | 1h | 0.5h | 1.5h |
-| `crearAula()` | 1h | 1h | 0.5h | 1.5h |
-| `editarAula()` | 1.5h | 1.5h | 0.5h | 2h |
-| `eliminarAula()` | 1h | 1h | 0.5h | 1.5h |
-| **TOTAL** | **~5.5h** | **~5.5h** | **~2.5h** | **~8h** |
+|`iniciarSesion()`|1h|1h|0.5h|1.5h|
+|`abrirAulas()`|1h|1h|0.5h|1.5h|
+|`crearAula()`|1h|1h|0.5h|1.5h|
+|`editarAula()`|1.5h|1.5h|0.5h|2h|
+|`eliminarAula()`|1h|1h|0.5h|1.5h|
+|**TOTAL**|**~5.5h**|**~5.5h**|**~2.5h**|**~8h**|
+
+</div>
 
 **Observaciones:**
 
 - CLI HTTP es **2.2x más rápido** que GUI web (reutiliza backend completo)
 - CLI standalone es **1.5x más lento** que GUI web (reimplementa toda la pila)
 - **Todos mantienen el análisis sin cambios** - diferencia solo en implementación
-
 
 ## Evidencia esperada: Dashboards CLI
 
@@ -562,7 +582,7 @@ diagrama-contexto-administrador.svg
 
 Leyenda:
 - CLI Python HTTP (stack actual)
-- Cambiar a: FastAPI/React | Spring/Angular | CLI Python Standalone
+- Cambiar a: FastAPI/React|Spring/Angular|CLI Python Standalone
 ```
 
 </details>
@@ -580,7 +600,7 @@ diagrama-contexto-administrador.svg
 
 Leyenda:
 - CLI Python Standalone (stack actual)
-- Cambiar a: FastAPI/React | Spring/Angular | CLI Python HTTP
+- Cambiar a: FastAPI/React|Spring/Angular|CLI Python HTTP
 ```
 
 </details>
