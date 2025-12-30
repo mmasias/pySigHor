@@ -7,7 +7,7 @@ skinparam linetype polyline
 legend {
   BackGroundColor #f0f0f0;
   'Margin 30
-  Padding 10
+  'Padding 10
 }
 footer {
   HorizontalAlignment left
@@ -18,9 +18,9 @@ footer {
 legend top
     **DASHBOARD DE CONTEXTO** - <i>Casos de uso</i>
     '====
-    |<#gray>     | Identificado |<#red>     | Requisitado |<#darkgoldenrod>     | Analizado |<#green>     | Diseñado |<#lightblue>     |Desarrollado|<#blue>     | Probado |<#black>     | Completado |
-    | | | | | | | |[[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - FastAPI + React + TypeScript]] |
-    | | | | | | | |[[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - Spring Boot + Angular + TypeScript]] |
+    |<#gray>     | Identificado |<#red>     | Requisitado |<#darkgoldenrod>     | Analizado |<#green>     | Diseñado |<#lightblue>     | Desarrollado |<#blue>     | Probado |<#black>     | Completado |
+    | | | | | | | |[[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - FastAPI/React/TS]] |
+    | | | | | | | |[[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - Spring/Angular/TS]] |
     '====
     '[**nombreCasoUso()**] -> Especificación detallada / [**A**] -> Análisis MVC / [**D**] -> Diseño (disponible en ramas específicas)
     '====
