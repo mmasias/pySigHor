@@ -1,0 +1,62 @@
+@startuml arquitectura-cli-http
+!define RECTANGLE class
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam component {
+    BackgroundColor<<usuario>> LightBlue
+    BackgroundColor<<vista>> LightGreen
+    BackgroundColor<<client>> LightYellow
+    BackgroundColor<<backend>> LightCoral
+    BackgroundColor<<database>> LightGray
+    BorderColor Black
+    ArrowColor Black
+}
+
+component "Usuario" <<usuario>> as usuario
+component "CLI Vista\n(Click)" <<vista>> as cli {
+    component "commands/auth.py"
+    component "commands/aulas.py"
+}
+
+note right of cli
+  **Vista:**
+  Interacción terminal
+  con usuario
+end note
+
+component "API Client\n(Requests)" <<client>> as client {
+    component "Consume FastAPI"
+}
+
+note right of client
+  **Reutilización:**
+  100% del backend
+  FastAPI existente
+end note
+
+component "FastAPI Backend" <<backend>> as backend {
+    component "Controllers\n(Vista)" as controllers
+    component "Services\n(Controlador)" as services
+    component "Repositories\n(Modelo)" as repositories
+}
+database "PostgreSQL" <<database>> as db
+
+note right of backend
+  **Controlador + Modelo:**
+  Ya implementados
+  para React/Angular
+end note
+
+usuario -down-> cli : comandos CLI
+cli -down-> client : HTTP/JSON
+client -down-> backend : REST endpoints
+controllers -down-> services
+services -down-> repositories
+repositories -down-> db : SQL
+
+
+
+
+
+@enduml

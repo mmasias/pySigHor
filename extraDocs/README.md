@@ -72,6 +72,7 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 | 013 | [Triangulación metodológica: equipos independientes para consolidación arquitectónica en RUP](013-consolidacion-arquitectonica/README.md) | [Por determinar] | Innovación en validación cruzada para transición crítica Análisis → Diseño |
 | 014 | [Prototipado más allá de GUI: validación de interfaces en arquitecturas modernas](014-prototipado-mas-alla-gui/README.md) | [Por determinar] | Expansión del concepto de prototipado para APIs REST, CLIs y múltiples puntos de contacto del sistema |
 | 015 | [Dashboards multi-stack y validación experimental: RUP con FastAPI/React y Spring/Angular](015-dashboards-multistack-validacion-experimental/README.md) | [Por determinar] | Validación práctica de independencia tecnológica RUP con implementaciones paralelas |
+| 016 | [CLI como validación: de GUI web a terminal sin modificar el análisis](016-validacion-cli/README.md) | [Por determinar] | Validación de independencia con CLI - dos arquitecturas (HTTP vs monolítico), un solo análisis |
 
 ### Estructura de artículos
 

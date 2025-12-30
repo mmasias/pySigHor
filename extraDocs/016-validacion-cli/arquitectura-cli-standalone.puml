@@ -1,0 +1,65 @@
+@startuml arquitectura-cli-standalone
+!define RECTANGLE class
+
+skinparam componentStyle rectangle
+skinparam backgroundColor #FEFEFE
+skinparam component {
+    BackgroundColor<<usuario>> LightBlue
+    BackgroundColor<<vista>> LightGreen
+    BackgroundColor<<controlador>> LightYellow
+    BackgroundColor<<modelo>> LightCoral
+    BackgroundColor<<database>> LightGray
+    BorderColor Black
+    ArrowColor Black
+}
+
+component "Usuario" <<usuario>> as usuario
+component "CLI Vista\n(Click)" <<vista>> as cli {
+    component "commands/auth.py"
+    component "commands/aulas.py"
+}
+component "Services\n(Controlador)" <<controlador>> as services {
+    component "auth_service.py"
+    component "aula_service.py"
+}
+component "Repositories\n(Modelo)" <<modelo>> as repos {
+    component "user_repository.py"
+    component "aula_repository.py"
+}
+component "Models\n(Modelo)" <<modelo>> as models {
+    component "user.py"
+    component "aula.py"
+}
+database "PostgreSQL" <<database>> as db
+
+usuario -down-> cli : comandos CLI
+cli -down-> services : llamadas directas
+services -down-> repos : llamadas directas
+repos -down-> models : ORM (SQLAlchemy)
+models -down-> db : SQL
+
+note right of cli
+  **Vista:**
+  Interacción terminal
+  con usuario
+end note
+
+note right of services
+  **Controlador:**
+  Implementación propia
+  de lógica de negocio
+end note
+
+note right of repos
+  **Modelo:**
+  Acceso directo a DB
+  sin dependencias HTTP
+end note
+
+note bottom of db
+  **Standalone:**
+  Sin servidor HTTP
+  Portable, independiente
+end note
+
+@enduml
