@@ -1,0 +1,49 @@
+@startuml secuencia-cli-standalone
+
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+
+actor Usuario
+participant "CLI Vista" as CLI
+participant "AuthService\n(Controlador)" as AuthService
+participant "UserRepository\n(Modelo)" as UserRepo
+participant "SessionRepository\n(Modelo)" as SessionRepo
+database "PostgreSQL" as DB
+
+Usuario -> CLI: login
+activate CLI
+
+CLI -> AuthService: authenticate()
+activate AuthService
+
+AuthService -> UserRepo: find_by_username()
+activate UserRepo
+
+UserRepo -> DB: SELECT
+activate DB
+DB --> UserRepo: user data
+deactivate DB
+
+UserRepo --> AuthService: user
+deactivate UserRepo
+
+AuthService -> AuthService: verify_password()\n(en entity)
+
+AuthService -> SessionRepo: create_session()
+activate SessionRepo
+
+SessionRepo -> DB: INSERT
+activate DB
+DB --> SessionRepo: session created
+deactivate DB
+
+SessionRepo --> AuthService: session
+deactivate SessionRepo
+
+AuthService --> CLI: session object
+deactivate AuthService
+
+CLI --> Usuario: ✓ Sesión iniciada
+deactivate CLI
+
+@enduml

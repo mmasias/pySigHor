@@ -1,0 +1,49 @@
+@startuml secuencia-cli-http
+
+skinparam backgroundColor #FEFEFE
+skinparam sequenceMessageAlign center
+
+actor Usuario
+participant "CLI Vista" as CLI
+participant "API Client" as Client
+participant "FastAPI\nController" as Controller
+participant "Service\n(Controlador)" as Service
+participant "Repository\n(Modelo)" as Repository
+database "PostgreSQL" as DB
+
+Usuario -> CLI: login
+activate CLI
+
+CLI -> Client: POST /login
+activate Client
+
+Client -> Controller: authenticate()
+activate Controller
+
+Controller -> Service: validate()
+activate Service
+
+Service -> Repository: find_user()
+activate Repository
+
+Repository -> DB: SELECT
+activate DB
+DB --> Repository: user data
+deactivate DB
+
+Repository --> Service: user
+deactivate Repository
+
+Service --> Controller: validation result
+deactivate Service
+
+Controller --> Client: HTTP 200 + token
+deactivate Controller
+
+Client --> CLI: response data
+deactivate Client
+
+CLI --> Usuario: ✓ Sesión iniciada
+deactivate CLI
+
+@enduml
