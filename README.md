@@ -8,18 +8,47 @@
 
 # pySigHor - Sistema generador de horarios
 
+## La aplicación
+
 En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Industrial y de Sistemas de la Universidad de Piura, impartida por el prof. Roberto Castro, aplicamos lo que habíamos aprendido en [Investigación de Operaciones](https://es.wikipedia.org/wiki/Programaci%C3%B3n_lineal) para desarrollar SIGHOR, un [algoritmo](l'Algoritmo.md) que derivó en un sistema generador de horarios. ¡Una joyita en Visual Basic 3!
+
 
 <div align=center>
 
-## El proyecto
-
-|[Proceso(s)](/RUP/README.md)|[Proceso(s)<br><sub>*vPragmática*</sub>](/RUP-pragmatico/README.md)|[Estado actual](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Reflexiones...](/extraDocs/README.md)|
-|-|-|-|-|
-|Aplicación de la metodología RUP para la reingeniería del sistema, con énfasis en pureza metodológica y trazabilidad sistemática.|Versión "ligera" de los procesos.|Propuesta de artefacto dinámico de seguimiento|Artículos de reflexión a partir de la dinámica de trabajo
-|||<sub>WIP: [RamaDiseño](https://github.com/mmasias/pySigHor/tree/faseDise%C3%B1o-Iteracion001/)</sub>
+|![](/images/F8zDugwX0AArV7H.jpeg)|![](/images/F8zDzlZXQAAe-o8.jpeg)|![](/images/F8zDw0CWEAADw8U.jpeg)|![](/images/F8zD4afXAAIsnGn.jpeg)|![](/images/F8zD2blXAAArega.jpeg)
+|:-:|:-:|:-:|:-:|:-:|
+|Definición de aulas|Definición de asignaturas (cursos)|Definición de profesores|Pantalla principal|Horario generado|
 
 </div>
+
+## El proyecto
+
+|[Proceso(s)](/RUP/README.md)|[Estado actual](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Reflexiones...](/extraDocs/README.md)|
+|-|-|-|
+|Aplicación de la metodología RUP para la reingeniería del sistema, con énfasis en **independencia tecnológica** y trazabilidad sistemática.|Dashboard visual de progreso<br>32 casos de uso analizados|14 artículos documentando decisiones metodológicas y validaciones experimentales
+
+### Experimento de Independencia Tecnológica RUP
+
+**Hipótesis:** Un análisis RUP completo puede soportar múltiples implementaciones tecnológicas sin modificaciones.
+
+|Rama|Stack|Casos diseñados|Dashboard|Estado|
+|-|-|-:|-|-|
+|[`main`](https://github.com/mmasias/pySigHor/tree/main)|Análisis puro (agnóstico)|32/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Completado|
+|[`diseño-fastapi-react`](https://github.com/mmasias/pySigHor/tree/diseño-fastapi-react)|FastAPI + React|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
+|[`diseño-spring-angular`](https://github.com/mmasias/pySigHor/tree/diseño-spring-angular)|Spring + Angular|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
+|`diseño-cli-python-http`<br>`diseño-cli-python-standalone`|CLI (validación paradigma no-GUI)|5/32 (planificado)|Pendiente|En diseño conceptual|
+
+**Resultado:** 0 modificaciones al análisis tras 3 implementaciones diferentes ([Artículo 015](/extraDocs/015-dashboards-multistack-validacion-experimental/))
+
+
+## Hitos
+
+|Conceptuales|Validaciones|Documentación 
+|-|-|-|
+|**32 casos de uso** con análisis MVC completo|**Independencia tecnológica validada** con 3 stacks diferentes (FastAPI/React, Spring/Angular, CLI)|**Artículos técnicos** documentando decisiones y validaciones ([extraDocs](/extraDocs/README.md))
+|**Nomenclatura MVC** aplicada sistemáticamente|**0 modificaciones al análisis** tras 3 implementaciones diferentes|**Trazabilidad completa** en 51+ conversaciones documentadas ([conversation-log](/conversation-log.md))
+|**Diagramas de contexto** libres de sesgo tecnológico|**Dashboard visual** para seguimiento de progreso|**Colaboración humano-IA** documentada éticamente ([Artículo 005](/extraDocs/005-etiquetado-etico-colaboracion-humano-ia/))
+|**Wireframes SALT** como abstracciones de interacción|**Validación multi-paradigma** (GUI web → CLI terminal)|**Proceso completamente documentado** para replicación y estudio
 
 ## Estructura del repositorio
 
@@ -42,22 +71,10 @@ pySigHor/
 └── README.md                        # Resumen del proyecto
 ```
 
-## La aplicación
 
-<div align=center>
+<div align=right>
 
-|![](/images/F8zDugwX0AArV7H.jpeg)|![](/images/F8zDzlZXQAAe-o8.jpeg)|![](/images/F8zDw0CWEAADw8U.jpeg)|![](/images/F8zD4afXAAIsnGn.jpeg)|![](/images/F8zD2blXAAArega.jpeg)
-|:-:|:-:|:-:|:-:|:-:|
-|Definición de aulas|Definición de asignaturas (cursos)|Definición de profesores|Pantalla principal|Horario generado|
+|*In memoriam L.F.M.*
+|-
 
 </div>
-
-## Hitos metodológicos que guían el trabajo (y se esperan alcanzar)
-
-|Pureza conceptual|Patrón metodológico|Documentación metodológica
-|-|-|-|
-|**Casos de uso atómicos** identificados y organizados|**Conexión sistemática** entre casos de uso mediante colaboraciones|**Artículos técnicos** documentando lecciones aprendidas y decisiones metodológicas
-|**Nomenclatura tecnológicamente agnóstica** aplicada sistemáticamente  |**Marco escalable** para análisis futuro de casos de uso restantes|**Trazabilidad completa** en conversation-log con todas las conversaciones registradas
-|**Diagramas de contexto** libres de sesgo tecnológico||**Patrones reutilizables** establecidos para proyectos RUP similares
-|**Trazabilidad completa** desde requisitos hasta análisis de colaboración||
-
