@@ -378,7 +378,7 @@ class User(Base):
 - **Independencia total** - No requiere servidor HTTP
 - **Portabilidad** - Distribuible como ejecutable único
 - **Performance** - Sin latencia de red
-- **Resiliencia** - Menos puntos de falla
+- **Robustez** - Menos puntos de falla
 - **Funciona sin conexión** - Opera sin conectividad a API
 
 </td></tr>
