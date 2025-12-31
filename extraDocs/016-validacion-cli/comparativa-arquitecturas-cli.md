@@ -4,7 +4,7 @@
 
 |||||||
 |-|-|-|-|-|-|
-|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|[Evidencia](evidencia.md)|**Comparativa**|[Reuso](reusacion-vs-reimplementacion.md)|
+|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|[Evidencia](evidencia.md)|**Comparativa**|[Reuso](reuso-vs-reimplementacion.md)|
 
 </div>
 
@@ -535,4 +535,4 @@ El análisis MVC es **verdaderamente independiente** de decisiones arquitectóni
 - [Artículo principal](README.md)
 - [Contexto del experimento](contexto.md)
 - [Evidencia de implementación](evidencia.md)
-- [Análisis de reuso vs reimplementación](reusacion-vs-reimplementacion.md)
+- [Análisis de reuso vs reimplementación](reuso-vs-reimplementacion.md)

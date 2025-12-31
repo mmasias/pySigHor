@@ -4,7 +4,7 @@
 
 |||||||
 |-|-|-|-|-|-|
-|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|[Reuso](reusacion-vs-reimplementacion.md)|
+|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|[Reuso](reuso-vs-reimplementacion.md)|
 
 </div>
 
