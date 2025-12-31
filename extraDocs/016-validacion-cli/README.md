@@ -4,7 +4,7 @@
 
 |||||||
 |-|-|-|-|-|-|
-|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|[Reutilización](reutilizacion-vs-reimplementacion.md)|
+|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|[Reuso](reusacion-vs-reimplementacion.md)|
 
 </div>
 
@@ -76,9 +76,9 @@ El experimento CLI reveló una dimensión adicional de validación:
 |Arquitectura 1<br>CLI como cliente HTTP|Arquitectura 2<br>CLI monolítico|
 |-|-|
 `CLI → HTTP → FastAPI → PostgreSQL`|`CLI → Services → Repositories → PostgreSQL`
-Reutiliza backend existente|Sin dependencias de servidor HTTP
+Reusa backend existente|Sin dependencias de servidor HTTP
 Consume mismos endpoints que React|Implementación directa desde análisis
-Máxima reutilización de código|Standalone, portable
+Máxima reuso de código|Standalone, portable
 
 </div>
 
@@ -162,14 +162,14 @@ Password: ****
 
 |![Arquitectura CLI HTTP](../../images/extraDocs/016-validacion-cli/arquitectura-cli-http.svg)|
 |:-:|
-|**CLI como cliente HTTP - Reutiliza backend FastAPI existente**|
+|**CLI como cliente HTTP - Reusa backend FastAPI existente**|
 |[Ver diagrama PlantUML](arquitectura-cli-http.puml)|
 
 </div>
 
 ### Ventajas de esta arquitectura
 
-1. **Máxima reutilización:** Backend completo ya implementado
+1. **Máxima reuso:** Backend completo ya implementado
 2. **Cero duplicación de lógica:** Services y repositories son los mismos
 3. **Consistencia garantizada:** Mismo backend para React y CLI
 4. **Rapidez de desarrollo:** Solo diseñar comandos CLI
@@ -355,8 +355,8 @@ def login():
 | Aspecto | Cliente HTTP | Monolítico | Diferencia |
 |-|-|-|-|
 | **Comandos CLI** | 5 comandos (~40 líneas c/u) | 5 comandos (~40 líneas c/u) | Igual |
-| **Services** | Reutiliza FastAPI | Implementar desde cero (~300 líneas) | +300 líneas |
-| **Repositories** | Reutiliza FastAPI | Implementar desde cero (~200 líneas) | +200 líneas |
+| **Services** | Reusa FastAPI | Implementar desde cero (~300 líneas) | +300 líneas |
+| **Repositories** | Reusa FastAPI | Implementar desde cero (~200 líneas) | +200 líneas |
 | **Total líneas de código** | ~200 | ~700 | +250% |
 | **Tiempo estimado** | ~2h | ~6h | +200% |
 | **Análisis RUP modificado** | 0% | 0% | **Igual** |
@@ -373,7 +373,7 @@ def login():
 | **Requiere base de datos** | Sí (indirecto) | Sí (directo) | Empate |
 | **Portabilidad** | Baja (2 componentes) | Alta (1 ejecutable) | Monolítico |
 | **Rendimiento** | Medio (overhead HTTP) | Alto (acceso directo) | Monolítico |
-| **Facilidad de desarrollo** | Alta (reutilización) | Media (desde cero) | Cliente HTTP |
+| **Facilidad de desarrollo** | Alta (reuso) | Media (desde cero) | Cliente HTTP |
 | **Mantenimiento** | Alto (1 backend) | Medio (2 implementaciones) | Cliente HTTP |
 
 </div>
@@ -416,7 +416,7 @@ def login():
 > "El análisis RUP captura responsabilidades de negocio, no decisiones tecnológicas. Las arquitecturas son elecciones de diseño basadas en factores técnicos (rendimiento, portabilidad, mantenimiento), no cambios al análisis."
 
 **Para profesionales:**
-> "La inversión en análisis MVC riguroso permite explorar múltiples arquitecturas sin rehacer trabajo conceptual. Cada arquitectura reutiliza el mismo análisis, solo cambia el nivel de reutilización tecnológica."
+> "La inversión en análisis MVC riguroso permite explorar múltiples arquitecturas sin rehacer trabajo conceptual. Cada arquitectura reusa el mismo análisis, solo cambia el nivel de reuso tecnológica."
 
 ## Conexión con artículos anteriores
 

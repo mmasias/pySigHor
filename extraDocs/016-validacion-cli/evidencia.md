@@ -4,7 +4,7 @@
 
 |||||||
 |-|-|-|-|-|-|
-|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|**Evidencia**|[Comparativa](comparativa-arquitecturas-cli.md)|[Reutilización](reutilizacion-vs-reimplementacion.md)|
+|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|**Evidencia**|[Comparativa](comparativa-arquitecturas-cli.md)|[Reuso](reusacion-vs-reimplementacion.md)|
 
 </div>
 
@@ -104,7 +104,7 @@ def login():
 
 ```python
 class APIClient:
-    """Cliente HTTP que reutiliza el backend FastAPI existente."""
+    """Cliente HTTP que reusa el backend FastAPI existente."""
     def __init__(self):
         self.base_url = get_api_base_url()
         self.session = requests.Session()
@@ -160,7 +160,7 @@ def list_aulas(page, limit):
 **Observación clave:**
 
 - El CLI solo implementa una nueva vista (comandos en terminal)
-- Reutiliza 100% del controlador (services) y modelo (repositories) del backend FastAPI
+- Reusa 100% del controlador (services) y modelo (repositories) del backend FastAPI
 - El análisis MVC permanece **sin modificación**
 - Solo se agrega un nuevo punto de contacto (CLI) al sistema existente
 
@@ -320,14 +320,14 @@ class User(Base):
 |Aspecto|Arquitectura 1 (HTTP)|Arquitectura 2 (Monolítico)|
 |-|-|-|
 |**Vista**|`commands/auth.py` → APIClient|`commands/auth.py` → AuthService|
-|**Controlador**|Reutiliza FastAPI backend|Implementa `AuthenticationService`|
-|**Modelo**|Reutiliza FastAPI backend|Implementa `UserRepository` + `SessionRepository`|
+|**Controlador**|Reusa FastAPI backend|Implementa `AuthenticationService`|
+|**Modelo**|Reusa FastAPI backend|Implementa `UserRepository` + `SessionRepository`|
 |**Dependencias**|`click`, `requests`|`click`, `sqlalchemy`, `psycopg2`|
 |**Servidor requerido**|Sí (FastAPI corriendo)|No (standalone)|
 |**Tiempo estimado**|~30 min|~1.5 horas|
 |**Artefactos nuevos**|3 archivos|7 archivos|
 |**Líneas de código**|~80 LOC|~250 LOC|
-|**Reutilización**|100% de backend|0% de backend (reimplementación)|
+|**Reuso**|100% de backend|0% de backend (reimplementación)|
 |**Análisis MVC modificado**|No|No|
 
 </div>
@@ -365,7 +365,7 @@ class User(Base):
 |**Casos diseñados CLI (standalone)**|5|Mismo conjunto de casos que web stacks|
 |**Artefactos de análisis modificados**|0|**100% de independencia tecnológica**|
 |**Diagramas MVC modificados**|0|**100% de validez transversal**|
-|**Especificaciones detalladas modificadas**|0|**100% de reutilización**|
+|**Especificaciones detalladas modificadas**|0|**100% de reuso**|
 
 </div>
 
@@ -386,7 +386,7 @@ class User(Base):
 
 **Observaciones:**
 
-- CLI HTTP es **2.2x más rápido** que GUI web (reutiliza backend completo)
+- CLI HTTP es **2.2x más rápido** que GUI web (reusa backend completo)
 - CLI standalone es **1.5x más lento** que GUI web (reimplementa toda la pila)
 - **Todos mantienen el análisis sin cambios** - diferencia solo en implementación
 

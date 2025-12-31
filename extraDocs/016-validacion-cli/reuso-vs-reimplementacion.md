@@ -1,36 +1,36 @@
-# Reutilización vs Reimplementación
+# Reuso vs Reimplementación
 
 <div align=right>
 
 |||||||
 |-|-|-|-|-|-|
-|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|**Reutilización**|
+|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|**Reuso**|
 
 </div>
 
-## La paradoja de la reutilización
+## La paradoja del reuso
 
 El experimento CLI plantea una paradoja aparente:
 
 <div align=center>
 
-|Reutilización máxima (CLI HTTP)|Reutilización mínima (CLI Standalone)|
+|Reuso máximo (CLI HTTP)|Reuso mínimo (CLI Standalone)|
 |-|-|
-|100% de backend reutilizado|0% de backend reutilizado
+|100% de backend reusado|0% de backend reusado
 |2.5 horas de desarrollo|8 horas de desarrollo
 |Dependencia de servidor HTTP|Independencia total
 
 </div>
 
-**La pregunta clave:** ¿Es siempre mejor reutilizar código?
+**La pregunta clave:** ¿Es siempre mejor reusar código?
 
-**La respuesta metodológica:** Depende del contexto. El análisis RUP es **reutilizable** en ambos casos, pero el **código de diseño** puede o no serlo según decisiones arquitectónicas.
+**La respuesta metodológica:** Depende del contexto. El análisis RUP es **reusable** en ambos casos, pero el **código de diseño** puede o no serlo según decisiones arquitectónicas.
 
-## Taxonomía de la reutilización en RUP
+## Taxonomía de la reuso en RUP
 
-### Nivel 1: Reutilización de análisis (100% en todos los casos)
+### Nivel 1: Reuso de análisis (100% en todos los casos)
 
-**Qué se reutiliza:**
+**Qué se reusa:**
 
 - Especificaciones detalladas de casos de uso
 - Diagramas de colaboración MVC
@@ -41,16 +41,16 @@ El experimento CLI plantea una paradoja aparente:
 
 **Evidencia en el experimento:**
 
-- FastAPI/React: Reutiliza análisis
-- Spring/Angular: Reutiliza análisis
-- CLI HTTP: Reutiliza análisis
-- CLI Standalone: Reutiliza análisis
+- FastAPI/React: Reusa análisis
+- Spring/Angular: Reusa análisis
+- CLI HTTP: Reusa análisis
+- CLI Standalone: Reusa análisis
 
-**Conclusión:** El análisis es **siempre reutilizable** independientemente de tecnología.
+**Conclusión:** El análisis es **siempre reusable** independientemente de tecnología.
 
-### Nivel 2: Reutilización de diseño (variable según arquitectura)
+### Nivel 2: Reuso de diseño (variable según arquitectura)
 
-**Qué *puede* reutilizarse:**
+**Qué *puede* reusarse:**
 
 - Clases de diseño (controllers, services, repositories)
 - Lógica de negocio (validaciones, transformaciones)
@@ -61,7 +61,7 @@ El experimento CLI plantea una paradoja aparente:
 
 <div align=center>
 
-|Stack|Reutiliza diseño de|Porcentaje|
+|Stack|Reusa diseño de|Porcentaje|
 |-|-|-|
 |**FastAPI/React**|Nada (primero implementado)|0%|
 |**Spring/Angular**|Nada (familia diferente: Java vs Python)|0%|
@@ -70,11 +70,11 @@ El experimento CLI plantea una paradoja aparente:
 
 </div>
 
-**Conclusión:** El diseño es **reutilizable solo dentro de la misma familia tecnológica**.
+**Conclusión:** El diseño es **reusable solo dentro de la misma familia tecnológica**.
 
-### Nivel 3: Reutilización de implementación (muy variable)
+### Nivel 3: Reuso de implementación (muy variable)
 
-**Qué *puede* reutilizarse:**
+**Qué *puede* reusarse:**
 
 - Código fuente exacto
 - Librerías y frameworks
@@ -85,16 +85,16 @@ El experimento CLI plantea una paradoja aparente:
 
 <div align=center>
 
-|Stack|Reutiliza implementación de|Forma de reutilización|
+|Stack|Reusa implementación de|Forma de reuso|
 |-|-|-|
-|**CLI HTTP**|FastAPI/React|**Consumo de API** - Reutilización por delegación|
+|**CLI HTTP**|FastAPI/React|**Consumo de API** - Reuso por delegación|
 |**CLI Standalone**|Nada|**Reimplementación** - Código nuevo desde cero|
 
 </div>
 
-**Conclusión:** La implementación es **reutilizable solo con decisiones arquitectónicas específicas** (API, microservicios, librerías compartidas).
+**Conclusión:** La implementación es **reusable solo con decisiones arquitectónicas específicas** (API, microservicios, librerías compartidas).
 
-## Análisis de reutilización por capa MVC
+## Análisis de reuso por capa MVC
 
 ### Capa Vista
 
@@ -107,7 +107,7 @@ El experimento CLI plantea una paradoja aparente:
 
 <div align=center>
 
-|Stack|Implementación Vista|Reutilización|
+|Stack|Implementación Vista|Reuso|
 |-|-|-|
 |FastAPI/React|Componentes React (.tsx)|0% entre stacks|
 |Spring/Angular|Componentes Angular (.ts)|0% entre stacks|
@@ -116,7 +116,7 @@ El experimento CLI plantea una paradoja aparente:
 
 </div>
 
-**Observación:** Vista siempre es **específica del paradigma de interfaz**. GUI web vs CLI terminal son **incompatibles** para reutilización de código, pero **compatibles** para reutilización de análisis.
+**Observación:** Vista siempre es **específica del paradigma de interfaz**. GUI web vs CLI terminal son **incompatibles** para reuso de código, pero **compatibles** para reuso de análisis.
 
 ### Capa Controlador
 
@@ -129,16 +129,16 @@ El experimento CLI plantea una paradoja aparente:
 
 <div align=center>
 
-|Stack|Implementación Controlador|Reutilización|
+|Stack|Implementación Controlador|Reuso|
 |-|-|-|
 |FastAPI/React|Services Python (FastAPI)|0% con Spring/Angular|
 |Spring/Angular|Services Java (Spring)|0% con FastAPI/React|
-|CLI HTTP|**Reutiliza** FastAPI Services|100% con FastAPI/React|
+|CLI HTTP|**Reusa** FastAPI Services|100% con FastAPI/React|
 |CLI Standalone|Services Python (standalone)|0% (reimplementa)|
 
 </div>
 
-**Observación:** Controlador es **reutilizable dentro de la misma familia** (Python FastAPI ↔ Python CLI HTTP). Entre lenguajes diferentes (Python ↔ Java), el análisis se reutiliza pero el código se reimplementa.
+**Observación:** Controlador es **reusable dentro de la misma familia** (Python FastAPI ↔ Python CLI HTTP). Entre lenguajes diferentes (Python ↔ Java), el análisis se reusa pero el código se reimplementa.
 
 ### Capa Modelo
 
@@ -151,22 +151,22 @@ El experimento CLI plantea una paradoja aparente:
 
 <div align=center>
 
-|Stack|Implementación Modelo|Reutilización|
+|Stack|Implementación Modelo|Reuso|
 |-|-|-|
 |FastAPI/React|Repositories Python + SQLAlchemy|0% con Spring/Angular|
 |Spring/Angular|Repositories Java + JPA|0% con FastAPI/React|
-|CLI HTTP|**Reutiliza** FastAPI Repositories|100% con FastAPI/React|
+|CLI HTTP|**Reusa** FastAPI Repositories|100% con FastAPI/React|
 |CLI Standalone|Repositories Python + SQLAlchemy|Potencial 70% con FastAPI|
 
 </div>
 
-**Observación:** Modelo es **reutilizable si comparten ORM y lenguaje**. CLI Standalone podría reutilizar modelos SQLAlchemy de FastAPI si existiera decisión arquitectónica de compartir librería.
+**Observación:** Modelo es **reusable si comparten ORM y lenguaje**. CLI Standalone podría reusar modelos SQLAlchemy de FastAPI si existiera decisión arquitectónica de compartir librería.
 
-## Cuantificación del esfuerzo: Reutilización vs Reimplementación
+## Cuantificación del esfuerzo: Reuso vs Reimplementación
 
 ### Caso de uso: `iniciarSesion()`
 
-**Implementación desde análisis (sin reutilización de código):**
+**Implementación desde análisis (sin reuso de código):**
 
 <div align=center>
 
@@ -179,20 +179,20 @@ El experimento CLI plantea una paradoja aparente:
 
 </div>
 
-**Implementación con reutilización (CLI HTTP):**
+**Implementación con reuso (CLI HTTP):**
 
 <div align=center>
 
 |Componente|Esfuerzo|Explicación|
 |-|-|-|
 |Vista|0.5h (comando Click)|Solo nueva vista|
-|Controlador|0h (reutiliza FastAPI)|Ya existe|
-|Modelo|0h (reutiliza FastAPI)|Ya existe|
+|Controlador|0h (reusa FastAPI)|Ya existe|
+|Modelo|0h (reusa FastAPI)|Ya existe|
 |**TOTAL**|**0.5h**|**75% de ahorro**|
 
 </div>
 
-**Ahorro por reutilización:** 1.5h por caso de uso
+**Ahorro por reuso:** 1.5h por caso de uso
 
 ### Caso de uso: `abrirAulas()`
 
@@ -209,26 +209,26 @@ El experimento CLI plantea una paradoja aparente:
 
 </div>
 
-**Implementación con reutilización (CLI HTTP):**
+**Implementación con reuso (CLI HTTP):**
 
 <div align=center>
 
 |Componente|Esfuerzo|Explicación|
 |-|-|-|
 |Vista|0.5h (formateo tabla)|Solo nueva vista|
-|Controlador|0h (reutiliza paginación)|Ya existe|
-|Modelo|0h (reutiliza query)|Ya existe|
+|Controlador|0h (reusa paginación)|Ya existe|
+|Modelo|0h (reusa query)|Ya existe|
 |**TOTAL**|**0.5h**|**80% de ahorro**|
 
 </div>
 
-**Ahorro por reutilización:** 2h por caso de uso
+**Ahorro por reuso:** 2h por caso de uso
 
 ### Totales del experimento (5 casos de uso)
 
 <div align=center>
 
-|Métrica|CLI HTTP (reutilización)|CLI Standalone (reimplementación)|Ahorro|
+|Métrica|CLI HTTP (reuso)|CLI Standalone (reimplementación)|Ahorro|
 |-|-|-|-|
 |**Tiempo total**|2.5h|8h|**5.5h (69%)**|
 |**Archivos nuevos**|5|15|10 archivos menos|
@@ -236,11 +236,11 @@ El experimento CLI plantea una paradoja aparente:
 
 </div>
 
-## El costo oculto de la reutilización
+## El costo oculto de la reuso
 
-### Deuda técnica introducida por reutilización
+### Deuda técnica introducida por reuso
 
-**CLI HTTP reutiliza FastAPI, pero introduce:**
+**CLI HTTP reusa FastAPI, pero introduce:**
 
 <div align=center>
 
@@ -256,7 +256,7 @@ El experimento CLI plantea una paradoja aparente:
 
 <div align=center>
 
-||CLI HTTP (reutilización)|CLI Standalone (reimplementación)|
+||CLI HTTP (reuso)|CLI Standalone (reimplementación)|
 |-|-|-|
 Desarrollo inicial|2.5h|8h
 Mantenimiento/año|2h (cambios sincronizados con API)|4h (cambios duplicados con backend)
@@ -272,7 +272,7 @@ TCO a 3 años|8.5h + infraestructura servidor|20h + sin infraestructura adiciona
 
 ### Beneficios de reimplementación deliberada
 
-**CLI Standalone NO reutiliza código, pero gana:**
+**CLI Standalone NO reusa código, pero gana:**
 
 <div align=center>
 
@@ -301,13 +301,13 @@ TCO a 3 años|8.5h + infraestructura servidor|20h + sin infraestructura adiciona
 
 **En este caso:** Reimplementación es **15x más rápida** y **más confiable**.
 
-## Matriz de decisión: ¿Reutilizar o reimplementar?
+## Matriz de decisión: ¿Reusar o reimplementar?
 
 ### Criterios de decisión
 
 <div align=center>
 
-|Criterio|Favorece Reutilización|Favorece Reimplementación|
+|Criterio|Favorece Reuso|Favorece Reimplementación|
 |-|-|-|
 |**Tiempo disponible**|Bajo (días)|Alto (semanas)|
 |**Presupuesto**|Limitado|Suficiente|
@@ -329,7 +329,7 @@ TCO a 3 años|8.5h + infraestructura servidor|20h + sin infraestructura adiciona
 - Usuario: Equipo técnico
 - Infraestructura: Servidor FastAPI ya deployado
 - Tiempo: Urgente (2 días)
-- **Decisión:** CLI HTTP (reutilización)
+- **Decisión:** CLI HTTP (reuso)
 
 **Caso 2: Herramienta de instalación para clientes**
 
@@ -350,15 +350,15 @@ TCO a 3 años|8.5h + infraestructura servidor|20h + sin infraestructura adiciona
 - Objetivo: Validar análisis RUP
 - Tiempo: Muy limitado (horas)
 - Infraestructura: Servidor de desarrollo
-- **Decisión:** CLI HTTP (reutilización)
+- **Decisión:** CLI HTTP (reuso)
 
 ## La lección metodológica fundamental
 
 ### Lo que RUP garantiza
 
-**Reutilización de análisis (100%):**
+**Reuso de análisis (100%):**
 
-Independientemente de si reutilizas o reimplementas código:
+Independientemente de si reusas o reimplementas código:
 
 - Las responsabilidades MVC son las mismas
 - Los casos de uso no cambian
@@ -369,16 +369,16 @@ Independientemente de si reutilizas o reimplementas código:
 
 ### Lo que RUP NO garantiza
 
-**Reutilización de código (variable):**
+**Reuso de código (variable):**
 
-RUP no dice que debas reutilizar código. Dice que **puedes elegir** basándote en:
+RUP no dice que debas reusar código. Dice que **puedes elegir** basándote en:
 
 - Compromisos técnicos
 - Restricciones de tiempo
 - Requisitos no funcionales
 - Contexto de despliegue
 
-**La decisión de reutilizar vs reimplementar es de DISEÑO, no de ANÁLISIS.**
+**La decisión de reusar vs reimplementar es de DISEÑO, no de ANÁLISIS.**
 
 ### La ecuación del valor
 
@@ -398,7 +398,7 @@ Valor de RUP = (Inversión en análisis riguroso) × (Número de implementacione
 - Análisis único: 40h
 - Implementación 1 (React): 60h (solo código)
 - Implementación 2 (Angular): 60h (solo código)
-- Implementación 3 (CLI HTTP): 3h (reutilización)
+- Implementación 3 (CLI HTTP): 3h (reuso)
 - Implementación 4 (CLI Standalone): 8h (reimplementación deliberada)
 - **Total:** 171h
 
@@ -408,9 +408,9 @@ Valor de RUP = (Inversión en análisis riguroso) × (Número de implementacione
 
 ## Estrategias híbridas: Lo mejor de ambos mundos
 
-### Estrategia 1: Reutilización progresiva
+### Estrategia 1: Reuso progresiva
 
-**Fase 1:** CLI HTTP (reutilización rápida)
+**Fase 1:** CLI HTTP (reuso rápida)
 
 - Tiempo: 2.5h
 - Objetivo: Validar análisis y obtener feedback rápido
@@ -419,7 +419,7 @@ Valor de RUP = (Inversión en análisis riguroso) × (Número de implementacione
 
 - Tiempo: +8h
 - Objetivo: Portabilidad y distribución a usuarios finales
-- **Reutiliza:** Lógica de negocio validada en Fase 1
+- **Reusa:** Lógica de negocio validada en Fase 1
 
 **Beneficio:** Validación rápida + producto final robusto
 
@@ -441,7 +441,7 @@ Consumida por:
 
 **Beneficio:**
 
-- Reutilización de control + entity
+- Reuso de control + entity
 - Independencia de boundary (API vs CLI)
 - Mantenimiento centralizado de lógica de negocio
 
@@ -470,27 +470,27 @@ $ pysighor --backend=direct login
 
 ## Conclusión
 
-La dicotomía "reutilizar vs reimplementar" es una **falsa dicotomía**:
+La dicotomía "reusar vs reimplementar" es una **falsa dicotomía**:
 
-1. **Siempre se reutiliza el análisis** - Esta es la promesa de RUP
-2. **A veces se reutiliza el código** - Decisión de diseño según contexto
+1. **Siempre se reusa el análisis** - Esta es la promesa de RUP
+2. **A veces se reusa el código** - Decisión de diseño según contexto
 3. **Ambas opciones son válidas** - Depende de compromisos específicos
 
 **La metodología RUP:**
 
-- Garantiza reutilización de análisis (inversión permanente)
-- Permite flexibilidad en reutilización de código (decisión táctica)
+- Garantiza reuso de análisis (inversión permanente)
+- Permite flexibilidad en reuso de código (decisión táctica)
 - Habilita múltiples implementaciones sin re-análisis
 
 **El experimento CLI demuestra:**
 
-- Reutilización (CLI HTTP): 2.5h, dependiente, rápido
+- Reuso (CLI HTTP): 2.5h, dependiente, rápido
 - Reimplementación (CLI Standalone): 8h, independiente, robusto
 - **Análisis sin cambios en ambos casos:** Validación exitosa de RUP
 
 **La lección final:**
 
-> No preguntes "¿Debo reutilizar código?". Pregunta:
+> No preguntes "¿Debo reusar código?". Pregunta:
 >
 > - ¿Qué compromisos estoy asumiendo?
 > - ¿Qué requiere este contexto específico?

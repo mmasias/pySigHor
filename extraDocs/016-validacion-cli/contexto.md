@@ -4,7 +4,7 @@
 
 |||||||
 |-|-|-|-|-|-|
-|[🏠️](../README.md)|[Artículo](README.md)|**Contexto**|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|[Reutilización](reutilizacion-vs-reimplementacion.md)|
+|[🏠️](../README.md)|[Artículo](README.md)|**Contexto**|[Evidencia](evidencia.md)|[Comparativa](comparativa-arquitecturas-cli.md)|[Reuso](reusacion-vs-reimplementacion.md)|
 
 </div>
 
@@ -136,7 +136,7 @@ CLI representa un paradigma radicalmente diferente:
 - API REST endpoints implementados
 - Componentes Angular mapeados desde análisis
 
-**Oportunidad clave:** Los endpoints REST de FastAPI ya están diseñados y pueden reutilizarse.
+**Oportunidad clave:** Los endpoints REST de FastAPI ya están diseñados y pueden reusarse.
 
 ## La pregunta de las dos arquitecturas CLI
 
@@ -151,7 +151,7 @@ Al planificar la validación CLI, surgió una pregunta arquitectónica interesan
 |Opción 1 - Cliente HTTP|Opción 2 - Monolítico|
 |-|-|
 `CLI → HTTP REST → FastAPI → PostgreSQL`|`CLI → Services → Repositories → PostgreSQL`
-Reutiliza backend existente|Sin dependencias de servidor HTTP
+Reusa backend existente|Sin dependencias de servidor HTTP
 Consume mismos endpoints que React|Acceso directo a base de datos
 Requiere servidor corriendo|Standalone, portable
 
@@ -166,7 +166,7 @@ Esta decisión arquitectónica NO debería afectar el análisis RUP. Si afecta, 
 
 ## Selección de casos de uso para validación
 
-### Criterio de selección: reutilización del mismo conjunto de casos
+### Criterio de selección: reuso del mismo conjunto de casos
 
 **Casos seleccionados (mismos que artículo 015):**
 
@@ -206,7 +206,7 @@ Esta decisión arquitectónica NO debería afectar el análisis RUP. Si afecta, 
 
 1. **Coherencia con FastAPI:** Mismo lenguaje que backend existente
 2. **Librerías maduras:** `click` o `typer` para CLIs modernos
-3. **Reutilización potencial:** Si implementamos monolítico, podemos compartir lógica con FastAPI
+3. **Reuso potencial:** Si implementamos monolítico, podemos compartir lógica con FastAPI
 4. **Simplicidad:** Python es ideal para prototipado rápido de CLIs
 
 ### Librería CLI: Click
@@ -261,14 +261,14 @@ Session = sessionmaker(bind=engine)
 
 - Artículo 016 con descripción completa del experimento
 - Comparativas de arquitecturas CLI
-- Análisis de reutilización vs reimplementación
+- Análisis de reuso vs reimplementación
 - Diagramas de mapeo MVC para CLI
 
 **Estado:** En progreso (este artículo)
 
 ### Fase 2: Implementación arquitectura cliente HTTP (Próxima)
 
-**Objetivo:** Validar reutilización máxima de backend existente
+**Objetivo:** Validar reuso máxima de backend existente
 
 **Tareas:**
 

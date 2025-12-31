@@ -4,7 +4,7 @@
 
 |||||||
 |-|-|-|-|-|-|
-|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|[Evidencia](evidencia.md)|**Comparativa**|[Reutilización](reutilizacion-vs-reimplementacion.md)|
+|[🏠️](../README.md)|[Artículo](README.md)|[Contexto](contexto.md)|[Evidencia](evidencia.md)|**Comparativa**|[Reuso](reusacion-vs-reimplementacion.md)|
 
 </div>
 
@@ -22,7 +22,7 @@ Este documento compara en detalle las dos arquitecturas CLI propuestas para vali
 |-|-|
 |![Arquitectura CLI HTTP](../../images/extraDocs/016-validacion-cli/arquitectura-cli-http.svg)|![Arquitectura CLI Standalone](../../images/extraDocs/016-validacion-cli/arquitectura-cli-standalone.svg)|
 |[Ver diagrama PlantUML](arquitectura-cli-http.puml)|[Ver diagrama PlantUML](arquitectura-cli-standalone.puml)|
-|**Reutiliza** backend completo de FastAPI|**Reimplementa** toda la pila (vista + controlador + modelo)|
+|**Reusa** backend completo de FastAPI|**Reimplementa** toda la pila (vista + controlador + modelo)|
 |**Agrega** solo vista CLI|**Sin dependencias** de servidor HTTP|
 |**Depende** de servidor HTTP corriendo|**Standalone** - ejecutable sin servicios externos|
 |**Comparte** controlador y modelo con React/Angular|**Portabilidad** máxima|
@@ -69,9 +69,9 @@ SessionLocal = sessionmaker(bind=engine)
 |-|-|-|
 |**Vista**|`commands/*.py` (Click)|`commands/*.py` (Click)|
 |**API Client**|`api_client/client.py`|No existe|
-|**Controlador**|Reutiliza FastAPI|`services/*.py` (implementación propia)|
-|**Modelo (Repository)**|Reutiliza FastAPI|`repositories/*.py` (implementación propia)|
-|**Modelo (Models)**|Reutiliza FastAPI|`models/*.py` (SQLAlchemy)|
+|**Controlador**|Reusa FastAPI|`services/*.py` (implementación propia)|
+|**Modelo (Repository)**|Reusa FastAPI|`repositories/*.py` (implementación propia)|
+|**Modelo (Models)**|Reusa FastAPI|`models/*.py` (SQLAlchemy)|
 |**Utils**|`config.py`, `formatters.py`|`config.py`, `database.py`, `formatters.py`|
 
 </div>
@@ -84,9 +84,9 @@ SessionLocal = sessionmaker(bind=engine)
 |-|-|-|-|
 |**Vista (commands)**|~200 LOC|~250 LOC|+25% (más lógica de orquestación)|
 |**API Client**|~100 LOC|0 LOC|-|
-|**Services**|0 LOC (reutiliza)|~400 LOC|+400 LOC|
-|**Repositories**|0 LOC (reutiliza)|~300 LOC|+300 LOC|
-|**Models**|0 LOC (reutiliza)|~200 LOC|+200 LOC|
+|**Services**|0 LOC (reusa)|~400 LOC|+400 LOC|
+|**Repositories**|0 LOC (reusa)|~300 LOC|+300 LOC|
+|**Models**|0 LOC (reusa)|~200 LOC|+200 LOC|
 |**Utils**|~50 LOC|~100 LOC|+50 LOC|
 |**TOTAL**|**~350 LOC**|**~1,250 LOC**|**+257%**|
 
@@ -131,8 +131,8 @@ def login():
 #### Responsabilidades
 
 - Vista: Interacción CLI con usuario
-- Controlador: **Reutilizado de FastAPI** (AuthService)
-- Modelo: **Reutilizado de FastAPI** (UserRepository)
+- Controlador: **Reusado de FastAPI** (AuthService)
+- Modelo: **Reusado de FastAPI** (UserRepository)
 
 **Tiempo de implementación:** ~30 minutos
 
@@ -271,8 +271,8 @@ class User(Base):
 |-|-|-|
 |**Archivos nuevos**|1 (command)|5 (command + service + 2 repos + model)|
 |**LOC vista**|~25|~35|
-|**LOC controlador**|0 (reutiliza)|~80|
-|**LOC modelo**|0 (reutiliza)|~120|
+|**LOC controlador**|0 (reusa)|~80|
+|**LOC modelo**|0 (reusa)|~120|
 |**Total LOC**|~25|~235|
 |**Tiempo**|30 min|1.5h|
 |**Complejidad**|Baja|Media|
@@ -287,8 +287,8 @@ class User(Base):
 |-|-|-|
 |**Archivos nuevos**|1 (command)|4 (command + service + repo + model)|
 |**LOC vista**|~40 (tabla)|~50|
-|**LOC controlador**|0 (reutiliza)|~60|
-|**LOC modelo**|0 (reutiliza)|~100|
+|**LOC controlador**|0 (reusa)|~60|
+|**LOC modelo**|0 (reusa)|~100|
 |**Total LOC**|~40|~210|
 |**Tiempo**|30 min|1.5h|
 |**Complejidad**|Baja|Media|
@@ -303,8 +303,8 @@ class User(Base):
 |-|-|-|
 |**Archivos nuevos**|1 (command)|2 (command + método en service/repo)|
 |**LOC vista**|~30|~40|
-|**LOC controlador**|0 (reutiliza)|~40|
-|**LOC modelo**|0 (reutiliza)|~50|
+|**LOC controlador**|0 (reusa)|~40|
+|**LOC modelo**|0 (reusa)|~50|
 |**Total LOC**|~30|~130|
 |**Tiempo**|30 min|1h|
 |**Complejidad**|Baja|Media|
@@ -319,8 +319,8 @@ class User(Base):
 |-|-|-|
 |**Archivos nuevos**|1 (command)|2 (command + método en service/repo)|
 |**LOC vista**|~35 (prompt valores actuales)|~50|
-|**LOC controlador**|0 (reutiliza)|~60|
-|**LOC modelo**|0 (reutiliza)|~70|
+|**LOC controlador**|0 (reusa)|~60|
+|**LOC modelo**|0 (reusa)|~70|
 |**Total LOC**|~35|~180|
 |**Tiempo**|30 min|2h|
 |**Complejidad**|Media|Media-Alta|
@@ -335,8 +335,8 @@ class User(Base):
 |-|-|-|
 |**Archivos nuevos**|1 (command)|2 (command + método en service/repo)|
 |**LOC vista**|~25 (confirmación)|~30|
-|**LOC controlador**|0 (reutiliza)|~30|
-|**LOC modelo**|0 (reutiliza)|~40|
+|**LOC controlador**|0 (reusa)|~30|
+|**LOC modelo**|0 (reusa)|~40|
 |**Total LOC**|~25|~100|
 |**Tiempo**|30 min|1h|
 |**Complejidad**|Baja|Media|
@@ -365,7 +365,7 @@ class User(Base):
 
 **Ventajas:**
 
-- **Reutilización máxima** - Todo el backend ya existe
+- **Reuso máxima** - Todo el backend ya existe
 - **Velocidad de desarrollo** - 3x más rápido
 - **Consistencia** - Misma lógica que React/Angular
 - **Mantenimiento centralizado** - Bug fixes en FastAPI benefician a CLI
@@ -430,7 +430,7 @@ class User(Base):
 |Criterio|CLI HTTP|CLI Standalone|
 |-|-|-|
 |**Tiempo de desarrollo**|⭐⭐⭐⭐⭐ (muy rápido)|⭐⭐ (lento)|
-|**Reutilización de código**|⭐⭐⭐⭐⭐ (100%)|⭐ (0%)|
+|**Reuso de código**|⭐⭐⭐⭐⭐ (100%)|⭐ (0%)|
 |**Portabilidad**|⭐ (baja)|⭐⭐⭐⭐⭐ (alta)|
 |**Independencia**|⭐ (depende de servidor)|⭐⭐⭐⭐⭐ (standalone)|
 |**Performance**|⭐⭐⭐ (latencia HTTP)|⭐⭐⭐⭐⭐ (directo)|
@@ -475,7 +475,7 @@ class User(Base):
 > La decisión arquitectónica entre CLI HTTP y CLI standalone es **ortogonal al análisis**. El análisis MVC captura las responsabilidades del sistema, no las decisiones de implementación. Estas decisiones se toman en la fase de diseño basándose en criterios como:
 >
 > - Tiempo disponible
-> - Reutilización deseada
+> - Reuso deseada
 > - Requisitos de portabilidad
 > - Infraestructura disponible
 > - Escenario de despliegue
@@ -489,7 +489,7 @@ class User(Base):
 **Implementar AMBAS arquitecturas:**
 
 1. **Fase 1 - CLI HTTP** (~2.5h)
-   - Validar reutilización máxima
+   - Validar reuso máxima
    - Demostrar velocidad de desarrollo
    - Mostrar consistencia con backend existente
 
@@ -535,4 +535,4 @@ El análisis MVC es **verdaderamente independiente** de decisiones arquitectóni
 - [Artículo principal](README.md)
 - [Contexto del experimento](contexto.md)
 - [Evidencia de implementación](evidencia.md)
-- [Análisis de reutilización vs reimplementación](reutilizacion-vs-reimplementacion.md)
+- [Análisis de reuso vs reimplementación](reusacion-vs-reimplementacion.md)
