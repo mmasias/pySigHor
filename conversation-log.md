@@ -281,4 +281,202 @@ Este experimento generará:
 
 ---
 
+## Conversación 51: Pulido Final del Artículo 016 - CLI como Validación
+**Fecha**: 2025-12-31
+**Participantes**: Manuel (Usuario) + Claude Sonnet 4.5
+
+### Contexto de la Sesión
+
+Sesión continuada desde conversación previa que se quedó sin contexto. Manuel retoma el trabajo de pulido del **Artículo 016: CLI como validación** - la validación de independencia tecnológica RUP mediante interfaz de línea de comandos.
+
+**Estado al inicio**: El artículo 016 ya tenía estructura completa con múltiples archivos markdown, pero requería refinamiento de terminología y formato.
+
+### Desarrollo Principal
+
+#### 1. **Eliminación Sistemática de Anglicismos**
+
+Manuel solicitó eliminar anglicismos innecesarios a lo largo de todo el artículo 016:
+
+**Cambios realizados**:
+- ❌ "Overhead de red" → ✅ "Sobrecarga de red"
+- ❌ "Resiliente/Resiliencia" → ✅ "Robusto/Robustez"
+- ❌ "Trade-offs" → ✅ "Compromisos"
+
+**Archivos afectados**:
+- `comparativa-arquitecturas-cli.md`: 3 ocurrencias de "resiliente", 3 de "trade-offs"
+- `reuso-vs-reimplementacion.md`: 1 "overhead", 1 "resiliente", 3 "trade-offs"
+
+**Rationale**: Mantener pureza del español técnico, evitando anglicismos cuando existe terminología española equivalente y clara.
+
+#### 2. **Cambio Terminológico Mayor: "Reutilización" → "Reuso"**
+
+**Pregunta de Manuel**:
+> "reuso o reutilización? qué término es más adecuado?"
+
+**Análisis de Claude**:
+- **"Reuso"**: Más técnico, conciso, adoptado en ingeniería de software
+- **"Reutilización"**: Más genérico, suena redundante ("utilización" ya implica "usar")
+
+**Decisión de Manuel**: Cambiar todo a "reuso"
+
+**Operación sistemática ejecutada**:
+
+```bash
+# Cambios en todos los archivos .md del artículo 016
+sed -i 's/Reutilización/Reuso/g; s/reutilización/reuso/g;
+        s/Reutiliza/Reusa/g; s/reutiliza/reusa/g' *.md
+```
+
+**Alcance**:
+- ✅ **119 ocurrencias** cambiadas en 5 archivos markdown
+- ✅ Archivo renombrado: `reutilizacion-vs-reimplementacion.md` → `reuso-vs-reimplementacion.md`
+- ✅ Todas las referencias cruzadas actualizadas
+- ✅ Corrección de género: "la reuso máxima" → "el reuso máximo"
+- ⚠️ Excepción mantenida: "reutilizable" (adjetivo estándar en español)
+
+**Error detectado y corregido**:
+- ❌ El `sed` inicial creó enlace malformado: "reusacion-vs-reimplementacion.md"
+- ✅ Corregido con segundo `sed`: "reuso-vs-reimplementacion.md"
+
+#### 3. **Centrado de Tablas**
+
+Manuel indicó que había comenzado a centrar tablas manualmente pero se quedó en el caso de uso `iniciarSesion()`.
+
+**Tablas centradas**:
+- `abrirAulas()` - Implementación desde análisis
+- `abrirAulas()` - Implementación con reuso (CLI HTTP)
+- Totales del experimento (5 casos de uso)
+- Criterios de decisión (matriz de arquitecturas)
+
+**Formato aplicado**:
+```markdown
+<div align=center>
+
+| Columna 1 | Columna 2 |
+|-----------|-----------|
+| Dato      | Dato      |
+
+</div>
+```
+
+#### 4. **Corrección de Tablas de Navegación - Artículo 015**
+
+Manuel detectó que las tablas de navegación del **Artículo 015** tenían formato incorrecto (3 columnas compactadas con `\|` en lugar de columnas separadas).
+
+**Estado original (incorrecto)**:
+```markdown
+||||
+|-|-|-|
+|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md) \| [Evidencia](evidencia.md) \| [Comparativa](comparativa-stacks.md)|
+```
+
+**Estado corregido**:
+```markdown
+||||||
+|-|-|-|-|-|
+|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-stacks.md)|
+```
+
+**Archivos corregidos**:
+- ✅ `015-dashboards-multistack-validacion-experimental/README.md`
+- ✅ `015-dashboards-multistack-validacion-experimental/contexto.md`
+- ✅ `015-dashboards-multistack-validacion-experimental/evidencia.md`
+- ✅ `015-dashboards-multistack-validacion-experimental/comparativa-stacks.md`
+
+### Resumen de Cambios Totales
+
+#### Archivos Modificados
+
+**Artículo 016**:
+- `reuso-vs-reimplementacion.md` (renombrado desde `reutilizacion-vs-reimplementacion.md`)
+- `comparativa-arquitecturas-cli.md`
+- `evidencia.md`
+- `contexto.md`
+- `README.md`
+
+**Artículo 015**:
+- `README.md`
+- `contexto.md`
+- `evidencia.md`
+- `comparativa-stacks.md`
+
+#### Métricas de Cambios
+
+| Tipo de Cambio | Cantidad |
+|----------------|----------|
+| Anglicismos eliminados | ~10 ocurrencias |
+| "Reutilización" → "Reuso" | 119 ocurrencias |
+| Tablas centradas | 4 tablas |
+| Tablas de navegación corregidas | 4 archivos |
+| Archivos renombrados | 1 archivo |
+| Enlaces actualizados | Todos los archivos relacionados |
+
+### Valor de la Sesión
+
+#### **Calidad de Documentación Técnica en Español**
+
+Esta sesión demuestra compromiso con:
+- **Pureza lingüística**: Eliminar anglicismos innecesarios
+- **Terminología técnica apropiada**: "Reuso" > "Reutilización"
+- **Consistencia**: Cambios sistemáticos en todos los archivos
+- **Formato profesional**: Tablas centradas, navegación coherente
+
+#### **Material Didáctico de Calidad**
+
+El Artículo 016 ahora está listo como material educativo:
+- ✅ Terminología española técnica apropiada
+- ✅ Sin anglicismos innecesarios
+- ✅ Formato visual consistente
+- ✅ Navegación coherente entre archivos
+
+#### **Metodología de Pulido Documental**
+
+Esta sesión establece patrón para pulido de documentación:
+1. **Identificación de anglicismos**: Revisión crítica de términos
+2. **Análisis terminológico**: Evaluar alternativas en español
+3. **Cambios sistemáticos**: Usar herramientas (`sed`) para consistencia
+4. **Verificación de enlaces**: Asegurar referencias cruzadas correctas
+5. **Formato visual**: Centrado de tablas, alineación consistente
+
+### Reflexiones sobre Gestión de `conversation-log.md`
+
+**Problema identificado**: El archivo `conversation-log.md` se volvió muy largo, por lo que se creó `conversation-log-001.md` para conversaciones 1-49.
+
+**Discusión pendiente con Manuel**: ¿Cuál es la mejor estrategia para gestionar logs de conversaciones crecientes?
+
+**Opciones a considerar**:
+1. **Archivos numerados por rango**: `conversation-log-001.md` (Conv. 1-49), `conversation-log-002.md` (Conv. 50-99)
+2. **Archivos por fecha**: `conversation-log-2025-Q4.md`, `conversation-log-2026-Q1.md`
+3. **Archivos por fase RUP**: `conversation-log-analisis.md`, `conversation-log-diseño.md`
+4. **Archivo índice + archivos individuales**: `conversation-log.md` (índice) + `conversations/051.md`
+
+**Estado actual**: Conversación 51 añadida a `conversation-log.md`. Esperando feedback de Manuel sobre estrategia de gestión de logs.
+
+### Estado Final de la Sesión
+
+**Artefactos listos**:
+- ✅ Artículo 016 completamente pulido
+- ✅ Artículo 015 con tablas de navegación corregidas
+- ✅ Terminología española consistente
+- ✅ Formato profesional aplicado
+
+**Pendiente**:
+- 🎯 Decidir estrategia de gestión de `conversation-log.md`
+- 🎯 Generar SVG de diagramas PlantUML (según Ley 004)
+- 🎯 Subir a rama `xRevisar` para aprobación de Manuel
+
+### Próximos Pasos
+
+Según **Ley 004: Rama de Revisión Obligatoria**:
+
+1. **Proponer artefactos**: "Artefactos listos, necesito que generes los SVG"
+2. **Esperar SVG**: Manuel convierte archivos .puml a .svg
+3. **Rama xRevisar**: `git checkout -b xRevisar` o `git checkout xRevisar`
+4. **Push completo**: `git add . && git commit && git push -u origin xRevisar`
+5. **Comunicar**: "Trabajo completado en rama xRevisar, listo para revisión"
+6. **Esperar OK**: No proceder sin aprobación explícita
+7. **Pull Request**: Solo después de "OK para PR"
+
+---
+
 *Este registro se actualizará continuamente conforme avance el proyecto*
