@@ -2,9 +2,9 @@
 
 <div align=right>
 
-||||
-|-|-|-|
-|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md) \| [Evidencia](evidencia.md) \| [Comparativa](comparativa-stacks.md)|
+||||||
+|-|-|-|-|-|
+|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Evidencia](evidencia.md)|[Comparativa](comparativa-stacks.md)|
 
 </div>
 
