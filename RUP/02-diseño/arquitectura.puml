@@ -1,0 +1,28 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Diagrama de Arquitectura - CLI Standalone
+
+Person(admin, "Administrador", "Usuario del sistema vía terminal")
+
+System_Boundary(c1, "pySigHor CLI Standalone") {
+    Container(cli_app, "Aplicación CLI", "Python + Click", "Interfaz de línea de comandos para gestión de horarios")
+    Container(services, "Capa de Servicios", "Python", "Lógica de negocio (AuthService, AulaService)")
+    Container(repositories, "Capa de Acceso a Datos", "Python + SQLAlchemy", "Acceso a datos (UserRepository, AulaRepository)")
+    ContainerDb(database, "Base de Datos", "SQLite", "Almacenamiento persistente local")
+}
+
+Rel(admin, cli_app, "Ejecuta comandos", "Terminal")
+Rel(cli_app, services, "Invoca métodos", "Llamadas directas")
+Rel(services, repositories, "Consulta/Modifica", "Llamadas directas")
+Rel(repositories, database, "Lee/Escribe", "SQL/SQLAlchemy")
+
+note right of cli_app
+  **Arquitectura monolítica:**
+  - Sin dependencias de red
+  - Toda la lógica implementada
+  - Ejecutable único standalone
+  - Base de datos local SQLite
+end note
+
+@enduml

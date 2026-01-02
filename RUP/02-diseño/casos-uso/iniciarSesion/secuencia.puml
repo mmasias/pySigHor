@@ -1,0 +1,52 @@
+@startuml
+title Diagrama de Secuencia: Iniciar Sesión (CLI Standalone)
+
+actor Administrador as admin
+participant "CLI\n(AuthCommand)" as cli
+participant "AuthService" as service
+participant "UserRepository" as repo
+participant "SQLite" as db
+participant "TokenManager" as token
+
+admin -> cli: sighor auth login
+activate cli
+
+cli -> admin: prompt: username
+admin -> cli: "admin"
+
+cli -> admin: prompt: password (oculto)
+admin -> cli: "admin123"
+
+cli -> service: authenticate(username, password)
+activate service
+
+service -> repo: find_by_username(username)
+activate repo
+
+repo -> db: SELECT * FROM users WHERE username = ?
+activate db
+db --> repo: User(id=1, username="admin", hashed_password="...")
+deactivate db
+
+repo --> service: User object
+deactivate repo
+
+service -> service: verify_password(password, hashed_password)
+note right: Bcrypt verification
+
+service -> service: generate_jwt_token(user)
+note right: PyJWT encode
+
+service --> cli: token (JWT string)
+deactivate service
+
+cli -> token: save_token(token)
+activate token
+token -> token: write to ~/.sighor/token
+token --> cli: OK
+deactivate token
+
+cli --> admin: "Sesión iniciada correctamente"
+deactivate cli
+
+@enduml

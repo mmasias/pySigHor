@@ -1,0 +1,51 @@
+@startuml
+title Diagrama de Secuencia: Abrir Aulas (CLI Standalone)
+
+actor Administrador as admin
+participant "CLI\n(AulaCommand)" as cli
+participant "TokenManager" as token
+participant "AulaService" as service
+participant "AulaRepository" as repo
+participant "SQLite" as db
+participant "OutputFormatter" as formatter
+
+admin -> cli: sighor aulas list --format table
+activate cli
+
+cli -> token: load_token()
+activate token
+token -> token: read ~/.sighor/token
+token --> cli: token (JWT string)
+deactivate token
+
+cli -> service: get_all()
+activate service
+
+service -> repo: find_all()
+activate repo
+
+repo -> db: SELECT * FROM aulas
+activate db
+db --> repo: List[Aula]
+deactivate db
+
+repo --> service: List[Aula]
+deactivate repo
+
+service -> service: [aula.to_dict() for aula in aulas]
+
+service --> cli: List[Dict]
+deactivate service
+
+cli -> formatter: format_table(aulas, columns)
+activate formatter
+
+formatter -> formatter: create Rich Table
+formatter -> formatter: add rows
+
+formatter --> admin: display ASCII table
+deactivate formatter
+
+deactivate cli
+
+@enduml

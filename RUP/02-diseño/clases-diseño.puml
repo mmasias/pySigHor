@@ -1,0 +1,128 @@
+@startuml
+title Diagrama de Clases de Diseño - CLI Standalone
+
+package "Interfaz CLI (Commands)" {
+    class CLIApp {
+        +main()
+        +setup_commands()
+    }
+
+    class AuthCommands {
+        +login(username, password)
+        +logout()
+    }
+
+    class AulaCommands {
+        +list(format)
+        +create(interactive)
+        +edit(id)
+        +delete(id, confirm)
+    }
+}
+
+package "Capa de Servicios" {
+    class AuthService {
+        -user_repository: UserRepository
+        +authenticate(username, password): str
+        +validate_token(token): dict
+        +hash_password(password): str
+        +verify_password(plain, hashed): bool
+    }
+
+    class AulaService {
+        -aula_repository: AulaRepository
+        +get_all(): List[Aula]
+        +get_by_id(id): Aula
+        +create(data): Aula
+        +update(id, data): Aula
+        +delete(id): bool
+        +validate_aula(data): bool
+    }
+}
+
+package "Capa de Acceso a Datos (Repositories)" {
+    class UserRepository {
+        -session: Session
+        +find_by_username(username): User
+        +find_by_id(id): User
+    }
+
+    class AulaRepository {
+        -session: Session
+        +find_all(): List[Aula]
+        +find_by_id(id): Aula
+        +create(aula): Aula
+        +update(aula): Aula
+        +delete(id): bool
+    }
+}
+
+package "Dominio / Modelos" {
+    class User {
+        +id: int
+        +username: str
+        +hashed_password: str
+        +email: str
+    }
+
+    class Aula {
+        +id: int
+        +nombre: str
+        +capacidad: int
+        +edificio: str
+    }
+}
+
+package "Utilidades" {
+    class TokenManager {
+        +save_token(token): void
+        +load_token(): str
+        +delete_token(): void
+        +token_exists(): bool
+    }
+
+    class OutputFormatter {
+        +format_table(data): void
+        +format_json(data): void
+    }
+
+    class DatabaseConfig {
+        +engine: Engine
+        +SessionLocal: sessionmaker
+        +get_db(): Session
+        +init_db(): void
+    }
+}
+
+' Relaciones Interfaz CLI
+CLIApp --> AuthCommands
+CLIApp --> AulaCommands
+
+AuthCommands --> AuthService
+AuthCommands --> TokenManager
+
+AulaCommands --> AulaService
+AulaCommands --> OutputFormatter
+AulaCommands --> TokenManager
+
+' Relaciones Capa de Servicios
+AuthService --> UserRepository
+AulaService --> AulaRepository
+
+' Relaciones Capa de Acceso a Datos
+UserRepository --> User
+UserRepository --> DatabaseConfig
+AulaRepository --> Aula
+AulaRepository --> DatabaseConfig
+
+note bottom of DatabaseConfig
+  SQLAlchemy configuration
+  SQLite: ~/.sighor/sighor.db
+end note
+
+note top of TokenManager
+  Token storage
+  File: ~/.sighor/token
+end note
+
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+title Diagrama de Secuencia: Crear Aula (CLI Standalone)
+
+actor Administrador as admin
+participant "CLI\n(AulaCommand)" as cli
+participant "TokenManager" as token
+participant "AulaService" as service
+participant "AulaRepository" as repo
+participant "SQLite" as db
+
+admin -> cli: sighor aulas create
+activate cli
+
+cli -> token: load_token()
+activate token
+token --> cli: token (JWT)
+deactivate token
+
+cli -> admin: prompt: Nombre del aula
+admin -> cli: "A101"
+
+cli -> admin: prompt: Capacidad
+admin -> cli: 30
+
+cli -> admin: prompt: Edificio
+admin -> cli: "A"
+
+cli -> service: create({"nombre": "A101", "capacidad": 30, "edificio": "A"})
+activate service
+
+service -> service: validate_aula(data)
+note right: Verifica campos y tipos
+
+service -> service: Aula(nombre, capacidad, edificio)
+
+service -> repo: create(aula)
+activate repo
+
+repo -> db: INSERT INTO aulas (nombre, capacidad, edificio)\nVALUES (?, ?, ?)
+activate db
+db --> repo: aula con ID=1
+deactivate db
+
+repo --> service: Aula(id=1, ...)
+deactivate repo
+
+service -> service: aula.to_dict()
+
+service --> cli: {"id": 1, "nombre": "A101", "capacidad": 30, "edificio": "A"}
+deactivate service
+
+cli --> admin: "Aula creada correctamente (ID: 1)"
+deactivate cli
+
+@enduml
