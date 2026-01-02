@@ -34,11 +34,11 @@ En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Indu
 > **Hipótesis:** Un análisis RUP completo puede soportar múltiples implementaciones tecnológicas sin modificaciones.
 > 
 > |Rama|Stack|Casos diseñados|Dashboard|Estado|
-> |-|-|-:|-|-|
-> |[***main***](https://github.com/mmasias/pySigHor/tree/main)|Análisis puro (agnóstico)|32/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Completado|
-> |[***diseño-fastapi-react***](https://github.com/mmasias/pySigHor/tree/diseño-fastapi-react)|FastAPI + React|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
-> |[***diseño-spring-angular***](https://github.com/mmasias/pySigHor/tree/diseño-spring-angular)|Spring + Angular|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
-> |*diseño-cli-python-http*<br>*diseño-cli-python-standalone*|CLI (validación paradigma no-GUI)|5/32 (planificado)|Pendiente|En diseño conceptual|
+> |-|-|-:|:-:|-|
+> |- [***main***](https://github.com/mmasias/pySigHor/tree/main)|<sup>Análisis puro (agnóstico)|32/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Completado|
+> |- [***diseño-fastapi-react***](https://github.com/mmasias/pySigHor/tree/diseño-fastapi-react)|<sup>FastAPI + React|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
+> |- [***diseño-spring-angular***](https://github.com/mmasias/pySigHor/tree/diseño-spring-angular)|<sup>Spring + Angular|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
+> |*- diseño-cli-python-http*<br>*- diseño-cli-python-standalone*|<sup>CLI (validación paradigma no-GUI)|Pendiente|Pendiente|En diseño conceptual|
 > 
 > **Resultado:** 0 modificaciones al análisis tras 3 implementaciones diferentes ([Artículo 015](/extraDocs/015-dashboards-multistack-validacion-experimental/))
 
