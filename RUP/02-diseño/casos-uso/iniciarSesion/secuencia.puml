@@ -1,16 +1,23 @@
 @startuml
-title Diagrama de Secuencia - Iniciar Sesión
+title Diagrama de Secuencia - Iniciar Sesión (CLI HTTP)
 
 actor "Administrador" as Admin
-participant "Frontend (React)" as FE
+participant "CLI (Click)" as CLI
+participant "APIClient" as Client
 participant "API (FastAPI)" as API
 participant "AuthService" as Auth
 participant "UsuarioRepository" as Repo
 database "Base de Datos" as DB
 
-Admin -> FE: Ingresa credenciales (user, pass)
-activate FE
-FE -> API: POST /token (username, password)
+Admin -> CLI: Ejecuta 'sighor login'
+activate CLI
+CLI -> Admin: Solicita username (prompt)
+Admin -> CLI: Ingresa username
+CLI -> Admin: Solicita password (prompt)
+Admin -> CLI: Ingresa password
+CLI -> Client: post('/token', {username, password})
+activate Client
+Client -> API: POST /token (username, password)
 activate API
 API -> Auth: authenticate_user(username, password)
 activate Auth
@@ -26,16 +33,29 @@ Auth -> Auth: verify_password(password, hash)
 alt Credenciales Válidas
     Auth -> Auth: create_access_token(data)
     Auth --> API: Token JWT
-    API --> FE: 200 OK (access_token)
-    FE -> FE: Guardar Token (LocalStorage/Context)
-    FE --> Admin: Redirigir a Dashboard
+    API --> Client: 200 OK (access_token)
+    deactivate API
+    Client --> CLI: Response(200, token)
+    deactivate Client
+    CLI -> CLI: token_manager.save_token(token)
+    CLI --> Admin: Sesión iniciada exitosamente
 else Credenciales Inválidas
     Auth --> API: False / Exception
     deactivate Auth
-    API --> FE: 401 Unauthorized
+    API --> Client: 401 Unauthorized
     deactivate API
-    FE --> Admin: Mostrar Error "Credenciales inválidas"
+    Client --> CLI: Response(401)
+    deactivate Client
+    CLI --> Admin: Credenciales inválidas
 end
-deactivate FE
+deactivate CLI
+
+note right of API
+  **Backend FastAPI reutilizado:**
+  - AuthService
+  - UsuarioRepository
+  - Base de datos SQLite
+  Sin modificaciones
+end note
 
 @enduml

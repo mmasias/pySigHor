@@ -1,24 +1,31 @@
 @startuml
-title Diagrama de Secuencia - Crear Aula
+title Diagrama de Secuencia - Crear Aula (CLI HTTP)
 
 actor "Administrador" as Admin
-participant "Frontend (React)" as FE
+participant "CLI (Click)" as CLI
+participant "APIClient" as Client
 participant "API (FastAPI)" as API
 participant "AulaService" as Service
 participant "AulaRepository" as Repo
 database "Base de Datos" as DB
 
-Admin -> FE: Clic en "Nueva Aula"
-activate FE
-FE --> Admin: Mostrar Formulario
-Admin -> FE: Ingresa datos (Nombre, Capacidad, Edificio) y Guardar
-FE -> API: POST /aulas (AulaCreate JSON)
+Admin -> CLI: Ejecuta 'sighor aulas create'
+activate CLI
+CLI -> Admin: Prompt: Nombre del aula?
+Admin -> CLI: Ingresa nombre
+CLI -> Admin: Prompt: Capacidad?
+Admin -> CLI: Ingresa capacidad
+CLI -> Admin: Prompt: Edificio?
+Admin -> CLI: Ingresa edificio
+CLI -> Client: post('/aulas', data={'nombre', 'capacidad', 'edificio'})
+activate Client
+Client -> API: POST /aulas (AulaCreate JSON + Bearer Token)
 activate API
 API -> Service: crear_aula(aula_create)
 activate Service
 Service -> Repo: create(aula_model)
 activate Repo
-Repo -> DB: INSERT INTO aulas ...
+Repo -> DB: INSERT INTO aulas (nombre, capacidad, edificio)
 activate DB
 DB --> Repo: ID nueva aula
 deactivate DB
@@ -26,10 +33,19 @@ Repo --> Service: Aula (con ID)
 deactivate Repo
 Service --> API: AulaResponse
 deactivate Service
-API --> FE: 201 Created (Aula JSON)
+API --> Client: 201 Created (Aula JSON)
 deactivate API
-FE -> FE: Actualizar Lista / Notificar Éxito
-FE --> Admin: Mostrar "Aula creada correctamente"
-deactivate FE
+Client --> CLI: Response(201, aula_json)
+deactivate Client
+CLI --> Admin: Aula creada exitosamente (ID: {id})
+deactivate CLI
+
+note right of API
+  **Backend FastAPI reutilizado:**
+  - AulaService
+  - AulaRepository
+  - Validación Pydantic (AulaCreate)
+  Sin modificaciones
+end note
 
 @enduml

@@ -8,12 +8,13 @@
 - **Proyecto**: pySigHor
 - **Fase RUP**: Elaboración
 - **Disciplina**: Diseño
-- **Versión**: 1.0
-- **Fecha**: 2025-11-19
-- **Autor**: Gemini
+- **Versión**: 1.0 (CLI HTTP)
+- **Fecha**: 2026-01-02
+- **Autor**: Equipo de desarrollo
 
 ## Propósito
-Detallar el proceso de actualización de una aula existente.
+
+Detallar el flujo para actualizar una aula existente desde la CLI, solicitando el ID y los nuevos datos mediante prompts interactivos.
 
 ## Diagrama de secuencia de diseño
 
@@ -22,11 +23,18 @@ Detallar el proceso de actualización de una aula existente.
 [Código PlantUML](secuencia.puml)
 
 ## Participantes
-*   **Frontend**: Formulario `AulaForm` (modo edición, precargado).
-*   **API**: Endpoint `PUT /aulas/{id}`.
-*   **AulaService**: Lógica de actualización.
-*   **AulaRepository**: `UPDATE` en base de datos.
+
+- **CLI (Click)**: Comando `sighor aulas edit <id>` que solicita nuevos datos mediante prompts.
+- **APIClient**: Cliente HTTP que realiza PUT `/aulas/{id}` con token y datos actualizados.
+- **API (FastAPI)**: Endpoint `PUT /aulas/{id}` protegido (requiere token) (reutilizado).
+- **AulaService**: Valida existencia y orquesta actualización (reutilizado).
+- **AulaRepository**: Ejecuta UPDATE en base de datos (reutilizado).
 
 ## Decisiones de diseño
-*   Verificación previa de existencia del ID (404 si no existe).
-*   Uso de `AulaUpdate` schema (campos opcionales si se desea PATCH, obligatorios si es PUT completo).
+
+- **ID como argumento**: `sighor aulas edit 5` recibe el ID como parámetro posicional.
+- **Prompts para nuevos valores**: CLI solicita nombre, capacidad y edificio con valores actuales como default.
+- Verificación previa de existencia del ID (404 si no existe).
+- CLI como **cliente HTTP puro**: consume mismo endpoint `PUT /aulas/{id}` que interfaz React.
+- Uso de schema `AulaUpdate` con campos opcionales (permite actualización parcial).
+- **Reuso completo del backend**: AulaService y AulaRepository sin modificaciones.

@@ -1,84 +1,108 @@
 @startuml
-title Diagrama de Clases de Diseño - Iteración 1 (Auth + Aulas)
+title Diagrama de Clases de Diseño - CLI HTTP (Auth + Aulas)
 
-package "Dominio / Modelos" {
-    class Usuario {
-        +id: int
+package "CLI Commands (Click)" {
+    class CLIApp {
+        +api_client: APIClient
+        +token_manager: TokenManager
+    }
+
+    class AuthCommands {
+        +login()
+        +logout()
+    }
+
+    class AulaCommands {
+        +list()
+        +create()
+        +edit(id)
+        +delete(id)
+    }
+}
+
+package "CLI Infrastructure" {
+    class APIClient {
+        +base_url: str
+        +session: requests.Session
+        +post(endpoint, data): Response
+        +get(endpoint, params): Response
+        +put(endpoint, data): Response
+        +delete(endpoint): Response
+    }
+
+    class TokenManager {
+        +token_file: str
+        +save_token(token: str)
+        +get_token(): str
+        +clear_token()
+    }
+
+    class OutputFormatter {
+        +format_table(data): str
+        +format_json(data): str
+        +format_error(message): str
+    }
+}
+
+package "Backend FastAPI (Reutilizado)" <<Cloud>> {
+    class "POST /token" as LoginEndpoint {
         +username: str
-        +password_hash: str
-        +rol: str
-        +is_active: bool
+        +password: str
+        --
+        +return: Token
     }
 
-    class Aula {
+    class "GET /aulas" as ListAulasEndpoint {
+        +skip: int
+        +limit: int
+        --
+        +return: List[AulaResponse]
+    }
+
+    class "POST /aulas" as CreateAulaEndpoint {
+        +body: AulaCreate
+        --
+        +return: AulaResponse
+    }
+
+    class "PUT /aulas/{id}" as UpdateAulaEndpoint {
         +id: int
-        +nombre: str
-        +capacidad: int
-        +edificio: str
-    }
-}
-
-package "API / Schemas (Pydantic)" {
-    class Token {
-        +access_token: str
-        +token_type: str
+        +body: AulaUpdate
+        --
+        +return: AulaResponse
     }
 
-    class TokenData {
-        +username: str
-    }
-
-    class AulaCreate {
-        +nombre: str
-        +capacidad: int
-        +edificio: str
-    }
-
-    class AulaUpdate {
-        +nombre: str?
-        +capacidad: int?
-        +edificio: str?
-    }
-    
-    class AulaResponse {
+    class "DELETE /aulas/{id}" as DeleteAulaEndpoint {
         +id: int
-        +nombre: str
-        +capacidad: int
-        +edificio: str
-    }
-    
-    AulaCreate <|-- AulaResponse
-}
-
-package "Capa de Acceso a Datos (Repositories)" {
-    interface IUsuarioRepository {
-        +get_by_username(username: str): Usuario
-    }
-
-    interface IAulaRepository {
-        +get_all(skip: int, limit: int): List[Aula]
-        +get_by_id(id: int): Aula
-        +create(aula: AulaCreate): Aula
-        +update(id: int, aula: AulaUpdate): Aula
-        +delete(id: int): bool
+        --
+        +return: bool
     }
 }
 
-package "Capa de Servicios / Controladores" {
-    class AuthService {
-        +authenticate_user(username, password): Token
-    }
-    
-    class AulaService {
-        +listar_aulas(): List[AulaResponse]
-        +crear_aula(aula: AulaCreate): AulaResponse
-        +editar_aula(id, aula: AulaUpdate): AulaResponse
-        +eliminar_aula(id): bool
-    }
-}
+CLIApp *-- APIClient
+CLIApp *-- TokenManager
+CLIApp *-- OutputFormatter
 
-Usuario "1" -- "0..*" Token : genera >
-AulaService ..> IAulaRepository : usa >
-AuthService ..> IUsuarioRepository : usa >
+AuthCommands ..> APIClient : consume >
+AuthCommands ..> TokenManager : gestiona >
+
+AulaCommands ..> APIClient : consume >
+AulaCommands ..> TokenManager : usa >
+AulaCommands ..> OutputFormatter : formatea >
+
+APIClient ..> LoginEndpoint : POST /token
+APIClient ..> ListAulasEndpoint : GET /aulas
+APIClient ..> CreateAulaEndpoint : POST /aulas
+APIClient ..> UpdateAulaEndpoint : PUT /aulas/{id}
+APIClient ..> DeleteAulaEndpoint : DELETE /aulas/{id}
+
+note right of "Backend FastAPI (Reutilizado)"
+  **Backend completo reutilizado:**
+  - AuthService
+  - AulaService
+  - Repositories
+  - Models (SQLAlchemy)
+  - Base de datos SQLite
+end note
 
 @enduml

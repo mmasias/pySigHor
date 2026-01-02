@@ -8,12 +8,13 @@
 - **Proyecto**: pySigHor
 - **Fase RUP**: Elaboración
 - **Disciplina**: Diseño
-- **Versión**: 1.0
-- **Fecha**: 2025-11-19
-- **Autor**: Gemini
+- **Versión**: 1.0 (CLI HTTP)
+- **Fecha**: 2026-01-02
+- **Autor**: Equipo de desarrollo
 
 ## Propósito
-Detallar el flujo de datos para recuperar y mostrar la lista de aulas registradas en el sistema.
+
+Detallar el flujo de datos para recuperar y mostrar la lista de aulas registradas en el sistema desde la interfaz CLI, formateando la salida como tabla ASCII o JSON.
 
 ## Diagrama de secuencia de diseño
 
@@ -22,12 +23,18 @@ Detallar el flujo de datos para recuperar y mostrar la lista de aulas registrada
 [Código PlantUML](secuencia.puml)
 
 ## Participantes
-*   **Frontend**: Componente `AulaList` que consume la API.
-*   **API**: Endpoint `GET /aulas` protegido (requiere token).
-*   **AulaService**: Orquestador que llama al repositorio.
-*   **AulaRepository**: Ejecuta la consulta SQL `SELECT`.
+
+- **CLI (Click)**: Comando `sighor aulas list` que consume la API y formatea salida.
+- **APIClient**: Cliente HTTP que realiza GET `/aulas` con token de autorización.
+- **API (FastAPI)**: Endpoint `GET /aulas` protegido (requiere token) (reutilizado).
+- **AulaService**: Orquestador que llama al repositorio (reutilizado).
+- **AulaRepository**: Ejecuta la consulta SQL `SELECT` (reutilizado).
+- **OutputFormatter**: Formatea datos como tabla Rich o JSON (específico de CLI).
 
 ## Decisiones de diseño
-*   Endpoint protegido con `Bearer Token`.
-*   Retorno de lista JSON de objetos `AulaResponse` (Pydantic Schema).
-*   Separación de DTOs (Schemas) de Modelos de BD (SQLAlchemy).
+
+- Endpoint protegido con `Bearer Token` (token obtenido de `token_manager`).
+- CLI como **cliente HTTP puro**: consume mismo endpoint `GET /aulas` que interfaz React.
+- **Formateo de salida flexible**: tabla ASCII (Rich) por defecto, JSON con flag `--format json`.
+- Retorno de lista JSON de objetos `AulaResponse` (Pydantic Schema heredado).
+- **Reuso completo del backend**: AulaService y AulaRepository sin modificaciones.

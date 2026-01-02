@@ -1,18 +1,25 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-title Diagrama de Arquitectura - Fase Diseño Iteración 1
+title Diagrama de Arquitectura - CLI como Cliente HTTP
 
-Person(admin, "Administrador", "Usuario principal del sistema")
+Person(admin, "Administrador", "Usuario del sistema vía terminal")
 
 System_Boundary(c1, "pySigHor Modernizado") {
-    Container(web_app, "Single Page Application", "React + TypeScript + Vite", "Interfaz de usuario para gestión de horarios")
-    Container(api, "API Backend", "Python + FastAPI", "Lógica de negocio y gestión de datos")
-    ContainerDb(database, "Base de Datos", "SQLite", "Almacenamiento persistente")
+    Container(cli_app, "CLI Application", "Python + Click + Requests", "Interfaz de línea de comandos para gestión de horarios")
+    Container(api, "API Backend", "Python + FastAPI", "Lógica de negocio y gestión de datos (reutilizado)")
+    ContainerDb(database, "Base de Datos", "SQLite", "Almacenamiento persistente (compartido)")
 }
 
-Rel(admin, web_app, "Usa", "HTTPS")
-Rel(web_app, api, "Realiza peticiones API", "JSON/HTTPS")
+Rel(admin, cli_app, "Ejecuta comandos", "Terminal")
+Rel(cli_app, api, "Consume endpoints REST", "JSON/HTTP")
 Rel(api, database, "Lee/Escribe", "SQL/SQLAlchemy")
+
+note right of cli_app
+  **Reuso máximo:**
+  - Backend FastAPI completo
+  - Services, Repositories, Models
+  - Misma base de datos que React
+end note
 
 @enduml

@@ -1,17 +1,25 @@
 @startuml
-title Diagrama de Secuencia - Abrir Aulas (Listar)
+title Diagrama de Secuencia - Abrir Aulas / Listar (CLI HTTP)
 
 actor "Administrador" as Admin
-participant "Frontend (React)" as FE
+participant "CLI (Click)" as CLI
+participant "APIClient" as Client
+participant "TokenManager" as Token
 participant "API (FastAPI)" as API
 participant "AulaService" as Service
 participant "AulaRepository" as Repo
 database "Base de Datos" as DB
+participant "OutputFormatter" as Formatter
 
-Admin -> FE: Navega a "Gestión de Aulas"
-activate FE
-FE -> FE: Verificar Token
-FE -> API: GET /aulas (Header: Bearer Token)
+Admin -> CLI: Ejecuta 'sighor aulas list'
+activate CLI
+CLI -> Token: get_token()
+activate Token
+Token --> CLI: access_token
+deactivate Token
+CLI -> Client: get('/aulas', headers={'Authorization': 'Bearer {token}'})
+activate Client
+Client -> API: GET /aulas (Header: Bearer Token)
 activate API
 API -> Service: listar_aulas()
 activate Service
@@ -25,10 +33,23 @@ Repo --> Service: List[Aula]
 deactivate Repo
 Service --> API: List[AulaResponse]
 deactivate Service
-API --> FE: 200 OK (JSON List)
+API --> Client: 200 OK (JSON List)
 deactivate API
-FE -> FE: Renderizar Tabla de Aulas
-FE --> Admin: Mostrar Lista de Aulas
-deactivate FE
+Client --> CLI: Response(200, aulas_json)
+deactivate Client
+CLI -> Formatter: format_table(aulas)
+activate Formatter
+Formatter --> CLI: Tabla ASCII (Rich)
+deactivate Formatter
+CLI --> Admin: Mostrar tabla de aulas
+deactivate CLI
+
+note right of API
+  **Backend FastAPI reutilizado:**
+  - AulaService
+  - AulaRepository
+  - Base de datos SQLite
+  Sin modificaciones
+end note
 
 @enduml

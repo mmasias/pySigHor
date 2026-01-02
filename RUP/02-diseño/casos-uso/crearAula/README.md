@@ -8,12 +8,13 @@
 - **Proyecto**: pySigHor
 - **Fase RUP**: Elaboración
 - **Disciplina**: Diseño
-- **Versión**: 1.0
-- **Fecha**: 2025-11-19
-- **Autor**: Gemini
+- **Versión**: 1.0 (CLI HTTP)
+- **Fecha**: 2026-01-02
+- **Autor**: Equipo de desarrollo
 
 ## Propósito
-Especificar el flujo para la creación de una nueva entidad Aula, incluyendo validaciones y persistencia.
+
+Detallar el flujo para crear una nueva aula desde la CLI mediante prompts interactivos, enviando los datos al backend FastAPI para validación y persistencia.
 
 ## Diagrama de secuencia de diseño
 
@@ -22,11 +23,17 @@ Especificar el flujo para la creación de una nueva entidad Aula, incluyendo val
 [Código PlantUML](secuencia.puml)
 
 ## Participantes
-*   **Frontend**: Formulario `AulaForm` (modo creación).
-*   **API**: Endpoint `POST /aulas`.
-*   **AulaService**: Lógica de creación.
-*   **AulaRepository**: `INSERT` en base de datos.
+
+- **CLI (Click)**: Comando `sighor aulas create` que solicita datos mediante prompts.
+- **APIClient**: Cliente HTTP que realiza POST `/aulas` con token y datos del aula.
+- **API (FastAPI)**: Endpoint `POST /aulas` protegido (requiere token) (reutilizado).
+- **AulaService**: Valida y orquesta la creación (reutilizado).
+- **AulaRepository**: Ejecuta INSERT en base de datos (reutilizado).
 
 ## Decisiones de diseño
-*   Uso de `AulaCreate` schema para validación de entrada (tipos, obligatoriedad).
-*   Retorno de código HTTP `201 Created` con el objeto creado.
+
+- **Prompts interactivos**: CLI solicita nombre, capacidad y edificio mediante `click.prompt()`.
+- CLI como **cliente HTTP puro**: consume mismo endpoint `POST /aulas` que interfaz React.
+- **Validaciones en backend**: Pydantic valida tipos y restricciones (capacidad > 0, etc.) con schema `AulaCreate`.
+- Respuesta exitosa (201 Created) muestra mensaje de confirmación con ID del aula creada.
+- **Reuso completo del backend**: AulaService y AulaRepository sin modificaciones.

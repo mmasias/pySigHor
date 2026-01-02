@@ -1,33 +1,38 @@
 # Fase de diseño
 
 ## Propósito
+
 Esta fase tiene como objetivo definir la arquitectura del sistema, la selección tecnológica y el diseño detallado de los componentes para guiar la implementación.
 
 ## Stack tecnológico seleccionado
 
-Para la modernización de **pySigHor**, se ha seleccionado una arquitectura de **Single Page Application (SPA)** con API REST, priorizando la separación de responsabilidades y el valor didáctico.
+Para la modernización de **pySigHor**, se ha seleccionado una arquitectura de **CLI (Command Line Interface)** que consume una API REST existente, priorizando el reuso máximo del backend y la validación de independencia de paradigma de interfaz.
 
-### Backend: Python + FastAPI
-*   **Framework**: FastAPI.
-*   **Ventajas**: Alto rendimiento (Asgi), validación de datos automática (Pydantic), documentación interactiva (Swagger UI) y tipado estático fuerte.
-*   **Rol**: Exponer la lógica de negocio y acceso a datos a través de una API RESTful.
+### CLI: Python + Click + Requests
 
-### Frontend: React + TypeScript
-*   **Framework**: React (con Vite como bundler).
-*   **Lenguaje**: TypeScript para mayor robustez y mantenibilidad.
-*   **Estilos**: CSS Modules o Tailwind (a definir en implementación).
-*   **Rol**: Interfaz de usuario interactiva y gestión del estado de la aplicación.
+- **Framework CLI**: Click (creación de comandos y prompts).
+- **Cliente HTTP**: Requests (consumo de API FastAPI).
+- **Ventajas**: Reuso completo del backend FastAPI, desarrollo rápido, interfaz textual portable.
+- **Rol**: Interfaz de línea de comandos para interactuar con el sistema SigHor.
 
-### Base de Datos: SQLite
-*   **Motor**: SQLite (fichero local).
-*   **ORM**: SQLAlchemy (async).
-*   **Ventajas**: Cero configuración, ideal para desarrollo y prototipado rápido, fácilmente migrable a PostgreSQL.
+### Backend: Python + FastAPI (Reutilizado)
+
+- **Framework**: FastAPI.
+- **Ventajas**: Backend completo ya implementado en rama `diseño-fastapi-react`.
+- **Rol**: Exponer la lógica de negocio y acceso a datos a través de una API RESTful.
+- **Reuso**: Services, Repositories, Models, configuración de base de datos.
+
+### Base de Datos: SQLite (Heredada)
+
+- **Motor**: SQLite (fichero local).
+- **ORM**: SQLAlchemy (async).
+- **Ventajas**: Misma base de datos que interfaz React, coherencia total de datos.
 
 ## Artefactos de diseño general
 
 ### Arquitectura del sistema
 
-Vista de alto nivel de los contenedores y su interacción.
+Vista de alto nivel de los contenedores y su interacción (CLI como cliente HTTP de FastAPI).
 
 <div align=center>
 
@@ -37,9 +42,9 @@ Vista de alto nivel de los contenedores y su interacción.
 
 </div>
 
-### Diagrama de clases de diseño (dominio y datos)
+### Diagrama de clases de diseño (CLI + Backend reutilizado)
 
-Modelado de las entidades principales, esquemas de API (Pydantic) y modelos de persistencia.
+Modelado de comandos CLI, cliente HTTP y mapeo con backend FastAPI existente.
 
 <div align=center>
 
@@ -51,23 +56,24 @@ Modelado de las entidades principales, esquemas de API (Pydantic) y modelos de p
 
 ### Configuración y estructura del proyecto
 
-Definición de la estructura de directorios, configuraciones iniciales y decisiones técnicas para materializar la arquitectura en código ejecutable.
+Definición de la estructura de directorios del CLI, configuraciones iniciales y decisiones técnicas para materializar la arquitectura en código ejecutable.
 
 [Documento completo](configuracion-proyecto.md)
 
 **Contenido**:
-*   Estructura de directorios (Backend y Frontend)
-*   Configuraciones iniciales (dependencias, variables de entorno)
-*   Esquema de base de datos
-*   Mapeo entre artefactos de diseño y código
-*   Comandos de desarrollo
+
+- Estructura de directorios CLI
+- Dependencias (Click, Requests, Rich)
+- Configuración de conexión a API FastAPI
+- Gestión de tokens de sesión
+- Comandos de desarrollo y ejecución
 
 ## Diseño de casos de uso
 
-El diseño detallado de cada caso de uso (diagramas de secuencia) se encuentra organizado en carpetas específicas:
+El diseño detallado de cada caso de uso (diagramas de secuencia CLI → API) se encuentra organizado en carpetas específicas:
 
-*   [Iniciar Sesión](casos-uso/iniciarSesion/README.md)
-*   [Abrir Aulas (Listar)](casos-uso/abrirAulas/README.md)
-*   [Crear Aula](casos-uso/crearAula/README.md)
-*   [Editar Aula](casos-uso/editarAula/README.md)
-*   [Eliminar Aula](casos-uso/eliminarAula/README.md)
+- [Iniciar Sesión](casos-uso/iniciarSesion/README.md)
+- [Abrir Aulas (Listar)](casos-uso/abrirAulas/README.md)
+- [Crear Aula](casos-uso/crearAula/README.md)
+- [Editar Aula](casos-uso/editarAula/README.md)
+- [Eliminar Aula](casos-uso/eliminarAula/README.md)

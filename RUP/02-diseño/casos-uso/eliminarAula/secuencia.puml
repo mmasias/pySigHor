@@ -1,35 +1,61 @@
 @startuml
-title Diagrama de Secuencia - Eliminar Aula
+title Diagrama de Secuencia - Eliminar Aula (CLI HTTP)
 
 actor "Administrador" as Admin
-participant "Frontend (React)" as FE
+participant "CLI (Click)" as CLI
+participant "APIClient" as Client
 participant "API (FastAPI)" as API
 participant "AulaService" as Service
 participant "AulaRepository" as Repo
 database "Base de Datos" as DB
 
-Admin -> FE: Clic en "Eliminar" (en una fila)
-activate FE
-FE --> Admin: Mostrar Confirmación
-Admin -> FE: Confirma eliminación
-FE -> API: DELETE /aulas/{id}
+Admin -> CLI: Ejecuta 'sighor aulas delete 5'
+activate CLI
+CLI -> Admin: Prompt: Confirmar eliminación de aula 5? (y/n)
+Admin -> CLI: Confirma (y)
+CLI -> Client: delete('/aulas/5')
+activate Client
+Client -> API: DELETE /aulas/5 (Bearer Token)
 activate API
-API -> Service: eliminar_aula(id)
+API -> Service: eliminar_aula(5)
 activate Service
-Service -> Repo: delete(id)
+Service -> Repo: delete(5)
 activate Repo
-Repo -> DB: DELETE FROM aulas WHERE id = ?
+Repo -> DB: DELETE FROM aulas WHERE id = 5
 activate DB
-DB --> Repo: Rows affected
-deactivate DB
-Repo --> Service: True/False
-deactivate Repo
-Service --> API: True
-deactivate Service
-API --> FE: 204 No Content
-deactivate API
-FE -> FE: Remover de la lista
-FE --> Admin: Mostrar "Aula eliminada"
-deactivate FE
+alt Eliminación exitosa
+    DB --> Repo: Rows affected: 1
+    deactivate DB
+    Repo --> Service: True
+    deactivate Repo
+    Service --> API: True
+    deactivate Service
+    API --> Client: 204 No Content
+    deactivate API
+    Client --> CLI: Response(204)
+    deactivate Client
+    CLI --> Admin: Aula eliminada exitosamente
+else Aula no existe
+    DB --> Repo: Rows affected: 0
+    deactivate DB
+    Repo --> Service: False
+    deactivate Repo
+    Service --> API: 404 Not Found
+    deactivate Service
+    API --> Client: 404 Not Found
+    deactivate API
+    Client --> CLI: Response(404)
+    deactivate Client
+    CLI --> Admin: Error: Aula no encontrada
+end
+deactivate CLI
+
+note right of API
+  **Backend FastAPI reutilizado:**
+  - AulaService
+  - AulaRepository
+  - Manejo de integridad referencial
+  Sin modificaciones
+end note
 
 @enduml

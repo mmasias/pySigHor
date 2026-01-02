@@ -8,12 +8,13 @@
 - **Proyecto**: pySigHor
 - **Fase RUP**: Elaboración
 - **Disciplina**: Diseño
-- **Versión**: 1.0
-- **Fecha**: 2025-11-19
-- **Autor**: Gemini
+- **Versión**: 1.0 (CLI HTTP)
+- **Fecha**: 2026-01-02
+- **Autor**: Equipo de desarrollo
 
 ## Propósito
-Detallar la interacción entre los componentes del sistema (Frontend, API, Servicios) para autenticar a un usuario y generar un token de acceso.
+
+Detallar la interacción entre los componentes del sistema (CLI, API HTTP, Servicios) para autenticar a un usuario desde la línea de comandos y almacenar el token de acceso localmente.
 
 ## Diagrama de secuencia de diseño
 
@@ -22,13 +23,18 @@ Detallar la interacción entre los componentes del sistema (Frontend, API, Servi
 [Código PlantUML](secuencia.puml)
 
 ## Participantes
-*   **Frontend (React)**: Captura credenciales y gestiona el almacenamiento del token.
-*   **API (FastAPI)**: Endpoint `/token` que recibe `OAuth2PasswordRequestForm`.
-*   **AuthService**: Lógica de negocio para verificar contraseñas y firmar JWTs.
-*   **UsuarioRepository**: Abstracción para acceso a datos de usuarios.
-*   **Base de Datos (SQLite)**: Persistencia de usuarios y hashes.
+
+- **CLI (Click)**: Captura credenciales mediante prompts y gestiona almacenamiento local del token.
+- **APIClient**: Cliente HTTP que consume endpoint `/token` del backend FastAPI.
+- **API (FastAPI)**: Endpoint `/token` que recibe `OAuth2PasswordRequestForm` (reutilizado).
+- **AuthService**: Lógica de negocio para verificar contraseñas y firmar JWTs (reutilizado).
+- **UsuarioRepository**: Abstracción para acceso a datos de usuarios (reutilizado).
+- **Base de Datos (SQLite)**: Persistencia de usuarios y hashes (compartida).
 
 ## Decisiones de diseño
-*   Uso de **JWT (JSON Web Tokens)** para autenticación stateless.
-*   Separación de `AuthService` para aislar la lógica de criptografía.
-*   Manejo de errores 401 explícito para feedback al usuario.
+
+- Uso de **JWT (JSON Web Tokens)** para autenticación stateless (heredado del backend).
+- **Almacenamiento local** del token en archivo `~/.sighor/token` (específico de CLI).
+- CLI como **cliente HTTP puro**: consume mismo endpoint `/token` que interfaz React.
+- Manejo de errores HTTP explícito (401 → "Credenciales inválidas", ConnectionError → "Backend no disponible").
+- **Reuso completo del backend**: AuthService, UsuarioRepository y DB sin modificaciones.

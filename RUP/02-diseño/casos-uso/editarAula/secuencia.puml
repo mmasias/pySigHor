@@ -1,33 +1,51 @@
 @startuml
-title Diagrama de Secuencia - Editar Aula
+title Diagrama de Secuencia - Editar Aula (CLI HTTP)
 
 actor "Administrador" as Admin
-participant "Frontend (React)" as FE
+participant "CLI (Click)" as CLI
+participant "APIClient" as Client
 participant "API (FastAPI)" as API
 participant "AulaService" as Service
 participant "AulaRepository" as Repo
 database "Base de Datos" as DB
 
-Admin -> FE: Clic en "Editar" (en una fila)
-activate FE
-FE --> Admin: Mostrar Formulario con datos precargados
-Admin -> FE: Modifica datos y Guardar
-FE -> API: PUT /aulas/{id} (AulaUpdate JSON)
+Admin -> CLI: Ejecuta 'sighor aulas edit 5'
+activate CLI
+CLI -> Client: get('/aulas/5')
+activate Client
+Client -> API: GET /aulas/5 (Bearer Token)
 activate API
-API -> Service: editar_aula(id, aula_update)
+API -> Service: obtener_aula(5)
 activate Service
-Service -> Repo: get_by_id(id)
+Service -> Repo: get_by_id(5)
 activate Repo
-Repo -> DB: SELECT * FROM aulas WHERE id = ?
+Repo -> DB: SELECT * FROM aulas WHERE id = 5
 activate DB
 DB --> Repo: Aula existente
 deactivate DB
 Repo --> Service: Aula
 deactivate Repo
-Service -> Service: Actualizar campos
-Service -> Repo: update(aula)
+Service --> API: AulaResponse
+deactivate Service
+API --> Client: 200 OK (Aula JSON)
+deactivate API
+Client --> CLI: aula_actual
+deactivate Client
+CLI -> Admin: Prompt: Nuevo nombre? [actual: {nombre}]
+Admin -> CLI: Ingresa nuevo nombre (o Enter para mantener)
+CLI -> Admin: Prompt: Nueva capacidad? [actual: {capacidad}]
+Admin -> CLI: Ingresa nueva capacidad
+CLI -> Admin: Prompt: Nuevo edificio? [actual: {edificio}]
+Admin -> CLI: Ingresa nuevo edificio
+CLI -> Client: put('/aulas/5', data={campos_modificados})
+activate Client
+Client -> API: PUT /aulas/5 (AulaUpdate JSON + Bearer Token)
+activate API
+API -> Service: editar_aula(5, aula_update)
+activate Service
+Service -> Repo: update(5, aula_update)
 activate Repo
-Repo -> DB: UPDATE aulas SET ... WHERE id = ?
+Repo -> DB: UPDATE aulas SET ... WHERE id = 5
 activate DB
 DB --> Repo: OK
 deactivate DB
@@ -35,10 +53,19 @@ Repo --> Service: Aula actualizada
 deactivate Repo
 Service --> API: AulaResponse
 deactivate Service
-API --> FE: 200 OK (Aula JSON)
+API --> Client: 200 OK (Aula JSON)
 deactivate API
-FE -> FE: Actualizar Lista / Notificar Éxito
-FE --> Admin: Mostrar "Aula actualizada correctamente"
-deactivate FE
+Client --> CLI: Response(200, aula_json)
+deactivate Client
+CLI --> Admin: Aula actualizada exitosamente
+deactivate CLI
+
+note right of API
+  **Backend FastAPI reutilizado:**
+  - AulaService
+  - AulaRepository
+  - Validación Pydantic (AulaUpdate)
+  Sin modificaciones
+end note
 
 @enduml
