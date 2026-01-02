@@ -77,6 +77,7 @@ Los casos de uso analizados incluyen **2 enlaces** de navegación:
 ### Casos de uso identificados únicamente (🔘 Gris)
 
 #### Gestión de datos maestros
+
 (Todos los casos de uso de datos maestros están en análisis o superior)
 
 #### Operaciones CRUD
@@ -85,7 +86,6 @@ Los casos de uso analizados incluyen **2 enlaces** de navegación:
 
 #### Funcionalidades especiales
 
-
 #### Sistema
 
 (Todos los casos de uso del sistema están en análisis o superior)
@@ -93,35 +93,41 @@ Los casos de uso analizados incluyen **2 enlaces** de navegación:
 ## Estadísticas del proyecto
 
 - **Total de casos de uso**: 32
-- **Casos de uso en análisis**: 32 (100%)
-  - ¡Proyecto completado en fase de análisis!
+- **Casos de uso en diseño**: 5 (15.6%) - Validación experimental en 4 stacks tecnológicos
+- **Casos de uso en análisis**: 27 (84.4%)
 - **Casos de uso identificados**: 0 (0%)
-  - Todos los casos implementados
-- **Progreso general**: 100% (proyecto COMPLETADO en análisis)
+- **Progreso general**: 100% análisis + 15.6% diseño experimental
 
 ## Próximos pasos
 
-### Hilos completados
-1. **✅ Hilo Programas completado** - crearPrograma(), editarPrograma(), eliminarPrograma()
-2. **✅ Hilo Cursos completado** - crearCurso(), editarCurso(), eliminarCurso()
-3. **✅ Hilo Profesores completado** - crearProfesor(), editarProfesor(), eliminarProfesor(), configurarPreferenciasProfesor()
-4. **✅ Hilo Edificios completado** - crearEdificio(), editarEdificio(), eliminarEdificio()
-5. **✅ Hilo Aulas completado** - crearAula(), editarAula(), eliminarAula()
-6. **✅ Hilo Recursos completado** - crearRecurso(), editarRecurso(), eliminarRecurso()
-7. **✅ Hilo Horarios completado** - generarHorario(), consultarHorario()
-8. **✅ Hilo Sistema completado** - iniciarSesion(), cerrarSesion(), completarGestion()
+### Hilos completados en análisis
 
-### ¡Proyecto completado en análisis!
-- **✅ Todos los hilos funcionales completados**
-- **✅ 32 casos de uso con especificación detallada**  
-- **✅ 32 casos de uso con análisis MVC completo**
-- **✅ Metodología RUP aplicada sistemáticamente**
+1. **Hilo Programas completado** - crearPrograma(), editarPrograma(), eliminarPrograma()
+2. **Hilo Cursos completado** - crearCurso(), editarCurso(), eliminarCurso()
+3. **Hilo Profesores completado** - crearProfesor(), editarProfesor(), eliminarProfesor(), configurarPreferenciasProfesor()
+4. **Hilo Edificios completado** - crearEdificio(), editarEdificio(), eliminarEdificio()
+5. **Hilo Aulas completado** - crearAula(), editarAula(), eliminarAula()
+6. **Hilo Recursos completado** - crearRecurso(), editarRecurso(), eliminarRecurso()
+7. **Hilo Horarios completado** - generarHorario(), consultarHorario()
+8. **Hilo Sistema completado** - iniciarSesion(), cerrarSesion(), completarGestion()
 
-### Próxima fase: Diseño
-- **Arquitectura del sistema**: Definir tecnologías y patrones arquitectónicos
-- **Diseño detallado**: Refinar clases de análisis en clases de diseño
-- **Bases de datos**: Diseño del modelo de datos relacional
-- **Interfaces**: Diseño detallado de interfaces de usuario
+### Proyecto completado en análisis
+
+- **Todos los hilos funcionales completados**
+- **32 casos de uso con especificación detallada**
+- **32 casos de uso con análisis MVC completo**
+- **Metodología RUP aplicada sistemáticamente**
+
+### Fase de diseño experimental (en progreso)
+
+- **5 casos de uso diseñados** en 4 stacks tecnológicos diferentes:
+  - FastAPI + React (frontend/backend)
+  - Spring Boot + Angular (frontend/backend)
+  - CLI Python + HTTP (cliente/servidor)
+  - CLI Python Standalone (monolítico)
+- **Objetivo**: Validar independencia tecnológica de RUP
+- **Casos diseñados**: iniciarSesion, abrirAulas, crearAula, editarAula, eliminarAula
+- **Próximo paso**: Ampliar diseño a más casos de uso según necesidad
 
 ## Metodología
 
