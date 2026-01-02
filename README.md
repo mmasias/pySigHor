@@ -36,11 +36,12 @@ En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Indu
 > |Rama|Stack|Casos diseñados|Dashboard|Estado|
 > |-|-|-:|:-:|-|
 > |- [***main***](https://github.com/mmasias/pySigHor/tree/main)|<sup>Análisis puro (agnóstico)|32/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Completado|
-> |- [***diseño-fastapi-react***](https://github.com/mmasias/pySigHor/tree/diseño-fastapi-react)|<sup>FastAPI + React|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
-> |- [***diseño-spring-angular***](https://github.com/mmasias/pySigHor/tree/diseño-spring-angular)|<sup>Spring + Angular|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Diseñado|
-> |*- diseño-cli-python-http*<br>*- diseño-cli-python-standalone*|<sup>CLI (validación paradigma no-GUI)|Pendiente|Pendiente|En diseño conceptual|
+> |- [***diseño-fastapi-react***](https://github.com/mmasias/pySigHor/tree/diseño-fastapi-react/RUP/02-diseño/)|<sup>FastAPI + React|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|En diseño...|
+> |- [***diseño-spring-angular***](https://github.com/mmasias/pySigHor/tree/diseño-spring-angular/RUP/02-diseño/)|<sup>Spring + Angular|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|En diseño...|
+> |- [***diseño-cli-python-http***](https://github.com/mmasias/pySigHor/tree/diseño-cli-python-http/RUP/02-diseño/)|<sup>CLI con reuso|5/32|Ver|En diseño...|
+> |- [***diseño-cli-python-standalone***](https://github.com/mmasias/pySigHor/tree/diseño-cli-python-standalone/RUP/02-diseño/)|<sup>CLI standalone|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-standalone/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|En diseño...|
 > 
-> **Resultado:** 0 modificaciones al análisis tras 3 implementaciones diferentes ([Artículo 015](/extraDocs/015-dashboards-multistack-validacion-experimental/))
+> **Resultado:** 0 modificaciones al análisis tras 5 implementaciones diferentes ([Artículo 015](/extraDocs/015-dashboards-multistack-validacion-experimental/))
 
 ## Hitos
 
