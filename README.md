@@ -33,7 +33,7 @@ En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Indu
 
 > **Hipótesis:** Un análisis RUP completo puede soportar múltiples implementaciones tecnológicas sin modificaciones.
 > 
-> |Rama|Stack|Casos diseñados|Dashboard|Estado|
+> |Rama|Stack|CdU|Dashboard|Estado|
 > |-|-|-:|:-:|-|
 > |- [***main***](https://github.com/mmasias/pySigHor/tree/main)|<sup>Análisis puro (agnóstico)|32/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|Completado|
 > |- [***diseño-fastapi-react***](https://github.com/mmasias/pySigHor/tree/diseño-fastapi-react/RUP/02-diseño/)|<sup>FastAPI + React|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|En diseño...|
