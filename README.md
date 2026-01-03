@@ -73,9 +73,9 @@ pySigHor/
 ├── images/                          # Capturas de pantalla y assets de documentación
 │   ├── RUP/                         # Imágenes generadas de diagramas RUP
 │   └── extraDocs/                   # Imágenes de documentación adicional
-├── extraFiles/                      # Archivos de licencias y configuración legacy
 ├── drafts-temp/                     # Borradores y archivos temporales
 ├── src/                             # Código fuente original de Visual Basic 3.0
+│   └── extraFiles/                  # Archivos de licencias y configuración legacy
 ├── conversation-log.md              # Registro completo de conversaciones del proyecto
 ├── *.md                             # Archivos de documentación y análisis
 └── README.md                        # Resumen del proyecto
