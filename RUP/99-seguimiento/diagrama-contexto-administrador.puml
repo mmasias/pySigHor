@@ -21,8 +21,10 @@ legend top
     |<#gray>     | Identificado |<#red>     | Requisitado |<#darkgoldenrod>     | Analizado |<#green>     | Diseñado |<#lightblue>     | Desarrollado |<#blue>     | Probado |<#black>     | Completado |
     | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - FastAPI/React]] |
     | | | | | | | | - Spring/Angular |
+    | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-http/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - CLI HTTP]] |
+    | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-standalone/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - CLI Standalone]] |
     '====
-    '[**nombreCasoUso()**] -> Especificación detallada / [**A**] -> Análisis MVC / [**D**] -> Diseño
+    '[**nombreCasoUso()**] -> Especificación detallada / [**A**] -> Análisis MVC / [**D**] -> Diseño (disponible en ramas específicas)
     '====
 end legend
 
