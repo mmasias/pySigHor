@@ -2,9 +2,9 @@
 
 <div align=right>
 
-||||||
-|-|-|-|-|-|
-|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Reflexiones](reflexionesPySighor/README.md)|[Conclusiones](conclusiones.md)|
+||
+|-|-|
+|[🏠️](../README.md)|**Artículo**|
 
 </div>
 

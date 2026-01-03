@@ -54,29 +54,31 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 
 ### Índice de artículos
 
-| # | Título | Commit | Tema |
-|---|--------|--------|------|
-| 000 | [Ingeniería inversa del sistema SigHor (1998)](000-ingenieria-inversa/) | [Inicio del proyecto] | Análisis de sistema legacy |
-| 001 | [El problema de saltarse pasos: de la ilusión de eficiencia al caos sistemático](001-saltarse-pasos-desarrollo/README.md) | [`b5711c76`](https://github.com/mmasias/pySigHor/tree/b5711c76a9b96432252c596b0d0c53815550fdf8) | Disciplina metodológica RUP |
-| 002 | [Coherencia estructural: cuando los README.md están en el lugar equivocado](002-coherencia-estructural-readme/README.md) | [Por determinar] | Organización de proyectos |
-| 003 | [La promesa de RUP: análisis independiente de tecnología - experimento metodológico en tiempo real](003-rup-independencia-tecnologica/README.md) | [Por determinar] | Experimentación metodológica |
-| 004 | [Dashboard visual RUP: diagrama de contexto como herramienta de gestión de proyecto](004-dashboard-visual-rup-casos-uso/README.md) | [Por determinar] | Innovación metodológica |
-| 005 | [Aplicación de etiquetado ético en colaboración humano-IA: caso de estudio pySigHor](005-etiquetado-etico-colaboracion-humano-ia/README.md) | [Por determinar] | Ética en colaboración humano-IA |
-| 006 | [Reflexión metodológica: delimitación del alcance en diagramas de colaboración RUP](006-reflexion-alcance-casos-uso-colaboracion/README.md) | [`b8f36ca`](https://github.com/mmasias/pySigHor/tree/b8f36ca7fd409c16fb03be9e3f21058ee78df985) | Análisis RUP y alcance de casos de uso |
-| 007 | [Diagramas de contexto múltiples por tecnología: pureza metodológica vs implementación práctica](007-diagramas-contexto-multiples-tecnologias/README.md) | [`7975ac6`](https://github.com/mmasias/pySigHor/tree/7975ac6) | Arquitectura multiplataforma y pureza RUP |
-| 008 | [Filosofía C→U: Integración de Creación y Edición en Casos de Uso CRUD](008-filosofia-crud-creacion-edicion/README.md) | [`69c0f68`](https://github.com/mmasias/pySigHor/tree/69c0f681227d1a0aad86ea8fa21313db09d570d7) | Metodología CRUD y experiencia de usuario |
-| 009 | [Valoración de un tercer LLM (ChatGPT) de la interacción](009-opinion-tercer-llm/README.md) | [`69c0f68`](https://github.com/mmasias/pySigHor/tree/69c0f681227d1a0aad86ea8fa21313db09d570d7) | Análisis externo de colaboración humano-IA |
-| 010 | [Incidente de aplicación automática post-compactación: análisis de límites de autonomía en colaboración humano-IA](010-incidente-aplicacion-automatica-post-compactacion/README.md) | [`1d4b7f4`](https://github.com/mmasias/pySigHor/commit/1d4b7f4) → [`a8dc1c9`](https://github.com/mmasias/pySigHor/commit/a8dc1c9) → [`7269793`](https://github.com/mmasias/pySigHor/commit/7269793) → [`8bafd43`](https://github.com/mmasias/pySigHor/commit/8bafd43) → [`d1308ed`](https://github.com/mmasias/pySigHor/commit/d1308ed) → [`c717c8a`](https://github.com/mmasias/pySigHor/commit/c717c8a) | Caso de estudio de control de calidad y protocolos de colaboración |
-| 011 | [Sobreoptimización de LLMs: El Problema de la Navegación Anticipada en RUP](011-sobreoptimizacion-llms-navegacion-rup/README.md) | [`c2b488f`](https://github.com/mmasias/pySigHor/commit/c2b488f) | Patrón de completismo automático en colaboración humano-IA |
-| 012 | [Reflexión: Fase de Análisis RUP Completada al 100%](012-reflexion-fase-analisis-completada/README.md) | [`4facee8`](https://github.com/mmasias/pySigHor/commit/4facee8) | Evaluación final contra hitos metodológicos, métricas completas y preparación para fase de Diseño |
-| 013 | [Triangulación metodológica: equipos independientes para consolidación arquitectónica en RUP](013-consolidacion-arquitectonica/README.md) | [Por determinar] | Innovación en validación cruzada para transición crítica Análisis → Diseño |
-| 014 | [Prototipado más allá de GUI: validación de interfaces en arquitecturas modernas](014-prototipado-mas-alla-gui/README.md) | [Por determinar] | Expansión del concepto de prototipado para APIs REST, CLIs y múltiples puntos de contacto del sistema |
-| 015 | [Dashboards multi-stack y validación experimental: RUP con FastAPI/React y Spring/Angular](015-dashboards-multistack-validacion-experimental/README.md) | [Por determinar] | Validación práctica de independencia tecnológica RUP con implementaciones paralelas |
-| 016 | [CLI como validación: de GUI web a terminal sin modificar el análisis](016-validacion-cli/README.md) | [Por determinar] | Validación de independencia con CLI - dos arquitecturas (HTTP vs monolítico), un solo análisis |
+|#|Título|Commit|Tema|
+|-|-|-|-|
+|000|[Ingeniería inversa del sistema SigHor (1998)](000-ingenieria-inversa/)|[Inicio del proyecto]|Análisis de sistema legacy|
+|001|[El problema de saltarse pasos: de la ilusión de eficiencia al caos sistemático](001-saltarse-pasos-desarrollo/README.md)|[`b5711c76`](https://github.com/mmasias/pySigHor/tree/b5711c76a9b96432252c596b0d0c53815550fdf8)|Disciplina metodológica RUP|
+|002|[Coherencia estructural: cuando los README.md están en el lugar equivocado](002-coherencia-estructural-readme/README.md)|[Por determinar]|Organización de proyectos|
+|003|[La promesa de RUP: análisis independiente de tecnología - experimento metodológico en tiempo real](003-rup-independencia-tecnologica/README.md)|[Por determinar]|Experimentación metodológica|
+|004|[Dashboard visual RUP: diagrama de contexto como herramienta de gestión de proyecto](004-dashboard-visual-rup-casos-uso/README.md)|[Por determinar]|Innovación metodológica|
+|005|[Aplicación de etiquetado ético en colaboración humano-IA: caso de estudio pySigHor](005-etiquetado-etico-colaboracion-humano-ia/README.md)|[Por determinar]|Ética en colaboración humano-IA|
+|006|[Reflexión metodológica: delimitación del alcance en diagramas de colaboración RUP](006-reflexion-alcance-casos-uso-colaboracion/README.md)|[`b8f36ca`](https://github.com/mmasias/pySigHor/tree/b8f36ca7fd409c16fb03be9e3f21058ee78df985)|Análisis RUP y alcance de casos de uso|
+|007|[Diagramas de contexto múltiples por tecnología: pureza metodológica vs implementación práctica](007-diagramas-contexto-multiples-tecnologias/README.md)|[`7975ac6`](https://github.com/mmasias/pySigHor/tree/7975ac6)|Arquitectura multiplataforma y pureza RUP|
+|008|[Filosofía C→U: Integración de Creación y Edición en Casos de Uso CRUD](008-filosofia-crud-creacion-edicion/README.md)|[`69c0f68`](https://github.com/mmasias/pySigHor/tree/69c0f681227d1a0aad86ea8fa21313db09d570d7)|Metodología CRUD y experiencia de usuario|
+|009|[Valoración de un tercer LLM (ChatGPT) de la interacción](009-opinion-tercer-llm/README.md)|[`69c0f68`](https://github.com/mmasias/pySigHor/tree/69c0f681227d1a0aad86ea8fa21313db09d570d7)|Análisis externo de colaboración humano-IA|
+|010|[Incidente de aplicación automática post-compactación: análisis de límites de autonomía en colaboración humano-IA](010-incidente-aplicacion-automatica-post-compactacion/README.md)|[`1d4b7f4`](https://github.com/mmasias/pySigHor/commit/1d4b7f4) → [`a8dc1c9`](https://github.com/mmasias/pySigHor/commit/a8dc1c9) → [`7269793`](https://github.com/mmasias/pySigHor/commit/7269793) → [`8bafd43`](https://github.com/mmasias/pySigHor/commit/8bafd43) → [`d1308ed`](https://github.com/mmasias/pySigHor/commit/d1308ed) → [`c717c8a`](https://github.com/mmasias/pySigHor/commit/c717c8a)|Caso de estudio de control de calidad y protocolos de colaboración|
+|011|[Sobreoptimización de LLMs: El Problema de la Navegación Anticipada en RUP](011-sobreoptimizacion-llms-navegacion-rup/README.md)|[`c2b488f`](https://github.com/mmasias/pySigHor/commit/c2b488f)|Patrón de completismo automático en colaboración humano-IA|
+|012|[Reflexión: Fase de Análisis RUP Completada al 100%](012-reflexion-fase-analisis-completada/README.md)|[`4facee8`](https://github.com/mmasias/pySigHor/commit/4facee8)|Evaluación final contra hitos metodológicos, métricas completas y preparación para fase de Diseño|
+|013|[Triangulación metodológica: equipos independientes para consolidación arquitectónica en RUP](013-consolidacion-arquitectonica/README.md)|[Por determinar]|Innovación en validación cruzada para transición crítica Análisis → Diseño|
+|014|[Prototipado más allá de GUI: validación de interfaces en arquitecturas modernas](014-prototipado-mas-alla-gui/README.md)|[Por determinar]|Expansión del concepto de prototipado para APIs REST, CLIs y múltiples puntos de contacto del sistema|
+|015|[Dashboards multi-stack y validación experimental: RUP con FastAPI/React y Spring/Angular](015-dashboards-multistack-validacion-experimental/README.md)|[Por determinar]|Validación práctica de independencia tecnológica RUP con implementaciones paralelas|
+|016|[CLI como validación: de GUI web a terminal sin modificar el análisis](016-validacion-cli/README.md)|[Por determinar]|Validación de independencia con CLI - dos arquitecturas (HTTP vs monolítico), un solo análisis|
+|017|[Opinión cruzada entre LLMs: validación metodológica multi-perspectiva](017-opinion-cruzada-llms/README.md)|[Por determinar]|Validación de decisiones metodológicas mediante análisis independiente de 4 LLMs con perspectivas complementarias|
 
 ### Estructura de artículos
 
 Cada artículo sigue la estructura:
+
 ```
 XXX-nombre-del-articulo/
 ├── README.md        # Contenido principal del artículo
@@ -87,6 +89,7 @@ XXX-nombre-del-articulo/
 ### Navegación interna
 
 Cada archivo incluye barra de navegación consistente:
+
 ```
 |🏠️|Artículo|Contexto|Evidencia|
 ```
