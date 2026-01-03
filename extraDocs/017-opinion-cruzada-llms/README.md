@@ -2,7 +2,7 @@
 
 <div align=right>
 
-||
+|||
 |-|-|
 |[🏠️](../README.md)|**Artículo**|
 
