@@ -12,7 +12,6 @@
 
 En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Industrial y de Sistemas de la Universidad de Piura, impartida por el prof. Roberto Castro, aplicamos lo que habíamos aprendido en [Investigación de Operaciones](https://es.wikipedia.org/wiki/Programaci%C3%B3n_lineal) para desarrollar SIGHOR, un [algoritmo](l'Algoritmo.md) que derivó en un sistema generador de horarios. ¡Una joyita en Visual Basic 3!
 
-
 <div align=center>
 
 |![](/images/F8zDugwX0AArV7H.jpeg)|![](/images/F8zDzlZXQAAe-o8.jpeg)|![](/images/F8zDw0CWEAADw8U.jpeg)|![](/images/F8zD4afXAAIsnGn.jpeg)|![](/images/F8zD2blXAAArega.jpeg)
@@ -43,15 +42,21 @@ En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Indu
 > |- [***diseño-cli-python-standalone***](https://github.com/mmasias/pySigHor/tree/diseño-cli-python-standalone/RUP/02-diseño/)|<sup>CLI standalone|5/32|[Ver](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-standalone/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|En diseño...|
 >
 > </div>
-> 
-> **Resultado:** 0 modificaciones al análisis tras 5 implementaciones diferentes ([Artículo 015](/extraDocs/015-dashboards-multistack-validacion-experimental/))
+>
+> **Caminos evolutivos probados:**
+>
+> - Web GUI tradicional (FastAPI/React, Spring/Angular)
+> - CLI standalone (arquitectura monolítica)
+> - CLI con reuso de infraestructura (consume API existente)
+>
+> **Resultado:** 0 modificaciones al análisis tras 4 caminos evolutivos diferentes ([Artículo 015](/extraDocs/015-dashboards-multistack-validacion-experimental/))
 
 ## Hitos
 
-|Conceptuales|Validaciones|Documentación 
+|Conceptuales|Validaciones|Documentación
 |-|-|-|
-|**32 casos de uso** con análisis MVC completo|**Independencia tecnológica validada** con 3 stacks diferentes (FastAPI/React, Spring/Angular, CLI)|**Artículos técnicos** documentando decisiones y validaciones ([extraDocs](/extraDocs/README.md))
-|**Nomenclatura MVC** aplicada sistemáticamente|**0 modificaciones al análisis** tras 3 implementaciones diferentes|**Trazabilidad completa** en 51+ conversaciones documentadas ([conversation-log](/conversation-log.md))
+|**32 casos de uso** con análisis MVC completo|**Independencia tecnológica validada** con 4 caminos evolutivos (Web GUI, CLI standalone, CLI con reuso)|**Artículos técnicos** documentando decisiones y validaciones ([extraDocs](/extraDocs/README.md))
+|**Nomenclatura MVC** aplicada sistemáticamente|**0 modificaciones al análisis** tras 4 caminos evolutivos de implementación|**Trazabilidad completa** en 51+ conversaciones documentadas ([conversation-log](/conversation-log.md))
 |**Diagramas de contexto** libres de sesgo tecnológico|**Dashboard visual** para seguimiento de progreso|**Colaboración humano-IA** documentada éticamente ([Artículo 005](/extraDocs/005-etiquetado-etico-colaboracion-humano-ia/))
 |**Wireframes SALT** como abstracciones de interacción|**Validación multi-paradigma** (GUI web → CLI terminal)|**Proceso completamente documentado** para replicación y estudio
 
