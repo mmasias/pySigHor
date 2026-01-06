@@ -33,14 +33,14 @@ Es un "hack" metodológico que consiste en reutilizar un artefacto de análisis 
 
 |||
 |-|-|
-Visibilidad topológica|Permite ver el estado del proyecto proyectado sobre la propia arquitectura, identificando qué áreas funcionales están maduras y cuáles verdes.
-Economía de herramientas|Elimina la necesidad de software de gestión externo. El diagrama *es* el reporte de estado.
-Trazabilidad histórica|Al estar versionado en Git, el historial del archivo genera automáticamente una "película" de la evolución del proyecto sin esfuerzo adicional.
-Valor didáctico|Enseña a visualizar el software como un todo orgánico en evolución, en lugar de tickets aislados en un backlog.
+**Visibilidad topológica**|Permite ver el estado del proyecto proyectado sobre la propia arquitectura, identificando qué áreas funcionales están maduras y cuáles verdes.
+**Economía de recursos**|Integra arquitectura y gestión reusando el diagrama como reporte de estado. Elimina la necesidad de software externo y la duplicidad de mantener tickets.
+**Trazabilidad histórica**|Al estar versionado en Git, el historial del archivo genera automáticamente una "película" de la evolución del proyecto sin esfuerzo adicional.
+**Valor didáctico**|Enseña a visualizar el software como un todo orgánico en evolución, en lugar de tickets aislados en un backlog.
 
 ## ¿Cómo?
 
-La implementación se basa en la **Ley del Mínimo Esfuerzo Tecnológico**:
+La implementación se basa en el **Principio de Simplicidad Tecnológica**:
 
 1. **Artefacto base**: Se utiliza el archivo fuente PlantUML (`.puml`) del diagrama de contexto de casos de uso.
 2. **Semántica de color**: Se define una leyenda estandarizada que vincula colores a fases RUP (ver `extraDocs/004-dashboard-visual-rup-casos-uso/`).
