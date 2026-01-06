@@ -8,9 +8,9 @@
 
 </div>
 
-## Resumen ejecutivo
+## Resumen
 
-Este artículo propone el concepto de **"Diagramas vivientes"** como innovación metodológica para gestión de proyectos RUP: la reutilización de artefactos de análisis estándar (diagramas de contexto de casos de uso) superponiéndoles una capa de metadatos de gestión mediante código de colores semántico. Esta técnica transforma un mapa estático de "qué hace el sistema" en un mapa dinámico de "cómo va la construcción del sistema", proporcionando **visibilidad topológica** del progreso proyectado sobre la propia arquitectura funcional.
+Este artículo propone el concepto de **"Diagramas vivientes"** como innovación metodológica para gestión de proyectos RUP: reutilizar artefactos de análisis estándar (diagramas de contexto de casos de uso) añadiéndoles una capa de metadatos de gestión mediante código de colores. Esta técnica transforma un mapa estático de "qué hace el sistema" en un mapa dinámico de "cómo va la construcción del sistema", proporcionando **visibilidad topológica** del progreso proyectado sobre la propia arquitectura funcional.
 
 **Diferencia clave con el artículo 004:** El artículo 004 documentó el descubrimiento y diseño técnico del dashboard visual como herramienta práctica. Este artículo analiza el concepto subyacente desde una perspectiva metodológica comparativa, posicionándolo frente a herramientas de gestión existentes y proponiendo "diagramas vivientes" como patrón metodológico generalizable.
 
@@ -144,8 +144,8 @@ NoAuth -[#darkgoldenrod,thickness=2]-> PreMenu
 |**Vista de progreso**|Topológica (sobre arquitectura)|Lineal (listas/tableros)|
 |**Integración**|Unificada (artefacto = dashboard)|Separada (tickets ≠ código)|
 |**Contexto arquitectónico**|Explícito (dependencias visibles)|Implícito (tags/épicas opcionales)|
-|**Herramienta requerida**|Editor de texto + Git|Plataforma cloud/servidor|
-|**Costo**|$0 (archivos de texto versionados)|Licencias (cloud/enterprise)|
+|**Herramienta requerida**|Editor de texto + Git|Plataforma en la nube/servidor|
+|**Costo**|$0 (archivos de texto versionados)|Licencias (nube/empresarial)|
 |**Trazabilidad histórica**|Git log (automática)|Manual (actualizar estados)|
 
 </div>
@@ -211,7 +211,7 @@ El siguiente caso ilustra cómo el diagrama viviente refleja el progreso del pro
 
 - **Estado A:** Color predominante amarillo/marrón → proyecto en fase de análisis uniforme
 - **Estado B:** Mezcla amarillo + verde → progreso heterogéneo (análisis vs diseño por caso de uso)
-- **Insight topológico:** Qué partes del sistema están evolucionando tecnológicamente mientras otras permanecen conceptuales
+- **Observación clave:** Qué partes del sistema están evolucionando tecnológicamente mientras otras permanecen conceptuales
 
 **Técnica de actualización:**
 
@@ -238,18 +238,18 @@ Esta técnica convierte la actualización del estado del proyecto en una **opera
 **1. Equipos muy grandes (>20 personas)**
 
 - Demasiados casos de uso simultáneos en progreso
-- Conflictos de merge frecuentes en archivo `.puml`
-- Herramientas enterprise (Jira) escalan mejor
+- Conflictos de fusión frecuentes en archivo `.puml`
+- Herramientas empresariales (Jira) escalan mejor
 
 **2. Proyectos que requieren métricas cuantitativas detalladas**
 
-- Burndown charts, velocity tracking, estimaciones
+- Gráficos de avance, seguimiento de velocidad, estimaciones
 - Diagramas vivientes son **cualitativos** (topología), no cuantitativos (métricas)
 
-**3. Organizaciones con workflows complejos de aprobación**
+**3. Organizaciones con flujos de trabajo complejos de aprobación**
 
-- Múltiples stakeholders revisando tickets
-- Diagramas vivientes asumen workflow técnico simple
+- Múltiples participantes revisando tickets
+- Diagramas vivientes asumen flujo de trabajo técnico simple
 
 **4. Proyectos sin metodología RUP/casos de uso**
 
@@ -378,36 +378,36 @@ for cu in casos_uso:
 
 **Diferencia con Rational Suite:**
 
-- Rational Suite: solución enterprise completa pero pesada
+- Rational Suite: solución empresarial completa pero pesada
 - Diagramas vivientes: solución minimalista pero práctica
 
 Ambos son válidos para RUP, diagramas vivientes democratizan acceso.
 
 ## Conclusiones
 
-### Logro conceptual
+### Resultado
 
 Se ha identificado y formalizado un patrón metodológico generalizable: **"Diagramas vivientes"** como técnica de gestión topológica de proceso mediante reutilización de artefactos de análisis con superposición de metadatos de gestión.
 
 ### Características distintivas
 
-**Elegancia metodológica:**
+**Simplicidad técnica con impacto visual:**
 
-- Simplicidad técnica (archivos de texto + colores)
-- Impacto visual máximo (arquitectura + gestión en un solo diagrama)
-- Coherencia con RUP (reutiliza artefactos estándar)
+- Archivos de texto + colores
+- Arquitectura + gestión en un solo diagrama
+- Reutiliza artefactos estándar de RUP
 
-**Practicidad inmediata:**
+**Aplicación práctica:**
 
 - Implementación sin inversión (PlantUML + Git)
-- Aplicabilidad universal en proyectos RUP
-- Facilidad de adopción (curva de aprendizaje mínima)
+- Aplicable en cualquier proyecto RUP
+- Curva de aprendizaje mínima
 
 ### Impacto esperado
 
 **Para proyectos RUP:**
 
-- Alternativa accesible a herramientas enterprise
+- Alternativa accesible a herramientas empresariales
 - Integración natural arquitectura-gestión
 - Valor didáctico en contextos educativos
 
