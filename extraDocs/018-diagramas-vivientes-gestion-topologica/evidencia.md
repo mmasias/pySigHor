@@ -20,18 +20,18 @@ Este documento proporciona evidencia empírica de que "diagramas vivientes" func
 
 |Fecha|Commit|Estado|Captura|
 |-|-|-|-|
-|**27 nov 2024**|`f1ac0ff`|Diagrama de contexto estándar (sin dashboard)|[Ver commit](https://github.com/mmasias/pySigHor/commit/f1ac0ff)|
-|**6 dic 2024**|`0474f79`|Propuesta inicial del dashboard|[Ver commit](https://github.com/mmasias/pySigHor/commit/0474f79)|
-|**20 dic 2024**|`7b143ca`|Análisis completado (todo amarillo)|[Ver commit](https://github.com/mmasias/pySigHor/commit/7b143ca)|
-|**3 ene 2025**|Rama `diseño-cli-python-http`|Diseño iniciado (amarillo + verde)|[Ver rama](https://github.com/mmasias/pySigHor/tree/dise%C3%B1o-cli-python-http)|
+|**5 jul 2025**|`50c6971`|Diagrama de contexto estándar (sin dashboard)|[Ver commit](https://github.com/mmasias/pySigHor/commit/50c6971)|
+|**9 jul 2025**|`591b539`|Propuesta inicial del dashboard|[Ver commit](https://github.com/mmasias/pySigHor/commit/591b539)|
+|**20 dic 2025**|`7b143ca`|Análisis completado (todo amarillo)|[Ver commit](https://github.com/mmasias/pySigHor/commit/7b143ca)|
+|**3 ene 2026**|Rama `diseño-cli-python-http`|Diseño iniciado (amarillo + verde)|[Ver rama](https://github.com/mmasias/pySigHor/tree/dise%C3%B1o-cli-python-http)|
 
 </div>
 
 ### Comparativa visual entre estados
 
-#### Estado 0: Diagrama de contexto estándar (27 nov 2024)
+#### Estado 0: Diagrama de contexto estándar (5 jul 2025)
 
-![Estado sin dashboard](https://raw.githubusercontent.com/mmasias/pySigHor/f1ac0ff/images/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.svg)
+![Estado sin dashboard](https://raw.githubusercontent.com/mmasias/pySigHor/50c6971/images/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.svg)
 
 **Características:**
 - Diagrama de contexto RUP tradicional
@@ -39,9 +39,9 @@ Este documento proporciona evidencia empírica de que "diagramas vivientes" func
 - Artefacto de análisis estático
 - Documentación de estructura, no de progreso
 
-#### Estado 1: Propuesta inicial del dashboard (6 dic 2024)
+#### Estado 1: Propuesta inicial del dashboard (9 jul 2025)
 
-![Estado inicial dashboard](https://raw.githubusercontent.com/mmasias/pySigHor/0474f79/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)
+![Estado inicial dashboard](https://raw.githubusercontent.com/mmasias/pySigHor/591b539/images/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.svg)
 
 **Características:**
 - **Transformación**: Mismo diagrama + capa de metadatos (colores)
@@ -49,7 +49,7 @@ Este documento proporciona evidencia empírica de que "diagramas vivientes" func
 - Refleja estado temprano del proyecto
 - Visibilidad clara de qué está en cada fase
 
-#### Estado 2: Análisis completado (20 dic 2024)
+#### Estado 2: Análisis completado (20 dic 2025)
 
 ![Análisis completado](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)
 
@@ -58,7 +58,7 @@ Este documento proporciona evidencia empírica de que "diagramas vivientes" func
 - Hito metodológico: fase de análisis finalizada
 - Preparado para bifurcación a múltiples tecnologías
 
-#### Estado 3: Diseño CLI iniciado (3 ene 2025)
+#### Estado 3: Diseño CLI iniciado (3 ene 2026)
 
 ![Diseño CLI](https://raw.githubusercontent.com/mmasias/pySigHor/dise%C3%B1o-cli-python-http/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)
 
