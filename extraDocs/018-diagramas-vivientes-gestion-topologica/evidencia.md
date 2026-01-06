@@ -31,7 +31,7 @@ Este documento proporciona evidencia empírica de que "diagramas vivientes" func
 
 #### Estado 0: Diagrama de contexto estándar (5 jul 2025)
 
-![Estado sin dashboard](https://raw.githubusercontent.com/mmasias/pySigHor/50c6971/images/RUP/00-casos-uso/01-actores-casos-uso/diagrama-contexto-administrador.svg)
+![Estado sin dashboard](https://raw.githubusercontent.com/mmasias/pySigHor/50c6971/images/01-Inception/diagrama-contexto/diagrama-contexto-administrador.svg)
 
 **Características:**
 - Diagrama de contexto RUP tradicional
