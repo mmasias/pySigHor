@@ -1,0 +1,159 @@
+@startuml er-sighor-original
+
+!define LIGHTBLUE #ADD8E6
+!define LIGHTGREEN #90EE90
+!define LIGHTCORAL #F08080
+
+title Diagrama Entidad-Relación - SigHor (BD Access 2.0 Original)
+
+' Tablas Maestras
+entity "M_Aulas" as Aulas {
+  * ID : Long <<PK>>
+  --
+  * Nombre : String(50)
+  * Capacidad : Byte
+  * Propiedades : Integer
+  * Especial : Boolean
+  * Bloqueada : Boolean
+  * IDEdificio : Long <<FK>>
+}
+
+entity "M_Cursos" as Cursos {
+  * ID : Long <<PK>>
+  --
+  * Nombre : String(50)
+  * Sigla : String(4)
+  * Programa : String(10)
+  * Ciclo : Double
+  * Creditos : Integer
+  * H : String(2)
+  * Vacantes : Integer
+  * Activo : Boolean
+  * Laboratorio : Boolean
+  * PI : Boolean
+  * PS : Boolean
+  * PC : Boolean
+  * PE : Boolean
+  * ProfesorVisitante : Boolean
+}
+
+entity "M_Profesores" as Profesores {
+  * ID : Long <<PK>>
+  --
+  * Nombre : String(50)
+  * Oficina : String(50)
+  * R1 : Integer
+  * R2 : Integer
+  * R3 : Integer
+  * R4 : Integer
+  * R5 : Integer
+}
+
+entity "M_Horario" as Horario {
+  * ID : Long <<PK>>
+  --
+  * Dia : String(50)
+  * Hora : Double
+  * IDAula : Long <<FK>>
+  * IDCurso : Long <<FK>>
+}
+
+entity "M_DatosGenerales" as DatosG {
+  * IDClase : Byte <<PK>>
+  * IDCorrelativo : Byte <<PK>>
+  --
+  * Elemento : String(50)
+  * Descripcion : String(200)
+}
+
+' Tablas de Relación
+entity "R_ProfesorCurso" as R_ProfCurso {
+  * IDProfesor : Long <<FK>>
+  * IDCurso : Long <<FK>>
+}
+
+' Tablas Secundarias
+entity "S_CursosHModificado" as S_CursosH {
+  * IDCurso : Long <<FK>>
+  --
+  * NuevoH : String(2)
+}
+
+entity "S_AulaOcupada" as S_AulaOc {
+  * ID : Long <<FK>>
+}
+
+' Tablas Temporales
+entity "T_PreHorario" as T_PreHorario {
+  * IDAula : Long <<FK>>
+  * IDCurso : Long <<FK>>
+  --
+  * H : String(2)
+}
+
+entity "T_AulaLibre" as T_AulaLibre {
+  * ID : Long <<FK>>
+  --
+  * Z : Integer
+}
+
+entity "T_Dias" as T_Dias {
+  * ID : Long <<PK>>
+  --
+  * Dia : String(50)
+  * DiaCorto : String(1)
+}
+
+entity "T_Horas" as T_Horas {
+  * ID : Long <<PK>>
+  --
+  * Hora : Double
+}
+
+' Relaciones
+Aulas ||--o{ Horario : "1:N\n(IDAula)"
+Cursos ||--o{ Horario : "1:N\n(IDCurso)"
+Profesores ||--o{ R_ProfCurso : "1:N"
+Cursos ||--o{ R_ProfCurso : "1:N"
+Cursos ||--o{ S_CursosH : "1:N"
+Aulas ||--o{ S_AulaOc : "1:N"
+Aulas ||--o{ T_PreHorario : "1:N"
+Cursos ||--o{ T_PreHorario : "1:N"
+Aulas ||-l-o{ T_AulaLibre : "1:N"
+
+T_PreHorario -d[hidden]- Horario
+
+'' Leyenda de colores
+'Aulas ##LIGHTBLUE
+'Cursos ##LIGHTBLUE
+'Profesores ##LIGHTBLUE
+'Horario ##LIGHTBLUE
+'DatosG ##LIGHTBLUE
+'
+'R_ProfCurso ##LIGHTGREEN
+'S_CursosH ##LIGHTGREEN
+'S_AulaOc ##LIGHTGREEN
+'
+'T_PreHorario ##LIGHTCORAL
+'T_AulaLibre ##LIGHTCORAL
+'T_Dias ##LIGHTCORAL
+'T_Horas ##LIGHTCORAL
+
+legend right
+  <b>Leyenda</b>
+  ----
+  |Tablas Maestras (M_) |
+  |Tablas de Relación (R_, S_) |
+  |Tablas Temporales (T_) |
+
+  <b>Tipos de Datos Access 2.0</b>
+  ----
+  | Long: 4 bytes (Autoincremental) |
+  | Byte: 1 byte (0-255) |
+  | Integer: 2 bytes |
+  | Double: 8 bytes |
+  | Text: n caracteres |
+  | Yes/No: 1 bit (Boolean) |
+endlegend
+
+@enduml

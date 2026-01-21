@@ -75,6 +75,7 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 |016|[CLI como validación: de GUI web a terminal sin modificar el análisis](016-validacion-cli/README.md)|[Por determinar]|Validación de independencia con CLI - dos arquitecturas (HTTP vs monolítico), un solo análisis|
 |017|[Opinión cruzada entre LLMs: validación metodológica multi-perspectiva](017-opinion-cruzada-llms/README.md)|[Por determinar]|Validación de decisiones metodológicas mediante análisis independiente de 4 LLMs con perspectivas complementarias|
 |018|[Diagramas vivientes: gestión topológica de proceso mediante artefactos de análisis](018-diagramas-vivientes-gestion-topologica/README.md)|[Por determinar]|Concepto de "diagramas vivientes" como patrón metodológico - comparativa con herramientas existentes y aplicación práctica|
+|019|[Extracción de BD Access 2.0 y validación de coherencia dominio-tablas](019-extraccion-bd-access-coherencia-dominio/README.md)|[Por determinar]|Extracción desde VM Windows 98, validación modelo del dominio ↔ estructura física, decisión de motor BD transversal|
 
 ### Estructura de artículos
 

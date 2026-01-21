@@ -1,0 +1,34 @@
+@startuml transversal-bd
+
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Base de Datos Transversal a Todos los Stacks
+
+database [PostgreSQL\n(Motor Unificado)] as db #LIGHTBLUE
+
+package "Stacks Tecnológicos" {
+  component [Spring/\nAngular] as spring
+  component [FastAPI/\nReact] as fastapi
+  component [CLI\nvariants] as cli
+}
+
+db -d-> spring
+db -d-> fastapi
+db -d-> cli
+
+note right of db
+  Transversal:
+  Un solo esquema
+  para todos los stacks
+end note
+
+note right
+  <b>Criterios de selección</b>
+  • Soporte multi-stack
+  • SQL estándar
+  • Herramientas de migración
+  • Open source
+end note
+
+@enduml

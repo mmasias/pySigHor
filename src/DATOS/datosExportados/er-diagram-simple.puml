@@ -1,0 +1,43 @@
+@startuml er-sighor-original-simple
+
+!define LIGHTBLUE #ADD8E6
+!define LIGHTGREEN #90EE90
+!define LIGHTCORAL #F08080
+
+title Diagrama Entidad-Relación - SigHor (BD Access 2.0 Original)
+
+' Tablas Maestras
+entity "M_Aulas" as Aulas
+entity "M_Cursos" as Cursos 
+entity "M_Profesores" as Profesores 
+entity "M_Horario" as Horario 
+entity "M_DatosGenerales" as DatosG 
+
+' Tablas de Relación
+entity "R_ProfesorCurso" as R_ProfCurso 
+
+' Tablas Secundarias
+entity "S_CursosHModificado" as S_CursosH 
+entity "S_AulaOcupada" as S_AulaOc 
+
+' Tablas Temporales
+entity "T_PreHorario" as T_PreHorario 
+entity "T_AulaLibre" as T_AulaLibre 
+entity "T_Dias" as T_Dias 
+entity "T_Horas" as T_Horas 
+
+' Relaciones
+Aulas ||--o{ Horario : "1:N\n(IDAula)"
+Cursos ||--o{ Horario : "1:N\n(IDCurso)"
+Profesores ||--o{ R_ProfCurso : "1:N"
+Cursos ||--o{ R_ProfCurso : "1:N"
+Cursos ||--o{ S_CursosH : "1:N"
+Aulas ||--o{ S_AulaOc : "1:N"
+Aulas ||--o{ T_PreHorario : "1:N"
+Cursos ||--o{ T_PreHorario : "1:N"
+Aulas ||-l-o{ T_AulaLibre : "1:N"
+
+T_PreHorario -d[hidden]- Horario
+
+
+@enduml

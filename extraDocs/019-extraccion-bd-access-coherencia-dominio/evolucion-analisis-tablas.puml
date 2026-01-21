@@ -1,0 +1,67 @@
+@startuml mapping-evolution
+
+skinparam backgroundColor #FEFEFE
+
+title Evolución: Clases de Análisis vs Tablas BD
+
+package "1998" {
+'!"Sistema Legacy 1998"
+rectangle "Sistema Legacy 1998" #LIGHTBLUE {
+  entity [Aula] as aula1
+  entity [Curso] as curso1
+  entity [Profesor] as prof1
+  entity [Horario] as hor1
+
+  database [M_Aulas] as ma1 #Pink
+  database [M_Cursos] as mc1 #Pink
+  database [M_Profesores] as mp1 #Pink
+  database [M_Horario] as mh1 #Pink
+}
+note left 
+  <b>Entidad ≡ Tabla</b>
+  Sin separación
+  de capas
+end note
+
+aula1 .d. ma1 : ≡
+curso1 .d. mc1 : ≡
+prof1 .d. mp1 : ≡
+hor1 .d. mh1 : ≡
+
+}
+
+package "Actual" {
+
+'! Enfoque moderno
+rectangle "Enfoque Moderno (ORM)" #E0F0FF {
+  entity [Aula] as aula2
+  entity [Curso] as curso2
+  entity [Profesor] as prof2
+  entity [Horario] as hor2
+
+  database [aulas] as ma2 #Pink
+  database [cursos] as mc2 #Pink
+  database [profesores] as mp2 #Pink
+  database [horarios] as mh2 #Pink
+}
+
+aula2 ..ma2 : ORM <
+curso2 ..mc2 : ORM <
+prof2 ..mp2 : ORM <
+hor2 ..mh2 : ORM <
+
+note left 
+  <b>Clases de Análisis</b>
+  ↓
+  Mapeo ORM
+  ↓
+  Tablas BD
+end note
+}
+
+1998 -d[hidden]-- Actual
+
+
+
+
+@enduml

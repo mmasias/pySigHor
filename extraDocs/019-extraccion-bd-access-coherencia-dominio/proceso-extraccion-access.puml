@@ -1,0 +1,46 @@
+@startuml extraction-process
+
+!define LIGHTBLUE #ADD8E6
+
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Proceso de Extracción desde Access 2.0
+
+component [VM_Windows_98] as vm {
+  component [Access 2.0\nNativo] as access 
+  database [HOR_UDEP.MDB\n(Formato 1997)] as mdb
+}
+
+component "Documentación\nAccess" as doc
+component "Archivos XLS\n(Exportación)" as xls
+component "SQLs.txt" as sql
+
+package "Artefactos Generados" {
+  file "estructura-bd-\noriginal.md" as md
+  file "er-diagram.puml\n(Completo)" as der1
+  file "er-diagram-\nsimple.puml" as der2
+}
+
+note left of md
+  Documentación
+  estructurada
+  completa
+end note
+
+mdb --> doc : Herramienta\ndocumentación
+mdb --> xls : Exportación\ntablas
+mdb --> sql : Consultas
+
+doc --> md : Parseo .prn
+doc --> der1 : Extracción\nde relaciones
+doc --> der2 : Simplificación
+
+note right of vm
+  Única solución viable
+  para formato Access 2.0
+end note
+
+
+
+@enduml
