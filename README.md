@@ -17,6 +17,10 @@ En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Indu
 |![](/images/F8zDugwX0AArV7H.jpeg)|![](/images/F8zDzlZXQAAe-o8.jpeg)|![](/images/F8zDw0CWEAADw8U.jpeg)|![](/images/F8zD4afXAAIsnGn.jpeg)|![](/images/F8zD2blXAAArega.jpeg)
 |:-:|:-:|:-:|:-:|:-:|
 |Definición de aulas|Definición de asignaturas (cursos)|Definición de profesores|Pantalla principal|Horario generado|
+| |
+|![](https://github.com/user-attachments/assets/f399891b-d89e-42b6-b3df-f5f8bddc5a86)
+|BD Access 2.0
+
 
 </div>
 
