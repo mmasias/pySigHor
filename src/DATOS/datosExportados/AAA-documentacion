@@ -1,0 +1,5399 @@
+
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 20/11/97 10:49:13   Def. Upda Yes
+                    p.m.
+          Last Upda 11/07/98 04:24:15   Record Co 15
+                    a.m.
+
+
+
+          Columns
+
+               ID               Name                          Number (Long)                                             Type           Size   4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Auto-Increment
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  300
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+
+               Nombre                        Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  750
+                    Data           No
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  Nombre
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+
+               Capacidad                     Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  1005
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        3
+                    Position: 
+
+                    Required:      No
+                    Source Field:  Capacidad
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+               Propiedades                   Number (Intege        2
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  1155
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Default        0
+                    Value: 
+                    Ordinal        4
+                    Position: 
+                    Required:      No
+                    Source Field:  Propiedades
+
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+               Especial                      Yes/No                1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  825
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+
+                    Ordinal        5
+                    Position: 
+                    Required:      No
+                    Source Field:  Especial
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+
+               Bloqueada                     Yes/No                1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  1005
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Ordinal        6
+                    Position: 
+                    Required:      No
+                    Source Field:  Bloqueada
+                    Source Table:  M_Aulas
+
+                    Validate On    No
+                    Set: 
+
+
+          Relationships
+
+               Reference2
+
+                        M_Aulas            M_Horario
+                     ID            1     IDAula
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+               Reference5
+
+                        M_Aulas          S_AulaOcupada
+                     ID            1     IDAula
+
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+               Reference8
+
+                        M_Aulas           T_PreHorario
+                     ID            1     IDAula
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+          Table Indexes
+               Name                  Number of
+               NOMBRE                1
+                    Clustered:     No
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Distinct Count 15
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          NOMBRE
+                    Primary:       No
+                    Required:      No
+                    Unique:        Yes
+                    Fields:        Nombre, Ascending
+               PrimaryKey            1
+                    Clustered:     No
+                    Distinct Count 15
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          PrimaryKey
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        ID, Ascending
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+
+          Group Permissions
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 29/10/97 01:28:03   Def. Upda Yes
+                    a.m.
+          Last Upda 10/07/98 03:45:58   Record Co 165
+                    p.m.
+
+
+
+          Columns
+
+               ID               Name                          Number (Long)                                             Type           Size   4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Auto-Increment
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  300
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Nombre                        Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  2
+                    Column Width:  2475
+                    Data           No
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  Nombre
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Sigla                         Text                  4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  4
+                    Column Width:  525
+                    Data           No
+                    Updatable: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Sigla
+
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               Ciclo                         Number (Double        8
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  5
+                    Column Width:  525
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+                    Default        0
+                    Value: 
+                    Ordinal        4
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  Ciclo
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Creditos                      Number (Intege        2
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  6
+                    Column Width:  795
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        5
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Creditos
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               Programa                      Text                 10
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  7
+                    Column Width:  900
+                    Data           No
+                    Updatable: 
+
+                    Ordinal        6
+                    Position: 
+                    Required:      No
+                    Source Field:  Programa
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               H                             Text                  2
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  8
+                    Column Width:  240
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        7
+                    Position: 
+                    Required:      No
+                    Source Field:  H
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Vacantes                      Number (Intege        2
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  9
+                    Column Width:  900
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        8
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Vacantes
+                    Source Table:  M_Cursos
+                    Validate On Se No
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    t: 
+
+               Activo                        Yes/No                1
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  10
+                    Column Width:  645
+                    Data           No
+                    Updatable: 
+
+                    Format:        Yes/No
+                    Ordinal        9
+                    Position: 
+                    Required:      No
+                    Source Field:  Activo
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Laboratorio                   Yes/No                1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  11
+                    Column Width:  1065
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+                    Ordinal        10
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Laboratorio
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               PI                            Yes/No                1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  12
+                    Column Width:  300
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+                    Ordinal        11
+                    Position: 
+
+                    Required:      No
+                    Source Field:  PI
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               PS                            Yes/No                1
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  13
+                    Column Width:  345
+
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+                    Ordinal        12
+                    Position: 
+                    Required:      No
+                    Source Field:  PS
+                    Source Table:  M_Cursos
+
+                    Validate On    No
+                    Set: 
+
+
+               PC                            Yes/No                1
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  14
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+                    Ordinal        13
+                    Position: 
+                    Required:      No
+
+                    Source Field:  PC
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               PE                            Yes/No                1
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  15
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+
+                    Format:        Yes/No
+                    Ordinal        14
+                    Position: 
+                    Required:      No
+                    Source Field:  PE
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               ProfesorVisitante             Yes/No                1
+                    Allow Zero     No
+                    Length: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  3
+
+                    Column Width:  1417
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+                    Ordinal        15
+                    Position: 
+                    Required:      No
+                    Source Field:  ProfesorVisitante
+
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+          Relationships
+
+               Reference1
+
+                        M_Cursos        R_ProfesorCurso
+                     ID            1     IDCurso
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+
+               Reference3
+
+                        M_Cursos           M_Horario
+                     ID            1     IDCurso
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+               Reference4
+
+                        M_Cursos      S_CursosHModificad
+                     ID            1   1 IDCurso
+
+
+                    Attributes:    One to One, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+
+               Reference9
+
+                        M_Cursos          T_PreHorario
+                     ID            1     IDCurso
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+          Table Indexes
+               Name                  Number of
+
+               ID                    1
+                    Clustered:     No
+                    Distinct Count 165
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          ID
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        ID, Ascending
+               NOMBRE                1
+                    Clustered:     No
+                    Distinct Count 152
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          NOMBRE
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        Nombre, Ascending
+
+               SIGLAS                1
+                    Clustered:     No
+                    Distinct Count 165
+                    Foreign:       No
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Ignore Nulls:  No
+                    Name:          SIGLAS
+                    Primary:       No
+                    Required:      No
+                    Unique:        Yes
+                    Fields:        Sigla, Ascending
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 02/05/98 09:02:07   Def. Upda Yes
+                    p.m.
+          Last Upda 02/05/98 11:43:59   Record Co 21
+                    p.m.
+
+
+
+          Columns
+
+               IDClase               Name                          Number (Byte)                                             Type           Size   1
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  765
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  IDClase
+
+                    Source Table:  M_DatosGenerales
+                    Validate On    No
+                    Set: 
+
+
+               IDCorrelativo                 Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Width:  1215
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  IDCorrelativo
+                    Source Table:  M_DatosGenerales
+                    Validate On    No
+                    Set: 
+
+
+
+               Elemento                      Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  1680
+                    Data           No
+                    Updatable: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Elemento
+                    Source Table:  M_DatosGenerales
+
+                    Validate On    No
+                    Set: 
+
+
+               Descripcion                   Text                200
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Width:  4440
+                    Data           No
+                    Updatable: 
+                    Ordinal        4
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Descripcion
+                    Source Table:  M_DatosGenerales
+                    Validate On    No
+                    Set: 
+
+
+          Table Indexes
+               Name                  Number of
+
+               ClavePrimaria         2
+                    Clustered:     No
+                    Distinct Count 21
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          ClavePrimaria
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        IDClase, Ascending
+                                   IDCorrelativo, Ascending
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 20/11/97 10:59:40   Def. Upda Yes
+                    p.m.
+          Last Upda 09/07/98 11:38:50   Record Co 295
+                    p.m.
+
+
+
+          Columns
+
+               Dia               Name                          Text                                             Type           Size  50
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  Default
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  Dia
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+
+               Hora                          Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  Default
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Default        0
+                    Value: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  Hora
+
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+               IDAula                        Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  Default
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+                    Default        0
+                    Value: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  IDAula
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+
+               IDCurso                       Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        4
+                    Position: 
+
+                    Required:      No
+                    Source Field:  IDCurso
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+          Relationships
+
+               Reference2
+
+                        M_Aulas            M_Horario
+                     ID            1     IDAula
+
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+               Reference3
+
+                        M_Cursos           M_Horario
+                     ID            1     IDCurso
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+          Table Indexes
+               Name                  Number of
+               PrimaryKey            4
+                    Clustered:     No
+                    Distinct Count 295
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          PrimaryKey
+                    Primary:       Yes
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        Dia, Ascending
+                                   Hora, Ascending
+                                   IDAula, Ascending
+                                   IDCurso, Ascending
+
+               Reference2            1
+                    Clustered:     No
+                    Distinct Count 15
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference2
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDAula, Ascending
+               Reference3            1
+                    Clustered:     No
+                    Distinct Count 73
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference3
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDCurso, Ascending
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 04/11/97 08:43:55   Def. Upda Yes
+                    a.m.
+          Last Upda 11/07/98 07:51:43   Record Co 70
+                    a.m.
+
+
+
+          Columns
+
+               ID               Name                          Number (Long)                                             Type           Size   4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Auto-Increment
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  300
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+
+               Nombre                        Text                 40
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  1935
+                    Data           No
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  Nombre
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+
+               Oficina                       Text                 40
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  840
+                    Data           No
+                    Updatable: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Oficina
+
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+               R1                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+                    Default        1
+                    Value: 
+                    Ordinal        5
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  R1
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+
+               R2                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        2
+                    Value: 
+                    Ordinal        6
+                    Position: 
+
+                    Required:      No
+                    Source Field:  R2
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+               R3                            Number (Byte)         1
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  345
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Default        3
+                    Value: 
+                    Ordinal        7
+                    Position: 
+                    Required:      No
+                    Source Field:  R3
+
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+               R4                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+                    Default        4
+                    Value: 
+                    Ordinal        8
+                    Position: 
+                    Required:      No
+                    Source Field:  R4
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+
+               R5                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  345
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        5
+                    Value: 
+                    Ordinal        9
+                    Position: 
+
+                    Required:      No
+                    Source Field:  R5
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+               Clave                         Text                 50
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  Default
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        10
+                    Position: 
+                    Required:      No
+                    Source Field:  Clave
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+
+          Relationships
+
+               Reference
+
+                      M_Profesores      R_ProfesorCurso
+                     ID            1     IDProfesor
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Table Indexes
+               Name                  Number of
+
+               ID                    1
+                    Clustered:     No
+                    Distinct Count 70
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          ID
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        ID, Ascending
+               Nombre                1
+                    Clustered:     No
+                    Distinct Count 70
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          Nombre
+                    Primary:       No
+                    Required:      No
+                    Unique:        Yes
+                    Fields:        Nombre, Ascending
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 04/11/97 08:46:47   Def. Upda Yes
+                    a.m.
+          Last Upda 04/06/98 11:56:55   Record Co 84
+                    p.m.
+
+
+
+          Columns
+
+               IDProfesor               Name                          Number (Long)                                             Type           Size   4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  1005
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+                    Source Field:  IDProfesor
+                    Source Table:  R_ProfesorCurso
+
+                    Validate On    No
+                    Set: 
+
+
+               IDCurso                       Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  780
+                    Data           No
+                    Updatable: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  IDCurso
+
+                    Source Table:  R_ProfesorCurso
+                    Validate On    No
+                    Set: 
+
+
+          Relationships
+
+               Reference
+
+                      M_Profesores      R_ProfesorCurso
+                     ID            1     IDProfesor
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+
+               Reference1
+
+                        M_Cursos        R_ProfesorCurso
+                     ID            1     IDCurso
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+          Table Indexes
+               Name                  Number of
+
+               ID                    2
+                    Clustered:     No
+                    Distinct Count 84
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          ID
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        IDCurso, Ascending
+                                   IDProfesor, Ascending
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               ID_CURSO              1
+                    Clustered:     No
+                    Distinct Count 82
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          ID_CURSO
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDCurso, Ascending
+               ID_PROFESOR           1
+                    Clustered:     No
+                    Distinct Count 56
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          ID_PROFESOR
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDProfesor, Ascending
+
+               Reference             1
+                    Clustered:     No
+                    Distinct Count 56
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDProfesor, Ascending
+               Reference1            1
+                    Clustered:     No
+                    Distinct Count 82
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference1
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDCurso, Ascending
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 15/05/98 08:24:19   Def. Upda Yes
+                    a.m.
+          Last Upda 18/06/98 11:06:47   Record Co 0
+                    p.m.
+
+
+
+          Columns
+
+               IDAula               Name                          Number (Long)                                             Type           Size   4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  675
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  IDAula
+
+                    Source Table:  S_AulaOcupada
+                    Validate On    No
+                    Set: 
+
+
+               HOcupa                        Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Width:  795
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  HOcupa
+                    Source Table:  S_AulaOcupada
+                    Validate On    No
+                    Set: 
+
+
+
+          Relationships
+
+               Reference5
+
+                        M_Aulas          S_AulaOcupada
+                     ID            1     IDAula
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+          Table Indexes
+               Name                  Number of
+
+               PrimaryKey            2
+                    Clustered:     No
+                    Distinct Count 0
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          PrimaryKey
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        IDAula, Ascending
+                                   HOcupa, Ascending
+               Reference5            1
+                    Clustered:     No
+                    Distinct Count 0
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference5
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDAula, Ascending
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 06/12/97 07:25:13   Def. Upda Yes
+                    a.m.
+          Last Upda 06/07/98 12:28:50   Record Co 82
+                    p.m.
+
+
+
+          Columns
+
+               IDCurso               Name                          Number (Long)                                             Type           Size   4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  780
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  IDCurso
+
+                    Source Table:  S_CursosHModificado
+                    Validate On    No
+                    Set: 
+
+
+               NuevoH                        Text                  1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Width:  795
+                    Data           No
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+
+                    Source Field:  NuevoH
+                    Source Table:  S_CursosHModificado
+                    Validate On    No
+                    Set: 
+
+
+          Relationships
+
+               Reference4
+
+                        M_Cursos      S_CursosHModificad
+                     ID            1   1 IDCurso
+
+
+                    Attributes:    One to One, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+          Table Indexes
+               Name                  Number of
+
+               PrimaryKey            1
+                    Clustered:     No
+                    Distinct Count 82
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          PrimaryKey
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        IDCurso, Ascending
+               Reference4            1
+                    Clustered:     No
+                    Distinct Count 82
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference4
+                    Primary:       No
+                    Required:      No
+                    Unique:        Yes
+                    Fields:        IDCurso, Ascending
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 19/06/98 01:08:07   Def. Upda Yes
+                    a.m.
+          Last Upda 07/07/98 01:33:19   Record Co 7
+                    p.m.
+          Row Heigh 195
+
+
+
+          Columns
+
+               Name                          Type           Size
+               ID                            Number (Double        8
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+
+                    Column Width:  540
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+
+                    Source Field:  ID
+                    Source Table:  T_AulaLibre
+                    Validate On    No
+                    Set: 
+
+
+               Z                             Number (Double        8
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Order:  Default
+                    Column Width:  540
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+                    Default        0
+                    Value: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  Z
+                    Source Table:  T_AulaLibre
+                    Validate On    No
+                    Set: 
+
+
+
+               Propiedades                   Number (Double        8
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  1155
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        3
+                    Position: 
+
+                    Required:      No
+                    Source Field:  Propiedades
+                    Source Table:  T_AulaLibre
+                    Validate On    No
+                    Set: 
+
+
+               Entero                        Number (Double        8
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  660
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        4
+                    Position: 
+                    Required:      No
+                    Source Field:  Entero
+
+                    Source Table:  T_AulaLibre
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 06/07/98 11:45:37   Def. Upda Yes
+                    p.m.
+          Last Upda 06/07/98 11:45:45   Record Co 0
+                    p.m.
+
+
+
+          Columns
+
+               ID               Name                          Number (Double                                             Type           Size   8
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  540
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+
+                    Source Table:  T_AulaOcupada
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/07/98 11:28:39   Def. Upda Yes
+                    p.m.
+          Last Upda 10/07/98 11:29:27   Record Co 7
+                    p.m.
+
+
+
+          Columns
+
+               ID               Name                          Number (Double                                             Type           Size   8
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  Default
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+
+                    Source Table:  T_Dias
+                    Validate On    No
+                    Set: 
+
+
+               DiaCorto                      Text                  1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Width:  Default
+                    Data           No
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+
+                    Source Field:  DiaCorto
+                    Source Table:  T_Dias
+                    Validate On    No
+                    Set: 
+
+
+               DiaLargo                      Text                  9
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  Default
+                    Data           No
+                    Updatable: 
+
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  DiaLargo
+                    Source Table:  T_Dias
+                    Validate On    No
+                    Set: 
+
+
+
+          Table Indexes
+               Name                  Number of
+               PrimaryKey            1
+                    Clustered:     No
+                    Distinct Count 7
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          PrimaryKey
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        ID, Ascending
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 11/07/98 01:31:02   Def. Upda Yes
+                    a.m.
+          Last Upda 11/07/98 02:38:05   Record Co 41
+                    a.m.
+
+
+
+          Columns
+
+               DIA               Name                          Text                                             Type           Size 255
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  420
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  DIA
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+               HORA                          Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  630
+                    Data           No
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  HORA
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+               11                            Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  11
+
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+               14                            Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+                    Ordinal        4
+                    Position: 
+
+                    Required:      No
+                    Source Field:  14
+                    Source Table:  T_HorarioParaImprimir
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Validate On    No
+                    Set: 
+
+
+               15                            Text                255
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  315
+                    Data           No
+                    Updatable: 
+
+                    Ordinal        5
+                    Position: 
+                    Required:      No
+                    Source Field:  15
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+               18a                           Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  450
+                    Data           No
+                    Updatable: 
+                    Ordinal        6
+                    Position: 
+                    Required:      No
+                    Source Field:  18a
+                    Source Table:  T_HorarioParaImprimir
+
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               18b                           Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  420
+                    Data           No
+                    Updatable: 
+                    Ordinal        7
+                    Position: 
+                    Required:      No
+
+                    Source Field:  18b
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+               19                            Text                255
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  390
+                    Data           No
+                    Updatable: 
+
+                    Ordinal        8
+                    Position: 
+                    Required:      No
+                    Source Field:  19
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+               24a                           Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  420
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        9
+                    Position: 
+                    Required:      No
+                    Source Field:  24a
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+               24b                           Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  420
+                    Data           No
+                    Updatable: 
+                    Ordinal        10
+                    Position: 
+                    Required:      No
+                    Source Field:  24b
+
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+               25                            Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Order:  Default
+                    Column Width:  375
+                    Data           No
+                    Updatable: 
+                    Ordinal        11
+                    Position: 
+
+                    Required:      No
+                    Source Field:  25
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+               28a                           Text                255
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  420
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        12
+                    Position: 
+                    Required:      No
+                    Source Field:  28a
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+               34                            Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  315
+                    Data           No
+                    Updatable: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Ordinal        13
+                    Position: 
+                    Required:      No
+                    Source Field:  34
+                    Source Table:  T_HorarioParaImprimir
+
+                    Validate On    No
+                    Set: 
+
+
+               35                            Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  435
+                    Data           No
+                    Updatable: 
+                    Ordinal        14
+                    Position: 
+                    Required:      No
+
+                    Source Field:  35
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+               38                            Text                255
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  450
+                    Data           No
+                    Updatable: 
+
+                    Ordinal        15
+                    Position: 
+                    Required:      No
+                    Source Field:  38
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+               39a                           Text                255
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  420
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        16
+                    Position: 
+                    Required:      No
+                    Source Field:  39a
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+               39b                           Text                255
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  420
+                    Data           No
+                    Updatable: 
+                    Ordinal        17
+                    Position: 
+                    Required:      No
+                    Source Field:  39b
+
+                    Source Table:  T_HorarioParaImprimir
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+               Admins
+
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/07/98 11:31:46   Def. Upda Yes
+                    p.m.
+          Last Upda 10/07/98 11:34:18   Record Co 12
+                    p.m.
+
+
+
+          Columns
+
+               ID               Name                          Number (Double                                             Type           Size   8
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  Default
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+
+                    Source Table:  T_Horas
+                    Validate On    No
+                    Set: 
+
+
+               Hora                          Number (Double        8
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Width:  Default
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  Hora
+                    Source Table:  T_Horas
+                    Validate On    No
+                    Set: 
+
+
+
+          Table Indexes
+               Name                  Number of
+               PrimaryKey            1
+                    Clustered:     No
+                    Distinct Count 12
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          PrimaryKey
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        ID, Ascending
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 20/05/98 12:24:26   Def. Upda Yes
+                    a.m.
+          Last Upda 20/05/98 12:29:50   Record Co 73
+                    a.m.
+
+
+
+          Columns
+
+               IDAula               Name                          Number (Long)                                             Type           Size   4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  Default
+
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  IDAula
+
+                    Source Table:  T_PreHorario
+                    Validate On    No
+                    Set: 
+
+
+               IDCurso                       Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Width:  Default
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  IDCurso
+                    Source Table:  T_PreHorario
+                    Validate On    No
+                    Set: 
+
+
+
+               H                             Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      Unknown or Undefined
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  Default
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+
+                    Source Field:  H
+                    Source Table:  T_PreHorario
+                    Validate On    No
+                    Set: 
+
+
+          Relationships
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+               Reference8
+
+                        M_Aulas           T_PreHorario
+                     ID            1     IDAula
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+
+
+               Reference9
+
+                        M_Cursos          T_PreHorario
+                     ID            1     IDCurso
+
+
+                    Attributes:    One to Many, Enforced, Cascade 
+                                   Updates, Cascade Deletes
+
+
+          Table Indexes
+               Name                  Number of
+
+               PrimaryKey            3
+                    Clustered:     No
+                    Distinct Count 73
+                    Foreign:       No
+                    Ignore Nulls:  No
+                    Name:          PrimaryKey
+                    Primary:       Yes
+                    Required:      Yes
+                    Unique:        Yes
+                    Fields:        IDAula, Ascending
+                                   IDCurso, Ascending
+                                   H, Ascending
+
+               Reference8            1
+                    Clustered:     No
+                    Distinct Count 15
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference8
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDAula, Ascending
+               Reference9            1
+                    Clustered:     No
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Distinct Count 73
+                    Foreign:       Yes
+                    Ignore Nulls:  No
+                    Name:          Reference9
+                    Primary:       No
+                    Required:      No
+                    Unique:        No
+                    Fields:        IDCurso, Ascending
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+                    18/06/98 11:13:11   Def. Upda Yes
+                    p.m.
+          Last Upda 19/06/98 01:23:51   ODBC Time 60          Date Crea
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Cursos.ID, M_Cursos.Nombre, 
+               M_Cursos.Programa, M_Cursos.Ciclo, 
+               S_CursosHModificado.NuevoH, M_Cursos.Vacantes
+               FROM M_Cursos INNER JOIN S_CursosHModificado ON 
+               M_Cursos.ID = S_CursosHModificado.IDCurso
+               WHERE ((S_CursosHModificado.NuevoH=[H requerido]))
+               ORDER BY M_Cursos.Ciclo;
+
+
+          Query Parameters
+
+               Name           Type
+               [H requerido]  Text
+
+
+          Columns
+
+               Name                          Type           Size
+               ID                            Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Auto-Increment, 
+                                   Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  300
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+
+                    Source Table:  M_Cursos
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Validate On    No
+                    Set: 
+
+
+               Nombre                        Text                 50
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  2
+                    Column Width:  2475
+                    Data           Yes
+                    Updatable: 
+
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  Nombre
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Programa                      Text                 10
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  7
+
+                    Column Width:  900
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  Programa
+                    Source Table:  M_Cursos
+
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               Ciclo                         Number (Double        8
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  5
+                    Column Width:  525
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Ciclo
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               NuevoH                        Text                  1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  795
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        4
+                    Position: 
+                    Required:      No
+                    Source Field:  NuevoH
+                    Source Table:  S_CursosHModificado
+
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               Vacantes                      Number (Intege        2
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  9
+                    Column Width:  900
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        5
+                    Position: 
+
+                    Required:      No
+                    Source Field:  Vacantes
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/06/98 07:52:26   Def. Upda Yes
+                    a.m.
+          Last Upda 30/06/98 10:15:37   ODBC Time 60
+                    p.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Cursos.ID, M_Cursos.Nombre, 
+               M_Cursos.Programa, M_Cursos.Creditos, M_Cursos.H, 
+               M_Cursos.Ciclo
+               FROM M_Cursos
+               WHERE ((M_Cursos.H=[H requerido]) AND 
+               (M_Cursos.Ciclo=[Ciclo requerido]))
+               ORDER BY Len(M_Cursos.Programa) DESC , 
+               M_Cursos.Programa DESC , M_Cursos.Creditos DESC , 
+               M_Cursos.H, M_Cursos.Ciclo;
+
+
+          Query Parameters
+
+               Name           Type
+               [H requerido]  Text
+               [Ciclo         Text
+               requerido]
+
+
+          Columns
+
+               Name                          Type           Size
+               ID                            Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Auto-Increment, 
+                                   Updatable
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  300
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  ID
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Nombre                        Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  2
+                    Column Width:  2715
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  Nombre
+
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               Programa                      Text                 10
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  7
+                    Column Width:  900
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+
+                    Required:      No
+                    Source Field:  Programa
+                    Source Table:  M_Cursos
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Validate On    No
+                    Set: 
+
+
+               Creditos                      Number (Intege        2
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  6
+                    Column Width:  795
+                    Data           Yes
+                    Updatable: 
+
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Creditos
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               H                             Text                  2
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  8
+                    Column Width:  240
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        4
+                    Position: 
+                    Required:      No
+                    Source Field:  H
+
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               Ciclo                         Number (Double        8
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  5
+                    Column Width:  525
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        5
+                    Position: 
+                    Required:      No
+                    Source Field:  Ciclo
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+
+          Group Permissions
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 20/06/98 07:53:04   Def. Upda Yes
+                    a.m.
+          Last Upda 20/06/98 07:53:05   ODBC Time 60
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Cursos.ID, M_Cursos.Nombre, 
+               M_Cursos.Vacantes
+               FROM M_Cursos
+               WHERE ((M_Cursos.Vacantes>145));
+
+
+          Columns
+
+               Name                          Type           Size
+               ID                            Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Auto-Increment, 
+                                   Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  300
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+
+                    Source Field:  ID
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               Nombre                        Text                 50
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length, Updatable
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  2
+                    Column Width:  2475
+
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  Nombre
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               Vacantes                      Number (Intege        2
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  9
+                    Column Width:  900
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Vacantes
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/06/98 07:11:16   Def. Upda Yes
+                    a.m.
+          Last Upda 10/07/98 03:49:04   ODBC Time 60
+                    p.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW Max(M_Cursos.H) AS HMaximo
+               FROM M_Cursos
+               WHERE ((M_Cursos.H<>"E" And M_Cursos.H<>"V"));
+
+
+          Columns
+
+               Name                          Type           Size
+               HMaximo                       Text                  0
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+
+                    Data           No
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+                    Validate On    No
+                    Set: 
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 19/06/98 06:34:11   Def. Upda Yes
+                    a.m.
+          Last Upda 19/06/98 06:34:12   ODBC Time 60
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW R_ProfesorCurso.IDCurso, 
+               R_ProfesorCurso.IDProfesor, M_Profesores.R1, 
+               M_Profesores.R2, M_Profesores.R3, M_Profesores.R4, 
+               M_Profesores.R5
+               FROM M_Cursos INNER JOIN (M_Profesores INNER JOIN 
+               R_ProfesorCurso ON M_Profesores.ID = 
+               R_ProfesorCurso.IDProfesor) ON M_Cursos.ID = 
+               R_ProfesorCurso.IDCurso
+               WHERE ((R_ProfesorCurso.IDCurso=[Curso]));
+
+
+          Query Parameters
+
+               Name           Type
+               Curso          Text
+
+
+          Columns
+
+               Name                          Type           Size
+               IDCurso                       Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  780
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        0
+                    Position: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Required:      No
+                    Source Field:  IDCurso
+                    Source Table:  R_ProfesorCurso
+                    Validate On    No
+                    Set: 
+
+
+
+               IDProfesor                    Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  1
+                    Column Width:  1005
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+
+                    Source Field:  IDProfesor
+                    Source Table:  R_ProfesorCurso
+                    Validate On    No
+                    Set: 
+
+
+               R1                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           Yes
+                    Updatable: 
+
+                    Decimal        Auto
+                    Places: 
+                    Default        1
+                    Value: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  R1
+                    Source Table:  M_Profesores
+
+                    Validate On    No
+                    Set: 
+
+
+               R2                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        2
+                    Value: 
+
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  R2
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+
+               R3                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  345
+                    Data           Yes
+                    Updatable: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Decimal        Auto
+                    Places: 
+                    Default        3
+                    Value: 
+                    Ordinal        4
+                    Position: 
+                    Required:      No
+
+                    Source Field:  R3
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+               R4                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           Yes
+                    Updatable: 
+
+                    Decimal        Auto
+                    Places: 
+                    Default        4
+                    Value: 
+                    Ordinal        5
+                    Position: 
+                    Required:      No
+                    Source Field:  R4
+                    Source Table:  M_Profesores
+
+                    Validate On    No
+                    Set: 
+
+
+               R5                            Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Column Order:  Default
+                    Column Width:  345
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+
+                    Default        5
+                    Value: 
+                    Ordinal        6
+                    Position: 
+                    Required:      No
+                    Source Field:  R5
+                    Source Table:  M_Profesores
+                    Validate On    No
+                    Set: 
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+               guest
+
+
+
+          Group Permissions
+               Admins
+               Guests         Read Permissions
+
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 06/07/98 11:30:39   Def. Upda Yes
+                    a.m.
+          Last Upda 06/07/98 11:31:36   ODBC Time 60
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCT M_Cursos.Programa, 
+               Len(M_Cursos.Programa) AS tmp, M_Cursos.PI, 
+               M_Cursos.PS, M_Cursos.PC, M_Cursos.PE
+               FROM M_Cursos
+               ORDER BY Len(M_Cursos.Programa);
+
+
+          Columns
+
+               Name                          Type           Size
+               Programa                      Text                 10
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  7
+                    Column Width:  900
+                    Data           No
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Programa
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               tmp                           Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Width:  405
+                    Data           No
+                    Updatable: 
+
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Validate On    No
+                    Set: 
+
+
+               PI                            Yes/No                1
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  12
+                    Column Width:  300
+                    Data           No
+                    Updatable: 
+
+                    Format:        Yes/No
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  PI
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               PS                            Yes/No                1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  13
+                    Column Width:  345
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Data           No
+                    Updatable: 
+                    Format:        Yes/No
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+
+                    Source Field:  PS
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               PC                            Yes/No                1
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  14
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+
+                    Format:        Yes/No
+                    Ordinal        4
+                    Position: 
+                    Required:      No
+                    Source Field:  PC
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               PE                            Yes/No                1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  15
+                    Column Width:  345
+                    Data           No
+                    Updatable: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Format:        Yes/No
+                    Ordinal        5
+                    Position: 
+                    Required:      No
+                    Source Field:  PE
+
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 18/06/98 11:23:33   Def. Upda Yes
+                    p.m.
+          Last Upda 19/06/98 01:10:08   ODBC Time 60
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Make-table
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Aulas.ID, 0 AS Z INTO T_AulaLibre
+               FROM M_Aulas;
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/07/98 04:49:21   Def. Upda Yes
+                    a.m.
+          Last Upda 10/07/98 04:49:21   ODBC Time 60
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCT M_Cursos.Ciclo
+               FROM (M_Cursos INNER JOIN S_CursosHModificado ON 
+               M_Cursos.ID = S_CursosHModificado.IDCurso) INNER JOIN 
+               M_Horario ON S_CursosHModificado.IDCurso = 
+               M_Horario.IDCurso
+               WHERE ((S_CursosHModificado.NuevoH=[Valor H]));
+
+
+          Query Parameters
+
+               Name           Type
+               [Valor H]      Text
+
+
+          Columns
+
+               Name                          Type           Size
+               Ciclo                         Number (Double        8
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  5
+                    Column Width:  525
+                    Data           No
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        0
+                    Position: 
+
+                    Required:      No
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Source Field:  Ciclo
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+
+          Group Permissions
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/07/98 05:04:57   Def. Upda Yes
+                    p.m.
+          Last Upda 10/07/98 05:34:15   ODBC Time 60
+                    p.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Aulas.Capacidad, M_Horario.IDAula
+               FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN 
+               M_Horario ON M_Aulas.ID = M_Horario.IDAula) ON 
+               M_Cursos.ID = M_Horario.IDCurso
+               WHERE ((M_Horario.Hora=7) AND (M_Horario.Dia="S"))
+               ORDER BY M_Horario.IDAula;
+
+
+          Columns
+
+               Name                          Type           Size
+               Capacidad                     Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  3
+                    Column Width:  1005
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+                    Source Field:  Capacidad
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               IDAula                        Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  2
+                    Column Width:  675
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  IDAula
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+
+
+          User Permissions
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+
+          Group Permissions
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 07/07/98 12:19:02   Def. Upda Yes
+                    a.m.
+          Last Upda 07/07/98 12:19:02   ODBC Time 60
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Cursos.Nombre, M_Aulas.Nombre
+               FROM M_Aulas, M_Cursos
+               WHERE ((M_Cursos.ID=[ID del Curso]) AND 
+               (M_Aulas.ID=[ID del aula]));
+
+
+          Query Parameters
+
+               Name           Type
+               [ID del Curso] Text
+               [ID del aula]  Text
+
+
+          Columns
+
+               Name                          Type           Size
+               M_Cursos.Nombre               Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  2
+                    Column Width:  2475
+                    Data           No
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Nombre
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               M_Aulas.Nombre                Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  750
+                    Data           No
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Nombre
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/07/98 04:56:35   Def. Upda Yes
+                    p.m.
+          Last Upda 10/07/98 05:34:06   ODBC Time 60
+                    p.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Aulas.Capacidad, M_Horario.Hora, 
+               M_Horario.IDAula, M_Horario.IDCurso
+               FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN 
+               M_Horario ON M_Aulas.ID = M_Horario.IDAula) ON 
+               M_Cursos.ID = M_Horario.IDCurso
+               WHERE ((M_Horario.Hora<>7) AND (M_Horario.Dia="S"))
+               ORDER BY M_Aulas.Capacidad, M_Horario.Hora, 
+               M_Horario.IDAula;
+
+
+          Columns
+
+               Name                          Type           Size
+               Capacidad                     Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  3
+                    Column Width:  1005
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+                    Source Field:  Capacidad
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               Hora                          Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  510
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  Hora
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+
+               IDAula                        Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  675
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+
+                    Source Field:  IDAula
+                    Source Table:  M_Horario
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Validate On    No
+                    Set: 
+
+
+               IDCurso                       Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  780
+                    Data           Yes
+                    Updatable: 
+
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  IDCurso
+                    Source Table:  M_Horario
+
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+               Admins
+
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 10/07/98 12:40:29   Def. Upda Yes
+                    a.m.
+          Last Upda 10/07/98 11:37:02   ODBC Time 60
+                    p.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Cursos.Sigla, M_Aulas.Nombre AS 
+               Aula, M_Horario.Dia, M_Horario.Hora
+               FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN ((T_Dias 
+               RIGHT JOIN M_Horario ON T_Dias.DiaCorto = 
+               M_Horario.Dia) LEFT JOIN T_Horas ON M_Horario.Hora = 
+               T_Horas.Hora) ON M_Aulas.ID = M_Horario.IDAula) ON 
+               M_Cursos.ID = M_Horario.IDCurso
+               ORDER BY T_Dias.ID, T_Horas.ID, M_Aulas.Nombre;
+
+
+          Columns
+
+               Name                          Type           Size
+               Sigla                         Text                  4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  525
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Sigla
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               Aula                          Text                 50
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+
+                    Column Order:  Default
+                    Column Width:  750
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  Nombre
+
+                    Source Table:  M_Aulas
+                    Validate On    No
+                    Set: 
+
+
+               Dia                           Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  3
+                    Column Width:  390
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        2
+                    Position: 
+
+                    Required:      No
+                    Source Field:  Dia
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+               Hora                          Number (Long)         4
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating Orde General
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    r: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  4
+                    Column Width:  510
+
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Hora
+
+                    Source Table:  M_Horario
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+                    07/07/98 12:56:56   Def. Upda Yes
+                    p.m.
+          Last Upda 09/07/98 10:19:48   ODBC Time 60          Date Crea
+                    p.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Aulas.ID AS IDAula, M_Cursos.ID 
+               AS IDCurso, T_PreHorario.H, M_Cursos.Creditos
+               FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN 
+               T_PreHorario ON M_Aulas.ID = T_PreHorario.IDAula) ON 
+               M_Cursos.ID = T_PreHorario.IDCurso
+               WHERE ((T_PreHorario.H=[H Requerido]))
+               ORDER BY T_PreHorario.H, M_Cursos.Creditos DESC;
+
+
+          Query Parameters
+
+               Name           Type
+               [H Requerido]  Text
+
+
+          Columns
+
+               Name                          Type           Size
+               IDAula                        Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Auto-Increment, 
+                                   Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  675
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+
+                    Source Table:  M_Aulas
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Validate On    No
+                    Set: 
+
+
+               IDCurso                       Number (Long)         4
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Fixed Size, Auto-Increment, 
+                                   Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  1
+                    Column Width:  780
+                    Data           Yes
+                    Updatable: 
+
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+                    Source Field:  ID
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+               H                             Number (Byte)         1
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+
+                    Column Width:  240
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Default        0
+                    Value: 
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+
+                    Source Field:  H
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Source Table:  T_PreHorario
+                    Validate On    No
+                    Set: 
+
+
+               Creditos                      Number (Intege        2
+
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  6
+                    Column Width:  795
+
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Creditos
+                    Source Table:  M_Cursos
+
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+               Admins
+
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          Date Crea 08/07/98 03:35:54   Def. Upda Yes
+                    a.m.
+          Last Upda 09/07/98 02:59:42   ODBC Time 60
+                    a.m.
+          Record Lo No Locks            Returns R Yes
+          Type:     Select
+
+
+
+          SQL
+               SELECT DISTINCTROW M_Cursos.Nombre, M_Cursos.H, 
+               S_CursosHModificado.NuevoH, M_Cursos.Vacantes
+               FROM M_Cursos INNER JOIN S_CursosHModificado ON 
+               M_Cursos.ID = S_CursosHModificado.IDCurso
+               WHERE ((M_Cursos.H<>"E") AND (M_Cursos.Activo<>False) 
+               AND (M_Cursos.ID Not In (select T_PreHorario.IDCurso 
+               from T_PreHorario
+               )))
+               ORDER BY M_Cursos.H;
+
+
+          Columns
+
+               Name                          Type           Size
+               Nombre                        Text                 50
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  2
+                    Column Width:  2475
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        0
+                    Position: 
+                    Required:      No
+
+                    Source Field:  Nombre
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+               H                             Text                  2
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+
+                    Column         No
+                    Hidden: 
+                    Column Order:  8
+                    Column Width:  240
+                    Data           Yes
+                    Updatable: 
+                    Ordinal        1
+                    Position: 
+                    Required:      No
+
+                    Source Field:  H
+                    Source Table:  M_Cursos
+                    Validate On    No
+                    Set: 
+
+
+               NuevoH                        Text                  1
+                    Allow Zero     No
+                    Length: 
+
+                    Attributes:    Variable Length, Updatable
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  Default
+                    Column Width:  795
+                    Data           Yes
+                    Updatable: 
+
+                    Ordinal        2
+                    Position: 
+                    Required:      No
+                    Source Field:  NuevoH
+                    Source Table:  S_CursosHModificado
+                    Validate On    No
+                    Set: 
+
+
+
+               Vacantes                      Number (Intege        2
+                    Allow Zero     No
+                    Length: 
+                    Attributes:    Fixed Size, Updatable
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+                    Collating      General
+                    Order: 
+                    Column         No
+                    Hidden: 
+                    Column Order:  9
+                    Column Width:  900
+
+                    Data           Yes
+                    Updatable: 
+                    Decimal        Auto
+                    Places: 
+                    Ordinal        3
+                    Position: 
+                    Required:      No
+                    Source Field:  Vacantes
+                    Source Table:  M_Cursos
+
+                    Validate On    No
+                    Set: 
+
+
+
+          User Permissions
+
+               admin          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+               guest
+
+
+
+          Group Permissions
+               Admins
+
+               Guests         Read Permissions
+               Users          Delete, Read Permissions, Set 
+                              Permissions, Change Owner
+
+
+
+
+
+
+          C:\MISDOC~1\HOR_UDEP.MDB                  Wednesday, 21 de 
+                                                      January de 2026
+
+
+          Properties
+          AccessVer 02.00               Collating General
+          Def. Upda Yes                 Query Tim 60
+          Transacti Yes                 V1xNullBe -1
+          Version:  2.0
+
+
+
+
+          User Permissions
+
+               admin          Read Permissions, Set 
+                              PermissionsOpen/Run, Open Exclusive
+               guest
+
+
+
+          Group Permissions
+
+               Admins
+               Guests
+               Users          Open/Run, Open Exclusive

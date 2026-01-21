@@ -1,0 +1,91 @@
+C_CursosIgualH
+
+SELECT DISTINCTROW M_Cursos.ID, M_Cursos.Nombre, M_Cursos.Programa, M_Cursos.Ciclo, S_CursosHModificado.NuevoH, M_Cursos.Vacantes
+FROM M_Cursos INNER JOIN S_CursosHModificado ON M_Cursos.ID = S_CursosHModificado.IDCurso
+WHERE ((S_CursosHModificado.NuevoH=[H requerido]))
+ORDER BY M_Cursos.Ciclo;
+
+
+C_CursosIgualHIgualC
+
+SELECT DISTINCTROW M_Cursos.ID, M_Cursos.Nombre, M_Cursos.Programa, M_Cursos.Creditos, M_Cursos.H, M_Cursos.Ciclo
+FROM M_Cursos
+WHERE ((M_Cursos.H=[H requerido]) AND (M_Cursos.Ciclo=[Ciclo requerido]))
+ORDER BY Len(M_Cursos.Programa) DESC , M_Cursos.Programa DESC , M_Cursos.Creditos DESC , M_Cursos.H, M_Cursos.Ciclo;
+
+C_CursosPorPartir
+
+SELECT DISTINCTROW M_Cursos.ID, M_Cursos.Nombre, M_Cursos.Vacantes
+FROM M_Cursos
+WHERE ((M_Cursos.Vacantes>145));
+
+C_HMaximo
+
+SELECT DISTINCTROW Max(M_Cursos.H) AS HMaximo
+FROM M_Cursos
+WHERE ((M_Cursos.H<>"E" And M_Cursos.H<>"V"));
+
+C_ProfesorCurso
+
+SELECT DISTINCTROW R_ProfesorCurso.IDCurso, R_ProfesorCurso.IDProfesor, M_Profesores.R1, M_Profesores.R2, M_Profesores.R3, M_Profesores.R4, M_Profesores.R5
+FROM M_Cursos INNER JOIN (M_Profesores INNER JOIN R_ProfesorCurso ON M_Profesores.ID = R_ProfesorCurso.IDProfesor) ON M_Cursos.ID = R_ProfesorCurso.IDCurso
+WHERE ((R_ProfesorCurso.IDCurso=[Curso]));
+
+C_ProgramasDefinidos
+
+SELECT DISTINCT M_Cursos.Programa, Len(M_Cursos.Programa) AS tmp, M_Cursos.PI, M_Cursos.PS, M_Cursos.PC, M_Cursos.PE
+FROM M_Cursos
+ORDER BY Len(M_Cursos.Programa);
+
+
+CE_CrearPaqueteAulasLibres
+
+SELECT DISTINCTROW M_Aulas.ID, 0 AS Z INTO T_AulaLibre
+FROM M_Aulas;
+
+Ciclos en H
+
+SELECT DISTINCT M_Cursos.Ciclo
+FROM (M_Cursos INNER JOIN S_CursosHModificado ON M_Cursos.ID = S_CursosHModificado.IDCurso) INNER JOIN M_Horario ON S_CursosHModificado.IDCurso = M_Horario.IDCurso
+WHERE ((S_CursosHModificado.NuevoH=[Valor H]));
+
+Consulta Aulas Sabados
+
+SELECT DISTINCTROW M_Aulas.Capacidad, M_Horario.IDAula
+FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN M_Horario ON M_Aulas.ID = M_Horario.IDAula) ON M_Cursos.ID = M_Horario.IDCurso
+WHERE ((M_Horario.Hora=7) AND (M_Horario.Dia="S"))
+ORDER BY M_Horario.IDAula;
+
+Consulta para Pruebas
+
+SELECT DISTINCTROW M_Cursos.Nombre, M_Aulas.Nombre
+FROM M_Aulas, M_Cursos
+WHERE ((M_Cursos.ID=[ID del Curso]) AND (M_Aulas.ID=[ID del aula]));
+
+Cursos de los sabados
+
+SELECT DISTINCTROW M_Aulas.Capacidad, M_Horario.Hora, M_Horario.IDAula, M_Horario.IDCurso
+FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN M_Horario ON M_Aulas.ID = M_Horario.IDAula) ON M_Cursos.ID = M_Horario.IDCurso
+WHERE ((M_Horario.Hora<>7) AND (M_Horario.Dia="S"))
+ORDER BY M_Aulas.Capacidad, M_Horario.Hora, M_Horario.IDAula;
+
+Horario Final
+
+SELECT DISTINCTROW M_Cursos.Sigla, M_Aulas.Nombre AS Aula, M_Horario.Dia, M_Horario.Hora
+FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN ((T_Dias RIGHT JOIN M_Horario ON T_Dias.DiaCorto = M_Horario.Dia) LEFT JOIN T_Horas ON M_Horario.Hora = T_Horas.Hora) ON M_Aulas.ID = M_Horario.IDAula) ON M_Cursos.ID = M_Horario.IDCurso
+ORDER BY T_Dias.ID, T_Horas.ID, M_Aulas.Nombre;
+
+Para chequear el PreHorario
+
+SELECT DISTINCTROW M_Aulas.ID AS IDAula, M_Cursos.ID AS IDCurso, T_PreHorario.H, M_Cursos.Creditos
+FROM M_Cursos INNER JOIN (M_Aulas INNER JOIN T_PreHorario ON M_Aulas.ID = T_PreHorario.IDAula) ON M_Cursos.ID = T_PreHorario.IDCurso
+WHERE ((T_PreHorario.H=[H Requerido]))
+ORDER BY T_PreHorario.H, M_Cursos.Creditos DESC;
+
+Para verificar: Cursos sin asignar (no HE)
+
+SELECT DISTINCTROW M_Cursos.Nombre, M_Cursos.H, S_CursosHModificado.NuevoH, M_Cursos.Vacantes
+FROM M_Cursos INNER JOIN S_CursosHModificado ON M_Cursos.ID = S_CursosHModificado.IDCurso
+WHERE ((M_Cursos.H<>"E") AND (M_Cursos.Activo<>False) AND (M_Cursos.ID Not In (select T_PreHorario.IDCurso from T_PreHorario
+)))
+ORDER BY M_Cursos.H;
