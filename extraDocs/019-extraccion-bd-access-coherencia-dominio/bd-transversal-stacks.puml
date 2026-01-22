@@ -1,4 +1,4 @@
-@startuml transversal-bd
+@startuml bd-transversal-stacks
 
 skinparam backgroundColor #FEFEFE
 skinparam componentStyle rectangle

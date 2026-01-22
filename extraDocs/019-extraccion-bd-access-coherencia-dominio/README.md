@@ -47,7 +47,7 @@ La fase de Diseño había establecido las entidades y sus relaciones desde una p
 
 |![Proceso de extracción](/images/extraDocs/019-extraccion-bd-access-coherencia-dominio/extraction-process.svg)|
 |:-:|
-|Proceso de extracción desde Access 2.0 ([proceso-extraccion-access.puml](proceso-extraccion-access.puml))|
+|Proceso de extracción desde Access 2.0 ([extraction-process.puml](extraction-process.puml))|
 
 </div>
 
