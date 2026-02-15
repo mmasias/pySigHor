@@ -1,5 +1,13 @@
 # Contexto - Mapa de Implementación FastAPI + React
 
+<div align=right>
+
+||||||
+|-|-|-|-|
+|[🏠️](../README.md)|**Artículo 020**|[Contexto](contexto.md)|[Plan de Iteraciones](plan-iteraciones.md)|[Metodología](metodologia.md)|
+
+</div>
+
 ## Información del Artefacto
 
 - **Proyecto**: pySigHor - Modernización del Sistema Generador de Horarios
@@ -40,7 +48,7 @@
 - ✅ Tecnológicamente neutro (sin HTTP, JSON, frameworks específicos)
 
 **Diseño FastAPI+React**:
-- ✅ 5/32 casos de uso diseñados (Ola 1: Auth + CRUD Aulas)
+- ✅ 5/32 casos de uso diseñados (Iteración 1: Auth + CRUD Aulas)
 - ✅ Arquitectura C4 de contenedores
 - ✅ Clases de diseño (Pydantic, SQLAlchemy, JWT)
 - ✅ Configuración de proyecto completa (pyproject.toml, package.json)
@@ -134,7 +142,7 @@ Conclusión: "RUP permitió construir ajustándose"
 
 **Ventaja**: SÍ demuestra que RUP permite construir ajustándose
 
-## Solución: Implementación en Olas
+## Solución: Implementación por Iteraciones
 
 ### Estrategia Definida
 

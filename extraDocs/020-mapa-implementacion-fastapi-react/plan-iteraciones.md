@@ -1,5 +1,13 @@
 # Plan de Iteraciones - FastAPI + React
 
+<div align=right>
+
+||||||
+|-|-|-|-|
+|[🏠️](../README.md)|**Artículo 020**|[Contexto](contexto.md)|[Plan de Iteraciones](plan-iteraciones.md)|[Metodología](metodologia.md)|
+
+</div>
+
 ## Información del Artefacto
 
 - **Proyecto**: pySigHor - Modernización del Sistema Generador de Horarios

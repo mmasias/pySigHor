@@ -3,7 +3,7 @@
 <div align=right>
 
 ||||||
-|-|-|-|-|
+|-|-|-|-|-|
 |[🏠️](../README.md)|**Artículo 020**|[Contexto](contexto.md)|[Plan de Iteraciones](plan-iteraciones.md)|[Metodología](metodologia.md)|
 
 </div>
@@ -57,18 +57,18 @@ Este no es un proyecto convencional de desarrollo de software. Es un **case stud
 - **Stack moderno**: Demandado en el mercado actual
 - **Zero-config**: SQLite para desarrollo sin overhead DevOps
 - **Migración clara**: Esquema permite migrar a PostgreSQL posteriormente
-- **Diseño completo**: 5/32 casos de uso ya diseñados (Ola 1 lista)
+- **Diseño completo**: 5/32 casos de uso ya diseñados (Iteración 1 lista)
 
 ### Estado Actual del Diseño
 
-**Completados** (Ola 1):
+**Completados** (Iteración 1):
 - ✅ `iniciarSesion()` - Autenticación JWT
 - ✅ `abrirAulas()` - Listado paginado
 - ✅ `crearAula()` - Creación con validación
 - ✅ `editarAula()` - Edición con merge parcial
 - ✅ `eliminarAula()` - Eliminación con confirmación
 
-**Pendientes de diseño** (Olas 2-7):
+**Pendientes de diseño** (Iteraciones 2-7):
 - Edificios, Recursos, Profesores, Programas, Cursos, GenerarHorario
 
 ## ¿Cómo?
