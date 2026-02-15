@@ -55,8 +55,8 @@ poetry run uvicorn app.main:app --reload --port 8000
 ```bash
 cd frontend
 
-# Instalar dependencias
-npm install
+# Ejecutar script de configuración automática
+./setup.sh
 
 # Levantar servidor
 npm run dev
