@@ -8,7 +8,7 @@
 
 # pySigHor > crearAula > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/crearAula/README.md)|[Diseño](/RUP/02-diseño/casos-uso/crearAula/README.md)|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/crearAula/README.md)|[Diseño](/RUP/02-diseño/casos-uso/crearAula/README.md)|[Desarrollo](/RUP/03-desarrollo/casos-uso/crearAula/README.md)|[Pruebas](/RUP/04-pruebas/casos-uso/crearAula/README.md)|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto

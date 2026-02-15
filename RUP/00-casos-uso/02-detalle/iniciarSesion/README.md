@@ -1,6 +1,6 @@
 # pySigHor > iniciarSesion > Detalle y prototipado
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/iniciarSesion/README.md)|[Diseño](/RUP/02-diseño/casos-uso/iniciarSesion/README.md)|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|**Detalle**|[Análisis](/RUP/01-analisis/casos-uso/iniciarSesion/README.md)|[Diseño](/RUP/02-diseño/casos-uso/iniciarSesion/README.md)|[Desarrollo](/RUP/03-desarrollo/casos-uso/iniciarSesion/README.md)|[Pruebas](/RUP/04-pruebas/casos-uso/iniciarSesion/README.md)|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
