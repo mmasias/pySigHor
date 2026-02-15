@@ -1,0 +1,101 @@
+@startuml flujo-iteraciones
+
+!define RECTANGLE class
+
+skinparam rectangle {
+  BackgroundColor #E3F2FD
+  BorderColor #1976D2
+  RoundCorner 10
+}
+
+skinparam rectangleText {
+  FontColor #0D47A1
+  FontSize 12
+}
+
+skinparam arrow {
+  Color #1976D2
+  Thickness 2
+}
+
+rectangle "Iteración N\n[Diseño 5 CdU]" #BBDEFB {
+  rectangle "Revisar análisis RUP" as diseno1
+  rectangle "Diseñar diagramas de secuencia" as diseno2
+  rectangle "Diseñar clases de diseño" as diseno3
+  rectangle "Definir endpoints HTTP" as diseno4
+
+  diseno1 -down-> diseno2
+  diseno2 -down-> diseno3
+  diseno3 -down-> diseno4
+}
+
+rectangle "Implementación\n[Commits descriptivos]" #C8E6C9 {
+  rectangle "Backend: Models + Schemas" as impl1
+  rectangle "Backend: Repositories + Services" as impl2
+  rectangle "Backend: Routers + Endpoints" as impl3
+  rectangle "Frontend: Types + Services" as impl4
+  rectangle "Frontend: Components + Pages" as impl5
+  rectangle "Commits feat/fix/refactor" as impl6
+
+  impl1 -down-> impl2
+  impl2 -down-> impl3
+  impl3 -down-> impl4
+  impl4 -down-> impl5
+  impl5 -down-> impl6
+}
+
+rectangle "Ejecutable Testeable\n[Localhost]" #FFCCBC {
+  rectangle "Backend: uvicorn port 8000" as test1
+  rectangle "Frontend: Vite port 5173" as test2
+  rectangle "Tests manuales completados" as test3
+  rectangle "Screenshots de funcionamiento" as test4
+
+  test1 -down-> test2
+  test2 -down-> test3
+  test3 -down-> test4
+}
+
+rectangle "Validación y Documentación\n[Ajustes registrados]" #E1BEE7 {
+  rectangle "Validar ejecutable" as val1
+  rectangle "Documentar ajustes" as val2
+  rectangle "Actualizar conversation-log" as val3
+  rectangle "Actualizar casos de uso" as val4
+
+  val1 -down-> val2
+  val2 -down-> val3
+  val3 -down-> val4
+}
+
+diseno4 -down-> impl1
+impl6 -down-> test1
+test4 -down-> val1
+
+rectangle ultimo as "Iteración N+1\n[Diseño 5 CdU siguientes]" #BBDEFB
+
+val4 -down-> ultimo
+
+note right of diseno4
+  **Fase 1: Diseño**
+  Duración: 1-2 sesiones
+  Solo si no está listo
+end note
+
+note right of impl6
+  **Fase 2: Implementación**
+  Duración: 2-3 sesiones
+  Commits descriptivos
+end note
+
+note right of test4
+  **Fase 3: Ejecutable**
+  Duración: 1 sesión
+  Backend + Frontend corriendo
+end note
+
+note right of val4
+  **Fase 4: Validación**
+  Duración: 1 sesión
+  Documentar ajustes
+end note
+
+@enduml
