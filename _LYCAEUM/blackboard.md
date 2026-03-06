@@ -14,7 +14,7 @@ Determinar cuáles son los próximos pasos más prioritarios para el proyecto py
 ---
 
 ## Ronda 1
-- Opencode: [pendiente]
-- Gemini: [pendiente]
-- Qwen: [pendiente]
-- Estado: EN CURSO
+- Opencode: Arquitectura escalable sin refactor mayor. Credenciales hardcodeadas + usuario sin BD son bloqueantes reales para Iteración 2. Secuencia de iteraciones correcta técnicamente.
+- Gemini: Mapa de valor didáctico por entidad (Profesores = M:N + pesos = preparación algorítmica = Alto). Testing desde Iteración 2 sobre entidades simples. Propuesta narrativa de introducir generarHorario() en Iteración 3 — invalidada por corrección de Manuel (fatiga intencional).
+- Qwen: Tres riesgos reales: (1) dashboard inconsistente — cosmético, pero viola integridad documental; (2) usuario hardcodeado — deuda acumulativa, ventana estrecha; (3) 21 CdU sin diseño — riesgo pedagógico diferible. Detectó 5 CdU cuando son 6; no cambia el argumento de fondo.
+- Estado: RESUELTO
