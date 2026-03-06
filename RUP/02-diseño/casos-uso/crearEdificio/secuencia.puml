@@ -1,0 +1,36 @@
+@startuml
+title Diagrama de Secuencia - Crear Edificio (C→U)
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "EdificioService" as Service
+participant "EdificioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Nuevo Edificio"
+activate FE
+FE --> Admin: Mostrar formulario mínimo (nombre)
+Admin -> FE: Ingresa nombre y Guardar
+FE -> API: POST /edificios (EdificioCreate JSON)
+activate API
+API -> Service: crear_edificio(edificio_create)
+activate Service
+Service -> Repo: create(edificio_model)
+activate Repo
+Repo -> DB: INSERT INTO edificios ...
+activate DB
+DB --> Repo: ID nuevo edificio
+deactivate DB
+Repo --> Service: Edificio (con ID)
+deactivate Repo
+Service --> API: EdificioResponse
+deactivate Service
+API --> FE: 201 Created (Edificio JSON)
+deactivate API
+note over FE: <<include>> editarEdificio(edificio.id)
+FE -> FE: Cargar formulario de edición con edificio recién creado
+FE --> Admin: Mostrar formulario de edición completa
+deactivate FE
+
+@enduml

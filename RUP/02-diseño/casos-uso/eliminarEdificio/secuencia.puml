@@ -1,0 +1,54 @@
+@startuml
+title Diagrama de Secuencia - Eliminar Edificio
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "EdificioService" as Service
+participant "EdificioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Eliminar" (en una fila)
+activate FE
+FE --> Admin: Mostrar confirmación
+Admin -> FE: Confirma eliminación
+FE -> API: DELETE /edificios/{id}
+activate API
+API -> Service: eliminar_edificio(id)
+activate Service
+
+Service -> Repo: count_aulas_by_edificio(id)
+activate Repo
+Repo -> DB: SELECT COUNT(*) FROM aulas WHERE edificio_id = ?
+activate DB
+DB --> Repo: count
+deactivate DB
+Repo --> Service: count
+deactivate Repo
+
+alt count > 0
+    Service --> API: 409 Conflict ("El edificio tiene aulas asociadas")
+    deactivate Service
+    API --> FE: 409 Conflict (JSON error)
+    deactivate API
+    FE --> Admin: Mostrar error "No se puede eliminar: tiene aulas asociadas"
+else count == 0
+    Service -> Repo: delete(id)
+    activate Repo
+    Repo -> DB: DELETE FROM edificios WHERE id = ?
+    activate DB
+    DB --> Repo: Rows affected
+    deactivate DB
+    Repo --> Service: True
+    deactivate Repo
+    Service --> API: True
+    deactivate Service
+    API --> FE: 204 No Content
+    deactivate API
+    FE -> FE: Remover de la lista
+    FE --> Admin: Mostrar "Edificio eliminado"
+end
+
+deactivate FE
+
+@enduml

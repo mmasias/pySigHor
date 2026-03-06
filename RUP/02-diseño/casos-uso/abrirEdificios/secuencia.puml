@@ -1,0 +1,34 @@
+@startuml
+title Diagrama de Secuencia - Abrir Edificios (Listar)
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "EdificioService" as Service
+participant "EdificioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Navega a "Gestión de Edificios"
+activate FE
+FE -> FE: Verificar Token
+FE -> API: GET /edificios (Header: Bearer Token)
+activate API
+API -> Service: listar_edificios()
+activate Service
+Service -> Repo: get_all()
+activate Repo
+Repo -> DB: SELECT * FROM edificios
+activate DB
+DB --> Repo: List[Edificio]
+deactivate DB
+Repo --> Service: List[Edificio]
+deactivate Repo
+Service --> API: List[EdificioResponse]
+deactivate Service
+API --> FE: 200 OK (JSON List)
+deactivate API
+FE -> FE: Renderizar Tabla de Edificios
+FE --> Admin: Mostrar Lista de Edificios
+deactivate FE
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+title Diagrama de Secuencia - Editar Edificio
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "EdificioService" as Service
+participant "EdificioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Editar" (en una fila)
+activate FE
+FE --> Admin: Mostrar formulario con datos precargados
+Admin -> FE: Modifica datos y Guardar
+FE -> API: PATCH /edificios/{id} (EdificioUpdate JSON)
+activate API
+API -> Service: editar_edificio(id, edificio_update)
+activate Service
+Service -> Repo: get_by_id(id)
+activate Repo
+Repo -> DB: SELECT * FROM edificios WHERE id = ?
+activate DB
+DB --> Repo: Edificio existente
+deactivate DB
+Repo --> Service: Edificio
+deactivate Repo
+Service -> Service: Actualizar campos
+Service -> Repo: update(edificio)
+activate Repo
+Repo -> DB: UPDATE edificios SET ... WHERE id = ?
+activate DB
+DB --> Repo: OK
+deactivate DB
+Repo --> Service: Edificio actualizado
+deactivate Repo
+Service --> API: EdificioResponse
+deactivate Service
+API --> FE: 200 OK (Edificio JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Edificio actualizado correctamente"
+deactivate FE
+
+@enduml
