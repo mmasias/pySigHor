@@ -77,6 +77,7 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 |018|[Diagramas vivientes: gestión topológica de proceso mediante artefactos de análisis](018-diagramas-vivientes-gestion-topologica/README.md)|[Por determinar]|Concepto de "diagramas vivientes" como patrón metodológico - comparativa con herramientas existentes y aplicación práctica|
 |019|[Extracción de BD Access 2.0 y validación de coherencia dominio-tablas](019-extraccion-bd-access-coherencia-dominio/README.md)|[Por determinar]|Extracción desde VM Windows 98, validación modelo del dominio ↔ estructura física, decisión de motor BD transversal|
 |020|[Mapa de implementación FastAPI + React: estrategia en olas con ajustes documentados](020-mapa-implementacion-fastapi-react/README.md)|[Por determinar]|Plan de implementación en 7 olas con documentación de ajustes como evidencia pedagógica de flexibilidad RUP|
+|021|[Sesiones de vibeCoding con agentes: LYCAEUM](021-lycaeum/README.md)
 
 ### Estructura de artículos
 
