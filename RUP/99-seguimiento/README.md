@@ -35,93 +35,52 @@ Este dashboard visual muestra el progreso del proyecto de modernización de SigH
 
 ## Navegación del diagrama
 
-Los casos de uso analizados incluyen **2 enlaces** de navegación:
-- **[nombreCasoUso]** - Especificación detallada
+Cada transición puede incluir hasta 4 enlaces según la fase alcanzada:
+- **[nombreCasoUso()]** - Especificación detallada (requisitos + prototipo)
 - **[A]** - Análisis MVC
+- **[D]** - Diseño técnico (diagramas de secuencia)
+- **[dev]** - Desarrollo (implementación)
 
 ## Progreso actual
 
+### Casos de uso en fase de desarrollo (🔵 Celeste) — Iteración 1
+
+- **iniciarSesion()** — autenticación JWT, backend + frontend
+- **abrirAulas()** — GET /aulas, listado completo
+- **crearAula()** — POST /aulas, filosofía C→U
+- **editarAula()** — PATCH /aulas/{id}
+- **eliminarAula()** — DELETE /aulas/{id}
+
+### Casos de uso en fase de diseño (🟢 Verde) — Iteración 2
+
+- **abrirEdificios()** — diagrama de secuencia listo
+- **crearEdificio()** — diagrama de secuencia listo (C→U, datos mínimos)
+- **editarEdificio()** — diagrama de secuencia listo
+- **eliminarEdificio()** — diagrama de secuencia listo (verificación de aulas dependientes → 409)
+
 ### Casos de uso en fase de análisis (🟫 Amarillo oscuro)
 
-- **iniciarSesion()** - Autenticación de usuarios (especificación + prototipo + análisis)
-- **completarGestion()** - Hub de convergencia del sistema (especificación + prototipo + análisis)
-- **abrirProgramas()** - Apertura de gestión de programas académicos (especificación + prototipo + análisis)
-- **abrirCursos()** - Apertura de gestión de cursos (especificación + prototipo + análisis)
-- **abrirProfesores()** - Apertura de gestión de profesores (especificación + prototipo + análisis)
-- **abrirEdificios()** - Apertura de gestión de edificios (especificación + prototipo + análisis)
-- **abrirAulas()** - Apertura de gestión de aulas (especificación + prototipo + análisis)
-- **abrirRecursos()** - Apertura de gestión de recursos (especificación + prototipo + análisis)
-- **crearPrograma()** - Creación de programas académicos como "el delgado" C→U (especificación + prototipo + análisis)
-- **editarPrograma()** - Edición de programas académicos aplicando filosofía C→U (especificación + prototipo + análisis)
-- **eliminarPrograma()** - Eliminación segura de programas con confirmación (especificación + prototipo + análisis)
-- **crearCurso()** - Creación de cursos como "el delgado" C→U (especificación + prototipo + análisis + secuencia)
-- **editarCurso()** - Edición de cursos como "el gordo" con edición continua (especificación + prototipo + análisis + secuencia)
-- **eliminarCurso()** - Eliminación segura de cursos con confirmación (especificación + prototipo + análisis)
-- **eliminarProfesor()** - Eliminación segura de profesores con confirmación (especificación + prototipo + análisis) - CORREGIDO
-- **editarProfesor()** - Edición de profesores como "el gordo" con edición continua (especificación + prototipo + análisis) - CORREGIDO
-- **crearEdificio()** - Creación de edificios como "el delgado" C→U (especificación + prototipo + análisis)
-- **editarEdificio()** - Edición de edificios como "el gordo" con edición continua (especificación + prototipo + análisis)
-- **eliminarEdificio()** - Eliminación segura de edificios con confirmación (especificación + prototipo + análisis)
-- **crearAula()** - Creación de aulas como "el delgado" C→U (especificación + prototipo + análisis)
-- **editarAula()** - Edición de aulas como "el gordo" con edición continua (especificación + prototipo + análisis)
-- **eliminarAula()** - Eliminación segura de aulas con confirmación (especificación + prototipo + análisis)
-- **crearRecurso()** - Creación de recursos como "el delgado" C→U (especificación + prototipo + análisis)
-- **editarRecurso()** - Edición de recursos como "el gordo" con edición continua (especificación + prototipo + análisis)
-- **eliminarRecurso()** - Eliminación segura de recursos con confirmación (especificación + prototipo + análisis)
-- **configurarPreferenciasProfesor()** - Configuración específica de preferencias de recursos (especificación + prototipo + análisis)
-- **generarHorario()** - Generación automática de horarios con proceso de 4 fases (especificación + prototipo + análisis)
-- **consultarHorario()** - Consulta de horarios generados (especificación + prototipo + análisis)
-- **asignarProfesorACurso()** - Gestión de asignaciones profesor-curso (especificación + prototipo + análisis)
-- **cerrarSesion()** - Cierre de sesión (especificación + prototipo + análisis)
-
-### Casos de uso identificados únicamente (🔘 Gris)
-
-#### Gestión de datos maestros
-(Todos los casos de uso de datos maestros están en análisis o superior)
-
-#### Operaciones CRUD
-
-- **crearRecurso()** / **editarRecurso()** / **eliminarRecurso()**
-
-#### Funcionalidades especiales
-
-
-#### Sistema
-
-(Todos los casos de uso del sistema están en análisis o superior)
+Todos los demás (~22 CdUs): Programas, Cursos, Profesores, Recursos, Horarios, y transversales (completarGestion, cerrarSesion, asignarProfesorACurso, generarHorario, consultarHorario).
 
 ## Estadísticas del proyecto
 
-- **Total de casos de uso**: 32
-- **Casos de uso en análisis**: 32 (100%)
-  - ¡Proyecto completado en fase de análisis!
-- **Casos de uso identificados**: 0 (0%)
-  - Todos los casos implementados
-- **Progreso general**: 100% (proyecto COMPLETADO en análisis)
+| Fase | CdUs | % |
+|---|:-:|:-:|
+| 🔵 Desarrollo (Iteración 1) | 5 | ~16% |
+| 🟢 Diseño (Iteración 2) | 4 | ~13% |
+| 🟫 Análisis | ~22 | ~71% |
+| **Total** | **~31** | |
 
 ## Próximos pasos
 
-### Hilos completados
-1. **✅ Hilo Programas completado** - crearPrograma(), editarPrograma(), eliminarPrograma()
-2. **✅ Hilo Cursos completado** - crearCurso(), editarCurso(), eliminarCurso()
-3. **✅ Hilo Profesores completado** - crearProfesor(), editarProfesor(), eliminarProfesor(), configurarPreferenciasProfesor()
-4. **✅ Hilo Edificios completado** - crearEdificio(), editarEdificio(), eliminarEdificio()
-5. **✅ Hilo Aulas completado** - crearAula(), editarAula(), eliminarAula()
-6. **✅ Hilo Recursos completado** - crearRecurso(), editarRecurso(), eliminarRecurso()
-7. **✅ Hilo Horarios completado** - generarHorario(), consultarHorario()
-8. **✅ Hilo Sistema completado** - iniciarSesion(), cerrarSesion(), completarGestion()
+### Completado
+- ✅ Fase de análisis: todos los CdUs
+- ✅ Diseño técnico + implementación: Iteración 1 (Aulas + autenticación)
+- ✅ Diseño técnico: Iteración 2 (Edificios)
 
-### ¡Proyecto completado en análisis!
-- **✅ Todos los hilos funcionales completados**
-- **✅ 32 casos de uso con especificación detallada**  
-- **✅ 32 casos de uso con análisis MVC completo**
-- **✅ Metodología RUP aplicada sistemáticamente**
-
-### Próxima fase: Diseño
-- **Arquitectura del sistema**: Definir tecnologías y patrones arquitectónicos
-- **Diseño detallado**: Refinar clases de análisis en clases de diseño
-- **Bases de datos**: Diseño del modelo de datos relacional
-- **Interfaces**: Diseño detallado de interfaces de usuario
+### En curso
+- Acción 1: Migrar autenticación de hardcodeado a BD real (prerrequisito de Iteración 2)
+- Acción 2: Implementar Iteración 2 — Edificios CRUD + tests Pytest
 
 ## Metodología
 
