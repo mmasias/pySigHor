@@ -1,40 +1,37 @@
-# LYCAEUM — Bitácora de Sesión 01
-**Fecha:** 7 de marzo de 2026  
-**Proyecto:** pySigHor  
-**Participantes:** Manuel (operador), Claude (orquestador), Opencode/GLM-4.6 (análisis técnico), Gemini (análisis pedagógico/estratégico), Qwen (contrargumentación)
+# Sesiones de vibeCoding con agentes: LYCAEUM
 
----
+<div align=right>
 
-## Contexto previo: de bundungún a LYCAEUM
+|||||
+|-|-|-|-|
+|[🏠️](../README.md)|**Artículo**|[Contexto](contexto.md)|[Evidencia](evidencia.md)
 
-La sesión surge de una discusión conceptual sobre la diferencia entre un **pipeline** y un **agente**. bundungún — el sistema original de Manuel, un bash script que lanza cuatro CLIs en un grid de Terminator — fue identificado como orquestador estático: los cuatro nodos responden al mismo prompt, el flujo es rígido, y la topología no cambia en tiempo de ejecución.
+</div>
 
-La pregunta que abrió el diseño: *¿y si designamos un jefe que decida a quién delegar y con qué instrucción?*
+## El Sistema
 
-Eso derivó en la arquitectura **blackboard pattern**: un directorio compartido donde el orquestador escribe tareas y los subordinados escriben respuestas, con un estado global en `blackboard.md`.
+### Origen: de bundungún a LYCAEUM
 
----
+**bundungún** era un script bash que lanzaba cuatro CLIs de IA en un grid de Terminator. Los cuatro respondían al mismo prompt, el flujo era rígido, y la topología no cambiaba en tiempo de ejecución. Era un *pipeline*, no un agente: el humano era el único nodo con capacidad de decisión.
 
-## Diseño del sistema
+La pregunta que abrió el diseño de LYCAEUM fue simple: *¿y si designamos un jefe que decida a quién delegar y con qué instrucción?*
 
-### Estructura de archivos
+La respuesta fue el **blackboard pattern**: un directorio compartido donde el orquestador escribe tareas y los subordinados escriben respuestas, con un estado global persistido en `blackboard.md`.
+
+### Arquitectura
+
 ```
-~/misRepos/pysighor/_LYCAEUM/
+_LYCAEUM/
   CLAUDE.md              ← instrucciones del orquestador
-  contexto_opencode.md   ← rol y protocolo para Opencode
-  contexto_gemini.md     ← rol y protocolo para Gemini
-  contexto_qwen.md       ← rol y protocolo para Qwen
-  task_opencode.md       ← tarea activa para Opencode
-  task_gemini.md         ← tarea activa para Gemini
-  task_qwen.md           ← tarea activa para Qwen
-  response_opencode.md   ← respuesta de Opencode
-  response_gemini.md     ← respuesta de Gemini
-  response_qwen.md       ← respuesta de Qwen
+  contexto_*.md          ← rol y protocolo de cada agente
+  task_*.md              ← tareas activas (escritas por el orquestador)
+  response_*.md          ← respuestas (escritas por los subordinados)
   blackboard.md          ← estado global y resumen de rondas
   sintesis_rondaN.md     ← síntesis final por ronda
 ```
 
-### Roles asignados
+**Roles:**
+
 | Agente | Especialidad |
 |---|---|
 | Claude Code | Orquestador: descompone, delega, sintetiza |
@@ -43,85 +40,84 @@ Eso derivó en la arquitectura **blackboard pattern**: un directorio compartido 
 | Qwen | Contrargumentación, detección de inconsistencias lógicas |
 
 ### Protocolo de ronda
-1. El orquestador lee el repo y el objetivo
-2. Escribe `task_*.md` para cada agente con instrucción específica
-3. Manuel entrega las tareas manualmente (modo mensajero)
+
+1. El orquestador lee el repo y el objetivo — **sin inventar contexto**
+2. Escribe `task_*.md` para cada agente con instrucción diferenciada por ángulo
+3. Manuel entrega las tareas manualmente (modo mensajero — Fase 1)
 4. Los agentes escriben sus `response_*.md`
-5. El orquestador lee, triangula y actualiza el `blackboard.md`
+5. El orquestador lee, triangula y actualiza `blackboard.md`
 6. Si hay resolución: síntesis final. Si no: nueva ronda (máx. 5)
 
 ---
 
-## Sesión en el trabajo (primera ejecución)
+## La Sesión Fundacional
 
-### Objetivo
-Analizar el estado actual del proyecto pySigHor y proponer los próximos pasos de desarrollo más prioritarios.
+### Objetivo planteado
+
+> Analizar el estado actual del proyecto pySigHor y proponer los próximos pasos de desarrollo más prioritarios.
 
 ### Comportamiento del orquestador
-Claude Code leyó el repo, detectó el estado de la Iteración 1, y delegó tres ángulos distintos:
-- Opencode: dependencias técnicas y viabilidad de la secuencia de iteraciones
-- Gemini: enfoque metodológico RUP y momento del testing
-- Qwen: cuestionamiento de los supuestos implícitos de la ruta planificada
 
-**Hallazgo destacado de Qwen:** detectó que `Programa` no aparece en ninguna iteración planificada pero `Curso` depende de él — gap en el modelo de dominio no señalado en ningún prompt.
+Claude Code leyó el repo antes de delegar: `git log`, `auth.py`, modelos, repositorios, frontend, diagramas PlantUML existentes. Las tareas resultantes estaban fundamentadas en evidencia real, no en suposiciones.
 
-### Síntesis del orquestador
-Convergencia de los tres agentes en: adelantar `generarHorario()` a iteración 3 (no dejarlo para el final), atacar la deuda técnica de auth antes de Iteración 2, y resolver el gap de `Programa`.
+Las tres tareas de Ronda 1 cubrieron ángulos genuinamente distintos:
+- **Opencode**: dependencias técnicas entre entidades, escalabilidad de la arquitectura, secuencia de iteraciones
+- **Gemini**: valor pedagógico diferencial por iteración, momento óptimo del testing, arco narrativo didáctico
+- **Qwen**: cuestionamiento de los supuestos implícitos de la ruta planificada
 
----
+### Hallazgos destacados por agente
 
-## Sesión en casa (segunda ejecución, misma tarde)
+**Opencode** leyó código real antes de responder. Detectó que `edificio.py` ya existía en los modelos — dato concreto que los otros dos no mencionaron. Validó la secuencia de iteraciones como técnicamente correcta.
 
-### Diferencia respecto a la primera sesión
-El orquestador leyó el repo más a fondo (git log, código real de auth.py, modelos, frontend) antes de escribir las tareas. Las instrucciones resultantes fueron significativamente más precisas.
+**Gemini** leyó `reflexionesAlgoritmo.md` — el archivo de ingeniería inversa del legacy VB3.0 de 1998, que ningún otro agente tocó. Por eso pudo hablar con precisión sobre las fases del algoritmo, los pesos R1-R5 y los BitSets. Propuso estructurar las iteraciones como arco narrativo: *"La Búsqueda del Horario Perfecto"*.
 
-### Hallazgos de los agentes
-
-**Opencode:** Leyó código real — `auth.py`, modelos, repositorios, frontend. Identificó credenciales hardcodeadas y usuario sin BD como bloqueantes reales. Validó la secuencia de iteraciones como técnicamente correcta. Detectó que `edificio.py` ya existía en los modelos.
-
-**Gemini:** Leyó `reflexionesAlgoritmo.md` (ingeniería inversa del legacy) — archivo que ningún otro agente tocó. Construyó tabla de valor didáctico por entidad. Propuso narrativa "La Búsqueda del Horario Perfecto". Recomendó introducir testing en Iteración 2 (Edificios) como terreno simple antes de llegar a complejidad de Profesores y `generarHorario()`.
-
-**Qwen:** Verificó `RUP/README.md` contra `RUP/03-desarrollo/` para confirmar la inconsistencia del dashboard. Detectó tres tensiones reales: (1) RUP vs. velocidad, (2) dashboard inconsistente, (3) usuario hardcodeado. Generó hallazgo autónomo: ausencia de **Definition of Done** explícito por CdU — sin ese criterio, el dashboard siempre va a mentir por olvido.
+**Qwen** verificó `RUP/README.md` contra `RUP/03-desarrollo/` para confirmar la inconsistencia del dashboard con sus propios ojos, no por la descripción del task. Generó un hallazgo autónomo no solicitado en ningún prompt: ausencia de **Definition of Done** explícito por CdU. Sin ese criterio, el dashboard siempre va a mentir por olvido, porque nadie sabe cuándo actualizar qué.
 
 ### Correcciones previas a la síntesis
-Antes de pedir síntesis al orquestador, Manuel aportó dos correcciones de contexto:
-1. Qwen asumió 5 CdU implementados; el dato real era 8, todos con ruta RUP completa.
-2. La repetición de CRUDs entre iteraciones es intencional — el objetivo pedagógico es que el alumno interiorice que cualquier dominio se factoriza en operaciones elementales. La "fatiga de CRUD" señalada por Gemini es el mecanismo de aprendizaje, no un problema.
+
+Antes de pedir la síntesis, Manuel aportó dos correcciones de contexto:
+
+1. **Corrección factual**: Qwen asumió 5 CdU implementados. El dato real era 8, todos con ruta RUP completa.
+2. **Corrección pedagógica**: La repetición de CRUDs entre iteraciones es intencional. La *"fatiga de CRUD"* señalada por Gemini es el mecanismo de aprendizaje — el objetivo es que el alumno interiorice que cualquier dominio se factoriza en operaciones elementales.
 
 ### Síntesis del orquestador
-El orquestador aplicó las correcciones con precisión: invalidó la motivación de Gemini (fatiga) pero preservó sus argumentos válidos (tabla de complejidad, testing en Iteración 2). Identificó el disenso real sobre el momento de `generarHorario()` y lo presentó como decisión de Manuel, no como conclusión del panel.
+
+El orquestador no limitó a resumir — triangulólas tres respuestas. Invalidó la motivación de Gemini (fatiga) pero preservó sus argumentos válidos. Identificó el disenso real sobre el momento de `generarHorario()` y lo presentó como decisión de Manuel, no como conclusión del panel.
 
 **Acciones resultantes:**
 
-| Orden | Acción | Bloqueante de |
+| Orden | Acción | Tipo |
 |---|---|---|
-| 0-A | Corregir dashboard (8 CdU a ✅) | Integridad documental |
-| 0-B | Diseño mínimo Edificios (4 diagramas de secuencia) | Coherencia RUP antes de codificar |
-| 1 | Migrar auth hardcodeada → BD real | Todo lo que venga después |
-| 2 | Iteración 2: Edificios + tests Pytest | Iteraciones 3+ |
+| 0-A | Corregir dashboard (8 CdU a ✅) | Higiene documental — inmediata |
+| 0-B | Diseño mínimo Edificios (4 diagramas de secuencia) | Coherencia RUP — prerrequisito |
+| 1 | Migrar auth hardcodeada → BD real | Bloqueante técnico — prerrequisito |
+| 2 | Iteración 2: Edificios + tests Pytest | Desarrollo — siguiente paso |
 
 ---
 
-## Ejecución de acciones
+## Ejecución de Acciones
 
-### Acción 0-A: Corrección del dashboard
-Claude Code la ejecutó directamente (no delegó). Antes de modificar, verificó `RUP/03-desarrollo/` para confirmar el número exacto de CdU — y corrigió el dato de Manuel: eran 5, no 8. El orquestador corrigió al jefe.
+### Comportamiento de delegación observado
 
-**Observación sobre delegación:** para tareas de edición de ficheros simples, Claude Code ejecuta sin delegar. Comportamiento correcto.
+Una pregunta crítica del sistema era: ¿cuándo decide el orquestador ejecutar él mismo vs. delegar a los subordinados?
 
-### Acción 0-B: Diseño mínimo para Edificios
-Claude Code la ejecutó directamente. Leyó los `.puml` de Aulas para replicar el formato exacto, leyó el análisis de `eliminarEdificio` para la restricción de integridad referencial, y produjo los cuatro diagramas de secuencia sin inventar convenciones nuevas.
+**Acción 0-A** (editar un README): ejecutada directamente. Antes de modificar, verificó `RUP/03-desarrollo/` para confirmar el número exacto de CdU — y corrigió el dato de Manuel: eran 5, no 8. **El orquestador corrigió al jefe.**
 
-### Acción 1: Migración de autenticación
-Claude Code entró en **plan mode** antes de tocar nada. Exploró 301 tool uses · 48.7k tokens antes de escribir el plan. El plan fue presentado para aprobación antes de ejecutar.
+**Acción 0-B** (diagramas de secuencia): ejecutada directamente. Leyó los `.puml` de Aulas para replicar el formato exacto, leyó el análisis de `eliminarEdificio` para la restricción de integridad referencial. Produjo los cuatro diagramas sin inventar convenciones.
 
-**Aspectos destacados del plan:**
-- Detectó que el proyecto usa synchronous SQLAlchemy (no async) y replicó el patrón exactamente
-- Respetó el naming convention del proyecto (español en service/router, inglés en repository)
-- El seed del admin es idempotente (comprueba existencia antes de insertar)
-- Alcance explícito: roles, CRUD de usuarios y refresh tokens diferidos hasta que haya un caso de uso diseñado
+**Acción 1** (migración de autenticación): ejecutada directamente, pero con un comportamiento diferente — entró en **plan mode** antes de tocar nada. Exploró el proyecto con 301 tool uses · 48.7k tokens antes de escribir el plan. El plan fue presentado para aprobación antes de ejecutar.
 
-**Verificación completa:**
+El orquestador no delegó código en ningún caso. El CLAUDE.md no contenía instrucción explícita sobre cuándo delegar vs. ejecutar, y Claude Code tiene sesgo natural hacia la ejecución propia. **Punto de mejora identificado para la siguiente iteración del sistema.**
+
+### Migración de autenticación — detalles
+
+El plan de la Acción 1 detectó y respetó:
+- Patrón synchronous SQLAlchemy (no async) del proyecto
+- Naming convention: métodos service/router en español, repository en inglés
+- Seed idempotente del admin (comprueba existencia antes de insertar)
+- Alcance mínimo: roles, CRUD de usuarios y refresh tokens diferidos hasta que haya un CdU diseñado
+
+Verificación completa antes de cerrar:
 - Login admin/admin → 200 + token JWT ✅
 - verify-token → `{"username": "admin"}` ✅
 - Credenciales incorrectas → 401 ✅
@@ -129,38 +125,43 @@ Claude Code entró en **plan mode** antes de tocar nada. Exploró 301 tool uses 
 
 ---
 
-## Observaciones sobre el sistema
+## Lecciones Aprendidas
 
-### Lo que funcionó bien
-- El orquestador lee el repo de verdad antes de delegar — no inventa contexto
-- Las tareas diferenciadas por ángulo producen respuestas genuinamente distintas y complementarias
-- La triangulación de respuestas detecta cosas que ningún agente individual habría señalado (gap de `Programa`, DoD, inconsistencia dashboard)
-- Claude Code distingue qué ejecutar él mismo vs. qué delegar (aunque con sesgo hacia ejecución propia en tareas de código)
+### 1. El blackboard pattern funciona para proyectos reales
 
-### Lo que requiere ajuste
-- **Delegación de código:** Claude Code no delega tareas de implementación aunque podría. Para forzar delegación en código de producción, añadir al CLAUDE.md: *"Tareas de creación o modificación de ficheros de producción se delegan siempre a los agentes especializados."*
-- **Gemini y la escritura de archivos:** En las dos sesiones, Gemini respondió en chat pero no escribió `response_gemini.md` automáticamente. Requiere instrucción explícita: *"escribe tu respuesta en `_LYCAEUM/response_gemini.md`"*
-- **Auto-compact en tareas largas:** La Acción 1 activó compactación en medio del plan mode. El sistema sobrevivió (el plan estaba escrito), pero es un riesgo en tareas de alta densidad de tokens.
+Los agentes leen el repo, no inventan contexto. Los hallazgos emergentes (gap de `Programa`, DoD, inconsistencia de dashboard) surgieron de la lectura real de artefactos, no de razonamiento abstracto. Eso es trazabilidad real, no apariencia de análisis.
 
-### Pendiente de implementar
-- **Definition of Done por CdU** — criterio explícito para marcar completado en el dashboard (hallazgo de Qwen)
-- **Automatización del transporte** — `inotifywait` + keystroke para eliminar el rol de mensajero manual (Fase 2 del sistema)
-- **Regla de delegación de código** en CLAUDE.md
+### 2. La diferenciación de ángulos produce resultados genuinamente distintos
 
----
+Dar a cada agente un rol y una pregunta distinta es la diferencia entre un panel y un eco. Qwen detectó cosas que Gemini y Opencode no detectaron precisamente porque su tarea era buscar fallos, no validar.
 
-## Commits de la sesión
-```
-LYCAEUM: ronda 1 completa - análisis estado pySigHor
-LYCAEUM 0-A/0-B: dashboard actualizado + diseño mínimo Edificios (pre-it2)
-LYCAEUM Acción 1: migrar auth hardcodeada a BD real - prereq Iteración 2
-```
+### 3. El orquestador corrige al humano
+
+La corrección del número de CdU (Manuel dijo 8, eran 5) no fue un error menor. Demuestra que el sistema funciona como un segundo par de ojos sobre los propios datos del proyecto — incluso sobre los datos que aportó el operador.
+
+### 4. El Definition of Done es un artefacto metodológico, no cosmético
+
+El hallazgo de Qwen sobre la ausencia de DoD es transferible a cualquier proyecto: sin criterio explícito de qué significa *completado*, el dashboard siempre va a mentir por olvido. Esto aplica independientemente de si hay IA involucrada o no.
+
+### 5. El auto-compact es un riesgo en tareas de alta densidad
+
+La Acción 1 activó compactación en medio del plan mode tras 48.7k tokens de exploración. El sistema sobrevivió porque el plan ya estaba escrito, pero es un vector de fallo en tareas largas. Estrategia de mitigación: dividir tareas complejas en subtareas antes de llegar al límite de contexto.
 
 ---
 
-## Estado del proyecto al cierre de sesión
-- Iteración 1: ✅ completa (auth + CRUD Aulas)
-- Dashboard: ✅ actualizado
-- Diseño Edificios: ✅ listo en RUP/02-diseño/
-- Autenticación: ✅ migrada a BD real
-- **Siguiente paso:** Iteración 2 — CRUD Edificios + tests Pytest
+## Estado del Sistema al Cierre de Sesión
+
+**Pendiente de implementar:**
+- Definition of Done por CdU (propuesto por Qwen, pendiente de artefacto formal)
+- Regla de delegación de código en CLAUDE.md
+- Automatización del transporte (Fase 2: `inotifywait` + keystroke)
+
+**Próximo paso del proyecto:** Iteración 2 — CRUD Edificios + tests Pytest
+
+---
+
+## Conclusión
+
+LYCAEUM demostró que la arquitectura blackboard con roles diferenciados produce análisis que ningún agente individual habría generado solo. La triangulación de perspectivas, la corrección mutua y la síntesis estructurada son propiedades emergentes del sistema, no de ninguno de sus nodos.
+
+bundungún era cuatro voces al mismo tiempo. LYCAEUM es un panel con un presidente.
