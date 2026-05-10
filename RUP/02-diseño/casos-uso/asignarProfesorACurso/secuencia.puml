@@ -1,0 +1,85 @@
+@startuml
+title Diagrama de Secuencia - Asignar Profesor a Curso
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "AsignacionService" as Service
+participant "AsignacionRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Gestionar cursos asignados"
+activate FE
+FE -> API: GET /profesores/{id}/cursos
+activate API
+API -> Service: obtener_cursos_asignados(profesor_id)
+activate Service
+Service -> Repo: get_by_profesor_id(profesor_id)
+activate Repo
+Repo -> DB: SELECT * FROM asignaciones WHERE profesor_id = ...
+activate DB
+DB --> Repo: Lista de asignaciones
+deactivate DB
+Repo --> Service: Lista de Cursos
+deactivate Repo
+Service --> API: List[CursoResponse]
+deactivate Service
+API --> FE: 200 OK (Cursos Asignados)
+deactivate API
+
+FE -> API: GET /cursos
+activate API
+API -> Service: obtener_todos_los_cursos()
+activate Service
+Service -> Repo: get_all_cursos()
+activate Repo
+Repo -> DB: SELECT * FROM cursos
+activate DB
+DB --> Repo: Lista de todos los cursos
+deactivate DB
+Repo --> Service: Lista de Cursos
+deactivate Repo
+Service --> API: List[CursoResponse]
+deactivate Service
+API --> FE: 200 OK (Todos los Cursos)
+deactivate API
+
+FE --> Admin: Mostrar pantalla de doble lista
+deactivate FE
+
+Admin -> FE: Mover cursos entre listas (Asignar/Desasignar)
+Admin -> FE: Clic en "Guardar"
+activate FE
+FE -> API: PUT /profesores/{id}/cursos ({"curso_ids": [...]})
+activate API
+API -> Service: actualizar_asignaciones(profesor_id, curso_ids)
+activate Service
+
+alt Validación Exitosa
+    Service -> Repo: reemplazar_asignaciones(profesor_id, curso_ids)
+    activate Repo
+    Repo -> DB: DELETE FROM asignaciones WHERE profesor_id = ...
+    activate DB
+    DB --> Repo: OK
+    deactivate DB
+    Repo -> DB: INSERT INTO asignaciones (profesor_id, curso_id) VALUES ...
+    activate DB
+    DB --> Repo: OK
+    deactivate DB
+    Repo --> Service: Lista de Cursos actualizada
+    deactivate Repo
+    Service --> API: List[CursoResponse]
+    deactivate Service
+    API --> FE: 200 OK (Cursos Asignados Actualizados)
+else Curso ID inválido
+    Service --> API: Lanzar HTTPException(422)
+    deactivate Service
+    API --> FE: 422 Unprocessable Entity
+end
+deactivate API
+
+FE -> FE: Mostrar confirmación o error
+FE --> Admin: Notificar resultado
+deactivate FE
+
+@enduml
