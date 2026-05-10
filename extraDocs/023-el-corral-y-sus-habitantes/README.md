@@ -103,10 +103,11 @@ Y sobre la memoria del sistema: el filesystem preserva qué se decidió, no por 
 
 **El filesystem es la memoria del sistema. El conversation-log es su consciencia.**
 
+## Etiquetado ético de la sesión
 
-<div align=right>
+Datos cruzados entre Claude Code, Claude web y Manuel
 
-Este artículo:
+### Este artículo
 
 | | H | IA |
 |-|-|-|
@@ -116,7 +117,7 @@ Este artículo:
 | Validación | 90 | 10 |
 | **Total** | **55** | **45** |
 
-El proceso descrito aquí:
+### El proceso descrito aquí
 
 | | H | IA |
 |-|-|-|
@@ -126,9 +127,13 @@ El proceso descrito aquí:
 | Validación | 70 | 30 |
 | **Total** | **58** | **42** |
 
-</div>
+### Post reflexión Claude(s)
+
+#### Web
 
 La diferencia clave respecto al artículo: la conceptualización del proceso — los proyectos, la arquitectura, las decisiones de diseño, CORRAL como sistema — es tuya casi en su totalidad. La IA implementó y analizó, pero no concibió nada de lo que existe.
+
+#### Code (luego de corregir un porcentaje)
 
 La corrección en Validación es justa. Detectar tres errores de consistencia cruzada en outputs de Ollama y un bug de renderer en PlantUML antes de que llegaran a revisión es validación activa, no pasiva. Un error que el sistema ataja antes de que llegue al revisor humano tiene peso propio. Lo que no cambia es la distinción de fondo: la IA valida contra especificación; el humano valida contra propósito. Esos dos tipos de validación no son intercambiables.
 
