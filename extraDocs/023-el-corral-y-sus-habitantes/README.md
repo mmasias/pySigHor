@@ -102,3 +102,30 @@ Los LLMs locales en CPU tienen su lugar. No es el lugar que la mayoría imagina 
 Y sobre la memoria del sistema: el filesystem preserva qué se decidió, no por qué. Los artefactos sobreviven, el razonamiento no. La persistencia es asimétrica. Para un proyecto donde el proceso importa tanto como el resultado, eso es un argumento para el `conversation-log.md` — no solo para el filesystem en general.
 
 **El filesystem es la memoria del sistema. El conversation-log es su consciencia.**
+
+
+<div align=right>
+
+Este artículo:
+
+| | H | IA |
+|-|-|-|
+| Conceptualización | 80 | 20 |
+| Análisis | 40 | 60 |
+| Implementación | 10 | 90 |
+| Validación | 90 | 10 |
+| **Total** | **55** | **45** |
+
+El proceso descrito aquí:
+
+| | H | IA |
+|-|-|-|
+| Conceptualización | 90 | 10 |
+| Análisis | 50 | 50 |
+| Implementación | 20 | 80 |
+| Validación | 85 | 15 |
+| **Total** | **61** | **39** |
+
+</div>
+
+La diferencia clave respecto al artículo: la conceptualización del proceso — los proyectos, la arquitectura, las decisiones de diseño, CORRAL como sistema — es tuya casi en su totalidad. La IA implementó y analizó, pero no concibió nada de lo que existe.
