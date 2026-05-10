@@ -1,0 +1,112 @@
+@startuml
+title Diagrama de Secuencia - Generar Horario
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "HorarioService" as Service
+participant "HorarioGenerator" as Generator
+participant "HorarioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Generar Horario"
+activate FE
+FE -> API: GET /horario/preflight
+activate API
+API -> Service: obtener_preflight()
+activate Service
+Service -> Repo: contar_datos_maestros()
+activate Repo
+Repo -> DB: SELECT count(*) FROM cursos, profesores, aulas
+activate DB
+DB --> Repo: Conteos
+deactivate DB
+Repo --> Service: Resumen de conteos
+deactivate Repo
+
+Service -> Repo: verificar_horario_existente()
+activate Repo
+Repo -> DB: SELECT count(*) FROM asignaciones_horario
+activate DB
+DB --> Repo: Resultado (existe/no existe)
+deactivate DB
+Repo --> Service: boolean
+deactivate Repo
+
+Service --> API: PreflightResponse(datos_validos, tiene_horario_existente, detalles)
+deactivate Service
+API --> FE: 200 OK (PreflightResponse)
+deactivate API
+
+alt datos_validos = false
+    FE --> Admin: Mostrar error (datos insuficientes)
+else datos_validos = true
+    opt tiene_horario_existente = true
+        FE --> Admin: Mostrar diálogo de confirmación de reemplazo
+        Admin -> FE: Confirmar reemplazo
+    end
+
+    FE -> API: POST /horario/generar ({"confirmar_reemplazo": true})
+    activate API
+    API -> Service: generar_nuevo_horario()
+    activate Service
+    
+    Service -> Repo: cargar_datos_maestros_completos()
+    activate Repo
+    Repo -> DB: SELECT * FROM cursos, profesores, aulas...
+    activate DB
+    DB --> Repo: Datos maestros
+    deactivate DB
+    Repo --> Service: Listado de datos para algoritmo
+    deactivate Repo
+
+    Service -> Generator: generar(datos_maestros)
+    activate Generator
+    
+    Generator -> Generator: PrepararH()
+    activate Generator
+    Generator --> Generator: OK
+    deactivate Generator
+    
+    Generator -> Generator: GeneraPreHorario()
+    activate Generator
+    Generator --> Generator: OK
+    deactivate Generator
+    
+    Generator -> Generator: GeneraHorario()
+    activate Generator
+    Generator --> Generator: OK
+    deactivate Generator
+    
+    Generator -> Generator: IngresoHE_HV()
+    activate Generator
+    Generator --> Generator: OK
+    deactivate Generator
+
+    Generator -> Repo: guardar_horario(horario_generado)
+    activate Repo
+    Repo -> DB: DELETE FROM asignaciones_horario
+    activate DB
+    DB --> Repo: OK
+    deactivate DB
+    Repo -> DB: INSERT INTO asignaciones_horario ...
+    activate DB
+    DB --> Repo: OK
+    deactivate DB
+    Repo --> Generator: Confirmación de persistencia
+    deactivate Repo
+
+    Generator --> Service: HorarioGeneradoSummary
+    deactivate Generator
+    
+    Service --> API: HorarioGeneradoResponse(estadisticas)
+    deactivate Service
+    API --> FE: 201 Created (Resumen)
+    deactivate API
+    
+    FE -> FE: Navegar a ConsultarHorario
+    FE --> Admin: Mostrar éxito y estadísticas
+    deactivate FE
+end
+
+@enduml
