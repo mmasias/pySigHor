@@ -1,0 +1,32 @@
+@startuml
+title Diagrama de Secuencia - Crear Curso
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "CursoService" as Service
+participant "CursoRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Clic en "Nuevo Curso"
+activate FE
+FE --> Admin: Mostrar Formulario
+Admin -> FE: Ingresa nombre del curso y Guardar
+FE -> API: POST /cursos (CursoCreate JSON)
+activate API
+API -> Service: crear_curso(curso_create)
+activate Service
+Service -> Repo: create(curso_model)
+activate Repo
+Repo -> DB: INSERT INTO cursos ...
+activate DB
+DB --> Repo: ID nuevo curso
+deactivate DB
+Repo --> Service: Curso (con ID)
+deactivate Repo
+Service --> API: CursoResponse
+deactivate Service
+API --> FE: 201 Created (Curso JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Curso creado correctamente"
+deactivate FE
+@enduml

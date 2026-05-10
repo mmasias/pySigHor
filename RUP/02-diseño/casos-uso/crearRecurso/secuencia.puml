@@ -1,0 +1,32 @@
+@startuml
+title Diagrama de Secuencia - Crear Recurso
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "RecursoService" as Service
+participant "RecursoRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Clic en "Nuevo Recurso"
+activate FE
+FE --> Admin: Mostrar Formulario
+Admin -> FE: Ingresa datos (Código, Nombre) y Guardar
+FE -> API: POST /recursos (RecursoCreate JSON)
+activate API
+API -> Service: crear_recurso(recurso_create)
+activate Service
+Service -> Repo: create(recurso_model)
+activate Repo
+Repo -> DB: INSERT INTO recursos ...
+activate DB
+DB --> Repo: ID nuevo recurso
+deactivate DB
+Repo --> Service: Recurso (con ID)
+deactivate Repo
+Service --> API: RecursoResponse
+deactivate Service
+API --> FE: 201 Created (Recurso JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Recurso creado correctamente"
+deactivate FE
+@enduml

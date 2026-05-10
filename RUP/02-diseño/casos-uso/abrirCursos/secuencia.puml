@@ -1,0 +1,31 @@
+@startuml
+title Diagrama de Secuencia - Abrir Cursos (Listar)
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "CursoService" as Service
+participant "CursoRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Navega a "Gestión de Cursos"
+activate FE
+FE -> FE: Verificar Token
+FE -> API: GET /cursos (Header: Bearer Token)
+activate API
+API -> Service: listar_cursos()
+activate Service
+Service -> Repo: get_all()
+activate Repo
+Repo -> DB: SELECT * FROM cursos
+activate DB
+DB --> Repo: List[Curso]
+deactivate DB
+Repo --> Service: List[Curso]
+deactivate Repo
+Service --> API: List[CursoResponse]
+deactivate Service
+API --> FE: 200 OK (JSON List)
+deactivate API
+FE -> FE: Renderizar Tabla de Cursos
+FE --> Admin: Mostrar Lista de Cursos
+deactivate FE
+@enduml

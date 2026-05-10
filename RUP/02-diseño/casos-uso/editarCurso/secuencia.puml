@@ -1,0 +1,41 @@
+@startuml
+title Diagrama de Secuencia - Editar Curso
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "CursoService" as Service
+participant "CursoRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Clic en "Editar" (en una fila)
+activate FE
+FE --> Admin: Mostrar Formulario con datos precargados
+Admin -> FE: Modifica datos y Guardar
+FE -> API: PUT /cursos/{id} (CursoUpdate JSON)
+activate API
+API -> Service: editar_curso(id, curso_update)
+activate Service
+Service -> Repo: get_by_id(id)
+activate Repo
+Repo -> DB: SELECT * FROM cursos WHERE id = ?
+activate DB
+DB --> Repo: Curso existente
+deactivate DB
+Repo --> Service: Curso
+deactivate Repo
+Service -> Service: Actualizar campos
+Service -> Repo: update(curso)
+activate Repo
+Repo -> DB: UPDATE cursos SET ... WHERE id = ?
+activate DB
+DB --> Repo: OK
+deactivate DB
+Repo --> Service: Curso actualizado
+deactivate Repo
+Service --> API: CursoResponse
+deactivate Service
+API --> FE: 200 OK (Curso JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Curso actualizado correctamente"
+deactivate FE
+@enduml

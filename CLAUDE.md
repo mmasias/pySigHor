@@ -55,6 +55,31 @@ Estos archivos contienen la trazabilidad completa del proyecto RUP y las reglas 
 
 **Referencia completa**: `/extraDocs/999-leyes-proyecto/ley-rama-revision.md`
 
+## Política de orquestación multi-agente
+
+Este proyecto usa Claude Code como orquestador de agentes (Ollama, Gemini). La regla fundamental es:
+
+**El criterio de delegación no es solo complejidad — es también volumen mecánico.**
+
+Escribir N archivos con contenido ya decidido es trabajo de becario aunque N sea pequeño y aunque Claude tenga el contenido en contexto. Optimizar la comodidad del orquestador no es lo mismo que optimizar el sistema.
+
+### Flujo correcto para generación de artefactos en lote
+
+1. **Claude revisa** los outputs de los agentes subordinados y detecta errores (esto requiere juicio — es de Claude)
+2. **Claude decide** qué escribir exactamente, incluyendo correcciones
+3. **Claude delega a Gemini** la escritura de los archivos en el repo (`gemini_run_async`, `cwd` = directorio del repo), con el contenido ya corregido y las rutas de destino explícitas en el prompt
+4. **Claude verifica** con `git status` que los archivos aparecen correctamente
+
+El primer archivo de una serie nueva puede escribirlo Claude para validar el patrón. A partir del segundo, delegar.
+
+### Agentes disponibles y sus roles en este proyecto
+
+| Agente | Rol |
+|---|---|
+| Ollama (qwen2.5:14b, local) | Generación de artefactos CRUD templados (sustituciones mecánicas sobre plantilla) |
+| Gemini | Escritura de archivos en repo, generación de CUs con lógica compleja, revisión crítica |
+| Claude Code | Orquestador: diseña prompts, revisa calidad, corrige errores, verifica resultado final |
+
 ## IMPORTANTE: Idioma Vehicular del Proyecto
 
 **ESPAÑOL como idioma obligatorio en TODO el proyecto:**

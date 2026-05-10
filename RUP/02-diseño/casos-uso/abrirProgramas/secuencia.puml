@@ -1,0 +1,31 @@
+@startuml
+title Diagrama de Secuencia - Abrir Programas (Listar)
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "ProgramaService" as Service
+participant "ProgramaRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Navega a "Gestión de Programas"
+activate FE
+FE -> FE: Verificar Token
+FE -> API: GET /programas (Header: Bearer Token)
+activate API
+API -> Service: listar_programas()
+activate Service
+Service -> Repo: get_all()
+activate Repo
+Repo -> DB: SELECT * FROM programas
+activate DB
+DB --> Repo: List[Programa]
+deactivate DB
+Repo --> Service: List[Programa]
+deactivate Repo
+Service --> API: List[ProgramaResponse]
+deactivate Service
+API --> FE: 200 OK (JSON List)
+deactivate API
+FE -> FE: Renderizar Tabla de Programas
+FE --> Admin: Mostrar Lista de Programas
+deactivate FE
+@enduml

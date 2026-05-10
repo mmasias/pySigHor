@@ -1,0 +1,41 @@
+@startuml
+title Diagrama de Secuencia - Editar Programa
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "ProgramaService" as Service
+participant "ProgramaRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Clic en "Editar" (en una fila)
+activate FE
+FE --> Admin: Mostrar Formulario con datos precargados
+Admin -> FE: Modifica datos y Guardar
+FE -> API: PUT /programas/{id} (ProgramaUpdate JSON)
+activate API
+API -> Service: editar_programa(id, programa_update)
+activate Service
+Service -> Repo: get_by_id(id)
+activate Repo
+Repo -> DB: SELECT * FROM programas WHERE id = ?
+activate DB
+DB --> Repo: Programa existente
+deactivate DB
+Repo --> Service: Programa
+deactivate Repo
+Service -> Service: Actualizar campos
+Service -> Repo: update(programa)
+activate Repo
+Repo -> DB: UPDATE programas SET ... WHERE id = ?
+activate DB
+DB --> Repo: OK
+deactivate DB
+Repo --> Service: Programa actualizado
+deactivate Repo
+Service --> API: ProgramaResponse
+deactivate Service
+API --> FE: 200 OK (Programa JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Programa actualizado correctamente"
+deactivate FE
+@enduml

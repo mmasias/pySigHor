@@ -1,0 +1,32 @@
+@startuml
+title Diagrama de Secuencia - Crear Programa
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "ProgramaService" as Service
+participant "ProgramaRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Clic en "Nuevo Programa"
+activate FE
+FE --> Admin: Mostrar Formulario
+Admin -> FE: Ingresa nombre del programa y Guardar
+FE -> API: POST /programas (ProgramaCreate JSON)
+activate API
+API -> Service: crear_programa(programa_create)
+activate Service
+Service -> Repo: create(programa_model)
+activate Repo
+Repo -> DB: INSERT INTO programas ...
+activate DB
+DB --> Repo: ID nuevo programa
+deactivate DB
+Repo --> Service: Programa (con ID)
+deactivate Repo
+Service --> API: ProgramaResponse
+deactivate Service
+API --> FE: 201 Created (Programa JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Programa creado correctamente"
+deactivate FE
+@enduml

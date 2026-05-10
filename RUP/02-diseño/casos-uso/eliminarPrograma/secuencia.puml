@@ -1,0 +1,32 @@
+@startuml
+title Diagrama de Secuencia - Eliminar Programa
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "ProgramaService" as Service
+participant "ProgramaRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Clic en "Eliminar" (en una fila)
+activate FE
+FE --> Admin: Mostrar Confirmación
+Admin -> FE: Confirma eliminación
+FE -> API: DELETE /programas/{id}
+activate API
+API -> Service: eliminar_programa(id)
+activate Service
+Service -> Repo: delete(id)
+activate Repo
+Repo -> DB: DELETE FROM programas WHERE id = ?
+activate DB
+DB --> Repo: Rows affected
+deactivate DB
+Repo --> Service: True/False
+deactivate Repo
+Service --> API: True
+deactivate Service
+API --> FE: 204 No Content
+deactivate API
+FE -> FE: Remover de la lista
+FE --> Admin: Mostrar "Programa eliminado"
+deactivate FE
+@enduml

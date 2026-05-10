@@ -1,0 +1,31 @@
+@startuml
+title Diagrama de Secuencia - Abrir Recursos (Listar)
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "RecursoService" as Service
+participant "RecursoRepository" as Repo
+database "Base de Datos" as DB
+Admin -> FE: Navega a "Gestión de Recursos"
+activate FE
+FE -> FE: Verificar Token
+FE -> API: GET /recursos (Header: Bearer Token)
+activate API
+API -> Service: listar_recursos()
+activate Service
+Service -> Repo: get_all()
+activate Repo
+Repo -> DB: SELECT * FROM recursos
+activate DB
+DB --> Repo: List[Recurso]
+deactivate DB
+Repo --> Service: List[Recurso]
+deactivate Repo
+Service --> API: List[RecursoResponse]
+deactivate Service
+API --> FE: 200 OK (JSON List)
+deactivate API
+FE -> FE: Renderizar Tabla de Recursos
+FE --> Admin: Mostrar Lista de Recursos
+deactivate FE
+@enduml

@@ -66,8 +66,51 @@ Definición de la estructura de directorios, configuraciones iniciales y decisio
 
 El diseño detallado de cada caso de uso (diagramas de secuencia) se encuentra organizado en carpetas específicas:
 
+### Sesión
+
 *   [Iniciar Sesión](casos-uso/iniciarSesion/README.md)
-*   [Abrir Aulas (Listar)](casos-uso/abrirAulas/README.md)
+*   [Cerrar Sesión](casos-uso/cerrarSesion/README.md)
+*   [Completar Gestión](casos-uso/completarGestion/README.md)
+*   [Consultar Horario](casos-uso/consultarHorario/README.md)
+
+### Aulas
+
+*   [Abrir Aulas](casos-uso/abrirAulas/README.md)
 *   [Crear Aula](casos-uso/crearAula/README.md)
 *   [Editar Aula](casos-uso/editarAula/README.md)
 *   [Eliminar Aula](casos-uso/eliminarAula/README.md)
+
+### Edificios
+
+*   [Abrir Edificios](casos-uso/abrirEdificios/README.md)
+*   [Crear Edificio](casos-uso/crearEdificio/README.md)
+*   [Editar Edificio](casos-uso/editarEdificio/README.md)
+*   [Eliminar Edificio](casos-uso/eliminarEdificio/README.md)
+
+### Profesores
+
+*   [Abrir Profesores](casos-uso/abrirProfesores/README.md)
+*   [Crear Profesor](casos-uso/crearProfesor/README.md)
+*   [Editar Profesor](casos-uso/editarProfesor/README.md)
+*   [Eliminar Profesor](casos-uso/eliminarProfesor/README.md)
+
+### Programas
+
+*   [Abrir Programas](casos-uso/abrirProgramas/README.md)
+*   [Crear Programa](casos-uso/crearPrograma/README.md)
+*   [Editar Programa](casos-uso/editarPrograma/README.md)
+*   [Eliminar Programa](casos-uso/eliminarPrograma/README.md)
+
+### Cursos
+
+*   [Abrir Cursos](casos-uso/abrirCursos/README.md)
+*   [Crear Curso](casos-uso/crearCurso/README.md)
+*   [Editar Curso](casos-uso/editarCurso/README.md)
+*   [Eliminar Curso](casos-uso/eliminarCurso/README.md)
+
+### Recursos
+
+*   [Abrir Recursos](casos-uso/abrirRecursos/README.md)
+*   [Crear Recurso](casos-uso/crearRecurso/README.md)
+*   [Editar Recurso](casos-uso/editarRecurso/README.md)
+*   [Eliminar Recurso](casos-uso/eliminarRecurso/README.md)
