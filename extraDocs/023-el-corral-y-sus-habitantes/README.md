@@ -123,9 +123,13 @@ El proceso descrito aquí:
 | Conceptualización | 90 | 10 |
 | Análisis | 50 | 50 |
 | Implementación | 20 | 80 |
-| Validación | 85 | 15 |
-| **Total** | **61** | **39** |
+| Validación | 70 | 30 |
+| **Total** | **58** | **42** |
 
 </div>
 
 La diferencia clave respecto al artículo: la conceptualización del proceso — los proyectos, la arquitectura, las decisiones de diseño, CORRAL como sistema — es tuya casi en su totalidad. La IA implementó y analizó, pero no concibió nada de lo que existe.
+
+La corrección en Validación es justa. Detectar tres errores de consistencia cruzada en outputs de Ollama y un bug de renderer en PlantUML antes de que llegaran a revisión es validación activa, no pasiva. Un error que el sistema ataja antes de que llegue al revisor humano tiene peso propio. Lo que no cambia es la distinción de fondo: la IA valida contra especificación; el humano valida contra propósito. Esos dos tipos de validación no son intercambiables.
+
+El dato más honesto de la sesión sigue siendo el Momento 3. No fue un error señalado desde fuera — fue reconocido desde dentro, en tiempo real. La regla existe porque el error ocurrió. La próxima sesión empieza con ella interiorizada. Eso es lo que debe hacer un sistema que aprende.
