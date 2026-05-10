@@ -1,0 +1,83 @@
+@startuml
+title Diagrama de Secuencia - Configurar Preferencias Profesor
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "PreferenciaService" as Service
+participant "PreferenciaRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Configurar preferencias de recursos"
+activate FE
+FE -> API: GET /profesores/{id}/preferencias
+activate API
+API -> Service: obtener_preferencias(profesor_id)
+activate Service
+Service -> Repo: get_by_profesor_id(profesor_id)
+activate Repo
+Repo -> DB: SELECT * FROM preferencias WHERE profesor_id = ...
+activate DB
+DB --> Repo: Resultado (preferencias o vacío)
+deactivate DB
+Repo --> Service: Lista de Preferencias
+deactivate Repo
+
+alt Si no existen preferencias
+    Service -> Repo: get_all_resources()
+    activate Repo
+    Repo -> DB: SELECT * FROM recursos ORDER BY id
+    activate DB
+    DB --> Repo: Todos los recursos
+    deactivate DB
+    Repo --> Service: Lista de Recursos
+    deactivate Repo
+    Service -> Service: Inicializar preferencias (prioridad por defecto)
+end
+
+Service --> API: List[PreferenciaResponse]
+deactivate Service
+API --> FE: 200 OK (Preferencias JSON)
+deactivate API
+FE --> Admin: Mostrar lista ordenable con recursos
+deactivate FE
+
+Admin -> FE: Arrastra recursos para reordenar
+Admin -> FE: Clic en "Guardar"
+activate FE
+FE -> API: PUT /profesores/{id}/preferencias (recurso_ids JSON)
+activate API
+API -> Service: actualizar_preferencias(profesor_id, recurso_ids)
+activate Service
+
+Service -> Service: Validar integridad (completitud, sin duplicados)
+
+alt Validación exitosa
+    Service -> Repo: replace_all(profesor_id, recurso_ids)
+    activate Repo
+    Repo -> DB: DELETE FROM preferencias WHERE profesor_id = ...
+    activate DB
+    DB --> Repo: OK
+    deactivate DB
+    Repo -> DB: INSERT INTO preferencias (profesor_id, recurso_id, prioridad) VALUES ...
+    activate DB
+    DB --> Repo: OK
+    deactivate DB
+    Repo --> Service: Lista actualizada
+    deactivate Repo
+    Service --> API: List[PreferenciaResponse]
+    deactivate Service
+    API --> FE: 200 OK (Preferencias JSON)
+    FE -> FE: Notificar éxito y navegar de vuelta
+    FE --> Admin: Mostrar "Preferencias guardadas correctamente"
+else Validación fallida
+    Service --> API: Error de validación
+    deactivate Service
+    API --> FE: 422 Unprocessable Entity
+    FE --> Admin: Mostrar mensaje de error (lista incompleta o duplicados)
+end
+
+deactivate API
+deactivate FE
+
+@enduml
