@@ -1,0 +1,34 @@
+@startuml
+title Diagrama de Secuencia - Abrir Profesores (Listar)
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "ProfesorService" as Service
+participant "ProfesorRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Navega a "Gestión de Profesores"
+activate FE
+FE -> FE: Verificar Token
+FE -> API: GET /profesores (Header: Bearer Token)
+activate API
+API -> Service: listar_profesores()
+activate Service
+Service -> Repo: get_all()
+activate Repo
+Repo -> DB: SELECT * FROM profesores
+activate DB
+DB --> Repo: List[Profesor]
+deactivate DB
+Repo --> Service: List[Profesor]
+deactivate Repo
+Service --> API: List[ProfesorResponse]
+deactivate Service
+API --> FE: 200 OK (JSON List)
+deactivate API
+FE -> FE: Renderizar Tabla de Profesores
+FE --> Admin: Mostrar Lista de Profesores
+deactivate FE
+
+@enduml

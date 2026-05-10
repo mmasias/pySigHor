@@ -1,0 +1,44 @@
+@startuml
+title Diagrama de Secuencia - Editar Profesor
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "ProfesorService" as Service
+participant "ProfesorRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Editar" (en una fila)
+activate FE
+FE --> Admin: Mostrar Formulario con datos precargados
+Admin -> FE: Modifica datos y Guardar
+FE -> API: PUT /profesores/{id} (ProfesorUpdate JSON)
+activate API
+API -> Service: editar_profesor(id, profesor_update)
+activate Service
+Service -> Repo: get_by_id(id)
+activate Repo
+Repo -> DB: SELECT * FROM profesores WHERE id = ?
+activate DB
+DB --> Repo: Profesor existente
+deactivate DB
+Repo --> Service: Profesor
+deactivate Repo
+Service -> Service: Actualizar campos
+Service -> Repo: update(profesor)
+activate Repo
+Repo -> DB: UPDATE profesores SET ... WHERE id = ?
+activate DB
+DB --> Repo: OK
+deactivate DB
+Repo --> Service: Profesor actualizado
+deactivate Repo
+Service --> API: ProfesorResponse
+deactivate Service
+API --> FE: 200 OK (Profesor JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Profesor actualizado correctamente"
+deactivate FE
+
+@enduml

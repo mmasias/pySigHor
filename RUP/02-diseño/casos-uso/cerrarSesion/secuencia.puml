@@ -1,0 +1,29 @@
+@startuml
+title Diagrama de Secuencia - Cerrar Sesión
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "AuthService" as Auth
+
+Admin -> FE: Solicita cerrar sesión
+activate FE
+FE -> Admin: Solicita confirmación
+
+alt Confirmar cierre
+    Admin -> FE: Confirma cerrar sesión
+    FE -> API: POST /auth/logout
+    activate API
+    API -> Auth: logout()
+    activate Auth
+    Auth --> API: logout exitoso
+    deactivate Auth
+    API --> FE: 200 OK
+    deactivate API
+    FE -> FE: Eliminar JWT (localStorage/Context)
+    FE -> Admin: Redirigir a /login (Sesión cerrada)
+else Cancelar cierre
+    Admin -> FE: Cancela la acción
+    FE -> Admin: Permanece en Dashboard (Sistema disponible)
+end
+deactivate FE
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+title Diagrama de Secuencia - completarGestion
+autonumber
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "AuthService" as Auth
+participant "UsuarioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE : Accede a /dashboard
+activate FE
+
+FE -> FE : Verificar existencia de JWT
+
+alt Token no existe
+    FE -> Admin : Redirigir a login
+else Token existe
+    FE -> API : GET /auth/me (Authorization: Bearer <token>)
+    activate API
+    
+    API -> Auth : get_current_user(token)
+    activate Auth
+    
+    Auth -> Auth : Validar JWT (firma y expiración)
+    
+    Auth -> Repo : find_by_id(user_id)
+    activate Repo
+    
+    Repo -> DB : SELECT * FROM usuarios WHERE id = ?
+    activate DB
+    DB --> Repo : datos_usuario
+    deactivate DB
+    
+    Repo --> Auth : usuario
+    deactivate Repo
+    
+    Auth --> API : usuario
+    deactivate Auth
+    
+    API --> FE : 200 OK (nombre, rol)
+    deactivate API
+    
+    FE -> FE : Renderizar dashboard con menú de gestión
+    FE --> Admin : Mostrar opciones de navegación
+    
+    Admin -> FE : Selecciona opción (ej: "Abrir Aulas")
+    FE -> FE : Navegación React Router (navigate("/aulas"))
+end
+
+deactivate FE
+
+@enduml

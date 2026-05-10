@@ -1,0 +1,50 @@
+@startuml
+title Diagrama de Secuencia de Diseño - Consultar Horario
+skinparam MaxMessageSize 150
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "HorarioService" as Service
+participant "HorarioRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Accede a vista "Consultar Horario"
+activate FE
+
+FE -> API: GET /horario (JWT Bearer)
+activate API
+
+API -> Service: obtener_horario_activo()
+activate Service
+
+Service -> Repo: find_active_schedule()
+activate Repo
+
+Repo -> DB: SELECT * FROM horarios ...
+activate DB
+DB --> Repo: Registro horario (o null)
+deactivate DB
+
+alt Horario existe
+    Repo -> DB: SELECT sesiones con detalles (curso, profe, aula)
+    activate DB
+    DB --> Repo: List[DatosSesion]
+    deactivate DB
+    Repo --> Service: List[EntidadSesion]
+    Service --> API: List[SesionHorarioResponse]
+    API --> FE: 200 OK (JSON List)
+    FE -> FE: Mapear datos a tabla
+    FE --> Admin: Mostrar Tabla de Sesiones
+else Horario no encontrado
+    Repo --> Service: null
+    deactivate Repo
+    Service --> API: raise Exception(404)
+    deactivate Service
+    API --> FE: 404 Not Found
+    deactivate API
+    FE --> Admin: Mostrar "No hay horario generado"
+end
+
+deactivate FE
+@enduml

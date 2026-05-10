@@ -1,0 +1,35 @@
+@startuml
+title Diagrama de Secuencia - Crear Profesor
+
+actor "Administrador" as Admin
+participant "Frontend (React)" as FE
+participant "API (FastAPI)" as API
+participant "ProfesorService" as Service
+participant "ProfesorRepository" as Repo
+database "Base de Datos" as DB
+
+Admin -> FE: Clic en "Nuevo Profesor"
+activate FE
+FE --> Admin: Mostrar Formulario
+Admin -> FE: Ingresa datos (Código, Nombres, Apellidos) y Guardar
+FE -> API: POST /profesores (ProfesorCreate JSON)
+activate API
+API -> Service: crear_profesor(profesor_create)
+activate Service
+Service -> Repo: create(profesor_model)
+activate Repo
+Repo -> DB: INSERT INTO profesores ...
+activate DB
+DB --> Repo: ID nuevo profesor
+deactivate DB
+Repo --> Service: Profesor (con ID)
+deactivate Repo
+Service --> API: ProfesorResponse
+deactivate Service
+API --> FE: 201 Created (Profesor JSON)
+deactivate API
+FE -> FE: Actualizar Lista / Notificar Éxito
+FE --> Admin: Mostrar "Profesor creado correctamente"
+deactivate FE
+
+@enduml
