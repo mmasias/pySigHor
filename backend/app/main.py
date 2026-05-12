@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.routers import aulas, auth
+from app.routers import aulas, auth, edificios, programas, cursos, profesores, recursos
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -21,8 +21,13 @@ app.add_middleware(
 )
 
 # Incluir routers
-app.include_router(aulas.router, prefix=settings.API_V1_STR)
 app.include_router(auth.router, prefix=settings.API_V1_STR)
+app.include_router(aulas.router, prefix=settings.API_V1_STR)
+app.include_router(edificios.router, prefix=settings.API_V1_STR)
+app.include_router(programas.router, prefix=settings.API_V1_STR)
+app.include_router(cursos.router, prefix=settings.API_V1_STR)
+app.include_router(profesores.router, prefix=settings.API_V1_STR)
+app.include_router(recursos.router, prefix=settings.API_V1_STR)
 
 
 @app.get("/")

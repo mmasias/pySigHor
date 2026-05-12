@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.core.database import Base
-from app.models import Aula, Edificio, Usuario
+from app.models import Aula, Edificio, Usuario, Programa, Curso, Profesor, Recurso
 from app.core.config import settings
 from app.core.security import get_password_hash
 
