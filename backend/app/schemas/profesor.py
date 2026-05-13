@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional
 
 
@@ -25,5 +25,4 @@ class ProfesorUpdate(BaseModel):
 class ProfesorResponse(ProfesorBase):
     id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

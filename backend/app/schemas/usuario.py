@@ -1,23 +1,21 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Optional
 
 
 class UsuarioBase(BaseModel):
-    """Schema base de Usuario."""
 
     username: str = Field(..., min_length=1, max_length=50)
 
 
 class UsuarioCreate(UsuarioBase):
-    """Schema para crear Usuario (con contraseña en plano)."""
 
     password: str = Field(..., min_length=1)
 
 
 class UsuarioResponse(UsuarioBase):
-    """Schema para respuesta de Usuario (sin hashed_password)."""
 
     id: int
     activo: bool
+    rol: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
