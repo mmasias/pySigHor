@@ -9,7 +9,7 @@ from app.services.programa_service import ProgramaService
 router = APIRouter(prefix="/programas", tags=["programas"])
 
 
-@router.get("/", response_model=list[ProgramaResponse])
+@router.get("", response_model=list[ProgramaResponse])
 async def listar_programas(skip: int = 0, limit: int = 100, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     service = ProgramaService(db)
     return await service.listar_programas(skip=skip, limit=limit)
@@ -24,7 +24,7 @@ async def obtener_programa(programa_id: int, current_user: str = Depends(get_cur
     return programa
 
 
-@router.post("/", response_model=ProgramaResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=ProgramaResponse, status_code=status.HTTP_201_CREATED)
 async def crear_programa(programa_data: ProgramaCreate, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     try:
         service = ProgramaService(db)

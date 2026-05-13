@@ -9,7 +9,7 @@ from app.services.curso_service import CursoService
 router = APIRouter(prefix="/cursos", tags=["cursos"])
 
 
-@router.get("/", response_model=list[CursoResponse])
+@router.get("", response_model=list[CursoResponse])
 async def listar_cursos(skip: int = 0, limit: int = 100, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     service = CursoService(db)
     return await service.listar_cursos(skip=skip, limit=limit)
@@ -24,7 +24,7 @@ async def obtener_curso(curso_id: int, current_user: str = Depends(get_current_u
     return curso
 
 
-@router.post("/", response_model=CursoResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=CursoResponse, status_code=status.HTTP_201_CREATED)
 async def crear_curso(curso_data: CursoCreate, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     try:
         service = CursoService(db)

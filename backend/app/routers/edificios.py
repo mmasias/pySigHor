@@ -9,7 +9,7 @@ from app.services.edificio_service import EdificioService
 router = APIRouter(prefix="/edificios", tags=["edificios"])
 
 
-@router.get("/", response_model=list[EdificioResponse])
+@router.get("", response_model=list[EdificioResponse])
 async def listar_edificios(skip: int = 0, limit: int = 100, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     service = EdificioService(db)
     return await service.listar_edificios(skip=skip, limit=limit)
@@ -24,7 +24,7 @@ async def obtener_edificio(edificio_id: int, current_user: str = Depends(get_cur
     return edificio
 
 
-@router.post("/", response_model=EdificioResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=EdificioResponse, status_code=status.HTTP_201_CREATED)
 async def crear_edificio(edificio_data: EdificioCreate, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     try:
         service = EdificioService(db)

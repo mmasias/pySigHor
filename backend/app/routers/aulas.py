@@ -9,7 +9,7 @@ from app.services.aula_service import AulaService
 router = APIRouter(prefix="/aulas", tags=["aulas"])
 
 
-@router.get("/", response_model=list[AulaResponse])
+@router.get("", response_model=list[AulaResponse])
 async def listar_aulas(
     skip: int = 0,
     limit: int = 100,
@@ -39,7 +39,7 @@ async def obtener_aula(
     return aula
 
 
-@router.post("/", response_model=AulaResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=AulaResponse, status_code=status.HTTP_201_CREATED)
 async def crear_aula(
     aula_data: AulaCreate,
     current_user: str = Depends(get_current_user),

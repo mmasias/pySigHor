@@ -9,7 +9,7 @@ from app.services.recurso_service import RecursoService
 router = APIRouter(prefix="/recursos", tags=["recursos"])
 
 
-@router.get("/", response_model=list[RecursoResponse])
+@router.get("", response_model=list[RecursoResponse])
 async def listar_recursos(skip: int = 0, limit: int = 100, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     service = RecursoService(db)
     return await service.listar_recursos(skip=skip, limit=limit)
@@ -24,7 +24,7 @@ async def obtener_recurso(recurso_id: int, current_user: str = Depends(get_curre
     return recurso
 
 
-@router.post("/", response_model=RecursoResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=RecursoResponse, status_code=status.HTTP_201_CREATED)
 async def crear_recurso(recurso_data: RecursoCreate, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     try:
         service = RecursoService(db)

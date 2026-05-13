@@ -9,7 +9,7 @@ from app.services.profesor_service import ProfesorService
 router = APIRouter(prefix="/profesores", tags=["profesores"])
 
 
-@router.get("/", response_model=list[ProfesorResponse])
+@router.get("", response_model=list[ProfesorResponse])
 async def listar_profesores(skip: int = 0, limit: int = 100, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     service = ProfesorService(db)
     return await service.listar_profesores(skip=skip, limit=limit)
@@ -24,7 +24,7 @@ async def obtener_profesor(profesor_id: int, current_user: str = Depends(get_cur
     return profesor
 
 
-@router.post("/", response_model=ProfesorResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=ProfesorResponse, status_code=status.HTTP_201_CREATED)
 async def crear_profesor(profesor_data: ProfesorCreate, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     try:
         service = ProfesorService(db)
