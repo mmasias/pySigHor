@@ -4,6 +4,7 @@ from app.repositories.programa_repository import ProgramaRepository
 from app.repositories.curso_repository import CursoRepository
 from app.repositories.profesor_repository import ProfesorRepository
 from app.repositories.recurso_repository import RecursoRepository
+from app.repositories.usuario_repository import UsuarioRepository
 
 __all__ = [
     "AulaRepository",
@@ -12,4 +13,5 @@ __all__ = [
     "CursoRepository",
     "ProfesorRepository",
     "RecursoRepository",
+    "UsuarioRepository",
 ]

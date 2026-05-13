@@ -1,39 +1,43 @@
 from typing import List, Optional
-from sqlalchemy.orm import Session
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.edificio import Edificio
 
 
 class EdificioRepository:
-    """Repositorio de Edificio."""
 
-    def __init__(self, db: Session):
+    def __init__(self, db: AsyncSession):
         self.db = db
 
-    def get_all(self, skip: int = 0, limit: int = 100) -> List[Edificio]:
-        return self.db.query(Edificio).offset(skip).limit(limit).all()
+    async def get_all(self, skip: int = 0, limit: int = 100) -> List[Edificio]:
+        result = await self.db.execute(select(Edificio).offset(skip).limit(limit))
+        return result.scalars().all()
 
-    def get_by_id(self, edificio_id: int) -> Optional[Edificio]:
-        return self.db.query(Edificio).filter(Edificio.id == edificio_id).first()
+    async def get_by_id(self, edificio_id: int) -> Optional[Edificio]:
+        result = await self.db.execute(select(Edificio).filter(Edificio.id == edificio_id))
+        return result.scalar_one_or_none()
 
-    def get_by_nombre(self, nombre: str) -> Optional[Edificio]:
-        return self.db.query(Edificio).filter(Edificio.nombre == nombre).first()
+    async def get_by_nombre(self, nombre: str) -> Optional[Edificio]:
+        result = await self.db.execute(select(Edificio).filter(Edificio.nombre == nombre))
+        return result.scalar_one_or_none()
 
-    def create(self, edificio_data: dict) -> Edificio:
+    async def create(self, edificio_data: dict) -> Edificio:
         db_edificio = Edificio(**edificio_data)
         self.db.add(db_edificio)
-        self.db.commit()
-        self.db.refresh(db_edificio)
+        await self.db.commit()
+        await self.db.refresh(db_edificio)
         return db_edificio
 
-    def update(self, edificio: Edificio, edificio_data: dict) -> Edificio:
+    async def update(self, edificio: Edificio, edificio_data: dict) -> Edificio:
         for field, value in edificio_data.items():
             if value is not None:
                 setattr(edificio, field, value)
-        self.db.commit()
-        self.db.refresh(edificio)
+        await self.db.commit()
+        await self.db.refresh(edificio)
         return edificio
 
-    def delete(self, edificio: Edificio) -> None:
-        self.db.delete(edificio)
-        self.db.commit()
+    async def delete(self, edificio: Edificio) -> None:
+        await self.db.delete(edificio)
+        await self.db.commit()

@@ -1,39 +1,43 @@
 from typing import List, Optional
-from sqlalchemy.orm import Session
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.programa import Programa
 
 
 class ProgramaRepository:
-    """Repositorio de Programa."""
 
-    def __init__(self, db: Session):
+    def __init__(self, db: AsyncSession):
         self.db = db
 
-    def get_all(self, skip: int = 0, limit: int = 100) -> List[Programa]:
-        return self.db.query(Programa).offset(skip).limit(limit).all()
+    async def get_all(self, skip: int = 0, limit: int = 100) -> List[Programa]:
+        result = await self.db.execute(select(Programa).offset(skip).limit(limit))
+        return result.scalars().all()
 
-    def get_by_id(self, programa_id: int) -> Optional[Programa]:
-        return self.db.query(Programa).filter(Programa.id == programa_id).first()
+    async def get_by_id(self, programa_id: int) -> Optional[Programa]:
+        result = await self.db.execute(select(Programa).filter(Programa.id == programa_id))
+        return result.scalar_one_or_none()
 
-    def get_by_nombre(self, nombre: str) -> Optional[Programa]:
-        return self.db.query(Programa).filter(Programa.nombre == nombre).first()
+    async def get_by_nombre(self, nombre: str) -> Optional[Programa]:
+        result = await self.db.execute(select(Programa).filter(Programa.nombre == nombre))
+        return result.scalar_one_or_none()
 
-    def create(self, programa_data: dict) -> Programa:
+    async def create(self, programa_data: dict) -> Programa:
         db_programa = Programa(**programa_data)
         self.db.add(db_programa)
-        self.db.commit()
-        self.db.refresh(db_programa)
+        await self.db.commit()
+        await self.db.refresh(db_programa)
         return db_programa
 
-    def update(self, programa: Programa, programa_data: dict) -> Programa:
+    async def update(self, programa: Programa, programa_data: dict) -> Programa:
         for field, value in programa_data.items():
             if value is not None:
                 setattr(programa, field, value)
-        self.db.commit()
-        self.db.refresh(programa)
+        await self.db.commit()
+        await self.db.refresh(programa)
         return programa
 
-    def delete(self, programa: Programa) -> None:
-        self.db.delete(programa)
-        self.db.commit()
+    async def delete(self, programa: Programa) -> None:
+        await self.db.delete(programa)
+        await self.db.commit()
