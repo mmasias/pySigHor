@@ -82,6 +82,7 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 |023|[El corral y sus habitantes: crónica de una orquestación multi-agente](023-el-corral-y-sus-habitantes/README.md)|[`7d23732`](https://github.com/mmasias/pySigHor/commit/7d23732)|CORRAL con tres nodos (Gemini, OpenCode, Ollama) orquestados por Claude Code — delegación por tipo de tarea, anti-patrón documentado, límites del hardware local|
 |024|[Auditoría de desviaciones diseño vs implementación](024-auditoria-diseno-vs-implementacion/articulo.md)|[`pre-auditoria-diseno-codigo`](https://github.com/mmasias/pySigHor/releases/tag/pre-auditoria-diseno-codigo)|Control de calidad: 20 desviaciones entre diseño y código, refactoring por capas con trazabilidad exhaustiva|
 |025|[Post-auditoría: refactoring alineado a diseño](025-postAuditoria/README.md)|[`post-auditoria-diseno-codigo`](https://github.com/mmasias/pySigHor/releases/tag/post-auditoria-diseno-codigo)|Cierre del ciclo de auditoría: 18/20 desviaciones resueltas, lecciones metodológicas y evolución del flujo de trabajo|
+|026|[Mapa RUP: disciplinas, actividades y artefactos concretos](026-mapaRUP/README.md)|[`ea93766`](https://github.com/mmasias/pySigHor/commit/ea93766)|Mapeo de cada disciplina RUP contra artefactos reales del proyecto, con conexiones a IDSW1 e IDSW2|
 
 ### Estructura de artículos
 
