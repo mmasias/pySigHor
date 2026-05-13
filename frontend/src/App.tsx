@@ -12,7 +12,7 @@ import ProfesoresPage from './pages/ProfesoresPage';
 import RecursosPage from './pages/RecursosPage';
 
 const theme = createTheme({
-  colorScheme: {
+  palette: {
     mode: 'light',
   },
 });

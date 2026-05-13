@@ -16,11 +16,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Verificar si hay token almacenado al cargar
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('user');
-    if (token && username) {
-      setUser({ username, token });
-    }
+    const verifyStoredToken = async () => {
+      const token = localStorage.getItem('token');
+      const username = localStorage.getItem('user');
+      if (token && username) {
+        try {
+          await authService.verifyToken();
+          setUser({ username, token });
+        } catch {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+        }
+      }
+    };
+    verifyStoredToken();
   }, []);
 
   const login = async (username: string, password: string) => {
