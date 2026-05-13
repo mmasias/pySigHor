@@ -1,12 +1,11 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
 from app.core.database import Base
 
 
 class Aula(Base):
-    """Modelo de Aula."""
-
     __tablename__ = "aulas"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -15,6 +14,7 @@ class Aula(Base):
     especial = Column(Boolean, default=False)
     bloqueada = Column(Boolean, default=False)
     id_edificio = Column(Integer, ForeignKey("edificios.id"), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    # Relación con edificio
     edificio = relationship("Edificio", back_populates="aulas")
