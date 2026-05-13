@@ -1,50 +1,41 @@
 from typing import List
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.recurso import Recurso
 from app.schemas.recurso import RecursoCreate, RecursoUpdate
+from app.repositories.recurso_repository import RecursoRepository
 
 
 class RecursoService:
     """Servicio de lógica de negocio de Recurso."""
 
-    def __init__(self, db: Session):
-        self.db = db
+    def __init__(self, db: AsyncSession):
+        self.repo = RecursoRepository(db)
 
-    def listar_recursos(self, skip: int = 0, limit: int = 100) -> List[Recurso]:
-        from app.repositories.recurso_repository import RecursoRepository
-        repo = RecursoRepository(self.db)
-        return repo.get_all(skip=skip, limit=limit)
+    async def listar_recursos(self, skip: int = 0, limit: int = 100) -> List[Recurso]:
+        return await self.repo.get_all(skip=skip, limit=limit)
 
-    def obtener_recurso(self, recurso_id: int) -> Recurso | None:
-        from app.repositories.recurso_repository import RecursoRepository
-        repo = RecursoRepository(self.db)
-        return repo.get_by_id(recurso_id)
+    async def obtener_recurso(self, recurso_id: int) -> Recurso | None:
+        return await self.repo.get_by_id(recurso_id)
 
-    def crear_recurso(self, recurso_data: RecursoCreate) -> Recurso:
-        from app.repositories.recurso_repository import RecursoRepository
-        repo = RecursoRepository(self.db)
-        existente = repo.get_by_nombre(recurso_data.nombre)
+    async def crear_recurso(self, recurso_data: RecursoCreate) -> Recurso:
+        existente = await self.repo.get_by_nombre(recurso_data.nombre)
         if existente:
             raise ValueError(f"Ya existe un recurso con el nombre '{recurso_data.nombre}'")
-        return repo.create(recurso_data.dict())
+        return await self.repo.create(recurso_data.dict())
 
-    def actualizar_recurso(self, recurso_id: int, recurso_data: RecursoUpdate) -> Recurso:
-        from app.repositories.recurso_repository import RecursoRepository
-        repo = RecursoRepository(self.db)
-        recurso = repo.get_by_id(recurso_id)
+    async def actualizar_recurso(self, recurso_id: int, recurso_data: RecursoUpdate) -> Recurso:
+        recurso = await self.repo.get_by_id(recurso_id)
         if not recurso:
             raise ValueError(f"Recurso con ID {recurso_id} no encontrado")
         if recurso_data.nombre and recurso_data.nombre != recurso.nombre:
-            existente = repo.get_by_nombre(recurso_data.nombre)
+            existente = await self.repo.get_by_nombre(recurso_data.nombre)
             if existente:
                 raise ValueError(f"Ya existe un recurso con el nombre '{recurso_data.nombre}'")
-        return repo.update(recurso, recurso_data.dict(exclude_unset=True))
+        return await self.repo.update(recurso, recurso_data.dict(exclude_unset=True))
 
-    def eliminar_recurso(self, recurso_id: int) -> None:
-        from app.repositories.recurso_repository import RecursoRepository
-        repo = RecursoRepository(self.db)
-        recurso = repo.get_by_id(recurso_id)
+    async def eliminar_recurso(self, recurso_id: int) -> None:
+        recurso = await self.repo.get_by_id(recurso_id)
         if not recurso:
             raise ValueError(f"Recurso con ID {recurso_id} no encontrado")
-        repo.delete(recurso)
+        await self.repo.delete(recurso)

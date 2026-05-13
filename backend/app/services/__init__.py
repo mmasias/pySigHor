@@ -4,6 +4,7 @@ from app.services.programa_service import ProgramaService
 from app.services.curso_service import CursoService
 from app.services.profesor_service import ProfesorService
 from app.services.recurso_service import RecursoService
+from app.services.usuario_service import UsuarioService
 
 __all__ = [
     "AulaService",
@@ -12,4 +13,5 @@ __all__ = [
     "CursoService",
     "ProfesorService",
     "RecursoService",
+    "UsuarioService",
 ]
