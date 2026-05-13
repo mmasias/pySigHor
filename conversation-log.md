@@ -479,4 +479,82 @@ Según **Ley 004: Rama de Revisión Obligatoria**:
 
 ---
 
-*Este registro se actualizará continuamente conforme avance el proyecto*
+## Conversación 52: Auditoría diseño vs implementación - Ciclo completo
+
+**Fecha**: 2026-05-13
+**Rama de trabajo**: `diseño-fastapi-react` (código) + `main` (documentación)
+**Participantes**: Manuel, Claude
+
+### Contexto
+
+La rama `diseño-fastapi-react` contenía código generado por "equipo B" (sesiones previas de vibe coding con LLMs) que se había apartado del diseño especificado en `RUP/02-diseño/configuracion-proyecto.md`. Se detectó la necesidad de una auditoría formal antes de continuar la construcción.
+
+### Actividad 1: Auditoría formal
+
+Se creó el artículo 024 en `main` con 4 archivos:
+
+- `articulo.md`: Presentación del problema y metodología
+- `auditoria.md`: Tabla maestra de 20 desviaciones (D01-D20) con referencias exactas a línea de diseño vs línea de código
+- `contexto.md`: Estado del proyecto en el momento de la auditoría
+- `seguimiento.md`: Tabla de seguimiento commit por commit
+
+**Tags de referencia**:
+- `pre-auditoria-diseno-codigo` (`40af49d`): estado divergente inmutable
+- `post-auditoria-diseno-codigo` (`fff93aa`): estado alineado al diseño
+
+Las 20 desviaciones se clasificaron por severidad: CRITICA (D01 sync/async, D05 sin auth), ALTA (D02 pydantic, D08 sin alembic), MEDIA y BAJA.
+
+### Actividad 2: Refactoring por capas (12 commits)
+
+Cada commit resolvió desviaciones específicas con trazabilidad en el mensaje:
+
+| Commit | Capa | Desviaciones resueltas |
+|---|---|---|
+| R01 | Dependencias (pyproject.toml) | D02 |
+| R02 | Config (config.py) | D02, D03, D04 |
+| R03 | Database (database.py) | D01 |
+| R04 | Security (security.py) | D01, D10 |
+| R05 | Models (todos) | D06, D07 |
+| R06 | Schemas (todos) | D02, D16 |
+| R07 | Repositories (todos) | D01, D17 |
+| R08 | Services (todos) | D01, D17 |
+| R09 | Routers (todos + main.py) | D01, D04, D05 |
+| R10 | Infraestructura (alembic + tests) | D08, D09 |
+| R11 | Frontend bugs (theme, auth, interceptor) | D13, D14, D15 |
+| R12 | Navegacion (Layout, components/) | D11, D18, D20 |
+
+**Resultado**: 18/20 desviaciones resueltas. D12 (selectores FK) y D19 (utils/) quedan pendientes.
+
+### Actividad 3: Documentación post-auditoría
+
+Se creó el artículo 025 en `main` cerrando el ciclo:
+
+- README.md con la estructura metodológica estándar (por qué, qué, para qué, cómo, y ahora qué)
+- Tabla de lecciones metodológicas aprendidas
+- Evolución del flujo de trabajo: LEY 004 obsoleta para construcción
+- Referencias cruzadas: artículo 024, tags pre/post, diff completo
+
+### Decisiones tomadas
+
+1. **Migración completa ahora** (sync->async, pydantic v1->v2) en lugar de documentar como deuda técnica
+2. **Artículo 025 separado del 024**: separa "problema detectado" (024) de "resolución y lecciones" (025), consistente con la estructura un-artículo-por-momento de extraDocs
+3. **LEY 004 obsoleta para construcción**: push directo a rama de desarrollo, revisión sobre la rama de construcción
+4. **Refactoring por capas**: un commit por capa arquitectónica para trazabilidad granular
+
+### Estado Final
+
+**Artefactos completados**:
+- Artículo 024 (auditoría) en `main` (`eab20ce` + `e3d99cf`)
+- Artículo 025 (post-auditoría) en `main` (`d3ea8fc`)
+- 12 commits de refactoring en `diseño-fastapi-react` (pushed a origin)
+- Tags `pre-auditoria-diseno-codigo` y `post-auditoria-diseno-codigo` en remote
+- `seguimiento.md` actualizado con hashes reales de todos los commits
+
+**Pendiente**:
+- D12: Selectores FK en AulasPage (Edificio) y CursosPage (Programa)
+- D19: Directorio `frontend/src/utils/` cuando haya utilidades que extraer
+- Continuar construcción del dominio core (generarHorario, consultarHorario)
+
+---
+
+*Este registro se actualizará continuamente conforme avance del proyecto*
