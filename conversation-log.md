@@ -483,7 +483,7 @@ Según **Ley 004: Rama de Revisión Obligatoria**:
 
 **Fecha**: 2026-05-13
 **Rama de trabajo**: `diseño-fastapi-react` (código) + `main` (documentación)
-**Participantes**: Manuel, Claude
+**Participantes**: Manuel, opencode (glm-5.1)
 
 ### Contexto
 
