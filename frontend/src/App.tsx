@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import Layout from './components/Layout';
 import LoginPage from './pages/LoginPage';
 import AulasPage from './pages/AulasPage';
 import EdificiosPage from './pages/EdificiosPage';
@@ -19,7 +20,7 @@ const theme = createTheme({
 
 const ProtectedRoute: React.FC<{ children: React.ReactElement }> = ({ children }) => {
   const { isAuthenticated } = useAuth();
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? <Layout>{children}</Layout> : <Navigate to="/login" />;
 };
 
 const App: React.FC = () => {
