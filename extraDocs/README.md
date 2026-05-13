@@ -79,7 +79,8 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 |020|[Mapa de implementación FastAPI + React: estrategia en olas con ajustes documentados](020-mapa-implementacion-fastapi-react/README.md)|[Por determinar]|Plan de implementación en 7 olas con documentación de ajustes como evidencia pedagógica de flexibilidad RUP|
 |021|[Sesiones de vibeCoding con agentes: LYCAEUM](021-lycaeum/README.md)|[commit](https://github.com/mmasias/pySigHor/tree/5e016dd955b4ed4f57016163b2ec71a8c9ac2aad)|Sistema multi-agente con blackboard pattern para análisis y ejecución de proyecto — arquitectura orquestador/subordinados sobre CLIs existentes
 |022|[bundungún -> LYCAEUM -> CORRAL: anatomía de una evolución](022-bundugun-lycaeum-corral/README.md)|[Por determinar]|Tejido conectivo de la trilogía: la arquitectura filesystem-como-bus que sobrevivió tres iteraciones y la única cosa que cambió en cada salto
-|023|[El corral y sus habitantes: crónica de una orquestación multi-agente](023-el-corral-y-sus-habitantes/README.md)|[`7d23732`](https://github.com/mmasias/pySigHor/commit/7d23732)|CORRAL con tres nodos (Gemini, OpenCode, Ollama) orquestados por Claude Code — delegación por tipo de tarea, anti-patrón documentado, límites del hardware local
+|023|[El corral y sus habitantes: crónica de una orquestación multi-agente](023-el-corral-y-sus-habitantes/README.md)|[`7d23732`](https://github.com/mmasias/pySigHor/commit/7d23732)|CORRAL con tres nodos (Gemini, OpenCode, Ollama) orquestados por Claude Code — delegación por tipo de tarea, anti-patrón documentado, límites del hardware local|
+|024|[Auditoría de desviaciones diseño vs implementación](024-auditoria-diseno-vs-implementacion/articulo.md)|[`pre-auditoria-diseno-codigo`](https://github.com/mmasias/pySigHor/releases/tag/pre-auditoria-diseno-codigo)|Control de calidad: 20 desviaciones entre diseño y código, refactoring por capas con trazabilidad exhaustiva|
 
 ### Estructura de artículos
 
