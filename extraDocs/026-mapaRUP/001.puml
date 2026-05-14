@@ -1,0 +1,111 @@
+@startuml
+
+skinparam handwritten false
+skinparam shadowing false
+skinparam padding 3
+hide stereotype
+
+skinparam state {
+    fontStyle bold
+    fontSize 13
+    arrowColor #AAAAAA
+
+    fontColor<<mn>>   #FF8C00
+    borderColor<<mn>> #FF8C00
+
+    fontColor<<a>>    #DC143C
+    borderColor<<a>>  #DC143C
+
+    fontColor<<b>>    #DAA520
+    borderColor<<b>>  #DAA520
+
+    fontColor<<c>>    #228B22
+    borderColor<<c>>  #228B22
+
+    fontColor<<d>>    #4682B4
+    borderColor<<d>>  #4682B4
+
+    fontColor<<e>>    #1E90FF
+    borderColor<<e>>  #1E90FF
+
+    fontColor<<skip>>          #AAAAAA
+    borderColor<<skip>>        #CCCCCC
+    backgroundColor<<skip>>    #F5F5F5
+}
+
+' --- Modelado del Negocio ---
+state "Modelo\ndel Dominio" as ModeloDominio <<mn>>
+
+' --- Requisitos ---
+state "Encontrar Actores\ny Casos de Uso" as Encontrar <<a>>
+state "Priorizar\nCasos de Uso" as Priorizar <<a>>
+state "Especificar\nCaso de Uso" as Especificar <<a>>
+state "Prototipar la\nInterfaz de Usuario" as Prototipar <<a>>
+state "Estructurar\nla Especificacion\nde Casos de Uso" as Estructurar <<a>>
+
+' --- Analisis ---
+state "Analisis de la\nArquitectura" as Analisis <<b>>
+state "Analisis de\nCaso de Uso" as AnalisisCasoUso <<b>>
+state "Analisis\nde Clase" as AnalisisClase <<skip>>
+state "Analisis\nde Paquete" as AnalisisPaquete <<skip>>
+
+' --- Diseno ---
+state "Diseno de la\nArquitectura" as DisenoArquitectura <<c>>
+state "Diseno de\nCaso de Uso" as DisenoCasoUso <<c>>
+state "Diseno\nde Clase" as DisenoClase <<c>>
+state "Disenar\nSubsistema" as DisenarSubsistema <<skip>>
+
+' --- Implementacion ---
+state "Implementar\nla Arquitectura" as ImplementarArquitectura <<d>>
+state "Integrar\nSistemas" as IntegrarSistemas <<d>>
+state "Implementar\nSubsistema" as ImplementarSubsistema <<d>>
+state "Implementar\nClase" as ImplementarClase <<d>>
+state "Implementar\nPrueba Unitaria" as ImplementarPruebaUnitaria <<d>>
+
+' --- Pruebas ---
+state "Planificar\nPruebas" as PlanificarPruebas <<skip>>
+state "Disenar\nPruebas" as DisenarPruebas <<skip>>
+state "Implementar\nPruebas" as ImplementarPruebas <<e>>
+state "Realizar Pruebas\nde Integracion" as RealizarPruebasIntegracion <<e>>
+state "Realizar\nPruebas de Sistemas" as RealizarPruebasSistemas <<e>>
+state "Evaluar\nPruebas" as EvaluarPruebas <<e>>
+
+' --- Transiciones ---
+[*]                       -->  ModeloDominio
+ModeloDominio           -->  Encontrar               : modelo-dominio.puml
+Encontrar                 -->  Priorizar               : actores-casos-uso.puml
+Priorizar                 -->  Especificar             : 99-seguimiento/
+Especificar               -->  Prototipar              : especificacion.puml (x30)
+Especificar               -->  Estructurar
+Priorizar                 -->  Analisis
+Prototipar                -->  AnalisisCasoUso         : prototipo.puml (x30)
+Estructurar               -->  AnalisisCasoUso
+Estructurar               -->  PlanificarPruebas
+Analisis                  -->  AnalisisCasoUso
+Analisis                  -->  DisenoArquitectura
+DisenoArquitectura        -->  DisenoCasoUso           : arquitectura.puml
+AnalisisCasoUso           -->  DisenoCasoUso           : colaboracion.puml (x30)
+AnalisisCasoUso           -->  AnalisisClase
+DisenoCasoUso             -->  DisenoClase             : clases-diseno.puml
+AnalisisClase             -->  DisenoClase
+AnalisisClase             -->  AnalisisPaquete
+DisenoArquitectura        -->  ImplementarArquitectura : configuracion-proyecto.md
+ImplementarArquitectura   -->  IntegrarSistemas
+DisenoClase               -->  DisenarSubsistema
+DisenoClase               -->  IntegrarSistemas        : secuencia.puml (x10)
+AnalisisPaquete           -->  DisenarSubsistema
+PlanificarPruebas         -->  DisenarPruebas
+DisenarSubsistema         -->  IntegrarSistemas
+IntegrarSistemas          -->  ImplementarSubsistema   : backend/app/ + frontend/src/
+ImplementarSubsistema     -->  ImplementarClase        : models / schemas / repos / services
+ImplementarClase          -->  ImplementarPruebaUnitaria
+ImplementarPruebaUnitaria -->  RealizarPruebasIntegracion : conftest.py + test_*.py
+ImplementarPruebaUnitaria -->  RealizarPruebasSistemas
+DisenarPruebas            -->  ImplementarPruebas
+ImplementarPruebas        -->  RealizarPruebasSistemas
+ImplementarPruebas        -->  RealizarPruebasIntegracion
+RealizarPruebasIntegracion --> EvaluarPruebas
+RealizarPruebasSistemas   --> EvaluarPruebas
+EvaluarPruebas            --> [*]                      : auditoria.md (024)
+
+@enduml

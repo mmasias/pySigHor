@@ -372,6 +372,14 @@ Este es un artefacto que no está en el temario de RUP pero que surge naturalmen
 - **Sección por iteración**: Mostrar qué disciplinas se activan en cada iteración RUP (no solo la primera aparición)
 - **Código de ejemplo por conexión IDSW2**: Extraer fragmentos concretos que ilustren cada principio SOLID
 
+<div align=center>
+
+|![](/images/extraDocs/026-mapaRUP/001.svg)
+|-:
+[Código fuente](001.puml)
+
+</div>
+
 ### Vacíos identificados
 
 | Disciplina | Estado | Observación |
