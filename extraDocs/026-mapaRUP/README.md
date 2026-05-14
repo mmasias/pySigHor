@@ -2,12 +2,15 @@
 
 ## ¿Por qué?
 
-En IDSW1 se enseña RUP como proceso teórico. En IDSW2 se enseñan principios de diseño. Los alumnos ven la teoría, pero les falta el mapa que conecte "cuándo se hace qué" con "qué sale de ahí". Este documento responde a preguntas concretas:
+En ingeniería de software se enseña RUP como proceso amén de los principios de diseño. La aproximación es teórica, y se echa en falta un mapa que conecte "cuándo se hace qué" con "qué sale de ahí". 
 
+Este documento responde a preguntas concretas:
+
+- ¿Cómo conecta todo?
+- ¿En qué momento del proceso se toman decisiones tecnológicas?
 - ¿Cuándo diseño las tablas de la base de datos?
 - ¿Cuándo hago el diagrama de arquitectura?
 - ¿Cuándo defino los endpoints de la API?
-- ¿En qué momento del proceso se toman decisiones tecnológicas?
 
 pySigHor es un proyecto donde cada disciplina RUP produjo artefactos reales, en orden, con trazabilidad. Este artículo mapea ese recorrido.
 
@@ -31,23 +34,24 @@ Cada disciplina se cruza transversalmente con las fases RUP (Inicio, Elaboració
 ### Vista general del recorrido
 
 ```
-Disciplina                    Artefacto pySigHor                           Respuesta a
-─────────────────────────────────────────────────────────────────────────────────────
-Modelado del Negocio      →   modelo-dominio.puml                      →  ¿De qué habla el sistema?
-Requisitos                →   actores-casos-uso.puml                    →  ¿Quién usa qué?
-Requisitos                →   diagrama-contexto.puml                    →  ¿Qué puede hacer el actor?
-Requisitos                →   especificacion.puml (x30)                 →  ¿Cómo es cada caso de uso?
-Requisitos                →   prototipo.puml (x30)                      →  ¿Qué ve el usuario?
-Análisis                  →   colaboracion.puml (x30)                   →  ¿Qué clases participan?
-Análisis                  →   secuencia.puml (análisis)                 →  ¿En qué orden interactúan?
-Diseño                    →   arquitectura.puml                         →  ¿Qué stack tecnológico?
-Diseño                    →   clases-diseño.puml                        →  ¿Cómo se mapean las clases?
-Diseño                    →   configuracion-proyecto.md                  →  ¿Cómo se estructura el código?
-Diseño                    →   secuencia.puml (diseño, x10)              →  ¿Qué endpoints/api calls?
-Implementación            →   routers/models/services/repos             →  El código ejecutable
-Implementación            →   React components + pages                  →  La interfaz ejecutable
-Pruebas                   →   tests/conftest.py + test_*.py             →  ¿Funciona?
-Control de Calidad        →   auditoria.md + seguimiento.md             →  ¿El código cumple el diseño?
+Disciplina                      Artefacto pySigHor                             Respuesta a
+---------------------------------------------------------------------------------------------------------
+Modelado del Negocio      -->   modelo-dominio.puml                       -->  ¿De qué habla el sistema?
+Requisitos                -->   actores-casos-uso.puml                    -->  ¿Quién usa qué?
+Requisitos                -->   diagrama-contexto.puml                    -->  ¿Qué puede hacer el actor?
+Requisitos                -->   especificacion.puml (x30)                 -->  ¿Cómo es cada caso de uso?
+Requisitos                -->   prototipo.puml (x30)                      -->  ¿Qué ve el usuario?
+Análisis                  -->   colaboracion.puml (x30)                   -->  ¿Qué clases participan?
+Análisis                  -->   secuencia.puml (análisis)                 -->  ¿En qué orden interactúan?
+Diseño                    -->   arquitectura.puml                         -->  ¿Qué stack tecnológico?
+Diseño                    -->   clases-diseño.puml                        -->  ¿Cómo se mapean las clases?
+Diseño                    -->   configuracion-proyecto.md                 -->  ¿Cómo se estructura el código?
+Diseño                    -->   secuencia.puml (diseño, x10)              -->  ¿Qué endpoints/api calls?
+Implementación            -->   routers/models/services/repos             -->  El código ejecutable
+Implementación            -->   React components + pages                  -->  La interfaz ejecutable
+Pruebas                   -->   tests/conftest.py + test_*.py             -->  ¿Funciona?
+Control de Calidad        -->   auditoria.md + seguimiento.md             -->  ¿El código cumple el diseño?
+---------------------------------------------------------------------------------------------------------
 ```
 
 ## ¿Para qué?
@@ -179,9 +183,9 @@ Las relaciones entre casos de uso (crearAula incluye abrirAulas, editarAula exti
 Se aplica sistemáticamente el patrón Boundary-Control-Entity a cada caso de uso:
 
 ```
-Boundary (Vista)     → Clases que interactúan con el actor
-Control (Controlador) → Coordinación de la lógica del caso de uso
-Entity (Modelo)      → Entidades del dominio y acceso a datos
+Boundary (Vista)     --> Clases que interactúan con el actor
+Control (Controlador) --> Coordinación de la lógica del caso de uso
+Entity (Modelo)      --> Entidades del dominio y acceso a datos
 ```
 
 Cada diagrama de colaboración muestra:
@@ -229,9 +233,9 @@ Muestra la estructura SPA + API REST + SQLite y la comunicación entre contenedo
 **Artefacto**: [`clases-diseño.puml`](../../RUP/02-diseño/clases-diseño.puml)
 
 Traducción de las clases de análisis (Boundary/Control/Entity) a clases de diseño concretas:
-- Entity → SQLAlchemy models
-- Control → FastAPI routers + services
-- Boundary → React components
+- Entity --> SQLAlchemy models
+- Control --> FastAPI routers + services
+- Boundary --> React components
 
 ##### Actividad 4.4: Diseño de base de datos
 
@@ -312,52 +316,52 @@ Este es un artefacto que no está en el temario de RUP pero que surge naturalmen
 
 ```
 "¿De qué va el sistema?"
-  → Modelo del dominio
-  → RUP/00-casos-uso/00-modelo-del-dominio/
+  --> Modelo del dominio
+  --> RUP/00-casos-uso/00-modelo-del-dominio/
 
 "¿Qué puede hacer el usuario?"
-  → Actores y casos de uso + Diagrama de contexto
-  → RUP/00-casos-uso/01-actores-casos-uso/
+  --> Actores y casos de uso + Diagrama de contexto
+  --> RUP/00-casos-uso/01-actores-casos-uso/
 
 "¿Cómo es cada funcionalidad paso a paso?"
-  → Especificación de caso de uso (diagrama de estados)
-  → RUP/00-casos-uso/02-detalle/<nombre>/
+  --> Especificación de caso de uso (diagrama de estados)
+  --> RUP/00-casos-uso/02-detalle/<nombre>/
 
 "¿Qué ve el usuario?"
-  → Prototipo de IU (wireframe)
-  → RUP/00-casos-uso/02-detalle/<nombre>/prototipo.puml
+  --> Prototipo de IU (wireframe)
+  --> RUP/00-casos-uso/02-detalle/<nombre>/prototipo.puml
 
 "¿Qué clases participan?"
-  → Diagrama de colaboración MVC
-  → RUP/01-analisis/casos-uso/<nombre>/
+  --> Diagrama de colaboración MVC
+  --> RUP/01-analisis/casos-uso/<nombre>/
 
 "¿Qué tecnología uso?"
-  → Decisión arquitectónica
-  → RUP/02-diseño/README.md (stack)
+  --> Decisión arquitectónica
+  --> RUP/02-diseño/README.md (stack)
 
 "¿Cómo se conectan los componentes?"
-  → Diagrama de arquitectura
-  → RUP/02-diseño/arquitectura.puml
+  --> Diagrama de arquitectura
+  --> RUP/02-diseño/arquitectura.puml
 
 "¿Cómo son las tablas de la BD?"
-  → Esquema de base de datos
-  → RUP/02-diseño/configuracion-proyecto.md
+  --> Esquema de base de datos
+  --> RUP/02-diseño/configuracion-proyecto.md
 
 "¿Qué endpoints tiene la API?"
-  → Diagrama de secuencia de diseño
-  → RUP/02-diseño/casos-uso/<nombre>/secuencia.puml
+  --> Diagrama de secuencia de diseño
+  --> RUP/02-diseño/casos-uso/<nombre>/secuencia.puml
 
 "¿Cómo es el código?"
-  → Implementación
-  → backend/app/ + frontend/src/
+  --> Implementación
+  --> backend/app/ + frontend/src/
 
 "¿Funciona?"
-  → Pruebas
-  → backend/tests/
+  --> Pruebas
+  --> backend/tests/
 
 "¿El código cumple el diseño?"
-  → Auditoría
-  → extraDocs/024-auditoria-diseno-vs-implementacion/
+  --> Auditoría
+  --> extraDocs/024-auditoria-diseno-vs-implementacion/
 ```
 
 ## ¿Y ahora qué?
