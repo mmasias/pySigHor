@@ -2,7 +2,7 @@
 
 ## ¿Por qué?
 
-En ingeniería de software se enseña RUP como proceso amén de los principios de diseño. La aproximación es teórica, y se echa en falta un mapa que conecte "cuándo se hace qué" con "qué sale de ahí". 
+En ingeniería de software se enseña RUP como proceso amén de los principios de diseño. La aproximación es teórica y se echa en falta un mapa que conecte "cuándo se hace qué" con "qué sale de ahí".
 
 Este documento responde a preguntas concretas:
 
@@ -21,15 +21,15 @@ pySigHor es un proyecto donde cada disciplina RUP produjo artefactos reales, en 
 RUP no es lineal, pero en un proyecto real las disciplinas tienen un orden natural de primera aparición. Este es el orden que siguió pySigHor:
 
 ```
-1. Modelado del Negocio        <- ¿De qué habla el sistema?
-2. Requisitos                  <- ¿Qué debe hacer el sistema?
-3. Análisis y Diseño           <- ¿Cómo se estructura la solución?
-4. Implementación              <- ¿Cómo se traduce a código?
-5. Pruebas                     <- ¿Funciona lo que se construyó?
-6. Despliegue                  <- ¿Cómo llega al usuario?
+1. Modelado del Negocio        : ¿De qué habla el sistema?
+2. Requisitos                  : ¿Qué debe hacer el sistema?
+3. Análisis y Diseño           : ¿Cómo se estructura la solución?
+4. Implementación              : ¿Cómo se traduce a código?
+5. Pruebas                     : ¿Funciona lo que se construyó?
+6. Despliegue                  : ¿Cómo llega al usuario?
 ```
 
-Cada disciplina se cruza transversalmente con las fases RUP (Inicio, Elaboración, Construcción, Transición), pero lo que interesa aquí es: **qué artefacto concreto se produjo en cada disciplina, dónde está, y qué pregunta responde**.
+Cada disciplina se cruza transversalmente con las fases RUP (Inicio, Elaboración, Construcción, Transición), pero lo que interesa aquí es: **qué artefacto concreto se produjo en cada disciplina, dónde está y qué pregunta responde**.
 
 ### Vista general del recorrido
 
@@ -50,7 +50,7 @@ Diseño                    -->   secuencia.puml (diseño, x10)              --> 
 Implementación            -->   routers/models/services/repos             -->  El código ejecutable
 Implementación            -->   React components + pages                  -->  La interfaz ejecutable
 Pruebas                   -->   tests/conftest.py + test_*.py             -->  ¿Funciona?
-Control de Calidad        -->   auditoria.md + seguimiento.md             -->  ¿El código cumple el diseño?
+Implementación            -->   auditoria.md + seguimiento.md             -->  ¿El código cumple el diseño?
 ---------------------------------------------------------------------------------------------------------
 ```
 
@@ -284,7 +284,7 @@ Los diagramas de secuencia de diseño muestran la interacción concreta con la t
 
 **Artefactos**: Documentación en [`03-desarrollo/casos-uso/`](../../RUP/03-desarrollo/casos-uso/)
 
-Cada caso de uso implementado tiene su README con endpoints, flujo de datos, y curl de prueba.
+Cada caso de uso implementado tiene su README con endpoints, flujo de datos y curl de prueba.
 
 ##### Actividad 5.3: Control de calidad
 
