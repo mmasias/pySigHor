@@ -6,6 +6,7 @@ export interface Aula {
   especial: boolean;
   bloqueada: boolean;
   id_edificio: number | null;
+  recursos: Recurso[];
 }
 export interface AulaCreate {
   nombre: string;
@@ -20,6 +21,7 @@ export interface AulaUpdate {
   especial?: boolean;
   bloqueada?: boolean;
   id_edificio?: number;
+  ids_recursos?: number[];
 }
 
 // --- Edificio ---

@@ -6,15 +6,20 @@ participant "Frontend (React)" as FE
 participant "API (FastAPI)" as API
 participant "AulaService" as Service
 participant "AulaRepository" as Repo
+participant "RecursoRepository" as RecRepo
 database "Base de Datos" as DB
 
 Admin -> FE: Clic en "Editar" (en una fila)
 activate FE
-FE --> Admin: Mostrar Formulario con datos precargados
-Admin -> FE: Modifica datos y Guardar
-FE -> API: PUT /aulas/{id} (AulaUpdate JSON)
+FE -> API: GET /recursos
 activate API
-API -> Service: editar_aula(id, aula_update)
+API --> FE: Lista de Recursos
+deactivate API
+FE --> Admin: Mostrar Formulario con datos precargados (incluye recursos)
+Admin -> FE: Modifica datos y selecciona recursos, Guardar
+FE -> API: PATCH /aulas/{id} (AulaUpdate JSON con ids_recursos)
+activate API
+API -> Service: actualizar_aula(id, aula_update)
 activate Service
 Service -> Repo: get_by_id(id)
 activate Repo
@@ -33,9 +38,29 @@ DB --> Repo: OK
 deactivate DB
 Repo --> Service: Aula actualizada
 deactivate Repo
+Service -> Repo: set_recursos(aula, ids_recursos)
+activate Repo
+Repo -> DB: DELETE FROM aula_recursos WHERE aula_id = ?
+activate DB
+DB --> Repo: OK
+deactivate DB
+Repo -> RecRepo: SELECT * FROM recursos WHERE id IN (...)
+activate RecRepo
+RecRepo -> DB: SELECT * FROM recursos WHERE id IN (...)
+activate DB
+DB --> RecRepo: Recursos
+deactivate DB
+RecRepo --> Repo: Lista de Recursos
+deactivate RecRepo
+Repo -> DB: INSERT INTO aula_recursos (aula_id, recurso_id) VALUES ...
+activate DB
+DB --> Repo: OK
+deactivate DB
+Repo --> Service: Aula con recursos actualizados
+deactivate Repo
 Service --> API: AulaResponse
 deactivate Service
-API --> FE: 200 OK (Aula JSON)
+API --> FE: 200 OK (Aula JSON con recursos)
 deactivate API
 FE -> FE: Actualizar Lista / Notificar Éxito
 FE --> Admin: Mostrar "Aula actualizada correctamente"

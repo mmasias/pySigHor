@@ -1,6 +1,8 @@
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional
 
+from app.schemas.recurso import RecursoBase
+
 
 class AulaBase(BaseModel):
 
@@ -22,10 +24,12 @@ class AulaUpdate(BaseModel):
     especial: Optional[bool] = None
     bloqueada: Optional[bool] = None
     id_edificio: Optional[int] = None
+    ids_recursos: Optional[list[int]] = None
 
 
 class AulaResponse(AulaBase):
 
     id: int
+    recursos: list[RecursoBase] = []
 
     model_config = ConfigDict(from_attributes=True)

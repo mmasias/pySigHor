@@ -1,8 +1,15 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from app.core.database import Base
+
+aula_recursos = Table(
+    "aula_recursos",
+    Base.metadata,
+    Column("aula_id", Integer, ForeignKey("aulas.id"), primary_key=True),
+    Column("recurso_id", Integer, ForeignKey("recursos.id"), primary_key=True),
+)
 
 
 class Aula(Base):
@@ -18,3 +25,4 @@ class Aula(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     edificio = relationship("Edificio", back_populates="aulas")
+    recursos = relationship("Recurso", secondary=aula_recursos, lazy="selectin")

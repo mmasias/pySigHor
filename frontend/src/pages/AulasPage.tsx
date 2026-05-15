@@ -18,6 +18,14 @@ import {
   TextField,
   Switch,
   Alert,
+  FormControl,
+  InputLabel,
+  Select,
+  SelectChangeEvent,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+  OutlinedInput,
 } from '@mui/material';
 import {
   Edit as EditIcon,
@@ -25,8 +33,8 @@ import {
   Add as AddIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import { aulaService } from '../services/api';
-import { Aula, AulaCreate, AulaUpdate } from '../types';
+import { aulaService, edificioService, recursoService } from '../services/api';
+import { Aula, AulaCreate, AulaUpdate, Edificio, Recurso } from '../types';
 
 const AulasPage: React.FC = () => {
   const { user, logout } = useAuth();
@@ -41,6 +49,9 @@ const AulasPage: React.FC = () => {
     especial: false,
     bloqueada: false,
   });
+  const [edificios, setEdificios] = useState<Edificio[]>([]);
+  const [recursos, setRecursos] = useState<Recurso[]>([]);
+  const [selectedRecursos, setSelectedRecursos] = useState<number[]>([]);
 
   const cargarAulas = async () => {
     setLoading(true);
@@ -59,6 +70,9 @@ const AulasPage: React.FC = () => {
     cargarAulas();
   }, []);
 
+  useEffect(() => { edificioService.listarEdificios().then(setEdificios); }, []);
+  useEffect(() => { recursoService.listarRecursos().then(setRecursos); }, []);
+
   const handleOpenCreate = () => {
     setEditingAula(null);
     setFormData({
@@ -67,6 +81,7 @@ const AulasPage: React.FC = () => {
       especial: false,
       bloqueada: false,
     });
+    setSelectedRecursos([]);
     setOpenDialog(true);
   };
 
@@ -79,6 +94,7 @@ const AulasPage: React.FC = () => {
       bloqueada: aula.bloqueada,
       id_edificio: aula.id_edificio || undefined,
     });
+    setSelectedRecursos(aula.recursos.map((r) => r.id));
     setOpenDialog(true);
   };
 
@@ -94,11 +110,10 @@ const AulasPage: React.FC = () => {
 
     try {
       if (editingAula) {
-        // Actualizar
-        const updated = await aulaService.actualizarAula(editingAula.id, formData);
+        const updateData: AulaUpdate = { ...formData, ids_recursos: selectedRecursos };
+        const updated = await aulaService.actualizarAula(editingAula.id, updateData);
         setAulas(aulas.map((a) => (a.id === updated.id ? updated : a)));
       } else {
-        // Crear
         const created = await aulaService.crearAula(formData);
         setAulas([...aulas, created]);
       }
@@ -158,6 +173,8 @@ const AulasPage: React.FC = () => {
               <TableCell>ID</TableCell>
               <TableCell>Nombre</TableCell>
               <TableCell>Capacidad</TableCell>
+              <TableCell>Edificio</TableCell>
+              <TableCell>Recursos</TableCell>
               <TableCell>Especial</TableCell>
               <TableCell>Bloqueada</TableCell>
               <TableCell>Acciones</TableCell>
@@ -166,13 +183,13 @@ const AulasPage: React.FC = () => {
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={7} align="center">
+                <TableCell colSpan={8} align="center">
                   Cargando...
                 </TableCell>
               </TableRow>
             ) : aulas.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} align="center">
+                <TableCell colSpan={8} align="center">
                   No hay aulas registradas
                 </TableCell>
               </TableRow>
@@ -182,6 +199,8 @@ const AulasPage: React.FC = () => {
                   <TableCell>{aula.id}</TableCell>
                   <TableCell>{aula.nombre}</TableCell>
                   <TableCell>{aula.capacidad}</TableCell>
+                  <TableCell>{edificios.find((e) => e.id === aula.id_edificio)?.nombre ?? '-'}</TableCell>
+                  <TableCell>{aula.recursos.length > 0 ? aula.recursos.map((r) => r.nombre).join(', ') : '-'}</TableCell>
                   <TableCell>{aula.especial ? 'Sí' : 'No'}</TableCell>
                   <TableCell>{aula.bloqueada ? 'Sí' : 'No'}</TableCell>
                   <TableCell>
@@ -221,7 +240,47 @@ const AulasPage: React.FC = () => {
               onChange={(e) => setFormData({ ...formData, capacidad: parseInt(e.target.value) })}
               inputProps={{ min: 0, max: 255 }}
             />
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: 2 }}>
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="edificio-label">Edificio</InputLabel>
+              <Select
+                labelId="edificio-label"
+                label="Edificio"
+                value={formData.id_edificio ?? ''}
+                onChange={(e: SelectChangeEvent<number | ''>) =>
+                  setFormData({ ...formData, id_edificio: e.target.value === '' ? undefined : Number(e.target.value) })
+                }
+              >
+                <MenuItem value=""><em>Sin edificio</em></MenuItem>
+                {edificios.map((ed) => (
+                  <MenuItem key={ed.id} value={ed.id}>{ed.nombre}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="recursos-label">Recursos</InputLabel>
+              <Select
+                labelId="recursos-label"
+                multiple
+                value={selectedRecursos}
+                onChange={(e: SelectChangeEvent<number[]>) => {
+                  setSelectedRecursos(e.target.value as number[]);
+                }}
+                input={<OutlinedInput label="Recursos" />}
+                renderValue={(selected) =>
+                  recursos
+                    .filter((r) => (selected as number[]).includes(r.id))
+                    .map((r) => r.nombre)
+                    .join(', ')
+                }
+              >
+                {recursos.map((rec) => (
+                  <MenuItem key={rec.id} value={rec.id}>
+                    <Checkbox checked={selectedRecursos.includes(rec.id)} />
+                    <ListItemText primary={rec.nombre} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
               <Switch
                 checked={formData.especial}
                 onChange={(e) => setFormData({ ...formData, especial: e.target.checked })}

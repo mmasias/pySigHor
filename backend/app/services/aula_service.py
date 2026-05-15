@@ -39,7 +39,14 @@ class AulaService:
             if existente:
                 raise ValueError(f"Ya existe un aula con el nombre '{aula_data.nombre}'")
 
-        return await self.repo.update(aula, aula_data.dict(exclude_unset=True))
+        data = aula_data.dict(exclude_unset=True)
+        ids_recursos = data.pop("ids_recursos", None)
+        aula = await self.repo.update(aula, data)
+
+        if ids_recursos is not None:
+            aula = await self.repo.set_recursos(aula, ids_recursos)
+
+        return aula
 
     async def eliminar_aula(self, aula_id: int) -> None:
         """Eliminar aula existente."""
