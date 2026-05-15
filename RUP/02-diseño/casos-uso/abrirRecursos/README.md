@@ -1,6 +1,6 @@
 # pySigHor > abrirRecursos > Diseño
 
-> |[🏠️](/RUP/README.md)|[📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirRecursos/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/abrirRecursos/README.md)|[Pruebas](/RUP/04-pruebas/casos-uso/abrirRecursos/README.md)|
+> |[🏠️](/RUP/README.md)|[📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirRecursos/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/abrirRecursos/README.md)|[Pruebas](/RUP/04-pruebas/casos-uso/abrirRecursos/README.md)|
 > |-|-|-|-|-|-|-|
 
 ## Información del artefacto

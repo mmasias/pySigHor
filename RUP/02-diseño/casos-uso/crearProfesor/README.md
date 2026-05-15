@@ -1,6 +1,6 @@
 # pySigHor > crearProfesor > Diseño
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearProfesor/README.md)|[Análisis](/RUP/01-analisis/casos-uso/crearProfesor/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/crearProfesor/README.md)|[Pruebas](/RUP/04-pruebas/casos-uso/crearProfesor/README.md)|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearProfesor/README.md)|[Análisis](/RUP/01-analisis/casos-uso/crearProfesor/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/crearProfesor/README.md)|[Pruebas](/RUP/04-pruebas/casos-uso/crearProfesor/README.md)|
 > |-|-|-|-|-|-|-|
 
 ## Información del artefacto

@@ -1,6 +1,6 @@
 # pySigHor > crearEdificio > Diseño
 
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearEdificio/README.md)|[Análisis](/RUP/01-analisis/casos-uso/crearEdificio/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/crearEdificio/README.md)|[Análisis](/RUP/01-analisis/casos-uso/crearEdificio/README.md)|**Diseño**|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## Información del artefacto
