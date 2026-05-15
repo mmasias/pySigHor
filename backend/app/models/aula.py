@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Table
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text, Table
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -16,8 +16,11 @@ class Aula(Base):
     __tablename__ = "aulas"
 
     id = Column(Integer, primary_key=True, index=True)
+    codigo = Column(String(20), nullable=False, unique=True, index=True)
     nombre = Column(String(50), nullable=False, unique=True, index=True)
-    capacidad = Column(Integer, nullable=False)
+    capacidad = Column(Integer, nullable=False, default=0)
+    tipo = Column(String(50), nullable=True)
+    observaciones = Column(Text, nullable=True)
     especial = Column(Boolean, default=False)
     bloqueada = Column(Boolean, default=False)
     id_edificio = Column(Integer, ForeignKey("edificios.id"), nullable=True)

@@ -6,21 +6,22 @@ from app.schemas.recurso import RecursoBase
 
 class AulaBase(BaseModel):
 
+    codigo: str = Field(..., min_length=1, max_length=20)
     nombre: str = Field(..., min_length=1, max_length=50)
-    capacidad: int = Field(..., ge=0, le=255)
-    especial: bool = False
-    bloqueada: bool = False
-    id_edificio: Optional[int] = None
 
 
 class AulaCreate(AulaBase):
-    pass
+
+    id_edificio: Optional[int] = None
 
 
 class AulaUpdate(BaseModel):
 
+    codigo: Optional[str] = Field(None, min_length=1, max_length=20)
     nombre: Optional[str] = Field(None, min_length=1, max_length=50)
     capacidad: Optional[int] = Field(None, ge=0, le=255)
+    tipo: Optional[str] = Field(None, max_length=50)
+    observaciones: Optional[str] = None
     especial: Optional[bool] = None
     bloqueada: Optional[bool] = None
     id_edificio: Optional[int] = None
@@ -30,6 +31,12 @@ class AulaUpdate(BaseModel):
 class AulaResponse(AulaBase):
 
     id: int
+    capacidad: int
+    tipo: Optional[str] = None
+    observaciones: Optional[str] = None
+    especial: bool = False
+    bloqueada: bool = False
+    id_edificio: Optional[int] = None
     recursos: list[RecursoBase] = []
 
     model_config = ConfigDict(from_attributes=True)

@@ -1,23 +1,27 @@
 // --- Aula ---
 export interface Aula {
   id: number;
+  codigo: string;
   nombre: string;
   capacidad: number;
+  tipo: string | null;
+  observaciones: string | null;
   especial: boolean;
   bloqueada: boolean;
   id_edificio: number | null;
   recursos: Recurso[];
 }
 export interface AulaCreate {
+  codigo: string;
   nombre: string;
-  capacidad: number;
-  especial?: boolean;
-  bloqueada?: boolean;
   id_edificio?: number;
 }
 export interface AulaUpdate {
+  codigo?: string;
   nombre?: string;
   capacidad?: number;
+  tipo?: string;
+  observaciones?: string;
   especial?: boolean;
   bloqueada?: boolean;
   id_edificio?: number;
