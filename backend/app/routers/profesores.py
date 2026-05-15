@@ -4,6 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.routers.auth import get_current_user
 from app.schemas.profesor import ProfesorCreate, ProfesorUpdate, ProfesorResponse
+from app.schemas.preferencia import PreferenciaResponse, PreferenciaUpdate
+from app.services.preferencia_service import PreferenciaService
 from app.services.profesor_service import ProfesorService
 
 router = APIRouter(prefix="/profesores", tags=["profesores"])
@@ -49,3 +51,21 @@ async def eliminar_profesor(profesor_id: int, current_user: str = Depends(get_cu
         await service.eliminar_profesor(profesor_id)
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+
+
+@router.get("/{profesor_id}/preferencias", response_model=list[PreferenciaResponse])
+async def obtener_preferencias(profesor_id: int, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    try:
+        service = PreferenciaService(db)
+        return await service.obtener_preferencias(profesor_id)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+
+
+@router.put("/{profesor_id}/preferencias", response_model=list[PreferenciaResponse])
+async def actualizar_preferencias(profesor_id: int, data: PreferenciaUpdate, current_user: str = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    try:
+        service = PreferenciaService(db)
+        return await service.actualizar_preferencias(profesor_id, data.recurso_ids)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {
   Box, Button, Container, Typography, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, IconButton, Dialog, DialogTitle,
-  DialogContent, DialogActions, TextField, Alert,
+  DialogContent, DialogActions, TextField, Alert, List, ListItem, ListItemText,
 } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon, Settings as SettingsIcon, ArrowUpward as ArrowUpIcon, ArrowDownward as ArrowDownIcon } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import { profesorService } from '../services/api';
-import { Profesor, ProfesorCreate } from '../types';
+import { profesorService, preferenciaService } from '../services/api';
+import { Profesor, ProfesorCreate, Preferencia } from '../types';
 
 const ProfesoresPage: React.FC = () => {
   const { user, logout } = useAuth();
@@ -17,6 +17,11 @@ const ProfesoresPage: React.FC = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [editingProfesor, setEditingProfesor] = useState<Profesor | null>(null);
   const [formData, setFormData] = useState<ProfesorCreate>({ nombres: '', apellidos: '' });
+
+  const [openPrefDialog, setOpenPrefDialog] = useState(false);
+  const [prefProfesor, setPrefProfesor] = useState<Profesor | null>(null);
+  const [preferencias, setPreferencias] = useState<Preferencia[]>([]);
+  const [prefLoading, setPrefLoading] = useState(false);
 
   const cargarProfesores = async () => {
     setLoading(true);
@@ -79,6 +84,57 @@ const ProfesoresPage: React.FC = () => {
     }
   };
 
+  const handleOpenPreferencias = async (profesor: Profesor) => {
+    setPrefProfesor(profesor);
+    setPrefLoading(true);
+    setOpenPrefDialog(true);
+    try {
+      const prefs = await preferenciaService.obtener(profesor.id);
+      setPreferencias(prefs);
+    } catch {
+      setError('Error al cargar preferencias');
+    } finally {
+      setPrefLoading(false);
+    }
+  };
+
+  const handleClosePrefDialog = () => {
+    setOpenPrefDialog(false);
+    setPrefProfesor(null);
+    setPreferencias([]);
+  };
+
+  const handleMoveUp = (index: number) => {
+    if (index === 0) return;
+    const updated = [...preferencias];
+    [updated[index - 1], updated[index]] = [updated[index], updated[index - 1]];
+    setPreferencias(updated.map((p, i) => ({ ...p, prioridad: i + 1 })));
+  };
+
+  const handleMoveDown = (index: number) => {
+    if (index === preferencias.length - 1) return;
+    const updated = [...preferencias];
+    [updated[index], updated[index + 1]] = [updated[index + 1], updated[index]];
+    setPreferencias(updated.map((p, i) => ({ ...p, prioridad: i + 1 })));
+  };
+
+  const handleGuardarPreferencias = async () => {
+    if (!prefProfesor) return;
+    setPrefLoading(true);
+    try {
+      const updated = await preferenciaService.actualizar(
+        prefProfesor.id,
+        { recurso_ids: preferencias.map((p) => p.recurso_id) },
+      );
+      setPreferencias(updated);
+      handleClosePrefDialog();
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Error al guardar preferencias');
+    } finally {
+      setPrefLoading(false);
+    }
+  };
+
   if (!user) return <Container><Typography variant="h6">Cargando...</Typography></Container>;
 
   return (
@@ -120,6 +176,7 @@ const ProfesoresPage: React.FC = () => {
                   <TableCell>{profesor.telefono || '-'}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleOpenEdit(profesor)} size="small"><EditIcon /></IconButton>
+                    <IconButton onClick={() => handleOpenPreferencias(profesor)} size="small" color="primary"><SettingsIcon /></IconButton>
                     <IconButton onClick={() => handleDelete(profesor)} size="small" color="error"><DeleteIcon /></IconButton>
                   </TableCell>
                 </TableRow>
@@ -153,6 +210,53 @@ const ProfesoresPage: React.FC = () => {
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancelar</Button>
           <Button onClick={handleSubmit} variant="contained">{editingProfesor ? 'Actualizar' : 'Crear'}</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openPrefDialog} onClose={handleClosePrefDialog} maxWidth="sm" fullWidth>
+        <DialogTitle>
+          Preferencias de recursos - {prefProfesor ? `${prefProfesor.nombres} ${prefProfesor.apellidos}` : ''}
+        </DialogTitle>
+        <DialogContent>
+          {prefLoading && preferencias.length === 0 ? (
+            <Typography>Cargando preferencias...</Typography>
+          ) : (
+            <List>
+              {preferencias.map((pref, index) => (
+                <ListItem
+                  key={pref.recurso_id}
+                  secondaryAction={
+                    <Box>
+                      <IconButton
+                        size="small"
+                        disabled={index === 0}
+                        onClick={() => handleMoveUp(index)}
+                      >
+                        <ArrowUpIcon />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        disabled={index === preferencias.length - 1}
+                        onClick={() => handleMoveDown(index)}
+                      >
+                        <ArrowDownIcon />
+                      </IconButton>
+                    </Box>
+                  }
+                >
+                  <ListItemText
+                    primary={`#${pref.prioridad} - ${pref.nombre_recurso}`}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosePrefDialog}>Cancelar</Button>
+          <Button onClick={handleGuardarPreferencias} variant="contained" disabled={prefLoading}>
+            Guardar
+          </Button>
         </DialogActions>
       </Dialog>
     </Container>

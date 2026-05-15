@@ -137,3 +137,13 @@ export interface AuthUser {
   username: string;
   token: string;
 }
+
+// --- Preferencias ---
+export interface Preferencia {
+  recurso_id: number;
+  nombre_recurso: string;
+  prioridad: number;
+}
+export interface PreferenciaUpdate {
+  recurso_ids: number[];
+}

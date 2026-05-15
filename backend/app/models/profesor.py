@@ -1,4 +1,5 @@
 from sqlalchemy import Column, DateTime, Integer, String, Text
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from app.core.database import Base
@@ -15,3 +16,10 @@ class Profesor(Base):
     observaciones = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+    preferencias = relationship(
+        "ProfesorRecurso",
+        back_populates="profesor",
+        order_by="ProfesorRecurso.prioridad",
+        lazy="selectin",
+    )
