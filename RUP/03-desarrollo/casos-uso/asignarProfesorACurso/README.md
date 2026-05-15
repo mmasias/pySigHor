@@ -1,9 +1,12 @@
 # pySigHor > asignarProfesorACurso > Desarrollo  
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/asignarProfesorACurso/README.md)|[Análisis](/RUP/01-analisis/casos-uso/asignarProfesorACurso/README.md)|[Diseño](/RUP/02-diseño/casos-uso/asignarProfesorACurso/README.md)|**Desarrollo**|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/asignarProfesorACurso/README.md)|[Análisis](/RUP/01-analisis/casos-uso/asignarProfesorACurso/README.md)|[Diseño](/RUP/02-diseño/casos-uso/asignarProfesorACurso/README.md)|**Desarrollo**|Pruebas|
 
-- **Estado:** implementado — issue [#26](https://github.com/mmasias/pySigHor/issues/26), rama `diseño-fastapi-react`
-- **Backend:** `backend/app/models/profesor_curso.py`, `backend/app/repositories/asignacion_repository.py`, `backend/app/services/asignacion_service.py`, endpoints en `backend/app/routers/profesores.py`
-- **Frontend:** `frontend/src/pages/ProfesoresPage.tsx` (dialog doble lista con selección múltiple)
+> |-|-|-|-|-|-|-|
+
+- **Backend:** [routers/profesores.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/routers/profesores.py) · [services/asignacion_service.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/services/asignacion_service.py) · [repositories/asignacion_repository.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/repositories/asignacion_repository.py) · [models/profesor_curso.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/models/profesor_curso.py)
+- **Frontend:** [pages/ProfesoresPage.tsx](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/frontend/src/pages/ProfesoresPage.tsx)
+
+
 
 ## Modelo de datos
 

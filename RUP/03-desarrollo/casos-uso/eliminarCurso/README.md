@@ -1,9 +1,12 @@
 # pySigHor > eliminarCurso > Desarrollo  
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarCurso/README.md)|[Análisis](/RUP/01-analisis/casos-uso/eliminarCurso/README.md)|[Diseño](/RUP/02-diseño/casos-uso/eliminarCurso/README.md)|**Desarrollo**|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/eliminarCurso/README.md)|[Análisis](/RUP/01-analisis/casos-uso/eliminarCurso/README.md)|[Diseño](/RUP/02-diseño/casos-uso/eliminarCurso/README.md)|**Desarrollo**|Pruebas|
 
-- **Estado:** ✅ **Completado** - Iteración 2
-- **Backend:** router en `backend/app/routers/cursos.py`, rama `diseño-fastapi-react`
-- **Frontend:** `frontend/src/pages/CursosPage.tsx`, service en `api.ts`, types en `types/index.ts`
+> |-|-|-|-|-|-|-|
+
+- **Backend:** [routers/cursos.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/routers/cursos.py) · [services/curso_service.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/services/curso_service.py) · [repositories/curso_repository.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/repositories/curso_repository.py) · [models/curso.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/models/curso.py)
+- **Frontend:** [pages/CursosPage.tsx](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/frontend/src/pages/CursosPage.tsx)
+
+
 
 #### Secciones:
 

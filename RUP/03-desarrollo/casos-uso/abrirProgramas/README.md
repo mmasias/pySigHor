@@ -1,9 +1,12 @@
 # pySigHor > abrirProgramas > Desarrollo  
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirProgramas/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirProgramas/README.md)|[Diseño](/RUP/02-diseño/casos-uso/abrirProgramas/README.md)|**Desarrollo**|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirProgramas/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirProgramas/README.md)|[Diseño](/RUP/02-diseño/casos-uso/abrirProgramas/README.md)|**Desarrollo**|Pruebas|
 
-- **Estado:** ✅ **Completado** - Iteración 2
-- **Backend:** router en `backend/app/routers/programas.py`, rama `diseño-fastapi-react`
-- **Frontend:** `frontend/src/pages/ProgramasPage.tsx`, service en `api.ts`, types en `types/index.ts`
+> |-|-|-|-|-|-|-|
+
+- **Backend:** [routers/programas.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/routers/programas.py) · [services/programa_service.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/services/programa_service.py) · [repositories/programa_repository.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/repositories/programa_repository.py) · [models/programa.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/models/programa.py)
+- **Frontend:** [pages/ProgramasPage.tsx](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/frontend/src/pages/ProgramasPage.tsx)
+
+
 
 #### Secciones:
 

@@ -1,9 +1,12 @@
 # pySigHor > abrirEdificios > Desarrollo  
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirEdificios/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirEdificios/README.md)|[Diseño](/RUP/02-diseño/casos-uso/abrirEdificios/README.md)|**Desarrollo**|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirEdificios/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirEdificios/README.md)|[Diseño](/RUP/02-diseño/casos-uso/abrirEdificios/README.md)|**Desarrollo**|Pruebas|
 
-- **Estado:** ✅ **Completado** - Iteración 2
-- **Backend:** router en `backend/app/routers/edificios.py`, rama `diseño-fastapi-react`
-- **Frontend:** `frontend/src/pages/EdificiosPage.tsx`, service en `api.ts`, types en `types/index.ts`
+> |-|-|-|-|-|-|-|
+
+- **Backend:** [routers/edificios.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/routers/edificios.py) · [services/edificio_service.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/services/edificio_service.py) · [repositories/edificio_repository.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/repositories/edificio_repository.py) · [models/edificio.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/models/edificio.py)
+- **Frontend:** [pages/EdificiosPage.tsx](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/frontend/src/pages/EdificiosPage.tsx)
+
+
 
 #### Secciones:
 
@@ -44,7 +47,6 @@ async def obtener_edificios():
 
 **Flujo de datos**: 
 - **API:** GET /api/v1/edificios
-- **Frontend:** Obtiene la lista de edificios y los renderiza.
 
 **Testing (curl + pasos frontend)**:
 ```bash

@@ -1,9 +1,12 @@
 # pySigHor > abrirProfesores > Desarrollo  
-> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/main/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirProfesores/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirProfesores/README.md)|[Diseño](/RUP/02-diseño/casos-uso/abrirProfesores/README.md)|**Desarrollo**|Pruebas|
+> |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirProfesores/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirProfesores/README.md)|[Diseño](/RUP/02-diseño/casos-uso/abrirProfesores/README.md)|**Desarrollo**|Pruebas|
 
-- **Estado:** ✅ **Completado** - Iteración 2
-- **Backend:** router en `backend/app/routers/profesores.py`, rama `diseño-fastapi-react`
-- **Frontend:** `frontend/src/pages/ProfesoresPage.tsx`, service en `api.ts`, types en `types/index.ts`
+> |-|-|-|-|-|-|-|
+
+- **Backend:** [routers/profesores.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/routers/profesores.py) · [services/profesor_service.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/services/profesor_service.py) · [repositories/profesor_repository.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/repositories/profesor_repository.py) · [models/profesor.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/models/profesor.py)
+- **Frontend:** [pages/ProfesoresPage.tsx](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/frontend/src/pages/ProfesoresPage.tsx)
+
+
 
 #### Secciones:
 
