@@ -3,11 +3,12 @@ import {
   Box, Button, Container, Typography, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, IconButton, Dialog, DialogTitle,
   DialogContent, DialogActions, TextField, Alert,
+  FormControl, InputLabel, Select, SelectChangeEvent, MenuItem,
 } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import { cursoService } from '../services/api';
-import { Curso, CursoCreate } from '../types';
+import { cursoService, programaService } from '../services/api';
+import { Curso, CursoCreate, Programa } from '../types';
 
 const CursosPage: React.FC = () => {
   const { user, logout } = useAuth();
@@ -17,6 +18,7 @@ const CursosPage: React.FC = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [editingCurso, setEditingCurso] = useState<Curso | null>(null);
   const [formData, setFormData] = useState<CursoCreate>({ nombre: '' });
+  const [programas, setProgramas] = useState<Programa[]>([]);
 
   const cargarCursos = async () => {
     setLoading(true);
@@ -31,6 +33,7 @@ const CursosPage: React.FC = () => {
   };
 
   useEffect(() => { cargarCursos(); }, []);
+  useEffect(() => { programaService.listarProgramas().then(setProgramas); }, []);
 
   const handleOpenCreate = () => {
     setEditingCurso(null);
@@ -145,6 +148,22 @@ const CursosPage: React.FC = () => {
               value={formData.horas ?? ''}
               onChange={(e) => setFormData({ ...formData, horas: e.target.value ? parseInt(e.target.value) : undefined })}
               inputProps={{ min: 0 }} />
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="programa-label">Programa</InputLabel>
+              <Select
+                labelId="programa-label"
+                label="Programa"
+                value={formData.id_programa ?? ''}
+                onChange={(e: SelectChangeEvent<number | ''>) =>
+                  setFormData({ ...formData, id_programa: e.target.value === '' ? undefined : Number(e.target.value) })
+                }
+              >
+                <MenuItem value=""><em>Sin programa</em></MenuItem>
+                {programas.map((prog) => (
+                  <MenuItem key={prog.id} value={prog.id}>{prog.nombre}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Box>
         </DialogContent>
         <DialogActions>

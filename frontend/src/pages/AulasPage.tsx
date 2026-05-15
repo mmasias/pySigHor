@@ -131,6 +131,8 @@ const AulasPage: React.FC = () => {
       } else {
         const created = await aulaService.crearAula(formData);
         setAulas([...aulas, created]);
+        handleOpenEdit(created);
+        return;
       }
       handleCloseDialog();
     } catch (err: any) {
