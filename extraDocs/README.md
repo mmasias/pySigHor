@@ -83,6 +83,7 @@ Los artículos se crean **reactivamente** cuando surge una situación metodológ
 |024|[Auditoría de desviaciones diseño vs implementación](024-auditoria-diseno-vs-implementacion/articulo.md)|[`pre-auditoria-diseno-codigo`](https://github.com/mmasias/pySigHor/releases/tag/pre-auditoria-diseno-codigo)|Control de calidad: 20 desviaciones entre diseño y código, refactoring por capas con trazabilidad exhaustiva|
 |025|[Post-auditoría: refactoring alineado a diseño](025-postAuditoria/README.md)|[`post-auditoria-diseno-codigo`](https://github.com/mmasias/pySigHor/releases/tag/post-auditoria-diseno-codigo)|Cierre del ciclo de auditoría: 18/20 desviaciones resueltas, lecciones metodológicas y evolución del flujo de trabajo|
 |026|[Mapa RUP: disciplinas, actividades y artefactos concretos](026-mapaRUP/README.md)|[`ea93766`](https://github.com/mmasias/pySigHor/commit/ea93766)|Mapeo de cada disciplina RUP contra artefactos reales del proyecto, con conexiones a IDSW1 e IDSW2|
+|027|[Brecha especificación - diseño: recursos en editarAula](027-brecha-especificacion-diseno/README.md)|[issue #23](https://github.com/mmasias/pySigHor/issues/23)|Un requisito que estaba en la especificación desapareció en el diagrama de secuencia y el código lo implementó fielmente... sin él|
 
 ### Estructura de artículos
 
