@@ -1,6 +1,5 @@
 # pySigHor > configurarPreferenciasProfesor > Desarrollo  
 > |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/README.md)|[Análisis](/RUP/01-analisis/casos-uso/configurarPreferenciasProfesor/README.md)|[Diseño](/RUP/02-diseño/casos-uso/configurarPreferenciasProfesor/README.md)|**Desarrollo**|Pruebas|
-
 > |-|-|-|-|-|-|-|
 
 - **Backend:** [routers/profesores.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/routers/profesores.py) · [services/preferencia_service.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/services/preferencia_service.py) · [repositories/preferencia_repository.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/repositories/preferencia_repository.py) · [models/profesor_recurso.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/models/profesor_recurso.py)

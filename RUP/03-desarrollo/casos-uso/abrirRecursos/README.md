@@ -1,6 +1,5 @@
 # pySigHor > abrirRecursos > Desarrollo  
 > |[🏠️](/RUP/README.md)|[ 📊](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|[Detalle](/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md)|[Análisis](/RUP/01-analisis/casos-uso/abrirRecursos/README.md)|[Diseño](/RUP/02-diseño/casos-uso/abrirRecursos/README.md)|**Desarrollo**|Pruebas|
-
 > |-|-|-|-|-|-|-|
 
 - **Backend:** [routers/recursos.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/routers/recursos.py) · [services/recurso_service.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/services/recurso_service.py) · [repositories/recurso_repository.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/repositories/recurso_repository.py) · [models/recurso.py](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/backend/app/models/recurso.py)
