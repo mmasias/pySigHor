@@ -6,35 +6,41 @@
 - **Frontend:** [pages/EdificiosPage.tsx](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/frontend/src/pages/EdificiosPage.tsx)
 
 
+Crea un nuevo edificio validando unicidad de nombre. El servicio lanza `ValueError` si el nombre ya existe; el router lo convierte en 400.
 
-#### Secciones:
+## Backend
 
-**Descripción**: 
-Este caso de uso se encarga de crear un nuevo edificio.
-
-**Estado**: Completado
-
-**Backend (Archivo, Endpoint con request/response JSON)**:
-- **Archivo:** `backend/app/routers/edificios.py`
-- **Schema (Edificio)**: 
-  - `nombre`: string (1-50)
-  - `direccion`: string opcional (max 100)
-
-**Implementación (snippets)**:
 ```python
-@router.post("/edificios", response_model=EdificioResponse, summary="Crea un nuevo edificio")
-async def crear_edificio(edificio: EdificioRequest):
-    if await EdificioModel.query.where(EdificioModel.nombre == edificio.nombre).gino.first():
-        raise HTTPException(status_code=409, detail="Nombre de edificio ya existe")
-
-    new_edificio = await EdificioModel.create(nombre=edificio.nombre, direccion=edificio.direccion)
-    return EdificioResponse(**new_edificio.to_dict())
+@router.post("", response_model=EdificioResponse, status_code=status.HTTP_201_CREATED)
+async def crear_edificio(edificio_data: EdificioCreate,
+                         current_user: str = Depends(get_current_user),
+                         db: AsyncSession = Depends(get_db)):
+    try:
+        service = EdificioService(db)
+        return await service.crear_edificio(edificio_data)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 ```
 
-**Frontend (Archivo, Implementación)**:
-- **Archivo:** `frontend/src/pages/EdificiosPage.tsx`
+```python
+# EdificioService.crear_edificio
+async def crear_edificio(self, edificio_data: EdificioCreate) -> Edificio:
+    existente = await self.repo.get_by_nombre(edificio_data.nombre)
+    if existente:
+        raise ValueError(f"Ya existe un edificio con el nombre '{edificio_data.nombre}'")
+    return await self.repo.create(edificio_data.dict())
+```
 
-**Testing (curl + pasos frontend)**:
+**Endpoint:** `POST /api/v1/edificios`  
+**Schema:** `{ "nombre": string, "direccion": string|null }`
+
 ```bash
-curl -X POST "http://localhost:8000/api/v1/edificios" -H "Content-Type: application/json" -d '{"nombre": "Edificio A", "direccion": "Av. Principal 123"}'
+curl -X POST "http://localhost:8000/api/v1/edificios" \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"nombre": "Edificio A", "direccion": "Av. Principal 123"}'
 ```
+
+## Frontend
+
+`EdificiosPage.tsx` abre un dialog de creación. Al confirmar llama a `edificioService.create(data)` y recarga la lista.

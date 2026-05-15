@@ -6,49 +6,33 @@
 - **Frontend:** [pages/EdificiosPage.tsx](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/frontend/src/pages/EdificiosPage.tsx)
 
 
+Lista todos los edificios existentes. El router delega en el servicio, que consulta el repositorio.
 
-#### Secciones:
+## Backend
 
-**Descripción**: 
-Este caso de uso se encarga de listar todos los edificios existentes en la base de datos.
-
-**Estado**: Completado
-
-**Backend (Archivo, Endpoint con request/response JSON)**:
-- **Archivo:** `backend/app/routers/edificios.py`
-- **Endpoint:**
-  ```python
-  @router.get("/edificios", response_model=list[EdificioResponse], summary="Obtiene todos los edificios")
-  async def obtener_edificios():
-      edificios = await EdificioModel.query.gino.all()
-      return [EdificioResponse(**edificio.to_dict()) for edificio in edificios]
-  ```
-
-**Validaciones**: 
-- No hay validaciones adicionales necesarias para este endpoint.
-
-**Implementación (snippets)**:
 ```python
-from fastapi import APIRouter, Depends
-from backend.app.models.edificio_model import Edificio as EdificioModel
-from backend.app.schemas.edificio_schema import EdificioResponse
-
-router = APIRouter()
-
-@router.get("/edificios", response_model=list[EdificioResponse], summary="Obtiene todos los edificios")
-async def obtener_edificios():
-    edificios = await EdificioModel.query.gino.all()
-    return [EdificioResponse(**edificio.to_dict()) for edificio in edificios]
+@router.get("", response_model=list[EdificioResponse])
+async def listar_edificios(skip: int = 0, limit: int = 100,
+                           current_user: str = Depends(get_current_user),
+                           db: AsyncSession = Depends(get_db)):
+    service = EdificioService(db)
+    return await service.listar_edificios(skip=skip, limit=limit)
 ```
 
-**Frontend (Archivo, Implementación)**:
-- **Archivo:** `frontend/src/pages/EdificiosPage.tsx`
+```python
+# EdificioRepository.get_all
+async def get_all(self, skip: int = 0, limit: int = 100) -> List[Edificio]:
+    result = await self.db.execute(select(Edificio).offset(skip).limit(limit))
+    return result.scalars().all()
+```
 
-**Flujo de datos**: 
-- **API:** GET /api/v1/edificios
+**Endpoint:** `GET /api/v1/edificios`
 
-**Testing (curl + pasos frontend)**:
 ```bash
-curl -X GET "http://localhost:8000/api/v1/edificios"
+curl -X GET "http://localhost:8000/api/v1/edificios" \
+  -H "Authorization: Bearer <token>"
 ```
-- En la interfaz del usuario, se verifica que la lista de edificios sea renderizada correctamente.
+
+## Frontend
+
+`EdificiosPage.tsx` llama a `edificioService.getAll()` al montar el componente y renderiza la lista en una tabla MUI.
