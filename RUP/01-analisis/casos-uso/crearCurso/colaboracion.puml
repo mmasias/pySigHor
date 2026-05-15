@@ -8,20 +8,27 @@ package crearCurso as "crearCurso()" {
     rectangle #629EF9 CrearCursoView
     rectangle #b5bd68 CursoController
     rectangle #F2AC4E CursoRepository
+    rectangle #F2AC4E ProgramaRepository
     rectangle #F2AC4E Curso
+    rectangle #F2AC4E Programa
 }
 
 CursosAbierto --> CrearCursoView: crearCurso()
+
+CrearCursoView -d-> CursoController: cargarProgramas() : List<Programa>
+
+CursoController --> ProgramaRepository: listarProgramas() : List<Programa>
 
 CrearCursoView -d-> CursoController: validarDatosMínimos(nombre) : boolean
 
 CursoController --> CursoRepository: verificarUnicidad(nombre) : boolean
 
-CrearCursoView --> CursoController: crearCurso(nombre) : Curso
+CrearCursoView --> CursoController: crearCurso(nombre, id_programa) : Curso
 
-CursoController --> CursoRepository: crear(nombre) : Curso
+CursoController --> CursoRepository: crear(nombre, id_programa) : Curso
 
 CursoRepository -- Curso
+ProgramaRepository -- Programa
 
 CrearCursoView ..> EditarCurso: <<include>> editarCurso(cursoNuevo)
 
