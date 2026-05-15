@@ -7,9 +7,7 @@
 
 # Dashboard de seguimiento RUP
 
-El dashboard de seguimiento muestra el progreso de implementación por stack tecnológico. Cada rama de implementación mantiene su propio dashboard, reflejando el estado de desarrollo específico de esa tecnología.
-
-## Dashboards por stack
+## Dashboards por stack tecnológico
 
 | Stack | Dashboard |
 |-------|-----------|
@@ -18,18 +16,27 @@ El dashboard de seguimiento muestra el progreso de implementación por stack tec
 | CLI Python HTTP | [![](https://img.shields.io/badge/-Ver_dashboard-lightblue?style=flat)](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-http/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) |
 | CLI Python Standalone | [![](https://img.shields.io/badge/-Ver_dashboard-lightblue?style=flat)](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-standalone/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg) |
 
+## Estado hasta análisis (main)
+
+<div align=center>
+
+|![Dashboard RUP - Diagrama de Contexto](/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg)|
+|:-:|
+|**Dashboard de seguimiento — todos los CdUs en fase de análisis**|
+|Código fuente: [diagrama-contexto-administrador.puml](diagrama-contexto-administrador.puml)|
+
+</div>
+
 ## Leyenda de estados RUP
 
 | Color | Fase |
 |-|-|
-| 🔘 Gris | Identificado |
-| 🔴 Rojo | Detalle / prototipado |
-| 🟫 Amarillo oscuro | Analizado |
-| 🟢 Verde | Diseñado |
-| 🔵 Celeste | Desarrollado |
-| 🔵 Azul | Probado |
-| ⚫ Negro | Completado |
+| Gris | Identificado |
+| Rojo | Requisitado / prototipado |
+| Amarillo oscuro | Analizado |
+| Verde | Diseñado |
+| Celeste | Desarrollado |
+| Azul | Probado |
+| Negro | Completado |
 
-## Nota metodológica
-
-El dashboard es tecnológicamente específico: el diseño y el desarrollo dependen del stack elegido. El análisis (hasta `01-analisis/`) es compartido por todos los stacks y vive en `main`. A partir de `02-diseño/`, cada rama de implementación es independiente.
+El análisis es compartido por todos los stacks y vive en `main`. A partir de `02-diseño/`, cada rama de implementación es independiente.

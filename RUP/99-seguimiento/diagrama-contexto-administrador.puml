@@ -1,0 +1,119 @@
+@startuml diagrama-contexto-administrador
+
+left to right direction
+skinparam linetype polyline
+
+<style>
+legend {
+  BackGroundColor #f0f0f0;
+  'Margin 30
+  'Padding 10
+}
+footer {
+  HorizontalAlignment left
+}
+
+</style>
+
+legend top
+    **DASHBOARD DE CONTEXTO** - <i>Casos de uso</i>
+    '====
+    |<#gray>     | Identificado |<#red>     | Requisitado |<#darkgoldenrod>     | Analizado |<#green>     | Diseñado |<#lightblue>     | Desarrollado |<#blue>     | Probado |<#black>     | Completado |
+    | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - FastAPI/React]] |
+    | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-spring-angular/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - Spring/Angular]] |
+    | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-http/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - CLI HTTP]] |
+    | | | | | | | | [[https://raw.githubusercontent.com/mmasias/pySigHor/diseño-cli-python-standalone/images/RUP/99-seguimiento/diagrama-contexto-administrador.svg - CLI Standalone]] |
+    '====
+    '[**nombreCasoUso()**] -> Especificación detallada / [**A**] -> Análisis MVC / [**D**] -> Diseño (disponible en ramas específicas)
+    '====
+end legend
+
+footer
+**<i>[[https://github.com/mmasias/pySigHor << Volver al repo]]</i>**
+end footer
+
+state "SESION_CERRADA" as NoAuth
+state "SISTEMA_DISPONIBLE" as Menu
+
+state "PROGRAMAS_ABIERTO" as ListProgramas
+state "PROGRAMA_ABIERTO" as EditPrograma
+state "CURSOS_ABIERTO" as ListCursos
+state "CURSO_ABIERTO" as EditCurso
+state "PROFESORES_ABIERTO" as ListProfesores
+state "PROFESOR_ABIERTO" as EditProfesor
+state "PROFESOR_PREFERENCIAS_ABIERTO" as EditProfesorPreferencias
+state "EDIFICIOS_ABIERTO" as ListEdificios
+state "EDIFICIO_ABIERTO" as EditEdificio
+state "AULAS_ABIERTO" as ListAulas
+state "AULA_ABIERTA" as EditAula
+state "RECURSOS_ABIERTO" as ListRecursos
+state "RECURSO_ABIERTO" as EditRecurso
+
+state "PROFESOR_ASIGNATURAS_ABIERTO" as Asignaciones
+state "HORARIO_GENERADO" as Generacion
+state "HORARIO_ABIERTO" as Consulta
+
+NoAuth -[#darkgoldenrod,thickness=2]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/iniciarSesion/README.md iniciarSesion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/iniciarSesion/README.md A]]
+
+Menu -[#darkgoldenrod,thickness=2]-> NoAuth: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/cerrarSesion/README.md cerrarSesion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/cerrarSesion/README.md A]]
+Menu -[#darkgoldenrod,thickness=2]-> ListProgramas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirProgramas/README.md abrirProgramas()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirProgramas/README.md A]]
+Menu -[#darkgoldenrod,thickness=2]-> ListCursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirCursos/README.md abrirCursos()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirCursos/README.md A]]
+Menu -[#darkgoldenrod,thickness=2]-> ListProfesores: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirProfesores/README.md abrirProfesores()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirProfesores/README.md A]]
+Menu -[#darkgoldenrod]-> ListEdificios: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirEdificios/README.md abrirEdificios()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirEdificios/README.md A]]
+Menu -[#darkgoldenrod]-> ListAulas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirAulas/README.md abrirAulas()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirAulas/README.md A]]
+Menu -[#darkgoldenrod]-> ListRecursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md abrirRecursos()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirRecursos/README.md A]]
+Menu -[#darkgoldenrod,bold]-> Generacion: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/generarHorario/README.md generarHorario()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/generarHorario/README.md A]]
+Menu -[#darkgoldenrod,bold]-> Consulta: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/consultarHorario/README.md consultarHorario()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/consultarHorario/README.md A]]
+
+EditProfesor -[#darkgoldenrod,thickness=2]-> Asignaciones: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/asignarProfesorACurso/README.md asignarProfesorACurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/asignarProfesorACurso/README.md A]]
+
+Asignaciones -[#darkgoldenrod,thickness=2]-> Asignaciones: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/asignarProfesorACurso/README.md asignarProfesorACurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/asignarProfesorACurso/README.md A]]
+Asignaciones -[#darkgoldenrod,thickness=2]-> EditProfesor: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarProfesor/README.md editarProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarProfesor/README.md A]]
+ListProgramas -[#darkgoldenrod,thickness=2]-> EditPrograma: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/crearPrograma/README.md crearPrograma()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/crearPrograma/README.md A]]
+ListProgramas -[#darkgoldenrod,thickness=2]-> EditPrograma: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarPrograma/README.md editarPrograma()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarPrograma/README.md A]]
+ListProgramas -[#darkgoldenrod,thickness=2]-> ListProgramas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarPrograma/README.md eliminarPrograma()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarPrograma/README.md A]]
+EditPrograma -[#darkgoldenrod,thickness=2]-> EditPrograma: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarPrograma/README.md editarPrograma()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarPrograma/README.md A]]
+EditPrograma -[#darkgoldenrod,thickness=2]-> ListProgramas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarPrograma/README.md eliminarPrograma()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarPrograma/README.md A]]
+EditPrograma -[#darkgoldenrod,thickness=2]-> ListProgramas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirProgramas/README.md abrirProgramas()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirProgramas/README.md A]]
+ListCursos -[#darkgoldenrod,thickness=2]-> EditCurso: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/crearCurso/README.md crearCurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/crearCurso/README.md A]]
+ListCursos -[#darkgoldenrod,thickness=2]-> EditCurso: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarCurso/README.md editarCurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarCurso/README.md A]]
+ListCursos -[#darkgoldenrod,thickness=2]-> ListCursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarCurso/README.md eliminarCurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarCurso/README.md A]]
+EditCurso -[#darkgoldenrod,thickness=2]-> EditCurso: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarCurso/README.md editarCurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarCurso/README.md A]]
+EditCurso -[#darkgoldenrod,thickness=2]-> ListCursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarCurso/README.md eliminarCurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarCurso/README.md A]]
+EditCurso -[#darkgoldenrod,thickness=2]-> ListCursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirCursos/README.md abrirCursos()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirCursos/README.md A]]
+ListProfesores -[#darkgoldenrod,thickness=2]-> EditProfesor: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/crearProfesor/README.md crearProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/crearProfesor/README.md A]]
+ListProfesores -[#darkgoldenrod,thickness=2]-> EditProfesor: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarProfesor/README.md editarProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarProfesor/README.md A]]
+ListProfesores -[#darkgoldenrod,thickness=2]-> ListProfesores: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarProfesor/README.md eliminarProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarProfesor/README.md A]]
+EditProfesor -[#darkgoldenrod,thickness=2]-> EditProfesor: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarProfesor/README.md editarProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarProfesor/README.md A]]
+EditProfesor -[#darkgoldenrod,thickness=2]-> ListProfesores: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarProfesor/README.md eliminarProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarProfesor/README.md A]]
+EditProfesor -[#darkgoldenrod,thickness=2]-> EditProfesorPreferencias: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/README.md configurarPreferenciasProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/configurarPreferenciasProfesor/README.md A]]
+EditProfesor -[#darkgoldenrod,thickness=2]-> ListProfesores: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirProfesores/README.md abrirProfesores()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirProfesores/README.md A]]
+EditProfesorPreferencias -[#darkgoldenrod,thickness=2]-> EditProfesorPreferencias: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/README.md configurarPreferenciasProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/configurarPreferenciasProfesor/README.md A]]
+EditProfesorPreferencias -[#darkgoldenrod,thickness=2]-> EditProfesor: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarProfesor/README.md editarProfesor()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarProfesor/README.md A]]
+ListEdificios -[#darkgoldenrod,bold]-> EditEdificio: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/crearEdificio/README.md crearEdificio()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/crearEdificio/README.md A]]
+ListEdificios -[#darkgoldenrod,bold]-> EditEdificio: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarEdificio/README.md editarEdificio()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarEdificio/README.md A]]
+ListEdificios -[#darkgoldenrod,bold]-> ListEdificios: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarEdificio/README.md eliminarEdificio()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarEdificio/README.md A]]
+EditEdificio -[#darkgoldenrod,bold]-> EditEdificio: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarEdificio/README.md editarEdificio()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarEdificio/README.md A]]
+EditEdificio -[#darkgoldenrod,bold]-> ListEdificios: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarEdificio/README.md eliminarEdificio()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarEdificio/README.md A]]
+EditEdificio -[#darkgoldenrod]-> ListEdificios: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirEdificios/README.md abrirEdificios()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirEdificios/README.md A]]
+ListAulas -[#darkgoldenrod,bold]-> EditAula: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/crearAula/README.md crearAula()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/crearAula/README.md A]]
+ListAulas -[#darkgoldenrod,bold]-> EditAula: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarAula/README.md editarAula()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarAula/README.md A]]
+ListAulas -[#darkgoldenrod,bold]-> ListAulas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarAula/README.md eliminarAula()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarAula/README.md A]]
+EditAula -[#darkgoldenrod,bold]-> EditAula: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarAula/README.md editarAula()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarAula/README.md A]]
+EditAula -[#darkgoldenrod,bold]-> ListAulas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarAula/README.md eliminarAula()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarAula/README.md A]]
+EditAula -[#darkgoldenrod]-> ListAulas: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirAulas/README.md abrirAulas()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirAulas/README.md A]]
+ListRecursos -[#darkgoldenrod,bold]-> EditRecurso: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/crearRecurso/README.md crearRecurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/crearRecurso/README.md A]]
+ListRecursos -[#darkgoldenrod,bold]-> EditRecurso: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarRecurso/README.md editarRecurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarRecurso/README.md A]]
+ListRecursos -[#darkgoldenrod,bold]-> ListRecursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarRecurso/README.md eliminarRecurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarRecurso/README.md A]]
+EditRecurso -[#darkgoldenrod,bold]-> EditRecurso: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/editarRecurso/README.md editarRecurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/editarRecurso/README.md A]]
+EditRecurso -[#darkgoldenrod,bold]-> ListRecursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/eliminarRecurso/README.md eliminarRecurso()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/eliminarRecurso/README.md A]]
+EditRecurso -[#darkgoldenrod]-> ListRecursos: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/abrirRecursos/README.md abrirRecursos()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/abrirRecursos/README.md A]]
+ListProgramas -[#darkgoldenrod,thickness=2]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/completarGestion/README.md completarGestion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/completarGestion/README.md A]]
+ListCursos -[#darkgoldenrod,thickness=2]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/completarGestion/README.md completarGestion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/completarGestion/README.md A]]
+ListProfesores -[#darkgoldenrod,thickness=2]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/completarGestion/README.md completarGestion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/completarGestion/README.md A]]
+ListEdificios -[#darkgoldenrod]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/completarGestion/README.md completarGestion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/completarGestion/README.md A]]
+ListAulas -[#darkgoldenrod]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/completarGestion/README.md completarGestion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/completarGestion/README.md A]]
+ListRecursos -[#darkgoldenrod,bold]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/completarGestion/README.md completarGestion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/completarGestion/README.md A]]
+Generacion -[#darkgoldenrod,bold]-> Consulta: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/consultarHorario/README.md consultarHorario()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/consultarHorario/README.md A]]
+Consulta -[#darkgoldenrod,bold]-> Menu: [[https://github.com/mmasias/pySigHor/blob/main/RUP/00-casos-uso/02-detalle/completarGestion/README.md completarGestion()]] [[https://github.com/mmasias/pySigHor/blob/main/RUP/01-analisis/casos-uso/completarGestion/README.md A]]
+@enduml
