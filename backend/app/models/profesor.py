@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from app.core.database import Base
+from app.models.profesor_curso import profesor_cursos
 
 
 class Profesor(Base):
@@ -23,3 +24,5 @@ class Profesor(Base):
         order_by="ProfesorRecurso.prioridad",
         lazy="selectin",
     )
+
+    cursos_asignados = relationship("Curso", secondary=profesor_cursos, lazy="selectin")

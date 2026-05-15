@@ -147,3 +147,8 @@ export interface Preferencia {
 export interface PreferenciaUpdate {
   recurso_ids: number[];
 }
+
+// --- Asignaciones ---
+export interface AsignacionUpdate {
+  curso_ids: number[];
+}

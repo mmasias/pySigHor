@@ -7,6 +7,7 @@ import {
   Profesor, ProfesorCreate, ProfesorUpdate,
   Recurso, RecursoCreate, RecursoUpdate,
   Preferencia, PreferenciaUpdate,
+  AsignacionUpdate,
 } from '../types';
 
 const API_BASE = '/api/v1';
@@ -124,6 +125,14 @@ export const preferenciaService = {
     (await apiClient.get(`/profesores/${profesorId}/preferencias`)).data,
   actualizar: async (profesorId: number, data: PreferenciaUpdate): Promise<Preferencia[]> =>
     (await apiClient.put(`/profesores/${profesorId}/preferencias`, data)).data,
+};
+
+// --- Asignaciones ---
+export const asignacionService = {
+  obtener: async (profesorId: number): Promise<Curso[]> =>
+    (await apiClient.get(`/profesores/${profesorId}/cursos`)).data,
+  actualizar: async (profesorId: number, data: AsignacionUpdate): Promise<Curso[]> =>
+    (await apiClient.put(`/profesores/${profesorId}/cursos`, data)).data,
 };
 
 // --- Autenticación ---

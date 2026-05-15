@@ -4,10 +4,10 @@ import {
   TableContainer, TableHead, TableRow, IconButton, Dialog, DialogTitle,
   DialogContent, DialogActions, TextField, Alert, List, ListItem, ListItemText,
 } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon, Settings as SettingsIcon, ArrowUpward as ArrowUpIcon, ArrowDownward as ArrowDownIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon, Settings as SettingsIcon, School as SchoolIcon, ArrowUpward as ArrowUpIcon, ArrowDownward as ArrowDownIcon, ArrowForward as ArrowRightIcon, ArrowBack as ArrowLeftIcon } from '@mui/icons-material';
 import { useAuth } from '../context/AuthContext';
-import { profesorService, preferenciaService } from '../services/api';
-import { Profesor, ProfesorCreate, Preferencia } from '../types';
+import { profesorService, preferenciaService, asignacionService, cursoService } from '../services/api';
+import { Profesor, ProfesorCreate, Preferencia, Curso } from '../types';
 
 const ProfesoresPage: React.FC = () => {
   const { user, logout } = useAuth();
@@ -22,6 +22,12 @@ const ProfesoresPage: React.FC = () => {
   const [prefProfesor, setPrefProfesor] = useState<Profesor | null>(null);
   const [preferencias, setPreferencias] = useState<Preferencia[]>([]);
   const [prefLoading, setPrefLoading] = useState(false);
+
+  const [openCursosDialog, setOpenCursosDialog] = useState(false);
+  const [cursosProfesor, setCursosProfesor] = useState<Profesor | null>(null);
+  const [cursosAsignados, setCursosAsignados] = useState<Curso[]>([]);
+  const [cursosDisponibles, setCursosDisponibles] = useState<Curso[]>([]);
+  const [cursosLoading, setCursosLoading] = useState(false);
 
   const cargarProfesores = async () => {
     setLoading(true);
@@ -135,6 +141,85 @@ const ProfesoresPage: React.FC = () => {
     }
   };
 
+  const handleOpenCursos = async (profesor: Profesor) => {
+    setCursosProfesor(profesor);
+    setCursosLoading(true);
+    setOpenCursosDialog(true);
+    try {
+      const [todos, asignados] = await Promise.all([
+        cursoService.listarCursos(),
+        asignacionService.obtener(profesor.id),
+      ]);
+      setCursosAsignados(asignados);
+      const asignadosIds = new Set(asignados.map((c) => c.id));
+      setCursosDisponibles(todos.filter((c) => !asignadosIds.has(c.id)));
+    } catch {
+      setError('Error al cargar cursos');
+    } finally {
+      setCursosLoading(false);
+    }
+  };
+
+  const handleCloseCursosDialog = () => {
+    setOpenCursosDialog(false);
+    setCursosProfesor(null);
+    setCursosAsignados([]);
+    setCursosDisponibles([]);
+  };
+
+  const handleAsignar = () => {
+    setCursosDisponibles((prev) => {
+      const movidos = prev.filter((c) => seleccionadosDisp.has(c.id));
+      setCursosAsignados((asig) => [...asig, ...movidos]);
+      return prev.filter((c) => !seleccionadosDisp.has(c.id));
+    });
+    setSeleccionadosDisp(new Set());
+  };
+
+  const handleDesasignar = () => {
+    setCursosAsignados((prev) => {
+      const movidos = prev.filter((c) => seleccionadosAsig.has(c.id));
+      setCursosDisponibles((disp) => [...disp, ...movidos]);
+      return prev.filter((c) => !seleccionadosAsig.has(c.id));
+    });
+    setSeleccionadosAsig(new Set());
+  };
+
+  const [seleccionadosDisp, setSeleccionadosDisp] = useState<Set<number>>(new Set());
+  const [seleccionadosAsig, setSeleccionadosAsig] = useState<Set<number>>(new Set());
+
+  const toggleSeleccionDisp = (id: number) => {
+    setSeleccionadosDisp((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSeleccionAsig = (id: number) => {
+    setSeleccionadosAsig((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
+  const handleGuardarCursos = async () => {
+    if (!cursosProfesor) return;
+    setCursosLoading(true);
+    try {
+      await asignacionService.actualizar(
+        cursosProfesor.id,
+        { curso_ids: cursosAsignados.map((c) => c.id) },
+      );
+      handleCloseCursosDialog();
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Error al guardar asignaciones');
+    } finally {
+      setCursosLoading(false);
+    }
+  };
+
   if (!user) return <Container><Typography variant="h6">Cargando...</Typography></Container>;
 
   return (
@@ -176,6 +261,7 @@ const ProfesoresPage: React.FC = () => {
                   <TableCell>{profesor.telefono || '-'}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleOpenEdit(profesor)} size="small"><EditIcon /></IconButton>
+                    <IconButton onClick={() => handleOpenCursos(profesor)} size="small" color="secondary"><SchoolIcon /></IconButton>
                     <IconButton onClick={() => handleOpenPreferencias(profesor)} size="small" color="primary"><SettingsIcon /></IconButton>
                     <IconButton onClick={() => handleDelete(profesor)} size="small" color="error"><DeleteIcon /></IconButton>
                   </TableCell>
@@ -255,6 +341,90 @@ const ProfesoresPage: React.FC = () => {
         <DialogActions>
           <Button onClick={handleClosePrefDialog}>Cancelar</Button>
           <Button onClick={handleGuardarPreferencias} variant="contained" disabled={prefLoading}>
+            Guardar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openCursosDialog} onClose={handleCloseCursosDialog} maxWidth="md" fullWidth>
+        <DialogTitle>
+          Cursos asignados - {cursosProfesor ? `${cursosProfesor.nombres} ${cursosProfesor.apellidos}` : ''}
+        </DialogTitle>
+        <DialogContent>
+          {cursosLoading && cursosAsignados.length === 0 && cursosDisponibles.length === 0 ? (
+            <Typography>Cargando cursos...</Typography>
+          ) : (
+            <Box sx={{ display: 'flex', gap: 2, mt: 1 }}>
+              <Box sx={{ flex: 1 }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Disponibles ({cursosDisponibles.length})
+                </Typography>
+                <List sx={{ border: '1px solid #ddd', borderRadius: 1, maxHeight: 400, overflow: 'auto' }}>
+                  {cursosDisponibles.length === 0 ? (
+                    <ListItem><ListItemText primary="No hay cursos disponibles" /></ListItem>
+                  ) : (
+                    cursosDisponibles.map((curso) => (
+                      <ListItem
+                        key={curso.id}
+                        button
+                        selected={seleccionadosDisp.has(curso.id)}
+                        onClick={() => toggleSeleccionDisp(curso.id)}
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        <ListItemText primary={curso.nombre} />
+                      </ListItem>
+                    ))
+                  )}
+                </List>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1 }}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={handleAsignar}
+                  disabled={seleccionadosDisp.size === 0}
+                  endIcon={<ArrowRightIcon />}
+                >
+                  Asignar
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={handleDesasignar}
+                  disabled={seleccionadosAsig.size === 0}
+                  startIcon={<ArrowLeftIcon />}
+                >
+                  Desasignar
+                </Button>
+              </Box>
+              <Box sx={{ flex: 1 }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Asignados ({cursosAsignados.length})
+                </Typography>
+                <List sx={{ border: '1px solid #ddd', borderRadius: 1, maxHeight: 400, overflow: 'auto' }}>
+                  {cursosAsignados.length === 0 ? (
+                    <ListItem><ListItemText primary="No hay cursos asignados" /></ListItem>
+                  ) : (
+                    cursosAsignados.map((curso) => (
+                      <ListItem
+                        key={curso.id}
+                        button
+                        selected={seleccionadosAsig.has(curso.id)}
+                        onClick={() => toggleSeleccionAsig(curso.id)}
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        <ListItemText primary={curso.nombre} />
+                      </ListItem>
+                    ))
+                  )}
+                </List>
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseCursosDialog}>Cancelar</Button>
+          <Button onClick={handleGuardarCursos} variant="contained" disabled={cursosLoading}>
             Guardar
           </Button>
         </DialogActions>
