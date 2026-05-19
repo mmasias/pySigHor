@@ -12,6 +12,10 @@
 
 En 1998, en la asignatura de TPD (Taller de procesamiento de datos) de Ing. Industrial y de Sistemas de la Universidad de Piura, impartida por el prof. Roberto Castro, aplicamos lo que habíamos aprendido en [Investigación de Operaciones](https://es.wikipedia.org/wiki/Programaci%C3%B3n_lineal) para desarrollar SIGHOR, un [algoritmo](l'Algoritmo.md) que derivó en un sistema generador de horarios. ¡Una joyita en Visual Basic 3!
 
+### ¿Qué?
+
+*Un administrador configura programas, cursos, profesores, aulas y recursos para que el sistema genere un horario academico que respete las restricciones definidas.*
+
 <div align=center>
 
 |![](/images/F8zDugwX0AArV7H.jpeg)|![](/images/F8zDzlZXQAAe-o8.jpeg)|![](/images/F8zDw0CWEAADw8U.jpeg)|![](/images/F8zD4afXAAIsnGn.jpeg)|![](/images/F8zD2blXAAArega.jpeg)
