@@ -165,6 +165,15 @@
 
 </div>
 
+### Diagrama Entidad-Relación (DER)
+
+<div align=center>
+
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/DER.svg)
+|-
+
+</div>
+
 ### Diagrama de despliegue
 
 <div align=center>
