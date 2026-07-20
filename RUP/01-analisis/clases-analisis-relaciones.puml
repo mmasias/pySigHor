@@ -1,0 +1,167 @@
+@startuml clases-analisis-relaciones
+
+left to right direction
+
+package Vista {
+  class AbrirCursosView
+  class AbrirProfesoresView
+  class AbrirProgramasView
+  class AsignarProfesorACursoView
+  class CerrarSesionView
+  class ConfigurarPreferenciasProfesorView
+  class ConsultarHorarioView
+  class CrearAulaView
+  class CrearCursoView
+  class CrearEdificioView
+  class CrearProfesorView
+  class CrearProgramaView
+  class CrearRecursoView
+  class EditarAulaView
+  class EditarCursoView
+  class EditarEdificioView
+  class EditarProfesorView
+  class EditarProgramaView
+  class EditarRecursoView
+  class EliminarAulaView
+  class EliminarCursoView
+  class EliminarEdificioView
+  class EliminarProfesorView
+  class EliminarProgramaView
+  class EliminarRecursoView
+  class GenerarHorarioView
+  class GestionView
+  class ListarAulasView
+  class ListarEdificiosView
+  class ListarRecursosView
+  class LoginView
+}
+
+package Controlador {
+  class AsignacionProfesorCursoController
+  class AulaController
+  class AulasController
+  class CerrarSesionController
+  class CompletarGestionController
+  class CursoController
+  class CursosController
+  class EdificioController
+  class EdificiosController
+  class HorarioController
+  class IniciarSesionController
+  class PreferenciasProfesorController
+  class ProfesorController
+  class ProfesoresController
+  class ProgramaController
+  class ProgramasController
+  class RecursoController
+  class RecursosController
+}
+
+package Modelo {
+  class AsignacionProfesorCurso
+  class Aula
+  class AulaRepository
+  class Curso
+  class CursoRepository
+  class Edificio
+  class EdificioRepository
+  class Horario
+  class HorarioGenerator
+  class HorarioRepository
+  class OpcionesMenu
+  class PermisosRepository
+  class PreferenciasRecurso
+  class Profesor
+  class ProfesorRepository
+  class Programa
+  class ProgramaRepository
+  class Recurso
+  class RecursoRepository
+  class Sesion
+  class SesionRepository
+  class Usuario
+  class UsuarioRepository
+  class Validador
+}
+
+
+' Dependencias Vista -> Controlador -> Modelo (extraídas de los 32 colaboracion.puml)
+AbrirCursosView ..> CursosController
+AbrirProfesoresView ..> ProfesoresController
+AbrirProgramasView ..> ProgramasController
+AsignacionProfesorCursoController ..> CursoRepository
+AsignacionProfesorCursoController ..> ProfesorRepository
+AsignarProfesorACursoView ..> AsignacionProfesorCursoController
+AulaController ..> AulaRepository
+AulaController ..> EdificioRepository
+AulaController ..> RecursoRepository
+AulasController ..> AulaRepository
+CerrarSesionController ..> CerrarSesionView
+CerrarSesionController ..> Sesion
+CerrarSesionController ..> SesionRepository
+CerrarSesionView ..> CerrarSesionController
+CompletarGestionController ..> OpcionesMenu
+CompletarGestionController ..> PermisosRepository
+CompletarGestionController ..> Sesion
+ConfigurarPreferenciasProfesorView ..> PreferenciasProfesorController
+ConsultarHorarioView ..> HorarioController
+CrearAulaView ..> AulaController
+CrearCursoView ..> CursoController
+CrearEdificioView ..> EdificioController
+CrearProfesorView ..> ProfesorController
+CrearProgramaView ..> ProgramaController
+CrearRecursoView ..> RecursoController
+CursoController ..> CursoRepository
+CursoController ..> ProgramaRepository
+CursosController ..> CursoRepository
+EdificioController ..> EdificioRepository
+EdificiosController ..> EdificioRepository
+EditarAulaView ..> AulaController
+EditarCursoView ..> CursoController
+EditarEdificioView ..> EdificioController
+EditarProfesorView ..> ProfesorController
+EditarProgramaView ..> ProgramaController
+EditarRecursoView ..> RecursoController
+EliminarAulaView ..> AulaController
+EliminarCursoView ..> CursoController
+EliminarEdificioView ..> EdificioController
+EliminarProfesorView ..> ProfesorController
+EliminarProgramaView ..> ProgramaController
+EliminarRecursoView ..> RecursoController
+GenerarHorarioView ..> HorarioController
+GestionView ..> CompletarGestionController
+GestionView ..> OpcionesMenu
+HorarioController ..> HorarioGenerator
+HorarioController ..> HorarioRepository
+HorarioController ..> Validador
+HorarioGenerator ..> HorarioRepository
+IniciarSesionController ..> Sesion
+IniciarSesionController ..> UsuarioRepository
+ListarAulasView ..> AulasController
+ListarEdificiosView ..> EdificiosController
+ListarRecursosView ..> RecursosController
+LoginView ..> IniciarSesionController
+PreferenciasProfesorController ..> ProfesorRepository
+PreferenciasProfesorController ..> RecursoRepository
+ProfesorController ..> ProfesorRepository
+ProfesoresController ..> ProfesorRepository
+ProgramaController ..> ProgramaRepository
+ProgramasController ..> ProgramaRepository
+RecursoController ..> RecursoRepository
+RecursosController ..> RecursoRepository
+SesionRepository ..> Sesion
+
+' Asociaciones Repositorio -- Entidad
+AulaRepository -- Aula
+CursoRepository -- Curso
+EdificioRepository -- Edificio
+HorarioRepository -- Horario
+ProfesorRepository -- Profesor
+ProgramaRepository -- Programa
+RecursoRepository -- Recurso
+UsuarioRepository -- Usuario
+ProfesorRepository -- AsignacionProfesorCurso
+ProfesorRepository -- PreferenciasRecurso
+HorarioRepository -- Validador
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml aula-estados
+
+title Aula - Estados de disponibilidad durante la generación de horario
+
+[*] --> Disponible
+
+Disponible --> Ocupada : asignación de curso\nen bloque horario
+Ocupada --> Disponible : bloque horario libera\n(otro turno / día)
+
+Disponible --> Bloqueada : Bloqueada = true
+Bloqueada --> Disponible : Bloqueada = false
+
+Disponible --> Especial : Especial = true
+Especial --> Disponible : Especial = false
+Especial --> Ocupada : asignación en\nhorario especial (HE/HV)
+
+note right of Bloqueada
+  Excluida del algoritmo:
+  no participa en ninguna
+  fase de asignación
+end note
+
+note right of Especial
+  Reservada para cursos
+  movidos a HE/HV
+  (ver curso-estados.puml)
+end note
+
+@enduml

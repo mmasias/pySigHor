@@ -1,0 +1,32 @@
+@startuml curso-estados
+
+title Curso - Ciclo de vida durante la generación de horario
+
+[*] --> SinHorario
+
+SinHorario --> BloqueValidado : PrepararH()\nsin conflicto
+SinHorario --> BloqueReubicado : PrepararH()\nconflicto: H -> H+4
+BloqueReubicado --> BloqueValidado
+
+BloqueValidado --> PreAsignado : GeneraPreHorario()\naula disponible
+BloqueValidado --> MovidoAEspecial : GeneraPreHorario()\nsin aula disponible -> HE
+
+PreAsignado --> AsignadoFinal : GeneraHorario()\nmaterializa día + hora
+
+MovidoAEspecial --> AsignadoFinal : IngresoHE() / IngresoHV()\ningreso a horario especial/vario
+
+AsignadoFinal --> [*]
+
+note right of BloqueReubicado
+  Resolución de conflictos:
+  el curso se reubica antes
+  de intentar la preasignación
+end note
+
+note right of MovidoAEspecial
+  Válvula de escape: cursos que
+  no caben en bloques regulares
+  pasan a horarios HE/HV
+end note
+
+@enduml

@@ -1,0 +1,383 @@
+@startuml clases-analisis-metodos-relaciones
+
+left to right direction
+
+package Vista {
+  class AbrirCursosView {
+    abrirCursos()
+  }
+  class AbrirProfesoresView {
+    abrirProfesores()
+  }
+  class AbrirProgramasView {
+    abrirProgramas()
+  }
+  class AsignarProfesorACursoView {
+    asignarProfesorACurso(profesorId)
+  }
+  class CerrarSesionView {
+    mostrarConfirmacion()
+  }
+  class ConfigurarPreferenciasProfesorView {
+    configurarPreferenciasProfesor(profesorId)
+  }
+  class ConsultarHorarioView {
+    consultarHorario()
+    consultarHorario(horarioGenerado)
+  }
+  class CrearAulaView {
+    crearAula()
+  }
+  class CrearCursoView {
+    crearCurso()
+  }
+  class CrearEdificioView {
+    crearEdificio()
+  }
+  class CrearProfesorView {
+    crearProfesor()
+  }
+  class CrearProgramaView {
+    crearPrograma()
+  }
+  class CrearRecursoView {
+    crearRecurso()
+  }
+  class EditarAulaView {
+    editarAula(aulaId)
+    editarAula(aulaNueva)
+  }
+  class EditarCursoView {
+    editarCurso(cursoId)
+    editarCurso(cursoNuevo)
+  }
+  class EditarEdificioView {
+    editarEdificio(edificioId)
+    editarEdificio(edificioNuevo)
+  }
+  class EditarProfesorView {
+    editarProfesor(profesorId)
+    editarProfesor(profesorNuevo)
+  }
+  class EditarProgramaView {
+    editarPrograma(programaId)
+    editarPrograma(programaNuevo)
+  }
+  class EditarRecursoView {
+    editarRecurso(recursoId)
+    editarRecurso(recursoNuevo)
+  }
+  class EliminarAulaView {
+    eliminarAula(aulaId)
+  }
+  class EliminarCursoView {
+    eliminarCurso(cursoId)
+  }
+  class EliminarEdificioView {
+    eliminarEdificio(edificioId)
+  }
+  class EliminarProfesorView {
+    eliminarProfesor(profesorId)
+  }
+  class EliminarProgramaView {
+    eliminarPrograma(programaId)
+  }
+  class EliminarRecursoView {
+    eliminarRecurso(recursoId)
+  }
+  class GenerarHorarioView {
+    generarHorario()
+  }
+  class GestionView
+  class ListarAulasView {
+    abrirAulas()
+  }
+  class ListarEdificiosView {
+    abrirEdificios()
+  }
+  class ListarRecursosView {
+    abrirRecursos()
+  }
+  class LoginView {
+    iniciarSesion(usuario, contraseña)
+  }
+}
+
+package Controlador {
+  class AsignacionProfesorCursoController {
+    asignarCurso(profesorId, cursoId) : boolean
+    cargarAsignacionesProfesor(profesorId)
+    desasignarCurso(profesorId, cursoId) : boolean
+  }
+  class AulaController {
+    cargarAulaParaEliminacion(aulaId) : Aula
+    cargarEdificios() : List<Edificio>
+    crearAula(codigo, nombre, id_edificio) : Aula
+    eliminarAula(aulaId) : void
+    modificarCampos(aulaId, cambios, id_edificio, ids_recursos) : boolean
+  }
+  class AulasController {
+    filtrarAulas(criterio) : List<Aula>
+    listarAulas() : List<Aula>
+  }
+  class CerrarSesionController {
+    solicitarCierre(Usuario)
+  }
+  class CompletarGestionController {
+    habilitarOpciones(administrador)
+  }
+  class CursoController {
+    cargarCursoParaEliminacion(cursoId) : Curso
+    cargarProgramas() : List<Programa>
+    crearCurso(nombre, id_programa) : Curso
+    eliminarCurso(cursoId) : void
+    modificarCampos(cursoId, cambios, id_programa) : boolean
+  }
+  class CursosController {
+    filtrarCursos(criterio) : List<Curso>
+    listarCursos() : List<Curso>
+  }
+  class EdificioController {
+    cargarEdificioParaEliminacion(edificioId) : Edificio
+    crearEdificio(codigo, nombre) : Edificio
+    eliminarEdificio(edificioId) : void
+    modificarCampos(edificioId, cambios) : boolean
+  }
+  class EdificiosController {
+    filtrarEdificios(criterio) : List<Edificio>
+    listarEdificios() : List<Edificio>
+  }
+  class HorarioController {
+    procesarConsulta() : ResultadoConsulta
+    procesarGeneracion() : ResultadoGeneracion
+  }
+  class IniciarSesionController {
+    autenticar(usuario, contraseña) : Sesion
+  }
+  class PreferenciasProfesorController {
+    cargarPreferenciasProfesor(profesorId)
+    modificarOrdenPrioridad(nuevoOrden) : boolean
+  }
+  class ProfesorController {
+    cargarProfesorParaEliminacion(profesorId) : Profesor
+    crearProfesor(codigo, nombres, apellidos) : Profesor
+    eliminarProfesor(profesorId) : void
+    modificarCampos(profesorId, cambios) : boolean
+  }
+  class ProfesoresController {
+    filtrarProfesores(criterio) : List<Profesor>
+    listarProfesores() : List<Profesor>
+  }
+  class ProgramaController {
+    cargarProgramaParaEliminacion(programaId) : Programa
+    cargarPrograma(programaId) : Programa
+    crearProgramaMinimo(nombre) : Programa
+    eliminarPrograma(programaId) : void
+    guardarPrograma(programa) : void
+    modificarCampos(programa) : void
+  }
+  class ProgramasController {
+    filtrarProgramas(criterio) : List<Programa>
+    listarProgramas() : List<Programa>
+  }
+  class RecursoController {
+    crearRecurso(codigo, nombre) : Recurso
+    eliminarRecurso(recursoId) : void
+    modificarCampos(recursoId, cambios) : boolean
+  }
+  class RecursosController {
+    filtrarRecursos(criterio) : List<Recurso>
+    listarRecursos() : List<Recurso>
+  }
+}
+
+package Modelo {
+  class AsignacionProfesorCurso
+  class Aula
+  class AulaRepository {
+    actualizar(aula) : boolean
+    buscarPorCriterio(criterio) : List<Aula>
+    crear(codigo, nombre, id_edificio) : Aula
+    eliminar(aulaId) : void
+    obtenerPorId(aulaId) : Aula
+    obtenerTodos() : List<Aula>
+    verificarUnicidad(codigo) : boolean
+  }
+  class Curso
+  class CursoRepository {
+    actualizar(curso) : boolean
+    buscarPorCriterio(criterio) : List<Curso>
+    crear(nombre, id_programa) : Curso
+    eliminar(cursoId) : void
+    obtenerCursosAsignados(profesorId) : List<Curso>
+    obtenerCursosDisponibles() : List<Curso>
+    obtenerPorId(cursoId) : Curso
+    obtenerTodos() : List<Curso>
+    verificarUnicidad(nombre) : boolean
+  }
+  class Edificio
+  class EdificioRepository {
+    actualizar(edificio) : boolean
+    buscarPorCriterio(criterio) : List<Edificio>
+    crear(codigo, nombre) : Edificio
+    eliminar(edificioId) : void
+    listarEdificios() : List<Edificio>
+    obtenerPorId(edificioId) : Edificio
+    obtenerTodos() : List<Edificio>
+    verificarUnicidad(codigo) : boolean
+  }
+  class Horario {
+    obtenerDatosCompletos() : DatosHorario
+  }
+  class HorarioGenerator {
+    ejecutarGeneracion() : Horario
+  }
+  class HorarioRepository {
+    cargarDatosMaestros() : DatosMaestros
+    cargarHorario() : Horario
+    existeHorario() : boolean
+    guardarHorario(horario) : boolean
+    verificarDatosDisponibles() : DatosDisponibles
+  }
+  class OpcionesMenu {
+    crearOpciones(opciones) : OpcionesMenu
+    getOpciones() : List<Opcion>
+  }
+  class PermisosRepository {
+    obtenerOpciones(usuario) : List<Opcion>
+  }
+  class PreferenciasRecurso
+  class Profesor
+  class ProfesorRepository {
+    actualizarAsignaciones(profesorId, asignaciones) : boolean
+    actualizarPreferencias(profesorId, preferencias) : boolean
+    actualizar(profesor) : boolean
+    buscarPorCriterio(criterio) : List<Profesor>
+    crear(codigo, nombres, apellidos) : Profesor
+    eliminar(profesorId) : void
+    obtenerConAsignaciones(profesorId) : Profesor
+    obtenerConPreferencias(profesorId) : Profesor
+    obtenerPorId(profesorId) : Profesor
+    obtenerTodos() : List<Profesor>
+    verificarUnicidad(codigo) : boolean
+  }
+  class Programa
+  class ProgramaRepository {
+    actualizar(programa) : void
+    buscarPorCriterio(criterio) : List<Programa>
+    crear(nombre) : Programa
+    eliminar(programaId) : void
+    listarProgramas() : List<Programa>
+    obtenerPorId(programaId) : Programa
+    obtenerTodos() : List<Programa>
+  }
+  class Recurso
+  class RecursoRepository {
+    actualizar(recurso) : boolean
+    buscarPorCriterio(criterio) : List<Recurso>
+    crear(codigo, nombre) : Recurso
+    eliminar(recursoId) : void
+    listarRecursos() : List<Recurso>
+    obtenerPorId(recursoId) : Recurso
+    obtenerRecursosDisponibles() : List<Recurso>
+    obtenerTodos() : List<Recurso>
+    verificarUnicidad(codigo) : boolean
+  }
+  class Sesion {
+    crearSesion(usuario) : Sesion
+    destruirSesion(Usuario)
+    getUsuario() : Usuario
+  }
+  class SesionRepository {
+    terminarSesion(Usuario)
+  }
+  class Usuario
+  class UsuarioRepository {
+    validarCredenciales(usuario, contraseña) : Usuario
+  }
+  class Validador {
+    verificarDatosMinimos() : boolean
+  }
+}
+
+
+' Dependencias Vista -> Controlador -> Modelo (extraídas de los 32 colaboracion.puml)
+AbrirCursosView ..> CursosController
+AbrirProfesoresView ..> ProfesoresController
+AbrirProgramasView ..> ProgramasController
+AsignacionProfesorCursoController ..> CursoRepository
+AsignacionProfesorCursoController ..> ProfesorRepository
+AsignarProfesorACursoView ..> AsignacionProfesorCursoController
+AulaController ..> AulaRepository
+AulaController ..> EdificioRepository
+AulaController ..> RecursoRepository
+AulasController ..> AulaRepository
+CerrarSesionController ..> CerrarSesionView
+CerrarSesionController ..> Sesion
+CerrarSesionController ..> SesionRepository
+CerrarSesionView ..> CerrarSesionController
+CompletarGestionController ..> OpcionesMenu
+CompletarGestionController ..> PermisosRepository
+CompletarGestionController ..> Sesion
+ConfigurarPreferenciasProfesorView ..> PreferenciasProfesorController
+ConsultarHorarioView ..> HorarioController
+CrearAulaView ..> AulaController
+CrearCursoView ..> CursoController
+CrearEdificioView ..> EdificioController
+CrearProfesorView ..> ProfesorController
+CrearProgramaView ..> ProgramaController
+CrearRecursoView ..> RecursoController
+CursoController ..> CursoRepository
+CursoController ..> ProgramaRepository
+CursosController ..> CursoRepository
+EdificioController ..> EdificioRepository
+EdificiosController ..> EdificioRepository
+EditarAulaView ..> AulaController
+EditarCursoView ..> CursoController
+EditarEdificioView ..> EdificioController
+EditarProfesorView ..> ProfesorController
+EditarProgramaView ..> ProgramaController
+EditarRecursoView ..> RecursoController
+EliminarAulaView ..> AulaController
+EliminarCursoView ..> CursoController
+EliminarEdificioView ..> EdificioController
+EliminarProfesorView ..> ProfesorController
+EliminarProgramaView ..> ProgramaController
+EliminarRecursoView ..> RecursoController
+GenerarHorarioView ..> HorarioController
+GestionView ..> CompletarGestionController
+GestionView ..> OpcionesMenu
+HorarioController ..> HorarioGenerator
+HorarioController ..> HorarioRepository
+HorarioController ..> Validador
+HorarioGenerator ..> HorarioRepository
+IniciarSesionController ..> Sesion
+IniciarSesionController ..> UsuarioRepository
+ListarAulasView ..> AulasController
+ListarEdificiosView ..> EdificiosController
+ListarRecursosView ..> RecursosController
+LoginView ..> IniciarSesionController
+PreferenciasProfesorController ..> ProfesorRepository
+PreferenciasProfesorController ..> RecursoRepository
+ProfesorController ..> ProfesorRepository
+ProfesoresController ..> ProfesorRepository
+ProgramaController ..> ProgramaRepository
+ProgramasController ..> ProgramaRepository
+RecursoController ..> RecursoRepository
+RecursosController ..> RecursoRepository
+SesionRepository ..> Sesion
+
+' Asociaciones Repositorio -- Entidad
+AulaRepository -- Aula
+CursoRepository -- Curso
+EdificioRepository -- Edificio
+HorarioRepository -- Horario
+ProfesorRepository -- Profesor
+ProgramaRepository -- Programa
+RecursoRepository -- Recurso
+UsuarioRepository -- Usuario
+ProfesorRepository -- AsignacionProfesorCurso
+ProfesorRepository -- PreferenciasRecurso
+HorarioRepository -- Validador
+
+@enduml
