@@ -1,0 +1,34 @@
+@startuml despliegue-objetivo
+
+title Diagrama de Despliegue - Objetivo (contenerización, fase posterior)
+
+actor Administrador
+
+node "Servidor" {
+  node "Docker: nginx" as nginx_env {
+    artifact "Reverse proxy" as nginx
+  }
+  node "Docker: frontend" as fe_env {
+    artifact "React SPA\n(build estático)" as spa
+  }
+  node "Docker: backend" as be_env {
+    artifact "FastAPI app\n(uvicorn)" as api
+  }
+  database "PostgreSQL" as db
+}
+
+Administrador --> nginx : HTTPS :443
+
+nginx --> spa : sirve estáticos
+nginx --> api : proxy /api
+api --> db : SQLAlchemy async\n(TCP)
+
+note bottom of db
+  Propuesta de arquitectura física
+  objetivo, aún no construida.
+  No refleja código actual.
+  Ver despliegue-actual.puml
+  para el estado real.
+end note
+
+@enduml

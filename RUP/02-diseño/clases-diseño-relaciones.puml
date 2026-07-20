@@ -1,0 +1,154 @@
+@startuml clases-diseño-relaciones
+
+left to right direction
+
+' Nota: no hay paquete "Router" ni "Controlador". En FastAPI, la capa HTTP
+' es funcional (endpoints decorados con @router.get/post/...), no orientada
+' a objetos. La cadena real de dependencia es Router (funciones) -> Servicio
+' -> Repositorio -> Modelo. Ver clases-diseño-relaciones.puml.
+
+package Modelo {
+  class Base
+  class Aula
+  class Curso
+  class Edificio
+  class Profesor
+  class ProfesorRecurso
+  class Programa
+  class Recurso
+  class Usuario
+}
+
+package Schema {
+  class AulaBase
+  class AulaCreate
+  class AulaUpdate
+  class AulaResponse
+  class CursoBase
+  class CursoCreate
+  class CursoUpdate
+  class CursoResponse
+  class EdificioBase
+  class EdificioCreate
+  class EdificioUpdate
+  class EdificioResponse
+  class ProfesorBase
+  class ProfesorCreate
+  class ProfesorUpdate
+  class ProfesorResponse
+  class ProgramaBase
+  class ProgramaCreate
+  class ProgramaUpdate
+  class ProgramaResponse
+  class RecursoBase
+  class RecursoCreate
+  class RecursoUpdate
+  class RecursoResponse
+  class UsuarioBase
+  class UsuarioCreate
+  class UsuarioResponse
+  class LoginRequest
+  class Token
+  class TokenData
+  class PreferenciaResponse
+  class PreferenciaUpdate
+  class AsignacionUpdate
+}
+
+package Repositorio {
+  class AulaRepository
+  class CursoRepository
+  class EdificioRepository
+  class ProfesorRepository
+  class ProgramaRepository
+  class RecursoRepository
+  class UsuarioRepository
+  class AsignacionRepository
+  class PreferenciaRepository
+}
+
+package Servicio {
+  class AulaService
+  class CursoService
+  class EdificioService
+  class ProfesorService
+  class ProgramaService
+  class RecursoService
+  class UsuarioService
+  class AsignacionService
+  class PreferenciaService
+}
+
+
+' Herencia y asociaciones del Modelo (SQLAlchemy)
+Base <|-- Aula
+Base <|-- Curso
+Base <|-- Edificio
+Base <|-- Profesor
+Base <|-- ProfesorRecurso
+Base <|-- Programa
+Base <|-- Recurso
+Base <|-- Usuario
+Aula "N" -- "1" Edificio
+Aula "N" -- "N" Recurso
+Curso "N" -- "1" Programa
+Profesor "1" -- "N" ProfesorRecurso
+ProfesorRecurso "N" -- "1" Recurso
+Profesor "N" -- "N" Curso
+
+' Herencia y asociaciones del Schema (Pydantic)
+AulaBase <|-- AulaCreate
+AulaBase <|-- AulaResponse
+CursoBase <|-- CursoCreate
+CursoBase <|-- CursoResponse
+EdificioBase <|-- EdificioCreate
+EdificioBase <|-- EdificioResponse
+ProfesorBase <|-- ProfesorCreate
+ProfesorBase <|-- ProfesorResponse
+ProgramaBase <|-- ProgramaCreate
+ProgramaBase <|-- ProgramaResponse
+RecursoBase <|-- RecursoCreate
+RecursoBase <|-- RecursoResponse
+UsuarioBase <|-- UsuarioCreate
+UsuarioBase <|-- UsuarioResponse
+AulaResponse ..> RecursoResponse
+
+' Dependencias Repositorio -> Modelo
+AulaRepository ..> Aula
+AulaRepository ..> Recurso
+CursoRepository ..> Curso
+EdificioRepository ..> Edificio
+ProfesorRepository ..> Profesor
+ProgramaRepository ..> Programa
+RecursoRepository ..> Recurso
+UsuarioRepository ..> Usuario
+AsignacionRepository ..> Curso
+PreferenciaRepository ..> ProfesorRecurso
+
+' Composición Servicio -> Repositorio y dependencias Servicio -> Schema
+AulaService *-- AulaRepository
+AulaService ..> AulaCreate
+AulaService ..> AulaUpdate
+CursoService *-- CursoRepository
+CursoService ..> CursoCreate
+CursoService ..> CursoUpdate
+EdificioService *-- EdificioRepository
+EdificioService ..> EdificioCreate
+EdificioService ..> EdificioUpdate
+ProfesorService *-- ProfesorRepository
+ProfesorService ..> ProfesorCreate
+ProfesorService ..> ProfesorUpdate
+ProgramaService *-- ProgramaRepository
+ProgramaService ..> ProgramaCreate
+ProgramaService ..> ProgramaUpdate
+RecursoService *-- RecursoRepository
+RecursoService ..> RecursoCreate
+RecursoService ..> RecursoUpdate
+UsuarioService *-- UsuarioRepository
+AsignacionService *-- AsignacionRepository
+AsignacionService *-- ProfesorRepository
+PreferenciaService *-- PreferenciaRepository
+PreferenciaService *-- ProfesorRepository
+PreferenciaService ..> PreferenciaResponse
+
+@enduml

@@ -1,0 +1,30 @@
+@startuml despliegue-actual
+
+title Diagrama de Despliegue - Estado actual (desarrollo local)
+
+actor Administrador
+
+node "Equipo de desarrollo" {
+  node "uvicorn --reload (:8000)" as api_env {
+    artifact "FastAPI app\n(backend/app)" as api
+  }
+  node "vite dev server (:5173)" as web_env {
+    artifact "React SPA\n(frontend/src)" as spa
+  }
+  database "SQLite\npysighor.db" as db
+}
+
+Administrador --> spa : HTTP :5173
+spa --> api : JSON/HTTPS :8000\n(CORS localhost:5173)
+api --> db : SQLAlchemy async\n(archivo local)
+
+note bottom of db
+  Sin contenedores ni servidor real.
+  Contenerización con Docker es
+  fase posterior (ver
+  configuracion-proyecto.md).
+  Ver despliegue-objetivo.puml
+  para la topología planeada.
+end note
+
+@enduml

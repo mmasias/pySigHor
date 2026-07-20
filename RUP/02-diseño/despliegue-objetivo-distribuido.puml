@@ -1,0 +1,35 @@
+@startuml despliegue-objetivo-distribuido
+
+title Diagrama de Despliegue - Objetivo distribuido (frontend y backend en servidores separados)
+
+actor Administrador
+
+node "Servidor Frontend" {
+  node "Docker: nginx" as nginx_env {
+    artifact "React SPA\n(build estático)" as spa
+  }
+}
+
+node "Servidor Backend" {
+  node "Docker: backend" as be_env {
+    artifact "FastAPI app\n(uvicorn)" as api
+  }
+  database "PostgreSQL" as db
+}
+
+Administrador --> spa : HTTPS :443
+
+spa --> api : JSON/HTTPS\n(CORS cross-origin,\nya no localhost)
+api --> db : SQLAlchemy async\n(TCP)
+
+note bottom of db
+  Variante distribuida de
+  despliegue-objetivo.puml:
+  separa el escalado de frontend
+  y backend en hosts distintos.
+  El CORS deja de ser same-origin
+  y pasa a ser cross-origin real.
+  Aún no construida.
+end note
+
+@enduml

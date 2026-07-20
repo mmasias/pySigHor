@@ -1,0 +1,101 @@
+@startuml DER
+
+hide circle
+hide empty members
+
+class Aula {
+  id : int <<PK>>
+  codigo : str
+  nombre : str
+  capacidad : int
+  tipo : str
+  observaciones : str
+  especial : bool
+  bloqueada : bool
+  id_edificio : int <<FK>>
+  created_at : datetime
+  updated_at : datetime
+}
+
+class Edificio {
+  id : int <<PK>>
+  nombre : str
+  direccion : str
+  created_at : datetime
+  updated_at : datetime
+}
+
+class Curso {
+  id : int <<PK>>
+  nombre : str
+  descripcion : str
+  creditos : int
+  horas : int
+  id_programa : int <<FK>>
+  created_at : datetime
+  updated_at : datetime
+}
+
+class Programa {
+  id : int <<PK>>
+  nombre : str
+  descripcion : str
+  activo : bool
+  created_at : datetime
+  updated_at : datetime
+}
+
+class Profesor {
+  id : int <<PK>>
+  nombres : str
+  apellidos : str
+  correo : str
+  telefono : str
+  observaciones : str
+  created_at : datetime
+  updated_at : datetime
+}
+
+class Recurso {
+  id : int <<PK>>
+  nombre : str
+  descripcion : str
+  created_at : datetime
+  updated_at : datetime
+}
+
+class Usuario {
+  id : int <<PK>>
+  username : str
+  hashed_password : str
+  rol : str
+  activo : bool
+  created_at : datetime
+}
+
+class ProfesorRecurso {
+  profesor_id : int <<PK,FK>>
+  recurso_id : int <<PK,FK>>
+  prioridad : int
+}
+
+Aula }--|| Edificio : ubicada en
+Aula }--{ Recurso : ofrece
+Curso }--|| Programa : pertenece a
+Profesor }--{ Curso : dicta
+Profesor ||--{ ProfesorRecurso : prefiere
+Recurso ||--{ ProfesorRecurso
+
+note bottom of Usuario
+  Sin relación con el dominio
+  académico (solo autenticación)
+end note
+
+note bottom of ProfesorRecurso
+  Entidad asociativa: la columna
+  "prioridad" pertenece a la relación
+  Profesor-Recurso, no a ninguna
+  de las dos entidades
+end note
+
+@enduml

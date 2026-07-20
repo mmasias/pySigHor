@@ -1,0 +1,408 @@
+@startuml clases-diseño-metodos-relaciones
+
+left to right direction
+
+package Modelo {
+  class Base
+  class Aula {
+    id : int
+    codigo : str
+    nombre : str
+    capacidad : int
+    tipo : str
+    observaciones : str
+    especial : bool
+    bloqueada : bool
+    id_edificio : int
+    created_at : datetime
+    updated_at : datetime
+  }
+  class Curso {
+    id : int
+    nombre : str
+    descripcion : str
+    creditos : int
+    horas : int
+    id_programa : int
+    created_at : datetime
+    updated_at : datetime
+  }
+  class Edificio {
+    id : int
+    nombre : str
+    direccion : str
+    created_at : datetime
+    updated_at : datetime
+  }
+  class Profesor {
+    id : int
+    nombres : str
+    apellidos : str
+    correo : str
+    telefono : str
+    observaciones : str
+    created_at : datetime
+    updated_at : datetime
+  }
+  class ProfesorRecurso {
+    profesor_id : int
+    recurso_id : int
+    prioridad : int
+  }
+  class Programa {
+    id : int
+    nombre : str
+    descripcion : str
+    activo : bool
+    created_at : datetime
+    updated_at : datetime
+  }
+  class Recurso {
+    id : int
+    nombre : str
+    descripcion : str
+    created_at : datetime
+    updated_at : datetime
+  }
+  class Usuario {
+    id : int
+    username : str
+    hashed_password : str
+    rol : str
+    activo : bool
+    created_at : datetime
+  }
+}
+
+package Schema {
+  class AulaBase {
+    codigo : str
+    nombre : str
+  }
+  class AulaCreate {
+    id_edificio : Optional[int]
+  }
+  class AulaUpdate {
+    codigo : Optional[str]
+    nombre : Optional[str]
+    capacidad : Optional[int]
+    tipo : Optional[str]
+    observaciones : Optional[str]
+    especial : Optional[bool]
+    bloqueada : Optional[bool]
+    id_edificio : Optional[int]
+    ids_recursos : Optional[list[int]]
+  }
+  class AulaResponse {
+    id : int
+    capacidad : int
+    tipo : Optional[str]
+    observaciones : Optional[str]
+    especial : bool
+    bloqueada : bool
+    id_edificio : Optional[int]
+    recursos : list[RecursoResponse]
+  }
+  class CursoBase {
+    nombre : str
+    descripcion : Optional[str]
+    creditos : Optional[int]
+    horas : Optional[int]
+    id_programa : Optional[int]
+  }
+  class CursoCreate
+  class CursoUpdate {
+    nombre : Optional[str]
+    descripcion : Optional[str]
+    creditos : Optional[int]
+    horas : Optional[int]
+    id_programa : Optional[int]
+  }
+  class CursoResponse {
+    id : int
+  }
+  class EdificioBase {
+    nombre : str
+    direccion : Optional[str]
+  }
+  class EdificioCreate
+  class EdificioUpdate {
+    nombre : Optional[str]
+    direccion : Optional[str]
+  }
+  class EdificioResponse {
+    id : int
+  }
+  class ProfesorBase {
+    nombres : str
+    apellidos : str
+    correo : Optional[str]
+    telefono : Optional[str]
+    observaciones : Optional[str]
+  }
+  class ProfesorCreate
+  class ProfesorUpdate {
+    nombres : Optional[str]
+    apellidos : Optional[str]
+    correo : Optional[str]
+    telefono : Optional[str]
+    observaciones : Optional[str]
+  }
+  class ProfesorResponse {
+    id : int
+  }
+  class ProgramaBase {
+    nombre : str
+    descripcion : Optional[str]
+    activo : bool
+  }
+  class ProgramaCreate
+  class ProgramaUpdate {
+    nombre : Optional[str]
+    descripcion : Optional[str]
+    activo : Optional[bool]
+  }
+  class ProgramaResponse {
+    id : int
+  }
+  class RecursoBase {
+    nombre : str
+    descripcion : Optional[str]
+  }
+  class RecursoCreate
+  class RecursoUpdate {
+    nombre : Optional[str]
+    descripcion : Optional[str]
+  }
+  class RecursoResponse {
+    id : int
+  }
+  class UsuarioBase {
+    username : str
+  }
+  class UsuarioCreate {
+    password : str
+  }
+  class UsuarioResponse {
+    id : int
+    activo : bool
+    rol : str
+  }
+  class LoginRequest {
+    username : str
+    password : str
+  }
+  class Token {
+    access_token : str
+    token_type : str
+  }
+  class TokenData {
+    username : Optional[str]
+  }
+  class PreferenciaResponse {
+    recurso_id : int
+    nombre_recurso : str
+    prioridad : int
+  }
+  class PreferenciaUpdate {
+    recurso_ids : list[int]
+  }
+  class AsignacionUpdate {
+    curso_ids : list[int]
+  }
+}
+
+package Repositorio {
+  class AulaRepository {
+    get_all(skip, limit) : List<Aula>
+    get_by_id(aula_id) : Aula
+    get_by_nombre(nombre) : Aula
+    create(aula_data) : Aula
+    update(aula, aula_data) : Aula
+    set_recursos(aula, ids_recursos) : Aula
+    delete(aula) : void
+  }
+  class CursoRepository {
+    get_all(skip, limit) : List<Curso>
+    get_by_id(curso_id) : Curso
+    get_by_nombre(nombre) : Curso
+    get_by_programa(programa_id) : List<Curso>
+    create(curso_data) : Curso
+    update(curso, curso_data) : Curso
+    delete(curso) : void
+  }
+  class EdificioRepository {
+    get_all(skip, limit) : List<Edificio>
+    get_by_id(edificio_id) : Edificio
+    get_by_nombre(nombre) : Edificio
+    create(edificio_data) : Edificio
+    update(edificio, edificio_data) : Edificio
+    delete(edificio) : void
+  }
+  class ProfesorRepository {
+    get_all(skip, limit) : List<Profesor>
+    get_by_id(profesor_id) : Profesor
+    get_by_correo(correo) : Profesor
+    create(profesor_data) : Profesor
+    update(profesor, profesor_data) : Profesor
+    delete(profesor) : void
+  }
+  class ProgramaRepository {
+    get_all(skip, limit) : List<Programa>
+    get_by_id(programa_id) : Programa
+    get_by_nombre(nombre) : Programa
+    create(programa_data) : Programa
+    update(programa, programa_data) : Programa
+    delete(programa) : void
+  }
+  class RecursoRepository {
+    get_all(skip, limit) : List<Recurso>
+    get_by_id(recurso_id) : Recurso
+    get_by_nombre(nombre) : Recurso
+    create(recurso_data) : Recurso
+    update(recurso, recurso_data) : Recurso
+    delete(recurso) : void
+  }
+  class UsuarioRepository {
+    get_by_username(username) : Usuario
+    create(data) : Usuario
+  }
+  class AsignacionRepository {
+    get_cursos_asignados(profesor_id) : List<Curso>
+    replace_all(profesor_id, curso_ids) : List<Curso>
+  }
+  class PreferenciaRepository {
+    get_by_profesor(profesor_id) : List<ProfesorRecurso>
+    replace_all(profesor_id, recurso_ids) : List<ProfesorRecurso>
+  }
+}
+
+package Servicio {
+  class AulaService {
+    listar_aulas(skip, limit) : List<Aula>
+    obtener_aula(aula_id) : Aula
+    crear_aula(aula_data) : Aula
+    actualizar_aula(aula_id, aula_data) : Aula
+    eliminar_aula(aula_id) : void
+  }
+  class CursoService {
+    listar_cursos(skip, limit) : List<Curso>
+    obtener_curso(curso_id) : Curso
+    crear_curso(curso_data) : Curso
+    actualizar_curso(curso_id, curso_data) : Curso
+    eliminar_curso(curso_id) : void
+  }
+  class EdificioService {
+    listar_edificios(skip, limit) : List<Edificio>
+    obtener_edificio(edificio_id) : Edificio
+    crear_edificio(edificio_data) : Edificio
+    actualizar_edificio(edificio_id, edificio_data) : Edificio
+    eliminar_edificio(edificio_id) : void
+  }
+  class ProfesorService {
+    listar_profesores(skip, limit) : List<Profesor>
+    obtener_profesor(profesor_id) : Profesor
+    crear_profesor(profesor_data) : Profesor
+    actualizar_profesor(profesor_id, profesor_data) : Profesor
+    eliminar_profesor(profesor_id) : void
+  }
+  class ProgramaService {
+    listar_programas(skip, limit) : List<Programa>
+    obtener_programa(programa_id) : Programa
+    crear_programa(programa_data) : Programa
+    actualizar_programa(programa_id, programa_data) : Programa
+    eliminar_programa(programa_id) : void
+  }
+  class RecursoService {
+    listar_recursos(skip, limit) : List<Recurso>
+    obtener_recurso(recurso_id) : Recurso
+    crear_recurso(recurso_data) : Recurso
+    actualizar_recurso(recurso_id, recurso_data) : Recurso
+    eliminar_recurso(recurso_id) : void
+  }
+  class UsuarioService {
+    autenticar(username, password) : Usuario
+  }
+  class AsignacionService {
+    obtener_asignaciones(profesor_id) : List<Curso>
+    actualizar_asignaciones(profesor_id, curso_ids) : List<Curso>
+  }
+  class PreferenciaService {
+    obtener_preferencias(profesor_id) : List<PreferenciaResponse>
+    actualizar_preferencias(profesor_id, recurso_ids) : List<PreferenciaResponse>
+  }
+}
+
+
+' Herencia y asociaciones del Modelo (SQLAlchemy)
+Base <|-- Aula
+Base <|-- Curso
+Base <|-- Edificio
+Base <|-- Profesor
+Base <|-- ProfesorRecurso
+Base <|-- Programa
+Base <|-- Recurso
+Base <|-- Usuario
+Aula "N" -- "1" Edificio
+Aula "N" -- "N" Recurso
+Curso "N" -- "1" Programa
+Profesor "1" -- "N" ProfesorRecurso
+ProfesorRecurso "N" -- "1" Recurso
+Profesor "N" -- "N" Curso
+
+' Herencia y asociaciones del Schema (Pydantic)
+AulaBase <|-- AulaCreate
+AulaBase <|-- AulaResponse
+CursoBase <|-- CursoCreate
+CursoBase <|-- CursoResponse
+EdificioBase <|-- EdificioCreate
+EdificioBase <|-- EdificioResponse
+ProfesorBase <|-- ProfesorCreate
+ProfesorBase <|-- ProfesorResponse
+ProgramaBase <|-- ProgramaCreate
+ProgramaBase <|-- ProgramaResponse
+RecursoBase <|-- RecursoCreate
+RecursoBase <|-- RecursoResponse
+UsuarioBase <|-- UsuarioCreate
+UsuarioBase <|-- UsuarioResponse
+AulaResponse ..> RecursoResponse
+
+' Dependencias Repositorio -> Modelo
+AulaRepository ..> Aula
+AulaRepository ..> Recurso
+CursoRepository ..> Curso
+EdificioRepository ..> Edificio
+ProfesorRepository ..> Profesor
+ProgramaRepository ..> Programa
+RecursoRepository ..> Recurso
+UsuarioRepository ..> Usuario
+AsignacionRepository ..> Curso
+PreferenciaRepository ..> ProfesorRecurso
+
+' Composición Servicio -> Repositorio y dependencias Servicio -> Schema
+AulaService *-- AulaRepository
+AulaService ..> AulaCreate
+AulaService ..> AulaUpdate
+CursoService *-- CursoRepository
+CursoService ..> CursoCreate
+CursoService ..> CursoUpdate
+EdificioService *-- EdificioRepository
+EdificioService ..> EdificioCreate
+EdificioService ..> EdificioUpdate
+ProfesorService *-- ProfesorRepository
+ProfesorService ..> ProfesorCreate
+ProfesorService ..> ProfesorUpdate
+ProgramaService *-- ProgramaRepository
+ProgramaService ..> ProgramaCreate
+ProgramaService ..> ProgramaUpdate
+RecursoService *-- RecursoRepository
+RecursoService ..> RecursoCreate
+RecursoService ..> RecursoUpdate
+UsuarioService *-- UsuarioRepository
+AsignacionService *-- AsignacionRepository
+AsignacionService *-- ProfesorRepository
+PreferenciaService *-- PreferenciaRepository
+PreferenciaService *-- ProfesorRepository
+PreferenciaService ..> PreferenciaResponse
+
+@enduml
