@@ -557,4 +557,46 @@ Se creó el artículo 025 en `main` cerrando el ciclo:
 
 ---
 
+## Conversación 53: ARTEFACTOS.md — catálogo de artefactos de un TFG de informática
+
+**Fecha**: 2026-07-20 a 2026-07-21
+**Ramas de trabajo**: `main` (portada y artefactos tecnológicamente neutros) + `diseño-fastapi-react` (artefactos de diseño/código real)
+**Participantes**: Manuel, Claude Sonnet 5
+
+### Contexto y origen
+
+Manuel pidió mirar `github.com/mmasias/pyReposU` (TFG de un alumno, Juan José Cobo, auditoría de repos GitHub) como referencia. Tras explorar su estructura completa (Anexos con estado del arte/brainstorming, Documentación previa/posterior al código, detalle de casos de uso, README-portada con marco teórico y conclusiones), se decidió construir `ARTEFACTOS.md` en la raíz de `main`.
+
+**Redefinición importante de propósito** (al cierre de la sesión): `ARTEFACTOS.md` **no es una portada-síntesis de pySigHor** — es un **catálogo demo de qué artefactos debe traer un TFG de informática**, usando pySigHor como vehículo. Por eso no lleva prosa de orientación (la audiencia son ingenieros de software) ni sección de conclusiones (no hay tesis que concluir, es un catálogo).
+
+### Estructura construida
+
+1. **Modelo del dominio**: diagrama de dominio existente + dos diagramas de estado nuevos (`modelosUML/curso-estados.puml`, `modelosUML/aula-estados.puml`) reconstruidos desde el legacy VB3 (`M_Aulas.Bloqueada/Especial`, `M_Cursos.H`, `T_AulaOcupada`, `S_CursosHModificado`) + enlace al glosario ya existente en `modelo-dominio.md` (sin duplicar contenido).
+2. **Requisitos**: actores y CdU completos, diagrama de contexto, detalle de 3 CdU elegidos — `crearAula()`, `configurarPreferenciasProfesor()`, `editarAula()` (sustituyó a `asignarProfesorACurso()` por redundancia visual). Patrón de tabla a dos columnas: detalle-especificación | interfaz-wireframe.
+3. **Análisis**: colaboración MVC de los 3 CdU + **`RUP/01-analisis/clases-analisis*.puml`** (4 archivos nuevos, sintetizados desde los 32 `colaboracion.puml` vía grep: inventario de 73 clases, +métodos, +75 relaciones, +ambas). Ningún diagrama inventado.
+4. **Diseño** (rama `diseño-fastapi-react`): secuencia de los 3 CdU + **`clases-diseño*.puml` reconstruido entero** (sustituyó el obsoleto "Iteración 1" de 2 entidades) leyendo los 44 archivos reales del backend (models/schemas/repositories/services/routers) — 60 clases reales, sin routers (no son clases en FastAPI, son funciones: hallazgo documentado explícitamente). + **`DER.puml`** nuevo (UML clásico con pata de gallo, tras descartar diamantes de Chen por problemas de sintaxis) + **3 diagramas de despliegue** nuevos (`despliegue-actual.puml` real sin Docker, `despliegue-objetivo.puml` un servidor, `despliegue-objetivo-distribuido.puml` dos servidores).
+5. **Desarrollo**: enlaces a artefactos de código real de los 3 CdU.
+
+**Disciplina excluida a propósito**: Pruebas. Manuel reconoció que es su propio pendiente ("ni siquiera lo enseño"), así que no se incluye ninguna sección — decisión consciente, no vacío a rellenar en el futuro.
+
+### Correcciones de Manuel durante la sesión (todas aplicadas)
+
+- Detalle de CdU ≠ interfaz — van juntos en columnas, no como secciones separadas.
+- Diagrama de clases sin relaciones es "inventario", no diagrama — se crearon archivos nuevos con relaciones en vez de regenerar los de solo-nombres, para que el contraste quede visible a los alumnos.
+- DER: "modo clásico UML" (pata de gallo), no diamantes de Chen.
+- **Claude nunca debe generar ni colocar el `.svg` final en el repo** — eso lo hace Manuel siempre, incluso teniendo `plantuml` local para validar sintaxis. Ocurrió una vez con `DER.svg` y se revirtió. Reforzado en memoria.
+
+### Estado final
+
+- `main`: commits `894a7b7`, `4c18d13`, `a5cc6a8` — `ARTEFACTOS.md` completo, `modelosUML/*-estados.puml`, `RUP/01-analisis/clases-analisis*.puml` (4 archivos) + sus SVG.
+- `diseño-fastapi-react`: commits `9cafe9d`, `aef3971` (y anteriores) — `clases-diseño*.puml` reconstruido, `DER.puml`, `despliegue-*.puml` (3 archivos) + todos sus SVG generados por Manuel.
+- Todo pusheado, árbol de trabajo limpio en ambas ramas.
+
+### Pendientes
+
+- Ninguno abierto sobre `ARTEFACTOS.md` — Manuel lo dio por cerrado explícitamente.
+- Sigue pendiente de sesiones anteriores: D12 (selectores FK), continuar `generarHorario`/`consultarHorario`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance del proyecto*
