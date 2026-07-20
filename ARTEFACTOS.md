@@ -157,8 +157,29 @@
 
 <div align=center>
 
-|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño.svg)
-|-
+|Inventario (solo nombres)|Inventario + atributos/métodos|
+|:-:|:-:|
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño.svg)|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño-metodos.svg)|
+|**Diagrama de clases** (+ relaciones)|**Diagrama de clases** + atributos/métodos|
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño-relaciones.svg)|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño-metodos-relaciones.svg)|
+
+</div>
+
+### Diagrama de despliegue
+
+<div align=center>
+
+|Estado actual (desarrollo local)|
+|:-:|
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-actual.svg)|
+
+</div>
+
+<div align=center>
+
+|Objetivo (un servidor, Docker)|Objetivo distribuido (dos servidores)|
+|:-:|:-:|
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-objetivo.svg)|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-objetivo-distribuido.svg)|
 
 </div>
 
