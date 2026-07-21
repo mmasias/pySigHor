@@ -7,7 +7,8 @@
 <div align=center>
 
 |![](/images/RUP/00-casos-uso/00-modelo-del-dominio/modelo-dominio.svg)
-|-
+|-:
+<sub>[*Código fuente*](/RUP/00-casos-uso/00-modelo-del-dominio/modelo-dominio.puml)</sub>
 
 </div>
 
