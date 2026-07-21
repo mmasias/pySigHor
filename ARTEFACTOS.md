@@ -62,9 +62,8 @@
 
 <div align=center>
 
-|Detalle|Prototipo|
-|-:|-:|
 |![](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula.svg)|![](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula-wireframe.svg)|
+|-:|-:|
 |<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/crearAula/especificacion.puml)</sup>|<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/crearAula/wireframes.puml)</sup>|
 
 </div>
@@ -73,9 +72,8 @@
 
 <div align=center>
 
-|Detalle|Prototipo|
-|-:|-:|
 |![](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor.svg)|![](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor-wireframe.svg)|
+|-:|-:|
 |<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/especificacion.puml)</sup>|<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/wireframes.puml)</sup>|
 
 </div>
@@ -84,9 +82,8 @@
 
 <div align=center>
 
-|Detalle|Prototipo|
-|-:|-:|
 |![](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula.svg)|![](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula-wireframe.svg)|
+|-:|-:|
 |<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/editarAula/especificacion.puml)</sup>|<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/editarAula/wireframes.puml)</sup>|
 
 </div>
@@ -95,9 +92,8 @@
 
 <div align=center>
 
-|Detalle|Prototipo (GUI)|Prototipo (API REST)|
-|-:|-:|-:|
 |![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas.svg)|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)|[Ver contrato REST](/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo-api.md#endpoint-principal)|
+|-:|-:|-:|
 |<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/abrirAulas/especificacion.puml)</sup>|<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo.puml)</sup>|
 
 </div>
@@ -150,12 +146,12 @@
 
 <div align=center>
 
-|Inventario (solo nombres)|Inventario + métodos|
-|-:|-:|
 |![](/images/RUP/01-analisis/clases-analisis.svg)|![](/images/RUP/01-analisis/clases-analisis-metodos.svg)|
+|-:|-:|
 |<sup>[*Código fuente*](/RUP/01-analisis/clases-analisis.puml)</sup>|<sup>[*Código fuente*](/RUP/01-analisis/clases-analisis-metodos.puml)</sup>|
-|**Diagrama de clases** (+ relaciones)|**Diagrama de clases** + métodos|
+
 |![](/images/RUP/01-analisis/clases-analisis-relaciones.svg)|![](/images/RUP/01-analisis/clases-analisis-metodos-relaciones.svg)|
+|-:|-:|
 |<sup>[*Código fuente*](/RUP/01-analisis/clases-analisis-relaciones.puml)</sup>|<sup>[*Código fuente*](/RUP/01-analisis/clases-analisis-metodos-relaciones.puml)</sup>|
 
 </div>
@@ -210,12 +206,12 @@
 
 <div align=center>
 
-|Inventario (solo nombres)|Inventario + atributos/métodos|
-|-:|-:|
 |![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño.svg)|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño-metodos.svg)|
+|-:|-:|
 |<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/clases-diseño.puml)</sup>|<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/clases-diseño-metodos.puml)</sup>|
-|**Diagrama de clases** (+ relaciones)|**Diagrama de clases** + atributos/métodos|
+
 |![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño-relaciones.svg)|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/clases-diseño-metodos-relaciones.svg)|
+|-:|-:|
 |<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/clases-diseño-relaciones.puml)</sup>|<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/clases-diseño-metodos-relaciones.puml)</sup>|
 
 </div>
@@ -232,21 +228,33 @@
 
 ### Diagrama de despliegue
 
+#### Estado actual (desarrollo local)
+
 <div align=center>
 
-|Estado actual (desarrollo local)|
-|-:|
 |![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-actual.svg)|
+|-:|
 |<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/despliegue-actual.puml)</sup>|
 
 </div>
 
+#### Objetivo (un servidor, Docker)
+
 <div align=center>
 
-|Objetivo (un servidor, Docker)|Objetivo distribuido (dos servidores)|
-|-:|-:|
-|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-objetivo.svg)|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-objetivo-distribuido.svg)|
-|<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/despliegue-objetivo.puml)</sup>|<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/despliegue-objetivo-distribuido.puml)</sup>|
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-objetivo.svg)
+|-:|
+|<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/despliegue-objetivo.puml)</sup>
+
+</div>
+
+#### Objetivo distribuido (dos servidores)
+
+<div align=center>
+
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/despliegue-objetivo-distribuido.svg)|
+|-:|
+|<sup>[*Código fuente*](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/02-diseño/despliegue-objetivo-distribuido.puml)</sup>|
 
 </div>
 
