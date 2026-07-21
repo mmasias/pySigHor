@@ -86,7 +86,7 @@
 
 |Detalle|Prototipo (GUI)|Prototipo (API REST)|
 |:-:|:-:|:-:|
-|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas.svg)|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)|[Ver contrato REST](/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo-api.md)|
+|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas.svg)|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)|[Ver contrato REST](/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo-api.md#endpoint-principal)|
 
 </div>
 
