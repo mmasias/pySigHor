@@ -11,6 +11,10 @@
 
 </div>
 
+### Glosario
+
+[Ver glosario completo](/RUP/00-casos-uso/00-modelo-del-dominio/modelo-dominio.md#glosario)
+
 ### Diagrama de estados de entidades
 
 <div align=center>
@@ -19,10 +23,6 @@
 |-|-
 
 </div>
-
-### Glosario
-
-[Ver glosario completo](/RUP/00-casos-uso/00-modelo-del-dominio/modelo-dominio.md#glosario)
 
 ## Requisitos
 
@@ -54,8 +54,9 @@
 
 <div align=center>
 
-|![](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula.svg)|![](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula-wireframe.svg)
-|-|-
+|Detalle|Prototipo|
+|:-:|:-:|
+|![](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula.svg)|![](/images/RUP/00-casos-uso/02-detalle/crearAula/crearAula-wireframe.svg)|
 
 </div>
 
@@ -63,8 +64,9 @@
 
 <div align=center>
 
-|![](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor.svg)|![](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor-wireframe.svg)
-|-|-
+|Detalle|Prototipo|
+|:-:|:-:|
+|![](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor.svg)|![](/images/RUP/00-casos-uso/02-detalle/configurarPreferenciasProfesor/configurarPreferenciasProfesor-wireframe.svg)|
 
 </div>
 
@@ -72,8 +74,9 @@
 
 <div align=center>
 
-|![](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula.svg)|![](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula-wireframe.svg)
-|-|-
+|Detalle|Prototipo|
+|:-:|:-:|
+|![](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula.svg)|![](/images/RUP/00-casos-uso/02-detalle/editarAula/editarAula-wireframe.svg)|
 
 </div>
 
