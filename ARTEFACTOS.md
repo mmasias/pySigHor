@@ -80,6 +80,16 @@
 
 </div>
 
+#### CdU 4: abrirAulas()
+
+<div align=center>
+
+|Detalle|Prototipo (GUI)|Prototipo (API REST)|
+|:-:|:-:|:-:|
+|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas.svg)|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)|[Ver contrato REST](/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo-api.md)|
+
+</div>
+
 ## Análisis
 
 ### Analisis de casos de uso
@@ -107,6 +117,15 @@
 <div align=center>
 
 |![](/images/RUP/01-analisis/casos-uso/editarAula/editarAula-analisis.svg)
+|-
+
+</div>
+
+#### CdU 4: abrirAulas()
+
+<div align=center>
+
+|![](/images/RUP/01-analisis/casos-uso/abrirAulas/abrirAulas-analisis.svg)
 |-
 
 </div>
@@ -152,6 +171,15 @@
 <div align=center>
 
 |![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/casos-uso/editarAula/secuencia.svg)
+|-
+
+</div>
+
+#### CdU 4: abrirAulas()
+
+<div align=center>
+
+|![](https://raw.githubusercontent.com/mmasias/pySigHor/diseño-fastapi-react/images/RUP/02-diseño/casos-uso/abrirAulas/secuencia.svg)
 |-
 
 </div>
@@ -208,3 +236,7 @@
 #### CdU 3: editarAula()
 
 [Ver artefactos de código](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/03-desarrollo/casos-uso/editarAula/README.md)
+
+#### CdU 4: abrirAulas()
+
+[Ver artefactos de código](https://github.com/mmasias/pySigHor/blob/diseño-fastapi-react/RUP/03-desarrollo/casos-uso/abrirAulas/README.md)
