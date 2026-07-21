@@ -93,7 +93,7 @@
 <div align=center>
 
 |![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas.svg)|![](/images/RUP/00-casos-uso/02-detalle/abrirAulas/abrirAulas-wireframe.svg)|[Ver contrato REST](/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo-api.md#endpoint-principal)|
-|-:|-:|-:|
+|-:|-:|:-:|
 |<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/abrirAulas/especificacion.puml)</sup>|<sup>[*Código fuente*](/RUP/00-casos-uso/02-detalle/abrirAulas/prototipo.puml)</sup>|
 
 </div>
