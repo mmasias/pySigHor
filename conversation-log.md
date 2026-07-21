@@ -599,4 +599,34 @@ Manuel pidió mirar `github.com/mmasias/pyReposU` (TFG de un alumno, Juan José 
 
 ---
 
+## Conversación 54: Cuarto CdU de ejemplo (abrirAulas) y enlaces de código fuente en ARTEFACTOS.md
+
+**Fecha**: 2026-07-21
+**Rama de trabajo**: `main`
+**Participantes**: Manuel, Claude Sonnet 5
+
+### Contexto
+
+Continuación directa de la Conversación 53 en la misma jornada. La sesión terminó de forma abrupta (crash del cliente) tras dejar el trabajo ya commiteado y pusheado; esta entrada documenta lo que ocurrió entre el cierre nominal de la Conversación 53 y el crash, reconstruido a partir del historial de git (`conversation-log.md` no se había actualizado en el momento del corte).
+
+### Cambios aplicados a `ARTEFACTOS.md`
+
+1. **Cuarto CdU de detalle: `abrirAulas()`** — añadido en las cuatro secciones (Requisitos, Análisis, Diseño, Desarrollo), replicando el patrón de los otros tres. Caso distinto a los anteriores: expone tanto un prototipo GUI (wireframe) como un prototipo de API REST puro (endpoint sin interfaz gráfica), por lo que su tabla de detalle tiene tres columnas (Detalle | Prototipo GUI | Prototipo API REST) en vez de dos.
+2. **Reordenado el Glosario**: se movió antes de "Diagrama de estados de entidades" en la sección Modelo del dominio.
+3. **Etiquetado de columnas** en las tablas de detalle de CdU: cabeceras explícitas "Detalle" / "Prototipo" (antes las tablas no tenían fila de cabecera).
+4. **Enlaces de código fuente reformateados**: pasaron de estar inline dentro de la misma celda de la imagen (`<br>` + enlace) a ocupar una fila de tabla propia bajo cada imagen o diagrama, consistente con el patrón ya usado en las tablas de una sola columna. Aplicado en las cuatro secciones (Requisitos, Análisis, Diseño, Desarrollo).
+
+### Estado final
+
+- `main`: commits `6d2fb58`, `93d6519`, `7a84513`, `ff719b6`, `1c0049e`, `023e495`, `7726a3b` (7 commits atómicos tras el cierre nominal de la Conversación 53).
+- `diseño-fastapi-react`: sin cambios nuevos en esta sesión; los artefactos de `abrirAulas()` (especificación, prototipo, colaboración, secuencia, README de desarrollo) ya existían de trabajo previo y solo se enlazaron desde `main`.
+- Todo pusheado, árbol de trabajo limpio. Verificado tras el crash: no hubo pérdida de trabajo, el corte fue puramente de la sesión conversacional.
+
+### Pendientes
+
+- Ninguno abierto sobre `ARTEFACTOS.md`.
+- Sigue pendiente de sesiones anteriores: D12 (selectores FK), continuar `generarHorario`/`consultarHorario`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance del proyecto*
