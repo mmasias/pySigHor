@@ -4524,6 +4524,178 @@ Diseño (Arquitectura + Clases + Secuencia + Configuración)
 
 ---
 
+## Conversación 50: Orquestación cruzada con pyCelda -- UI de autoría Profesor, IDOR y despliegue
+**Fecha**: 2026-08-22
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor)
+
+### Contexto de la Sesión
+
+Sesión sin trabajo directo sobre el código de `pySigHor` -- esta sesión operó como nodo orquestador/revisor del proyecto hermano `pyCelda` (`/home/manuel/misRepos/_PROYECTOS/pyCelda`, GitHub `mmasias/pyCelda`), coordinando con las sesiones `Claude-pyCelda` (constructora) y `Claude-Prometeus` (despliegue en el servidor de producción) vía `SendMessage`. Rol ya establecido en sesiones previas (ver memoria de proyecto): pyCelda construye, pySigHor verifica cada lote por fork independiente contra repo/ejecución real, Manuel decide cada merge y cada ciclo de despliegue.
+
+### Desarrollo Principal
+
+#### 1. **Cierre de la UI de autoría `Profesor` (issue #93 de pyCelda)**
+Retomado el fleco que quedó abierto la sesión anterior: `AbrirGuia.tsx` del lado `Profesor` seguía en el esqueleto mínimo de la rebanada de calibración (18/08), con botones/campos hardcodeados "Fuera de alcance". Verificado que los wireframes de los 14 CU de `Profesor` ya existían completos -- transferencia de wireframe ya cerrado a pantallas reales, no decisión de diseño nueva. Reparto en 3 lotes (acciones directas sobre `Guia`; CRUD `PonderacionEvaluacion`; CRUD `ReferenciaBibliografica`), delegado por pyCelda a OpenCode, verificado por pySigHor con fork independiente en cada uno (diff real, `pytest`, `tsc`, tests reales de "profesor no dueño"). PRs #98/#99/#100 mergeados sin discrepancias de fondo.
+
+#### 2. **Issue #96 -- IDOR del lado `Profesor`, resuelto intercalado por lote**
+pyCelda encontró, al planificar, que el gap de pertenencia (mismo patrón que el issue #86 ya conocido) cubría también `Profesor`, más 2 endpoints sin autenticación en absoluto. Decisión de pySigHor, avalada por Manuel: en vez de posponer el fix hasta cerrar los 3 lotes, intercalarlo en el mismo PR que cada lote ya tocaba el fichero correspondiente -- razón: ya hay 30 `Profesor` reales en producción (a diferencia del precedente #86, un solo `DirectorGrado` de prueba).
+
+#### 3. **Decisión de diseño en el camino: `sessionStorage` sobre `location.state`**
+Para que `eliminarPonderacionEvaluacion()`/`eliminarReferenciaBibliografica()` (sin endpoint de backend por decisión previa) sobrevivan a la navegación entre pantallas, pyCelda propuso `location.state` de React Router; pySigHor detectó que es insuficiente porque el listado tiene saltos intermedios hacia Crear/Abrir que perderían el estado acumulado -- confirmado contra los wireframes antes de objetar. Adoptado `sessionStorage` keyed por `guiaId` en su lugar.
+
+#### 4. **Fleco final: aterrizaje de `Profesor` tras login**
+Al revisar la bitácora publicada, Manuel notó que faltaba verificar si `Profesor` aterrizaba en `mis-asignaturas-grado` tras iniciar sesión. Verificado que no -- gap real, documentado en el propio código como pendiente desde la rebanada de calibración. Cerrado por pyCelda en PR #102, verificado, mergeado, desplegado.
+
+#### 5. **Despliegue en producción, dos ciclos**
+Sin cambio de esquema de BD en ningún PR de la sesión (verificado explícitamente en cada uno -- criterio nuevo fijado por Manuel hoy: si algún PR futuro toca el modelo, el despliegue debe ser extraer datos reales→aplicar esquema→reimportar, no un recreate, para no perder los datos ya corregidos que ya están en producción). Claude-Prometeus desplegó primero el rango `eb91821`→`447032c` (PRs #97-#100) y después `447032c`→`f2576d2` (PR #102), ambos con `GET /api/health` OK verificado independientemente.
+
+#### 6. **Bitácora de la sesión, discussion #101**
+Publicada por pySigHor (mismo patrón que #90/#61), revisada por pyCelda y Prometeus con correcciones de precisión incorporadas. Incidente menor en el camino: el primer intento de publicación salió con el body roto (error de sintaxis `-f body=@fichero` en una mutación GraphQL cruda), detectado por Prometeus, corregido, peaje pagado en la discussion #84 ("fustigamiento", convención ya establecida del proyecto pyCelda) -- por los tres agentes, incluido pySigHor, por no haber caído en el gap del aterrizaje de `Profesor` hasta que lo notó Manuel.
+
+#### 7. **Extra fuera de alcance de #93: doble identidad `DirectorGrado`/`Profesor` (PR #103)**
+Manuel retomó, ya cerrada la bitácora inicial, un hallazgo aparcado desde el 19/08: qué pasa cuando una misma persona es `DirectorGrado` y también `Profesor` a la vez -- caso real en dev (`manuel.masias@uneatlantico.es` tiene fila en ambas tablas), no hipotético. Reflexión de arquitectura antes de construir: no era un `<<choice>>` que exigiera retroceso formal a Requisitos (como `semestreDefault`, discussion #72) -- mismo patrón ya cerrado en discussion #47/#48 (`abrirAsignaturasGrado()` como `<<extend>>` condicionado por rol, tercer punto de extensión, no CU nuevo). pySigHor redactó el fragmento de documentación (comentario en el diagrama de contexto + párrafo en el README del CU) y el brief técnico, se lo pasó a pyCelda como borrador. pyCelda lo verificó contra el `.puml` real antes de aplicar -- el estado `ASIGNATURAS_GRADO_ABIERTO` ya tenía dos entradas distintas desde discussion #47, confirmó que el edge nuevo reconectaba con el sentido *heredado* correcto y añadió un comentario aclaratorio de las tres entradas. PR #103 (`de41909`): `es_tambien_profesor` en `get_current_rol()`, enlace condicional en `Grados.tsx`, 127/127 tests, `tsc` limpio, sin tocar `models/` -- verificado por pySigHor sin fork, mergeado, desplegado por Prometeus en un tercer ciclo.
+
+### Estado del Proyecto (pyCelda, no pySigHor)
+
+- **Issue #93**: cerrado -- 3 lotes de UI `Profesor` en producción.
+- **Issue #96**: cerrado -- IDOR de `Profesor` resuelto en los 3 lotes.
+- **Issue #86**: sigue abierto -- IDOR del lado `DirectorGrado`, pendiente sin fecha.
+- **PR #103**: cerrado -- doble identidad `DirectorGrado`/`Profesor`, hallazgo del 19/08 resuelto.
+- **Pendiente sin fecha**: retroceso a Requisitos de `editarAsignaturaGrado()`; revisión manual de Manuel sobre el checklist reorganizado por actor de #93.
+- **Producción**: `https://mmasias.cloud-ip.cc/` en `de41909`, health-check OK.
+
+### Para Próxima Sesión
+
+Sin tareas activas de `pySigHor` en sí -- el próximo trabajo de esta sesión, si lo hay, depende de que Manuel retome alguno de los pendientes de `pyCelda` listados arriba, o pida trabajo directo sobre este repositorio. Manuel indicó que la siguiente actividad será probar manualmente la UI usando el checklist reorganizado del issue #93.
+
+---
+
+## Conversación 51: Corrección de alcance de memoria, lecciones meta de orquestación, y tres ajustes de calentamiento en pyCelda antes de la revisión CRUD
+**Fecha**: 2026-08-22
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor), Claude-pyCelda (constructora), Claude-Prometeus (despliegue)
+
+### Contexto de la Sesión
+
+Sin trabajo directo sobre código de `pySigHor`. Continuación del rol de orquestador/revisor de `pyCelda` (ver Conversación 50), con una corrección de arquitectura de memoria al inicio y tres ajustes menores de UI como calentamiento antes de que Manuel empiece la revisión profunda de CRUD sobre entidades diversas de `pyCelda`.
+
+### Desarrollo Principal
+
+#### 1. **Corrección de arquitectura de memoria multi-sesión**
+Manuel corrigió que esta sesión venía guardando en su propio directorio de memoria (`~/.claude/projects/.../pysighor/memory/`, symlink real hacia `myClaudeContext/projects/.../pysighor/memory/`) hechos específicos de `pyCelda` -- error de alcance. La memoria de cada proyecto vive en el directorio de su propia sesión nombrada (`Claude-pyCelda`, `Claude-Prometeus`); pySigHor dirige vía `SendMessage`/`ListAgents`, no almacena. Entradas antiguas de pyCelda en la memoria de pySigHor quedaron marcadas como residuo pendiente de migrar, sin borrar sin más instrucción.
+
+#### 2. **Vistazo puntual autorizado a la memoria de pyCelda -- extracción de lecciones meta de orquestación**
+Manuel autorizó explícitamente, por única vez, revisar la memoria de la sesión `Claude-pyCelda` (`myClaudeContext/projects/.../pyCelda/memory/`) para extraer aprendizajes generalizables de orquestación, no hechos del proyecto. Cinco memorias nuevas guardadas en pySigHor: malla multi-sesión y no relay de autorización entre peers (`feedback_malla_multisesion_confirmacion_propia`), diseñar antes de delegar a un becario (`feedback_disenar_antes_de_delegar`), mecánica de invocación de OpenCode -- workdir explícito (`feedback_opencode_workdir_explicito`), calibrar el esfuerzo de verificación (`feedback_calibrar_verificacion`), y verificar el punto de entrada real de un flujo construido por lotes (`feedback_verificar_punto_entrada_flujo`).
+
+#### 3. **Tres ajustes de UI en pyCelda, diseñados por pySigHor y delegados a Claude-pyCelda**
+Como forma de "cuantificar el alcance" antes de la revisión CRUD profunda, Manuel propuso tres ajustes pequeños que ejercitan el mismo tipo de relaciones que la revisión va a tocar. Cada uno se trabajó leyendo el código real de `pyCelda` (no ocurrencias sin verificar), resolviendo ambigüedades de diseño antes de delegar (ver [[feedback_disenar_antes_de_delegar]]):
+
+- **Ítem 1** -- `/grados/:id/guias` (`ConsultarEstadoGuias.tsx`): columnas `AsignaturaGrado`/`Profesorado`, hoy con placeholder literal "Fuera de alcance de esta rebanada", rellenas con datos reales. Decisión: sin columnas nuevas, nombre de asignatura sin fallback (ya resuelto de antes), profesorado en emails coma-separados con fallback "Sin profesorado asignado" -- aplicado también a `AsignaturasGrado.tsx`, que tenía el mismo bug de celda en blanco.
+- **Ítem 2** -- `/grados/:id/guias/:id` (`AbrirGuia.tsx`): completar semestre y fecha de PDF (ya venían del backend, solo faltaba pintarlos), nombre/contenido de asignatura y tablas de resultados de aprendizaje/metodologías docentes (requería exponer `Guia.asignatura_grado` en el schema, un solo cambio resolvía las cuatro filas). `fecha_creacion` se quedó fuera de alcance -- no existe como columna, decisión de no meter migración ahora. Añadido en el camino: columna "Sistema de evaluación" mostraba el id crudo en vez de un nombre -- corregido a `tipo -- descripcion` (patrón ya existente en `CrearPonderacionEvaluacion.tsx`), mismo fix aplicado también en `PonderacionesEvaluacion.tsx` por tener el bug idéntico.
+- **Ítem 3** -- `MisAsignaturasGrado.tsx`: un DirectorGrado que entra a ver sus asignaturas como Profesor no tenía forma de volver a `/grados`. Simétrico al botón ya existente en `Grados.tsx`, pero sin necesidad de campo nuevo de backend -- `SesionResponse.rol === "director_grado"` ya es señal suficiente porque `get_current_rol()` prioriza esa identidad de forma absoluta.
+
+Cada ítem siguió el mismo ciclo: pySigHor diseña -> Claude-pyCelda construye -> pySigHor revisa contra `git diff` real (no autoinforme) -> Manuel decide commit/push -> pySigHor o Manuel avisa a Claude-Prometeus -> despliegue verificado. Hallazgos menores en la revisión del ítem 1+2: eager-load faltante en `PonderacionEvaluacionRepository.obtener()` (corregido), `uv.lock` untracked dejado fuera del commit. Extra por iniciativa de Claude-pyCelda, avalado sin revertir: mismo fix de nombre de sistema de evaluación aplicado también en `PonderacionEvaluacion.tsx` (pantalla de detalle individual).
+
+#### 4. **Incidente de despliegue: frontend horneado dentro de la imagen `caddy`**
+Tras el primer push (`3744a3d`, más `c517e80` corrigiendo un `Deploy:` trailer olvidado), Manuel reportó no ver ningún cambio en producción pese a `/api/health` en verde. Causa real, diagnosticada por Claude-Prometeus: el stack no tiene contenedor `frontend` propio -- el bundle se compila dentro de un multi-stage build de la imagen `caddy`, y el deploy anterior solo había reconstruido `backend`. En el camino, un primer intento de verificar con `grep` de una frase esperada dio falso positivo por ser substring de otra cadena ya existente; la señal decisiva fue comparar `docker inspect --created` del contenedor contra la fecha del commit. Resultado: nueva **Regla 5** en `DEPLOY.md` (reconstruir siempre `caddy` si el rango de commits toca `frontend/`), propuesta por Prometeus, avalada por pySigHor, confirmada por Manuel, y ya validada con éxito en el despliegue del ítem 3 (`36f2935`).
+
+#### 5. **Corrección de estilo: español peruano, no voseo**
+Manuel corrigió un uso de "vos" dirigido a él ("lo compartimos vos y yo") -- el usuario habla español peruano (tuteo), no rioplatense. Guardado como preferencia global de comunicación, no específica de proyecto.
+
+### Estado del Proyecto (pyCelda, no pySigHor)
+
+- Tres ajustes de UI en producción: columnas de guías del grado, detalle completo de guía + nombre de sistema de evaluación, botón "Ver mis grados". Commits `3744a3d`/`c517e80`/`36f2935` en `main`, desplegados y verificados (`/api/health` + verificación de bundle real).
+- `DEPLOY.md`: nueva Regla 5 (reconstruir `caddy` si el diff toca `frontend/`), commit `1117b9c` de Prometeus, integrado sin conflicto por Claude-pyCelda.
+- Pendientes sin fecha (heredados de Conversación 50, sin cambios esta sesión): issue #86 (IDOR `DirectorGrado`), retroceso a Requisitos de `editarAsignaturaGrado()`.
+- Ciclo cerrado, sin pendientes de esta sesión -- felicitación cruzada de Manuel (vía pySigHor) a Claude-pyCelda y Claude-Prometeus.
+
+### Para Próxima Sesión
+
+Manuel inicia la revisión profunda de CRUD sobre entidades diversas de `pyCelda` -- los tres ajustes de esta sesión fueron calentamiento explícito para esa revisión (ejercitan las mismas relaciones `Guia`/`AsignaturaGrado`/`Profesor`/`SistemaEvaluacion` que la revisión va a tocar). Sin tareas activas de `pySigHor` en sí.
+
+---
+
+## Conversación 52: Bug real del issue #93 (fantasma de `vinculada=False`), fix en dos rondas, despliegue y reset de datos de producción
+**Fecha**: 2026-08-22/23
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor), Claude-pyCelda (constructora), Claude-Prometeus (despliegue)
+
+### Contexto de la Sesión
+
+Continuación directa de la Conversación 51, misma sesión de pySigHor. Tras cerrar los tres ajustes de calentamiento, Manuel señaló el último comentario del issue #93 de `pyCelda` (2026-08-22T22:26, guía id=2) como el único error significativo detectado hasta entonces, y pidió que pySigHor lo entendiera antes de delegarlo.
+
+### Desarrollo Principal
+
+#### 1. **Diagnóstico del bug -- fantasma de ponderaciones/referencias "eliminadas"**
+Manuel reportó: al eliminar una `PonderacionEvaluacion` y crear una nueva bajo el mismo `SistemaEvaluacion`, tras guardar el borrador la eliminada reaparecía -- en la vista de DirectorGrado se veían la antigua y la nueva a la vez, y si el Profesor volvía a guardar, la antigua reaparecía también en su propia vista. pySigHor diagnosticó la causa raíz contra el código real (no hipótesis): `PonderacionEvaluacion.vinculada` (y su gemela en `ReferenciaBibliografica`) estaba sobrecargado con dos significados -- "recién creada, pendiente" y "desvinculada" -- y `desvincular()` solo cambiaba el flag sin borrar la fila, así que `listar_pendientes_de()` la resucitaba para siempre en cualquier vista (`abrir_guia()` es el mismo endpoint para Profesor y DirectorGrado, sin filtrado por rol). Un segundo bug compuesto: `AbrirGuia.tsx` limpiaba la exclusión de `sessionStorage` tras guardar sin refrescar `guia.ponderaciones`, haciendo que la fila fantasma reapareciera de inmediato en la misma pantalla.
+
+#### 2. **Fix en dos rondas, cada una revisada por pySigHor contra `git diff` real**
+- **Ronda 1**: `desvincular()` pasó a borrar la fila de verdad (`db.delete`) en ambos repositorios; `AbrirGuia.tsx` re-fetchea la guía completa tras guardar en vez de spread parcial. 2 tests de regresión nuevos reproduciendo el caso exacto de Manuel.
+- **Hallazgo intercalado por Claude-pyCelda, honesto y sin corregir por su cuenta**: un test ya existente documentaba la misma causa por otra puerta -- una ponderación nunca vinculada, excluida antes del primer guardado, tampoco se borraba (`sincronizar_ponderaciones()` solo miraba `vinculadas_actuales`, no el total de filas de la guía). pySigHor confirmó que era el mismo bug y, con Manuel, decidió corregirlo en el mismo encargo en vez de abrir issue aparte.
+- **Ronda 2**: `sincronizar_ponderaciones()`/`sincronizar_referencias()` (`backend/app/models/guia.py`) recalculadas sobre `todas_las_de_la_guia - deseadas`, no solo lo ya vinculado -- válido porque el frontend siempre manda el conjunto completo de lo visible, nunca un delta parcial. Test viejo dividido en dos, más un test nuevo simétrico para `ReferenciaBibliografica`. 135 tests en verde.
+- **Nota para la cola, no bloqueante**: ni `vincular()` ni `desvincular()` verifican que el id recibido pertenezca a la guía que se está guardando -- mismo patrón que #86/#96, hoy no explotable porque el frontend nunca manda ids ajenos, pendiente para cuando la revisión profunda de CRUD llegue a `Guia`/`PonderacionEvaluacion`/`ReferenciaBibliografica`.
+
+#### 3. **Despliegue verificado en dos ciclos**
+Commit `de9d0d5` en `main`, con `Deploy: estándar`. Claude-pyCelda exigió confirmación directa de Manuel para el push (no aceptó el relay de pySigHor como autorización -- disciplina de malla funcionando como se diseñó). Claude-Prometeus aplicó la Regla 5 (reconstruir `caddy` además de `backend`, por tocar frontend), y verificó no solo por timestamp de contenedor sino leyendo el código real dentro del contenedor (`self.db.delete(ponderacion)` confirmado en la línea exacta). `/api/health` OK, sin incidencias.
+
+#### 4. **Reset de datos de producción para pruebas cruzadas**
+Manuel, directamente con Claude-Prometeus (operación de datos, no de código -- no toca `main`): restauró la BBDD de producción a la copia post-fix de la normalización de Materias (`pycelda_backup_20260821_224155.db` -- 16 Materia, 55 AsignaturaGrado, 182 ResultadoAprendizaje reconciliado), verificando primero cuál de las dos copias disponibles era la correcta antes de restaurar. Backup de seguridad de la producción previa tomado antes de sobrescribir. Alta de `ibuprofeno@uneatlantico.es` como Profesor (id=31) en 4 asignaturas para pruebas cruzadas de doble identidad/pertenencia. Snapshot final guardado como `BBDD_DATOS_LIMPIOS_CON_IBUPROFENO.db`. Efecto intencional: se pierde el estado de pruebas manuales del 22-23 de agosto para empezar con datos limpios.
+
+### Estado del Proyecto (pyCelda, no pySigHor)
+
+- **Issue #93**: cerrado del todo -- 3 ajustes de UI + el bug de ponderaciones/referencias fantasma, en producción (`de9d0d5`).
+- **Producción**: `https://mmasias.cloud-ip.cc/` en `de9d0d5`, con datos reseteados a la copia limpia post-normalización + Ibuprofeno como profesor de prueba.
+- **Pendientes sin fecha (sin cambios esta sesión)**: issue #86 (IDOR `DirectorGrado`), retroceso a Requisitos de `editarAsignaturaGrado()`, la nota de pertenencia cruzada en `vincular()`/`desvincular()` señalada en el punto 2.
+- **Próximo hito de Manuel**: mañana por la mañana, sesión dedicada solo a testing y debugging manual con los datos limpios -- explícitamente no delegado, tiempo de Manuel probando la UI real.
+
+### Para Próxima Sesión
+
+Sin tareas activas de `pySigHor` en sí. Cuando Manuel retome, probablemente traiga hallazgos concretos de su sesión de testing/debugging para que pySigHor los diagnostique (mismo patrón que el issue #93 de esta sesión: entender primero contra el código real, luego delegar con el diseño ya resuelto) antes de delegarlos a Claude-pyCelda.
+
+---
+
+## Conversación 53: Validación manual del checklist v0.4.0 de pyCelda -- tres PRs de seguridad/UI, delegación de capitanía a pySigHor
+**Fecha**: 2026-08-25/26
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor/capitán), Claude-pyCelda-SDF1 (constructora), Claude-pyCelda-Prometeus (despliegue)
+
+### Contexto de la Sesión
+
+Sin trabajo directo sobre código de `pySigHor` -- continuación del rol de orquestador/revisor de `pyCelda`. Nota metodológica al arrancar: la última entrada de este log (Conversación 52, 2026-08-22/23) quedó desactualizada respecto al estado real de `pyCelda` -- entre esa fecha y hoy hubo trabajo sustancial (bloque Admin bottom-up completo 2026-08-24/25, issue #86 IDOR cerrado por código el 2026-08-25) registrado solo en la memoria de proyecto (`project_pycelda_transferencia_rup.md`), no en este archivo. Esta conversación no reconstruye ese hueco -- documenta solo lo trabajado en esta sesión, partiendo del estado ya reflejado en memoria.
+
+### Desarrollo Principal
+
+#### 1. **Validación manual del checklist v0.4.0, discussion [#131](https://github.com/mmasias/pyCelda/discussions/131)**
+Manuel fue marcando en vivo (`[x]`/comentarios) el checklist redactado por pySigHor tras el cierre de PR #129 (#86). Bloque 1 (Admin): 5 ítems del checklist corregidos por error propio de redacción (backend completo con frontend deferido a propósito, no bugs); 1 hallazgo real sin fix todavía ("Volver al panel"/"cerrar sesión" ausente en pantallas hijas de Admin). Bloque 2 (flujo legítimo de Director): sin sorpresas, 2 ítems más corregidos por error de redacción (acciones que nunca fueron de `DirectorGrado`).
+
+#### 2. **Convención nueva: editar comentarios de GitHub directamente, no solo responder**
+Descubierto (confirmado por Manuel) que `gh` está autenticado como la cuenta propia de Manuel -- pySigHor puede editar (`updateDiscussionComment`) cualquier comentario de la discussion, incluidos los del propio Manuel. Adoptada como convención: comentario original se tacha línea a línea (nunca todo el bloque en un solo `~~...~~`, rompe el renderizado GFM a través de límites de bloque) y la explicación de resolución se publica como respuesta aparte (`replyToId`), no inline.
+
+#### 3. **Ramillete 1: tres hallazgos menores -> PR #132 (`03c3024`)**
+Mensaje de revocación de Guia invisible para el Profesor (property `comentario_revocacion` nueva, simétrica a `comentario_rechazo`), 409 de `eliminarResultadoAprendizaje()` sin indicar a qué está asociado (`nombres_asignaciones()` nuevo), tabla vestigial "Asignaturas del grado" en `Grado.tsx` (causa raíz: calco de `GradoAdmin.tsx`, esos botones nunca fueron capacidad de `DirectorGrado` -- confirmado contra `diagramaContextoAdmin.puml` vs `diagramaContextoDirectorGrado.puml`). Diseñados por pySigHor, construidos por pyCelda (fix 1 ella misma, 2/3 delegados a OpenCode), verificados por pySigHor en clon propio (diff+tests+tsc) antes de aprobar. Desplegado por Prometeus, health-check OK.
+
+#### 4. **Bloque 3, falsa alarma de IDOR -- investigación disciplinada antes de tocar código**
+Probando pertenencia cruzada con un segundo director real (`ibuprofeno@uneatlantico.es`, director del grado de prueba y también Profesor de una asignatura de GII), Manuel reportó que "editar semestre" y "revocar aprobación" de una Guia ajena parecían funcionar -- riesgo de que PR #129 tuviera un hueco. pySigHor no aceptó la alarma sin verificar: código revisado (`dirige()` limpio en ambos endpoints), consulta de solo lectura pedida a Prometeus contra producción (`grados_directores_grado` confirmó sin asociación cruzada), y crucialmente **se le pidió a Manuel repetir la prueba hasta el envío real del formulario**, no solo cargar la página -- ambas veces `404`. Diagnóstico correcto: no había escritura cruzada, el hallazgo real era que `AbrirGuia.tsx` decidía la UI de Director solo por la forma de la URL (`modoRevisor`), dejando ver formularios de acción a cualquiera con acceso de lectura legítimo como Profesor. Fix: `puede_revisar: bool` en `AbrirGuiaResponse` -> PR #133 (`02b5e2a`), verificado y desplegado igual que el anterior.
+
+#### 5. **Hallazgo más grave: el mismo formulario cargaba sin sesión en absoluto (incógnito)**
+Manuel probó `CrearResultadoAprendizaje` en ventana de incógnito -- también cargaba. Causa raíz, verificada por pySigHor: `App.tsx` no tenía **ningún** guard de sesión centralizado, las ~50 rutas eran `<Route>` sueltos; páginas sin llamada de lectura previa al montar no tenían nada que las protegiera. Manuel pidió explícitamente: arreglarlo, auditoría sistemática del resto de pantallas de Director, y dejarlo como regla de validación permanente. Encargo de 3 partes a pyCelda: `RequireSession` (componente de layout que verifica `GET /auth/me` antes de renderizar cualquier ruta protegida), auditoría de pertenencia de `Materia`/`AsignaturaGrado`/`ResultadoAprendizaje`/`Grado` (resultado: todo ya limpio, solo un hueco de test de regresión), y documentación de la regla en `RUP/04-desarrollo/README.md`. PR #134 (`e0b6629`), verificado (247 tests, `tsc`, `vite build`) y desplegado. Manuel confirmó personalmente en navegador real que el redirect funciona.
+
+#### 6. **Delegación de capitanía completa a pySigHor**
+Manuel autorizó directamente (a pyCelda y a Prometeus, sin relay) que pySigHor "capitanee" este hilo -- diseño, delegación, verificación, petición de merge y de despliegue -- sin pasar por él turno a turno, hasta que quede "resuelto y estabilizado". pyCelda inicialmente no incluyó el merge en el alcance registrado; Manuel lo corrigió explícitamente ("el merge también"). Prometeus, al ejecutar el segundo despliegue del hilo, precisó que no asume la misma extensión indefinida para su propio dominio sin confirmación directa de Manuel -- comportamiento correcto, no fricción, mismo principio de "ningún peer autoriza en nombre de otro" ya establecido.
+
+#### 7. **Incidente operativo menor: working tree compartido**
+pySigHor verificó PR #132 y #133 haciendo `git checkout`/`diff` sobre `~/misRepos/_PROYECTOS/pyCelda`, el mismo directorio donde `Claude-pyCelda-SDF1` construía en paralelo -- le pisó un checkout a mitad de operación (detectado por ella vía reflog, sin daño real). Corregido: clon dedicado y persistente `~/misRepos/_PROYECTOS/pyCelda-verify-pysighor` (entornos backend/frontend instalados), usado desde entonces para toda verificación.
+
+### Estado del Proyecto (pyCelda, no pySigHor)
+
+- **Producción**: `https://mmasias.cloud-ip.cc/` en `e0b6629`. Cadena de esta sesión: `03c3024` (PR #132) -> `02b5e2a` (PR #133) -> `e0b6629` (PR #134), los tres verificados por pySigHor y desplegados por Prometeus sin incidencias.
+- **Checklist #131**: bloque 1 y 2 cerrados (con hallazgos resueltos), bloque 3 parcialmente probado (abrir/revocar/editar-semestre confirmados sin IDOR; aprobar/rechazar/escalar/RA/AsignaturaGrado/listado-guías cruzados todavía sin probar), bloques 4 y 5 sin empezar.
+- **Pendiente real, sin fix asignado**: "Volver al panel"/"cerrar sesión" ausente en pantallas hijas de Admin (bloque 1); el IDOR de cuerpo de petición mencionado en el propio checklist (asociar RA de A a Materia de B vía manipulación de request) no reproducible solo con la UI, sin decidir todavía si se verifica con script.
+- **Clon de verificación de pySigHor**: `~/misRepos/_PROYECTOS/pyCelda-verify-pysighor`, listo para reutilizar (backend `uv sync --extra dev`, frontend `npm install` ya hechos).
+
+### Para Próxima Sesión
+
+Manuel indicó: mañana sigue con "pruebas ácidas" (terminar el checklist #131, empezando por el resto del bloque 3) y quiere implementar "algunos atajos de interfaz" nuevos, todavía sin especificar. pySigHor retoma el rol de capitán de este hilo (diseño/delegación/verificación/petición de merge y deploy) mientras Manuel no diga lo contrario -- la autorización de capitanía sigue vigente para este hilo, confirmar con Manuel si se extiende a los "atajos de interfaz" o es un encargo aparte.
+
+---
+
 *"Hacer las cosas bien no es pedantería académica: es inversión que se amortiza en cada línea de código escrita después."*
 
 ---
