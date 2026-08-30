@@ -4683,16 +4683,71 @@ Manuel autorizó directamente (a pyCelda y a Prometeus, sin relay) que pySigHor 
 #### 7. **Incidente operativo menor: working tree compartido**
 pySigHor verificó PR #132 y #133 haciendo `git checkout`/`diff` sobre `~/misRepos/_PROYECTOS/pyCelda`, el mismo directorio donde `Claude-pyCelda-SDF1` construía en paralelo -- le pisó un checkout a mitad de operación (detectado por ella vía reflog, sin daño real). Corregido: clon dedicado y persistente `~/misRepos/_PROYECTOS/pyCelda-verify-pysighor` (entornos backend/frontend instalados), usado desde entonces para toda verificación.
 
+#### 8. **Cierre del checklist #131**: bloque 3 completado (salvo dos IDOR de cuerpo de petición, no reproducibles vía UI, pospuestos) y un tercer error de checklist corregido -- "B intenta eliminar una AsignaturaGrado de A" no aplica, `eliminar_asignatura_grado()` es exclusiva de `Admin` (`require_admin`), nunca fue capacidad de `DirectorGrado`, mismo patrón que el hallazgo de `Grado.tsx` de esta misma sesión.
+
+#### 9. **Reflexión sobre GET vs POST, y trabajo nocturno autónomo -- `MetodologiaDocente`+`SistemaEvaluacion`**
+Manuel preguntó si las URLs de acción debían convertirse a POST -- aclarado que las mutaciones reales ya eran POST/PUT (nunca GET) y que la navegación del navegador es intrínsecamente GET, sin relación con la autorización real (que es donde estaba y sigue el arreglo). Antes de cerrar la sesión, Manuel propuso dejar a pySigHor trabajando en los bloques restantes de `Admin` (`Profesor`/`MetodologiaDocente`/`SistemaEvaluacion`/`Cursos académicos`, discussion #113) -- pySigHor reflexionó primero (sin ejecutar) que "operativo" no ha coincidido con la experiencia real del proyecto (cada bloque "simple" de Admin ha tenido al menos un hallazgo real), y señaló riesgos concretos por entidad. Manuel corrigió el riesgo de `Profesor` (los scripts de Prometeus son parche temporal, no un segundo camino que pueda divergir), aceptó diferir `Profesor` y `Cursos académicos` (el segundo por sospecha real de que `CursoAcademico` no está modelado -- ver memoria de proyecto sobre `Guia.grado_id` denormalizado) y autorizó el ciclo completo -- diseño, construcción, verificación, PR, merge y despliegue, sin supervisión turno a turno -- para `MetodologiaDocente`+`SistemaEvaluacion`.
+
+pySigHor verificó Requisitos (los 10 CU puramente `Admin` de ambas entidades ya existían completos, solo faltaba Análisis→Diseño→Desarrollo), wireframes, modelos/repos existentes y el patrón de bloqueo "en uso" ya usado en PR #132, y diseñó un encargo detallado para cada entidad antes de delegar. Trabajado de madrugada, sin Manuel presente:
+
+- **PR #135** (`MetodologiaDocente`, `a47e7d6`→`564440e`): pipeline completo delegado a OpenCode con diseño ya cerrado, verificado por pyCelda antes de comitear (no se fió del resumen, que salió corrupto otra vez) y por pySigHor de forma independiente en su clon (270 tests, `tsc`/`vite build` limpios). pyCelda resolvió por su cuenta, con razonamiento verificado, que el bloqueo de borrado solo necesita comprobar uso en `Materia` (no `AsignaturaGrado` aparte) porque el invariante ya está garantizado por el guard de `desasociarMetodologiaDocenteMateria()`.
+- **PR #136** (`SistemaEvaluacion`, `68c67f0`→`60fc17b`): mismo patrón. **Hallazgo real de pyCelda, autocorregido antes de comitear**: la instrucción original de pySigHor de tratar `tipo` como texto libre era un error -- el README de Requisitos de `crearSistemaEvaluacion()` fija explícitamente una lista cerrada (`"Evaluación continua"`/`"Evaluación final"`, issue #14) que pySigHor no había leído (solo verificó contra código/modelo/seed). Corregido con `Literal[...]` en los schemas y `<select>` en el frontend antes de comitear, con test de regresión del `422`. También se detectó y evitó una colisión de ruta real: el listado nuevo de Admin no podía usar `GET /materias/{id}/sistemas-evaluacion` porque ese path ya servía al selector de `Profesor` en `crearPonderacionEvaluacion()` -- resuelto namespacing bajo `/admin/`. 297 tests, `tsc`/`vite build` limpios, verificado por pySigHor.
+
+Los tres despliegues de la noche (#134/#135/#136) los ejecutó Prometeus con el mismo rigor de siempre (Regla 3 de `DEPLOY.md`, health-check real), avisado por pySigHor sin que Manuel mediara -- Prometeus dejó explícito que actúa por la autorización directa que Manuel le dio para este lote, sin asumir que se extiende indefinidamente a peticiones futuras sin confirmación suya.
+
 ### Estado del Proyecto (pyCelda, no pySigHor)
 
-- **Producción**: `https://mmasias.cloud-ip.cc/` en `e0b6629`. Cadena de esta sesión: `03c3024` (PR #132) -> `02b5e2a` (PR #133) -> `e0b6629` (PR #134), los tres verificados por pySigHor y desplegados por Prometeus sin incidencias.
-- **Checklist #131**: bloque 1 y 2 cerrados (con hallazgos resueltos), bloque 3 parcialmente probado (abrir/revocar/editar-semestre confirmados sin IDOR; aprobar/rechazar/escalar/RA/AsignaturaGrado/listado-guías cruzados todavía sin probar), bloques 4 y 5 sin empezar.
-- **Pendiente real, sin fix asignado**: "Volver al panel"/"cerrar sesión" ausente en pantallas hijas de Admin (bloque 1); el IDOR de cuerpo de petición mencionado en el propio checklist (asociar RA de A a Materia de B vía manipulación de request) no reproducible solo con la UI, sin decidir todavía si se verifica con script.
-- **Clon de verificación de pySigHor**: `~/misRepos/_PROYECTOS/pyCelda-verify-pysighor`, listo para reutilizar (backend `uv sync --extra dev`, frontend `npm install` ya hechos).
+- **Producción**: `https://mmasias.cloud-ip.cc/` en `60fc17b`. Cadena completa de la sesión (siete PRs, todos verificados por pySigHor y desplegados por Prometeus sin incidencias): `03c3024` (#132) → `02b5e2a` (#133) → `e0b6629` (#134) → `564440e` (#135) → `60fc17b` (#136).
+- **Discussion #113 (Admin bottom-up)**: `MetodologiaDocente` y `SistemaEvaluacion` cerrados Requisitos→Producción. Quedan `Profesor` y `Cursos académicos` (el segundo posiblemente ni modelado -- pendiente de resolver mañana), ambos deliberadamente fuera del alcance de esta noche.
+- **Checklist #131**: cerrado salvo los dos IDOR de cuerpo de petición (no reproducibles vía UI, sin urgencia) y la decisión pendiente sobre "Volver al panel"/"cerrar sesión" ausente en pantallas hijas de Admin (bloque 1, hallazgo real sin fix asignado todavía).
+- **Clon de verificación de pySigHor**: `~/misRepos/_PROYECTOS/pyCelda-verify-pysighor`, usado en las siete verificaciones de la noche, listo para reutilizar.
+- **Sin comitear en `pySigHor`**: esta actualización del log/memoria está hecha pero no comiteada -- Manuel no lo ha pedido todavía para este tramo (a diferencia del primer cierre de la noche, que sí se comiteó a petición explícita en `b4a20f8`).
 
 ### Para Próxima Sesión
 
-Manuel indicó: mañana sigue con "pruebas ácidas" (terminar el checklist #131, empezando por el resto del bloque 3) y quiere implementar "algunos atajos de interfaz" nuevos, todavía sin especificar. pySigHor retoma el rol de capitán de este hilo (diseño/delegación/verificación/petición de merge y deploy) mientras Manuel no diga lo contrario -- la autorización de capitanía sigue vigente para este hilo, confirmar con Manuel si se extiende a los "atajos de interfaz" o es un encargo aparte.
+Manuel indicó: mañana sigue con "pruebas ácidas" y "atajos de interfaz" nuevos (sin especificar todavía), más la decisión pendiente sobre `CursoAcademico`/`Profesor` de Admin. Verificar primero si `CursoAcademico` está realmente modelado antes de asumir que es CRUD simple -- la sospecha nace de que `Guia.grado_id` es un campo denormalizado documentado como simplificación. Confirmar con Manuel si la autorización de capitanía (diseño/delegación/verificación/merge/deploy sin supervisión turno a turno) sigue vigente para trabajo nuevo, o si aplicó solo a lo ya cerrado esta noche.
+
+---
+
+## Conversación 54: CRUD de Profesor, asociación a AsignaturaGrado, cierre real del issue #13, y el bug "Profesor sin botón Abrir guía"
+**Fecha**: 2026-08-26 (mañana/tarde/noche, continuación directa de la Conversación 53)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como capitán del hilo), Claude-pyCelda-SDF1 (constructora), Claude-pyCelda-Prometeus (despliegue)
+
+### Contexto de la Sesión
+
+Continuación de la misma sesión de pySigHor tras el cierre nocturno de la Conversación 53. Manuel volvió de una reunión, pidió reporte de situación, y amplió el encargo varias veces según fue probando en producción -- toda la capitanía (diseño/delegación/verificación/merge/deploy) siguió sin supervisión turno a turno, con Manuel interviniendo solo en las decisiones de diseño genuinas.
+
+### Desarrollo Principal
+
+#### 1. **CRUD completo de `Profesor` + gestión de `DirectorGrado`, PR #137**
+Manuel notó, probando `SistemaEvaluacion`, que no había forma de asociar un Profesor a una AsignaturaGrado desde Admin. Reflexión previa: el modelo `Profesor` solo tenía `id`+`email`, migración real necesaria (`nombre`, backfill desde `docs/scripts/seed/profesores.json`, 30/30 reales). Hallazgo del issue #13 (bloqueo permanente de `eliminarProfesor()` por historial de Guias, palabras textuales de Manuel en el propio README de Requisitos) investigado y confirmado **inalcanzable hoy** (no existía `desasignarProfesorAsignaturaGrado()` todavía) -- documentado como nota, no bloqueante. OpenCode agotó su cuota de 5h a mitad del pipeline, pyCelda terminó lo que faltaba. Bug real de Prometeus al desplegar: ruta del script de backfill asumía raíz de repo, no funciona en el contenedor (workaround aplicado, pendiente de corregir la ruta).
+
+#### 2. **`asignarProfesorAAsignaturaGrado()`/`desasignarProfesorAsignaturaGrado()`, PR #138 -- cierra el issue #13 de verdad**
+Manuel pidió cerrar la pieza que faltaba, esta vez sin OpenCode ("está cansao"). Hallazgo real de pySigHor antes de delegar, confirmado contra 2 READMEs de Requisitos: `Guia -- Profesor` debe copiarse puntualmente al crear la Guia, no derivarse en vivo -- el código vigente lo violaba. Manuel confirmó el modelo mental completo (Guia vive en su CursoAcademico; `activarCursoAcademico()` futuro clonaría la plantilla en cada curso nuevo). Construido: tabla `guias_profesores` nueva, `Guia.profesorado` como relationship real, backfill de las 55 Guias reales. Bonus no pedido: `eliminarProfesor()` gana la tercera condición real de bloqueo, cierra el issue #13 de verdad, con test explícito.
+
+#### 3. **Bitácora #139, tag `v0.5.0`, felicitaciones cruzadas**
+Manuel pidió una discussion resumen del día completo -- publicada, pyCelda y Prometeus complementaron con su perspectiva. Reflexión sobre versión ("¿casi beta?"): aclarado que `0.x` en SemVer ya implica "en desarrollo", no hace falta sufijo -- tagueado `v0.5.0` sobre `536ba9a` a petición directa de Manuel.
+
+#### 4. **Reflexión: ¿delegar a OpenCode desconectado, o seguir aquí?**
+Manuel propuso un artefacto nuevo ("cronograma de sesiones docente + evaluaciones") y preguntó si convenía una sesión de OpenCode sin supervisión. Recomendación de pySigHor: no, al menos no Requisitos -- todo lo que funcionó bien dependía de tener Requisitos cerrados antes de delegar. Manuel aceptó, diseñaron juntos 4 decisiones (dueño = `Guia`, `tipo` en lista cerrada, sin enlace a `SistemaEvaluacion` en v1, mismo ciclo de aprobación que la Guia) -- **construcción pausada a propósito** para guardar saldo de uso, discussion #140, retomar el sábado.
+
+#### 5. **El bug real: "Profesor sin botón Abrir guía", investigación de `CursoAcademico`, PRs #141/#142**
+Manuel probó el ciclo completo (crear Grado → configurar como Director → asignar Profesor) y el Profesor no veía "Abrir guía". Causa verificada: `Guia()` solo se construye en `seed_grado.py`, ningún endpoint vivo crea una Guia al dar de alta una `AsignaturaGrado`. Investigación paso a paso con Manuel de `activarCursoAcademico()`: resultó que **`CursoAcademico` ya está completo en Requisitos** (4 CU, clase real en el modelo de dominio) -- la sospecha de "no modelado" era sobre el código, no Requisitos. Gap real encontrado en `crearAsignaturaGrado()` (cero menciones de `Guia`, confirmado con grep) -- resuelto reutilizando la misma rama "Guia nace vacía" que `activarCursoAcademico()` ya documentaba, disparada desde un segundo punto de entrada, con la simplificación de que `CursoAcademico` no existe aún como tabla (condición trivial hoy). PR #141 (fix para creaciones nuevas) + PR #142 (backfill retroactivo de las 4 AsignaturaGrado huérfanas ya en producción, encontradas por Prometeus por iniciativa propia: ids 56/57/58/59). PR #144: documentación del bug recurrente de nombrado de SVG de plantuml local (3 veces en la sesión).
+
+#### 6. **Checklist nuevo, discussion #145, y cierre de discussion #131**
+A petición de Manuel, checklist nuevo organizado por *proceso de trabajo* (no por CU aislado) cubriendo todo lo de la sesión -- 8 secciones, con el flujo completo Admin→Director→Profesor→Guia como primer punto y el test de "desasignar y comprobar que la Guia histórica sigue mostrando al profesor" marcado como el más importante. Discussion #131 (checklist anterior) cerrada y etiquetada (`estado:concluida`/`resultado:aplicado`) -- pero antes de cerrarla, verificación honesta a petición de Manuel ("¿había algo que se me escapó?") encontró un ítem real sin marcar (spot-check de aislamiento entre Profesores) que no se había trasladado -- añadido a #145 antes de dar el cierre por bueno.
+
+### Estado del Proyecto (pyCelda, no pySigHor)
+
+- **Producción**: `https://mmasias.cloud-ip.cc/` en `436037b`, tag `v0.5.0`. Trece PRs desde el inicio de la Conversación 53 (#132-#144), todos verificados por pySigHor y desplegados por Prometeus sin incidencias de fondo.
+- **Checklist activo**: discussion #145 -- Manuel probando en vivo ahora mismo.
+- **Discussion #131**: cerrada, ya no requiere atención.
+- **Pendiente real, sin fecha**: resultado de las pruebas de Manuel contra #145 (lo que traiga es el punto de partida real); cronograma de sesiones (discussion #140, retomar sábado); `CursoAcademico`/`activarCursoAcademico()` (Requisitos completo, sin construir); "volver al panel" en pantallas hijas de Admin; 2 IDOR de cuerpo de petición; fix de ruta en `backfill_nombre_profesor.py`.
+- **Clon de verificación**: `~/misRepos/_PROYECTOS/pyCelda-verify-pysighor`, usado en las trece verificaciones del día, listo para reutilizar.
+
+### Para Próxima Sesión
+
+Manuel limpiará el contexto de esta sesión para refrescarlo mañana. Memoria de proyecto (`project_pycelda_transferencia_rup.md`, sección "CIERRE DE SESIÓN") actualizada con el estado completo para retomar sin fricción. Prompt sugerido para mañana: pedir a pySigHor que lea su memoria de pyCelda y revise el estado real de discussions #145/#140 antes de que Manuel cuente cómo fueron sus pruebas. Sin comitear esta actualización del log -- Manuel no lo ha pedido para este tramo.
 
 ---
 
