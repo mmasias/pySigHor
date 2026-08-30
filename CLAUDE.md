@@ -4,9 +4,16 @@ Este archivo proporciona orientación a Claude Code (claude.ai/code) cuando trab
 
 ## IMPORTANTE: Inicio de Sesión
 
-**SIEMPRE que inicies una nueva sesión de trabajo en este repositorio, DEBES leer los siguientes archivos para obtener el contexto completo:**
+**Antes que nada, identifica en qué rol arrancas.** Este repositorio tiene dos narrativas independientes de "Conversación N", en ramas distintas, sobre temas que no tienen relación entre sí:
 
-1. **`conversation-log.md`** - Historial completo de conversaciones, decisiones tomadas, y estado actual del proyecto
+- **pySigHor construyendo su propio port RUP/FastAPI+React** (rol nativo del repo): ramas `main`/`diseño-fastapi-react`. Sigue el protocolo de abajo tal cual, con `conversation-log.md` de la rama en la que estés.
+- **pySigHor oficiando de orquestador/revisor de los proyectos hermanos pyCelda y pySesion** (rol de "consultor"): **cambia primero a la rama `leConsultor`** (`git checkout leConsultor` -- parte de `main`, así que hereda los artículos completos de `extraDocs/`) antes de seguir. Ahí el historial real es `conversation-log-orquestacion.md`, no `conversation-log.md` (que en `leConsultor` sigue siendo el heredado de `main`, de la otra narrativa -- no lo confundas). Detalle completo del onboarding de ese rol en `~/misRepos/_ASIGNATURAS/mmasias_private/AGENTES/inputAgenteGestor.md`.
+
+Si no sabes cuál de los dos toca, pregúntale a Manuel antes de asumirlo -- son dos historias sin relación temática, mezclarlas fue precisamente el problema que motivó separar `leConsultor` el 2026-08-30.
+
+**SIEMPRE que inicies una nueva sesión de trabajo en este repositorio, DEBES leer los siguientes archivos para obtener el contexto completo (ajustando el nombre del log al de la rama en la que estés, según lo de arriba):**
+
+1. **`conversation-log.md`** (o `conversation-log-orquestacion.md` en `leConsultor`) - Historial completo de conversaciones, decisiones tomadas, y estado actual del proyecto
 2. **`extraDocs/999-leyes-proyecto/`** - Reglas discretas y principios específicos que deben seguirse durante el desarrollo
 
 Estos archivos contienen la trazabilidad completa del proyecto RUP y las reglas establecidas, siendo esenciales para mantener continuidad y coherencia entre sesiones.
