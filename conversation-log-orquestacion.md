@@ -280,6 +280,67 @@ Confirmar con Manuel si `leConsultor` se comitea/pushea ya o queda pendiente de 
 
 ---
 
+## Conversación 56: pyCelda desde la máquina `oficina` -- `Guia.contenido`, modelo de datos, renombrado `Cronograma`->`Planificación docente`
+**Fecha**: 2026-09-01 (tarde)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor, renombrada `Claude-pySigHor-Oficina`), Claude-pyCelda-Oficina (constructora -- 2ª sesión en la misma máquina, NO `Claude-pyCelda-SDF1`), Claude-pyCelda-Prometeus (despliegue)
+
+### Contexto de la Sesión
+
+Primera sesión del rol de orquestador **desde la máquina `oficina`** (`aio@despacho.U`, Ubuntu 26.04), no SDF1. Consecuencias prácticas: ni `pyCelda-verify-pysighor` ni `pySesion` existían aquí. Recreé el clon de verificación (clon limpio de GitHub) e instalé el toolchain que faltaba -- `uv` y `plantuml 1.2026.7` (el `plantuml` del sistema es 1.2020, que da un diff de estilo masivo; el 1.2026.7 casa con los SVG ya committeados). El nodo constructor esta vez fue una segunda sesión Claude Code en `oficina`, también llamada `Claude-pyCelda-Oficina` -- colisión de nombre con la mía hasta que Manuel me renombró a `Claude-pySigHor-Oficina`.
+
+Manuel presentó la aplicación a profesorado ese día y empezaron las pruebas reales. Siete PRs mergeados a partir de lo que fue apareciendo, todos con el flujo de siempre: diseño mío contra el repo -> discussion de criterio -> delegación a `Claude-pyCelda-Oficina` -> verificación independiente mía en el clon con ejecución real -> merge con OK explícito de Manuel PR a PR -> despliegue de Prometeus con runbook.
+
+### Desarrollo Principal
+
+#### 1. `Guia.contenido` como apartado propio de la fase de impartición (discussion pyCelda #191, PR #192)
+
+El profesor pidió poder editar el temario al editar su guía docente. El modelo tenía `contenido` solo en la fase estructural (`AsignaturaGrado`, que la `Guia` heredaba al renderizar el PDF, sin materializarlo -- entrada explícita del README del modelo, wireframe "heredado de AsignaturaGrado"). Reflexión: la petición cruza la línea estructural/impartición, pero el temario de una guía docente es en la práctica real un artefacto redactado y revisado cada curso, y los demás apartados que el profesor edita (`PonderacionEvaluacion`, `ReferenciaBibliografica`, `semestre`) ya viven en la `Guia` y se siembran del curso anterior. Cuatro opciones evaluadas; elegida A: `Guia.contenido` propio, sembrado al nacer (copia puntual, no fallback en vivo -- coherente con el "snapshot por curso" del resto de la Guia), editado por `guardarBorradorGuia()` sin CU nuevo, renderizado en el PDF; `AsignaturaGrado.contenido` degradado a semilla + referencia estructural verificada. Retroceso puntual a Modelo/Requisitos (mecanismo de las discussions #47/#72, no reapertura de fase).
+
+Lección propia reforzada con evidencia nueva: mi extracción de la agrupación Materia->Asignatura de las memorias ANECA, ya "verificada" por mí con conteos, tenía un bug estructural que solo salió cuando `Claude-pyCelda-Oficina` lo EJECUTÓ de verdad, no solo lo revisó. La verificación cruzada no es teatro ni cuando el diseñador cree haberlo probado.
+
+Migración: `ADD COLUMN` en sitio, decisión de Manuel -- para un ADD-COLUMN-con-default SQLite lo hace nativo y el ritual extract/reimport es más superficie de riesgo (regla general "si toca `models/`, extract/reimport" intacta para el resto de casos). Backfill `Guia.contenido := AsignaturaGrado.contenido` de 108/108 guías en producción, verificado contra backup. **El conteo real de guías es 108** (GII 55 + GIOI 53).
+
+Incidente de proceso en el despliegue: Prometeus iba a hacer un dry-run sobre copia antes del `apply`, pero el override `DATABASE_URL` no surtió efecto (`app.core.database` no lee esa var) y el `apply` corrió contra la BD real. Resultado correcto y verificado contra backup, script idempotente -- pero fuera del control pactado. Lección: el mecanismo de dry-run-sobre-copia asumía una palanca que no existe.
+
+#### 2. Modelo de datos en `RUP/03-diseño/modelo-datos/` (discussion pyCelda #196, PR #197)
+
+Hueco real detectado: `03-diseño` solo tenía la vista OO (`diagrama-clases-diseño.puml`); ninguna vista relacional del almacén de datos -- las 6 tablas de unión invisibles, la nulabilidad de las FK sin documentar, ni qué asociación es FK física vs lógica (issue #181). **Precedente en pySigHor**: la rama `diseño-fastapi-react` ya tiene `RUP/02-diseño/DER.puml` (notación `class` + `<<PK>>`/`<<FK>>`, crow's foot) -- transferido con juicio.
+
+Artefactos: `DER.puml` (+SVG, 100% generado, 23 tablas en 3 packages), `diccionario-datos.md` (capa estructural generada entre marcadores `<!-- BEGIN/END GENERADO -->` + capa de intención a mano: dominios de los 8 enum, FK lógicas, denormalizaciones, reglas de consistencia -- enlazando al README del modelo de dominio sin duplicar el "por qué"), `backend/app/scripts/generar_modelo_datos.py` (introspección de `Base.metadata`, `--check`, sin BD, aborta si una tabla no está repartida en `PAQUETES`). Nivel lógico-físico híbrido (tipos SQLAlchemy, no storage classes de SQLite). **Regla de mantenimiento nueva** en `RUP/03-diseño/README.md`: un PR que toca `backend/app/models/` regenera DER + diccionario y revisa la capa de intención -- misma obligación que actualizar el README del modelo de dominio.
+
+Dos hallazgos incidentales registrados, no corregidos (fuera de alcance): `asignaturas.contenido` es `String` sin longitud mientras `asignaturas_grado`/`guias` usan `Text`; `asignaturas_grado.estado` nace `'Activo'` (el README del modelo dice `Vigente`/`Extinguido`).
+
+#### 3. `Cronograma` -> `Planificación docente` (renombrado completo) + `Sesion.tipo` 6º valor (discussion pyCelda #198, PR #199)
+
+Mismo concepto, mejor nombre (el que usan las guías docentes reales). Renombrado completo, no solo etiqueta -- una etiqueta dejaría divergencia permanente doc<->código, justo lo que el proyecto elimina siempre. Alcance: entidad de dominio `PlanificacionDocente` (sigue colapsada, sin tabla -- `Sesion` va directo a `Guia`); casos de uso `abrirPlanificacionDocente` + `crear`/`editar`/`eliminarSesion`; tabla `sesiones_cronograma` -> `sesiones`; estados `PLANIFICACION_DOCENTE_ABIERTA`; 12 carpetas RUP (`git mv`) en Requisitos/Análisis/Diseño; backend, frontend, modelo de datos regenerado; 23 SVG. `git grep` confirmó cero identificadores residuales (los restos en `docs/scripts/seed/*.json` son temario real de asignaturas, no la entidad).
+
+`Sesion.tipo` gana `CLASE_TEORICO_PRACTICA` ("Clase teórico/práctica") -- enmienda explícita en el README del modelo de dominio a la afirmación "sin candidatos adicionales" de la discussion #140. Sin cambio de esquema.
+
+Migración: `ALTER TABLE sesiones_cronograma RENAME TO sesiones`, nativo en SQLite, mismo criterio que #192. En producción la tabla tenía 1 fila (una sesión de las pruebas de ese día), preservada por el RENAME. En #199 Manuel no estaba en la máquina y autorizó explícita y directamente a Prometeus a lanzar el `apply` -- no relayado por mí.
+
+#### 4. PRs menores y deuda de SVG
+
+- **#193**: textarea de `contenido` de la guía a `rows={35}`.
+- **#195**: dimensionado de 10 textareas de `frontend/src/pages/` (grupos 1 y 2 de un audit -- editores de "Contenido" a `rows={35}` + ancho 100%, descripción/comentario a ancho 100%). Grupo 3 (referencias bibliográficas) aplazado a otra sesión, "hay ideas de fondo".
+- **#194**: 11 SVG de `images/RUP/` que quedaron stale tras #192 -- regenerados con plantuml 1.2026.7. Manuel: "el cambio en la consistencia estética de un artefacto de requisitos es mal menor y perfectamente asumible; otra cosa son errores semánticos en ese mismo artefacto".
+
+#### 5. Patrón de despliegue con migración, asentado
+
+Aplicado dos veces esta sesión (#192, #199). Runbook en el cuerpo del PR: backup manual -> `git pull` -> script de migración `plan` (revisar conteos) -> `apply` contra el volumen **antes** de `./deploy.sh` (el backend nuevo declara el esquema nuevo y `create_all()` no migra tablas existentes) -> `deploy.sh` -> health + check funcional de la ruta/columna nueva. Scripts en `backend/app/scripts/`, modos `plan`/`apply`, idempotentes, SQL crudo (ejecutables en el contenedor viejo). El paso `apply` escribe en `pycelda.db` y el clasificador de auto-mode de Prometeus lo bloquea -> lo ejecuta Manuel con `!` o autoriza directamente a Prometeus.
+
+### Estado del Proyecto
+
+- **pyCelda**: producción en `main`, `a2719cd`, `/api/health` `200`, verificado de forma independiente. Discussions #191/#196/#198 cerradas (`concluida`+`aplicado`). Sin PRs ni deploys pendientes.
+- **pySesion**: sin tocar esta sesión -- sigue donde quedó el 2026-08-30 (Requisitos y Análisis cerrados, Diseño sin empezar).
+- **pySigHor**: esta Conversación 56 en `leConsultor`. Clon de verificación y toolchain (`uv`, plantuml 1.2026.7) instalados en `oficina`.
+- **Pendientes heredados de pyCelda, sin tocar**: issues #179/#181/#184/#185/#187; `CursoAcademico`/`activarCursoAcademico()`; 2 IDOR de cuerpo de petición (discussion #131); issue #148 (`Grado.codigo` sin unicidad); auditoría de `curso`/`semestre` en el resto de `AsignaturaGrado` (discussion #128); grupo 3 de textareas (referencias bibliográficas).
+
+### Para Próxima Sesión
+
+`inputAgenteGestor.md` sigue asumiendo SDF1 y `Claude-pyCelda-SDF1` como constructor -- si se sigue trabajando desde `oficina`, conviene ajustar la sección 5 (objeto de gestión) o al menos anotar que el clon de verificación y el nodo constructor pueden estar en `oficina`. Sin tareas activas más allá de los pendientes heredados.
+
+---
+
 *"Hacer las cosas bien no es pedantería académica: es inversión que se amortiza en cada línea de código escrita después."*
 
 ---
