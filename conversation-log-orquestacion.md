@@ -352,6 +352,56 @@ Resultado: 139 sesiones, cero sin clasificar. Material de referencia dejado en `
 
 ---
 
+## Conversación 57: Revisión y merge del PR #204 (sincronización de documentación de pyCelda), coordinación multi-sesión y cierre de discrepancias de estado
+**Fecha**: 2026-09-01 noche -> 2026-09-02 (madrugada)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor, `Claude-pySigHor-SDF1`), OpenCode (constructor de la rama `cc/sincronizar-readmes-estado` en pyCelda, sin sesión Claude propia identificada), Claude-pyCelda-Prometeus (despliegue/verificación), Claude-pySigHor-Oficina (sesión previa de la tarde, no viva durante esta ventana -- su trabajo se reconcilió por escrito, no en vivo)
+
+### Contexto de la Sesión
+
+Primera sesión desde SDF1 tras la tanda de la tarde en `oficina` (Conversación 56). Manuel trajo directamente el resultado de OpenCode: una rama de pyCelda (`cc/sincronizar-readmes-estado`) con un diagnóstico y corrección de la documentación RUP de estado, pidiendo opinión sobre si mergearla.
+
+### Desarrollo Principal
+
+#### 1. Revisión y merge del PR #204 (discussion implícita, sin discussion propia -- delegación directa de Manuel)
+
+OpenCode caracterizó su propio trabajo como tres cosas distintas: diagnóstico (detectar y cuantificar la divergencia), corrección (aplicar solo afirmaciones de estado) y autoría nueva (8 fichas de Desarrollo de código ya existente pero indocumentado). Verificación independiente completa, no aceptando el resumen como prueba:
+
+- **Alcance**: `git diff --stat` confirmó solo documentación -- ningún `.py` tocado salvo la línea `description` de `pyproject.toml`.
+- **421/421 tests** ejecutados de verdad en un clon aislado (no el `pyCelda-verify-pysighor` compartido, que tenía otra tarea en curso -- incidente propio evitado a tiempo: un `git stash`+`checkout` mal pensado sobre ese clon compartido estuvo a punto de pisar trabajo de otra sesión; diagnosticado y revertido sin daño (el stash solo contenía un `uv.lock` generado). Lección reforzada: nunca mutar el working tree de un clon de verificación compartido sin comprobar antes su estado.
+- **Cifras de divergencia recalculadas de forma independiente y exactas**: 46+46+38 CU con carpeta real sin fila en el índice (Análisis/Diseño/Desarrollo), 8 CU con código real sin ficha de Desarrollo (verificado que el código de las 8 ya existía en `main` antes de la rama -- no es documentación de código inexistente), 41 CU recoloreados en el dashboard (verificado a nivel de colores hex reales dentro del SVG generado, no solo en el `.puml` fuente: 46->190 líneas `#ADD8E6`, 0->31 `#FF0000` correspondientes exactas a las 9 CU de Admin realmente pendientes).
+- **Cronología de la divergencia verificada contra `git log` real** de `main`: congelamiento de los resúmenes el 19-08 (último commit que tocó los índices antes del fix), primera divergencia real el 24-08 (todo el bloque Admin implementado ese día sin tocar un solo índice), sync del 29-08 (`c160411`) que ya nació caducado -- el propio README de Desarrollo seguía diciendo "40 de los 42" el mismo día que el commit se declaraba "sincroniza dashboard y README raíz".
+- Tres fichas nuevas contrastadas línea a línea contra router/schema real (`crearSesion`, `eliminarAsignaturaGrado`, `eliminarSesion`): contrato exacto en los tres casos.
+- Mergea limpio contra `origin/main` (verificado con `git merge-tree`).
+
+Sin ningún hallazgo negativo en ningún ángulo verificado. Manuel autorizó "adelante, mergéalo" -- **PR #204 mergeado a `main`, `8cb2b09`**. Cierra el pendiente "recuento de Análisis desincronizado" que la memoria de pySigHor llevaba abierto desde el cierre de la Conversación 56.
+
+#### 2. Discrepancia de estado en `inputAgenteDespliegue.md`, aviso cruzado a Prometeus
+
+Al revisar si los tres `inputAgente*.md` necesitaban actualización, se detectó que `inputAgenteDespliegue.md` afirmaba producción en `c975aa1` (estado de las ~01:00 del 09-01, antes de la tanda de la tarde) cuando la memoria propia de pySigHor ya registraba `a2719cd`. Sin acceso directo a `.deployed-commit` de Prometeus para confirmar, se envió el hallazgo por `SendMessage` a `Claude-pyCelda-Prometeus` en vez de editar un fichero ajeno a ciegas -- **regla de oro del método aplicada literalmente** ("ningún nodo relaya autorización de otro" tiene su contraparte: ningún nodo asume el estado de la máquina de otro sin verificarlo). Prometeus confirmó contra la máquina real (`a2719cd`, health 200) y corrigió su propio runbook, más una nueva sección de memoria propia de verificación.
+
+#### 3. Conflicto real de edición concurrente en `inputAgenteGestor.md`, reconciliado a mano
+
+Al intentar reflejar el hito del PR #204 en `inputAgenteGestor.md` (repo `mmasias_private`), un `git status`/`fetch` de rutina reveló que `Claude-pySigHor-Oficina` había comiteado (`c731dfb`, 18:38 de ese mismo día) una reescritura amplia de la misma sección §5.2 sobre una base anterior a mis ediciones locales -- ambas tocaban el mismo bloque de tabla. Un `pull` directo habría fallado o mezclado mal dos reescrituras del mismo contenido. Protocolo aplicado: `git stash` de mis cambios, `pull --ff-only` limpio (trajo también el fix de Prometeus y un backup automático), y superposición manual de solo la información nueva (hito de esta noche, `main` a `8cb2b09`, cierre del pendiente de Análisis) sobre la base ya reescrita por Oficina, en vez de reaplicar mi diff antiguo a ciegas. Confirmado con Manuel, comiteado y pusheado (`d89098a`).
+
+Mismo patrón de reconciliación (sin conflicto de fichero, pero sí de contenido narrativo) al revisar `myClaudeContext`: dos commits nuevos de Prometeus (verificación de producción, corrección de su propio puntero de `main`) coincidían exactos con lo verificado esta sesión -- `pull` limpio, sin correcciones necesarias, mi propia actualización de memoria comiteada encima (`e65d523`, escaneo de secretos limpio antes de pushear).
+
+#### 4. Corrección de `inputAgenteDeveloper.md`
+
+Al preguntar Manuel si el estado quedaba listo para retomar mañana, auditoría de los tres `inputAgente*.md` reveló que `inputAgenteDeveloper.md` (identidad de `Claude-pyCelda-Oficina`) afirmaba **"Despliegue pendiente en Prometeus"** para el PR #199 y **"Carga de datos pendiente en Prometeus"** para el PR #201 -- ambos ya hechos y verificados esta misma sesión. No solo desactualizado: engañoso, con riesgo real de que una sesión futura reintentara un despliegue o una carga ya completados. Sin sesión `Claude-pyCelda-Oficina` viva para avisar, corregido directamente con los hechos ya verificados (autorización general de ejecución rutinaria, corrección factual sin ambigüedad de diseño).
+
+### Estado del Proyecto
+
+- **pyCelda**: `main` en `8cb2b09` (PR #204). Producción en `a2719cd` + 139 `Sesion` del piloto de planificaciones, sin nada pendiente de desplegar (verificado por mí y por Prometeus, de forma independiente, la misma noche). Discussions activas ninguna nueva. Pendiente "recuento de Análisis desincronizado" **cerrado**.
+- **pySesion**: sin tocar esta sesión.
+- **pySigHor**: esta Conversación 57 en `leConsultor`. Los tres ficheros `AGENTES/inputAgente*.md` (`Gestor`, `Despliegue`, `Developer`) y la memoria de `myClaudeContext` quedan reconciliados y al día entre las cuatro sesiones que los tocaron esta ventana (SDF1, Oficina, Prometeus, esta misma).
+- **Pendientes heredados de pyCelda, sin tocar**: issues #179/#181/#184/#185/#187/#202; `CursoAcademico`/`activarCursoAcademico()`; 2 IDOR de cuerpo de petición (discussion #131); issue #148; auditoría de `curso`/`semestre` (discussion #128); grupo 3 de textareas; resto del Excel de planificaciones docentes de GII (~33 hojas sin curar).
+
+### Para Próxima Sesión
+
+Ninguna tarea activa. Lección de proceso para dejar anotada: cuando varias sesiones (distintas máquinas) editan los mismos ficheros de infraestructura compartida (`AGENTES/*.md`, memoria de `myClaudeContext`) en la misma ventana de tiempo sin coordinarse en vivo, `git fetch`+diff antes de editar es obligatorio, no opcional -- un `pull` a ciegas sobre cambios locales pudo haber destruido o mezclado mal el trabajo de otra sesión. Ocurrió dos veces esta sesión (`inputAgenteGestor.md` con Oficina, working tree de `pyCelda-verify-pysighor` con una tarea ajena en curso) y las dos veces el chequeo previo evitó el daño.
+
+---
+
 *"Hacer las cosas bien no es pedantería académica: es inversión que se amortiza en cada línea de código escrita después."*
 
 ---
