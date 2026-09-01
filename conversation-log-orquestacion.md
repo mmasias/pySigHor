@@ -328,16 +328,27 @@ Migración: `ALTER TABLE sesiones_cronograma RENAME TO sesiones`, nativo en SQLi
 
 Aplicado dos veces esta sesión (#192, #199). Runbook en el cuerpo del PR: backup manual -> `git pull` -> script de migración `plan` (revisar conteos) -> `apply` contra el volumen **antes** de `./deploy.sh` (el backend nuevo declara el esquema nuevo y `create_all()` no migra tablas existentes) -> `deploy.sh` -> health + check funcional de la ruta/columna nueva. Scripts en `backend/app/scripts/`, modos `plan`/`apply`, idempotentes, SQL crudo (ejecutables en el contenedor viejo). El paso `apply` escribe en `pycelda.db` y el clasificador de auto-mode de Prometeus lo bloquea -> lo ejecuta Manuel con `!` o autoriza directamente a Prometeus.
 
+#### 6. Importación de planificaciones docentes reales -- piloto de 5 asignaturas GII (discussion pyCelda #200, PR #201)
+
+Manuel preguntó si se podía importar la planificación sesión a sesión (`PlanificacionDocente`/`Sesion`, recién renombrada en el punto 3) desde una hoja de cálculo real del profesorado. La planificación docente nunca estuvo en el corpus de las memorias ANECA -- dato nuevo, aportado por Manuel.
+
+**Análisis del Excel real** (`CdM 26-27.xlsx`, ~54 hojas GII, ~16 vacías): metadatos de cabecera (`Grado`/`Curso`) inconsistentes, no sirven para emparejar; el tipo de sesión iba codificado por color de celda contra una leyenda de 4 valores, con ~25 variantes de tono. Manuel curó una segunda versión (`PLANIFICACION Docente curada.xlsx`) sustituyendo el color por el texto de la leyenda en una columna -- resuelve el problema de raíz.
+
+**Iteración "vamos comentando" sobre 5 hojas reales** (Matemática I, Física, Tecnología y Estructura de Ordenadores, Programación I, Introducción a la gestión de proyectos software): celdas fusionadas resueltas a su ancla (un tema fusionado en N filas = N sesiones idénticas -- confirmado por Manuel con el ejemplo real de TEO); `EVALUACION_PARCIAL` no está en la leyenda, se infiere de la descripción y sobreescribe la columna de tipo salvo que empiece por "Revisión"; `numero` por orden de fila (la columna "Sesión" tiene huecos y duplicados reales); normalización `rpdR` -> "Revisión pública de Reto"; decisiones puntuales en vivo (Seminario -> práctica, fila en blanco -> saltar).
+
+Resultado: 139 sesiones, cero sin clasificar. Material de referencia dejado en `~/misRepos/corral/tasks/planificacion-docente/` (primer uso de ese directorio en esta tanda) para que `Claude-pyCelda-Oficina` lo productivizara: `importar_planificaciones.py`, `sesiones.json` comiteado, loader idempotente en `seed_grado.py` + `cargar_sesiones.py` standalone. Verificado: parser vs. .xlsx real da salida byte-idéntica al JSON comiteado; seed y `cargar_sesiones` idempotentes. Desplegado por Prometeus como operación de datos (sin redeploy) -- fricción real: `docs/scripts/seed/` no está en la imagen Docker, tuvo que `docker cp` el JSON y los scripts nuevos al contenedor, registrado como [issue #202](https://github.com/mmasias/pyCelda/issues/202). 139 `Sesion` verificadas en producción por SQL y de forma independiente.
+
 ### Estado del Proyecto
 
-- **pyCelda**: producción en `main`, `a2719cd`, `/api/health` `200`, verificado de forma independiente. Discussions #191/#196/#198 cerradas (`concluida`+`aplicado`). Sin PRs ni deploys pendientes.
+- **pyCelda**: producción -- código en `main`, `a2719cd`; datos del piloto de planificaciones (139 `Sesion`) aplicados sin commit de deploy propio (`a4ce9ee` no toca código de app). `/api/health` `200`, verificado de forma independiente. Discussions #191/#196/#198/#200 cerradas (`concluida`+`aplicado`). Issue #202 abierto (fricción de despliegue de datos). Sin PRs ni deploys de código pendientes.
 - **pySesion**: sin tocar esta sesión -- sigue donde quedó el 2026-08-30 (Requisitos y Análisis cerrados, Diseño sin empezar).
-- **pySigHor**: esta Conversación 56 en `leConsultor`. Clon de verificación y toolchain (`uv`, plantuml 1.2026.7) instalados en `oficina`.
-- **Pendientes heredados de pyCelda, sin tocar**: issues #179/#181/#184/#185/#187; `CursoAcademico`/`activarCursoAcademico()`; 2 IDOR de cuerpo de petición (discussion #131); issue #148 (`Grado.codigo` sin unicidad); auditoría de `curso`/`semestre` en el resto de `AsignaturaGrado` (discussion #128); grupo 3 de textareas (referencias bibliográficas).
+- **pySigHor**: esta Conversación 56 en `leConsultor`. Clon de verificación y toolchain (`uv`, plantuml 1.2026.7, `openpyxl`) instalados en `oficina`.
+- **Pendientes heredados de pyCelda, sin tocar**: issues #179/#181/#184/#185/#187; `CursoAcademico`/`activarCursoAcademico()`; 2 IDOR de cuerpo de petición (discussion #131); issue #148 (`Grado.codigo` sin unicidad); auditoría de `curso`/`semestre` en el resto de `AsignaturaGrado` (discussion #128); grupo 3 de textareas (referencias bibliográficas); issue #202 (fricción `docs/` fuera de la imagen).
+- **Pendiente nuevo, sin fecha**: el resto del Excel de planificaciones docentes de GII (~33 hojas sin curar) para escalar la importación más allá del piloto de 5.
 
 ### Para Próxima Sesión
 
-`inputAgenteGestor.md` sigue asumiendo SDF1 y `Claude-pyCelda-SDF1` como constructor -- si se sigue trabajando desde `oficina`, conviene ajustar la sección 5 (objeto de gestión) o al menos anotar que el clon de verificación y el nodo constructor pueden estar en `oficina`. Sin tareas activas más allá de los pendientes heredados.
+`inputAgenteGestor.md` sigue asumiendo SDF1 y `Claude-pyCelda-SDF1` como constructor -- si se sigue trabajando desde `oficina`, conviene ajustar la sección 5 (objeto de gestión) o al menos anotar que el clon de verificación y el nodo constructor pueden estar en `oficina`. Si Manuel cura más hojas del Excel de planificaciones, retomar la importación desde `~/misRepos/corral/tasks/planificacion-docente/DECISIONES.md`. Sin más tareas activas.
 
 ---
 
