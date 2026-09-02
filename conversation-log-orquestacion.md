@@ -455,7 +455,7 @@ Se probó la "consulta vía diálogo" (AskUserQuestion): **llega pero no notific
 
 ### Para Próxima Sesión
 
-Al retomar desde casa: leer discussion #213 antes de nada -- el paso de audit-del-clúster aplica a cualquier PR de la deuda que toque comportamiento de un CU. Orden sugerido de la deuda: #210 (con las 3 colecciones a la vez, y de paso los 2 IDOR de cuerpo de #131), luego #208, luego #212 (solo-RUP, corto). El nodo constructor de la próxima ronda será `Claude-pyCelda-<sufijo de la máquina activa>` -- desde SDF1, `Claude-pyCelda-SDF1`, y habrá que recrear el clon de verificación y toolchain allí si no está.
+Leer discussion #213 antes de nada -- el paso de audit-del-clúster aplica a cualquier PR de la deuda que toque comportamiento de un CU. Orden sugerido de la deuda: #210 (con las 3 colecciones a la vez, y de paso los 2 IDOR de cuerpo de #131), luego #208, luego #212 (solo-RUP, corto). No se sabe desde qué máquina se retoma -- confirmar contra `machine-id.md`; emparejamiento homogéneo (`Claude-pySigHor-<sufijo>` con `Claude-pyCelda-<mismo sufijo>`), Prometeus constante. El clon de verificación y su toolchain viven en `oficina`; si se retoma desde otra máquina, recrearlos allí.
 
 ---
 
