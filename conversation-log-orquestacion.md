@@ -402,6 +402,63 @@ Ninguna tarea activa. Lección de proceso para dejar anotada: cuando varias sesi
 
 ---
 
+## Conversación 58: Tanda #206 -- regla `c3` de planificación docente mínima + medidores de completitud, y la consolidación de RUP que se desvió cuatro veces
+**Fecha**: 2026-09-02 (tarde-noche)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor, `Claude-pySigHor-Oficina`), Claude-pyCelda-Oficina (constructor, apoyándose en OpenCode; Manuel le dio autorización explícita de "push, merges y PRs a indicación de pySigHor" para esta tanda), Claude-pyCelda-Prometeus (despliegue)
+
+### Contexto de la Sesión
+
+Sesión larga desde `oficina`; Manuel se marchó a casa a mitad y siguió el avance vía Claude Web Remoto, con capitanía completa delegada a pySigHor (diseño + verificación + merge + coordinación de despliegue sin confirmación turno a turno). Dos ajustes pedidos por Manuel tras las pruebas reales de la app con profesorado:
+
+1. Que tener una planificación docente con un mínimo de sesiones sea de obligado cumplimiento para enviar la guía docente a revisión.
+2. Que al gestionar las ponderaciones de evaluación se vea la suma agregada (vinculadas o no).
+
+### Desarrollo Principal
+
+#### 1. Discussion #206: el tema común y los dos escenarios
+
+Reflexión previa: los dos ajustes son la misma cuestión -- `enviarGuiaARevision()` es el único punto donde se comprueba que la guía está lista, y en ambos casos el profesor solo descubre el incumplimiento al recibir el rechazo. Discussion #206 con el post común ("condiciones de envío de la `Guia` y su retroalimentación previa") + dos comentarios, "Escenario planificación" y "Escenario ponderación". Manuel decidió: umbral entre 25 y 30 (luego fijado en 25 por defecto), configurable por Admin, cota 1-100, snapshot en `Guia`, patrón `vinculada` para `Sesion` (Opción 2), `c3` encadenado tras `c2` en `especificacion.puml`, medidor total + subtotales por sistema, solo texto.
+
+**Corrección propia registrada en el hilo**: escribí que `especificacion.puml` tenía un único `<<choice>>`; Manuel señaló que ya tenía dos encadenados (`c1` ítems sin guardar / `c2` rango o suma), añadidos por `3ee9d38`. Me apoyé en el "Hallazgo" caduco del README de Análisis sin abrir el `.puml`. Tachado y corregido con comentario aparte.
+
+#### 2. Bloque 1 -- medidor de completitud de ponderaciones (PR #207, `d15ed02`)
+
+Solo frontend, sin backend ni migración. `PonderacionesEvaluacion.tsx` y `AbrirGuia.tsx`: "Total asignado: X% / 100%" + "Asignado" por `SistemaEvaluacion` contra su rango. Retoque tras mi verificación: un sistema con 0% muestra "(sin asignar)" en gris, no rojo "(fuera de rango)" -- porque `puede_enviarse_a_revision()` no valida rango de un sistema sin ponderaciones vinculadas (hallazgo -> [issue #208](https://github.com/mmasias/pyCelda/issues/208)). Desplegado por Prometeus, bundle sha256-idéntico a mi build verificado.
+
+#### 3. Bloque 2 -- `Sesion` entra en el ciclo `vinculada`/pending (PR #209, `dc2da1c`)
+
+Bugfix aditivo: el RUP y el frontend ya especificaban Opción 2 completa (`crearSesion`/`editarSesion` "datos en memoria", `eliminarSesion` "N/A sin backend", `PlanificacionDocente.tsx` con lista de trabajo), pero el backend divergía. `SesionRepository.existe_pendiente_de`/`vincular`/`desvincular`, `Guia.sincronizar_sesiones`, `GuardarBorradorRequest.ids_sesiones_final`, `guardar_borrador_guia` sincroniza sesiones, el `409` de `enviar_guia_a_revision` las cuenta. `AbrirGuia.tsx` ahora respeta `claveSesionesExcluidas` -- bug de paso corregido: antes "eliminar sesión" en el front no persistía nunca. Sin cambio de esquema. Hallazgo transversal -> [issue #210](https://github.com/mmasias/pyCelda/issues/210): `sincronizar_*` no acota `a_vincular` a las filas de la guía (500 con id inexistente + manipulación cruzada del flag `vinculada` de otra guía). Pre-existente en las 3 colecciones. Lo más cercano a seguridad de la tanda.
+
+#### 4. Bloque 3 -- regla `c3` + `sesiones_minimas` configurable (PR #211, `661e058`, con migración)
+
+`AsignaturaGrado.sesiones_minimas` (default 25, cota 1-100 validada con `422`), `Guia.sesiones_minimas` (snapshot al nacer), `Guia.planificacion_docente_completa()`, rama `c3` en `enviar_guia_a_revision` (`422`, "N de M sesiones"). CRUD Admin. Envelope `AbrirPlanificacionDocenteResponse {sesiones, sesiones_minimas}` -- decisión mía (un solo consumidor, modelo correcto) frente a segunda llamada a `abrirGuia`. Medidor "N / M sesiones" en dos vistas. Migración `migrar_sesiones_minimas.py`: fix pedido en mi revisión -- backfill one-shot (dentro de `if not guias_existe`, no re-sincroniza -- coherente con "snapshot al nacer"). Prometeus la validó contra copia de la BD real antes del merge (108 guías -> 25, 0 fuera de rango, idempotente). En producción la lanzó Manuel con `!` porque el clasificador de auto-mode de Prometeus bloqueó el paso de escritura dos veces.
+
+#### 5. La consolidación de RUP que se desvió cuatro veces
+
+El Bloque 2 mergeó con `guardarBorradorGuia` Análisis/Diseño sin tocar pese a que su comportamiento cambió, y yo lo aprobé (verifiqué tests + diff + notas de Desarrollo, no "qué otros CU describen algo que acaba de cambiar"). Al verificar el Bloque 2 aseveré que "el RUP de `eliminarSesion` especifica exactamente el comportamiento posicional" habiendo leído solo Análisis y Diseño -- la ficha de Requisitos decía lo contrario (renumeración persistida "confirmada por Manuel"). Contradicción intra-CU de meses. Lo cazó el nodo constructor. Manuel decidió (vía diálogo): alinear Requisitos a lo construido (posicional, `Sesion.numero` conserva huecos). El arreglo debió ser un barrido; fueron cuatro rondas (`12bc082`/`e3b89f2`/`fc62c07`/`aa151da`) porque reaccioné a mi siguiente `grep` en vez de auditar. El nodo constructor forzó el cambio de método proponiendo un audit sistemático del clúster entero -- que reveló también deriva **anterior a #206** (`abrirGuia` desde #199, `abrirPonderacionesEvaluacion` #38 -> [issue #212](https://github.com/mmasias/pyCelda/issues/212)). Al final, `guardarBorradorGuia`, `abrirGuia`, `abrirPlanificacionDocente`, `eliminarSesion`, diagramas de clases y DER/diccionario quedaron consolidados; todos los SVG regeneran byte-idénticos.
+
+#### 6. Retrospectiva -- discussion #213
+
+A petición de Manuel ("esto es un aprendizaje de la hostia, hemos de saber dónde nos desviamos"). Causa raíz: no existe un paso explícito de "auditar la RUP del clúster afectado" cuando un PR cambia el comportamiento de un CU. Cambios de proceso propuestos: (a) audit-del-clúster obligatorio antes de merge que cambie comportamiento; (b) linter determinista de "hallazgos abiertos" en RUP (`no resuelto aquí`, `queda señalado`, `cuando se retoquen`, `dos colecciones`, `cinco lecturas`); (c) verificar siempre la ficha de Requisitos, no solo Análisis/Diseño; (d) resolver la fricción del `apply` de migración en Prometeus; (e) saldar #212 pronto en un PR corto de solo-RUP.
+
+#### 7. Canal de escalada con Manuel ausente
+
+Se probó la "consulta vía diálogo" (AskUserQuestion): **llega pero no notifica al móvil**. Acuerdo: la tanda avanza, lo que necesita criterio de Manuel se deja en diálogo + una línea en el terminal, lo bloqueante-e-irreversible detiene ese bloque hasta que responda, lo reversible y de bajo riesgo lo decide pySigHor y lo reporta. Manuel "al pendiente" pese a todo.
+
+### Estado del Proyecto
+
+- **pyCelda**: `main` y producción en `661e058`. Tanda #206 cerrada (3 bloques desplegados: `d15ed02` -> `dc2da1c` -> `661e058`). `/api/health` 200, integrity + FK check limpios en prod, 139 `Sesion` del piloto intactas, 108 guías con `sesiones_minimas=25`. Discussions #206 (`concluida`+`aplicado`) y #213 (retrospectiva, `en-curso`). Tag último `v0.6.0` sobre `7618f19` -- **sin bump de versión en esta tanda** (pendiente si se quiere reflejar #206).
+- **pySesion**: sin tocar esta sesión (Requisitos y Análisis cerrados, Diseño sin empezar desde 2026-08-30).
+- **pySigHor**: esta Conversación 58 en `leConsultor`. Clon de verificación `pyCelda-verify-pysighor` en `oficina`, en `main`.
+- **Deuda nueva de #206, priorizada**: **#210** (`sincronizar_*` sin acotar `a_vincular` -- seguridad, prioridad sobre las otras dos) > **#208** (sistemas de evaluación requeridos vacíos sin validar) > **#212** (deriva RUP pre-#206, solo RUP).
+- **Pendientes heredados de pyCelda, sin tocar**: issues #179/#181/#184/#185/#187/#202; `CursoAcademico`/`activarCursoAcademico()` (Requisitos completo, sin construir -- ahora también debe clonar `sesiones_minimas`, ya anotado en su README); 2 IDOR de cuerpo de petición (discussion #131, relacionado con #210); issue #148; auditoría de `curso`/`semestre` (discussion #128); grupo 3 de textareas; resto del Excel de planificaciones docentes de GII (~33 hojas sin curar).
+
+### Para Próxima Sesión
+
+Al retomar desde casa: leer discussion #213 antes de nada -- el paso de audit-del-clúster aplica a cualquier PR de la deuda que toque comportamiento de un CU. Orden sugerido de la deuda: #210 (con las 3 colecciones a la vez, y de paso los 2 IDOR de cuerpo de #131), luego #208, luego #212 (solo-RUP, corto). El nodo constructor de la próxima ronda será `Claude-pyCelda-<sufijo de la máquina activa>` -- desde SDF1, `Claude-pyCelda-SDF1`, y habrá que recrear el clon de verificación y toolchain allí si no está.
+
+---
+
 *"Hacer las cosas bien no es pedantería académica: es inversión que se amortiza en cada línea de código escrita después."*
 
 ---
