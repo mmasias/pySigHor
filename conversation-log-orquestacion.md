@@ -463,4 +463,60 @@ Leer discussion #213 antes de nada -- el paso de audit-del-clúster aplica a cua
 
 ---
 
+## Conversación 59: Deuda de #206 completa (#210/#208/#212), con capitanía total delegada y sin Manuel activo
+**Fecha**: 2026-09-03
+**Participantes**: Manuel (Usuario, ausente durante casi toda la sesión), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor, `Claude-pySigHor-SDF1`), Claude-pyCelda-SDF1 (constructor, apoyándose en OpenCode), Claude-pyCelda-Prometeus (despliegue)
+
+### Contexto de la sesión
+
+Retoma desde SDF1 (máquina confirmada contra `machine-id.md`, coincide con el nombre de la sesión). Manuel delega **capitanía completa** de la deuda de #206 (#210, #208, #212) y se desconecta -- diseño, verificación, aprobación de merges y coordinación de despliegue sin confirmación turno a turno, con el diálogo como único canal de escalada (llega al móvil pero no notifica, así que solo lo bloqueante-e-irreversible detiene un bloque). No hizo falta escalar nada -- las tres piezas eran de bajo riesgo y quedaban dentro de las reglas de autonomía ya fijadas.
+
+Antes de empezar: `git remote -v` del propio repo pySigHor apuntaba a `https://github.com/mmasias/pyCelda.git` en vez de `pySigHor.git` -- corregido (`git remote set-url`), encargo explícito de Manuel al arrancar. Causa no investigada (probablemente copia de configuración entre proyectos en algún momento pasado); sin efecto práctico hasta ahora porque nunca se hizo push desde este repo.
+
+### Desarrollo principal
+
+#### 1. Recreación del clon de verificación en SDF1
+
+`pyCelda-verify-pysighor` existía en SDF1 pero estaba 129 commits detrás de `main` (de una sesión de trabajo anterior, no de verificación). `git reset --hard origin/main` (repo desechable, sin trabajo propio que perder) + `uv sync` + 435 tests en verde como línea base. Detectado de paso: `plantuml` local es `1.2026.6`, el constructor (vía plantuml.com) generó con `1.2026.8` -- desfase de dos versiones menores que produce SVG **byte-distintos con contenido idéntico**. Ver `feedback_verificacion_svg_plantuml.md`.
+
+#### 2. #210 (seguridad) -- PR #214, `ba5bbce`
+
+`Guia.sincronizar_ponderaciones/_referencias/_sesiones` no intersectaba `deseadas` con las filas propias de la `Guia`: un id inexistente en el body de `PUT /guias/{id}/borrador` causaba 500, un id de otra `Guia` se le marcaba `vinculada=True` sin cambiar su `guia_id`. Diseño mío (intersectar en el único punto de entrada, sin duplicar la validación en los tres repositorios porque `vincular()` solo tiene ese call site), construido por el constructor, verificado reproduciendo los 6 tests fallando sin el fix antes de aprobar. Audit-del-clúster: no requería tocar RUP (la ficha de `guardarBorradorGuia`, las tres fases, no documentaba nada sobre pertenencia de ids). Los "2 IDOR de cuerpo" de discussion #131 que formaban parte del encargo original ya estaban resueltos desde `ab0f753` (25-08) -- verificado, no tocado. Desplegado, `/api/health` 200 verificado también de forma directa desde aquí (no solo por el reporte de Prometeus).
+
+**Incidente propio, corregido en el momento**: al diseñar el fix escribí el cambio directamente en `/home/manuel/misRepos/_PROYECTOS/pyCelda/backend/app/models/guia.py` (el repo del constructor), rompiendo la separación de roles del método (orquestador diseña y verifica, constructor construye). Detectado antes de seguir, revertido con `git checkout --`, y el diseño se envió como especificación por `SendMessage` en su lugar. Ver `feedback_orquestacion_pycelda.md` (actualizado).
+
+#### 3. #208 -- PR #215, `5cad9f8`, dos rondas de audit-del-clúster
+
+`puede_enviarse_a_revision()` solo validaba el rango de los `SistemaEvaluacion` con alguna `PonderacionEvaluacion` vinculada -- uno requerido (`ponderacion_minima > 0`) en 0% se colaba. Propuesta de criterio publicada en el issue antes de construir (`Guia.bloqueo_ponderaciones() -> str | None`, recorre todos los sistemas de la materia, mensaje concreto "Falta asignar N%.../Sobra N%..."), sin objeción, autorizado a proceder por ser de bajo riesgo. Primer PR correcto en fix/tests/RUP del propio CU -- pero el **audit-del-clúster encontró 4 gaps reales fuera de `enviarGuiaARevision`**: los dos diagramas de clases consolidados sin el método nuevo, y un ejemplo de respuesta 422 en la ficha de Desarrollo que habría quedado directamente falso tras el merge. Devuelto al constructor con la lista completa (no reactivo), corregido en un segundo commit, reverificado antes de aprobar. Desplegado, verificado en producción.
+
+#### 4. #212 (solo RUP) -- PR #216, `a1e6c2d`, tres rondas de audit-del-clúster
+
+Deriva pre-#206 en `abrirGuia` (`profesorado`/`puede_revisar` ausentes de Análisis/Diseño) y `abrirPonderacionesEvaluacion` (segunda lectura de `SistemaEvaluacion` sin reflejar). El constructor contó las lecturas reales contra el código en vez de asumir "dos más" (`profesorado`/`asignatura_grado` viajan precargados en la misma consulta, solo `puede_revisar` es una lectura nueva genuina), y corrigió de oficio una caracterización errónea preexistente de `puede_revisar` en `RUP/04-desarrollo/README.md` (no es un toggle de UI, es defensa en profundidad -- verificado contra `AbrirGuia.tsx` antes de escribirlo). **El propio constructor aplicó el audit-del-clúster de forma proactiva, sin que se lo pidiera**, encontrando y corrigiendo 5 gaps (diagramas de clases, `03-diseño/README.md`, dos fichas de Desarrollo, nota de `consultarEstadoGuias` señalando fuera de alcance una deriva distinta que no cerró). Mi propia ronda final de verificación encontró un **sexto gap** que ni el constructor ni su propio barrido cazaron (`configuracion-proyecto.md`, conteo de funciones desactualizado) -- corregido en un tercer commit. Solo RUP, sin despliegue.
+
+Cada afirmación factual del PR (precarga en `GuiaRepository.obtener()`, `GradoRepository.dirige()`, `Promise.all` en el frontend, orden exacto del campo Profesorado en wireframe y en `AbrirGuia.tsx`, los tres schemas Pydantic contra los JSON de ejemplo, `GuiaResumenResponse` real) verificada contra el código, no contra el resumen del constructor -- todo exacto, cero hallazgos falsos.
+
+#### 5. Discussion #140 cerrada, #131 anotada, #213 cerrada
+
+`Diseño (pausado): Cronograma de sesiones` (#140, "retomar sábado" desde el 29-08) cerrada: `Sesion` implementa las 4 decisiones de diseño allí cerradas, construido desde #199 y completado en #206 -- título limpiado, etiquetas de bitácora aplicadas. Los "2 IDOR de cuerpo" de discussion #131 (ya cerrada) anotados como resueltos desde `ab0f753`, sin reabrir la discussion. #213 (retrospectiva de #206) cerrada con el resumen completo de las tres piezas y evidencia concreta de que el cambio de proceso propuesto (§6.1, audit-del-clúster) funcionó -- incluida la lección de que ninguna pasada única agota el árbol RUP completo, ni siquiera cuando el método ya se interiorizó.
+
+**Error propio, corregido**: el primer intento de cerrar #213 se publicó por error en discussion #206 (node id equivocado, copiado de una consulta anterior sin volver a verificarlo). Detectado antes de cerrar nada, corregido con un segundo comentario en el hilo correcto y un pointer cruzado -- ningún contenido se perdió, pero confirma la utilidad de verificar el id de destino antes de cada mutación GraphQL cuando se opera sobre varias discussions en la misma sesión.
+
+### Estado del proyecto
+
+- **pyCelda**: `main` en `a1e6c2d` (post-#216). Producción en `5cad9f8` (post-#215 -- #216 no despliega, es solo RUP). Deuda de #206 completa: #210/#208/#212 cerrados. Discussions #206 y #213 cerradas (`concluida`+`aplicado`), #140 cerrada. Tag sigue `v0.6.0`, sin bump (fuera del alcance delegado esta tanda).
+- **pySesion**: sin tocar.
+- **pySigHor**: esta Conversación 59 en `leConsultor`. Remote `origin` corregido a `pySigHor.git`. Clon `pyCelda-verify-pysighor` recreado y al día en SDF1.
+- **Deuda nueva, sin issue todavía**: `RUP/04-desarrollo/casos-uso/consultarEstadoGuias/README.md` tiene su propia deriva de RUP (comparación con `AbrirGuiaResponse` obsoleta, `GuiaResumenResponse` real con 4 campos que la ficha no refleja) -- detectada como efecto colateral del audit de #212, señalada en el propio README, deliberadamente sin issue propio (fuera del alcance delegado). Candidata para cuando se retome pyCelda.
+- **Pendientes heredados sin fecha, sin tocar**: issues #179/#181/#184/#185/#187/#202; `CursoAcademico`/`activarCursoAcademico()`; 2 IDOR de cuerpo de discussion #131 -- **ya no aplica, verificado resuelto en #210**; issue #148; auditoría de `curso`/`semestre` (discussion #128); grupo 3 de textareas; resto del Excel de planificaciones docentes de GII (~33 hojas sin curar).
+
+### Para próxima sesión
+
+Sin tarea activa de la deuda de #206 -- completa. Si se retoma pyCelda: considerar abrir issue para la deriva de `consultarEstadoGuias` antes de que crezca más (mismo patrón que motivó #212). Confirmar máquina contra `machine-id.md` al arrancar; si se retoma desde `oficina`, el clon de verificación y su toolchain (con `plantuml` en la versión que sea) viven ahí, no en SDF1 -- no asumir que el de SDF1 recreado hoy sigue siendo el vigente si pasa mucho tiempo sin uso.
+
+---
+
+*"Hacer las cosas bien no es pedantería académica: es inversión que se amortiza en cada línea de código escrita después."*
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
