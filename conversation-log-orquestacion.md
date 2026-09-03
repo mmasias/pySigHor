@@ -519,4 +519,86 @@ Sin tarea activa de la deuda de #206 -- completa. Si se retoma pyCelda: consider
 
 ---
 
+## Conversación 60: v1 del render de la guía docente en pyCelda -- plantilla oficial UNEA, `descargarGuiaPDF()` real + CU nuevo `previsualizarGuia()`, en producción
+**Fecha**: 2026-09-03
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor como orquestador/revisor, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor, apoyándose en OpenCode), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto de la sesión
+
+Retoma desde `oficina` (máquina confirmada contra `machine-id.md`, coincide con el nombre de la sesión -- emparejamiento homogéneo con `Claude-pyCelda-Oficina`). La deuda de #206 quedó completa en la Conversación 59; sin tarea activa al arrancar. Manuel trae **una plantilla de Guía Docente en Word** (`docs/PROPUESTA_PLANTILLA/Formulario-UNEA_GuiaDocente.docx`, oficial de la universidad): es lo que quiere que `pyCelda` exporte a partir de cada `Guia`, no en Word sino en HTML exportable a PDF.
+
+### Desarrollo principal
+
+#### 1. Discussion #217 -- el "qué" (diagnóstico de encaje de la plantilla)
+
+Convertida la plantilla a texto (`soffice --headless`), contrastada bloque a bloque contra el modelo de dominio de pyCelda (`main` en `a1e6c2d`) y contra las guías reales (`docs/GII-IYA009.pdf`). Diagnóstico publicado como cuerpo, tres preguntas una por comentario. Respuestas de Manuel:
+
+- **Plantilla oficial** = fuente de requisitos. El formato de salida sí es libre (HTML->PDF).
+- **Enfoque B (incremental)**: escalar `generarGuiasPDF()`/`descargarGuiaPDF()` con lo que el modelo rinde hoy (6 bloques), el resto de gaps al backlog en su propio ciclo RUP.
+- **Competencias**: ya resuelto en el modelo de dominio (entidad unificada `ResultadoAprendizaje`, sin clase `Competencia`). Matiz nuevo de Manuel, anotado en `project_pycelda_arquitectura_decisiones.md` y en el bullet del modelo de dominio: la universidad migra grado a grado de "Competencias" a "Resultados de aprendizaje", y **`ResultadoAprendizaje.tipo == "General"` es el discriminador del estado de esa migración** -- un grado con algún RA `"General"` no está migrado (sus RA son competencias), sin ninguno ya lo está; nunca coexisten los dos regímenes. El bullet del modelo decía "probablemente quede sin uso pronto" -- desmentido.
+
+Gaps identificados que NO son de plantilla sino de requisitos/modelo (backlog ordenado por Manuel): normalizar `ReferenciaBibliografica.tipo`, requisitos previos, tabla de actividades formativas con horas/presencialidad, convocatoria extraordinaria, marca de superación obligatoria, distinción RA titulación/optativa, validación de forma de contenidos.
+
+#### 2. Discussion #218 -- el "cómo" (motor de render)
+
+D1-D4 cerradas con Manuel: **PDF oficial + página HTML subproducto de la misma plantilla** (D1); **WeasyPrint** (Jinja2 + CSS Paged Media, no Chromium) (D2); **re-render desde la fila `Guia` en cada descarga, sin almacenar bytes** (D3, `generarGuiasPDF()` intacto); **una sola plantilla** `backend/app/templates/guia_docente.html` + logo en `backend/app/static/` (no en `images/` ni `docs/` -- no viajan en la imagen Docker, familia #202) (D4).
+
+P1-P4: **P1 = B, los RA se leen en vivo de `AsignaturaGrado`, NO se materializan** (razón de Manuel: los RA no deberían cambiar una vez definidos; materializarlos los duplica). Consecuencia: el v1 no toca modelo de dominio, sin migración de esquema, sin backfill. Deuda registrada en **issue #219** (`editarResultadoAprendizaje()` sobre la descripción altera guías ya aprobadas -- el reparto es inmutable pero la descripción no). P2 no aplica. **P3 = A**: la vista HTML usa la misma auth que `abrirGuia()` (`Profesor` autor + `DirectorGrado`), `Admin` fuera del v1. **P4**: vista HTML en cualquier estado, con banda de aviso roja si la guía no está `Aprobada`.
+
+CU nuevo **`previsualizarGuia()`**: verbo nuevo del vocabulario cerrado, propuesto por el constructor con el precedente de `selecciona`, **ratificado por Manuel**. Ruta `GET /api/v1/guias/{id}/vista`.
+
+#### 3. Desglose RUP del constructor y checkpoint intermedio
+
+El constructor (`Claude-pyCelda-Oficina`, emparejamiento homogéneo) publicó el desglose RUP en #218 -- aprobado con matices. Se acordó **un solo PR** (RUP + código) con un **checkpoint intermedio**: comitear la prosa RUP en la rama, pushear y esperar revisión antes de escribir código (lección de la Conversación 58 / retrospectiva #206: la consolidación de RUP no es un añadido opcional del PR de feature).
+
+Revisión del checkpoint (`e0c7be9`) en clon dedicado: recuentos de catálogo correctos (91 -> 96, verificados contra las carpetas reales: 98 en `03-detalle` = 96 + 2 primitivas, 89 fichas por fase). Un hallazgo real, **el patrón #213 otra vez**: los números que describen los diagramas *consolidados* (`"42 colaboracion.puml"`, `"88 secuencia.puml"`, `"21 colaboraciones"`) estaban stale en `main` desde antes de L10 y el constructor los había tocado a medias (un `+1` sobre un número mal por 47). Devuelto con la instrucción de grep completo de todos los números de diagrama consolidado y una sola pasada -- el constructor encontró más de los que yo señalé (`configuracion-proyecto.md`, `04-desarrollo/README.md`) y arregló el conjunto. Segundo cambio: las fichas de Desarrollo decían "✅ Completado" sin código -> a "🚧 RUP escrito, código pendiente" hasta que entrara el código.
+
+#### 4. PR #221 -- código, revisión, dos rondas de fix
+
+Clon de verificación **`pyCelda-verify-pysighor` recreado en `oficina`** (el de SDF1 quedó de la Conversación 59; el rol se ejecuta desde varias máquinas y el clon vive donde corrió la última tanda). venv con WeasyPrint 69.0 -- **las libs de sistema (pango/cairo/harfbuzz) ya estaban por el escritorio KDE, sin sudo**, así que la autoverificación real del PDF se pudo hacer aquí (el entorno del constructor tiene poetry roto y no puede instalar libs).
+
+Verificación independiente de `db63cc6`: 453/453 tests (ejecución real, no el resumen del constructor); **PDF real generado** con WeasyPrint sobre una `Guia` rica y contrastado a ojo contra `GII-IYA009.pdf` -- layout fiel. Hallazgos:
+
+- **Bloqueante**: la cabecera decía "GUÍA DOCENTE" **sin año** (`CursoAcademico` no está modelado). Expuesto a Manuel como decisión -> **constante de config** `Settings.curso_academico_vigente` (default "2026-2027") + **issue #222** para sustituirla por `CursoAcademico`.
+- **No bloqueante aplicado**: viñetas de lista con guion largo (`\2013`) -> guion normal (regla tipográfica de Manuel + coherencia con `GII-IYA009`).
+- **No bloqueante diferido**: logo SVG de 54 KB inline en base64 por respuesta (**issue #223**); `_contexto` usa `db.get(Grado, guia.grado_id)` (columna desnormalizada) en vez de la ruta estructural -- push-back razonado del constructor aceptado (consistente con `_es_director_de_la_guia`/`listar_del_grado`, robusto frente a `asignatura_grado is None`).
+- **Deriva pre-existente del audit del clúster**: `descargar_guia_pdf` es `Profesor`-only en código vs su RUP con actor `Admin` -> **issue #220**, no tocado en esta tanda.
+
+Re-check de `2a39aea` + `4ce674b`: 454/454, cabecera "GUÍA DOCENTE 2026-2027" y viñetas "-" verificadas en render real. (El `4ce674b` corrigió una regresión del propio constructor: el `<title>` perdió el acento al quitar un `--`.)
+
+#### 5. Merge y despliegue
+
+Manuel dio la palabra: merge + despliegue, y **fijó el canal de despliegue: pasa por pySigHor, el nodo constructor NO habla con Prometeus** (hub-and-spoke). Autorización explícita para dirigir la tanda ("lo que pida pySigHor, el constructor lo ejecuta").
+
+- Merge: `13fcd94` (merge commit, no squash -- convención de pyCelda, los 6 commits conservados). Lo hizo el constructor.
+- Despliegue: coordinado por mí con Prometeus. Build de imagen backend (capa apt de WeasyPrint: `libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b fonts-dejavu-core`) + caddy (frontend tocado). Sin migración. `apt-get update` no falló, sin `--no-cache`.
+- Verificación independiente desde `oficina`: `/api/health` 200; rutas `/vista` y `/pdf` registradas (401 sin auth, no 404/500); bundle `index-fKWiju3i.js` servido; render de PDF real (WeasyPrint 69.0, `%PDF-1.7`, `<title>` con acento) contra el código exacto desplegado en mi clon.
+- **Matiz operativo**: ninguna de las 108 guías tiene `fecha_generacion_pdf` seteada, así que `descargarGuiaPDF` devuelve 409 para todas. El timestamp lo pone `editarSemestreGuia()`/`generarGuiasPDF()`, ninguno disparado nunca. **El camino end-to-end vivo hoy es `previsualizarGuia()`** (vista HTML, cualquier estado).
+- Dashboard `99-seguimiento`: `e5a9983` (commit directo a main, convención de pyCelda para docs de seguimiento), 95/95 -> 96/96.
+
+#### 6. Error propio
+
+Al justificar al constructor el commit directo a main del dashboard cité "**LEY 004** lo exceptúa". LEY 004 es una regla de **pySigHor** (rama `xRevisar` para artefactos RUP del propio port FastAPI/React), no existe en pyCelda y no aplica. El commit directo era correcto por la convención propia de pyCelda (precedente del git log), no por LEY 004. Corregido con el constructor.
+
+### Estado del proyecto
+
+- **pyCelda**: `main` y producción en `13fcd94` + `e5a9983` (dashboard, no despliega). v1 del render de la guía docente **en producción**. Discussions #217 (`concluida`/`pendiente` -- el backlog de gaps sigue abierto) y #218 (`concluida`/`aplicado`). Issues nuevos: **#219** (RA en vivo), **#220** (auth `Admin` del PDF), **#222** (`CursoAcademico` para el año), **#223** (logo SVG inline). Tag sigue `v0.6.0`.
+- **pySesion**: sin tocar (Requisitos y Análisis cerrados, en pausa hasta Diseño).
+- **pySigHor**: esta Conversación 60 en `leConsultor`. Clon `pyCelda-verify-pysighor` recreado y al día en **`oficina`** (con venv WeasyPrint) -- no en SDF1.
+- **Memoria actualizada**: `project_pycelda_plantilla_guia_docente.md` (nuevo, historia completa de la tanda), `project_pycelda_arquitectura_decisiones.md` (bullet de `tipo == "General"`), `MEMORY.md` (pointer). El commit de myClaudeContext lo hace `Claude-pyCelda-Oficina` (se ofreció) -- recoge también estos cambios de pySigHor por ser repo compartido.
+
+### Para próxima sesión
+
+- **Ajuste adicional pendiente** que Manuel mencionó al cerrar, sin detallar -- preguntar.
+- Siguiente pieza natural del render: escalar `generarGuiasPDF()` (`Admin`) o el flujo que setea `fecha_generacion_pdf`, sin lo cual el PDF oficial no llega a un usuario (solo la vista HTML).
+- Backlog de #217: normalizar `ReferenciaBibliografica.tipo` es el primero, barato -- desbloquea el subbloqueo limpio de bibliografía.
+- Deriva de `consultarEstadoGuias` (heredada de la Conversación 59) sigue sin issue.
+- Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación vive en `oficina`.
+
+---
+
+*"Un documento oficial no debería salir sin el año: modelar la entidad completa es trabajo aparte, pero la constante de config cuesta una línea."*
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
