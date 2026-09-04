@@ -601,4 +601,71 @@ Al justificar al constructor el commit directo a main del dashboard cité "**LEY
 
 ---
 
+## Conversación 61: v2 Frente A de la guía docente -- maquetación al formulario oficial, y el error de haberse basado en la guía vieja
+**Fecha**: 2026-09-03 (noche) -- 2026-09-04
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor orquestador/revisor, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor, contexto limpiado a mitad para entrar fresco a v2), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto de la sesión
+
+Continúa desde la Conversación 60 sin cortar sesión. Cerrada la tanda del v1 del render (PR #221, producción `13fcd94`), Manuel pidió: (1) escribir un `RESUMEN.md` del experimento de desarrollo con agentes en la raíz de pyCelda (publicación -- números del proyecto: ~20k LoC código, 7,8k tests, 23k RUP, 96 CU, 436 commits, 3,5 semanas de definición + 1,5 de construcción); (2) ajustes de maqueta del PDF.
+
+### Desarrollo principal
+
+#### 1. El diagnóstico que reabrió la maqueta
+
+Manuel generó una guía, la aprobó, y no encontraba cómo generar el PDF. Diagnóstico: **no hay acción dedicada**. `fecha_generacion_pdf` solo lo sella `editar_semestre_guia` como efecto colateral (`guia.regenerar_pdf()`, DirectorGrado); `generarGuiasPDF()` (Admin, lote) especificado en RUP pero sin construir. Workaround: "Editar semestre -> guardar". Y `previsualizarGuia()` solo funciona para Profesor/DirectorGrado, no Admin (P3/opción a) -- si Manuel mira como Admin, 404.
+
+Luego, revisando la cabecera repetida: la maqueta del v1 se basó **a ojo de `docs/GII-IYA009.pdf`** (una guía docente ya rellenada, formato antiguo) en vez de **`docs/PROPUESTA_PLANTILLA/Plantilla-GuiaDocente.pdf`** (el formulario oficial en blanco, 7 páginas, que Manuel también había puesto en el repo). El contenido salió bien (venía del `.docx`), el aspecto no. Renderizadas las 7 páginas del formulario oficial y contrastadas sección por sección: logo arriba izquierda (no centro), título en texto azul sin banda de fondo, secciones numeradas, celdas de etiqueta en azul saturado, campos "CENTRO"/"DOCENTE"/"EMAIL" (no "Facultad"/"Profesorado"/...). Manuel llevaba cinco ajustes sueltos reconstruyendo el formulario de memoria; se decidió una pasada de maquetación con `Plantilla-GuiaDocente.pdf` como única fuente visual.
+
+#### 2. Discussion #224 -- v2, dos frentes
+
+**Frente A -- maquetación al formulario oficial.** Todas las decisiones cerradas con Manuel: logo izquierda 75% + regla azul, título sin banda solo pág 1, secciones numeradas 1-6, celdas azul saturado, pie "Página X de Y" abajo derecha, **marca de agua diagonal "BORRADOR - NO OFICIAL" en todas las páginas** del PDF cuando `estado != Aprobada` (la vista HTML conserva la banda roja). 6 secciones siempre presentes con esqueleto: `_REQUISITOS_PREVIOS_AQUI_`, tabla de 10 actividades formativas en blanco (sustituye el marcador `ACTIVIDADES_FORMATIVAS_AQUI`), extraordinaria con texto fijo y "pendiente de concretar", 4 subsecciones fijas de bibliografía. "Interés y participación del alumno" NO es fila fija -- ponderación normal del profesor. Sin modelo, sin migración.
+
+**Frente B -- `generarGuiaPDF()` para el usuario.** CU nuevo singular (DirectorGrado, `POST /guias/{id}/generar-pdf`, 409 si no Aprobada, reutiliza `regenerar_pdf()`), + cierre de #220 (`descargar_guia_pdf` Profesor-only -> `_tiene_acceso_a_guia`). **Manuel lo aparcó** ("no lo veo complejo") -- desglose cerrado en el hilo, sin construir.
+
+Preguntas del desglose del constructor (8), resueltas: Análisis/Diseño de Frente A se tocan ligero; HTML conserva banda roja; ruta `/generar-pdf` no `/pdf`; 409; dos PRs; mapeo de bibliografía sobre valores reales de producción.
+
+#### 3. El constructor entró fresco
+
+Manuel limpió el contexto de `Claude-pyCelda-Oficina` para que entrara sin arrastre a v2. Briefing completo (bootstrap + encargo #224). Desglose RUP -> checkpoint de la prosa (8 fichas, 96/96 sin CU nuevo) -> revisión en clon dedicado.
+
+**Deriva stale de #218 -- dos líneas, no una.** El barrido del constructor sobre "placeholder" cazó una (`04-desarrollo/README.md`); mi verificación independiente encontró la segunda (`editarSemestreGuia/README.md:26`). El patrón #213 recurrente: ninguna pasada única agota el árbol, conviene que barran los dos nodos por separado. Ambas dobladas en el PR-A.
+
+#### 4. PR #225 -- código, un bloqueante
+
+Plantilla reescrita a la maqueta oficial + `_contexto()` con flag `vista_html` (banda en HTML / marca de agua en PDF) + `_subseccion_biblio()` con mapeo defensivo. Prometeus consultó producción: `referencias_bibliograficas.tipo` tiene `Complementaria`/`Básica`/`Web` (seed), pero el frontend ofrece `"Webs de referencia"` y `"Otras fuentes de consulta"` -- **dos vocabularios**, columna libre sin validación. Registrado como **issue #226**, ligado al backlog #1 de #217. El mapeo trata ambos.
+
+Verificación en clon dedicado con PDF real: 463/463 tests, maqueta fiel al formulario oficial. **Un bloqueante**: la marca de agua a 42pt con `left:0; right:0` hacía *wrap* a dos líneas y se recortaba por los dos bordes -- ilegible. Fix: `top:50%; left:50%; transform: translate(-50%,-50%) rotate(-45deg); white-space:nowrap; font-size:38pt` (commit `659e484`). Re-verificado: una línea diagonal limpia, centrada, tenue, repetida en las 3 páginas. Nits (cabecera de tabla a mayúsculas, prosa RUP sin corchetes) aplicados.
+
+#### 5. Merge y despliegue
+
+Merge `c21212f` (merge commit). Despliegue coordinado por pySigHor con Prometeus (el constructor no habla con Prometeus). Solo rebuild de backend (plantilla + módulo de render; sin migración, sin deps, sin env var, frontend intacto -- `deploy.sh` reconstruye caddy igual, mismo hash de bundle). Verificación: Prometeus rasterizó 3 PDFs en producción (Aprobada sin marca de agua, Borrador/EnRevisión con marca de agua diagonal, secciones 1-6, celdas azul saturado, pie "Página X de Y"); pySigHor `/api/health` 200 + visual en clon contra el SHA desplegado.
+
+**Observación de Prometeus sin resolver**: `_REQUISITOS_PREVIOS_AQUI_` sale como literal en caja gris monoespaciada en el PDF -- Manuel lo aprobó (campo no modelado, backlog), pero se lee como una variable de plantilla sin resolver. Reconsiderar cuando empiecen a generarse PDFs de verdad.
+
+### Estado del proyecto
+
+- **pyCelda**: `main` y producción en `c21212f`. Render de la guía docente v1 + v2 Frente A en producción. Discussions #217 (`concluida`/`pendiente`), #218 (`concluida`/`aplicado`), #224 (`en-curso`/`pendiente` -- Frente B aparcado). Issues: #219, #220, #222, #223, #226. Catálogo 96/96. Tag `v0.6.0`. `RESUMEN.md` en la raíz (`1b8307a`).
+- **pySesion**: sin tocar.
+- **pySigHor**: esta Conversación 61 en `leConsultor`. Clon `pyCelda-verify-pysighor` en `oficina` con venv WeasyPrint 69, al día con `main`.
+- **Memoria**: `project_pycelda_plantilla_guia_docente.md` reorganizado con bloques "ESTADO ACTUAL" + "PENDIENTES" arriba. Commit myClaudeContext `1a1d391` (más `cef40f6` de Prometeus).
+
+### Para próxima sesión -- encargo activo
+
+**Seguir ajustando la maqueta del PDF de la guía docente.** Manuel revisa los PDF de muestra y pide cambios; es iteración de plantilla (`guia_docente.html` + `_contexto()`), sin modelo. Pendientes concretos en `project_pycelda_plantilla_guia_docente.md` "PENDIENTES":
+
+1. Más ajustes de maqueta según lo que Manuel vea.
+2. `_REQUISITOS_PREVIOS_AQUI_` literal -> ¿"Pendiente"/"No aplica"?
+3. Frente B (`generarGuiaPDF()` DirectorGrado + #220), aparcado, desglose ya cerrado en #224.
+4. Backlog de #217 (7 gaps) -- normalizar `ReferenciaBibliografica.tipo` (#226) es el primero y barato.
+5. `generarGuiasPDF()` en lote -- depende de `CursoAcademico`.
+
+Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación vive en `oficina`.
+
+---
+
+*"La maqueta se basó en la guía vieja rellenada, no en el formulario oficial en blanco. El cliente lo detectó preguntando en qué me había basado -- la pregunta correcta antes de aceptar un iterar-ajuste-a-ajuste."*
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
