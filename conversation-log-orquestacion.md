@@ -668,4 +668,54 @@ Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación 
 
 ---
 
+## Conversación 62: purga "módulo"->"materia" (#252/#253, checkpoint sin cerrar) y diseño de #254 -- profesorado de la Guia sin mantenedor
+
+**Hueco 61->62.** Este log se quedó en la 61. Entre medias hubo varias sesiones cuyo registro real vive en la memoria de proyecto, no aquí: cierre de Frente B / PDF-al-aprobar (#238), tanda de 8 issues técnicos (#240-#245) + tag **`v0.7.0`**, portada de guías (#239), y el **pase de cierre de issues de abajo arriba** -- #14 (→ #248/#249), #23, #181 (PR #250, FK real `AsignaturaGrado.asignatura_id`), #184 (PR #251, importar bibliografía/planificación entre `AsignaturaGrado` hermanas). Producción efectiva en `ab2febe`, `main` en `b6d7701`. Ver `project_pycelda_transferencia_rup.md` (índice), `project_pycelda_tanda_8_issues_tecnicos.md`, `project_pycelda_limpieza_issues_abiertos.md`, y las discussions [#246](https://github.com/mmasias/pyCelda/discussions/246)/[#247](https://github.com/mmasias/pyCelda/discussions/247). El diario narrativo se ha vuelto stub a favor del sistema de memoria (patrón ya anticipado en `feedback_memoria_un_fichero_un_hecho`).
+
+### 1. Manuel creó tres issues; pySigHor los revisó y corrigió
+
+- **#252**: la vista Admin de `AsignaturaGrado` (`AsignaturaGradoAdmin.tsx`) solo tiene "Volver al Grado"; la del DirectorGrado ya tiene el par "Volver al Grado" + "Volver a la materia". Añadir el segundo. Impacto RUP: la ficha `abrirAsignaturaGrado` documenta ese 2.º retorno como "exclusivo de DirectorGrado" -- deja de serlo.
+- **#253**: botón "Volver al módulo" -> "Volver a la materia". Manuel lo amplió a **purga completa** de "módulo" (sinónimo de Materia) -> "materia" en UI **+ artefactos RUP de esas pantallas** (opción confirmada por él). Fuera: `Login.tsx`/`AdminLogin.tsx` ("Módulo académico"/"de Administración" = área de la app), y todo "módulo de código" en `03-diseño/`.
+- **#254**: la delicada. Ver punto 2.
+
+Encargo de #252+#253 al constructor (`Claude-pyCelda-Oficina`) -- una rama, un PR, con los `file:line` pre-rastreados en clon por pySigHor y la nota de Manuel de apoyarse en OpenCode para el barrido mecánico.
+
+### 2. #254 -- debate largo, lento y socrático con Manuel; cerrado en discussion #255
+
+Manuel condujo el análisis paso a paso ("muy, muy lentamente, sin adelantarnos"). pySigHor verificó cada afirmación contra el código y contra **datos de producción** (consulta de solo lectura vía Prometeus).
+
+**Diagnóstico**: `guia.profesorado` (`guias_profesores`) es una copia materializada que **nunca se re-deriva** de `asignatura_grado.profesorado`. Se siembra al nacer la guía (o en la 1.ª asignación si la copia está vacía) y después nada la actualiza -- ni aprobar, ni `regenerar_pdf()`, ni editar, ni `desasignar`. `Guia.contenido` es el mismo tipo de campo (copia sembrada, patrón #191) pero **tiene mantenedor** (el profesor lo reescribe cada curso, y editarlo degrada `Aprobada->Borrador`). `Guia.profesorado` no tiene camino de edición: es el hueco. Producción: 6 de 108 guías divergen (1, 5, 13, 30, 64, 100), todas copia < plantilla.
+
+**Solución acordada** (detalle en #255 y en `project_pycelda_profesorado_guia_254.md`):
+- `aprobar()`/`escalar_a_aprobada()` re-derivan `guia.profesorado := list(asignatura_grado.profesorado)` (Fat Model).
+- El Admin, al cambiar la plantilla de verdad y si la guía activa está `Aprobada` -> la pasa a `EnRevision` + fila de `HistorialCambio` (`autor_id=0` centinela, comentario "En revisión por cambio en los profesores que la imparten"), expuesta como banner. Otros estados: transparente.
+- Vistas en la app -> plantilla **en vivo**, siempre. PDF/previsualización -> copia **congelada**, siempre.
+- Solo guías activas; las archivadas (con #222) quedan congeladas. Consecuencia interina aceptada: al desasignar de todo + re-aprobar, el profesor pasa a ser borrable físicamente.
+- Reconciliación de las 6 por opción (a): migración pone las `Aprobada` en `EnRevision`, Manuel re-aprueba por UI -- **prueba de aceptación del mecanismo con datos reales**.
+- Arista **nueva en la máquina de estados de `Guia`**: `Aprobada -> EnRevision` por acción administrativa. Checkpoint de prosa RUP obligatorio.
+
+**Error propio**: al publicar el primer análisis en #255 me inventé el node-id de la discussion y el comentario cayó en un repo público ajeno (`libigl/libigl` #2506); detectado en ~30 s, borrado, republicado en el sitio correcto. Método corregido: consultar el id, nunca construirlo.
+
+### Estado del proyecto
+
+- **pyCelda**: producción en `ab2febe`, `main` en `b6d7701` (RUP derivado encima, a propósito). Tag `v0.7.0`.
+- **#252/#253**: checkpoint de prosa RUP del constructor pusheado a `cc/purga-modulo-materia-252-253` (`9bfb635`, 37 ficheros: RUP 4 fases + 10 SVGs + `generar_modelo_datos.py` + `DER.puml`/`DER.svg`). El constructor amplió a `RUP/00-modelo-del-dominio/README.md` + DER -- pendiente que pySigHor confirme o revierta. **Revisión de pySigHor en clon SIN HACER** (aparcada por saldo). Código del frontend escrito por el constructor pero fuera del checkpoint hasta el OK.
+- **#254**: diseñado y cerrado en discussion #255. **Sin construir.**
+- **pySesion**: sin tocar.
+- **Memoria**: nuevo `project_pycelda_profesorado_guia_254.md`; `project_pycelda_limpieza_issues_abiertos.md` y `MEMORY.md` actualizados. Commit myClaudeContext de esta sesión (ver tag `stable-*`).
+
+### Para próxima sesión -- encargos activos
+
+1. **Revisar el checkpoint de #252/#253** en `cc/purga-modulo-materia-252-253` (`9bfb635`): `tsc`+`vite build`, 10 SVGs por contenido, grep "módulo" limpio, coherencia UI<->wireframe, la reescritura de la prosa de asimetría de `abrirAsignaturaGrado`, y decidir sobre la ampliación al Modelo del dominio + DER. Luego: el constructor mete el código -> PR -> revisión del PR -> despliegue coordinado con Prometeus (`./deploy.sh` estándar, sin migración de esquema).
+2. **Encargo de #254** al constructor cuando Manuel dé el "adelante": checkpoint de prosa RUP primero (arista nueva en la máquina de estados de `Guia`, fichas en 4 fases, migración de datos para las 6). Detalle completo en discussion #255 y `project_pycelda_profesorado_guia_254.md`.
+3. De fondo, el pase de issues sigue en **#219** (RA en vivo) y luego **#222** (`CursoAcademico`, del que #254 depende para "solo guías activas").
+
+Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación vive en `oficina`.
+
+---
+
+*"Sí hay lógica, pero es invisible y está diseñada para un futuro que todavía no existe. `Guia.contenido` tiene quien lo mantenga; `Guia.profesorado` no tiene a nadie."*
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
