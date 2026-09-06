@@ -764,4 +764,45 @@ Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación 
 
 ---
 
+## Conversación 64: prep de la beta de profesores -- #259 (requisitos previos en vivo) y #262 (Admin monitorea la beta) a producción
+
+**Fecha**: 2026-09-06 (tarde-noche)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (Asistente, sesión pySigHor orquestador/revisor, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto
+
+Continuación directa de la 63, desde `oficina`. Manuel: "tenía pensado abrir la tanda de #219, pero estoy considerando hacer algo antes" -> lo que quería era **dejar la aplicación en modo beta a un grupo de profesores** esta semana que estará fuera, con ajustes estéticos previos. Valoración de gravedad de los issues abiertos: ninguno bloqueante de seguridad/datos; el bloqueante estético real era el literal `_REQUISITOS_PREVIOS_AQUI_` crudo en todos los PDF/HTML de guía.
+
+### Desarrollo
+
+**1. #259 -- `AsignaturaGrado.requisitos_previos`, texto plano en vivo** (discussion #259, ítem 2 del backlog de #217). Debate de diseño: dónde vive el campo. Verificado contra el seed (817 filas): constante por AG (solo la placeholder `__` diverge) -> `AsignaturaGrado`, no `Guia` ni `Asignatura`. Manuel señaló que el CU de edición **ya existe** (`editarAsignaturaGrado`, DirectorGrado) -> el campo entra ahí junto a `contenido` (8.º campo); opción (a): lectura en vivo, el congelado retroactivo se decide en #219 junto con los RA (2.º atributo del mismo patrón). Checkpoint de prosa RUP -> código -> PR #261, merge **`0d0bb04`**. Migración aditiva + backfill de 23 AG del piloto (normaliza la familia "No aplica" a NULL). **Dos hallazgos**: dato de seed defectuoso (`GIOI__CSJ087` con los requisitos de Matemática Numérica, corregido a "No aplica" en `402e82d`, patrón #248/#249) y bug del `plan` pre-deploy (`ag.NULL`, fix `de383e5` + test de regresión). La revisión en clon no cazó el bug porque `create_all` crea la columna antes del `plan` -- lección para calibrar verificación de migraciones aditivas.
+
+**2. Prep de la beta**. Manuel: beta abierta a cuentas `@uneatlantico.es` (dominio institucional, sin acotar), él actúa de DirectorGrado durante ella, todas las guías a Borrador antes de irse. Prometeus: `UPDATE guias SET estado='Borrador', fecha_generacion_pdf=NULL` (93 filas, backup previo). No hay estado `Archivada`. `historial_cambios` intacto.
+
+**3. #262 -- Admin en `previsualizarGuia` + pantalla de monitoreo**. Al probar el gate de fase 1, Manuel descubrió que el panel de Admin no tenía ninguna vía a guías. **Fase 1** (PR #263, `e2229eb`): `/vista` gana Admin, gemelo de #220; se retira el `get_current_rol` que daba 403. #218 P3 fijaba el modelo, un §3 lo difirió por falta de plumbing. **Fase 2** (PR #264 + fix `266f8f0`): pantalla `ConsultarEstadoGuiasAdmin` (`/admin/grados/:id/guias`), botón `[Estado del curso actual]` en `GradoAdmin`, gate de `listar_guias_del_grado` ampliado, `ListaGuiasDelGrado` prop `modo` (fila Admin: Previsualizar + Descargar PDF con `tiene_pdf`), forward-compat #222. El debate de diseño de la fase 2 cayó por error en el canal de Prometeus; Manuel lo cortó y pidió recogerlo por escrito -> ratificado en 3 comentarios de #262. Recorrido validado por Manuel end-to-end (aprobó la guía 1 como DirectorGrado -> Admin la descarga).
+
+**4. Dos delegaciones permanentes concedidas por Manuel** (directo a cada sesión, ver [[project_pycelda_infraestructura_despliegue]]):
+- **Git del constructor**: commit/pull/PR/merge de todo lo que dirija pySigHor, sin OK por PR. Cambia el flujo: pySigHor aprueba en clon -> dice "merge" directo, el reporte a Manuel es posterior.
+- **Escrituras a BD de Prometeus**: `apply` de migración + `UPDATE`/data-prep sin esperar el `!` de Manuel. Marco intacto (lo pide pySigHor, backup antes, verificación + reporte).
+
+**5. Cierre de tanda**. Cerradas discussions #224, #255, #259 + las 8 viejas `concluida`/`aplicado` (#101/#114/#191/#196/#198/#200/#206). #217 sigue abierta (tracker de gaps 4-7 + #249). Issues nuevos abiertos de camino: **#260** (DER/diccionario stale tras FK de #181), **#265** (`abrirGuia()` 403 al Admin vs diagrama). Input docs actualizados (`mmasias_private` `dfe8ef1`/`0223781`; `inputAgenteDespliegue` lo llevó Prometeus).
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`266f8f0`**, `main` **`feb1ccb`** (1 commit de `docs(seguimiento)` por delante). #259 y #262 cerrados y en producción. 108 guías en Borrador para la beta. Catálogo CU 101/101. Abiertos: #219 (siguiente), #222, #258, #260, #265, #248, #249.
+- **pySesion**: sin tocar.
+- **Beta**: lista para abrir. Falta solo el pase de curación de datos de Manuel.
+
+### Para próxima sesión
+
+**#219** (`editarResultadoAprendizaje()` altera guías aprobadas), ahora con **dos** atributos de `AsignaturaGrado` en vivo (RA + `requisitos_previos`) -- decidir materialización/congelado para los dos a la vez, plegando las deudas de familia (`fecha_generacion_pdf` sucia al degradar, gate de estado sobre `EnRevision`). Luego **#222** (`CursoAcademico`). Estético/datos (bibliografía #249, gaps 4-7 de #217, curación de `requisitos_previos`) a la vuelta de Manuel.
+
+Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación vive en `oficina`.
+
+---
+
+*"Se me caen las lágrimas de la alegría."* -- Manuel, al ver los requisitos previos reales en producción.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
