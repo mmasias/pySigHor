@@ -805,4 +805,44 @@ Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación 
 
 ---
 
+## Conversación 65: tanda estética de la guía docente + `generarPlanificacionDocenteGenerica()`
+
+**Fecha**: 2026-09-06 (noche, continuación directa de la 64 sin cortar sesión)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto
+
+La 64 cerró con `conversation-log` y memoria comiteados. Manuel siguió con una tanda de ajustes finos sobre la guía docente y la planificación docente, y de paso validó end-to-end el flujo de #254.
+
+### Desarrollo
+
+**1. Validación de #254 (sin cambios).** Manuel probó como Admin + Director: guía Aprobada -> Admin cambia profesorado -> guía a `EnRevisión` + banner, PDF sigue con el profesor viejo (copia congelada, deliberado); director re-aprueba -> PDF con los dos; camino inverso (quitar profesor) igual. "Nunca estuve más contento de haber estado equivocado." Todo es el comportamiento de #255. Confirmado: gestionar `AsignaturaGrado -- Profesor` es exclusivo del Admin, el director no tiene camino.
+
+**2. #266/#267 -- color de fila en la planificación docente por `Sesion.tipo`** (reproduce la leyenda del SigHor original: `CLASE_TEORICA` celeste, `CLASE_PRACTICA`/`CLASE_LABORATORIO` verde, `CLASE_TEORICO_PRACTICA` amarillo, evaluaciones sin fondo). Mapa `tipo -> clase` en `frontend/src/sesionTipo.ts` (`Record` cerrado, tsc como verificación de cobertura -- no hay runner de tests en el frontend), leyenda compartida, en las dos vistas (profesor + revisor). + pie del medidor: `N sesiones (mínimo M)` **permanente** (antes solo mostraba "mínimo" si estaba incompleta) + `(faltan N)` rojo. Producción `ad0e238`.
+
+**3. #268/#269 -- iteración de la plantilla del PDF**. Espaciado cabecera/cuerpo (`padding-bottom: 4mm` en la caja de margen `@top-left`). Saltos de página: `<thead>` real en las tablas de secciones 4 y 5 (antes `<tr><th>` suelto -> no repetían cabecera al partirse) + `display: table-header-group` + `table { break-inside: avoid }` + `h1/h2/h3 { break-after: avoid }` + `<div class="bloque">` en los bloques cortos de tamaño fijo. Prosa variable NO envuelta. Revisado con render de PDF real en clon (forcé la tabla de evaluación a 35 filas -> se parte repitiendo cabecera). Producción `8fc393e`.
+
+**4. #270/#271 -- párrafo institucional fijo** de trazabilidad de autoría (10 % de horas lectivas a trabajo supervisado con evidencias), hardcoded entre secciones 4 y 5. Texto literal de Manuel. Producción `50a15af`.
+
+**5. #272/#273 -- `generarPlanificacionDocenteGenerica()`** (CU nuevo, catálogo 101->102). Botón `[Crear N sesiones genéricas]` en el empty-state de la planificación docente: crea `Guia.sesiones_minimas` sesiones planas (`CLASE_TEORICA`, vacías, `vinculada=True`, numeradas 1..N) -> el medidor pasa a verde de una. Familia de `importarPlanificacionDocenteDeGuiaHermana()` (#184): persistencia real e inmediata, una fila de `HistorialCambio`. `<<choice>>` de vacío -> 409 si ya hay sesiones. Sin degradado (una guía vacía nunca está Aprobada, gate c3). Reflexión previa: N = `sesiones_minimas` (no 30 fijo), `vinculada=True` directo. Checkpoint de prosa RUP -> código+tests -> PR #273 -> merge `5675f74` -> seguimiento `6f8de26`. **Verbo pendiente de ratificar por Manuel** (mi +1: `generar` con precedente `generarGuiasPDF`, `Genérica` calificando `PlanificacionDocente`).
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`5675f74`**, `main` **`6f8de26`** (1 commit de dashboard por delante). Catálogo CU 101->102. Guías en Borrador para la beta.
+- **pySesion**: sin tocar.
+- Issues abiertos: #219 (siguiente del pase de fondo), #222, #258, #260, #265, #248, #249.
+- Issues nuevos abiertos hoy: #266, #268, #270, #272 (cerrados) + #265 (backlog).
+
+### Para próxima sesión
+
+- **Ratificar el verbo `generarPlanificacionDocenteGenerica()`** o pedir rename mientras solo lo toque RUP + endpoint + función frontend.
+- Pase de fondo: **#219** (RA + `requisitos_previos` en vivo alteran guías aprobadas -- dos atributos, decidir materialización/congelado para los dos), luego **#222** (`CursoAcademico`).
+- Confirmar máquina contra `machine-id.md` al arrancar. Clon de verificación en `oficina`.
+
+---
+
+*"Estupendo, como todo lo hecho hoy."* -- Manuel, al cierre.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
