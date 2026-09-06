@@ -718,4 +718,50 @@ Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación 
 
 ---
 
+## Conversación 63: #252/#253 y #254 a producción -- purga de "módulo", `Guia -- Profesor` re-derivado al aprobar, y tag `v0.8.0`
+
+Continuación directa de la 62. Tres issues del pase de cierre entran en producción en la misma sesión.
+
+### 1. #252 + #253 -- PR #256, `31486fd`
+
+Checkpoint de prosa RUP (`9bfb635`, 37 ficheros) revisado en clon: barrido "módulo" (sinónimo de Materia) -> "materia" en UI + wireframes + prosa del clúster ActividadFormativa en 4 fases + `RUP/00-modelo-del-dominio/README.md` + `DER` (ampliación confirmada por Manuel), sin tocar el sentido-código ni "Módulo académico/de Administración". Reescritura de la asimetría de retorno de `abrirAsignaturaGrado` (#252: el Admin gana "Volver a la materia", arista nueva `ASIGNATURA_GRADO_ABIERTO --> MATERIA_ABIERTO`). Código (`3aba01b`) + 2 docstrings de backend. 558 tests, `tsc`/`vite build` limpios. Desplegado por Prometeus; el deploy reconcilió `main` con producción (arrastró los 4 commits solo-RUP de adelanto). El constructor **delegó el barrido a OpenCode** (job `f7dfe15d`, lista literal `old->new`, reparto por propiedad de fichero) -- salió limpio salvo 4 "del módulo" sueltos que cazó con grep repo-wide.
+
+### 2. #254 -- PR #257, `5912db1`, tag `v0.8.0`
+
+El grande. `Guia -- Profesor` era una copia materializada sin mantenedor. Ahora:
+- `Guia.aprobar()` / `escalar_a_aprobada()` re-derivan la copia de `AsignaturaGrado -- Profesor` (Fat Model, `_sincronizar_profesorado()`).
+- El Admin al cambiar la plantilla (`asignar`/`desasignarProfesorAAsignaturaGrado`) manda la guía activa `Aprobada -> EnRevision` -- **11ª transición** de la máquina de estados, administrativa -- + fila de `HistorialCambio` (`autor_id=0` centinela) + banner (`comentario_revision_por_profesorado`, patrón `comentario_rechazo`). `ultima_actualizacion_rol` gana "Administración".
+- Vistas de la app leen la plantilla en vivo; PDF/previsualización siguen leyendo la copia congelada.
+- Operación **atómica**: `asignar_profesor`/`desasignar_profesor` pasan de `commit()` a `flush()`, el helper `_revisar_guia_por_cambio_de_profesorado()` cierra la transacción (bifurcación real marcada por el constructor, aprobada -- 2 commits dejarían el bug de #254 como ventana de caída).
+
+Checkpoint de prosa (30 ficheros, Modelo + Requisitos + Análisis) revisado en clon: 2 huecos (falta `consultarEstadoGuias`; header de changelog en una ficha). Código revisado con **sonda e2e propia** (HTTP, 9/9 aserciones sobre el escenario real) + 572 tests. Migración `migrar_guia_profesorado_254.py` (plan/apply, actúa sobre la divergencia real, idempotente, no toca `guias_profesores`).
+
+Despliegue: `./deploy.sh` primero (el script importa el modelo nuevo), luego `apply`. El `plan` de Prometeus reveló que 2 de las 6 divergentes (guias 1, 13) ya estaban `EnRevision` -- el script las salta por diseño, mandó `{5,30,64,100}`. Manuel re-aprobó esas 4 por la UI (algunas de GIOI, usó la cuenta de pruebas "ibuprofeno" como DirectorGrado -- **la autorización 404-uniforme le bloqueó abrir por URL una guía de un grado que no dirige**, validación de seguridad gratis). `guias_profesores` 110 -> 115. Verificado copia == plantilla en las 4.
+
+### 3. #258 abierto de camino
+
+Manuel observó que se pueden aprobar guías con la planificación docente incompleta: el gate c1/c2/c3 vive solo en `enviarGuiaARevision()`, ni `aprobarGuia()` ni `escalarGuiaAAprobada()` re-chequean (deliberado -- acto de juicio). #254 lo destapó (guia 100 ya estaba aprobada-incompleta). [#258](https://github.com/mmasias/pyCelda/issues/258): indicadores de completitud junto a los botones de aprobar/rechazar, informativos no gate. Backlog, familia #219/#223.
+
+### 4. Balance de delegación a OpenCode
+
+Manuel pidió revisar si el constructor se apoya en OpenCode. Sí en #253 (transformación cerrada, lista literal), no en #254 (el contenido de cada ficha solo existe tras pensar el diseño). Criterio acordado, en memoria [[feedback_disenar_antes_de_delegar]]: al becario solo si es **transformación cerrada especificable sin escribir yo el contenido destino** -- no "¿parece repetitivo?". Y presupuestar siempre la verificación (`git diff` completo, no el `output.md`; grep repo-wide de la regla).
+
+### Estado del proyecto
+
+- **pyCelda**: producción `5912db1`, `main` `0b4ff97` (1 commit de dashboard por delante). **Tag `v0.8.0`**. Pase de cierre: cerrados #14/#23/#181/#184/#252/#253/#254; quedan **#219** (RA en vivo) y **#222** (`CursoAcademico`). Backlog estético de #217 después. #258 abierto.
+- **pySesion**: sin tocar.
+- **Memoria**: `project_pycelda_limpieza_issues_abiertos` + `project_pycelda_profesorado_guia_254` + `feedback_disenar_antes_de_delegar` actualizados; commit de `myClaudeContext` con el tag `stable-*` de esta sesión.
+
+### Para próxima sesión
+
+**#219** (`editarResultadoAprendizaje()` altera guías aprobadas). Plegar las deudas de la familia: `fecha_generacion_pdf` sucia al degradar; sin gate de estado para ediciones sobre `EnRevision` (test de #184 lo fija); y el arreglo `fecha` vs `estado`. Luego **#222** (`CursoAcademico`, el más grande -- `activarCursoAcademico()` solo está en Requisitos; `reemplazar_desde()` de #184 y el bucle de sincronización de #254 son reutilizables para el "clonar al nacer"). #254 depende de #222 para el matiz "solo guías activas".
+
+Confirmar máquina contra `machine-id.md` al arrancar. El clon de verificación vive en `oficina`.
+
+---
+
+*"Madre mía, vaya semanita: le hemos dado un repaso apabullante."* -- Manuel, al cierre.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
