@@ -890,4 +890,39 @@ Arranque desde `oficina` (máquina confirmada, sesión renombrada a `Claude-pySi
 
 ---
 
+## Conversación 67: tanda de pulido UI durante la beta -- vocabulario Instrumento (#279), badges de estado (#281), jerarquía de texto en tablas (#283)
+
+**Fecha**: 2026-09-07 (continuación de la 66 sin cortar sesión)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto
+
+Con el hub `/inicio` (#274/#276) ya en producción, Manuel deja de nuevo los pendientes de fondo y trae tres ajustes de UI de una sola pasada, aprovechando que la beta está viva. Los tres: un PR, cero backend, `./deploy.sh` puro, gestionados de principio a fin sin checkpoints intermedios.
+
+### Desarrollo
+
+**1. #278/#279 -- "Ponderación de Evaluación" -> "Instrumento de Evaluación"** (`b16e2a5` -> `9b401aa`). La pantalla de la guía nombraba la entidad "Ponderación", pero el **diccionario de datos y el Modelo del dominio (README §41-42) ya la definen como "instrumento concreto de evaluación"** (`PonderacionEvaluacion` -> `SistemaEvaluacion`, con `descripcion`/`ponderacion` propios; varios instrumentos por categoría). El cambio alinea la UI con vocabulario que ya existía. Alcance decidido por Manuel: **solo strings visibles** -- clase del modelo, CU, rutas y API intactos; "Ponderación" cuando significa el **%** se queda. Addendum: 1.ª tabla `Descripción` -> `Instrumento`; 2.ª tabla (`SistemaEvaluacion`) gana columna `Descripción` (`s.descripcion` ya venía; el `tipo` es enum de 2 valores, dos filas iguales eran indistinguibles). **G1**: error propio en el cuerpo del issue -- afirmé que `/mis-asignaturas-grado` ya devolvía `[]` a un no-Profesor (falso, 403), premisa no verificada.
+
+**2. #280/#281 -- badge de color de `Guia.estado`** (`9b401aa` -> `aac6f9a`). "Reflexionemos". Badge (no fondo de fila -- chocaría con `.error` del medidor y con el fondo por `Sesion.tipo` de #266). **Semántica, no decoración**: Aprobada verde, **EnRevisión ámbar** (cola del director, tiene que saltar -- no el azul claro que propuso Manuel al principio), Rechazada rojo, **Borrador neutro** (`#e5e7eb`, un paso sobre el zebra; el autor lo trabaja, no grita). 3 señales + reposo. Texto siempre visible (color aditivo). Arregla "EnRevision" -> "En revisión". Pieza patrón #266: `estadoGuia.ts` (`Record` cerrado) + `EstadoGuiaBadge` + `LeyendaEstadosGuia`. **Superficie: 8 sitios de render** -- mi brief listó 3, la revisión en clon sacó 3 más (`AsignaturasGrado.tsx`, `RechazarGuia`, `RevocarAprobacionGuia`). RUP: leyenda + wireframes de 5 CU.
+
+**3. #282/#283 -- jerarquía de texto en tablas** (`aac6f9a` -> `704a53e`). "Reflexionemos". 1.ª columna (identificativa) a tamaño base, resto a `0.875rem` (el "texto secundario" que ya usa `button`). **Mecanismo A** (decidido): clase de tabla + selector posicional (`table.jerarquica td:not(:first-child)`, dos selectores). Asume identificativa siempre primera -- Manuel: "si rompemos la regla visualmente es fácil de detectar". De paso se cablea `.nota` (colgada sin regla). Tablas: `TablaMisGuias`, `ListaGuiasDelGrado`, `AsignaturasGrado`, `TablaMisGrados` -- esta **además reordena** a `Nombre | Código | Estado` (era el contraejemplo). Fuera por ahora: tablas de números, `PlanificacionDocente`. **La revisión cazó 2 SVG de wireframe stale**: el constructor concluyó "no hay SVG que regenerar" tras `find RUP -name '*.svg'` (los renders viven en `images/RUP/`, 136 ahí). Regenerados en `660dbed`. El constructor anotó la lección en su memoria de proyecto (`feedback_svg_wireframe_viven_en_images`).
+
+### Método
+
+Tres ciclos seguidos con autonomía de lote. La revisión en clon con ejecución real cazó algo real en las tres (G1, 3 spots de superficie, 2 SVG stale) -- "el orquestador verifica ejecutando, no sobre el resumen del constructor" sigue pagando. Pausa a mitad para que Manuel limpiara el contexto del constructor antes de #282; encargo reenviado autocontenido (rol + autorización + puntero al issue).
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`704a53e`** (`main` = `704a53e`). Catálogo CU **102**. Beta de profesores en curso. Cero backend en toda la tanda.
+- **pySesion**: sin tocar.
+- Issues abiertos de fondo: #275, #277, #219, #222, #258, #260, #265, #248, #249. Verbo de #272 sin ratificar.
+
+### Para próxima sesión
+
+- Fumar **#277** (protocolo de despliegue con la beta viva) y **#275** (huérfanas de `directores_grado`).
+- **#219** (RA + `requisitos_previos` en vivo), luego **#222**, luego #258. Verbo de #272.
+- Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
