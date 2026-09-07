@@ -925,4 +925,47 @@ Tres ciclos seguidos con autonomía de lote. La revisión en clon con ejecución
 
 ---
 
+## Conversación 68: continuación del pulido de la beta (evaluación, tablas del profesor) + primer hallazgo de la beta de un profesor
+
+**Fecha**: 2026-09-07/08 (continuación directa de la 67, sin cortar sesión; desde `oficina`)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto
+
+La 67 cerró con #279/#281/#283 en producción. Manuel siguió con más ajustes de UI encontrados usando el producto y en la revisión de la guía docente, y de camino llegó el primer hallazgo sustantivo de la beta (un profesor "dándole con palo").
+
+### Desarrollo
+
+Cinco PRs de pulido, todos **cero backend**, `./deploy.sh` puro, gestión de lote completa sin checkpoints. Detalle en la memoria [[project_pycelda_pulido_ui_beta]] (sección Conv. 68).
+
+- **#285/#286** (`46e1087`) -- "Reflexionemos". Dos `SistemaEvaluacion` del mismo `tipo` eran indistinguibles en la sección "Evaluación". Helper `sistemaEvaluacion.ts` -> `"Descripción (Tipo)"` con regla de colapso (si `descripcion` vacía o `== tipo` -> solo `tipo`). Cabecera `Descripción` -> `Instrumento` en `AbrirGuia`. Medidor (subtotales + Total) a `0.875rem`. Hallazgo de camino del constructor: hay **dos stylesheets** (`index.html` `<style>` + `src/index.css`) que duplican `.nota`/`.error`/`body`/`table` -> la premisa de #282 (".nota colgada sin regla") era inexacta -> issue **#287**.
+- **#288/#289** -- "primero el instrumento, luego el sistema": swap de columnas en la tabla de Evaluación.
+- **#290/#291** -- feedback de un profesor: `TablaMisGuias` gana columna "Cuatrimestre" + orden `semestre -> curso -> nombre -> grado`; `AsignaturasGrado.tsx` gana orden `curso -> semestre_default -> nombre` (addendum -- verifiqué que estaba sin ordenar, #235 solo tocó `Materia.tsx`); botón "Mis asignaturas" en las 3 pantallas hijas de la guía.
+- **#292/#293** -- Manuel: Curso+Cuatrimestre adyacentes rompen la tabla -> quitar ambas columnas, mantener el orden.
+- **#294/#295** (`28d7a16`) -- quitar también "Materia" de `TablaMisGuias` -> `Asignatura | Grado | Carácter | Estado guía`. Wireframes de "Mis guías" alineados al componente (añaden "Grado" que faltaba, cierra el follow-up de #291).
+
+**Hallazgo de la beta -> issue #296** ([[project_pycelda_hallazgo_beta_gate_enrevision]]). El profesor de Programación Web dejó dos pruebas en una guía real:
+1. Inyección HTML (`<strong>` en `Sesion.descripcion`) -- **falló bien**: `guia_docente.py:89` usa `autoescape=select_autoescape(["html"])` y React escapa. Se guarda crudo, se renderiza escapado.
+2. `POST /guias/{id}/sesiones` con la guía en `EnRevisión` -- **funcionó**. Autenticado (cookie de Google, es Profesor de esa AG -- `imparte()` gatea, sin IDOR). Verificado en código: `crear_sesion` no chequea estado, no llama `confirmar_guardado()`, **no escribe `HistorialCambio`**; `ponderacion_evaluacion.py`/`referencia_bibliografica.py` ni importan `HistorialCambio`. Solo `generar-genericas` y los imports (#184) registran. `confirmar_guardado()` degrada `Aprobada -> Borrador` pero no toca `EnRevisión` -- deuda asumida en #184, listada en los pendientes de #219.
+
+**Error propio mío**: dije dos veces a Manuel (en la reflexión y en el feedback de su respuesta al profesor) que `crear_sesion` escribe en `HistorialCambio`. Falso -- atribuí mal una línea `confirmar_guardado()` de `generar_planificacion_docente_generica`. Lo corregí antes de que enviara la respuesta. Reafirma [[feedback_verificar_resumen_antes_de_reportar]] (aplica a afirmaciones propias sobre el repo).
+
+**No es brecha de seguridad**: usuario autorizado, su guía, capacidad legítima. Es integridad de flujo (`EnRevisión` no está congelada) + falta de rastro. Lección general de la beta: toda regla de flujo que vive solo en render condicional del frontend es una sugerencia, no un contrato -- va a salir más de esta clase.
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`28d7a16`** (`main` = `28d7a16`). Catálogo CU **102**. Cero backend en toda la Conv. 68. Beta en curso.
+- **pySesion**: sin tocar.
+- Issues cerrados esta sesión (verificados en prod por pySigHor): #285/#288/#290/#292/#294. Sin cerrar por descuido del constructor: #266/#268/#270 (Conv. 65), #278/#280/#282 (Conv. 67).
+- Issues abiertos de camino: **#296** (hallazgo beta, familia #219), **#287** (CSS duplicado), **#284** (PDF `SistemaEvaluacion`).
+
+### Para próxima sesión
+
+- **#296** y **#277** son los siguientes de la beta. Auditoría del clúster de mutaciones de contenido (gate de estado + rastro en historial) para #296.
+- Verbo de #272 sin ratificar. Pase de fondo **#219** -> **#222** -> #258.
+- Cerrar los issues stragglers (#266/#268/#270/#278/#280/#282) -- están todos en producción.
+- Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
