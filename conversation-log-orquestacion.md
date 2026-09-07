@@ -845,4 +845,49 @@ La 64 cerró con `conversation-log` y memoria comiteados. Manuel siguió con una
 
 ---
 
+## Conversación 66: hub `/inicio` tras login (`abrirInicio()`, #274/#276) + dos issues de backlog
+
+**Fecha**: 2026-09-07 (desde `oficina`)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto
+
+Arranque desde `oficina` (máquina confirmada, sesión renombrada a `Claude-pySigHor-Oficina`). Manuel deja los pendientes de fondo (#219/#222/#258, verbo de #272) para más adelante y trae un ajuste que considera más urgente para la beta: un profesor que **fue** director de grado (se le dio el rango y se le quitó) aterriza tras el login en `/grados` vacío y necesita un clic extra para llegar a sus guías.
+
+### Desarrollo
+
+**1. Diagnóstico (verificado contra código, no contra la queja).** El síntoma no es de un profesor puro -- ese ya aterriza directo en `/mis-asignaturas-grado` (#102). Es de un **ex-director**: `quitarDirectorGrado()` (`profesor.py`) solo hace `grado.directores.remove(director)` sobre la M:N `grados_directores_grado`; la fila de `directores_grado` **no se borra nunca** (deliberado, Análisis de `quitarDirectorGrado()` / discussion #18: "sigue resolviendo el email en el inicio de sesión"). `get_current_rol()` la ve -> `rol: director_grado` -> `/grados` -> `listar_dirigidos_por()` `[]` -> tabla vacía. La composición "fila persistente" + "prioriza DirectorGrado" (#93/#103) no se había trazado.
+
+**2. Reflexión Opción 1 vs Opción C.** Opción 1 (guard `>= 1 grado` en `get_current_rol`) no cumple el requisito de Manuel ("ver ambos listados en la primera pantalla"): elige una sola pantalla. **Manuel elige C**: pantalla de inicio única (`abrirInicio()`) que compone "Mis guías" y "Mis grados". Más mantenible a largo plazo (modelo simétrico, menos routing condicional), no menos.
+
+**3. discussion #274** -- propuesta + decisión C + 3 sub-preguntas (naturaleza RUP del hub, nombre, rutas). Auditoría del clúster (constructor) antes de prosa: **3 gaps**, verificados de forma independiente por pySigHor:
+- **G1** (error mío en el cuerpo de #274): `/mis-asignaturas-grado` NO devolvía `[]` a un no-Profesor, lanzaba 403. La simetría hay que construirla en **los dos** endpoints. Corregido con comentario (tachado, sin editar in-place).
+- **G2**: cambio de contrato observable de `/auth/me` (director con 0 grados: `director_grado` -> `profesor`).
+- **G3**: el guard ingenuo (fila huérfana -> `profesor`) haría **regresión** para el ex-director que además no imparte -> `403 "Cuenta sin rol asociado"` -> bucle de login (`RequireSession` rebota). Resolución: `rol` nunca 403 para cuenta conocida; ex-director puro -> `rol = profesor`, hub con secciones vacías. Sin ramificar el `<<choice>>`.
+
+**4. Modelado RUP (checkpoint Fase 1, `efd9f7e`, revisado en clon).** `abrirInicio()` = primitiva de navegación, **no cuenta, catálogo sigue en 102** (criterio de `abrirPanelAdministracion()`). `<<include>>` (no `<<extend>>`) de `abrirGrados()` + `abrirAsignaturasGrado()`. `iniciarSesion()` de 3 ramas `<<extend>>` a 2 (`abrirInicio()` / `abrirPanelAdministracion()`). El 3.er punto de extensión de #103 (doble identidad) **desaparece** -- la solución quita un caso especial. Estado `INICIO_ABIERTO` nuevo en contexto + seguimiento de Profesor y DirectorGrado; **Admin no se toca** (verificado byte a byte). SVGs regenerados con contenido real (grep, no hash).
+
+**5. Fase 2 (código, `ac806c9`, PR #276).** `get_current_rol()`: `dirige_grados` = fila + `GradoRepository.contar_dirigidos_por(director.id) > 0`; ex-director -> `profesor`, nunca 403; `/auth/me` gana `es_profesor` + `dirige_grados`. `/api/v1/grados` y `/api/v1/mis-asignaturas-grado` -> variante `_opcional` + `[]`. Frontend: `Inicio.tsx` + `components/TablaMis{Guias,Grados}.tsx`, `Login.tsx` converge a `/inicio`, `Grados.tsx`/`MisAsignaturasGrado.tsx` reescritas sobre los componentes + "Volver a inicio", conservadas como deep links. RUP Fase 2: `secuencia.puml` de Diseño reescrito (callback solo comprueba existencia; `get_current_rol` resuelve en cada `/auth/me`), fichas Diseño+Desarrollo, líneas de recuento. **Verificado en clon con ejecución real**: `pytest` 604 verde, `npm run build` verde, matriz de rol (5 casos incl. G3 anti-bucle), `secuencia-admin.svg` fuente decodificada byte-idéntica (`java -jar plantuml -decodeurl` -- solo re-layout por versión de jar).
+
+**6. Merge + despliegue.** `main` = `b16e2a5` (merge #276). Prometeus: `./deploy.sh` puro (sin migración -- cero cambios en `models/`), backup `pycelda.db.bak-PRE276-*`, 5/5 smoke checks (`/inicio` 200; endpoints `[]`-en-vez-de-403 con cuentas reales; `/auth/me` de los 6 directores sin regresión; rama huérfana simulada -> `profesor` nunca 403; hash de bundle). `.deployed-commit` = `b16e2a5`. Verificación independiente adicional de pySigHor contra producción (`/`, `/inicio`, `/login` 200; `/api/v1/grados`, `/auth/me` sin cookie 401).
+
+**7. Backlog abierto de camino.**
+- **#275** -- filas huérfanas de `directores_grado`: ni `quitarDirectorGrado()` ni `eliminarProfesor()` las limpian. Ya no bug funcional tras el guard, deuda de datos. 4 opciones (borrado en cascada / flag activo / script puntual / ligar a `CursoAcademico`). Familia histórico-vs-vivo de #219/#222.
+- **#277** -- protocolo de modo mantenimiento / bloqueo de acceso durante despliegues, para la beta (a petición explícita de Manuel, "luego lo fumamos"). 5 opciones (página de mantenimiento en Caddy por flag / middleware backend / combinadas / invalidación de sesiones por epoch / solo proceso).
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`b16e2a5`** (`main` = `b16e2a5`). Catálogo CU **102** (`abrirInicio()` no suma). Guías 104 Borrador / 4 Aprobada (Manuel probando el flujo de aprobación). Beta de profesores en curso.
+- **pySesion**: sin tocar.
+- discussion #274 **cerrada** (`estado:concluida` / `resultado:aplicado`).
+- Issues abiertos: **#219** (siguiente del pase de fondo), #222, #258, #260, #265, #248, #249, **#275** (nuevo), **#277** (nuevo).
+
+### Para próxima sesión
+
+- Fumar **#277** (protocolo de despliegue con la beta viva) y **#275** (huérfanas de `directores_grado`).
+- Pendientes de fondo intactos: **verbo `generarPlanificacionDocenteGenerica()`** sin ratificar; **#219** (RA + `requisitos_previos` en vivo), luego **#222** (`CursoAcademico`), luego #258.
+- Confirmar máquina contra `machine-id.md` al arrancar. Clon de verificación en `oficina`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
