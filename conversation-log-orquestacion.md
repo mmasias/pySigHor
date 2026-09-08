@@ -968,4 +968,62 @@ Cinco PRs de pulido, todos **cero backend**, `./deploy.sh` puro, gestión de lot
 
 ---
 
+## Conversación 69: auditoría del 2.º profesor de la beta (`deAuditoriaDP`) -- #303 límite de contenido + #298 suelo de ponderación a producción
+
+**Fecha**: 2026-09-08/09 (desde `oficina`)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Contexto
+
+Un segundo profesor de la beta (colega de Manuel, distinto del de Programación Web de #296) entregó un **informe de pruebas estructurado** del rol Profesor (`Informe_de_pruebas_pyCelda.pdf`): 3 fases (exploración libre, orientación por interfaz, adversarial API vs. UI), **15 hallazgos + 3 propuestas de mejora**, priorizados, con repro, citando issues del repo. Manuel: "reflexionemos sobre él sin aún hacer nada", luego "crea los issues con prefijo `deAuditoriaDP`... para ir valorándolos uno a uno".
+
+### El informe valida el núcleo
+
+Aislamiento entre profesores (404 uniforme en lectura y escritura; probó IDs contiguos, rutas directas a sub-recursos, IDOR de cuerpo), firma JWT, validación de envío a revisión en servidor, autoescape en las dos superficies -- ninguno se rompió bajo pruebas dirigidas.
+
+### Issues creados (`deAuditoriaDP`)
+
+15+3 -> **6 issues nuevos + comentarios en 4 existentes** (no duplicar). Detalle en [[project_pycelda_auditoria_dp]].
+
+- **#297** planificación docente ausente del PDF oficial (H-6, alta -- pregunta de alcance)
+- **#298** suelo `>0` por instrumento de ponderación (H-3 + wording H-10)
+- **#299** señales de UI al editar la guía (H-11/H-15/H-16/H-18 + P-3)
+- **#300** cronograma: orden fijo, numeración con huecos, longitud (H-7/H-8/H-12 + P-2)
+- **#301** errores con nombres internos + dato histórico (H-10 resto + H-14)
+- **#302** importar planificación docente desde Excel (P-1 -- ciclo RUP propio)
+- **#303** límite de tamaño en `Guia.contenido`
+- Comentarios: #296 (H-2/H-13, el 2.º profesor reprodujo el gate de `EnRevisión` de forma independiente y lo amplía), #249 (H-9), #266 (H-5), #300 (`AsignaturaGrado.contenido`)
+
+### #303 -- límite de `Guia.contenido` (10.000 caracteres) -> producción `7e0d8c4` (PR #304)
+
+- Método de Manuel: medir el máximo real de producción, x2, redondear. Prometeus (solo lectura): 108 guías, **max real 4.801**. El pegote de ~213.606 chars del 1.er profesor ya no existe (Manuel lo limpió a mano); queda bloat en el freelist de SQLite (~217 KB, **`VACUUM` pendiente de autorización de Manuel**). Límite: **10.000**.
+- Grep del constructor **antes de codificar**: no hay schema de creación de `Guia` (el contenido nace como copia de `AsignaturaGrado.contenido`). El `max_length` va solo en `GuardarBorradorRequest.contenido`. Mi premisa "los dos schemas" era falsa.
+- Check en el router (`HTTPException(422, detail=str)` antes de sincronizar, rechazo atómico), **no** `Field(max_length=)` de Pydantic (daría `[object Object]` en el frontend -- pyCelda no tiene handler de `RequestValidationError`). Constante `LIMITE_CONTENIDO_GUIA` en `models/guia.py`. Frontend `maxLength` + contador. RUP: tope como barrera de entrada, no precondición de dominio (sin `<<choice>>`).
+- Verificado en el clon (`pytest` 607, `build` verde) + en producción por Prometeus.
+
+### #298 -- suelo `>0` por instrumento de ponderación -> producción `459e421` (PR #305)
+
+- H-3: el backend valida el máximo pero no el mínimo -> acepta 0 y negativos. `SistemaEvaluacion` ya tiene `ponderacion_minima`/`maxima`; nunca había un `validar_minimo`.
+- **Modelo del dominio (aclarado por Manuel)**: `minima`/`maxima` acotan la **suma** de instrumentos (`enviarGuiaARevision`) **y también** el instrumento individual (`validar_maximo`). Un instrumento: `> 0` estricto y `<= ponderacion_maxima` (opción B: permite "examen final único = 100%").
+- Fix: staticmethod `PonderacionEvaluacion.ponderacion_valida(p) = p > 0`, check en crear+editar antes de `validar_maximo`. De paso, H-10: `"...del SistemaEvaluacion"` -> `"...del sistema de evaluación"`. Sin migración.
+- **Error propio**: en el brief de delegación afirmé "`minima/maxima` son la horquilla de la suma, no cotas por instrumento" sin verificarlo. Es ambas cosas. El constructor lo transcribió al docstring; lo cacé en mi revisión del PR y pedí `--amend`. Ver [[feedback_verificar_modelo_dominio_antes_de_decidir]] (reincidencia).
+- Verificado en el clon (`pytest` 617, `build` verde) + en producción por Prometeus.
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`459e421`** (`main` = `459e421`). Catálogo CU **102**. Beta en curso.
+- **pySesion**: sin tocar.
+- Cerrados esta sesión (verificados en prod): **#303**, **#298**.
+- Abiertos de la auditoría: #297, #299, #300, #301, #302.
+- Pendiente puntual: `VACUUM` del freelist de SQLite, a la espera de OK de Manuel.
+
+### Para próxima sesión
+
+- **#297** necesita decisión de alcance de Manuel (¿el cronograma es parte de la guía oficial?). **#299** es tanda multi-parte de frontend. **#300** necesita migración. **#302** es ciclo RUP propio.
+- Sigue pendiente: **#296** + **#277** + #275 (beta), verbo de #272, pase de fondo **#219** -> **#222** -> #258.
+- Stragglers de housekeeping sin cerrar: #266/#268/#270/#278/#280/#282 (en producción).
+- Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
