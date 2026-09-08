@@ -996,7 +996,7 @@ Aislamiento entre profesores (404 uniforme en lectura y escritura; probó IDs co
 
 ### #303 -- límite de `Guia.contenido` (10.000 caracteres) -> producción `7e0d8c4` (PR #304)
 
-- Método de Manuel: medir el máximo real de producción, x2, redondear. Prometeus (solo lectura): 108 guías, **max real 4.801**. El pegote de ~213.606 chars del 1.er profesor ya no existe (Manuel lo limpió a mano); queda bloat en el freelist de SQLite (~217 KB, **`VACUUM` pendiente de autorización de Manuel**). Límite: **10.000**.
+- Método de Manuel: medir el máximo real de producción, x2, redondear. Prometeus (solo lectura): 108 guías, **max real 4.801**. El pegote de ~213.606 chars del 1.er profesor ya no existe (Manuel lo limpió a mano); el bloat del freelist lo reclamó el **`VACUUM` de Prometeus (2026-09-09, sin deploy)**. Límite: **10.000**.
 - Grep del constructor **antes de codificar**: no hay schema de creación de `Guia` (el contenido nace como copia de `AsignaturaGrado.contenido`). El `max_length` va solo en `GuardarBorradorRequest.contenido`. Mi premisa "los dos schemas" era falsa.
 - Check en el router (`HTTPException(422, detail=str)` antes de sincronizar, rechazo atómico), **no** `Field(max_length=)` de Pydantic (daría `[object Object]` en el frontend -- pyCelda no tiene handler de `RequestValidationError`). Constante `LIMITE_CONTENIDO_GUIA` en `models/guia.py`. Frontend `maxLength` + contador. RUP: tope como barrera de entrada, no precondición de dominio (sin `<<choice>>`).
 - Verificado en el clon (`pytest` 607, `build` verde) + en producción por Prometeus.
@@ -1015,7 +1015,7 @@ Aislamiento entre profesores (404 uniforme en lectura y escritura; probó IDs co
 - **pySesion**: sin tocar.
 - Cerrados esta sesión (verificados en prod): **#303**, **#298**.
 - Abiertos de la auditoría: #297, #299, #300, #301, #302.
-- Pendiente puntual: `VACUUM` del freelist de SQLite, a la espera de OK de Manuel.
+- `VACUUM` del freelist de SQLite: hecho por Prometeus el 2026-09-09 (autorizado por Manuel directo, sin deploy; page_count 306->248, freelist 53->0, ~232 KB reclamados, integrity + recuentos intactos, `.deployed-commit` sigue en `459e421`).
 
 ### Para próxima sesión
 
