@@ -1026,4 +1026,54 @@ Aislamiento entre profesores (404 uniforme en lectura y escritura; probó IDs co
 
 ---
 
+## Conversación 70: `VACUUM` del freelist, incidente wifi de aeropuerto, #306 granularidad de fecha imprecisa
+
+**Fecha**: 2026-09-09/10 (continuación directa de la 69, desde `oficina`)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### `VACUUM` del freelist de SQLite
+
+Manuel autorizó a Prometeus directamente. Hecho el 2026-09-09, sin deploy: backup `pycelda.db.bak-PREVACUUM`, `VACUUM` + `PRAGMA optimize` con el backend arriba. `page_count` 306 -> 248, freelist 53 -> 0, fichero 1.253.376 -> 1.015.808 bytes (~232 KB reclamados). Recuentos e `integrity_check` intactos. `.deployed-commit` sin cambio (`459e421`). Cierra el fleco que dejó el pegote de ~213k chars de la beta (#303/H-12).
+
+### Incidente wifi de aeropuerto (no del servidor)
+
+Manuel, fuera, no podía acceder a `https://mmasias.cloud-ip.cc/` -- primero error genérico, luego `ERR_CONNECTION_RESET`. Diagnóstico:
+
+- Producción **sana**: 200 en raíz y `/api/health` desde internet pública (yo, `WebFetch`) y desde el router (Prometeus, su curl sale por el router). Cert Let's Encrypt válido 69 días. Contenedores `Up`. DNS dinámico correcto (`mmasias.cloud-ip.cc` -> `88.9.129.247` = IP pública actual).
+- Prometeus: 75 s de tail del log de caddy durante los reintentos de Manuel -> **cero conexiones nuevas de IP externa**. El RST ocurre antes de llegar al servidor. Sin `fail2ban` (no instalado), sin rate-limit ni filtrado por IP en el Caddyfile.
+- Manuel confirma que está en un **wifi de aeropuerto** sin datos móviles disponibles. Causa: DPI/SNI-filtering del aeropuerto, que corta por categoría los dominios de DNS dinámico (`cloud-ip.cc`).
+- **Nada que arreglar.** Salida para Manuel: VPN / Cloudflare WARP, o esperar a otra red.
+
+Nada tocado en producción.
+
+### #306 -- granularidad fina de `fechaImprecisa()`
+
+Petición de Manuel: en la columna "Última actualización" de la lista de guías del director/Admin, granularidad fina cerca y gruesa lejos. Diseño cerrado con Manuel en dos rondas (banda de 1-4 meses; "ayer" vs "hace un día"; "hace un momento" para < 1 h). `frontend/src/fecha.ts` reescrito:
+
+| Δ | Texto |
+|---|---|
+| < 1 h (incl. futuro) | `Hace un momento` |
+| mismo día | `Hoy` |
+| 1 día | `Ayer` |
+| 2-6 días | `Hace {dos..seis} días` |
+| 7-27 días | `Hace {una/dos/tres} semanas` (`floor(dias/7)`) |
+| 28 días - ~4,5 meses | `Hace {un..cuatro} meses` (`round(dias/30)`, tope 4) |
+| `round(dias/30) >= 5` (≈135 días) | `Hace mucho tiempo` |
+
+Números en palabra, contrato de salida intacto (`.toLowerCase()` en el call site). Único call site `ListaGuiasDelGrado.tsx`. Frontend puro, `./deploy.sh` puro. Verificado con recorrido runtime de 23 valores contra el spec en el clon + bundle `index-DQdWtkmy.js` en producción (Prometeus confirma que ya no contiene "esta semana"). PR #307, merge **`cb8918f`**.
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`cb8918f`** (`main` = `cb8918f`). Catálogo CU **102**. Beta en curso.
+- **pySesion**: sin tocar.
+- Cerrado esta sesión: **#306**. `VACUUM` hecho.
+- Auditoría abierta sin cambio: #297, #299, #300, #301, #302.
+
+### Para próxima sesión
+
+- Igual que al cierre de la 69: **#297** necesita decisión de alcance de Manuel; #299/#300/#302 son tandas mayores; beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258; stragglers de housekeeping #266/#268/#270/#278/#280/#282.
+- Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
