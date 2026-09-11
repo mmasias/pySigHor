@@ -1076,4 +1076,50 @@ Números en palabra, contrato de salida intacto (`.toLowerCase()` en el call sit
 
 ---
 
+## Conversación 71: listado de copias de seguridad en Admin (#308, `consultarCopiasSeguridad()`), catálogo 102 -> 103
+
+**Fecha**: 2026-09-11 (desde `oficina`)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+### Reflexión previa (sin construir nada)
+
+Manuel: "que tan complejo resulta poner, en la pantalla del administrador, un listado simple que muestre todas las copias de seguridad". Antes de opinar, pedí a Prometeus los hechos de infraestructura. Diagnóstico: **dos familias de backup físicamente separadas** -- puntuales (volumen Docker, el backend ya los ve) y diario (repo Git privado del host, fuera de Docker, el backend no lo ve). 5 formatos de nombre distintos acumulados. La pregunta no era "cuánto cuesta programarlo" sino si el listado cruza una frontera de infraestructura.
+
+Expuse tres caminos (solo puntuales / montar el repo privado entero / manifiesto que unifica sin exponer nada de más) con sus trade-offs. Manuel: **Fase 2 (manifiesto), listar sin descargar.**
+
+### Diseño del contrato compartido
+
+Fijé el esquema **antes** de delegar, porque cruza dos repos/nodos que no se hablan entre sí: `backups_manifest.jsonl` en la raíz del volumen `pycelda-db` (el mismo directorio de `pycelda.db`), JSON Lines, solo append, 5 campos (`timestamp`, `familia`, `archivo`, `tamano_bytes`, `motivo`). Delegación en paralelo, sin bloqueo mutuo: Prometeus (infraestructura) + constructor (app), ambos contra el mismo esquema fijo.
+
+### Prometeus -- infraestructura
+
+El backup puntual **no vivía en ningún script** -- era un `docker run cp` manual del runbook. Lo convirtió en `pycelda-db-backup-puntual.sh <LABEL>`. Append integrado en los dos generadores. Backfill: 33 puntuales + 12 diarios = 45 líneas. Una decisión de interpretación consultada y confirmada (fecha real parseable del nombre se respeta aunque falte el label, no degrada a `mtime` sin necesidad). El propio backup del deploy de #309 (`PRE309`) se auto-anotó -> 46 entradas verificadas en producción, funcionando de punta a punta.
+
+### Constructor -- app (PR #309, `cc/copias-seguridad-admin`, 2 commits)
+
+- Backend: ruta del manifiesto derivada del `engine` de SQLAlchemy (no hardcodea `/data`), parseo defensivo (nunca revienta con una línea corrupta), `require_admin`, sin prefijo `/admin/` (precedente de catálogos top-level).
+- Frontend: fecha exacta, deliberadamente sin reutilizar `fechaImprecisa()` de #306 -- para diagnóstico de incidente la precisión importa. Sin botón de descarga.
+- RUP -- CU nuevo completo: `consultarCopiasSeguridad()`, verbo verificado contra la Nomenclatura del proyecto antes de decidir (no `abrirX()`, `CopiaSeguridad` no es entidad de `modeloDominio.puml`). Entrada en `diagramaContextoAdmin.puml` + `actoresCasosUsoAdminOperativa.puml`, ficha completa sin `<<choice>>`.
+- **Catálogo 102 -> 103**: preguntó antes de tocarlo (correcto, no era parte del issue). Sweep acotado: sube el total con la aritmética de por qué este CU está fuera del modelo por capas L0-L10; no toca las fracciones de progreso por fase ni el dashboard de seguimiento (housekeeping diferido, mismo patrón que 4 bumps anteriores).
+
+Verificado en el clon (`pytest` 623, build verde, `plantuml -checkonly` en 4 puml, 5 SVG por contenido) y en producción (Prometeus: 200/46 entradas, 401/403 correctos).
+
+### Incidente menor de malla
+
+Mientras se esperaba el ajuste de catálogo, la sesión constructora quedó `idle` con el mensaje encolado sin drenar -- una sesión interactiva no procesa mensajes entre sesiones hasta su siguiente turno propio, y sin nadie interactuando con ella no se dispara sola. Manuel la desatascó preguntándole directamente en su terminal.
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`c40ac8d`** (`main` = `c40ac8d`). **Catálogo CU 103** (subió por primera vez desde 102 en varias sesiones). Beta en curso.
+- Cerrado esta sesión: **#308**.
+- Housekeeping nuevo, no bloqueante: dashboard `99-seguimiento/README.md` a 103/103 -- mismo saco que #266/#268/#270/#278/#280/#282.
+
+### Para próxima sesión
+
+- Igual que antes: **#297** necesita decisión de alcance de Manuel; #299/#300/#302 son tandas mayores; beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- Housekeeping acumulado: #266/#268/#270/#278/#280/#282 + dashboard de seguimiento (103/103).
+- Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
