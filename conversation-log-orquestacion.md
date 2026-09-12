@@ -1162,8 +1162,26 @@ Manuel repasó también #299 (lo dejó para cuando esté en ordenador -- estaba 
 
 ### Para próxima sesión
 
-- **#297 y #316 cerrados.** Quedan: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
-- Housekeeping acumulado: #266/#268/#270/#278/#280/#282 (dashboard de seguimiento ya sincronizado, #316).
+### Manuales de usuario -- Profesor y Director de Grado (#318..#337)
+
+Encargo directo de Manuel, no de la auditoría: manuales de usuario reales (intro "qué puedes hacer" + capítulos detallados +, para Director/Admin, orden para montar un programa). Descubrimiento de camino: `pyCeldaPublico`, repo público ya existente y sincronizado a mano por Manuel desde antes de mi rol -- no lo tenía en el radar. Descarté hacer público el repo privado entero (historial de hallazgos de seguridad en su issue tracker) y publiqué ahí en su lugar, directamente yo (trabajo de publicación cross-repo, no de desarrollo pyCelda) -- sincronización completa del catálogo RUP de camino (llevaba desde 08-18 sin tocar, 394 ficheros).
+
+**Piloto Profesor (#318)**: 5 rondas de corrección de Manuel sobre el mismo manual -- tono infantil ("pyCelda es la aplicación donde..."), segunda persona ("tus asignaturas"), doblete de género ("director o directora", sin precedente en el proyecto), descripción de columnas obvias por su nombre. Cada corrección se documentó como regla concreta con ejemplo antes/después (ver [[project_pycelda_manuales_usuario]] y `feedback_amistoso_no_condescendiente.md` de pyCelda). **Director de Grado (#329) aplicó las 5 reglas desde el principio, sin ninguna ronda de corrección** -- confirma que la calibración transfiere bien documentada así.
+
+Verificar el manual contra la UI real (no contra RUP ni `PROPUESTA_WIREFRAME`, desactualizado) tuvo efecto colateral de QA gratis: cazó 3 fugas de jerga interna a usuarios reales que ninguna auditoría previa había encontrado -- #320 (`SistemaEvaluacion` en un mensaje de error), y sobre todo **#331** (las pantallas Rechazar/Revocar/Editar semestre mostraban literalmente `"Fuera de alcance de esta rebanada"` en su cabecera a un director real) y #332 (columna `"AsignaturaGrado"` sin traducir). Los tres, corregidos y desplegados.
+
+Enlaces desde la app real en `Login.tsx` (`<sub>`, pedido explícito) e `Inicio.tsx` (sin `<sub>`), URL compartida en `frontend/src/manualUsuario.ts`.
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`38abf82`** (`main` = producción). Catálogo CU **103**. Manuales de Profesor y Director cerrados y en producción; Admin sin empezar.
+- Cerrado esta sesión: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
+
+### Para próxima sesión
+
+- **Manual de Admin** -- siguiente encargo directo, mismo criterio de calibración ya cerrado (5 reglas, ver [[project_pycelda_manuales_usuario]] en memoria pySigHor), sin necesitar más rondas de corrección de tono.
+- Backlog sin cambio: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- Housekeeping acumulado: #266/#268/#270/#278/#280/#282.
 - Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
 
 ---
