@@ -1156,10 +1156,14 @@ Verificación en dos capas: la mía (clon aislado) incluyó compilar `main` y la
 
 Manuel pidió "repásame #297". Al releer el issue completo con `gh issue view --json comments` salió que **ya lo había respondido él mismo el 2026-09-08** ("no es parte de este proyecto: es parte de pySesion") -- decisión tomada el mismo día que se abrió, en un comentario directo, sin pasar por una sesión mía. Mi memoria/agentes lo arrastraron como "ABIERTO, necesita decisión de Manuel" durante las Conversaciones 70, 71 y 72 sin releer el issue. Contrastado contra el dominio de pySesion (su `Sesion` es la ocurrencia real de clase/asistencia, vinculada a la guía docente de pyCelda que la provee, no la replica) -- la decisión de Manuel encaja: el cronograma-como-registro-oficial pertenece a pySesion, no a pyCelda. Cerrado #297 en pyCelda con esa nota; sin issue espejo en pySesion todavía (sigue en Requisitos desde 2026-08-30, se retoma cuando ese frente se reanude). Lección de método: `feedback_releer_comentarios_issue_antes_de_repetir_estado.md` -- releer comentarios de un issue con `gh`, no solo la ficha de memoria, antes de repetir su estado en un backlog que se copia sesión a sesión.
 
+### #316 -- sincronización de READMEs con el catálogo real (housekeeping, 2026-09-12)
+
+Manuel repasó también #299 (lo dejó para cuando esté en ordenador -- estaba con la app móvil en un vuelo) y de paso pidió mirar si el README raíz mostraba datos correctos. No: stale desde `a82277f` (2026-09-04) -- "99/99, 90/99, 497 tests" cuando el catálogo real llevaba cerrado en 103/103 desde #308. Manuel lo autorizó como mecánico ("Adelante"). Diseño resuelto antes de delegar (catálogo 103/103, 94/103 con código real -- verificado por grep que los mismos 9 CU de `Admin` de siempre siguen sin código, 627 tests backend) para que el constructor solo editara prosa + regenerara el SVG del dashboard (self-loop de `consultarCopiasSeguridad()`). PR #317 (`491553a`): dos rondas -- primera con 2 referencias a "102" sin actualizar en el dashboard (líneas describiendo el catálogo *actual*, no una cifra histórica de una tanda concreta), devueltas y corregidas. Desviación de proceso documentada por el constructor: el `curl` a plantuml.com quedó bloqueado por su clasificador de auto-mode, usó el jar local `plantuml-1.2026.7.jar` -- verifiqué independientemente comparando paleta de colores y conteo de elementos SVG contra el render anterior del servidor público: idénticos salvo el delta exacto de un self-loop nuevo, mismo `<?plantuml 1.2026.7?>`. Sin código de aplicación, sin deploy -- `main` (`491553a`) queda un paso por delante de producción (`65deb39`).
+
 ### Para próxima sesión
 
-- **#297 cerrado.** Quedan: #299/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
-- Housekeeping acumulado: #266/#268/#270/#278/#280/#282 + dashboard de seguimiento (103/103).
+- **#297 y #316 cerrados.** Quedan: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- Housekeeping acumulado: #266/#268/#270/#278/#280/#282 (dashboard de seguimiento ya sincronizado, #316).
 - Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
 
 ---
