@@ -1122,4 +1122,34 @@ Mientras se esperaba el ajuste de catálogo, la sesión constructora quedó `idl
 
 ---
 
+## Conversación 72: lista de profesores en Admin -- columna "Asignaturas" (#310) + fusión Nombre/Email (#312)
+
+**Fecha**: 2026-09-11/12 (desde `oficina`)
+**Participantes**: Manuel (Usuario), Claude Sonnet 5 (pySigHor orquestador, `Claude-pySigHor-Oficina`), `Claude-pyCelda-Oficina` (constructor), `Claude-pyCelda-Prometeus` (despliegue)
+
+Dos peticiones directas de Manuel, no de la auditoría, sobre `Profesores.tsx`. Ninguna necesitó CU nuevo ni migración.
+
+### #310 -- columna "Asignaturas" (PR #311, `414ebc4`)
+
+Reflexión: el join ya existía (`asignaturas_impartidas()`, usado solo en la ficha de detalle) pero en bucle sobre el listado sería N+1 (54 profesores). Diseño: método agregado `contar_asignaturas_por_profesor()`, una sola consulta `GROUP BY`. `ProfesorResponse` gana `num_asignaturas_grado`. El constructor probó la propiedad "una sola consulta" con un test real (`event.listen(before_cursor_execute)`, cuenta sentencias emitidas) -- no solo el resultado. Revisé el efecto colateral de reutilizar `ProfesorResponse` en profesorado anidado (cae a `0` sin significado ahí) -- inerte, ningún frontend lo lee en esos contextos. Nota cruzada no bloqueante dejada en #222 (cuando exista `CursoAcademico`, este recuento debería acotarse al curso vigente). Verificado por Prometeus con contraste directo: `manuel.masias` (id 1) = 10, igual que la query SQL directa.
+
+### #312 -- fusión Nombre + Email (PR #313, `2637021`)
+
+Manuel propuso el nombre como enlace `mailto:` para ahorrar espacio. Antes de construir, comprobé el precedente del proyecto: **cero `<a>`/`mailto:`/`<Link>` en todo el frontend** -- la navegación es siempre un botón explícito. Se lo señalé como reflexión (no objeción ciega): el `mailto:` introduciría dos patrones nuevos a la vez y ocultaría el email como texto legible/copiable. Propuse la alternativa -- nombre+email apilados en la misma celda, email en `.nota` (clase ya existente) -- y Manuel la aceptó. Implementación con guard correcto para no duplicar el email cuando `nombre` es `null`. RUP: el wireframe de PlantUML no puede apilar dos líneas en una celda -- el constructor lo documentó con honestidad en vez de fingir una aproximación literal.
+
+Ambos PRs verificados en el clon (`pytest`, build, `plantuml -checkonly`, SVG por contenido) y en producción por Prometeus.
+
+### Estado del proyecto
+
+- **pyCelda**: producción **`2637021`** (`main` = `2637021`). Catálogo CU **103**. Beta en curso.
+- Cerrado esta sesión: **#310**, **#312**.
+
+### Para próxima sesión
+
+- Igual que antes: **#297** necesita decisión de alcance de Manuel; #299/#300/#302 son tandas mayores; beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- Housekeeping acumulado: #266/#268/#270/#278/#280/#282 + dashboard de seguimiento (103/103).
+- Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
+
+---
+
 *Este registro se actualizará continuamente conforme avance el rol de orquestador.*
