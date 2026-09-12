@@ -1139,10 +1139,18 @@ Manuel propuso el nombre como enlace `mailto:` para ahorrar espacio. Antes de co
 
 Ambos PRs verificados en el clon (`pytest`, build, `plantuml -checkonly`, SVG por contenido) y en producción por Prometeus.
 
+### #314 -- Admin puro bloqueado en `/panel-administracion` (PR #315, `65deb39`)
+
+Origen atípico: no vino de Manuel ni de la auditoría, sino de Prometeus, como efecto colateral de una orden de Manuel fuera de mi canal (alta directa de `jesus.pena@uneatlantico.es` como admin vía `ADMIN_EMAILS`). Prometeus, al comprobar el login real, encontró que `/panel-administracion` expulsaba a `jesus.pena` con 403 pese a que su cookie de Admin era válida, y me lo escaló en vez de tocar código de aplicación -- separación de responsabilidades correcta.
+
+Verifiqué contra el código real antes de abrir issue: `get_current_rol()` (detrás de `GET /auth/me`, guard único de `RequireSession` para *todas* las rutas autenticadas del SPA, Admin incluido) nunca miraba el claim `rol=admin` del token -- solo resolvía vía `Profesor`/`DirectorGrado`. Los 3 admins previos tienen también esas filas, así que nunca se disparó el 403, pero además resolvían mal en silencio (`profesor`/`director_grado`, nunca `admin` -- el tipo `Rol` del frontend ni incluía `"admin"`). Diseño cerrado en #314: guard temprano por claim del token, mismo patrón que `require_admin()`/`get_current_admin_email_opcional()`, sin tabla `Admin` real. Efecto secundario deliberado: los 3 admins previos pasan a resolver `admin` correctamente.
+
+Verificación en dos capas: la mía (clon aislado) incluyó compilar `main` y la rama del fix por separado y comparar el hash del bundle JS resultante -- byte-idéntico, confirma que el cambio de tipo TS es puramente de compilación. Prometeus verificó en producción con la cookie real de `jesus.pena` (`/auth/me` -> 200 `rol=admin`) y comprobó de oficio, sin que se lo pidiera, que `manuel.masias` no sufre regresión cruzada entre su cookie admin y su cookie normal.
+
 ### Estado del proyecto
 
-- **pyCelda**: producción **`2637021`** (`main` = `2637021`). Catálogo CU **103**. Beta en curso.
-- Cerrado esta sesión: **#310**, **#312**.
+- **pyCelda**: producción **`65deb39`** (`main` = `65deb39`). Catálogo CU **103** (sin cambio, #314 es corrección de un CU existente). Beta en curso.
+- Cerrado esta sesión: **#310**, **#312**, **#314**.
 
 ### Para próxima sesión
 
