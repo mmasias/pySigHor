@@ -1152,9 +1152,13 @@ Verificación en dos capas: la mía (clon aislado) incluyó compilar `main` y la
 - **pyCelda**: producción **`65deb39`** (`main` = `65deb39`). Catálogo CU **103** (sin cambio, #314 es corrección de un CU existente). Beta en curso.
 - Cerrado esta sesión: **#310**, **#312**, **#314**.
 
+### #297 -- corrección de seguimiento (no de código)
+
+Manuel pidió "repásame #297". Al releer el issue completo con `gh issue view --json comments` salió que **ya lo había respondido él mismo el 2026-09-08** ("no es parte de este proyecto: es parte de pySesion") -- decisión tomada el mismo día que se abrió, en un comentario directo, sin pasar por una sesión mía. Mi memoria/agentes lo arrastraron como "ABIERTO, necesita decisión de Manuel" durante las Conversaciones 70, 71 y 72 sin releer el issue. Contrastado contra el dominio de pySesion (su `Sesion` es la ocurrencia real de clase/asistencia, vinculada a la guía docente de pyCelda que la provee, no la replica) -- la decisión de Manuel encaja: el cronograma-como-registro-oficial pertenece a pySesion, no a pyCelda. Cerrado #297 en pyCelda con esa nota; sin issue espejo en pySesion todavía (sigue en Requisitos desde 2026-08-30, se retoma cuando ese frente se reanude). Lección de método: `feedback_releer_comentarios_issue_antes_de_repetir_estado.md` -- releer comentarios de un issue con `gh`, no solo la ficha de memoria, antes de repetir su estado en un backlog que se copia sesión a sesión.
+
 ### Para próxima sesión
 
-- Igual que antes: **#297** necesita decisión de alcance de Manuel; #299/#300/#302 son tandas mayores; beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- **#297 cerrado.** Quedan: #299/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
 - Housekeeping acumulado: #266/#268/#270/#278/#280/#282 + dashboard de seguimiento (103/103).
 - Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
 
