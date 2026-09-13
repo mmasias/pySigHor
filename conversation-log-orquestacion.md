@@ -1172,15 +1172,28 @@ Verificar el manual contra la UI real (no contra RUP ni `PROPUESTA_WIREFRAME`, d
 
 Enlaces desde la app real en `Login.tsx` (`<sub>`, pedido explícito) e `Inicio.tsx` (sin `<sub>`), URL compartida en `frontend/src/manualUsuario.ts`.
 
+### Manual de Admin (#338) + tanda de derivados (#340-#343) -- 2026-09-13
+
+Manuel dio el visto bueno explícito ("Adelante con el manual de admin!") tras el cierre del de Director. Diseño cerrado en #338 con las 6 reglas de calibración desde el inicio (las 5 de Profesor/Director + registro impersonal reforzado) y un aviso explícito de alcance: **Cursos académicos** (#222) y **Generar guías PDF** masivo aparecen deshabilitados en `PanelAdministracion.tsx`, no documentarlos como funcionales. PR #339 (`ab64e4b`, docs-only): 8 capítulos, calibración limpia a la primera igual que Director -- confirma que el volumen mayor (58 CU frente a 46/22) no exigió cambiar de método; se mantuvo la delegación directa al constructor, sin OpenCode, decisión ya cerrada y no reabierta.
+
+Escribir el manual contra la UI real cazó, de nuevo, hallazgos genuinos -- esta vez seis, de los que abrí 4 issues:
+
+- **#340** (la más seria de las cuatro fugas de jerga de toda la iniciativa): `AbrirGuia.tsx` mostraba de forma **permanente** (no tooltip, no caso límite) un párrafo con tres jergas a la vez -- "actor Profesor", "fuera de alcance de esta rebanada" y "DirectorGrado" -- a cualquier director al abrir una guía que no puede editar.
+- **#341**: nombres de clase interna (`AsignaturaGrado`, `DirectorGrado`, `PonderacionEvaluacion`) literales en un botón real (`+ Crear AsignaturaGrado`) y varias frases de confirmación/bloqueo. El constructor amplió el grep que le pedí y encontró 2 casos más no reportados en su primer barrido.
+- **#342** (no es jerga, es dato sucio): el campo `Carácter` de una asignatura de grado era una lista cerrada (`<select>`) al crear pero texto libre (`<input>`) al editar. Al corregirlo, el constructor detectó que la propia lista cerrada estaba incompleta -- el seed real (`asignaturas_grado.json`, GII/GIOI) usa también "Prácticas Externas" y "Trabajo Fin de Grado", ausentes del catálogo original. Corregido con una lista compartida de 5 valores + fallback para no forzar un cambio silencioso si hay algún dato aún más raro en producción.
+- **#343**: enlace al manual de Admin en `AdminLogin.tsx`, mismo patrón simétrico que Profesor/Director.
+- Manuel decidió además renombrar el tooltip "Fuera de alcance de esta rebanada" (8 ficheros restantes tras el fix de #340) a "Funcionalidad en construcción" -- wording de producto, no bug, bundleado en el mismo PR.
+
+Todo en PR #344 (`a109bfe`), verificado por mí (tsc + vite build, grep de cierre de "rebanada"/"AsignaturaGrado" sin restos, contraste directo del seed JSON para #342) y desplegado por Prometeus con evidencia de bundle/health/grep del bundle servido. **Las cuatro fugas de jerga cazadas en toda la iniciativa de manuales (#320/#331/#332/#340) están cerradas y en producción.**
+
 ### Estado del proyecto
 
-- **pyCelda**: producción **`38abf82`** (`main` = producción). Catálogo CU **103**. Manuales de Profesor y Director cerrados y en producción; Admin sin empezar.
-- Cerrado esta sesión: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
+- **pyCelda**: producción **`a109bfe`** (`main` = producción). Catálogo CU **103** (sin cambio en toda la iniciativa de manuales). **Los tres manuales de usuario (Profesor/Director/Admin) cerrados y en producción**, con sus tres enlaces simétricos desde la app (`Login.tsx`/`AdminLogin.tsx`/`Inicio.tsx`) y desde `pyCeldaPublico`.
+- Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
 
 ### Para próxima sesión
 
-- **Manual de Admin** -- siguiente encargo directo, mismo criterio de calibración ya cerrado (5 reglas, ver [[project_pycelda_manuales_usuario]] en memoria pySigHor), sin necesitar más rondas de corrección de tono.
-- Backlog sin cambio: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- Iniciativa de manuales de usuario **completa**. Retomar el backlog de fondo: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
 - Housekeeping acumulado: #266/#268/#270/#278/#280/#282.
 - Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
 
