@@ -1186,15 +1186,30 @@ Escribir el manual contra la UI real cazó, de nuevo, hallazgos genuinos -- esta
 
 Todo en PR #344 (`a109bfe`), verificado por mí (tsc + vite build, grep de cierre de "rebanada"/"AsignaturaGrado" sin restos, contraste directo del seed JSON para #342) y desplegado por Prometeus con evidencia de bundle/health/grep del bundle servido. **Las cuatro fugas de jerga cazadas en toda la iniciativa de manuales (#320/#331/#332/#340) están cerradas y en producción.**
 
+### Mapa de dependencias del sistema (#345/#347) + limpieza de terminología (#349) -- 2026-09-13
+
+Con los tres manuales cerrados, Manuel pidió "reflexionemos" sobre representar la jerarquía de dependencias de los elementos principales para que el Admin sepa "qué cuelga de qué" -- una simplificación del modelo de dominio, explícitamente "que no vulgarización". Cerré el diseño antes de delegar: dos categorías de relación irreductibles (contención estricta vs. catálogos asignados en cascada, no poseídos) que un árbol único falsearía. Manuel decidió, ante la pregunta: pieza **compartida** entre los tres manuales (no solo Admin) + tabla de **responsable por bloque** + **diagrama PlantUML/SVG** (primera imagen de los manuales, hasta ahora solo texto).
+
+El constructor cazó un error real mío en la tabla de responsables antes de tocar nada -- justo como le pedí ("para y dímelo, no ajustes en silencio"): había marcado "Asignatura de grado" como Admin puro, pero es mixta igual que Materia (Admin lo administrativo, Director el contenido académico vía un endpoint propio distinto). PR #346: 11 bloques, 6 categorías de color (el constructor añadió una 6ª, "Compartida", para Guía docente, que no encajaba en mis 5 originales), enlazado desde los tres manuales.
+
+Manuel pidió después orientación top-down en vez de izquierda-derecha (#347/PR #348) -- verificado esta vez **renderizando el SVG real con Chrome headless**, no solo con grep de etiquetas, para confirmar visualmente que no había solapes (técnica nueva, reutilizable).
+
+De camino, dos falsas alarmas de "no carga" durante la revisión de Manuel -- ambas resultaron ser el wifi del aeropuerto filtrando dominios "no mainstream" (primero `mmasias.cloud-ip.cc`, luego específicamente `raw.githubusercontent.com` mientras `github.com` cargaba bien), confirmado por él al llegar al avión. Detalle en [[project_pycelda_infraestructura_despliegue]] de la memoria de pySigHor -- ya van 3 veces.
+
+Ya con el mapa publicado, Manuel notó que varios manuales decían "corresponde avisar a administración" -- término informal, confundible con una oficina real, en vez del rol "Admin" ya establecido en el propio mapa. #349/PR #350: 11 apariciones corregidas en 6 ficheros, distinguiendo con cuidado "panel de administración" (nombre real de pantalla, se queda) de "administración" como sujeto de una acción (pasa a "Admin"); una no era simple renombrado (`redactarLaGuia.md` atribuía a un "administración del grado" único cosas que reparten Admin y Director). Se me escapó un caso capitalizado que ni mi grep ni el del constructor pillaron a la primera (ambos en minúsculas) -- corregido en una segunda vuelta, lección de grepear con y sin `-i`.
+
+Toda esta tanda (#345/#347/#349) es docs-only, sin código de aplicación -- no hizo falta desplegar.
+
 ### Estado del proyecto
 
-- **pyCelda**: producción **`a109bfe`** (`main` = producción). Catálogo CU **103** (sin cambio en toda la iniciativa de manuales). **Los tres manuales de usuario (Profesor/Director/Admin) cerrados y en producción**, con sus tres enlaces simétricos desde la app (`Login.tsx`/`AdminLogin.tsx`/`Inicio.tsx`) y desde `pyCeldaPublico`.
-- Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
+- **pyCelda**: `main` = **`fa60a43`**; `.deployed-commit` de producción = **`a109bfe`** (diferencia: 3 tandas docs-only sin deploy). Catálogo CU **103** (sin cambio en toda la iniciativa). **Los tres manuales de usuario (Profesor/Director/Admin) y el mapa de dependencias compartido, cerrados y publicados**, con sus enlaces simétricos desde la app (`Login.tsx`/`AdminLogin.tsx`/`Inicio.tsx`) y desde `pyCeldaPublico` (`64a75af`).
+- Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados), #345/#347 (mapa de dependencias), #349 (terminología). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
 
 ### Para próxima sesión
 
-- Iniciativa de manuales de usuario **completa**. Retomar el backlog de fondo: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- Iniciativa de manuales de usuario y mapa de dependencias **completa**. Retomar el backlog de fondo: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
 - Housekeeping acumulado: #266/#268/#270/#278/#280/#282.
+- Pendiente sin decidir: si el solape de Curso/Carácter de AsignaturaGrado, editable desde Admin y Director en dos pantallas distintas, es intencional o merece un issue propio (hallazgo del constructor durante #345).
 - Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
 
 ---
