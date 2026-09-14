@@ -1200,16 +1200,24 @@ Ya con el mapa publicado, Manuel notó que varios manuales decían "corresponde 
 
 Toda esta tanda (#345/#347/#349) es docs-only, sin código de aplicación -- no hizo falta desplegar.
 
+### Navegación de capítulos (#351/#353) + discussion pyFedatario (#355) + reorden de UI (#356) -- 2026-09-13/14
+
+Cierres rápidos de camino: tabla de navegación anterior/índice/siguiente en los 19 capítulos de los tres manuales (#351, PR #352), luego retoque de formato pedido por Manuel tras verlo publicado -- quitar `<sub>` (renderizaba mal) por `<div align=center>` (#353, PR #354).
+
+**Discussion #355**: Manuel propuso marcar la guía docente con checksum o firma digital para que un lector externo verifique su autenticidad. Reflexioné dos caminos (checksum+servicio de consulta vs. firma digital) y los publiqué en una discussion para debatir, sin cerrar diseño. Manuel añadió un tercer camino -- personalizar el hash por alumno destinatario, para disuadir la circulación de guías entre alumnado -- que resultó estructuralmente disruptivo: pyCelda no tiene ningún concepto de "Alumno" en su dominio. Resolución de Manuel: esa funcionalidad es externa a pyCelda, un proyecto hermano futuro ("pyFedatario", nombre provisional, mismo patrón de frontera que pySesion) que consumiría pyCelda pero emitiría sus propias guías personalizadas. Sin arrancar, solo capturado en memoria.
+
+**#356**: Manuel dio feedback guiado, actor por actor ("te voy contando hasta que termine"), sobre la página de guía del Profesor -- dos hallazgos: las secciones de solo lectura (RA/MD/AF) interrumpen el flujo de lo editable, y los botones "Gestionar" quedan enterrados después de su tabla en vez de junto al título. Verificados ambos contra el código real antes de escribir el issue. Generalicé el patrón (autorizado explícitamente: "procede donde consideres pertinente") a las pantallas equivalentes de Director (`Materia.tsx`, `AsignaturaGrado.tsx`) y Admin (`AsignaturaGradoAdmin.tsx`), reutilizando la clase `.nota` ya existente. El constructor, con el contexto recién limpiado por Manuel, verificó todo contra el código sin discrepancias y además encontró por grep amplio 3 pantallas más con el mismo defecto (`MateriaAdmin.tsx`, `Profesor.tsx`, `ResultadosAprendizaje.tsx`), aplicando el mismo criterio por analogía sin necesitar preguntar. PR #357, 7 ficheros, desplegado y verificado por Prometeus contra el bundle servido.
+
 ### Estado del proyecto
 
-- **pyCelda**: `main` = **`fa60a43`**; `.deployed-commit` de producción = **`a109bfe`** (diferencia: 3 tandas docs-only sin deploy). Catálogo CU **103** (sin cambio en toda la iniciativa). **Los tres manuales de usuario (Profesor/Director/Admin) y el mapa de dependencias compartido, cerrados y publicados**, con sus enlaces simétricos desde la app (`Login.tsx`/`AdminLogin.tsx`/`Inicio.tsx`) y desde `pyCeldaPublico` (`64a75af`).
-- Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados), #345/#347 (mapa de dependencias), #349 (terminología). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
+- **pyCelda**: producción `.deployed-commit` = `main` = **`823ee14`**. Catálogo CU **103** (sin cambio). Iniciativa de manuales+mapa completa; ahora además reorden de UI editable/solo-lectura en 7 pantallas, en producción.
+- Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados), #345/#347 (mapa de dependencias), #349 (terminología), #351/#353 (navegación de capítulos), #356 (reorden UI). Discussion #355 abierta para más debate (checksum propio de pyCelda, Caminos A/B, sin cerrar). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
 
 ### Para próxima sesión
 
-- Iniciativa de manuales de usuario y mapa de dependencias **completa**. Retomar el backlog de fondo: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
+- Iniciativa de manuales de usuario, mapa de dependencias y reorden de UI **completos**. Retomar el backlog de fondo: #299 (repasado, Manuel lo retoma desde ordenador)/#300/#302 (tandas mayores, con Manuel presente); beta **#296**+#277+#275; verbo de #272; pase de fondo **#219** -> **#222** -> #258.
 - Housekeeping acumulado: #266/#268/#270/#278/#280/#282.
-- Pendiente sin decidir: si el solape de Curso/Carácter de AsignaturaGrado, editable desde Admin y Director en dos pantallas distintas, es intencional o merece un issue propio (hallazgo del constructor durante #345).
+- Pendiente sin decidir: si el solape de Curso/Carácter de AsignaturaGrado, editable desde Admin y Director en dos pantallas distintas, es intencional o merece un issue propio (hallazgo del constructor durante #345). Discussion #355 (checksum/firma propia de pyCelda) sigue abierta.
 - Confirmar máquina contra `machine-id.md`. Clon de verificación en `oficina`.
 
 ---
