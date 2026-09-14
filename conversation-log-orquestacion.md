@@ -1208,10 +1208,12 @@ Cierres rápidos de camino: tabla de navegación anterior/índice/siguiente en l
 
 **#356**: Manuel dio feedback guiado, actor por actor ("te voy contando hasta que termine"), sobre la página de guía del Profesor -- dos hallazgos: las secciones de solo lectura (RA/MD/AF) interrumpen el flujo de lo editable, y los botones "Gestionar" quedan enterrados después de su tabla en vez de junto al título. Verificados ambos contra el código real antes de escribir el issue. Generalicé el patrón (autorizado explícitamente: "procede donde consideres pertinente") a las pantallas equivalentes de Director (`Materia.tsx`, `AsignaturaGrado.tsx`) y Admin (`AsignaturaGradoAdmin.tsx`), reutilizando la clase `.nota` ya existente. El constructor, con el contexto recién limpiado por Manuel, verificó todo contra el código sin discrepancias y además encontró por grep amplio 3 pantallas más con el mismo defecto (`MateriaAdmin.tsx`, `Profesor.tsx`, `ResultadosAprendizaje.tsx`), aplicando el mismo criterio por analogía sin necesitar preguntar. PR #357, 7 ficheros, desplegado y verificado por Prometeus contra el bundle servido.
 
+Corrección menor de camino (#358, PR #359): Manuel había pedido el atenuado en el título, pero aclaró después que era para el contenido -- `.nota` movido del `<h2>` al `<table>` en las mismas 9 posiciones, título normal.
+
 ### Estado del proyecto
 
-- **pyCelda**: producción `.deployed-commit` = `main` = **`823ee14`**. Catálogo CU **103** (sin cambio). Iniciativa de manuales+mapa completa; ahora además reorden de UI editable/solo-lectura en 7 pantallas, en producción.
-- Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados), #345/#347 (mapa de dependencias), #349 (terminología), #351/#353 (navegación de capítulos), #356 (reorden UI). Discussion #355 abierta para más debate (checksum propio de pyCelda, Caminos A/B, sin cerrar). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
+- **pyCelda**: producción `.deployed-commit` = `main` = **`166bc8a`**. Catálogo CU **103** (sin cambio). Iniciativa de manuales+mapa completa; reorden de UI editable/solo-lectura en 7 pantallas, en producción, con la corrección de #358 ya aplicada.
+- Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados), #345/#347 (mapa de dependencias), #349 (terminología), #351/#353 (navegación de capítulos), #356/#358 (reorden UI + corrección). Discussion #355 abierta para más debate (checksum propio de pyCelda, Caminos A/B, sin cerrar). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
 
 ### Para próxima sesión
 
