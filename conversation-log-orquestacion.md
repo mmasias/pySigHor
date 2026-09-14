@@ -1229,7 +1229,9 @@ Mid-turn, Manuel pidió reflexionar sobre un botón "Duplicar" junto a "Eliminar
 ### Estado del proyecto
 
 - **pyCelda**: producción `.deployed-commit` = `main` = **`d1af9d4`** (#362/PR #363 + #364/PR #365, ambos cerrados). Catálogo CU sin cambio. Iniciativa de manuales+mapa, reorden de UI y tipografía de botones completas y en producción; planificación docente con editor en tabla y botón Duplicar también en producción.
-- Cerrado esta sesión: #345/#347 (mapa de dependencias), #349 (terminología), #351/#353 (navegación de capítulos), #356/#358 (reorden UI + corrección), #360 (tipografía + azul institucional), #362 y #364 (planificación docente: editor en tabla + Duplicar). Discussion #355 abierta para más debate (checksum propio de pyCelda, Caminos A/B, sin cerrar).
+- Cerrado esta sesión: #345/#347 (mapa de dependencias), #349 (terminología), #351/#353 (navegación de capítulos), #356/#358 (reorden UI + corrección), #360 (tipografía + azul institucional), #362 y #364 (planificación docente: editor en tabla + Duplicar), #366 (manual de Profesor actualizado con el nuevo flujo, sin tocar #360). Discussion #355 abierta para más debate (checksum propio de pyCelda, Caminos A/B, sin cerrar).
+
+**Nota de camino (#366, mismo 2026-09-14)**: Manuel pidió reflejar en el manual el cambio de #362/#364, pero explícitamente no la tipografía de botones (#360) -- criterio claro: cambio de comportamiento sí se documenta, retoque estético no. Capítulo actualizado con el mismo método/constructor/reglas que el resto de manuales, publicado en `pyCeldaPublico` = `fdc0957`.
 
 ### Para próxima sesión
 
