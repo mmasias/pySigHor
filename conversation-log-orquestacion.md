@@ -1214,9 +1214,13 @@ Corrección menor de camino (#358, PR #359): Manuel había pedido el atenuado en
 
 Manuel pidió reflexionar antes de tocar nada ("para poder verlos antes de cambiarlos") -- publiqué un Artifact HTML con 4 opciones de fuente de botón, renderizadas con el lienzo real de la sección Bibliografía de `AbrirGuia.tsx` y los colores/paddings reales de `index.css`. Le gustaron las tres sans-serif y me pidió elegir: **Source Sans 3** (pareja histórica de Merriweather, diseñada por Adobe para acompañar una serif de lectura). De camino pidió el azul institucional de la universidad para el botón primario -- corrigió un hex erróneo al vuelo (`#287cc0` -> `#337ab7`), lo apliqué en el propio artefacto antes de que decidiera. PR #361, diff idéntico a lo especificado, en producción sin incidencias.
 
+### Diagnóstico -- "asignaturas hermanas" IYA025, sin bug (2026-09-14)
+
+Manuel reportó que "Estructuras de datos y algoritmos I" de Informática e IOI no funcionaban como hermanas para importar bibliografía/planificación (#184). Diagnóstico completo sin tocar nada, con Prometeus haciendo 3 consultas de solo lectura sucesivas: `asignatura_id` ya coincidía entre GII/GIOI (backfill de #181 sano, sin bug de enlace), el backfill del resto de GII/GIOI también estaba bien (1 sola discrepancia de 21, correcta -- TFG). El código real exige además guía origen `Aprobada`; Manuel confirmó que había probado antes de que se aprobara la guía de GII (06-09). **Cero bug, cero fix** -- funciona ya con los datos actuales, confirmado en vivo por Manuel. Lección escrita en `feedback_diagnosticar_antes_de_asumir_bug.md`.
+
 ### Estado del proyecto
 
-- **pyCelda**: producción `.deployed-commit` = `main` = **`935b0fb`**. Catálogo CU **103** (sin cambio). Iniciativa de manuales+mapa completa; reorden de UI editable/solo-lectura en 7 pantallas; botones en Source Sans 3 + azul institucional, todo en producción.
+- **pyCelda**: producción `.deployed-commit` = `main` = **`935b0fb`** (sin cambio, el diagnóstico de arriba no tocó código). Catálogo CU **103** (sin cambio). Iniciativa de manuales+mapa completa; reorden de UI editable/solo-lectura en 7 pantallas; botones en Source Sans 3 + azul institucional, todo en producción.
 - Cerrado esta sesión: #338/#340/#341/#342/#343 (Admin + derivados), #345/#347 (mapa de dependencias), #349 (terminología), #351/#353 (navegación de capítulos), #356/#358 (reorden UI + corrección), #360 (tipografía + azul institucional). Discussion #355 abierta para más debate (checksum propio de pyCelda, Caminos A/B, sin cerrar). Con las sesiones previas: #318/#320/#324..#328 (Profesor), #329/#331..#337 (Director).
 
 ### Para próxima sesión
